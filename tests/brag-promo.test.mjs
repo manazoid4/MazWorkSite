@@ -33,7 +33,7 @@ test('brand matches current site, site preview is noindexed and main CTA stays c
  assert.match(scene,/#ff6b1a/);
  assert.match(page,/robots: \{ index: false, follow: false \}/);
  assert.match(page,/\{MAIN_CTA\}/);
- assert.match(page,/\/free-plan\?src=brag-preview#leak-check-form/);
+ assert.match(page,/\/free-plan\?src=dm-brag#leak-check-form/);
  assert.match(plan,/20 seconds total/);
 });
 
