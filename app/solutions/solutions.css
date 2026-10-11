@@ -1,0 +1,74 @@
+/* Maz Works Solutions: pick a problem, see four answers. Ink borders, hard shadows, warm fills. */
+.sol { --sol-gap: 14px; display: grid; gap: var(--sol-gap); margin-top: 8px; }
+.sol-prompt { font-weight: 700; font-size: 1.05rem; margin-bottom: 10px; }
+
+/* Picker: one tap per problem. Two columns on phones. */
+.sol-picker { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sol-picker a { display: grid; align-content: space-between; gap: 4px; min-height: 64px; height: 100%; padding: 10px 12px; border: 2px solid var(--ink); background: var(--surface); text-decoration: none; box-shadow: 3px 3px 0 var(--ink); font-weight: 700; line-height: 1.2; }
+.sol-picker a span { font-size: .98rem; }
+.sol-picker a b { font-family: var(--mono); font-size: .78rem; font-weight: 700; color: var(--muted); }
+.sol-picker a:hover { background: var(--wheat); }
+.sol-picker a:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.sol-picker a[aria-current='true'] { background: var(--ink); color: #fff; box-shadow: 3px 3px 0 var(--signal); }
+.sol-picker a[aria-current='true'] b { color: #fff; }
+.sol-picker a[aria-current='true'] span::before { content: '✓ '; }
+@media (min-width: 760px) { .sol-picker { grid-template-columns: repeat(3, 1fr); } }
+
+/* Optional "I run a…" switch: examples only. */
+.sol-biz { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sol-biz > span { font-weight: 700; margin-right: 2px; }
+.sol-biz button { min-height: 44px; padding: 0 12px; border: 2px solid var(--ink); background: var(--surface); font: inherit; font-size: .92rem; cursor: pointer; }
+.sol-biz button[aria-pressed='true'] { background: var(--ink); color: #fff; }
+.sol-biz button:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.sol-biz small { flex-basis: 100%; font-size: .8rem; color: var(--muted); }
+
+/* Panels */
+.sol-panel { border: 2px solid var(--ink); background: var(--surface); box-shadow: 5px 5px 0 var(--ink); }
+.sol-panel > summary { display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 52px; padding: 10px 14px; font-weight: 700; cursor: pointer; background: var(--wheat); }
+.sol-panel > summary b { font-family: var(--mono); font-size: .85rem; }
+.sol-body { display: grid; gap: 18px; padding: 16px 14px 18px; }
+.sol-q { font-family: var(--mono); font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--signal-text); margin-bottom: 6px; }
+.sol-problem { font-size: clamp(1.45rem, 5.4vw, 2rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; }
+.sol-pain { margin-top: 6px; color: var(--muted); }
+.sol-eg { margin-top: 10px; padding: 8px 10px; background: var(--clay); border-left: 5px solid var(--signal); font-size: .95rem; }
+.sol-small { margin-top: 8px; font-size: .86rem; color: var(--muted); }
+.sol-list { padding-left: 1.1rem; display: grid; gap: 4px; }
+
+/* Mini flow: trigger, what it does, what you get. */
+.sol-flow { list-style: none; padding: 0; margin-top: 12px; display: grid; gap: 0; counter-reset: sol; }
+.sol-flow li { position: relative; display: grid; gap: 1px; padding: 8px 10px 10px 40px; border: 2px solid var(--ink); margin-top: -2px; background: var(--surface); counter-increment: sol; }
+.sol-flow li::before { content: counter(sol); position: absolute; left: 8px; top: 8px; width: 24px; height: 24px; display: grid; place-items: center; background: var(--ink); color: #fff; font-weight: 700; font-size: .85rem; border-radius: 50%; }
+.sol-flow li:last-child { background: var(--sage); }
+.sol-flow i, .sol-next i { font-style: normal; font-family: var(--mono); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.sol-flow li:last-child i { color: var(--ink); }
+@media (min-width: 760px) {
+  .sol-flow { grid-template-columns: repeat(3, 1fr); }
+  .sol-flow li { margin: 0 -2px 0 0; }
+}
+
+/* The signature: one bar, two labelled halves. Solid = pay once; dashed = keeps costing. Words carry the meaning, not colour. */
+.sol-split { display: grid; grid-template-columns: 1fr; border: 2px solid var(--ink); }
+.sol-split > div { padding: 12px; }
+.sol-once { background: var(--sage); }
+.sol-keeps { background: var(--surface); border-top: 2px dashed var(--ink); }
+.sol-split-label { font-family: var(--mono); font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.sol-split-value { font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin: 2px 0 8px; }
+.sol-keeps .sol-split-value { font-size: 1.3rem; }
+.sol-split dl { display: grid; gap: 6px; font-size: .88rem; }
+.sol-split dt { font-weight: 700; }
+.sol-split dd { margin: 0; color: var(--muted); }
+@media (min-width: 760px) {
+  .sol-split { grid-template-columns: 1fr 1fr; }
+  .sol-keeps { border-top: 0; border-left: 2px dashed var(--ink); }
+}
+
+.sol-next { list-style: none; padding: 0; display: grid; gap: 6px; }
+.sol-next li { display: grid; grid-template-columns: 3.4rem 1fr; gap: 8px; align-items: baseline; }
+.sol-cta { gap: 6px; margin-top: 14px; display: flex; justify-content: center; width: 100%; min-height: 52px; text-decoration: none; }
+@media (min-width: 760px) { .sol-cta { width: auto; display: inline-flex; padding-inline: 28px; } }
+
+/* With JavaScript: one panel at a time, the picker is the header. Without: every panel shows. */
+.sol-js > div:not(.sol-on) { display: none; }
+.sol-js .sol-on > .sol-panel > summary { display: none; }
+@media (min-width: 900px) { .sol-body { padding: 22px 24px 24px; grid-template-columns: 1fr 1fr; } .sol-body > section:nth-child(3), .sol-body > section:nth-child(4) { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .sol * { transition: none !important; } }

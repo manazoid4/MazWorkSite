@@ -578,6 +578,15 @@ export const CARE_PLANS = [
 export const CARE_PLAN = CARE_PLANS[0];
 
 /**
+ * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).
+ * LIVE value is 0 ("Set-up included"). PROPOSED value is 99, a one-off fee:
+ * the cost model (docs/maz-works/receptionist/PRICING-MODEL.md) shows free
+ * set-up takes about 7.0 months to pay back the founder's time, 3.6 with a 99
+ * fee. Not approved: leave at 0 until Maz says so, then change only this line.
+ */
+export const AFTER_HOURS_SETUP_FEE: number = 0; // proposed: 99
+
+/**
  * After-Hours Receptionist (launched 9 Oct 2026): a monthly call-answering
  * service, separate from the one-off packages. Answers any call the owner
  * can't pick up: busy on a job in the day, or closed at night (Maz, 9 Oct:
@@ -594,7 +603,8 @@ export const AFTER_HOURS = {
   href: '/after-hours-receptionist',
   /** Fair-use minutes included each month. Over that, the price is agreed first, never billed by surprise. */
   minutes: 300,
-  setup: 'Set-up included',
+  setupFee: AFTER_HOURS_SETUP_FEE,
+  setup: AFTER_HOURS_SETUP_FEE > 0 ? `${formatPrice(AFTER_HOURS_SETUP_FEE)} set-up, once` : 'Set-up included',
   terms: 'Month to month. No long contract. Cancel with a month’s notice.',
   guarantee: 'You hear it answering as your business before your first month is billed.',
   included: [
@@ -614,45 +624,6 @@ export const AFTER_HOURS = {
     'Replacing emergency services. Callers in an emergency are told to ring 999 or the right service.',
   ],
 } as const;
-
-/**
- * "What do you need?" (conversion fixes, 2 Oct): four plain starting points at
- * the top of /prices, so someone who only wants a website isn't sent through
- * the automation ladder first. Prices read from the offers above. (Sits below
- * AFTER_HOURS because the missed-calls row reads it.)
- */
-export const CHOOSER: { need: string; answer: string; href: string }[] = [
-  { need: 'Stop chasing customers and admin', answer: `${OFFERS[0].name} ${OFFERS[0].price}, or a ${OFFERS[1].name} ${OFFERS[1].price.toLowerCase()}`, href: '#systems' },
-  { need: 'Somewhere to send people to book or buy', answer: `${CREATOR_OFFERS[1].name} ${CREATOR_OFFERS[1].price}, or a ${WEB_OFFERS[0].name} ${WEB_OFFERS[0].price.toLowerCase()}`, href: '#websites' },
-  { need: 'Stop losing callers to voicemail', answer: `Text-back ${OFFERS[0].price} once, or calls answered for ${AFTER_HOURS.price}`, href: '#monthly' },
-  { need: 'Something built just for you', answer: `${OFFERS[2].name} ${OFFERS[2].price.toLowerCase()}`, href: '#systems' },
-];
-export const SAME_PRICE_NOTE = `Two things cost ${CREATOR_OFFERS[1].price}: a ${CREATOR_OFFERS[1].name} is one page that books or sells; a ${OFFERS[1].name} is three tasks joined up behind your business.`;
-
-/**
- * How the prices are organised (11 Oct 2026): pay once by default, pay monthly
- * only where something genuinely costs money every month. No new prices here:
- * every figure is read from the offers above.
- */
-export const WAYS_TO_PAY: { id: string; title: string; price: string; body: string; href: string }[] = [
-  { id: 'once', title: 'Pay once, own it', price: `${OFFERS[0].price} to ${OFFERS[2].price.replace(/^From /, '')}+`, body: 'One fixed price, paid once you’ve seen it working. Yours for good.', href: '#systems' },
-  { id: 'monthly', title: 'Pay monthly, for a live service', price: AFTER_HOURS.price, body: `Only the ${AFTER_HOURS.name}: a phone line costs money by the minute.`, href: '#monthly' },
-];
-
-/**
- * Prices by problem: the same approved prices, found by what is going wrong
- * instead of by package name. Missed calls is the only problem with a monthly
- * answer as well as a one-off one.
- */
-const STARTER_ONCE = `${OFFERS[0].name}, ${OFFERS[0].price} once`;
-export const SOLUTIONS: { id: string; problem: string; fix: string; once: string; monthly?: string; href: string }[] = [
-  { id: 'missed-calls', problem: 'Calls go to voicemail', fix: 'A text back with your booking link, or the call answered for you.', once: `Missed-call text-back: ${STARTER_ONCE}`, monthly: `${AFTER_HOURS.name}, ${AFTER_HOURS.price}`, href: AFTER_HOURS.href + '#which' },
-  { id: 'no-shows', problem: 'No-shows and empty slots', fix: 'Online booking, reminders and a waitlist that fills cancellations.', once: STARTER_ONCE, href: '#systems' },
-  { id: 'quotes', problem: 'Quotes go quiet', fix: 'A friendly follow-up after 3 and 7 days, sent for you.', once: STARTER_ONCE, href: '#systems' },
-  { id: 'reviews', problem: 'Not enough reviews', fix: 'Every customer asked for a Google review after the job.', once: STARTER_ONCE, href: '#systems' },
-  { id: 'payments', problem: 'Chasing money', fix: 'Reminders before and after the due date, with the pay link.', once: STARTER_ONCE, href: '#systems' },
-  { id: 'joined-up', problem: 'All of it, joined up', fix: 'Three tasks working together, plus a weekly report.', once: `${OFFERS[1].name}, ${OFFERS[1].price.toLowerCase()} once`, href: '#systems' },
-];
 
 /**
  * Four ways to deal with a missed call, cheapest first, said honestly. Shown on
