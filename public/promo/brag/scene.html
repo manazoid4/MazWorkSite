@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Maz Works · 20-second launch film</title>
+  <style>
+  :root{color-scheme:light;--paper:#f6f6f3;--ink:#151615;--orange:#ff6b1a;--muted:#5d605b;--rule:#c9cbc6;--forest:#0f7a4f;font-family:Arial,Helvetica,sans-serif}
+  *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#131512}
+  #film{position:absolute;top:50%;left:50%;width:1280px;height:720px;overflow:hidden;background:var(--paper);transform-origin:center;transform:translate(-50%,-50%) scale(var(--scale,1));isolation:isolate}
+  .chrome{position:absolute;top:29px;left:54px;right:54px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+  .wordmark{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.025em;font-size:17px}
+  .monogram{display:grid;place-items:center;width:43px;height:43px;background:var(--ink);color:white;font:900 16px Consolas,monospace;letter-spacing:-2px}
+  .chapter{font:700 13px Consolas,monospace;letter-spacing:.09em;text-transform:uppercase}
+  .footer{position:absolute;bottom:25px;left:54px;right:54px;display:flex;justify-content:space-between;border-top:1px solid var(--rule);padding-top:15px;z-index:5;font:700 13px Consolas,monospace;color:var(--muted)}
+  .slide{position:absolute;inset:0;padding:110px 54px 90px;visibility:hidden;opacity:0;will-change:transform,opacity}
+  .eyebrow{font:700 15px Consolas,monospace;letter-spacing:.09em;text-transform:uppercase;margin-bottom:26px}
+  h1,h2,h3,p{margin:0}h1{font-size:94px;line-height:.95;letter-spacing:-.075em;font-weight:900}h2{font-size:76px;line-height:1.01;letter-spacing:-.06em;font-weight:850}
+  .orange{color:var(--orange)}.muted{color:var(--muted)}.small{font-size:22px;line-height:1.45}
+  .s1{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:50px}
+  .s1 h1{max-width:650px}.s1 p{max-width:560px;margin-top:28px;font-size:25px;line-height:1.3}
+  .call{width:390px;height:310px;background:#fff;border:2px solid #151615;box-shadow:19px 19px 0 var(--orange);padding:26px;transform:rotate(3deg)}
+  .call .top{font:700 16px Consolas,monospace;display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding-bottom:20px}
+  .call .miss{font-size:42px;letter-spacing:-.05em;font-weight:900;margin-top:37px}
+  .call .detail{font-size:20px;color:#555;margin-top:7px}
+  .call .tag{display:inline-block;background:#fee3d5;color:#a94111;padding:9px 12px;margin-top:32px;font:700 16px Consolas,monospace}
+  .s2{background:var(--ink);color:var(--paper);display:grid;grid-template-columns:.95fr 1.05fr;gap:70px;align-items:center}
+  .s2 h2{font-size:72px}.s2 .eyebrow{color:#ffb48b}
+  .bubble-wrap{max-width:515px}.bubble-label{font:700 15px Consolas,monospace;margin-bottom:17px;color:#b9bab1}
+  .bubble{background:#eaf5ed;color:#14251b;border-radius:20px 20px 20px 5px;padding:28px 29px;font-size:28px;line-height:1.27;letter-spacing:-.02em;box-shadow:12px 12px 0 rgba(255,255,255,.1)}
+  .bubble-foot{color:#b9bab1;font-size:18px;margin-top:17px}
+  .s3 .eyebrow{margin-bottom:18px}.s3 h2{font-size:62px}.s3 .sub{font-size:22px;color:var(--muted);margin-top:13px}
+  .workflow{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;gap:14px;margin-top:49px}
+  .wf-card{height:223px;border:2px solid var(--ink);background:white;padding:24px;box-shadow:8px 8px 0 #e6e6e1}
+  .wf-no{font:700 15px Consolas,monospace;color:var(--muted)}.wf-card h3{font-size:29px;line-height:1.08;margin:20px 0 12px;letter-spacing:-.04em}
+  .wf-card p{font-size:20px;line-height:1.26;color:#555}.wf-card.done{border-color:#125d3f}
+  .wf-arrow{font-size:37px;font-weight:900;color:var(--orange);text-align:center}
+  .foot-note{font:600 14px Consolas,monospace;margin-top:30px;color:var(--muted)}
+  .s4{background:#e9eee9;display:grid;grid-template-columns:1fr .85fr;gap:50px;align-items:center}
+  .s4 h2{font-size:75px}.s4 h2 em{font-style:normal;border-bottom:9px solid var(--orange)}
+  .work-index{border-top:2px solid var(--ink);font-size:24px}.work-index div{padding:25px 0;border-bottom:1px solid #b5bcb6}
+  .work-index strong{display:block;letter-spacing:-.035em}.work-index span{display:block;font:600 15px Consolas,monospace;color:var(--muted);margin-top:7px}
+  .s5{background:var(--orange);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+  .s5 h2{font-size:103px;max-width:1150px}.s5 .eyebrow{margin-bottom:25px}.s5 .cta{background:var(--ink);color:#fff;font-size:26px;font-weight:800;padding:20px 26px;margin-top:34px;box-shadow:7px 7px 0 #fff}
+  .s5 .end{font:750 18px Consolas,monospace;margin-top:23px}
+  .s5 .rule{height:1px;width:100%;background:var(--ink);margin-top:35px}
+  .s5 .minor{font-size:17px;margin-top:13px}
+  #film:has(.s2[style*="visible"]) .wordmark,#film:has(.s2[style*="visible"]) .chapter,#film:has(.s2[style*="visible"]) .footer{color:#f6f6f3}
+  #film:has(.s2[style*="visible"]) .monogram{background:#f6f6f3;color:#151615}
+  #film:has(.s2[style*="visible"]) .footer{border-top-color:#777}
+  #film:has(.s5[style*="visible"]) .monogram{background:#151615;color:white}
+  #film:has(.s5[style*="visible"]) .footer{border-top-color:#151615;color:#151615}
+  .controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:10px;align-items:center;padding:7px;border-radius:999px;background:rgba(20,22,19,.88)}
+  .controls button{border:0;border-radius:30px;padding:12px 20px;background:#fff;color:#151615;font:700 13px Arial;cursor:pointer}
+  .controls button:hover{background:#ff6b1a}
+  .controls span{color:white;font:700 12px Consolas,monospace;padding:0 12px}
+  .render .controls{display:none}
+  @media(prefers-reduced-motion:reduce){.controls span{font-weight:bold}}
+  </style>
+</head>
+<body>
+  <div id="film" role="img" aria-label="Illustrative Maz Works launch film: a missed call, a follow-up text, a booking request, and a free demo invitation. No real customer or performance result is depicted.">
+    <div class="chrome"><div class="wordmark"><span class="monogram">MW</span> MAZ WORKS</div><span class="chapter">A BETTER NEXT STEP / 2026</span></div>
+    <section class="slide s1" data-start="0" data-end="3.2">
+      <div><p class="eyebrow">01 / The problem</p><h1>THE PHONE <span class="orange">RANG.</span><br>YOU WERE BUSY.</h1><p>You were doing the work. The enquiry could wait — but would the caller?</p></div>
+      <div class="call"><div class="top"><span>BUSINESS PHONE</span><span>18:42</span></div><div class="miss">1 missed call</div><div class="detail">Unknown caller · example</div><span class="tag">NO REPLY YET</span></div>
+    </section>
+    <section class="slide s2" data-start="3.2" data-end="6.7">
+      <div><p class="eyebrow">02 / A better response</p><h2>LET THE<br><span class="orange">FOLLOW-UP</span><br>HAPPEN.</h2></div>
+      <div class="bubble-wrap"><p class="bubble-label">AUTOMATIC TEXT / EXAMPLE</p><div class="bubble">Sorry we missed your call. Want a quote or a booking? Tell us what you need here.</div><p class="bubble-foot">Shown with demo data. Not an actual sent message.</p></div>
+    </section>
+    <section class="slide s3" data-start="6.7" data-end="12.8">
+      <p class="eyebrow">03 / What the system does</p><h2>ONE CALL. <span class="orange">THREE STEPS.</span></h2><p class="sub">An example of the connected workflow I can build around your business.</p>
+      <div class="workflow">
+        <div class="wf-card" data-in=".35"><span class="wf-no">01 / TRIGGER</span><h3>Missed call</h3><p>An enquiry comes in while you're busy.</p></div>
+        <span class="wf-arrow" data-in="1.2">→</span>
+        <div class="wf-card" data-in="1.75"><span class="wf-no">02 / ACTION</span><h3>Helpful text</h3><p>They get the right link to reply.</p></div>
+        <span class="wf-arrow" data-in="2.6">→</span>
+        <div class="wf-card done" data-in="3.1"><span class="wf-no">03 / RESULT</span><h3>Request captured</h3><p>You review it and decide the next step.</p></div>
+      </div><p class="foot-note">Illustrative workflow, not connected to a real customer or phone line.</p>
+    </section>
+    <section class="slide s4" data-start="12.8" data-end="16.5">
+      <div><p class="eyebrow">04 / Who's behind it</p><h2>DESIGNED.<br>BUILT.<br><em>IN-HOUSE.</em></h2><p class="small muted" style="margin-top:26px">One independent builder. Practical tools for real businesses.</p></div>
+      <div class="work-index"><div data-in=".3"><strong>JobFilter</strong><span>MY OWN SOFTWARE PRODUCT</span></div><div data-in="1.2"><strong>Scrap Finance Partners</strong><span>CLIENT WEBSITE BUILD</span></div><div data-in="2"><strong>Automation · custom software · websites</strong><span>MAZ WORKS / UK</span></div></div>
+    </section>
+    <section class="slide s5" data-start="16.5" data-end="20">
+      <p class="eyebrow">05 / Your business, your example</p><h2>SHOW ME<br>THE <span style="color:white">PROBLEM.</span></h2><div class="cta">Get my free demo ↗</div><div class="end">mazworks.uk/free-plan</div><div class="rule"></div><p class="minor">A working test example + a fixed quote. No obligation.</p>
+    </section>
+    <div class="footer"><span>MADE BY MAZ WORKS · UK</span><span>20 SECOND FILM · DEMO CONTENT</span></div>
+  </div>
+  <div class="controls"><button type="button" id="toggle" aria-label="Pause film">Pause</button><button type="button" id="replay">Replay ↺</button><span id="counter">0:00 / 0:20</span></div>
+  <script>
+  (() => {
+    'use strict';
+    const DURATION=20;
+    const film=document.getElementById('film');
+    const scenes=[...document.querySelectorAll('.slide')];
+    const controls=document.querySelector('.controls');
+    const toggle=document.getElementById('toggle');
+    const counter=document.getElementById('counter');
+    let position=0,last=0,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const renderMode=new URLSearchParams(location.search).has('render');
+    if(renderMode) document.documentElement.classList.add('render');
+    if(!playing) position=16.7;
+    function fit(){film.style.setProperty('--scale',Math.min(innerWidth/1280,innerHeight/720).toString());}
+    addEventListener('resize',fit);fit();
+    function draw(t){
+      const time=Math.max(0,Math.min(DURATION-.001,t));
+      for(const scene of scenes){
+        const a=Number(scene.dataset.start),b=Number(scene.dataset.end),on=time>=a&&time<b,p=time-a;
+        scene.style.visibility=on?'visible':'hidden';
+        scene.style.opacity=on?'1':'0';
+        if(on){
+          const enter=Math.min(1,Math.max(0,p/.32)),out=Math.min(1,Math.max(0,(b-time)/.22));
+          scene.style.opacity=String(Math.min(enter,out));
+          scene.style.transform='translateY('+((1-enter)*25)+'px)';
+          for(const item of scene.querySelectorAll('[data-in]')){
+            const start=Number(item.dataset.in),v=Math.min(1,Math.max(0,(p-start)/.36));
+            item.style.opacity=String(v);
+            item.style.transform='translateY('+((1-v)*32)+'px)';
+          }
+        }
+      }
+      counter.textContent='0:'+String(Math.floor(time)).padStart(2,'0')+' / 0:20';
+    }
+    function frame(now){if(!last)last=now;const delta=Math.min(0.1,(now-last)/1000);last=now;if(playing)position=(position+delta)%DURATION;draw(position);requestAnimationFrame(frame);}
+    window.seek=(t)=>{position=Number(t)||0;playing=false;toggle.textContent='Play';toggle.setAttribute('aria-label','Play film');draw(position);};
+    toggle.addEventListener('click',()=>{if(position>19.9)position=0;playing=!playing;toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-label',playing?'Pause film':'Play film');});
+    document.getElementById('replay').addEventListener('click',()=>{position=0;playing=true;toggle.textContent='Pause';toggle.setAttribute('aria-label','Pause film');draw(0);});
+    if(!playing){toggle.textContent='Play';toggle.setAttribute('aria-label','Play film');}
+    document.addEventListener('visibilitychange',()=>{last=0;});
+    draw(position);requestAnimationFrame(frame);
+  })();
+  </script>
+</body>
+</html>
