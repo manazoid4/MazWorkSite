@@ -38,7 +38,7 @@ export default function BragPreview() {
           <p className="eyebrow">The share kit</p>
           <h2 id="brag-materials-title">One film. <em>Three ways to use it.</em></h2>
           <p>Bring the film to founder meetups on a laptop, pair it with a physical NFC Proof Pass, or post the prepared short copy with the finished render. The sample workflow should never be described as a completed client installation.</p>
-          <a className="button button-signal" href="/free-plan?src=brag-preview#leak-check-form">{MAIN_CTA}</a>
+          <a className="button button-signal" href="/free-plan?src=dm-brag#leak-check-form">{MAIN_CTA}</a>
         </div>
         <div className="brag-kit-list">
           <div><span>01</span><strong>Show it</strong><p>Use the 20-second loop at a business or tech meetup. No sound is required to understand it.</p></div>
