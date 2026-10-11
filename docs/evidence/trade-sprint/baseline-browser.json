@@ -1,0 +1,78 @@
+[
+  {
+    "route": "/",
+    "title": "Small business automation UK: calls, bookings | Maz Works",
+    "height": 6845,
+    "overflow": false,
+    "cta": [
+      417,
+      5996,
+      861
+    ]
+  },
+  {
+    "route": "/for",
+    "title": "Who it’s for: pick your business — Maz Works",
+    "height": 5502,
+    "overflow": false,
+    "cta": [
+      4077,
+      4714
+    ]
+  },
+  {
+    "route": "/for/roofers",
+    "title": "Roofers: business systems — Maz Works",
+    "height": 6884,
+    "overflow": false,
+    "cta": [
+      450,
+      2463,
+      2738
+    ]
+  },
+  {
+    "route": "/for/garages",
+    "title": "Garages and MOT: business systems — Maz Works",
+    "height": 6846,
+    "overflow": false,
+    "cta": [
+      424,
+      2415,
+      2669
+    ]
+  },
+  {
+    "route": "/for/architects",
+    "title": "Architects: business systems — Maz Works",
+    "height": 7921,
+    "overflow": false,
+    "cta": [
+      477,
+      2525,
+      2801
+    ]
+  },
+  {
+    "route": "/for/salons-and-beauty",
+    "title": "Salons and beauty: business systems — Maz Works",
+    "height": 6851,
+    "overflow": false,
+    "cta": [
+      424,
+      2429,
+      2705
+    ]
+  },
+  {
+    "route": "/free-plan",
+    "title": "Free demo and fixed price | Maz Works",
+    "height": 5570,
+    "overflow": false,
+    "cta": [
+      511,
+      4721,
+      861
+    ]
+  }
+]

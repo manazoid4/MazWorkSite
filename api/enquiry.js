@@ -1,5 +1,6 @@
 import { CHECK_REPLY_TIME } from '../app/reply-time.js';
 import { createHash } from 'node:crypto';
+import { cleanEnquirySource, isEnquirySource } from '../app/linkedin-source.ts';
 const buckets = new Map();
 const WINDOW = 60_000;
 const MAX_BODY = 16_384;
@@ -22,10 +23,17 @@ export function cleanPageUrl(value) {
   try {
     const url = new URL(value.trim().slice(0, 500));
     if (url.protocol !== 'https:' || url.username || url.password || !PAGE_HOSTS.test(url.hostname)) return '';
-    return `${url.origin}${url.pathname}${url.search}`.slice(0, 300);
+    // Context is sent as separate validated fields. Never copy query data into mail.
+    return `${url.origin}${url.pathname}`.slice(0, 300);
   } catch { return ''; }
 }
 export async function deliverEnquiry(body, fetchImpl = fetch) {
+  const tradeRoute = value => typeof value === 'string' && value.startsWith('/for/') && isEnquirySource(`for-${value.slice(5)}`) && value !== '/for/hub';
+  body = { ...body, source: cleanEnquirySource(body.source),
+    source_page: tradeRoute(body.source_page) ? body.source_page : '',
+    proof_id: body.proof_id === body.trade && tradeRoute(`/for/${body.trade}`) ? body.proof_id : '',
+    next_step: 'Send a free demo and fixed price; not an order',
+  };
   const key = process.env.RESEND_API_KEY;
   if (!key) return { ok: false, confirmationSent: false };
   const send = async (message, suffix) => {
@@ -40,7 +48,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       return typeof result.id === 'string';
     } catch { return false; }
   };
-  const fields = ['name', 'email', 'problem', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'source'];
+  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
@@ -111,7 +119,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','website','referred_by','interested_in','systems','trade','source','request_id','_url','draft'];
+    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});

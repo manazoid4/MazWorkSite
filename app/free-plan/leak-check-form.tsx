@@ -1,16 +1,16 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { CHECK_REPLY_TIME, CONTACT_EMAIL, MAIN_CTA } from '../site';
 import { trackConversion } from '../analytics';
 import { EnquiryRecovery } from '../enquiry-recovery';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { CHECK_PICK_EVENT } from '../package-link';
-import { AFTER_HOURS, ALL_OFFERS, CREATOR_EXTRAS, EXTRAS, FREE_STEP } from '../offers';
+import { FREE_STEP } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
-import { NICHE_GUIDES } from '../for/niches';
-import { TYPE_IDS } from '../customer-types';
 import { rememberedCampaign } from '../linkedin-source';
+import { changeTrade, contextSearch, enquirySource, KNOWN_PACKAGES, problemsForTrade, readTradeContext, safeEnquiryPageUrl, TRADE_CHOICES, TRADE_PROBLEMS, tradeContextFields, tradeLabel, type TradeContext } from '../trade-context';
 import { draftFreePlan } from './draft';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
@@ -59,8 +59,13 @@ export const QUICK_PICKS = [
   'No website to send people to',
 ] as const;
 
-/** Packages and add-ons a price card may name. Anything else in `?package=` is ignored. */
-const KNOWN_PACKAGES: string[] = [...ALL_OFFERS.map((offer) => offer.name), ...EXTRAS.map((extra) => extra.name), ...CREATOR_EXTRAS.map((extra) => extra.name), AFTER_HOURS.name];
+/** Isolated under Suspense so the native form remains in the static HTML. */
+function ContextLocationSync({ onChange }: { onChange: (search: string) => void }) {
+  const params = useSearchParams();
+  const search = params.toString();
+  useEffect(() => { onChange(search); }, [search, onChange]);
+  return null;
+}
 
 /**
  * Auto-reply for the no-JavaScript route only. FormSubmit does not send
@@ -71,6 +76,7 @@ export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself an
 
 export function LeakCheckForm() {
   const requestId = useRef('');
+  const sending = useRef(false);
   const started = useRef(false);
   const [confirmationSent, setConfirmationSent] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -80,9 +86,11 @@ export function LeakCheckForm() {
   const [failureReason, setFailureReason] = useState<FailureReason>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
   const [picked, setPicked] = useState<string[]>([]);
-  const [pkg, setPkg] = useState('');
+  const [context, setContext] = useState<TradeContext>(() => readTradeContext(''));
+  const contextRef = useRef(context);
+  const pkg = context.package;
   // Picks carried over from "Build my system" (?systems= with JS, ?headache= without).
-  const [plan, setPlan] = useState({ systems: '', trade: '' });
+  const [plan, setPlan] = useState({ systems: '', ids: '' });
   // Without JavaScript the chips can't submit, so the text box stays required
   // until the form hydrates; after that a tap is enough (validated in submitRequest).
   const [hydrated, setHydrated] = useState(false);
@@ -93,51 +101,59 @@ export function LeakCheckForm() {
 
   useEffect(() => { setHydrated(true); requestId.current = crypto.randomUUID(); }, []);
 
+  const readLocation = useCallback((search: string) => {
+    const next = readTradeContext(search);
+    if (next.trade !== contextRef.current.trade) setPicked([]);
+    contextRef.current = next;
+    setContext(next);
+    const params = new URLSearchParams(search);
+    const ids = [...new Set([...(params.get('systems') || '').split(','), ...params.getAll('headache').map(id => HEADACHE_PICKS.find(pick => pick.id === id)?.system || '')])].filter(id => SYSTEMS.some(system => system.id === id));
+    setPlan({ systems: ids.map(id => SYSTEMS.find(system => system.id === id)!.name).join(', '), ids: ids.join(',') });
+  }, []);
+
+  function updateContext(next: TradeContext, clearSystems = false) {
+    contextRef.current = next;
+    setContext(next);
+    const params = new URLSearchParams(contextSearch(window.location.search, next));
+    if (clearSystems) { params.delete('systems'); params.delete('headache'); setPlan({ systems: '', ids: '' }); }
+    window.history.replaceState(null, '', `${window.location.pathname}${params.size ? `?${params}` : ''}${window.location.hash}`);
+  }
+
   useEffect(() => {
     const choose = (name: string | null) => {
-      if (name && KNOWN_PACKAGES.includes(name)) setPkg(name);
+      if (name && KNOWN_PACKAGES.includes(name)) updateContext({ ...contextRef.current, package: name });
     };
     const params = new URLSearchParams(window.location.search);
-    choose(params.get('package'));
-    const ids = [...(params.get('systems') || '').split(','), ...params.getAll('headache').map((id) => HEADACHE_PICKS.find((pick) => pick.id === id)?.system || '')];
-    const names = [...new Set(ids)].map((id) => SYSTEMS.find((system) => system.id === id)?.name).filter(Boolean) as string[];
-    const trade = [...TYPE_IDS, ...NICHE_GUIDES.map((guide) => guide.id), 'creator', 'other'].includes(params.get('trade') || '') ? params.get('trade')! : '';
-    if (names.length || trade) {
-      setPlan({ systems: names.join(', '), trade });
-      const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
-      if (box && names.length && !box.value) box.value = `From Build my system: ${names.join(', ')}.`;
-    }
+    readLocation(window.location.search);
     // Links from elsewhere on the site can pass on what the visitor already typed.
     for (const [param, field] of [['website', 'website'], ['name', 'name']] as const) {
       const input = formRef.current?.querySelector<HTMLInputElement>(`[name="${field}"]`);
       const value = params.get(param)?.replace(/[<>]/g, '').slice(0, 80);
       if (input && value && !input.value) input.value = value;
     }
-    const business = params.get('business')?.replace(/[<>]/g, '').slice(0, 40);
-    const note = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
-    if (note && business && !note.value.includes(business)) note.value = [`Business: ${business}.`, note.value].filter(Boolean).join(' ');
+    const business = params.get('business')?.replace(/[<>]/g, '').slice(0, 80);
+    const website = formRef.current?.querySelector<HTMLInputElement>('[name="website"]');
+    if (website && business && !website.value) website.value = business;
     const onPick = (event: Event) => choose((event as CustomEvent<string>).detail);
     window.addEventListener(CHECK_PICK_EVENT, onPick);
     return () => window.removeEventListener(CHECK_PICK_EVENT, onPick);
   }, []);
 
+  function jobText(message: string): string {
+    return [TRADE_PROBLEMS.find(item => item.id === context.problem)?.label, ...picked, plan.systems ? `From Build my system: ${plan.systems}` : '', message.trim()].filter(Boolean).join('\n');
+  }
+
   function togglePick(label: string) {
     if (!started.current) { started.current = true; trackConversion('Form started', { placement: window.location.pathname }); }
-    const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
     const on = !picked.includes(label);
     setPicked(on ? [...picked, label] : picked.filter((item) => item !== label));
-    if (!box) return;
-    const line = `${label}.`;
-    box.value = on
-      ? [box.value.trim(), line].filter(Boolean).join(' ')
-      : box.value.replace(line, '').replace(/\s{2,}/g, ' ').trim();
     if (on) setErrors((current) => (current.problem ? { ...current, problem: '' } : current));
   }
 
   function goToDetails() {
     const box = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
     const site = formRef.current?.querySelector<HTMLInputElement>('[name="website"]');
-    const task = box?.value.trim() || '';
+    const task = jobText(box?.value || '');
     if (!task) {
       setErrors((current) => ({ ...current, problem: FIELD_MESSAGES.problem }));
       focusField('problem');
@@ -155,21 +171,21 @@ export function LeakCheckForm() {
 
   async function submitRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submitState === 'sending') return;
+    if (sending.current || submitState === 'sending') return;
 
     const form = event.currentTarget;
     const data = new FormData(form);
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
-    const task = String(data.get('problem') || '').trim();
+    const ownMessage = String(data.get('problem') || '').trim();
+    const task = jobText(ownMessage);
+    const existingTools = String(data.get('existing_tools') || '').trim();
     const website = String(data.get('website') || '').trim();
     const referredBy = String(data.get('referred_by') || '').trim();
     const honey = String(data.get('_honey') || '').trim();
-    const page = window.location.pathname === '/' ? 'homepage' : window.location.pathname.replace(/^\//, '');
-    const pageSource = new URLSearchParams(window.location.search).get('src')?.trim() || `direct (${page})`;
     // First touch wins: a LinkedIn/outreach tag from landing survives any route to the form (sticky bar, calculator, menu).
     const campaign = rememberedCampaign();
-    const source = campaign && campaign !== pageSource ? `${campaign} → ${pageSource}` : pageSource;
+    const source = enquirySource(window.location.search, campaign);
 
     const found: Record<FieldName, string> = {
       problem: fieldMessage('problem', task),
@@ -192,37 +208,47 @@ export function LeakCheckForm() {
       ['Name', name],
       ['Email', email],
       ['The job', task],
+      ['Customer message', ownMessage || 'No additional message'],
+      ['Existing tools', existingTools],
       ['Website', website],
       ['Referred by', referredBy],
-      ['Interested in', pkg],
+      ...tradeContextFields(context),
       ['Source', source],
     ]));
 
     setSubmitState('sending');
+    sending.current = true;
 
     // Free-plan autopilot (C9): a drafted reply Maz can approve in two minutes, built only from offers.ts.
-    const draft = draftFreePlan({ name, trade: plan.trade, systems: plan.systems, package: pkg, problem: task });
+    const draft = draftFreePlan({ name, trade: context.trade, systems: plan.ids, package: pkg, problem: task });
 
     const result = await sendPlanEnquiry({
       request_id: requestId.current,
-      draft: `${draft.subject}\n\n${draft.text}`,
+      draft: `Owner review required: this is a demo enquiry, not an order. ${pkg ? `Explicit package interest: ${pkg}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.\n\n${draft.subject}\n\n${draft.text}`,
       name,
       email,
       website,
       referred_by: referredBy,
       service: SERVICE_LABEL,
       problem: task,
+      customer_message: ownMessage,
+      existing_tools: existingTools,
       interested_in: pkg || 'Not chosen',
       systems: plan.systems,
-      trade: plan.trade,
-      next_step: 'Email me a plan and fixed price',
+      trade: context.trade,
+      industry: tradeLabel(context.trade),
+      problem_id: context.problem,
+      proof_id: context.proof,
+      source_page: context.sourcePage,
+      next_step: 'Send a free demo and fixed price; not an order',
       source,
       _replyto: email,
       _subject: subject,
       _template: 'table',
       _honey: honey,
-      _url: window.location.href,
+      _url: safeEnquiryPageUrl(window.location.href),
     });
+    sending.current = false;
 
     if (result.ok) {
       form.reset();
@@ -264,17 +290,22 @@ export function LeakCheckForm() {
         }
       }}
     >
+      <Suspense fallback={null}><ContextLocationSync onChange={readLocation} /></Suspense>
       <input type="hidden" name="_subject" value="Maz Works — free demo and price" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <input type="hidden" name="systems" value={plan.systems} />
-      <input type="hidden" name="trade" value={plan.trade} />
+      <input type="hidden" name="trade" value={context.trade} />
+      <input type="hidden" name="industry" value={tradeLabel(context.trade)} />
+      <input type="hidden" name="proof_id" value={context.proof} />
+      <input type="hidden" name="problem_id" value={context.problem} />
+      <input type="hidden" name="source_page" value={context.sourcePage} />
+      <input type="hidden" name="next_step" value="Send a free demo and fixed price; not an order" />
       <p className="mw-form-kicker">Tap what fits, then tell me where to send your demo. No call needed.</p>
-      {pkg ? (
-        <p className="mw-form-picked">Asking about: <strong>{pkg}</strong> <button type="button" className="text-link" onClick={() => setPkg('')}>Clear</button></p>
-      ) : null}
+      {context.trade ? <p className="mw-form-picked">Your <strong>{tradeLabel(context.trade)}{context.problem ? ` · ${TRADE_PROBLEMS.find(item => item.id === context.problem)?.label}` : ''}</strong> demo enquiry. A free example and fixed price, not an order.</p> : null}
+      {context.proof ? <p className="mw-form-picked">Demo context: <strong>{tradeLabel(context.proof)}</strong> — an illustrative example, not client results. <button type="button" className="text-link" disabled={submitState === 'sending'} onClick={() => updateContext({ ...context, proof: '' })}>Clear demo context</button></p> : null}
       {plan.systems ? <p className="mw-form-picked">Your demo: <strong>{plan.systems}</strong></p> : null}
 
       {hydrated && submitState !== 'sent' ? (
@@ -284,10 +315,34 @@ export function LeakCheckForm() {
         </div>
       ) : null}
       <div className="mw-form-part" data-part="1">
+        <details>
+          <summary>Change industry or package</summary>
+          <label>
+          <span>Industry <small>(optional)</small></span>
+          <select name="industry_choice" value={context.trade} disabled={submitState === 'sending'} onChange={event => { if (event.target.value !== context.trade) setPicked([]); updateContext(changeTrade(context, event.target.value), event.target.value !== context.trade); setErrors(current => ({ ...current, problem: '' })); }}>
+            <option value="">Choose your industry, or leave open</option>
+            {TRADE_CHOICES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+            <option value="creator">Creator</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label>
+          <span>Package preference <small>(optional, not an order)</small></span>
+          <select name="package_choice" value={pkg} disabled={submitState === 'sending'} onChange={event => updateContext({ ...context, package: event.target.value })}>
+            <option value="">Not chosen — help me decide</option>
+            {KNOWN_PACKAGES.map(name => <option key={name} value={name}>{name}</option>)}
+          </select>
+        </label>
+        </details>
         <fieldset className="mw-quick-picks">
           <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
           <div>
-            {QUICK_PICKS.map((label) => (
+            {context.trade ? problemsForTrade(context.trade).map(item => (
+              <button type="button" key={item.id} aria-pressed={context.problem === item.id} disabled={submitState === 'sending'} onClick={() => {
+                updateContext({ ...context, problem: context.problem === item.id ? '' : item.id });
+                setErrors(current => ({ ...current, problem: '' }));
+              }}>{item.label}</button>
+            )) : QUICK_PICKS.map((label) => (
               <button type="button" key={label} aria-pressed={picked.includes(label)} onClick={() => togglePick(label)} disabled={submitState === 'sending'}>
                 {label}
               </button>
@@ -310,6 +365,12 @@ export function LeakCheckForm() {
         <p id="leak-check-err-problem" className="mw-field-error" role="alert">{errors.problem}</p>
 
         <label>
+          <span>Tools you already use <small>(optional)</small></span>
+          <input name="existing_tools" maxLength={500} placeholder="For example: Fresha, GarageHive, a calendar or a spreadsheet" disabled={submitState === 'sending'} />
+          <small>So I can check what they already do before suggesting anything new.</small>
+        </label>
+
+        <label>
           <span>Business name or website <small>(optional)</small></span>
           <input
             name="website"
@@ -328,7 +389,7 @@ export function LeakCheckForm() {
           <div className="mw-form-summary">
             <p><strong>Your job:</strong> {summary.task}</p>
             {summary.website ? <p><strong>Website:</strong> {summary.website}</p> : null}
-            {pkg ? <p><strong>Asking about:</strong> {pkg}</p> : null}
+            {tradeContextFields(context).filter(([label]) => label !== 'Source page').map(([label, value]) => <p key={label}><strong>{label}:</strong> {value}</p>)}
             <button type="button" className="text-link" onClick={() => { setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Change</button>
           </div>
         ) : null}

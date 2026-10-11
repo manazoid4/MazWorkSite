@@ -1,5 +1,19 @@
 # Maz Works Design Direction
 
+## Industry journeys — 11 October 2026
+
+The `/for` family uses the current homepage colour and type system. Its visual world is a small business's working day: a job card, appointment request, project brief or document checklist. The visitor should recognise the job before reading a service description.
+
+- Immediate: industry, specific problem, canonical starting price, main CTA and one labelled example.
+- On interaction: customer action, business-owner receipt and the human decision still required.
+- On demand: calculator, detailed inclusions and related workflows.
+- Composition: concise hero beside a useful artefact on desktop; natural reading order on mobile. Distinct workflow fields and actions give industries their identity.
+- Colour: existing controlled sky, mint, sun and pink surfaces with ink text; orange remains the main action.
+- Shape/type: existing readable display/sans/mono hierarchy, clear dividers and restrained borders. No new fonts, gradients, dashboard ornament or stock client photography.
+- Truth: examples never imply live messages, confirmed appointments, clinical decisions or verified integrations. Existing software is checked before proposing a replacement.
+
+This scoped direction supersedes older portfolio-era wording for industry pages; it does not restyle the homepage or Objects.
+
 ## Maz Works Objects — Tactile Signal Studio
 
 The `/3d-printing` route is a deliberate sub-brand surface inside Maz Works rather than a global restyle.
