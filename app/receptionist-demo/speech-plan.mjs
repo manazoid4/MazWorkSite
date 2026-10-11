@@ -120,3 +120,17 @@ export function lastQuestion(text) {
   const asked = splitSentences(text).filter((sentence) => /\?["”’')]*\s*$/.test(sentence));
   return asked.length ? asked[asked.length - 1] : '';
 }
+
+/**
+ * What the caller said, when the recogniser stops. A final result wins; if the
+ * browser only ever sent an interim one (it often ends right after the last
+ * words), that still counts, unless it is just a noise word.
+ * @param {string} finalText
+ * @param {string} interimText
+ */
+export function chooseHeard(finalText, interimText) {
+  const final = String(finalText || '').trim();
+  if (final) return final;
+  const interim = String(interimText || '').trim();
+  return /^(um+|uh+|er+m?|hmm+|mm+|ah+|huh)$/i.test(interim) ? '' : interim;
+}

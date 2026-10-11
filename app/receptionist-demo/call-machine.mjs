@@ -15,6 +15,9 @@
 /** How long the mic stays open with nobody talking before we nudge (ms). */
 export const LISTEN_PATIENCE_MS = 9000;
 
+/** Typing or muted: how long a quiet call waits before "Are you still there?" (ms). The same wait again ends it. */
+export const TYPED_IDLE_MS = 45000;
+
 /** @type {CallState} */
 export const IDLE = { phase: 'idle', muted: false, silences: 0 };
 

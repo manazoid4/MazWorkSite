@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { AFTER_HOURS } from '../offers';
 import { MAIN_CTA } from '../site';
-import { IDLE, LISTEN_PATIENCE_MS, SILENCE_GOODBYE, STILL_THERE, isLive, phaseLabel, primaryFor, silenceAction, transition, type Phase } from './call-machine.mjs';
+import { IDLE, LISTEN_PATIENCE_MS, SILENCE_GOODBYE, STILL_THERE, TYPED_IDLE_MS, isLive, phaseLabel, primaryFor, silenceAction, transition, type Phase } from './call-machine.mjs';
 import { DEFAULT_CONFIG, cleanConfig, createDesk, decodeConfig } from './engine.mjs';
 import { buzz, playTone } from './feel.mjs';
 import { ownerMessage } from './owner-message.mjs';
 import { PROBLEMS, WORKS_BEST, describeSupport, problemFromRecognitionError, type Problem } from './recovery.mjs';
-import { captionUnits, estimateMs, lastQuestion, planSpeech, revealAtChar, revealAtTime, thinkingBeatMs } from './speech-plan.mjs';
-import { pickVoice } from './voice-pick.mjs';
+import { captionUnits, chooseHeard, estimateMs, lastQuestion, planSpeech, revealAtChar, revealAtTime, thinkingBeatMs } from './speech-plan.mjs';
+import { createBrowserSpeech, type SpeechOutput } from './speech-output';
 import { TryYours } from './try-yours';
 
 type Line = { who: 'desk' | 'caller'; text: string; cut?: boolean };
@@ -89,6 +89,7 @@ export function VoiceDesk() {
   const [tryOpen, setTryOpen] = useState(false);
   const [hints, setHints] = useState<string[]>([]);
   const [listenKey, setListenKey] = useState(0);
+  const [announce, setAnnounce] = useState('');
 
   const m = useRef<Machine>(IDLE);
   const desk = useRef<Desk | null>(null);
@@ -96,7 +97,11 @@ export function VoiceDesk() {
   const live = useRef(false);
   const voiceRef = useRef(true);
   const capsRef = useRef(caps);
-  const voice = useRef<SpeechSynthesisVoice | null>(null);
+  const out = useRef<SpeechOutput | null>(null);
+  const ringTail = useRef<{ greeting: string; first?: string } | null>(null);
+  const resumeText = useRef('');
+  const textRef = useRef(false);
+  const typingRef = useRef(false);
   const voiceBroken = useRef(false);
   const micDead = useRef(false);
   /** Counts utterances. A callback only carries on if its number is still the current one. */
@@ -135,23 +140,22 @@ export function VoiceDesk() {
     const fromLink = code ? decodeConfig(code) : null;
     if (fromLink) { setConfig(fromLink); setSource('link'); }
     calm.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const synth = 'speechSynthesis' in window ? window.speechSynthesis : null;
-    const found = describeSupport({ recognition: Boolean(recogniserClass()), synthesis: Boolean(synth), voices: synth?.getVoices().length ?? 0, userAgent: navigator.userAgent });
+    out.current = createBrowserSpeech(RATE);
+    const found = describeSupport({ recognition: Boolean(recogniserClass()), synthesis: Boolean(out.current), voices: out.current?.voiceCount() ?? 0, userAgent: navigator.userAgent });
     setCaps(found);
     capsRef.current = found;
     if (found.notice) setProblem(found.notice);
     if (!found.canListen) setTyping(true);
-    if (!synth) return undefined;
-    // Voices often load after the page does, so look again when the list changes.
-    const pick = () => { voice.current = pickVoice(synth.getVoices()); };
-    pick();
-    synth.addEventListener('voiceschanged', pick);
-    return () => { synth.removeEventListener('voiceschanged', pick); };
+    return () => { out.current?.dispose(); };
   }, []);
   useEffect(() => () => { live.current = false; stopListening(); stopSpeech(); window.clearTimeout(decay.current); try { audio.current?.close(); } catch { /* already closed */ } },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []);
 
+  // Typing panel gone (closed, or mic path restored) means the box can no longer hold focus: voice must be free to reopen.
+  useEffect(() => { if (!(typing || textRef.current) || !isLive(phase)) typedFocus.current = false; });
+  // On the typed path the cursor is always in the box on your turn.
+  useEffect(() => { if (textRef.current && phase === 'waiting' && document.activeElement !== typedBox.current) typedBox.current?.focus({ preventScroll: true }); });
   // Keep the newest line in view inside the transcript only: never scroll the page.
   useEffect(() => { const el = log.current; if (el) el.scrollTop = el.scrollHeight; }, [lines]);
   // The summary arrives when the call ends: move focus on so keyboard users aren't dropped.
@@ -169,7 +173,19 @@ export function VoiceDesk() {
     if (idle) return undefined;
     const onKey = (event: KeyboardEvent) => {
       if (!live.current) return;
-      if (event.key === 'Escape') { event.preventDefault(); endCall(); return; }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        const box = typedBox.current;
+        // In the typing box, Esc clears it, then closes it, and only then does the next Esc hang up.
+        if (box && event.target === box) {
+          if (box.value) { box.value = ''; return; }
+          if (typingRef.current && !textRef.current) { toggleTyping(); return; }
+          box.blur();
+          return;
+        }
+        endCall();
+        return;
+      }
       const t = event.target as HTMLElement | null;
       if (event.key === ' ' && (!t || t === document.body)) { event.preventDefault(); primary.current?.click(); }
     };
@@ -183,7 +199,16 @@ export function VoiceDesk() {
   // ---- Helpers ----
   const later = (fn: () => void, ms: number) => { const id = window.setTimeout(fn, ms); timers.current.push(id); return id; };
   const clearTimers = () => { timers.current.forEach((id) => window.clearTimeout(id)); timers.current = []; window.clearInterval(tick.current); };
-  const addLine = (who: Line['who'], text: string, cut?: boolean) => setLines((current) => [...current, { who, text, cut }]);
+  const addLine = (who: Line['who'], text: string, cut?: boolean) => {
+    setLines((current) => [...current, { who, text, cut }]);
+    // One polite live region: say new receptionist lines only when nobody is hearing them out loud.
+    if (who === 'desk' && !(voiceRef.current && capsRef.current.canSpeak && !voiceBroken.current)) setAnnounce(`Receptionist: ${text}`);
+  };
+  /** After a quiet spell on the typed or muted path, nudge, then end politely. */
+  const armIdle = () => {
+    clearGuard();
+    guard.current = window.setTimeout(() => { if (live.current && m.current.phase === 'waiting') onSilence(); }, TYPED_IDLE_MS);
+  };
 
   /** Moves the little ring around the state icon. Written straight to the element, because it changes on every spoken word. */
   const bump = () => {
@@ -203,7 +228,7 @@ export function VoiceDesk() {
   function stopSpeech() {
     turn.current += 1;
     clearTimers();
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    out.current?.cancel();
   }
   function clearGuard() { window.clearTimeout(guard.current); }
   /** Detaches and aborts the recogniser, so there is never more than one. */
@@ -220,7 +245,7 @@ export function VoiceDesk() {
     if (!live.current) return;
     live.current = false;
     stopListening();
-    if (pending.current) addLine('desk', spokenSoFar.current.join(' ') || pending.current, true);
+    if (pending.current && spokenSoFar.current.length) addLine('desk', spokenSoFar.current.join(' '), true);
     stopSpeech();
     pending.current = '';
     feel('hangup', 'end');
@@ -248,30 +273,26 @@ export function VoiceDesk() {
       setCaption({ units, shown: units.length });
       done();
     };
-    const synth = 'speechSynthesis' in window ? window.speechSynthesis : null;
+    const speech = out.current;
     const total = estimateMs(sentence.say, RATE);
-    if (voiceRef.current && synth && capsRef.current.canSpeak && !voiceBroken.current) {
-      const utterance = new SpeechSynthesisUtterance(sentence.say);
-      utterance.lang = 'en-GB';
-      utterance.rate = RATE;
-      if (voice.current) utterance.voice = voice.current;
-      utterance.onstart = () => { started = true; t0 = Date.now(); send('SPEAK_START'); };
-      utterance.onboundary = (event) => { boundarySeen = true; setCaption({ units, shown: revealAtChar(units, event.charIndex) }); bump(); };
-      utterance.onend = finish;
-      utterance.onerror = finish;
+    if (voiceRef.current && speech && capsRef.current.canSpeak && !voiceBroken.current) {
       // A voice that never starts (none installed, blocked): carry on silently with captions.
       later(() => {
         if (started || finished || token !== turn.current) return;
         finished = true;
         voiceBroken.current = true;
-        synth.cancel();
-        showProblem(synth.getVoices().length === 0 ? PROBLEMS['no-voice'] : PROBLEMS['voice-failed']);
+        speech.cancel();
+        showProblem(speech.voiceCount() === 0 ? PROBLEMS['no-voice'] : PROBLEMS['voice-failed']);
         speakSentence(sentence, token, done);
       }, 2600);
       tick.current = window.setInterval(() => { if (started && !boundarySeen) setCaption({ units, shown: revealAtTime(units, Date.now() - t0, total) }); }, 90);
-      // Backstop for engines that never fire onend: stop the voice first so the mic never opens over it.
-      later(() => { if (!finished) { synth.cancel(); finish(); } }, total * 2 + 2500);
-      synth.speak(utterance);
+      // Backstop for engines that never fire the end: stop the voice first so the mic never opens over it.
+      later(() => { if (!finished) { speech.cancel(); finish(); } }, total * 2 + 2500);
+      speech.speak(sentence.say, {
+        onStart: () => { started = true; t0 = Date.now(); send('SPEAK_START'); },
+        onBoundary: (charIndex) => { boundarySeen = true; setCaption({ units, shown: revealAtChar(units, charIndex) }); bump(); },
+        onEnd: finish,
+      });
     } else {
       // Captions only, at reading pace.
       const reading = Math.round(total * 0.8);
@@ -323,13 +344,20 @@ export function VoiceDesk() {
   /** Opens the microphone for the caller's turn. */
   function listen() {
     const Recog = recogniserClass();
-    if (!live.current || m.current.muted || micDead.current || !capsRef.current.canListen || !Recog || typedFocus.current) { if (m.current.phase === 'interrupted') send('YIELD'); return; }
+    if (!live.current) return;
+    if (m.current.muted || micDead.current || !capsRef.current.canListen || !Recog || typedFocus.current) {
+      // Not listening (typing, muted, no mic): never leave the call stuck, and never let it sit open forever.
+      if (m.current.phase === 'interrupted') send('YIELD');
+      if (m.current.phase === 'waiting') armIdle();
+      return;
+    }
     if (m.current.phase !== 'waiting' && m.current.phase !== 'interrupted') return;
     stopListening();
     const r = new Recog();
     rec.current = r;
     r.lang = 'en-GB'; r.interimResults = true; r.continuous = false; r.maxAlternatives = 1;
     let heard = '';
+    let latest = '';
     let opened = false;
     let failed = false;
     manualStop.current = false;
@@ -353,13 +381,14 @@ export function VoiceDesk() {
         text += event.results[i][0].transcript;
         if (event.results[i].isFinal) heard = text;
       }
+      latest = text;
       setInterim(text);
     };
     r.onerror = (event) => {
       if (rec.current !== r) return;
       const found = problemFromRecognitionError(event.error);
+      if (found && found.kind !== 'quiet') failed = true;
       if (found?.fatal) {
-        failed = true;
         micDead.current = true;
         setCaps((c) => ({ ...c, canListen: false }));
         setTyping(true);
@@ -372,8 +401,9 @@ export function VoiceDesk() {
       clearGuard();
       setInterim('');
       if (!live.current) return;
-      if (heard.trim()) handle(heard);
-      else if (failed || manualStop.current) send('STOP_LISTEN');
+      const said = chooseHeard(heard, latest);
+      if (said) handle(said);
+      else if (failed || manualStop.current) { send('STOP_LISTEN'); send('YIELD'); if (m.current.phase === 'waiting') armIdle(); }
       else onSilence();
     };
     try { r.start(); } catch { rec.current = null; showProblem(PROBLEMS['mic-missing']); send('YIELD'); }
@@ -394,6 +424,8 @@ export function VoiceDesk() {
     const answer = desk.current.reply(said);
     setHints(desk.current.hints());
     pending.current = answer;
+    lastDesk.current = answer;
+    spokenSoFar.current = [];
     const urgent = desk.current.summary().urgent;
     const token = turn.current;
     later(() => { if (token === turn.current) speakReply(answer, desk.current?.stage === 'done' ? 'end' : 'listen'); }, thinkingBeatMs(answer, { urgent }));
@@ -401,9 +433,10 @@ export function VoiceDesk() {
 
   /** Cuts the receptionist off and records what was heard of the reply. */
   function interruptNow() {
+    // Only what the caller actually heard goes in the transcript: a reply cut off before any sound is never shown.
     const heardPart = spokenSoFar.current.join(' ');
-    const full = pending.current;
-    if (full) addLine('desk', heardPart || full, true);
+    if (pending.current && heardPart) addLine('desk', heardPart, true);
+    spokenSoFar.current = [];
     pending.current = '';
     stopSpeech();
     send('INTERRUPT');
@@ -416,6 +449,7 @@ export function VoiceDesk() {
 
   const pauseCall = () => {
     if (!live.current) return;
+    resumeText.current = pending.current || lastDesk.current;
     interruptNow();
     stopListening();
     send('PAUSE');
@@ -425,7 +459,16 @@ export function VoiceDesk() {
     if (!live.current || m.current.phase !== 'paused') return;
     setProblem(null);
     send('RESUME');
-    speakReply(lastDesk.current || 'Sorry, where were we? How can I help?', 'listen');
+    // Paused while still ringing: carry on from the ring, with the tapped line if there was one.
+    if (ringTail.current) { finishRing(); return; }
+    speakReply(resumeText.current || lastDesk.current || 'Sorry, where were we? How can I help?', 'listen');
+  };
+  const finishRing = () => {
+    const tail = ringTail.current;
+    if (!tail || !live.current) return;
+    ringTail.current = null;
+    send('RING_END');
+    if (tail.first) { addLine('desk', tail.greeting); handle(tail.first); } else speakReply(tail.greeting, 'listen');
   };
 
   /** Starts a call. With `first` (a suggestion tapped before the call), the greeting is shown and that line is sent straight away. */
@@ -438,12 +481,12 @@ export function VoiceDesk() {
       if (Ctx && !audio.current) audio.current = new Ctx();
       void audio.current?.resume();
     } catch { /* tones are a bonus */ }
-    if (voiceRef.current && 'speechSynthesis' in window) window.speechSynthesis.speak(new SpeechSynthesisUtterance(' '));
+    if (voiceRef.current) out.current?.unlock();
     voiceBroken.current = false;
     micDead.current = !capsRef.current.canListen;
     desk.current = createDesk(config);
     live.current = true;
-    setLines([]); setSummary(null); setCaption(null); setYouSaid(''); setAsked(''); setInterim('');
+    setLines([]); setSummary(null); setCaption(null); setYouSaid(''); setAsked(''); setInterim(''); setAnnounce('');
     setProblem(capsRef.current.notice);
     setTryOpen(false);
     setHints(desk.current.hints());
@@ -453,11 +496,8 @@ export function VoiceDesk() {
     const greeting = desk.current.greet();
     const rings = first ? 1 : 2;
     later(() => feel('pickup'), rings * 1100 - 150);
-    later(() => {
-      if (!live.current) return;
-      send('RING_END');
-      if (first) { addLine('desk', greeting); handle(first); } else speakReply(greeting, 'listen');
-    }, rings * 1100);
+    ringTail.current = { greeting, first };
+    later(finishRing, rings * 1100);
     primary.current?.focus({ preventScroll: true });
   };
 
@@ -479,23 +519,29 @@ export function VoiceDesk() {
     if (action === 'call' || action === 'again') begin();
     else if (action === 'interrupt') interrupt();
     else if (action === 'stop') { manualStop.current = true; try { rec.current?.stop(); } catch { /* ended */ } }
-    else if (action === 'talk') listen();
+    else if (action === 'talk') { typedFocus.current = false; typedBox.current?.blur(); listen(); }
     else if (action === 'resume') resume();
   };
 
   const toggleMute = () => {
     const next = send('MUTE');
-    if (next.muted) { stopListening(); setInterim(''); } else if (live.current && next.phase === 'waiting') later(listen, 150);
+    if (next.muted) { stopListening(); setInterim(''); if (next.phase === 'waiting') armIdle(); } else if (live.current && next.phase === 'waiting') { clearGuard(); later(listen, 150); }
   };
   const toggleVoice = () => {
     voiceRef.current = !voiceRef.current;
     setVoiceOn(voiceRef.current);
-    if (!voiceRef.current && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (!voiceRef.current) out.current?.cancel();
   };
   const toggleTyping = () => {
-    const open = !typing;
+    const open = !typingRef.current;
+    typingRef.current = open;
     setTyping(open);
     if (open) later(() => typedBox.current?.focus(), 30);
+    else {
+      // Closing the box means "back to voice": a hidden input can't blur, so free the mic by hand.
+      typedFocus.current = false;
+      if (live.current && m.current.phase === 'waiting') { clearGuard(); later(listen, 120); }
+    }
   };
 
   /** A visitor typed their own business: swap the desk and go back to the start. */
@@ -527,6 +573,13 @@ export function VoiceDesk() {
   const planHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
   const chips = phase === 'idle' ? starter : phase === 'ended' ? [] : hints;
   const live_ = isLive(phase);
+  /** No usable microphone (none, blocked, muted): the box under the panel is the way to answer. */
+  const textMode = live_ && (!canListenNow || view.muted);
+  textRef.current = textMode;
+  typingRef.current = typing;
+  const showForm = live_ && (typing || textMode);
+  const showMain = (!idle || phase === 'idle') && (!textMode || main.action === 'interrupt' || main.action === 'resume');
+  const calmNote = problem !== null && problem === caps.notice;
 
   let words: Caption | null = null;
   if (phase === 'speaking' || (phase === 'thinking' && caption && !youSaid)) words = caption;
@@ -544,6 +597,7 @@ export function VoiceDesk() {
 
   return (
     <div className={`vd vd-s-${phase}`} ref={card} data-phase={phase}>
+      <p className="vd-sr" aria-live="polite" aria-atomic="true">{announce}</p>
       <p className="vd-truth">{truth}</p>
       <div className="vd-head">
         <div className="vd-who-wrap">
@@ -560,7 +614,7 @@ export function VoiceDesk() {
       {tryOpen && idle ? <TryYours custom={source !== 'default'} onMade={(c) => madeDemo(c, 'typed')} onClose={() => setTryOpen(false)} onReset={resetExample} /> : null}
 
       {problem ? (
-        <p className={`vd-problem${problem.fatal ? ' is-hard' : ''}`} role={problem.fatal || problem.kind === 'hidden' ? 'alert' : 'status'}>
+        <p className={`vd-problem${calmNote ? ' is-calm' : problem.fatal ? ' is-hard' : ''}`} role={!calmNote && (problem.fatal || problem.kind === 'hidden') ? 'alert' : undefined}>
           <strong>{problem.message}</strong> {problem.next}
         </p>
       ) : null}
@@ -569,7 +623,7 @@ export function VoiceDesk() {
         <div className={`vd-now vd-now-${phase}`}>
           <div className="vd-now-top">
             <span className="vd-ico" ref={ico}><Ico name={phaseIcon(phase)} size={26} /></span>
-            <span className="vd-state" role="status" aria-live="polite">{label}</span>
+            <span className="vd-state">{label}</span>
             {phase === 'thinking' ? <span className="vd-dots" aria-hidden="true"><i /><i /><i /></span> : null}
           </div>
           <p className="vd-caption" aria-hidden="true">
@@ -579,7 +633,18 @@ export function VoiceDesk() {
           <div className="vd-patience" aria-hidden="true">{phase === 'listening' && !interim ? <i key={listenKey} style={{ ['--patience' as string]: `${LISTEN_PATIENCE_MS}ms` }} /> : null}</div>
         </div>
 
-        {!idle || phase === 'idle' ? (
+        {showForm ? (
+          <form className={`vd-type${textMode ? ' is-primary' : ''}`} onSubmit={sendTyped}>
+            <label className="vd-sr" htmlFor="vd-typed">Type what you’d say</label>
+            <input id="vd-typed" ref={typedBox} autoComplete="off" enterKeyHint="send" placeholder="Type what you’d say…"
+              onChange={() => { if (m.current.phase === 'waiting' && (textRef.current || typedFocus.current)) armIdle(); }}
+              onFocus={() => { typedFocus.current = true; if (m.current.phase === 'listening') { stopListening(); send('STOP_LISTEN'); armIdle(); } }}
+              onBlur={() => { typedFocus.current = false; }} />
+            <button type="submit" className={textMode ? 'vd-main vd-main-talk' : 'vd-btn vd-btn-sun'}><Ico name="send" size={textMode ? 26 : 20} /><span>Send</span></button>
+          </form>
+        ) : null}
+
+        {showMain ? (
           <button type="button" ref={primary} className={`vd-main vd-main-${main.action}`} disabled={main.action === 'none'} onClick={onPrimary}>
             <Ico name={{ call: 'phone', again: 'again', interrupt: 'hand', stop: 'check', talk: 'mic', resume: 'phone', none: phase === 'interrupted' ? 'mic' : 'thinking' }[main.action]} size={26} />
             {main.label}
@@ -588,21 +653,11 @@ export function VoiceDesk() {
 
         {live_ ? (
           <div className="vd-ctls" role="group" aria-label="Call controls">
-            <button type="button" className="vd-ctl" aria-pressed={view.muted} disabled={!canListenNow} onClick={toggleMute}><Ico name={view.muted ? 'micoff' : 'mic'} /><span>{view.muted ? 'Mic muted' : 'Mute mic'}</span></button>
-            <button type="button" className="vd-ctl" aria-pressed={typing} aria-expanded={typing} onClick={toggleTyping}><Ico name="keys" /><span>Type</span></button>
-            <button type="button" className="vd-ctl" aria-pressed={!voiceOn} onClick={toggleVoice}><Ico name={voiceOn ? 'sound' : 'soundoff'} /><span>{voiceOn ? 'Voice on' : 'Voice off'}</span></button>
+            <button type="button" className="vd-ctl" aria-pressed={view.muted} disabled={!canListenNow} onClick={toggleMute}><Ico name={view.muted ? 'micoff' : 'mic'} /><span>Mute mic</span></button>
+            <button type="button" className="vd-ctl" aria-pressed={typing || textMode} disabled={textMode} onClick={toggleTyping}><Ico name="keys" /><span>Type</span></button>
+            <button type="button" className="vd-ctl" aria-pressed={!voiceOn} onClick={toggleVoice}><Ico name={voiceOn ? 'sound' : 'soundoff'} /><span>Mute voice</span></button>
             <button type="button" className="vd-ctl vd-ctl-end" onClick={endCall} aria-keyshortcuts="Escape"><Ico name="end" /><span>End call</span></button>
           </div>
-        ) : null}
-
-        {typing && live_ ? (
-          <form className="vd-type" onSubmit={sendTyped}>
-            <label className="vd-sr" htmlFor="vd-typed">Type what you’d say</label>
-            <input id="vd-typed" ref={typedBox} autoComplete="off" enterKeyHint="send" placeholder="Type what you’d say…"
-              onFocus={() => { typedFocus.current = true; if (m.current.phase === 'listening') { stopListening(); send('STOP_LISTEN'); } }}
-              onBlur={() => { typedFocus.current = false; }} />
-            <button type="submit" className="vd-btn vd-btn-sun"><Ico name="send" size={20} /><span>Send</span></button>
-          </form>
         ) : null}
 
         {chips.length ? (
@@ -633,7 +688,7 @@ export function VoiceDesk() {
 
       <div className="vd-side">
         <h3 className="vd-side-title">The call so far</h3>
-        <ol className="vd-log" ref={log} tabIndex={0} aria-live="polite" aria-relevant="additions" aria-label="Call so far">
+        <ol className="vd-log" ref={log} tabIndex={0} aria-label="Call so far">
           {lines.length === 0 ? <li className="vd-empty">Nothing yet. Start the call, then talk as if you were a customer ringing after hours.</li> : null}
           {lines.map((line, index) => (
             <li key={index} className={`vd-line vd-${line.who}`}><span className="vd-who">{line.who === 'desk' ? 'Receptionist' : 'You'}{line.cut ? ' (cut off)' : ''}</span><span className="vd-said">{line.text}</span></li>
