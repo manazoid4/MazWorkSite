@@ -31,7 +31,8 @@ test('the static /for inventory has exactly one distinct configured proof per pa
   for (const [slug, proof] of Object.entries(INDUSTRY_PROOFS)) {
     assert.equal(proof.slug, slug);
     assert.ok(['missed-call', 'quote-follow-up', 'booking', 'reminder', 'lead-capture', 'onboarding'].includes(proof.problem));
-    assert.equal(proof.steps.length, 3);
+    assert.ok(proof.steps.length >= 3 && proof.steps.length <= 5, slug);
+    assert.ok(proof.moment && proof.decision, slug);
     assert.ok(proof.heroTitle.length <= 65, slug);
     assert.ok(proof.intro.length <= 160, slug);
     assert.ok(proof.artifact && proof.boundary && proof.scope);

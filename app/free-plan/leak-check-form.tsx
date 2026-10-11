@@ -222,9 +222,10 @@ export function LeakCheckForm() {
     // Free-plan autopilot (C9): a drafted reply Maz can approve in two minutes, built only from offers.ts.
     const draft = draftFreePlan({ name, trade: context.trade, systems: plan.ids, package: pkg, problem: task });
 
+    const reviewNote = `Owner review required: this is a demo enquiry, not an order. ${pkg ? `Explicit package interest: ${pkg}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.`;
     const result = await sendPlanEnquiry({
       request_id: requestId.current,
-      draft: `Owner review required: this is a demo enquiry, not an order. ${pkg ? `Explicit package interest: ${pkg}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.\n\n${draft.subject}\n\n${draft.text}`,
+      draft: `${reviewNote}\n\n${draft.subject}\n\n${draft.text}`,
       name,
       email,
       website,
@@ -364,6 +365,8 @@ export function LeakCheckForm() {
         </label>
         <p id="leak-check-err-problem" className="mw-field-error" role="alert">{errors.problem}</p>
 
+        <details className="mw-more">
+          <summary>Add your business name, website or tools <small>(optional)</small></summary>
         <label>
           <span>Tools you already use <small>(optional)</small></span>
           <input name="existing_tools" maxLength={500} placeholder="For example: Fresha, GarageHive, a calendar or a spreadsheet" disabled={submitState === 'sending'} />
@@ -380,6 +383,7 @@ export function LeakCheckForm() {
             disabled={submitState === 'sending'}
           />
         </label>
+        </details>
 
         {hydrated ? <button type="button" className="button button-dark mw-form-next" onClick={goToDetails} disabled={submitState === 'sending'}>Next: where to send it</button> : null}
       </div>
@@ -389,7 +393,7 @@ export function LeakCheckForm() {
           <div className="mw-form-summary">
             <p><strong>Your job:</strong> {summary.task}</p>
             {summary.website ? <p><strong>Website:</strong> {summary.website}</p> : null}
-            {tradeContextFields(context).filter(([label]) => label !== 'Source page').map(([label, value]) => <p key={label}><strong>{label}:</strong> {value}</p>)}
+            {tradeContextFields(context).filter(([label, value]) => !['Source page', 'Request'].includes(label) && !value.startsWith('Not ')).map(([label, value]) => <p key={label}><strong>{label}:</strong> {value}</p>)}
             <button type="button" className="text-link" onClick={() => { setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Change</button>
           </div>
         ) : null}

@@ -27,13 +27,35 @@ export function cleanPageUrl(value) {
     return `${url.origin}${url.pathname}`.slice(0, 300);
   } catch { return ''; }
 }
-export async function deliverEnquiry(body, fetchImpl = fetch) {
-  const tradeRoute = value => typeof value === 'string' && value.startsWith('/for/') && isEnquirySource(`for-${value.slice(5)}`) && value !== '/for/hub';
-  body = { ...body, source: cleanEnquirySource(body.source),
+const PROBLEM_IDS = ['missed-call', 'quote-follow-up', 'booking', 'reminder', 'lead-capture', 'onboarding'];
+/** One line, no control characters or angle brackets, capped. Stops a value forging extra lines in the owner email. */
+export const oneLine = (value, max) => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '';
+/** Visitor's own words may keep line breaks, but nothing else unusual. */
+const ownWords = (value, max) => typeof value === 'string' ? value.replace(/[\u0000-\u0009\u000b-\u001f\u007f<>]/g, ' ').replace(/\n{3,}/g, '\n\n').trim().slice(0, max) : '';
+export function cleanEnquiryContext(body) {
+  const isTrade = value => typeof value === 'string' && value !== 'hub' && (isEnquirySource(`for-${value}`) || ['creator', 'other'].includes(value));
+  const tradeRoute = value => typeof value === 'string' && value.startsWith('/for/') && value !== '/for/hub' && isEnquirySource(`for-${value.slice(5)}`);
+  const trade = isTrade(body.trade) ? body.trade : '';
+  return { ...body,
+    trade,
+    industry: trade ? oneLine(body.industry, 60) : '',
+    problem_id: PROBLEM_IDS.includes(body.problem_id) ? body.problem_id : '',
+    proof_id: trade && body.proof_id === trade && tradeRoute(`/for/${trade}`) ? trade : '',
+    source: cleanEnquirySource(body.source),
     source_page: tradeRoute(body.source_page) ? body.source_page : '',
-    proof_id: body.proof_id === body.trade && tradeRoute(`/for/${body.trade}`) ? body.proof_id : '',
+    name: oneLine(body.name, 120),
+    problem: ownWords(body.problem, 4000),
+    customer_message: ownWords(body.customer_message, 2000),
+    existing_tools: oneLine(body.existing_tools, 500),
+    interested_in: oneLine(body.interested_in, 120),
+    systems: oneLine(body.systems, 400),
+    website: oneLine(body.website, 200),
+    referred_by: oneLine(body.referred_by, 120),
     next_step: 'Send a free demo and fixed price; not an order',
   };
+}
+export async function deliverEnquiry(body, fetchImpl = fetch) {
+  body = cleanEnquiryContext(body);
   const key = process.env.RESEND_API_KEY;
   if (!key) return { ok: false, confirmationSent: false };
   const send = async (message, suffix) => {

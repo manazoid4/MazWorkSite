@@ -8,6 +8,7 @@ import { NICHE_GUIDES } from './niches';
 import { OFFERS } from '../offers';
 import { CUSTOMER_TYPES } from '../customer-types';
 import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
+import { INDUSTRY_VOICE } from './industry-voice';
 import './trade-pages.css';
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default function ForHubPage() {
         <p className="eyebrow">Pick yours</p>
         <h2 id="for-types-title">Four kinds of business.</h2>
         <ul className="tp-tiles tp-tiles-4" aria-label="Kinds of business">
-          {CUSTOMER_TYPES.map((type) => <Tile key={type.id} href={`/for/${type.id}`} icon={type.icon} name={type.name} line={type.examples} />)}
+          {CUSTOMER_TYPES.map((type) => <Tile key={type.id} href={`/for/${type.id}`} icon={type.icon} name={type.name} line={`${INDUSTRY_VOICE[type.id].hook} ${type.examples}`} />)}
         </ul>
       </section>
 
@@ -57,7 +58,7 @@ export default function ForHubPage() {
         <p className="eyebrow">Or by trade</p>
         <h2 id="for-trades-title">Go straight to your trade.</h2>
         <ul className="tp-tiles tp-tiles-4" aria-label="Trades">
-          {NICHE_GUIDES.map((guide) => <Tile key={guide.id} href={`/for/${guide.id}`} icon={NICHE_ICONS[guide.id] ?? 'spark'} name={guide.shortName} line={guide.title} tag={typeOf(guide.id)} />)}
+          {NICHE_GUIDES.map((guide) => <Tile key={guide.id} href={`/for/${guide.id}`} icon={NICHE_ICONS[guide.id] ?? 'spark'} name={guide.shortName} line={INDUSTRY_VOICE[guide.id].hook} tag={typeOf(guide.id)} />)}
           <li><a className="tp-tile tp-tile-else" href="/free-plan?src=for-hub&trade=other#leak-check-form"><span className="tp-card-icon" aria-hidden="true"><KitIcon name="spark" /></span><strong>Something else?</strong><span>Every kind of business is welcome. Tell me what you do.</span><em>{MAIN_CTA} <span aria-hidden="true">→</span></em></a></li>
         </ul>
         
