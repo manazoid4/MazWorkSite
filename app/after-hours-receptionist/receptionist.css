@@ -161,3 +161,15 @@
 @media (max-width: 520px) { .ah-card { box-shadow: 5px 5px 0 var(--signal); margin-right: 5px; } }
 .ah-talk { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .ah-talk span { color: var(--muted); }
+
+/* Four ways to handle a missed call (11 Oct 2026) */
+.ah-which { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 14px; }
+.ah-which li { border: 3px solid var(--ink); padding: 16px 18px; display: grid; align-content: start; gap: 8px; background: var(--surface); }
+.ah-which-this { box-shadow: 6px 6px 0 var(--ink); }
+.ah-which h3 { font-size: 1.1rem; }
+.ah-which-price { font-size: 1.35rem; font-weight: 700; }
+.ah-which dl { margin: 0; display: grid; gap: 8px; }
+.ah-which dt { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ah-which dd { margin: 2px 0 0; line-height: 1.4; }
+@media (min-width: 760px) { .ah-which { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .ah-which { grid-template-columns: repeat(4, 1fr); } }

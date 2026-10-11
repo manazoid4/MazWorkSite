@@ -2,6 +2,9 @@
 
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
 
+## 11 Oct: event Proof Pass concept (documentation only)
+- Reusable NFC networking card, "I owe you proof. Not a pitch.", with an agreed bounded test demo and optional seven-day personal return walkthrough. Full proposed brief: [EVENT-PROOF-PASS.md](EVENT-PROOF-PASS.md). Canonical strategy in the Maz Works Knowledge Vault. No card production, website feature, new free full-build offer or automation has been launched.
+
 ## 10 Oct: receptionist finish pass (#137 merged, #139 merged, #140)
 - #137 merged the finish pass: call screen with a voice visual that follows the speech, call timer, message-style summary, "Try it as your business" (name + trade, no prices invented), a receptionist rebuilt after a 308-call stress test (urgent and danger handling, number checks, honest answers), site-wide readability fixes. #139 (Maz's call): the receptionist answers missed calls day or night, same £79.
 - #140: fixes from an independent red-team pass (phone layout, Escape, link safety, details given in the first sentence). Before any paid line: phone provider with a spend cap, £79 payment link, ICO fee.
