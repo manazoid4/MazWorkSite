@@ -62,3 +62,42 @@ test('the offer is wired in: homepage, services, prices, enquiry, footer, sitema
   const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
   assert.match(form, /AFTER_HOURS\.name\]/, 'the free demo form accepts ?package=After-Hours Receptionist');
 });
+
+// Pricing structure (11 Oct 2026): pay once by default, monthly only for the
+// receptionist, and every figure still read from offers.ts.
+test('/prices explains the two ways to pay and gives the receptionist its own lane', async () => {
+  const html = await read('prices');
+  const page = text(html);
+  assert.match(page, /How the prices work/);
+  assert.match(page, /Pay once, own it/);
+  assert.match(page, /Pay monthly, for a live service/);
+  assert.match(html, /id="monthly"/);
+  assert.match(html, /id="after-hours"/, 'old /prices#after-hours links still land');
+  assert.match(html, /id="offer-after-hours"/);
+  assert.match(page, /300\s+call minutes included/);
+  assert.match(page, /Stop losing callers to voicemail/);
+  assert.match(page, /Prices by problem/);
+});
+
+test('the receptionist page offers the cheaper fix honestly, and a minutes check', async () => {
+  const html = await read('after-hours-receptionist');
+  const page = text(html);
+  assert.match(page, /Four ways to handle a missed call/);
+  assert.match(page, /Missed-call text-back\s*£149 once/);
+  assert.match(page, /skip the monthly fee/);
+  assert.match(html, /href="\/services\/missed-call"/);
+  assert.match(page, /Will\s+300\s+minutes cover you\?/);
+  assert.match(page, /Your own figures, not a forecast/);
+});
+
+test('the new pricing blocks type no price of their own', async () => {
+  const offers = await readFile(path.join(root, 'app', 'offers.ts'), 'utf8');
+  const start = offers.indexOf('"What do you need?"');
+  const end = offers.indexOf('How the work is actually set up');
+  assert.ok(start > 0 && end > start);
+  const block = offers.slice(start, end).replace("price: '£0'", '');
+  assert.doesNotMatch(block, /£\s?\d/, 'chooser, ways to pay, solutions and missed-call options read prices from the offers');
+  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx']) {
+    assert.doesNotMatch((await readFile(path.join(root, file), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, ''), /£\s?\d/, file);
+  }
+});

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
-import { AFTER_HOURS } from '../offers';
+import { AFTER_HOURS, MISSED_CALL_OPTIONS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
@@ -10,6 +10,7 @@ import { BEST_FOR, CHIPS, COMPARE, EMERGENCY_NOTE, FAQS, NEXT, STEPS, TRUST } fr
 import { NightCall } from './night-call';
 import { CallDemo } from './call-demo';
 import { ValueCheck } from './value-check';
+import { MinutesCheck } from './minutes-check';
 import './receptionist.css';
 
 const TITLE = 'After-hours call answering for small businesses | Maz Works';
@@ -119,10 +120,30 @@ export default function AfterHoursPage() {
           <div className="ah-side">
             <h3>Would one booked job cover it?</h3>
             <ValueCheck />
+            <h3 className="ah-side-h">Will {AFTER_HOURS.minutes} minutes cover you?</h3>
+            <MinutesCheck />
             <h3 className="ah-side-h">Not included, said plainly</h3>
             <ul className="ah-not">{AFTER_HOURS.notIncluded.map((item) => <li key={item}>{item}</li>)}</ul>
           </div>
         </div>
+      </section>
+
+      <section className="ah-section" id="which" data-reveal aria-labelledby="ah-which-title">
+        <p className="eyebrow">Pick the smallest fix that works</p>
+        <h2 id="ah-which-title">Four ways to handle a missed call.</h2>
+        <p className="ah-sub">Cheapest first. If a text back is all your callers need, buy that once and skip the monthly fee.</p>
+        <ul className="ah-which">{MISSED_CALL_OPTIONS.map((option) => (
+          <li key={option.id} className={option.id === 'receptionist' ? 'ah-which-this' : undefined}>
+            <h3>{option.name}</h3>
+            <p className="ah-which-price">{option.price}</p>
+            <dl>
+              <div><dt>The caller</dt><dd>{option.caller}</dd></div>
+              <div><dt>You get</dt><dd>{option.you}</dd></div>
+              <div><dt>Fits when</dt><dd>{option.fits}</dd></div>
+            </dl>
+            {option.href ? <a className="text-link" href={option.href}>{option.id === 'receptionist' ? 'What’s included' : 'See this one'} <span aria-hidden="true">→</span></a> : null}
+          </li>
+        ))}</ul>
       </section>
 
       <section className="ah-section ah-try" id="try" aria-labelledby="ah-try-title">

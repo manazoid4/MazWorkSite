@@ -361,18 +361,6 @@ export const LANES: { id: string; title: string; offers: Offer[]; note: string }
 ];
 
 /**
- * "What do you need?" (conversion fixes, 2 Oct): three plain starting points at
- * the top of /prices, so someone who only wants a website isn't sent through
- * the automation ladder first. Prices read from the offers above.
- */
-export const CHOOSER: { need: string; answer: string; href: string }[] = [
-  { need: 'Stop chasing customers and admin', answer: `${OFFERS[0].name} ${OFFERS[0].price}, or a ${OFFERS[1].name} ${OFFERS[1].price.toLowerCase()}`, href: '#systems' },
-  { need: 'Somewhere to send people to book or buy', answer: `${CREATOR_OFFERS[1].name} ${CREATOR_OFFERS[1].price}, or a ${WEB_OFFERS[0].name} ${WEB_OFFERS[0].price.toLowerCase()}`, href: '#websites' },
-  { need: 'Something built just for you', answer: `${OFFERS[2].name} ${OFFERS[2].price.toLowerCase()}`, href: '#systems' },
-];
-export const SAME_PRICE_NOTE = `Two things cost ${CREATOR_OFFERS[1].price}: a ${CREATOR_OFFERS[1].name} is one page that books or sells; a ${OFFERS[1].name} is three tasks joined up behind your business.`;
-
-/**
  * The fix ladder: the same four steps for every kind of business, so a buyer
  * always knows what the next rung costs.
  */
@@ -626,6 +614,56 @@ export const AFTER_HOURS = {
     'Replacing emergency services. Callers in an emergency are told to ring 999 or the right service.',
   ],
 } as const;
+
+/**
+ * "What do you need?" (conversion fixes, 2 Oct): four plain starting points at
+ * the top of /prices, so someone who only wants a website isn't sent through
+ * the automation ladder first. Prices read from the offers above. (Sits below
+ * AFTER_HOURS because the missed-calls row reads it.)
+ */
+export const CHOOSER: { need: string; answer: string; href: string }[] = [
+  { need: 'Stop chasing customers and admin', answer: `${OFFERS[0].name} ${OFFERS[0].price}, or a ${OFFERS[1].name} ${OFFERS[1].price.toLowerCase()}`, href: '#systems' },
+  { need: 'Somewhere to send people to book or buy', answer: `${CREATOR_OFFERS[1].name} ${CREATOR_OFFERS[1].price}, or a ${WEB_OFFERS[0].name} ${WEB_OFFERS[0].price.toLowerCase()}`, href: '#websites' },
+  { need: 'Stop losing callers to voicemail', answer: `Text-back ${OFFERS[0].price} once, or calls answered for ${AFTER_HOURS.price}`, href: '#monthly' },
+  { need: 'Something built just for you', answer: `${OFFERS[2].name} ${OFFERS[2].price.toLowerCase()}`, href: '#systems' },
+];
+export const SAME_PRICE_NOTE = `Two things cost ${CREATOR_OFFERS[1].price}: a ${CREATOR_OFFERS[1].name} is one page that books or sells; a ${OFFERS[1].name} is three tasks joined up behind your business.`;
+
+/**
+ * How the prices are organised (11 Oct 2026): pay once by default, pay monthly
+ * only where something genuinely costs money every month. No new prices here:
+ * every figure is read from the offers above.
+ */
+export const WAYS_TO_PAY: { id: string; title: string; price: string; body: string; href: string }[] = [
+  { id: 'once', title: 'Pay once, own it', price: `${OFFERS[0].price} to ${OFFERS[2].price.replace(/^From /, '')}+`, body: 'One fixed price, paid once you’ve seen it working. Yours for good.', href: '#systems' },
+  { id: 'monthly', title: 'Pay monthly, for a live service', price: AFTER_HOURS.price, body: `Only the ${AFTER_HOURS.name}: a phone line costs money by the minute.`, href: '#monthly' },
+];
+
+/**
+ * Prices by problem: the same approved prices, found by what is going wrong
+ * instead of by package name. Missed calls is the only problem with a monthly
+ * answer as well as a one-off one.
+ */
+const STARTER_ONCE = `${OFFERS[0].name}, ${OFFERS[0].price} once`;
+export const SOLUTIONS: { id: string; problem: string; fix: string; once: string; monthly?: string; href: string }[] = [
+  { id: 'missed-calls', problem: 'Calls go to voicemail', fix: 'A text back with your booking link, or the call answered for you.', once: `Missed-call text-back: ${STARTER_ONCE}`, monthly: `${AFTER_HOURS.name}, ${AFTER_HOURS.price}`, href: AFTER_HOURS.href + '#which' },
+  { id: 'no-shows', problem: 'No-shows and empty slots', fix: 'Online booking, reminders and a waitlist that fills cancellations.', once: STARTER_ONCE, href: '#systems' },
+  { id: 'quotes', problem: 'Quotes go quiet', fix: 'A friendly follow-up after 3 and 7 days, sent for you.', once: STARTER_ONCE, href: '#systems' },
+  { id: 'reviews', problem: 'Not enough reviews', fix: 'Every customer asked for a Google review after the job.', once: STARTER_ONCE, href: '#systems' },
+  { id: 'payments', problem: 'Chasing money', fix: 'Reminders before and after the due date, with the pay link.', once: STARTER_ONCE, href: '#systems' },
+  { id: 'joined-up', problem: 'All of it, joined up', fix: 'Three tasks working together, plus a weekly report.', once: `${OFFERS[1].name}, ${OFFERS[1].price.toLowerCase()} once`, href: '#systems' },
+];
+
+/**
+ * Four ways to deal with a missed call, cheapest first, said honestly. Shown on
+ * the receptionist page so a buyer can pick the smaller fix if that is all they need.
+ */
+export const MISSED_CALL_OPTIONS: { id: string; name: string; price: string; caller: string; you: string; fits: string; href?: string }[] = [
+  { id: 'voicemail', name: 'Voicemail', price: '£0', caller: 'Hears a beep. Many hang up.', you: 'A missed-call list and the odd message.', fits: 'You ring everyone back within minutes anyway.' },
+  { id: 'text-back', name: 'Missed-call text-back', price: `${OFFERS[0].price} once`, caller: 'Gets a text with your booking or quote link.', you: 'The enquiry in writing. Texts cost a few pence each, paid to the provider.', fits: 'Your callers are happy to book or reply by text.', href: '/services/missed-call' },
+  { id: 'receptionist', name: AFTER_HOURS.name, price: AFTER_HOURS.price, caller: 'Is answered, gets common questions answered and leaves details.', you: 'A summary of every call, and urgent ones passed on.', fits: 'Callers want to speak to someone, or ask questions before they book.', href: '#price' },
+  { id: 'system', name: OFFERS[1].name, price: `${OFFERS[1].price} once`, caller: 'Gets the text back, then reminders and follow-ups.', you: 'Calls, quotes and reviews in one list, with a weekly report.', fits: 'Missed calls are one of several things you chase by hand.', href: '/prices#systems' },
+];
 
 /** How the work is actually set up, in plain words (homepage "How I set it up"). */
 export const DELIVERY: { title: string; body: string }[] = [
