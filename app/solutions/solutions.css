@@ -79,7 +79,7 @@
 @media (min-width: 760px) { .sol-cta { width: auto; display: inline-flex; padding-inline: 28px; } }
 
 /* With JavaScript: one panel at a time, the picker is the header. Without: every panel shows. */
-.sol-js > div:not(.sol-on) { display: none; }
+.sol-js > .sol-item:not(.sol-on) { display: none; }
 .sol-js .sol-on > .sol-panel > summary { display: none; }
 @media (min-width: 900px) { .sol-body { padding: 22px 24px 24px; grid-template-columns: 1fr 1fr; } .sol-body > section:nth-child(3), .sol-body > section:nth-child(4) { grid-column: 1 / -1; } }
 @media (prefers-reduced-motion: reduce) { .sol * { transition: none !important; } }

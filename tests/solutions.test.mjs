@@ -146,6 +146,11 @@ test('the picker never moves focus on load (the skip link must stay hidden), and
   const picker = await src('app/solutions/solutions-picker.tsx');
   assert.match(picker, /className="sol-sum"/);
   assert.match(picker, /I run a… \(optional\)/);
+  // The business switch must not be caught by the rule that hides unselected panels.
+  const css = await src('app/solutions/solutions.css');
+  assert.match(css, /\.sol-js > \.sol-item:not\(\.sol-on\) \{ display: none; \}/);
+  assert.doesNotMatch(css, /\.sol-js > div:not/);
+  assert.match(css, /\.sol-biz button \{ min-height: 44px;/);
   const page = text(await read('solutions'));
   assert.match(page, /£149 once · nothing required monthly/);
   assert.match(page, /from £595 once · nothing required monthly/);

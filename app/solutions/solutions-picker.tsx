@@ -30,7 +30,7 @@ function Panel({ solution, biz, open }: { solution: Solution; biz: BizId | null;
         <section aria-labelledby={`${solution.id}-q1`}>
           <h3 className="sol-q" id={`${solution.id}-q1`}>The problem</h3>
           <p className="sol-problem">{solution.problem}</p>
-          <p className="sol-sum">{solution.onceHead} once · {solution.keepsHead.toLowerCase()} monthly{solution.also ? ` · ${solution.also}` : ''}</p>
+          <p className="sol-sum">{from(solution)} once · {solution.keepsHead.toLowerCase()} monthly{solution.also ? ` · ${solution.also}` : ''}</p>
           <p className="sol-pain">{solution.pain}</p>
           {example ? <p className="sol-eg"><b>{bizLabel}:</b> {example}</p> : null}
           <ol className="sol-flow" aria-label="What happens">
@@ -138,7 +138,7 @@ export function SolutionsPicker({ startOpen, firstSelected }: { startOpen: boole
 
       {SOLUTIONS.map((solution) => {
         const on = hydrated && sel === solution.id;
-        return <div key={solution.id} className={on ? 'sol-on' : undefined}><Panel solution={solution} biz={on ? biz : null} open={hydrated ? on : startOpen} /></div>;
+        return <div key={solution.id} className={on ? 'sol-item sol-on' : 'sol-item'}><Panel solution={solution} biz={on ? biz : null} open={hydrated ? on : startOpen} /></div>;
       })}
     </div>
   );
