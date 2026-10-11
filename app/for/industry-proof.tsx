@@ -41,7 +41,7 @@ export function IndustryProof({ proof }: { proof: IndustryProof }) {
     setPlaying(true);
   }
   return (
-    <section className="ip-proof" id="industry-proof" data-testid="industry-proof" data-industry={proof.slug} aria-labelledby="ip-title">
+    <div role="region" className="ip-proof" id="industry-proof" data-testid="industry-proof" data-industry={proof.slug} aria-labelledby="ip-title">
       <header className="ip-head"><p className="ip-label">Example · made-up business, nothing is sent</p><h2 id="ip-title">{proof.title}</h2><p className="ip-moment">{proof.moment}</p></header>
       <ol className="ip-progress" aria-label="Example steps">{proof.steps.map((s, index) => <li key={s.title} aria-current={index === state.step ? 'step' : undefined}><span>{index + 1}</span><em>{s.title}</em></li>)}</ol>
       <div className="ip-customer">
@@ -59,8 +59,8 @@ export function IndustryProof({ proof }: { proof: IndustryProof }) {
       </div>
       <aside className="ip-owner" aria-labelledby="ip-owner-title"><p className="ip-label">Your side · {state.complete ? 'what lands with you' : 'preview'}</p><h3 id="ip-owner-title">{proof.artifact}</h3><strong>{summary.status}</strong><dl>{summary.fields.map(f => <div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}</dl><p>{summary.owner}</p>{state.complete ? <p className="ip-decision"><strong>Your call.</strong> {proof.decision}</p> : null}</aside>
       <details className="ip-boundary"><summary>What this example does not do</summary><p>{proof.scope} {proof.boundary}</p><p>Real setup depends on your existing tools and permissions. Any app subscriptions or message costs are paid to the provider and agreed first.</p></details>
-      <noscript><p>Read the example without JavaScript:</p><ol>{proof.steps.map(s => <li key={s.title}><strong>{s.title}: </strong>{s.customer} {s.owner}</li>)}</ol><p>{proof.boundary}</p></noscript>
+      <noscript><p>Turn on JavaScript to step through this example. {proof.boundary}</p></noscript>
       <CampaignLink className="ip-cta" href={href}>{MAIN_CTA} <span aria-hidden="true">→</span></CampaignLink>
-    </section>
+    </div>
   );
 }

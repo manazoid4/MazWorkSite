@@ -1,10 +1,9 @@
 /**
  * Per-page extras for the /for pages: what changes (three before/after rows),
- * the wording shown on the hero phone, and which receptionist preset to demo.
+ * and which receptionist preset to demo.
  * These are examples of what changes, never client results or statistics.
  * Prices are never typed here (they come from app/offers.ts).
  */
-import type { HeroDemoCopy } from '../hero-demo';
 import type { ChangeRow } from '../before-after';
 import { getMenuJob } from '../offers';
 
@@ -12,12 +11,9 @@ const row = (job: string, icon: string, before: string, after: string): ChangeRo
 
 export type TradeExtras = {
   changes: ChangeRow[];
-  demo: HeroDemoCopy;
   /** Receptionist demo: preset id in app/receptionist-demo/presets.mjs, the name it answers as, and "Talk to it as ___". */
   receptionist?: { preset: string; business: string; as: string };
 };
-
-const BOOKED = 'Tuesday 10:30 · added to your diary';
 
 export const TRADE_EXTRAS: Record<string, TradeExtras> = {
   'heating-and-plumbing': {
@@ -26,7 +22,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('quote-follow-up', 'mail', 'Quotes you sent last week have gone quiet.', 'A friendly reminder goes out after 3 and 7 days, and stops when they reply.'),
       row('reviews', 'star', 'Happy customers never get asked for a review.', 'A review request follows every finished job.'),
     ],
-    demo: { text: 'Sorry we missed you, I’m on a job. Book a visit or ask for a quote here: ', link: 'yourplumbing.co.uk/book', booked: 'Boiler visit booked', bookedDetail: BOOKED },
     receptionist: { preset: 'plumbing', business: 'Your plumbing firm', as: 'a plumber' },
   },
   roofers: {
@@ -35,7 +30,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('quote-follow-up', 'mail', 'Quotes sent after the last storm have gone quiet.', 'A friendly reminder goes out after 3 and 7 days, and stops when they reply.'),
       row('reviews', 'star', 'Finished roofs never turn into Google reviews.', 'A review request follows every finished job.'),
     ],
-    demo: { text: 'Sorry we missed you, I’m up on a roof. Send photos or ask for a quote here: ', link: 'yourroofing.co.uk/quote', booked: 'Quote request in', bookedDetail: 'Photos received · added to your list', action: 'Send' },
     receptionist: { preset: 'roofer', business: 'Your roofing firm', as: 'a roofer' },
   },
   builders: {
@@ -44,7 +38,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('quote-follow-up', 'mail', 'Big quotes go unchased while you’re on site.', 'Quotes are chased after 3 and 7 days, and stop when they reply.'),
       row('payment-reminders', 'cart', 'Stage payments slip and you end up chasing.', 'A nudge goes before and after each stage is due, with the pay link.'),
     ],
-    demo: { text: 'Thanks for calling, we’re on site. Tell us about your project and book a visit here: ', link: 'yourbuilders.co.uk/visit', booked: 'Site visit requested', bookedDetail: 'Project details received · added to your list', action: 'Send' },
     receptionist: { preset: 'builder', business: 'Your building firm', as: 'a builder' },
   },
   electricians: {
@@ -53,7 +46,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('job-updates', 'chat', 'Customers ring to ask when you’re coming.', '“Booked”, “on the way” and “done” texts go out for you.'),
       row('reviews', 'star', 'Happy customers never get asked for a review.', 'A review request follows every finished job.'),
     ],
-    demo: { text: 'Sorry we missed you, I’m on a job. Book a visit or tell me what you need here: ', link: 'yourelectrics.co.uk/book', booked: 'Visit booked', bookedDetail: BOOKED },
     receptionist: { preset: 'electrician', business: 'Your electrical firm', as: 'an electrician' },
   },
   'salons-and-beauty': {
@@ -62,7 +54,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('reminders', 'calendar', 'Clients forget, and the chair sits empty.', 'A reminder goes the day before; clients confirm or move by text.'),
       row('rebooking', 'repeat', 'Regulars drift away and nobody nudges them back.', 'Past clients get a nudge when they’re due back.'),
     ],
-    demo: { text: 'Sorry we missed you, we’re with a client. Book your appointment here: ', link: 'yoursalon.co.uk/book', booked: 'Cut and colour booked', bookedDetail: BOOKED },
     receptionist: { preset: 'salon', business: 'Your salon', as: 'a salon' },
   },
   'dog-groomers': {
@@ -71,7 +62,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('online-booking', 'paw', 'Bookings wait until you can stop and reply.', 'Owners book a slot themselves, day or night.'),
       row('reminders', 'calendar', 'A forgotten appointment leaves a gap in your day.', 'A reminder goes out the day before.'),
     ],
-    demo: { text: 'Sorry we missed you, we’re mid-groom. Book a slot here: ', link: 'yourgrooming.co.uk/book', booked: 'Groom booked', bookedDetail: BOOKED },
   },
   garages: {
     changes: [
@@ -79,7 +69,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('one-list', 'mail', 'Quote and MOT requests arrive by phone, email and web form.', 'Each one is logged in a single list with an instant reply.'),
       row('quote-follow-up', 'chat', 'Quotes go quiet once the car is on the ramp.', 'A friendly reminder goes out if the customer goes quiet.'),
     ],
-    demo: { text: 'Sorry we missed you, we’re under a car. Book your MOT here: ', link: 'yourgarage.co.uk/mot', booked: 'MOT booked', bookedDetail: 'Thursday 9:00 · added to your diary' },
     receptionist: { preset: 'garage', business: 'Your garage', as: 'a garage' },
   },
   'cafes-and-food': {
@@ -88,7 +77,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('online-booking', 'calendar', 'Table bookings come by phone while you’re serving.', 'Customers book a table themselves, day or night.'),
       row('reviews', 'star', 'Happy regulars never get asked for a review.', 'Customers are asked for a Google review after each visit.'),
     ],
-    demo: { text: 'Sorry we missed you, we’re serving. Book a table here: ', link: 'yourcafe.co.uk/book', booked: 'Table booked', bookedDetail: 'Saturday 12:30 · added to your diary' },
   },
   'clinics-and-therapists': {
     changes: [
@@ -96,7 +84,6 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('online-booking', 'calendar', 'Booking means ringing and hoping someone answers.', 'Clients book themselves, day or night.'),
       row('reminders', 'chat', 'A missed appointment leaves a gap you can’t refill.', 'A reminder goes out the day before; clients confirm or move by text.'),
     ],
-    demo: { text: 'Sorry we missed your call, we’re with a patient. Book an appointment here: ', link: 'yourclinic.co.uk/book', booked: 'Appointment booked', bookedDetail: BOOKED },
     receptionist: { preset: 'clinic', business: 'Your clinic', as: 'a clinic' },
   },
   architects: {
@@ -105,26 +92,21 @@ export const TRADE_EXTRAS: Record<string, TradeExtras> = {
       row('quote-follow-up', 'chat', 'Proposals go quiet after you send them.', 'A polite follow-up goes out, in your words.'),
       row('milestones', 'pin', 'Clients ask where their project is up to.', 'Clients get an update at each stage, automatically.'),
     ],
-    demo: { text: 'Thanks for calling, we’re in a meeting. Tell us about your project here: ', link: 'yourpractice.co.uk/enquiry', booked: 'Project enquiry', bookedDetail: 'Brief received · added to your list', action: 'Send' },
   },
   // Customer-type pages derive their before/after rows from their own pains; only the phone and receptionist are set here.
   trades: {
     changes: [],
-    demo: { text: 'Sorry we missed you, I’m on a job. Get a quote or book here: ', link: 'yourbusiness.co.uk/quote', booked: 'Quote request in', bookedDetail: BOOKED, action: 'Send' },
     receptionist: { preset: 'builder', business: 'Your trade business', as: 'a tradesperson' },
   },
   appointments: {
     changes: [],
-    demo: { text: 'Sorry we missed you, we’re with a client. Book your appointment here: ', link: 'yourbusiness.co.uk/book', booked: 'Appointment booked', bookedDetail: BOOKED },
     receptionist: { preset: 'salon', business: 'Your salon', as: 'a salon' },
   },
   creators: {
     changes: [],
-    demo: { text: 'Thanks for calling! Book a call or grab the guide here: ', link: 'yourname.co.uk/book', booked: 'Call booked', bookedDetail: BOOKED },
   },
   offices: {
     changes: [],
-    demo: { text: 'Sorry we missed you, we’re with a client. Tell us what you need here: ', link: 'yourfirm.co.uk/enquiry', booked: 'New enquiry', bookedDetail: 'Added to your one list · reply sent', action: 'Send' },
   },
 };
 

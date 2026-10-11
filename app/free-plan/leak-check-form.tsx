@@ -316,25 +316,25 @@ export function LeakCheckForm() {
         </div>
       ) : null}
       <div className="mw-form-part" data-part="1">
-        <details>
-          <summary>Change industry or package</summary>
+        {hydrated ? <details>
+          <summary>Change industry or package</summary>{/* Options render after hydration: they are choices for JavaScript visitors and must not bloat every page that embeds the form. */}
           <label>
           <span>Industry <small>(optional)</small></span>
           <select name="industry_choice" value={context.trade} disabled={submitState === 'sending'} onChange={event => { if (event.target.value !== context.trade) setPicked([]); updateContext(changeTrade(context, event.target.value), event.target.value !== context.trade); setErrors(current => ({ ...current, problem: '' })); }}>
             <option value="">Choose your industry, or leave open</option>
-            {TRADE_CHOICES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+            {hydrated ? <>{TRADE_CHOICES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
             <option value="creator">Creator</option>
-            <option value="other">Something else</option>
+            <option value="other">Something else</option></> : null}
           </select>
         </label>
         <label>
           <span>Package preference <small>(optional, not an order)</small></span>
           <select name="package_choice" value={pkg} disabled={submitState === 'sending'} onChange={event => updateContext({ ...context, package: event.target.value })}>
             <option value="">Not chosen — help me decide</option>
-            {KNOWN_PACKAGES.map(name => <option key={name} value={name}>{name}</option>)}
+            {hydrated ? KNOWN_PACKAGES.map(name => <option key={name} value={name}>{name}</option>) : null}
           </select>
         </label>
-        </details>
+        </details> : null}
         <fieldset className="mw-quick-picks">
           <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
           <div>
@@ -366,12 +366,11 @@ export function LeakCheckForm() {
         <p id="leak-check-err-problem" className="mw-field-error" role="alert">{errors.problem}</p>
 
         <details className="mw-more">
-          <summary>Add your business name, website or tools <small>(optional)</small></summary>
-        <label>
-          <span>Tools you already use <small>(optional)</small></span>
-          <input name="existing_tools" maxLength={500} placeholder="For example: Fresha, GarageHive, a calendar or a spreadsheet" disabled={submitState === 'sending'} />
-          <small>So I can check what they already do before suggesting anything new.</small>
-        </label>
+          <summary>Details</summary>
+        {hydrated ? <label>
+          <span>Tools you use <small>(optional)</small></span>
+          <input name="existing_tools" maxLength={500} placeholder="Fresha, GarageHive, a calendar? I will check what they do first." disabled={submitState === 'sending'} />
+        </label> : null}
 
         <label>
           <span>Business name or website <small>(optional)</small></span>

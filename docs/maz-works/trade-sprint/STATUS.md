@@ -1,6 +1,10 @@
 # Trade sprint status
 
-**WIP handover (usage limit hit).** Done: 14 hand-written industry examples wired into every /for hero (`IndustryProof`, styled); own voice block per page; all CTAs carry industry, origin page and job; enquiry API sanitises and limits context; form step 1 slimmer; new `tests/trade-journey.test.mjs`. Browser-checked: all 15 pages at 320 and 390 (no overflow, 44px targets); roofers to form pre-fill verified; 4 pages (hub, roofers, salons, offices) looked at by eye. Tests: 231 of 233 pass; the 2 red are homepage tests broken by main (#144 price-list), not this branch.
+**Final (11 Oct).** Everything planned is done and `npm run verify` passes (typecheck, build, 233 of 233 tests, smoke). All 15 pages were looked at in a real browser at 390, checked at 320, and roofers at desktop width; the roofers page to form pre-fill was run end to end. Eight AFTER screenshots are in `docs/evidence/trade-sprint/`.
+
+Correction: an earlier note below blamed main for two red homepage tests. That was wrong. The cause was this branch: Codex's form listed every package and industry as static option text, and the form is embedded on the homepage, adding words and "Team training". Options now render after hydration only. Type pages also needed a higher word budget (800 to 1000) because the hero phone became a full step-through example; the reason is in the test comment.
+
+Earlier handover note (superseded). Done: 14 hand-written industry examples wired into every /for hero (`IndustryProof`, styled); own voice block per page; all CTAs carry industry, origin page and job; enquiry API sanitises and limits context; form step 1 slimmer; new `tests/trade-journey.test.mjs`. Browser-checked: all 15 pages at 320 and 390 (no overflow, 44px targets); roofers to form pre-fill verified; 4 pages (hub, roofers, salons, offices) looked at by eye. Tests: 231 of 233 pass; the 2 red are homepage tests broken by main (#144 price-list), not this branch.
 NOT done: 11 pages not eyeballed; only 4 AFTER screenshots committed; desktop shot not viewed; `npm run smoke` not run; dead hero-phone copy left in `trade-extras.ts`.
 
 Takeover of Codex's unfinished sprint (11 Oct 2026). Table 1 is what was found at commit `6880b62`, checked by reading the files and running the tests. Table 2 (bottom) is what this branch finished.
