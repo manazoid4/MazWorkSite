@@ -5,6 +5,9 @@
 .ip-proof[data-industry="appointments"], .ip-proof[data-industry="salons-and-beauty"], .ip-proof[data-industry="dog-groomers"], .ip-proof[data-industry="cafes-and-food"], .ip-proof[data-industry="clinics-and-therapists"] { --ip-tint: var(--sage); }
 .ip-proof[data-industry="creators"] { --ip-tint: var(--wheat); }
 .ip-proof[data-industry="offices"], .ip-proof[data-industry="architects"] { --ip-tint: var(--mist); }
+.tp-hero.s-hero-split { grid-template-columns: minmax(0, 1fr); }
+.tp-hero.s-hero-split > * { min-width: 0; }
+@media (min-width: 900px) { .tp-hero.s-hero-split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
 .ip-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .ip-head h2 { margin: 4px 0 6px; font-size: 1.3rem; line-height: 1.15; }
 .ip-moment { color: var(--ink); font-size: .95rem; line-height: 1.4; }

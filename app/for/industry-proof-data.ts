@@ -228,7 +228,7 @@ export const INDUSTRY_PROOFS: Record<string, IndustryProof> = {
   offices: {
     slug: 'offices', title: 'Document checklist progress', heroTitle: 'Make client paperwork easier to follow',
     intro: 'Give each client a clear checklist and show your team what still needs review. Keep documents in your approved system.',
-    problem: 'onboarding', moment: 'Monday morning: three new clients, nine missing documents and an inbox of “did you get my email?”.',
+    problem: 'onboarding', moment: 'Monday morning: new clients waiting on paperwork, and an inbox of “did you get my email?”.',
     artifact: 'Onboarding checklist',
     boundary: 'Example status choices only; no document upload, ID collection or verification. Documents stay in your approved secure system.',
     scope: 'One onboarding checklist task.',
