@@ -138,3 +138,16 @@ test('/solutions is in the sitemap, the site map page, the footer groups and car
   assert.match(html, /<link rel="canonical" href="https:\/\/[^"]+\/solutions"/);
   assert.match(html, /<title>[^<]*Maz Works<\/title>/);
 });
+
+test('the picker never moves focus on load (the skip link must stay hidden), and shows a one-line cost summary', async () => {
+  for (const file of ['app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx']) {
+    assert.doesNotMatch(await src(file), /\.focus\(|autoFocus/, file);
+  }
+  const picker = await src('app/solutions/solutions-picker.tsx');
+  assert.match(picker, /className="sol-sum"/);
+  assert.match(picker, /I run a… \(optional\)/);
+  const page = text(await read('solutions'));
+  assert.match(page, /£149 once · nothing required monthly/);
+  assert.match(page, /from £595 once · nothing required monthly/);
+  assert.match(page, /Or calls answered: £79\/month, set-up included/);
+});

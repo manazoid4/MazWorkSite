@@ -30,6 +30,7 @@ function Panel({ solution, biz, open }: { solution: Solution; biz: BizId | null;
         <section aria-labelledby={`${solution.id}-q1`}>
           <h3 className="sol-q" id={`${solution.id}-q1`}>The problem</h3>
           <p className="sol-problem">{solution.problem}</p>
+          <p className="sol-sum">{solution.onceHead} once · {solution.keepsHead.toLowerCase()} monthly{solution.also ? ` · ${solution.also}` : ''}</p>
           <p className="sol-pain">{solution.pain}</p>
           {example ? <p className="sol-eg"><b>{bizLabel}:</b> {example}</p> : null}
           <ol className="sol-flow" aria-label="What happens">
@@ -128,8 +129,8 @@ export function SolutionsPicker({ startOpen, firstSelected }: { startOpen: boole
       </nav>
 
       {hydrated ? (
-        <div className="sol-biz" role="group" aria-label="I run a…">
-          <span>I run a…</span>
+        <div className="sol-biz" role="group" aria-labelledby="sol-biz-label">
+          <span id="sol-biz-label">I run a… (optional)</span>
           {BIZ_TYPES.map((b) => <button type="button" key={b.id} aria-pressed={biz === b.id} onClick={() => chooseBiz(biz === b.id ? null : b.id)}>{b.label}</button>)}
           <small>Changes the example only, never the price.</small>
         </div>

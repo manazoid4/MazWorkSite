@@ -37,6 +37,8 @@ export type Solution = {
   keeps: CostLine[];
   keepsHead: string;
   own: string;
+  /** Optional second cost line, e.g. the monthly alternative. */
+  also?: string;
   /** Package named in the pre-filled free demo form. */
   pkg: string;
   /** Extra line for upgrades and bundles. */
@@ -67,6 +69,7 @@ export const SOLUTIONS: Solution[] = [
     keeps: [TEXTS, CARE, { label: `Want calls answered instead? ${AFTER_HOURS.name}`, value: `${AFTER_HOURS.price}, ${AFTER_HOURS.minutes} minutes. ${AFTER_HOURS.setup}.` }],
     keepsHead: 'Nothing required',
     own: OWN_STARTER,
+    also: `Or calls answered: ${AFTER_HOURS.price}, ${AFTER_HOURS.setup.toLowerCase()}`,
     pkg: STARTER.name,
     upgrade: `${STARTER_UPGRADE} The ${AFTER_HOURS.name} is a separate monthly service: ${AFTER_HOURS.terms}`,
     examples: {
