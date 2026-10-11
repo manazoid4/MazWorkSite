@@ -99,7 +99,7 @@ test('every explainer animation has a reduced-motion still', async () => {
   const animated = (css.match(/animation:/g) || []).length;
   assert.ok(animated >= 4, 'explainers animate');
   assert.ok(css.includes('prefers-reduced-motion: no-preference'), 'motion only when allowed');
-  assert.doesNotMatch(css.replace(/@media [^{]*prefers-reduced-motion: no-preference\)[\s\S]*?\n}\n/g, ''), /animation:/, 'no animation runs outside the no-preference block');
+  assert.doesNotMatch(css.replace(/@media [^{]*prefers-reduced-motion: no-preference\)[\s\S]*?\r?\n}\r?\n/g, ''), /animation:/, 'no animation runs outside the no-preference block');
   const prices = await readPage('/prices');
   // Conversion fixes (2 Oct): the tiles-join animation was removed (unreadable mid-animation; the value line says it).
   assert.doesNotMatch(prices, /class="ex ex-tiles"/);
