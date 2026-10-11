@@ -1,4 +1,4 @@
-import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
+import { AFTER_HOURS, ALWAYS_INCLUDED, SOLUTIONS, WAYS_TO_PAY, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -128,6 +128,11 @@ export function PriceList({ checkHref }: { checkHref: string }) {
       </ul>
       <p className="s-small">{SAME_PRICE_NOTE}</p>
 
+      <h3 className="s-track-title" id="ways">How the prices work</h3>
+      <ul className="s-ways" aria-label="How the prices work">
+        {WAYS_TO_PAY.map((way) => <li key={way.id}><a href={way.href}><strong>{way.title}</strong><b>{way.price}</b><span>{way.body}</span></a></li>)}
+      </ul>
+
       <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
       <Ladder />
 
@@ -141,8 +146,26 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           </div>
         </div>
       ))}
+      <span id="after-hours" />
+      <h3 className="s-track-title" id="monthly">Monthly service</h3>
+      <div className="s-prices">
+        <article className="s-price" id="offer-after-hours">
+          <h3>{AFTER_HOURS.name}</h3>
+          <p className="s-price-amount">{AFTER_HOURS.price}</p>
+          <p>Calls answered when you can’t pick up, day or night.</p>
+          <p className="s-small">{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
+          <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
+          <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
+        </article>
+      </div>
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
       <p className="s-guarantee" id="price-match"><strong>UK price match.</strong> {PRICE_MATCH}</p>
+
+      <Fold id="by-problem" title="Prices by problem">
+        <ul className="s-solutions" aria-label="Prices by problem">
+          {SOLUTIONS.map((row) => <li key={row.id}><a href={row.href}><strong>{row.problem}</strong><span>{row.fix}</span><b>{row.once}</b>{row.monthly ? <b>Or monthly: {row.monthly}</b> : null}</a></li>)}
+        </ul>
+      </Fold>
 
       <Fold id="automation-menu" title="The automation menu: what each job does">
         <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>
@@ -193,10 +216,6 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <div className="s-extras-care" id="care">
             <h4>After it’s built</h4>
             {CARE_PLANS.map((plan) => <p key={plan.id}><strong>{plan.name}, {plan.price}.</strong> {plan.body}</p>)}
-          </div>
-          <div className="s-extras-care" id="after-hours">
-            <h4>Monthly service</h4>
-            <p><strong>{AFTER_HOURS.name}, {AFTER_HOURS.price}.</strong> {`Calls answered when you can’t pick up, day or night: your FAQs answered, messages taken, urgent calls passed on and a summary emailed to you. ${AFTER_HOURS.setup}. ${AFTER_HOURS.terms}`} <a href={AFTER_HOURS.href}>How it works →</a></p>
           </div>
         </div>
       </Fold>
