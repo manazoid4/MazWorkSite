@@ -1,3 +1,7 @@
+## 11 Oct 2026 — Event Proof Pass concept (docs only)
+
+Proposed reusable NFC "I owe you proof. Not a pitch." return-card pilot for local founder/business events, with a bounded free test demonstration and optional seven-day return walkthrough. Documented in `docs/maz-works/EVENT-PROOF-PASS.md`; canonical detail in the Maz Works Knowledge Vault. **No site feature, marketing announcement, live offer or deployment.** Only trial physical cards after owner approves copy and the event organiser allows a demo setup.
+
 # Maz Works: latest session handover (public copy)
 
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
