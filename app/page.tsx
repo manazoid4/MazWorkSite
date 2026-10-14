@@ -60,7 +60,7 @@ export default function Page() {
    <a className="s-teaser s-teaser-slim" href={AFTER_HOURS.href}><span className="s-teaser-tag">New</span><strong>After-hours call answering {AFTER_HOURS.price}</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
-   <p className="eyebrow">See it working</p><h2 id="how-title">One missed call, start to finish.</h2><WalkthroughVideo />
+   <p className="eyebrow">See it working</p><h2 id="how-title">One quote, chased for you.</h2><WalkthroughVideo />
    <h3 className="hv-h3" id="changes-title">What changes for you</h3>
    <BeforeAfter rows={CHANGES.map(c => ({ key: c.job, icon: c.icon, before: c.before, name: getMenuJob(c.job).name, after: c.after }))} />
    <p className="s-small">Example of what changes, not a client result.</p>
