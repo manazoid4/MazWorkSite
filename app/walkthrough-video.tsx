@@ -31,7 +31,7 @@ export function WalkthroughVideo() {
         </video>
         {armed && !started ? <button type="button" className="hv-play" onClick={play}><span className="hv-play-icon" aria-hidden="true" />Play the 22-second example</button> : null}
       </div>
-      <figcaption className="hv-vcap"><span className="s-demo-tag">Example</span> Quote chased, booking confirmed, invoice sent. Captions on.</figcaption>
+      <figcaption className="hv-vcap"><span className="s-demo-tag">Example</span> Quote chased, booking confirmed, invoice chased. Captions on.</figcaption>
     </figure>
   );
 }
