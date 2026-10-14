@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * The 22 second demo: a quote nobody answered, chased, booked and invoiced on its own.
- * Rendered from code, no face or voice: `node scripts/render-demo-video.mjs`
- * (scene in scripts/demo-video/scene.html). Re-render when the words change.
+ * Rendered from code, no face or voice, in the private maz-works-brag-room repo
+ * (`npx hyperframes render`). Do not run scripts/render-demo-video.mjs: it still makes the
+ * old 30 second clip and would overwrite this one.
  * Set to null to hide the video everywhere. No figcaption: the homepage word cap is 600,
  * and the poster and every frame already say "example, not a real customer".
  */
