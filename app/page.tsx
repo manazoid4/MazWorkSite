@@ -46,7 +46,7 @@ export default function Page() {
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
     <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}, after a free demo.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (30s) <span aria-hidden="true">→</span></a></div>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (22s) <span aria-hidden="true">→</span></a></div>
    <ManazirLine />
    </div><HeroDemo />
   </section>
