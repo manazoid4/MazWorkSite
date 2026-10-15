@@ -154,6 +154,7 @@ test('the signup email to Maz names the trade the visitor picked', async () => {
 test('every page footer offers the trade chooser, the demo button and the list', async () => {
   const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
   assert.match(src, /Which one are you\?/);
+  assert.match(src, /Something else/, 'businesses outside the five trades can pick themselves too');
   assert.match(src, /src=footer-/);
   assert.match(src, /<NewsletterSignup/);
   assert.match(await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8'), /<FooterConvert \/>/);

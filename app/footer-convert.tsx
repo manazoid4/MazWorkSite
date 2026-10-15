@@ -11,18 +11,19 @@ import { TRADES, TRADE_STORAGE_KEY, getTrade, type TradeKey } from './trades';
  * a tagged demo link and the mailing list. The pick is remembered on this device.
  */
 export function FooterConvert() {
-  const [key, setKey] = useState<TradeKey | null>(null);
+  // 'other': every UK small business can answer, not just the five trades (AGENTS.md audience rule).
+  const [key, setKey] = useState<TradeKey | 'other' | null>(null);
 
   useEffect(() => {
     const read = () => {
-      try { setKey(getTrade(localStorage.getItem(TRADE_STORAGE_KEY))?.key ?? null); } catch { /* storage blocked: stay generic */ }
+      try { const v = localStorage.getItem(TRADE_STORAGE_KEY); setKey(v === 'other' ? 'other' : getTrade(v)?.key ?? null); } catch { /* storage blocked: stay generic */ }
     };
     read();
     window.addEventListener('mw-trade', read);
     return () => window.removeEventListener('mw-trade', read);
   }, []);
 
-  function pick(next: TradeKey) {
+  function pick(next: TradeKey | 'other') {
     setKey(next);
     try { localStorage.setItem(TRADE_STORAGE_KEY, next); } catch { /* still works for this page */ }
   }
@@ -38,9 +39,10 @@ export function FooterConvert() {
           {TRADES.map((item) => (
             <button key={item.key} type="button" aria-pressed={item.key === key} onClick={() => pick(item.key)}>{item.label}</button>
           ))}
+          <button type="button" aria-pressed={key === 'other'} onClick={() => pick('other')}>Something else</button>
         </div>
         <p className="mw-footer-line" aria-live="polite">
-          {trade ? trade.line : 'Pick yours and see the jobs that could run on their own while you work.'}
+          {trade ? trade.line : key === 'other' ? 'Any small business: the enquiry gets answered, the quote followed up and the booking confirmed while you work.' : 'Pick yours and see the jobs that could run on their own while you work.'}
         </p>
         <p className="mw-footer-actions">
           <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
