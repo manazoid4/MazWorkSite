@@ -1689,3 +1689,23 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .s-ways span, .s-solutions span { color: var(--muted); }
 .s-solutions b { font-size: .95rem; }
 @media (min-width: 760px) { .s-ways { grid-template-columns: repeat(2, 1fr); } .s-solutions { grid-template-columns: repeat(2, 1fr); } }
+
+/* Trade page: that trade's 22 s video under "What changes in your day" (conversion sprint). */
+.tp-trade-video {
+  margin: 0 0 24px;
+  display: grid;
+  gap: 8px;
+  max-width: 360px;
+}
+
+.tp-trade-video video {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--ink);
+}
+
+/* The page already shows this trade's video, so the footer band does not repeat it. */
+.s-home:has(.tp-trade-video) .mw-footer-video {
+  display: none;
+}

@@ -82,6 +82,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <section className="s-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
+        {trade ? (
+          <figure className="tp-trade-video">
+            <video src={`/video/for/${trade}.mp4`} poster={`/video/for/${trade}.webp`} controls muted playsInline preload="metadata"
+              aria-label="22 second example: messages answered, followed up and confirmed while the owner works. Example, not a real customer." />
+            <figcaption className="s-small">22 seconds, no sound needed. Example. Not a real customer.</figcaption>
+          </figure>
+        ) : null}
         <div className="tp-ba"><BeforeAfter rows={extras.changes} /></div>
         <p className="s-small">Examples of what changes, not client results.</p>
       </section>
