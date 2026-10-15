@@ -44,7 +44,7 @@ test('a valid email is added to Resend contacts and reported as joined', async (
   await handler(fakeReq({ email: '  Owner@Shop.co.uk ' }), res, f.impl);
   assert.equal(res.statusCode, 200);
   assert.deepEqual(JSON.parse(res.body), { ok: true });
-  assert.equal(f.calls.length, 3, "contact, note to Maz, welcome email");
+  assert.equal(f.calls.length, 2, "contact, note to Maz; no automatic email to the visitor (Maz, 15 Oct)");
   assert.equal(f.calls[0].url, 'https://api.resend.com/contacts');
   assert.equal(f.calls[0].headers.authorization, 'Bearer re_test_key');
   assert.deepEqual(f.calls[0].body, { email: 'owner@shop.co.uk', unsubscribed: false });
@@ -158,44 +158,4 @@ test('every page footer offers the trade chooser, the demo button and the list',
   assert.match(src, /src=footer-/);
   assert.match(src, /<NewsletterSignup/);
   assert.match(await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8'), /<FooterConvert \/>/);
-});
-
-test('a new signup gets their trade video straight away, with a one tap unsubscribe', async () => {
-  const f = recordingFetch();
-  await handler(fakeReq({ email: 'owner@shop.co.uk', source: 'footer', trade: 'garage' }), fakeRes(), f.impl);
-  const welcome = f.calls[2].body;
-  assert.deepEqual(welcome.to, ['owner@shop.co.uk']);
-  assert.equal(welcome.subject, 'Your garage video is here');
-  assert.match(welcome.text, /\/video\/for\/garage\.mp4/);
-  assert.match(welcome.text, /Example\. Not a real customer\./);
-  assert.match(welcome.text, /src=welcome-garage&trade=garages/);
-  assert.match(welcome.headers['List-Unsubscribe'], /\/api\/unsubscribe\?e=owner%40shop\.co\.uk&t=[0-9a-f]{32}/);
-  assert.match(welcome.text, /Unsubscribe in one tap: https:\/\/www\.mazworks\.uk\/api\/unsubscribe/);
-  for (const t of ['salon', 'garage', 'clinic', 'cafe', 'trades', undefined]) {
-    const { subject, text } = (await import('../api/subscribe.js')).welcomeEmail('a@b.co', t);
-    assert.doesNotMatch(subject + text, /£|\bAI\b|[–—]| - |missed|lost|competitor|\bfix\b|repair/i, `copy rules: ${t}`);
-  }
-});
-
-test('signing up again sends no second welcome email and does not reveal it', async () => {
-  const f = recordingFetch(409, '{"message":"Contact already exists"}');
-  const res = fakeRes();
-  await handler(fakeReq({ email: 'owner@shop.co.uk' }), res, f.impl);
-  assert.deepEqual(JSON.parse(res.body), { ok: true });
-  assert.equal(f.calls.filter((c) => c.body.to?.[0] === 'owner@shop.co.uk').length, 0);
-});
-
-test('the unsubscribe link only works for the address it was sent to', async () => {
-  const { default: unsub } = await import('../api/unsubscribe.js');
-  const { unsubToken } = await import('../api/subscribe.js');
-  const good = fakeRes(); const f = recordingFetch();
-  const req = (q) => ({ method: 'GET', url: `/api/unsubscribe?${q}`, headers: {} });
-  await unsub(req(`e=owner%40shop.co.uk&t=${unsubToken('owner@shop.co.uk')}`), good, f.impl);
-  assert.equal(good.statusCode, 200);
-  assert.equal(f.calls[0].url, 'https://api.resend.com/contacts/owner%40shop.co.uk');
-  assert.deepEqual(f.calls[0].body, { unsubscribed: true });
-  const bad = fakeRes(); const g = recordingFetch();
-  await unsub(req(`e=someone%40else.co.uk&t=${unsubToken('owner@shop.co.uk')}`), bad, g.impl);
-  assert.equal(bad.statusCode, 400);
-  assert.equal(g.calls.length, 0);
 });

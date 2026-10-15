@@ -5,8 +5,6 @@
 // without JavaScript (a plain POST gets a redirect back), the honeypot is
 // checked before anything reaches Resend, and the API key never reaches a
 // browser. The key lives only in Vercel as RESEND_API_KEY.
-import { createHmac } from 'node:crypto';
-
 const CONTACTS_URL = 'https://api.resend.com/contacts';
 const EMAILS_URL = 'https://api.resend.com/emails';
 // Resend stores contacts silently, so each signup is also emailed to Maz.
@@ -98,7 +96,7 @@ export async function addContact(email, fetchImpl = fetch) {
     if (response.ok) return { ok: true };
     // Signing up twice is not an error from the visitor's side: they are on the list.
     const detail = await response.text().catch(() => '');
-    if (response.status === 409 || /already exists/i.test(detail)) return { ok: true, existing: true };
+    if (response.status === 409 || /already exists/i.test(detail)) return { ok: true };
     return { ok: false, reason: 'rejected' };
   } catch {
     return { ok: false, reason: controller.signal.aborted ? 'timeout' : 'network' };
@@ -138,72 +136,6 @@ export async function notifyOwner(email, fetchImpl = fetch, tags = {}) {
   }
 }
 
-const SITE = 'https://www.mazworks.uk';
-const WELCOME_FROM = 'Maz at Maz Works <signups@mazworks.uk>';
-// Same five audiences as app/trades.ts: their video, their busy moment, their /for page.
-const WELCOME = {
-  salon: { word: 'salon', moment: 'mid colour', guide: 'salons-and-beauty' },
-  garage: { word: 'garage', moment: 'under a car', guide: 'garages' },
-  clinic: { word: 'clinic', moment: 'with a client', guide: 'clinics-and-therapists' },
-  cafe: { word: 'cafe', moment: 'in the lunch rush', guide: 'cafes-and-food' },
-  trades: { word: 'trade', moment: 'on a job', guide: 'heating-and-plumbing' },
-};
-
-/** Signed so only the address an email went to can be unsubscribed by its link. */
-export function unsubToken(email) {
-  // shortcut: falls back to the Resend key as the signing secret; set UNSUBSCRIBE_SECRET to rotate it on its own
-  const secret = process.env.UNSUBSCRIBE_SECRET || process.env.RESEND_API_KEY || '';
-  return createHmac('sha256', secret).update(email).digest('hex').slice(0, 32);
-}
-
-export const unsubUrl = (email) => `${SITE}/api/unsubscribe?e=${encodeURIComponent(email)}&t=${unsubToken(email)}`;
-
-/** Email 1 of the sprint sequence: their trade's 22 s video straight away. Copy rules: no prices, no dashes. */
-export function welcomeEmail(email, trade) {
-  const w = WELCOME[trade];
-  const video = w ? `${SITE}/video/for/${trade}.mp4` : `${SITE}/video/demo.mp4`;
-  const demo = `${SITE}/free-plan?src=welcome-${trade || 'list'}${w ? `&trade=${w.guide}` : ''}#leak-check-form`;
-  const unsub = unsubUrl(email);
-  return {
-    subject: w ? `Your ${w.word} video is here` : 'Your Maz Works video is here',
-    unsub,
-    text: [
-      'Hi,',
-      `Thanks for joining. Here is the 22 second example: the replies, reminders and follow ups that could run on their own while you're ${w ? w.moment : 'busy with a customer'}.`,
-      `${video}\nExample. Not a real customer.`,
-      `No call and no pitch. If you want to see it working with your own business name, reply with the name or tap Get my free demo:\n${demo}`,
-      'Maz\nmazworks.uk',
-      `You joined the Maz Works list at mazworks.uk. Unsubscribe in one tap: ${unsub}`,
-    ].join('\n\n'),
-  };
-}
-
-/** Best effort, like notifyOwner: the visitor is already on the list if this fails. */
-export async function sendWelcome(email, trade, fetchImpl = fetch) {
-  const apiKey = process.env.RESEND_API_KEY || '';
-  if (!apiKey) return false;
-  const { subject, text, unsub } = welcomeEmail(email, trade);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-  try {
-    const response = await fetchImpl(EMAILS_URL, {
-      method: 'POST',
-      headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
-      body: JSON.stringify({
-        from: WELCOME_FROM, to: [email], reply_to: NOTIFY_TO, subject, text,
-        // one-click unsubscribe for Gmail and Yahoo (RFC 8058); api/unsubscribe.js answers the POST
-        headers: { 'List-Unsubscribe': `<${unsub}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
-      }),
-      signal: controller.signal,
-    });
-    return response.ok;
-  } catch {
-    return false;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 export default async function handler(req, res, fetchImpl = fetch) {
   if (req.method !== 'POST') {
     res.statusCode = 405;
@@ -231,10 +163,6 @@ export default async function handler(req, res, fetchImpl = fetch) {
 
   const result = await addContact(email, fetchImpl);
   // Awaited, not fired-and-forgotten: the function can be frozen once it replies.
-  if (result.ok) {
-    // A second signup with the same address gets no second welcome email.
-    await Promise.all([notifyOwner(email, fetchImpl, tags), result.existing ? false : sendWelcome(email, tags.trade, fetchImpl)]);
-  }
-  // `existing` stays server side: the reply must not reveal who is already on the list.
-  return reply(req, res, result.ok ? 200 : 502, result.ok ? { ok: true } : result, back);
+  if (result.ok) await notifyOwner(email, fetchImpl, tags);
+  return reply(req, res, result.ok ? 200 : 502, result, back);
 }

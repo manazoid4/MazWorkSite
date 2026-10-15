@@ -68,7 +68,7 @@ export function FooterConvert() {
         source="footer"
         trade={trade?.key}
         title="Not ready yet?"
-        text={trade ? trade.offer : 'Get the 22 second example by email now, then one short email a month.'}
+        text={trade ? trade.offer : 'One email a month: a job you can hand off, and how it works.'}
       />
     </div>
   );
