@@ -1,5 +1,4 @@
 import { FooterConvert } from './footer-convert';
-import { NAV_GROUPS } from './nav';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
 import { CONTACT_EMAIL, LINKEDIN_URL } from './site';
@@ -25,31 +24,24 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <FooterConvert />
 
+      {/* Minimal on purpose (Maz, 15 Oct): one hook, six links. Every page link lives in the menu and on /site-map. */}
       <div className="mw-footer-brand">
-        <strong>Maz Works</strong>
-        <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain.</span>
-        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        <p className="mw-footer-hook">Every enquiry answered. Every booking confirmed. You stay on the job.</p>
+        <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
       </div>
 
-      <div className="mw-footer-groups">
-        {NAV_GROUPS.map((group) => (
-          <nav key={group.title} aria-label={group.title}>
-            <p>{group.title}</p>
-            {group.links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
-          </nav>
-        ))}
-        <nav aria-label="Get started">
-          <p>Get started</p>
-          <a href="/demos">Free demo</a>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=Maz%20Works%20feedback`}>Feedback</a>
-          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        </nav>
-      </div>
+      <nav className="mw-footer-links" aria-label="Footer">
+        <a href="/prices">Prices</a>
+        <a href="/what-we-do">How it works</a>
+        <a href="/for">Who it’s for</a>
+        <a href="/faq">FAQ</a>
+        <a href="/work/scrap-finance-partners">Client work</a>
+        <a href="/contact">Contact</a>
+      </nav>
 
       <div className="mw-footer-bottom">
-        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></span>
-        <a className="mw-back-top" href="#main-content">Back to top ↑</a>
-        <span>Fixed quotes · No VAT added</span>
+        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a></span>
+        <span>Fixed quotes · No VAT added · <a href="/3d-printing">Objects</a> · <a href="/lab">Lab</a> · <a className="mw-back-top" href="#main-content">Back to top ↑</a></span>
       </div>
     </footer>
   );
