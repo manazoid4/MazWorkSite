@@ -134,3 +134,27 @@ test('no notification is sent when the signup itself failed', async () => {
   await handler(fakeReq({ email: 'owner@shop.co.uk' }), fakeRes(), f.impl);
   assert.equal(f.calls.some((call) => call.url.endsWith('/emails')), false);
 });
+
+test('footer signups carry only known trade and source tags, and return to the same page', async () => {
+  const { signupTags, returnPath } = await import('../api/subscribe.js');
+  assert.deepEqual(signupTags({ source: 'footer', trade: 'salon', return: 'footer-signup' }), { source: 'footer', trade: 'salon', formId: 'footer-signup' });
+  assert.deepEqual(signupTags({ source: '<b>x</b>', trade: 'plumber', return: 'a b' }), { source: '', trade: '', formId: '' });
+  const req = { headers: { host: 'www.mazworks.uk', referer: 'https://www.mazworks.uk/for/garages?x=1' } };
+  assert.deepEqual(returnPath(req, 'footer-signup'), { path: '/for/garages', formId: 'footer-signup' });
+  assert.deepEqual(returnPath({ headers: { host: 'www.mazworks.uk', referer: 'https://evil.example/p' } }, 'footer-signup'), { path: '/lab', formId: 'newsletter' });
+});
+
+test('the signup email to Maz names the trade the visitor picked', async () => {
+  const f = recordingFetch();
+  await handler(fakeReq({ email: 'owner@shop.co.uk', source: 'footer', trade: 'cafe' }), fakeRes(), f.impl);
+  assert.match(f.calls[1].body.subject, /\(cafe\)/);
+  assert.match(f.calls[1].body.text, /signed up from: footer/);
+});
+
+test('every page footer offers the trade chooser, the demo button and the list', async () => {
+  const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
+  assert.match(src, /Which one are you\?/);
+  assert.match(src, /src=footer-/);
+  assert.match(src, /<NewsletterSignup/);
+  assert.match(await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8'), /<FooterConvert \/>/);
+});

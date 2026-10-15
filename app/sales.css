@@ -728,6 +728,85 @@ main {
   }
 }
 
+/* Footer conversion band: pick your trade, see your world, get the demo or join the list. */
+.mw-footer-convert {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+  gap: 24px 48px;
+  align-items: start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.mw-footer-ask {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 750;
+}
+
+.mw-footer-chips {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mw-footer-chips button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.mw-footer-chips button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.mw-footer-line {
+  margin-top: 14px;
+  max-width: 560px;
+}
+
+.mw-footer-actions {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+
+.mw-footer-video {
+  grid-row: span 2;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  background: var(--ink);
+  justify-self: end;
+}
+
+.mw-footer-convert .mw-newsletter {
+  grid-column: 1;
+  margin: 0;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .mw-footer-convert {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-footer-video {
+    grid-row: auto;
+    justify-self: start;
+  }
+}
+
 /* ==== Folded in from mazworks-friction-pass.css (Batch 3 CSS consolidation, 30 Sep 2026). Order kept so the cascade is unchanged. ==== */
 /* 26 Sep conversion/friction pass. Kept separate so a later design agent can replace it cleanly. */
 

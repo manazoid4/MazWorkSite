@@ -19,6 +19,8 @@ import { OFFERS } from '../../offers';
 import { StraightAnswers } from '../../straight-answers';
 import { CalculatorReveal } from '../../calculator-reveal';
 import { JobLinks } from '../../services/job-links';
+import { RememberTrade } from '../../remember-trade';
+import { tradeForGuide } from '../../trades';
 
 export const dynamicParams = false;
 
@@ -57,11 +59,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
   const extras = TRADE_EXTRAS[guide.id];
+  const trade = tradeForGuide(guide.id);
   const cards: CardItem[] = guide.fixes.map((fix) => ({ key: fix.name, icon: iconFor(fix.name), name: fix.name, price: fix.price, body: fix.body, href: `/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form` }));
 
   return (
     <main className="s-home">
       <SiteHeader /><ServiceSchema path={`/for/${guide.id}`} />
+      {trade ? <RememberTrade trade={trade} /> : null}
 
       <TradeHero
         id="niche-title"

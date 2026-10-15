@@ -1,3 +1,4 @@
+import { FooterConvert } from './footer-convert';
 import { NAV_GROUPS } from './nav';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
@@ -22,6 +23,8 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer className="site-footer mw-site-footer mw-footer-clean">
+      <FooterConvert />
+
       <div className="mw-footer-brand">
         <strong>Maz Works</strong>
         <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain.</span>
