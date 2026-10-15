@@ -19,27 +19,27 @@ export const TRADES: Trade[] = [
   {
     key: 'salon', label: 'Salon', guide: 'salons-and-beauty',
     line: 'Mid colour when the Instagram DM comes in? It gets answered and booked while you work, and Saturday gets a reminder the night before.',
-    offer: 'Get the 22 second salon video by email now, then one short email a month.',
+    offer: 'One email a month: a salon job you can hand off, and how it works.',
   },
   {
     key: 'garage', label: 'Garage', guide: 'garages',
     line: 'Under a car when the phone goes? The caller gets a text back, the parts quote gets followed up and the MOT reminder goes out by itself.',
-    offer: 'Get the 22 second garage video by email now, then one short email a month.',
+    offer: 'One email a month: a garage job you can hand off, and how it works.',
   },
   {
     key: 'clinic', label: 'Clinic', guide: 'clinics-and-therapists',
     line: 'With a client all day? Tomorrow’s confirmations go out on their own and a cancelled slot goes to the waiting list.',
-    offer: 'Get the 22 second clinic video by email now, then one short email a month.',
+    offer: 'One email a month: a clinic job you can hand off, and how it works.',
   },
   {
     key: 'cafe', label: 'Cafe', guide: 'cafes-and-food',
     line: 'Lunch rush when the catering enquiry lands? It gets a reply, the table for 8 gets confirmed, and you look up when it is quiet.',
-    offer: 'Get the 22 second cafe video by email now, then one short email a month.',
+    offer: 'One email a month: a cafe job you can hand off, and how it works.',
   },
   {
     key: 'trades', label: 'Trades', guide: 'heating-and-plumbing',
     line: 'On a roof when they ring? The quote from Tuesday gets followed up and the unpaid invoice gets a polite nudge.',
-    offer: 'Get the 22 second trade video by email now, then one short email a month.',
+    offer: 'One email a month: a trade job you can hand off, and how it works.',
   },
 ];
 
