@@ -25,7 +25,9 @@ async function readPage(route) {
 function stripNavChrome(html) {
   return html
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
-    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ');
+    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
+    // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
+    .replace(/<div class="mw-footer-convert">[\s\S]*?(?=<div class="mw-footer-brand">)/, ' ');
 }
 
 function visibleText(html) {

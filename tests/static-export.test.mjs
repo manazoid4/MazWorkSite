@@ -28,7 +28,9 @@ const CASE_STUDY_WORD_BUDGET = 320;
 function stripNavChrome(html) {
   return html
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
-    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ');
+    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
+    // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
+    .replace(/<div class="mw-footer-convert">[\s\S]*?(?=<div class="mw-footer-brand">)/, ' ');
 }
 
 function mainWordCount(html) {
@@ -89,8 +91,10 @@ test('homepage positions Maz Works as a systems builder, not a website-fix shop 
 });
 
 test('homepage has one way in: the free check form, with the call as the fallback', async () => {
-  const html = await readPage('/');
-  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage carries exactly one form, the free check');
+  const page = await readPage('/');
+  assert.match(page, /id="footer-signup"/, 'the mailing list lives in the shared footer band (conversion sprint, 15 Oct)');
+  const html = stripNavChrome(page);
+  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage itself carries exactly one form, the free check');
   assert.match(html, /id="leak-check-form"/);
   assert.doesNotMatch(html, /Send enquiry/);
   assert.doesNotMatch(html, /class="mw-newsletter"/);
@@ -232,7 +236,7 @@ test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27
 test('homepage has five sections and keeps process detail on what-we-do (brief v2)', async () => {
  const html = await readPage('/');
  for (const id of ['build','how','check','about']) assert.match(html,new RegExp(`id="${id}"`));
- assert.equal((html.match(/<section /g)||[]).length,5);
+ assert.equal((stripNavChrome(html).match(/<section /g)||[]).length,5);
  const detail=await readPage('/what-we-do');
  for(const copy of ['How I set it up','Built on what you already use','I never need your passwords','What you own at the end','What I need from you']) assert.ok(detail.includes(copy));
  const words=mainWordCount(html);assert.ok(words<=WORD_BUDGET,`homepage has ${words} words; budget ${WORD_BUDGET}`);

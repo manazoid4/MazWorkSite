@@ -45,7 +45,29 @@ function wantsJson(req) {
   return (req.headers.accept || '').includes('application/json');
 }
 
-function reply(req, res, status, result) {
+const TRADES = ['salon', 'garage', 'clinic', 'cafe', 'trades'];
+const TAG = /^[a-z0-9-]{1,32}$/;
+
+/** Only known shapes get through: these values land in Maz's inbox and a redirect URL. */
+export function signupTags(body) {
+  const pick = (value, ok) => (typeof value === 'string' && ok(value) ? value : '');
+  return {
+    source: pick(body.source, (v) => TAG.test(v)),
+    trade: pick(body.trade, (v) => TRADES.includes(v)),
+    formId: pick(body.return, (v) => TAG.test(v)),
+  };
+}
+
+/** Back to the page the form was on (same site only), else the original /lab form. */
+export function returnPath(req, formId) {
+  try {
+    const from = new URL(req.headers.referer || '');
+    if (formId && from.host === req.headers.host) return { path: from.pathname, formId };
+  } catch { /* no or bad referer */ }
+  return { path: '/lab', formId: 'newsletter' };
+}
+
+function reply(req, res, status, result, back = { path: '/lab', formId: 'newsletter' }) {
   res.setHeader('cache-control', 'no-store, max-age=0');
   res.setHeader('x-content-type-options', 'nosniff');
   if (wantsJson(req)) {
@@ -55,7 +77,7 @@ function reply(req, res, status, result) {
   }
   // No JavaScript: send the visitor back to the form with the outcome in the URL.
   res.statusCode = 303;
-  res.setHeader('location', `/lab?subscribed=${result.ok ? '1' : '0'}#newsletter`);
+  res.setHeader('location', `${back.path}?subscribed=${result.ok ? '1' : '0'}#${back.formId}`);
   return res.end();
 }
 
@@ -87,7 +109,8 @@ export async function addContact(email, fetchImpl = fetch) {
  * Best effort: a failed notification must never turn a real signup into an
  * error for the visitor, because the contact is already saved in Resend.
  */
-export async function notifyOwner(email, fetchImpl = fetch) {
+export async function notifyOwner(email, fetchImpl = fetch, tags = {}) {
+  const from = [tags.trade && `trade: ${tags.trade}`, tags.source && `signed up from: ${tags.source}`].filter(Boolean).join(', ');
   const apiKey = process.env.RESEND_API_KEY || '';
   if (!apiKey) return false;
   const controller = new AbortController();
@@ -100,8 +123,8 @@ export async function notifyOwner(email, fetchImpl = fetch) {
         from: NOTIFY_FROM,
         to: [NOTIFY_TO],
         reply_to: email,
-        subject: `New mailing-list signup: ${email}`,
-        text: `${email} just joined the Maz Works mailing list from www.mazworks.uk.\n\nThey are saved in Resend contacts. Reply to this email to write to them directly.`,
+        subject: `New mailing-list signup${tags.trade ? ` (${tags.trade})` : ''}: ${email}`,
+        text: `${email} just joined the Maz Works mailing list from www.mazworks.uk.${from ? `\n${from}` : ''}\n\nThey are saved in Resend contacts. Reply to this email to write to them directly.`,
       }),
       signal: controller.signal,
     });
@@ -133,11 +156,13 @@ export default async function handler(req, res, fetchImpl = fetch) {
     return reply(req, res, 200, { ok: true });
   }
 
+  const tags = signupTags(body);
+  const back = returnPath(req, tags.formId);
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
-  if (!EMAIL.test(email)) return reply(req, res, 400, { ok: false, reason: 'invalid-email' });
+  if (!EMAIL.test(email)) return reply(req, res, 400, { ok: false, reason: 'invalid-email' }, back);
 
   const result = await addContact(email, fetchImpl);
   // Awaited, not fired-and-forgotten: the function can be frozen once it replies.
-  if (result.ok) await notifyOwner(email, fetchImpl);
-  return reply(req, res, result.ok ? 200 : 502, result);
+  if (result.ok) await notifyOwner(email, fetchImpl, tags);
+  return reply(req, res, result.ok ? 200 : 502, result, back);
 }
