@@ -27,7 +27,8 @@ function stripNavChrome(html) {
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
     .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
     // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
-    .replace(/<div class="mw-footer-convert">[\s\S]*?(?=<div class="mw-footer-brand">)/, ' ');
+    // the footer (trade chooser band, hook, six links) is the same on every page too (15 Oct)
+    .replace(/<div class="mw-footer-convert">[\s\S]*?<\/footer>/, ' ');
 }
 
 function visibleText(html) {

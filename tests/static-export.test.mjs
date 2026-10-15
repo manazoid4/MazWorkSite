@@ -30,7 +30,8 @@ function stripNavChrome(html) {
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
     .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
     // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
-    .replace(/<div class="mw-footer-convert">[\s\S]*?(?=<div class="mw-footer-brand">)/, ' ');
+    // the footer (trade chooser band, hook, six links) is the same on every page too (15 Oct)
+    .replace(/<div class="mw-footer-convert">[\s\S]*?<\/footer>/, ' ');
 }
 
 function mainWordCount(html) {
@@ -546,7 +547,8 @@ test('every main page is one tap from the key routes, and the trade guides have 
   // and phones only saw "Free quote". Now every page carries the same map.
   for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
-    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/for/architects', '/3d-printing#architecture-property']) {
+    // 15 Oct (Maz: footer minimal): the long footer list went; trade guides and architecture models stay one tap away via /for and /site-map.
+    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/site-map']) {
       // The free-plan link may carry ?src=… and #leak-check-form (9 Oct: nav and footer land on the form).
       const linked = html.includes(`href="${href}"`) || (href === '/free-plan' && html.includes('href="/free-plan?'));
       assert.ok(linked, `${route} is missing a link to ${href}`);

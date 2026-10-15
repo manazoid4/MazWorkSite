@@ -1709,3 +1709,23 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .s-home:has(.tp-trade-video) .mw-footer-video {
   display: none;
 }
+
+/* Footer hook: the one line every visitor reads last. */
+.mw-footer-hook {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 750;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.mw-footer-links a {
+  font-size: .82rem;
+}
+
+@media (max-width: 760px) {
+  .mw-footer-links {
+    justify-content: flex-start;
+  }
+}
