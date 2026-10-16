@@ -121,7 +121,7 @@ test('trade guides stay reachable and the homepage shows a labelled missed-call 
     assert.match(await readPage('/for'), new RegExp(`href="/for/${guide}"`));
   }
   assert.match(html, /class="s-demo"/);
-  assert.match(html, /Missed-call text-back, Starter Automation £149\. Not a real customer\./);
+  assert.match(html, /Missed-call text-back, Starter Automation £99\. Not a real customer\./);
   // The Enquiries/Reminders/Reviews tabs left the homepage (9 Oct): a before/after panel replaced them.
   assert.match(html, /class="hv-ba"/);
   assert.match(html, /Example of what changes, not a client result\./);
@@ -132,7 +132,7 @@ test('what-we-do shows a clearly labelled example report, not a real client', as
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
   for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
-  assert.match(html, /Total £248/);
+  assert.match(html, /Total £198/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -163,9 +163,9 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
 test('homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep)', async () => {
   const html = await readPage('/');
   // Polish (2 Oct): the homepage shows the first step's price on each type tile; every other price is one tap away on /prices.
-  assert.match(html, /£149/);
+  assert.match(html, /£99/);
   const prices = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
+  for (const [name, price] of [['Starter Automation', '£99'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
     assert.match(prices, new RegExp(name));
     assert.match(prices, new RegExp(price, 'i'));
   }
@@ -186,7 +186,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
   const pricesAgain = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£79'], ['Launch Page', '£295'], ['Website', 'From £1,295']]) {
+  for (const [name, price] of [['Starter Automation', '£99'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£79'], ['Launch Page', '£295'], ['Website', 'From £1,295']]) {
     assert.match(pricesAgain, new RegExp(name));
     assert.match(pricesAgain, new RegExp(price));
   }
@@ -206,7 +206,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
-  for (const price of ['£149', 'From £595', 'From £2,450', '£295']) assert.match(contact, new RegExp(price));
+  for (const price of ['£99', 'From £595', 'From £2,450', '£295']) assert.match(contact, new RegExp(price));
   assert.match(contact, /No VAT added/);
 });
 
@@ -359,7 +359,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
-  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [149, 595, 2450, 79, 295, 1295]);
+  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [99, 595, 2450, 79, 295, 1295]);
   for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
     assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
