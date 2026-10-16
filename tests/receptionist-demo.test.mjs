@@ -438,7 +438,7 @@ test('RC9 branch order: cancel, hours, "open now" and "do you cover brakes"', ()
 test('RC10 asked if it is a bot, a scam or a person: honest answers, never the word AI', () => {
   for (const line of ['are you a bot', 'are you AI', 'are you a robot', 'is this a recording', 'are you a computer', 'are you real']) {
     const reply = talk([line]).said[1];
-    assert.match(reply, /^No, I’m the automated receptionist for Harbour Street Garage/, line);
+    assert.match(reply, /^I’m an automated receptionist for Harbour Street Garage, not a person./, line);
     assert.doesNotMatch(reply, /\bAI\b/);
   }
   assert.match(talk(['is this a scam']).said[1], /^No, this is the automated receptionist for Harbour Street Garage\. If you’d rather check, look up their number and ring back when they’re open\. Can I help with anything\?$/);
