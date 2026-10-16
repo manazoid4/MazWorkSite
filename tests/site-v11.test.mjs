@@ -108,7 +108,7 @@ test('every explainer animation has a reduced-motion still', async () => {
 test('the drafted free plan quotes only prices from offers.ts and picks the right rung', () => {
   const starter = draft.draftFreePlan({ name: 'Sam Example', trade: 'trades', problem: 'Missed calls' });
   assert.equal(starter.offer.id, 'starter');
-  assert.match(starter.text, /Starter Automation: missed-call text-back \(£149\)/);
+  assert.match(starter.text, /Starter Automation: missed-call text-back \(£99\)/);
   assert.match(starter.text, /Guarantee:/);
   assert.match(starter.text, /Day 0: free demo and fixed price/);
   assert.doesNotMatch(starter.text, /£195|£795|£2,950/);
@@ -161,6 +161,6 @@ test('sales check: a plumber, a salon owner and a creator reach "Get my free dem
     // Tap 2: the main button on the type page.
     const page = await readPage(`/for/${type}`);
     assert.match(page, /Get my free demo</, `${type}: free plan button`);
-    assert.match(page, /£149/, `${type}: starter price visible`);
+    assert.match(page, /£99/, `${type}: starter price visible`);
   }
 });

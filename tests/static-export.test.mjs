@@ -28,7 +28,10 @@ const CASE_STUDY_WORD_BUDGET = 320;
 function stripNavChrome(html) {
   return html
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
-    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ');
+    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
+    // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
+    // the footer (trade chooser band, hook, six links) is the same on every page too (15 Oct)
+    .replace(/<div class="mw-footer-convert">[\s\S]*?<\/footer>/, ' ');
 }
 
 function mainWordCount(html) {
@@ -89,8 +92,10 @@ test('homepage positions Maz Works as a systems builder, not a website-fix shop 
 });
 
 test('homepage has one way in: the free check form, with the call as the fallback', async () => {
-  const html = await readPage('/');
-  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage carries exactly one form, the free check');
+  const page = await readPage('/');
+  assert.match(page, /id="footer-signup"/, 'the mailing list lives in the shared footer band (conversion sprint, 15 Oct)');
+  const html = stripNavChrome(page);
+  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage itself carries exactly one form, the free check');
   assert.match(html, /id="leak-check-form"/);
   assert.doesNotMatch(html, /Send enquiry/);
   assert.doesNotMatch(html, /class="mw-newsletter"/);
@@ -116,7 +121,7 @@ test('trade guides stay reachable and the homepage shows a labelled missed-call 
     assert.match(await readPage('/for'), new RegExp(`href="/for/${guide}"`));
   }
   assert.match(html, /class="s-demo"/);
-  assert.match(html, /Missed-call text-back, Starter Automation £149\. Not a real customer\./);
+  assert.match(html, /Missed-call text-back, Starter Automation £99\. Not a real customer\./);
   // The Enquiries/Reminders/Reviews tabs left the homepage (9 Oct): a before/after panel replaced them.
   assert.match(html, /class="hv-ba"/);
   assert.match(html, /Example of what changes, not a client result\./);
@@ -127,7 +132,7 @@ test('what-we-do shows a clearly labelled example report, not a real client', as
   assert.match(html, /id="example"/);
   assert.match(html, /A fictional business, made up to show the format/);
   for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
-  assert.match(html, /Total £248/);
+  assert.match(html, /Total £198/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -158,9 +163,9 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
 test('homepage sells one first step: Starter, four popular add-ons, bigger jobs and a link to every price (28 Sep)', async () => {
   const html = await readPage('/');
   // Polish (2 Oct): the homepage shows the first step's price on each type tile; every other price is one tap away on /prices.
-  assert.match(html, /£149/);
+  assert.match(html, /£99/);
   const prices = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
+  for (const [name, price] of [['Starter Automation', '£99'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
     assert.match(prices, new RegExp(name));
     assert.match(prices, new RegExp(price, 'i'));
   }
@@ -181,7 +186,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
   const pricesAgain = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£149'], ['Launch Page', '£595'], ['Website', 'From £1,495']]) {
+  for (const [name, price] of [['Starter Automation', '£99'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£79'], ['Launch Page', '£295'], ['Website', 'From £1,295']]) {
     assert.match(pricesAgain, new RegExp(name));
     assert.match(pricesAgain, new RegExp(price));
   }
@@ -189,7 +194,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(pricesAgain, /What’s included, and what isn’t/, 'every package shows what it excludes');
   for (const id of ['compare', 'extras']) assert.match(pricesAgain, new RegExp(`id="${id}"`));
   assert.match(pricesAgain, /What’s not included/);
-  assert.match(prices, /Google listing tidy[\s\S]{0,300}£49/);
+  assert.match(prices, /Google listing tidy[\s\S]{0,300}£29/);
   assert.match(prices, /Extra website page[\s\S]{0,300}£295/);
   assert.match(prices, /Team training[\s\S]{0,300}£95/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
@@ -201,7 +206,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
-  for (const price of ['£149', 'From £595', 'From £2,450', '£595']) assert.match(contact, new RegExp(price));
+  for (const price of ['£99', 'From £595', 'From £2,450', '£295']) assert.match(contact, new RegExp(price));
   assert.match(contact, /No VAT added/);
 });
 
@@ -232,7 +237,7 @@ test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27
 test('homepage has five sections and keeps process detail on what-we-do (brief v2)', async () => {
  const html = await readPage('/');
  for (const id of ['build','how','check','about']) assert.match(html,new RegExp(`id="${id}"`));
- assert.equal((html.match(/<section /g)||[]).length,5);
+ assert.equal((stripNavChrome(html).match(/<section /g)||[]).length,5);
  const detail=await readPage('/what-we-do');
  for(const copy of ['How I set it up','Built on what you already use','I never need your passwords','What you own at the end','What I need from you']) assert.ok(detail.includes(copy));
  const words=mainWordCount(html);assert.ok(words<=WORD_BUDGET,`homepage has ${words} words; budget ${WORD_BUDGET}`);
@@ -354,7 +359,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
-  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [149, 595, 2450, 149, 595, 1495]);
+  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [99, 595, 2450, 79, 295, 1295]);
   for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
     assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
@@ -478,7 +483,7 @@ test('retired offer terms are gone from every public page', async () => {
     '/for/heating-and-plumbing', '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
   ];
   // £795 was the retired Growth System; from 27 Sep (Offer v8) it is the Business System price.
-  // Offer v11: £595 is the Business System and Creator Launch; the old £395 Brand Kit, £19/month and unlimited changes are retired.
+  // Offer v11: £595 is the Business System (Launch Page £295 from v13); the old £395 Brand Kit, £19/month and unlimited changes are retired.
   const retired = [/£150/, /Quick Win/, /£19\/month/, /founding/i, /hacked/i, /£395/, /£249/, /Enquiry Repair/, /Enquiry Check/, /Contact Setup/, /unlimited changes/i, /Custom Software &amp; Websites/, /pay the rest/i];
   for (const route of routes) {
     const html = await readPage(route);
@@ -542,7 +547,8 @@ test('every main page is one tap from the key routes, and the trade guides have 
   // and phones only saw "Free quote". Now every page carries the same map.
   for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
-    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/for/architects', '/3d-printing#architecture-property']) {
+    // 15 Oct (Maz: footer minimal): the long footer list went; trade guides and architecture models stay one tap away via /for and /site-map.
+    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/site-map']) {
       // The free-plan link may carry ?src=… and #leak-check-form (9 Oct: nav and footer land on the form).
       const linked = html.includes(`href="${href}"`) || (href === '/free-plan' && html.includes('href="/free-plan?'));
       assert.ok(linked, `${route} is missing a link to ${href}`);
