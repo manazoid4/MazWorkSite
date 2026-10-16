@@ -44,7 +44,7 @@ test('a valid email is added to Resend contacts and reported as joined', async (
   await handler(fakeReq({ email: '  Owner@Shop.co.uk ' }), res, f.impl);
   assert.equal(res.statusCode, 200);
   assert.deepEqual(JSON.parse(res.body), { ok: true });
-  assert.equal(f.calls.length, 2);
+  assert.equal(f.calls.length, 2, "contact, note to Maz; no automatic email to the visitor (Maz, 15 Oct)");
   assert.equal(f.calls[0].url, 'https://api.resend.com/contacts');
   assert.equal(f.calls[0].headers.authorization, 'Bearer re_test_key');
   assert.deepEqual(f.calls[0].body, { email: 'owner@shop.co.uk', unsubscribed: false });
@@ -133,4 +133,29 @@ test('no notification is sent when the signup itself failed', async () => {
   const f = recordingFetch(400);
   await handler(fakeReq({ email: 'owner@shop.co.uk' }), fakeRes(), f.impl);
   assert.equal(f.calls.some((call) => call.url.endsWith('/emails')), false);
+});
+
+test('footer signups carry only known trade and source tags, and return to the same page', async () => {
+  const { signupTags, returnPath } = await import('../api/subscribe.js');
+  assert.deepEqual(signupTags({ source: 'footer', trade: 'salon', return: 'footer-signup' }), { source: 'footer', trade: 'salon', formId: 'footer-signup' });
+  assert.deepEqual(signupTags({ source: '<b>x</b>', trade: 'plumber', return: 'a b' }), { source: '', trade: '', formId: '' });
+  const req = { headers: { host: 'www.mazworks.uk', referer: 'https://www.mazworks.uk/for/garages?x=1' } };
+  assert.deepEqual(returnPath(req, 'footer-signup'), { path: '/for/garages', formId: 'footer-signup' });
+  assert.deepEqual(returnPath({ headers: { host: 'www.mazworks.uk', referer: 'https://evil.example/p' } }, 'footer-signup'), { path: '/lab', formId: 'newsletter' });
+});
+
+test('the signup email to Maz names the trade the visitor picked', async () => {
+  const f = recordingFetch();
+  await handler(fakeReq({ email: 'owner@shop.co.uk', source: 'footer', trade: 'cafe' }), fakeRes(), f.impl);
+  assert.match(f.calls[1].body.subject, /\(cafe\)/);
+  assert.match(f.calls[1].body.text, /signed up from: footer/);
+});
+
+test('every page footer offers the trade chooser, the demo button and the list', async () => {
+  const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
+  assert.match(src, /Which one are you\?/);
+  assert.match(src, /Something else/, 'businesses outside the five trades can pick themselves too');
+  assert.match(src, /src=footer-/);
+  assert.match(src, /<NewsletterSignup/);
+  assert.match(await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8'), /<FooterConvert \/>/);
 });

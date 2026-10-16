@@ -25,7 +25,10 @@ async function readPage(route) {
 function stripNavChrome(html) {
   return html
     .replace(/<div class="mw-menu-panel"[\s\S]*?<\/ul><\/div><\/div>/, ' ')
-    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ');
+    .replace(/<div class="mw-footer-groups">[\s\S]*?<\/nav><\/div>/, ' ')
+    // the trade chooser + signup band (footer-convert.tsx) sits right before the footer brand on every page
+    // the footer (trade chooser band, hook, six links) is the same on every page too (15 Oct)
+    .replace(/<div class="mw-footer-convert">[\s\S]*?<\/footer>/, ' ');
 }
 
 function visibleText(html) {
@@ -133,7 +136,7 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   assert.match(lab, /Maz Works Objects/);
   assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
   assert.match(home, /Tell me the job/);
-  assert.match(home, /£149/);
+  assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);
   assert.match(objects, /href="\/lab"/);
   assert.match(objects, /href="\/demos"/);
