@@ -1228,6 +1228,7 @@ main {
 
 .s-lab { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
 .s-lab li { padding: 20px 0; border-bottom: 1px solid var(--soft-line); display: grid; gap: 6px; }
+.s-lab + .s-small { margin: 24px 0 40px; }
 .s-lab h2 { font-size: 1.4rem; }
 .s-lab-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-weight: 700; font-size: .92rem; }
 
@@ -1254,6 +1255,7 @@ main {
 
 @media (min-width: 960px) {
   .s-check { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; }
+  .s-check > .hv-steps-wrap { grid-column: 1 / -1; }
   .s-prices { grid-template-columns: 1.1fr 1fr 1fr; }
   .s-proof { grid-template-columns: repeat(2, 260px); }
 }
@@ -1549,7 +1551,9 @@ main {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
 .s-video { margin: 20px 0 28px; max-width: 860px; scroll-margin-top: 90px; }
-.s-video .hv-vframe { max-width: 420px; margin-inline: auto; }
+.s-video .hv-vframe { max-width: 420px; }
+/* poster frame is blank in its bottom quarter: park the play button there so it does not cover the cards */
+.s-video .hv-play { justify-content: flex-end; padding-bottom: 7%; }
 .s-video video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; border: 3px solid var(--ink); background: var(--ink); }
 .mw-demo-form[data-sent] :is(.mw-form-summary, .mw-form-row, .mw-form-kicker, .mw-form-picked, .mw-form-submit > button, .mw-form-submit > p:not([role])) { display: none; }
 
@@ -1562,7 +1566,7 @@ main {
 .s-tracks { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .s-tracks li { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); background: var(--surface); }
 .s-tracks small { font-size: .85rem; opacity: .8; }
-.s-track-title { margin: 32px 0 12px; }
+.s-track-title { margin: 40px 0 16px; }
 .s-offer-spec { border-top: 1px solid var(--line); padding-top: 8px; font-size: .92rem; }
 .s-offer-spec summary { cursor: pointer; font-weight: 750; min-height: 44px; display: flex; align-items: center; }
 .s-offer-spec p { margin: 6px 0 2px; }
@@ -1574,7 +1578,7 @@ main {
 .s-ladder strong { font-size: 1rem; }
 .s-ladder span { grid-column: 1; color: var(--muted); font-size: .9rem; }
 .s-ladder b { grid-column: 2; grid-row: 1 / span 2; font-size: 1.3rem; font-weight: 850; letter-spacing: -.03em; white-space: nowrap; }
-@media (min-width: 721px) { .s-ladder { grid-template-columns: repeat(5, minmax(0, 1fr)); } .s-ladder li a { grid-template-columns: 1fr; height: 100%; align-content: start; } .s-ladder b { grid-column: 1; grid-row: auto; margin-top: 6px; } }
+@media (min-width: 721px) { .s-ladder { grid-template-columns: repeat(4, minmax(0, 1fr)); } .s-ladder li a { grid-template-columns: 1fr; height: 100%; align-content: start; } .s-ladder b { grid-column: 1; grid-row: auto; margin-top: 6px; } }
 .s-always { list-style: none; margin-top: 16px; display: grid; gap: 10px; max-width: 980px; }
 .s-always li { display: grid; gap: 3px; padding: 12px 14px; border: 1px solid var(--line); background: var(--surface); font-size: .95rem; }
 .s-always span { color: var(--muted); font-size: .9rem; }
