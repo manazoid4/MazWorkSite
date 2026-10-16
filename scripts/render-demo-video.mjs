@@ -1,3 +1,5 @@
+// SUPERSEDED (14 Oct 2026): the homepage clip now comes from the private maz-works-brag-room repo.
+// Running this overwrites public/video/demo.* with the old 30 second clip.
 // Renders the 30 second demo (missed call -> instant text -> booked) from code:
 //   node scripts/render-demo-video.mjs
 // Needs Playwright (Chromium) and ffmpeg (with libx264 + libwebp) on the machine; neither is a

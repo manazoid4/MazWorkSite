@@ -33,7 +33,7 @@
 
 /* Link chips (jobs, replaces glued inline links) */
 .tp-jobs { margin-top: 24px; }
-.tp-jobs h2, .tp-jobs h3 { margin: 10px 0 14px; }
+.tp-jobs h2, .tp-jobs h3 { margin: 14px 0 18px; }
 .tp-links { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 10px; }
 .tp-links a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font-weight: 700; font-size: .92rem; text-decoration: none; }
 .tp-links a:hover { background: var(--signal); }

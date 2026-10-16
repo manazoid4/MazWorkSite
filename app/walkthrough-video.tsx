@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * The 30 second demo: a missed call, the text that goes out on its own, the booking.
- * Rendered from code, no face or voice: `node scripts/render-demo-video.mjs`
- * (scene in scripts/demo-video/scene.html). Re-render when the words change.
+ * The 22 second demo: a quote nobody answered, chased, booked and invoiced on its own.
+ * Rendered from code, no face or voice, in the private maz-works-brag-room repo
+ * (`npx hyperframes render`). Do not run scripts/render-demo-video.mjs: it still makes the
+ * old 30 second clip and would overwrite this one.
  * Set to null to hide the video everywhere. No figcaption: the homepage word cap is 600,
  * and the poster and every frame already say "example, not a real customer".
  */
@@ -25,13 +26,13 @@ export function WalkthroughVideo() {
   return (
     <figure className="s-video" id="demo-video">
       <div className="hv-vframe">
-        <video ref={ref} controls={!armed || started} preload="none" playsInline poster={WALKTHROUGH_VIDEO.poster} width={1280} height={720} aria-label="30 second example, no sound: a missed call becomes a booking on its own. Not a real customer.">
+        <video ref={ref} controls={!armed || started} preload="none" playsInline poster={WALKTHROUGH_VIDEO.poster} width={1080} height={1350} aria-label="22 second example: an unanswered quote gets chased, booked and invoiced on its own. Not a real customer.">
           <source src={WALKTHROUGH_VIDEO.src} type="video/mp4" />
           <track kind="captions" src={WALKTHROUGH_VIDEO.captions} srcLang="en" label="English" default />
         </video>
-        {armed && !started ? <button type="button" className="hv-play" onClick={play}><span className="hv-play-icon" aria-hidden="true" />Play the 30-second example</button> : null}
+        {armed && !started ? <button type="button" className="hv-play" onClick={play}><span className="hv-play-icon" aria-hidden="true" />Play the 22-second example</button> : null}
       </div>
-      <figcaption className="hv-vcap"><span className="s-demo-tag">Example</span> Missed call, text, booking. Captions on, no sound.</figcaption>
+      <figcaption className="hv-vcap"><span className="s-demo-tag">Example</span> Quote chased, booking confirmed, invoice chased. Captions on.</figcaption>
     </figure>
   );
 }

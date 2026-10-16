@@ -52,6 +52,13 @@
  * set-ups no longer sold on their own (free inside packages, £49 each for
  * more), and Extra automation down from £145 to £99.
  *
+ * Offer v13 (16 Oct 2026, Maz: "they can do that for a lot less than the
+ * price I'm charging"). Items an owner can DIY on free tools came down:
+ * creator Starter £149→£79, Launch Page £595→£295 (so Website £1,495→£1,295
+ * stays cheaper than its parts), set-ups £49→£29, creator add-ons £99→£49,
+ * Weekly report £145→£79, then Starter Automation £149→£99 (Maz: "149 isn't
+ * justifiable for a simple automation"). System £595 and Custom £2,450 unchanged.
+ *
  * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
  * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
  */
@@ -143,8 +150,8 @@ export const OFFERS: Offer[] = [
     track: 'automation',
     service: 'repair',
     name: 'Starter Automation',
-    price: '£149',
-    from: 149,
+    price: '£99',
+    from: 99,
     tag: 'The easy way to start',
     body: 'One task from the menu, set up so it happens on its own.',
     bullets: [
@@ -245,10 +252,10 @@ export const CREATOR_OFFERS: Offer[] = [
     track: 'automation',
     service: 'creator-starter',
     name: 'Starter for creators',
-    price: '£149',
-    from: 149,
-    tag: 'Same Starter, creator job',
-    body: 'The same Starter Automation every business gets, with the creator job: someone comments a word, gets your free resource and joins an email list you own.',
+    price: '£79',
+    from: 79,
+    tag: 'Starter, creator job',
+    body: 'A Starter built around the creator job, priced lower because it runs on free tools: someone comments a word, gets your free resource and joins an email list you own.',
     bullets: [
       'Keyword DM reply → free resource → email list + welcome email',
       'Plus 2 set-ups free: profile tidy and your link everywhere',
@@ -278,8 +285,8 @@ export const CREATOR_OFFERS: Offer[] = [
     track: 'web',
     service: 'sales-page',
     name: 'Launch Page',
-    price: '£595',
-    from: 595,
+    price: '£295',
+    from: 295,
     tag: 'One page that does the selling',
     body: 'One page, written for you, where people book, buy or enquire, in a look that’s yours, with every customer added to your list. For any business or creator.',
     bullets: [
@@ -317,8 +324,8 @@ export const WEB_OFFERS: Offer[] = [
     track: 'web',
     service: 'website',
     name: 'Website',
-    price: 'From £1,495',
-    from: 1495,
+    price: 'From £1,295',
+    from: 1295,
     body: 'Everything in a Launch Page, plus four more pages: a full website with enquiries and bookings built in, not just a brochure.',
     bullets: [
       'Everything in a Launch Page, plus four more pages (five in all)',
@@ -356,7 +363,7 @@ export const ALL_OFFERS: Offer[] = [...OFFERS, ...CREATOR_OFFERS, ...WEB_OFFERS]
 
 /** The three lanes the price page is organised in. ≤7 headline prices in total. */
 export const LANES: { id: string; title: string; offers: Offer[]; note: string }[] = [
-  { id: 'systems', title: 'Automation and custom software', offers: OFFERS, note: 'One task, three joined up, or something built for you. Creators: your Starter is comment-to-get-it, same price.' },
+  { id: 'systems', title: 'Automation and custom software', offers: OFFERS, note: `One task, three joined up, or something built for you. Creators: your Starter is comment-to-get-it, for ${CREATOR_OFFERS[0].price}.` },
   { id: 'websites', title: 'Pages and websites', offers: PAGE_OFFERS, note: 'Same prices for every business and creator. A Website is a Launch Page plus four more pages.' },
 ];
 
@@ -412,7 +419,7 @@ export function getMenuJob(id: string): MenuJob {
  */
 export type Extra = { name: string; price: string; what: string };
 
-export const SETUP_PRICE = '£49';
+export const SETUP_PRICE = '£29';
 
 export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Extra[] }[] = [
   {
@@ -436,7 +443,7 @@ export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Ext
     note: 'Bigger set-ups that only make sense alongside a package. They go on the same invoice.',
     items: [
       { name: 'Extra automation', price: '£99', what: 'One more task from the automation menu, added to a package.' },
-      { name: 'Weekly report', price: '£145', what: 'One simple email each week: enquiries, bookings, quotes waiting and money due. Included with a Business System.' },
+      { name: 'Weekly report', price: '£79', what: 'One simple email each week: enquiries, bookings, quotes waiting and money due. Included with a Business System.' },
       { name: 'Extra website page', price: '£295', what: 'One more page on your site or sales page, for a service or an offer, written and styled to match.' },
       { name: 'Team training', price: '£95', what: 'A one-hour video call showing your staff how everything works, plus a short written guide to keep.' },
     ],
@@ -446,12 +453,15 @@ export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Ext
 /** Flat list, for tests and anything that needs every add-on or set-up. */
 export const EXTRAS: Extra[] = EXTRA_GROUPS.flatMap((group) => group.items);
 
+/** Creators can DIY most of these on free plans (ManyChat, Calendly, shop emails), so they cost less than a business task (Maz, 16 Oct). */
+export const CREATOR_EXTRA_PRICE = '£49';
+
 /** Add-ons for people who sell through social media (creators page). */
 export const CREATOR_EXTRAS: { icon: string; name: string; price: string; what: string }[] = [
-  { icon: 'chat', name: 'Instant DM replies', price: getExtra('Extra automation').price, what: 'Prices, availability and your booking link answered in the DMs while you work. The DM app’s fee is paid by you.' },
-  { icon: 'box', name: 'Order updates', price: getExtra('Extra automation').price, what: 'Buyers get “order received” and “it’s on its way” messages without you typing them.' },
-  { icon: 'calendar', name: 'Online booking', price: getExtra('Extra automation').price, what: 'Clients book sessions, classes or collections themselves, day or night.' },
-  { icon: 'star', name: 'Review requests', price: getExtra('Extra automation').price, what: 'Happy clients are asked for a review, so the next person trusts you faster.' },
+  { icon: 'chat', name: 'Instant DM replies', price: CREATOR_EXTRA_PRICE, what: 'Prices, availability and your booking link answered in the DMs while you work. The DM app’s fee is paid by you.' },
+  { icon: 'box', name: 'Order updates', price: CREATOR_EXTRA_PRICE, what: 'Buyers get “order received” and “it’s on its way” messages without you typing them.' },
+  { icon: 'calendar', name: 'Online booking', price: CREATOR_EXTRA_PRICE, what: 'Clients book sessions, classes or collections themselves, day or night.' },
+  { icon: 'star', name: 'Review requests', price: CREATOR_EXTRA_PRICE, what: 'Happy clients are asked for a review, so the next person trusts you faster.' },
 ];
 
 /** The creator customer journey Creator Launch is built around. */
@@ -627,7 +637,6 @@ export const CHOOSER: { need: string; answer: string; href: string }[] = [
   { need: 'Stop losing callers to voicemail', answer: `Text-back ${OFFERS[0].price} once, or calls answered for ${AFTER_HOURS.price}`, href: '#monthly' },
   { need: 'Something built just for you', answer: `${OFFERS[2].name} ${OFFERS[2].price.toLowerCase()}`, href: '#systems' },
 ];
-export const SAME_PRICE_NOTE = `Two things cost ${CREATOR_OFFERS[1].price}: a ${CREATOR_OFFERS[1].name} is one page that books or sells; a ${OFFERS[1].name} is three tasks joined up behind your business.`;
 
 /**
  * How the prices are organised (11 Oct 2026): pay once by default, pay monthly
@@ -782,7 +791,7 @@ const BUSINESS_SYSTEM_JOBS = 3;
 /**
  * Prices a set of chosen jobs by the offer rules above, for the
  * "Build my system" tool. Everything is read from this file:
- * - one-day set-ups are never sold alone: two ride free with a Starter, £49 each after that;
+ * - one-day set-ups are never sold alone: two ride free with a Starter, SETUP_PRICE each after that;
  * - a task from the automation menu is Starter Automation, and each further
  *   one is Extra automation (which only ever adds to a package);
  * - asking for a package (Business System, Custom) quotes that package;
@@ -812,7 +821,7 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
     lines.push(builds === 0 ? { label: `${starter.name}: ${job.name.toLowerCase()}`, price: starter.price } : { label: `${extraJob.name}: ${job.name.toLowerCase()}`, price: extraJob.price });
     builds++;
   }
-  // One-day set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, £49 each beyond two.
+  // One-day set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, SETUP_PRICE each beyond two.
   if (setups.length && !builds) { lines.unshift({ label: `${starter.name}: one task of your choice`, price: starter.price }); builds = 1; }
   setups.forEach((name, index) => lines.push({ label: `${name} (one-day set-up)`, price: index < INCLUDED_SETUPS ? 'Included' : SETUP_PRICE }));
   const total = lines.reduce((sum, line) => sum + priceAmount(line.price), 0);

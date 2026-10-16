@@ -19,6 +19,8 @@ import { OFFERS } from '../../offers';
 import { StraightAnswers } from '../../straight-answers';
 import { CalculatorReveal } from '../../calculator-reveal';
 import { JobLinks } from '../../services/job-links';
+import { RememberTrade } from '../../remember-trade';
+import { tradeForGuide } from '../../trades';
 
 export const dynamicParams = false;
 
@@ -57,11 +59,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
   const extras = TRADE_EXTRAS[guide.id];
+  const trade = tradeForGuide(guide.id);
   const cards: CardItem[] = guide.fixes.map((fix) => ({ key: fix.name, icon: iconFor(fix.name), name: fix.name, price: fix.price, body: fix.body, href: `/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form` }));
 
   return (
     <main className="s-home">
       <SiteHeader /><ServiceSchema path={`/for/${guide.id}`} />
+      {trade ? <RememberTrade trade={trade} /> : null}
 
       <TradeHero
         id="niche-title"
@@ -78,6 +82,13 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <section className="s-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
+        {trade ? (
+          <figure className="tp-trade-video">
+            <video src={`/video/for/${trade}.mp4`} poster={`/video/for/${trade}.webp`} controls muted playsInline preload="metadata"
+              aria-label="22 second example: messages answered, followed up and confirmed while the owner works. Example, not a real customer." />
+            <figcaption className="s-small">22 seconds, no sound needed. Example. Not a real customer.</figcaption>
+          </figure>
+        ) : null}
         <div className="tp-ba"><BeforeAfter rows={extras.changes} /></div>
         <p className="s-small">Examples of what changes, not client results.</p>
       </section>
