@@ -1,5 +1,6 @@
 import { CHECK_REPLY_TIME } from '../app/reply-time.js';
 import { createHash } from 'node:crypto';
+import { cleanEnquirySource, isEnquirySource } from '../app/linkedin-source.ts';
 const buckets = new Map();
 const WINDOW = 60_000;
 const MAX_BODY = 16_384;
@@ -22,10 +23,39 @@ export function cleanPageUrl(value) {
   try {
     const url = new URL(value.trim().slice(0, 500));
     if (url.protocol !== 'https:' || url.username || url.password || !PAGE_HOSTS.test(url.hostname)) return '';
-    return `${url.origin}${url.pathname}${url.search}`.slice(0, 300);
+    // Context is sent as separate validated fields. Never copy query data into mail.
+    return `${url.origin}${url.pathname}`.slice(0, 300);
   } catch { return ''; }
 }
+const PROBLEM_IDS = ['missed-call', 'quote-follow-up', 'booking', 'reminder', 'lead-capture', 'onboarding'];
+/** One line, no control characters or angle brackets, capped. Stops a value forging extra lines in the owner email. */
+export const oneLine = (value, max) => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '';
+/** Visitor's own words may keep line breaks, but nothing else unusual. */
+const ownWords = (value, max) => typeof value === 'string' ? value.replace(/[\u0000-\u0009\u000b-\u001f\u007f<>]/g, ' ').replace(/\n{3,}/g, '\n\n').trim().slice(0, max) : '';
+export function cleanEnquiryContext(body) {
+  const isTrade = value => typeof value === 'string' && value !== 'hub' && (isEnquirySource(`for-${value}`) || ['creator', 'other'].includes(value));
+  const tradeRoute = value => typeof value === 'string' && value.startsWith('/for/') && value !== '/for/hub' && isEnquirySource(`for-${value.slice(5)}`);
+  const trade = isTrade(body.trade) ? body.trade : '';
+  return { ...body,
+    trade,
+    industry: trade ? oneLine(body.industry, 60) : '',
+    problem_id: PROBLEM_IDS.includes(body.problem_id) ? body.problem_id : '',
+    proof_id: trade && body.proof_id === trade && tradeRoute(`/for/${trade}`) ? trade : '',
+    source: cleanEnquirySource(body.source),
+    source_page: tradeRoute(body.source_page) ? body.source_page : '',
+    name: oneLine(body.name, 120),
+    problem: ownWords(body.problem, 4000),
+    customer_message: ownWords(body.customer_message, 2000),
+    existing_tools: oneLine(body.existing_tools, 500),
+    interested_in: oneLine(body.interested_in, 120),
+    systems: oneLine(body.systems, 400),
+    website: oneLine(body.website, 200),
+    referred_by: oneLine(body.referred_by, 120),
+    next_step: 'Send a free demo and fixed price; not an order',
+  };
+}
 export async function deliverEnquiry(body, fetchImpl = fetch) {
+  body = cleanEnquiryContext(body);
   const key = process.env.RESEND_API_KEY;
   if (!key) return { ok: false, confirmationSent: false };
   const send = async (message, suffix) => {
@@ -40,7 +70,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       return typeof result.id === 'string';
     } catch { return false; }
   };
-  const fields = ['name', 'email', 'problem', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'source'];
+  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
@@ -111,7 +141,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','website','referred_by','interested_in','systems','trade','source','request_id','_url','draft'];
+    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});

@@ -171,6 +171,8 @@ button.text-link {
 .mw-quick-picks button[aria-pressed="true"] { background: var(--signal); font-weight: 750; }
 .mw-quick-picks button[aria-pressed="true"]::before { content: "✓ "; }
 .mw-form-picked { padding: 10px 12px; background: var(--signal); border: 1px solid var(--ink); font-size: .92rem; }
+.mw-demo-form details > summary { min-height: 44px; display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 700; }
+.mw-demo-form details[open] > label { margin-top: 8px; }
 
 /* ==== Folded in from resource-pages.css (Batch 3 CSS consolidation, 30 Sep 2026). Order kept so the cascade is unchanged. ==== */
 /* JobFilter-inspired information patterns, translated into the quieter Maz Works visual system. */
@@ -572,14 +574,14 @@ button.text-link {
 }
 
 .mw-qw-lead {
-  margin-top: 12px;
+  margin: 12px 0 20px;
   color: var(--muted);
   font-size: .88rem;
 }
 
 .mw-qw-list {
   margin-top: 14px;
-  padding-left: 1.1em;
+  padding-left: 0;
   display: grid;
   gap: 6px;
   font-size: .95rem;

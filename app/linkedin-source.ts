@@ -8,6 +8,37 @@ export function isCampaignTag(source: string | null | undefined): source is stri
   return !!source && (LINKEDIN_SOURCES.includes(source) || OUTREACH_TAG.test(source));
 }
 
+// Actual public CTA sources (including generated links in type pages, services,
+// scene-player, the calculator and case studies). Do not accept arbitrary suffixes.
+const INTERNAL_SOURCES = new Set([
+  'site', 'nav', 'footer', 'contact', 'brand-kit', 'for-hub', 'prices', 'prices-hero',
+  'builder', 'estimator', 'example-plan', 'scope-sheet', 'services', 'demos',
+  'after-hours', 'voice-demo', 'whats-new',
+  ...['trades', 'appointments', 'creators', 'offices', 'heating-and-plumbing', 'roofers',
+    'builders', 'electricians', 'salons-and-beauty', 'dog-groomers', 'garages',
+    'cafes-and-food', 'clinics-and-therapists', 'architects'].map(id => `for-${id}`),
+  ...['trades', 'appointments', 'creators', 'offices', 'other'].map(id => `estimator-${id}`),
+  ...['missed-calls', 'enquiries', 'reminders', 'reviews', 'quotes', 'booking', 'rebooking',
+    'weekly', 'keyword-dm'].map(id => `scene-${id}`),
+  ...['missed-call', 'quote-follow-up', 'payment-reminders', 'reviews', 'job-updates',
+    'weekly-report', 'online-booking', 'reminders', 'rebooking', 'waitlist', 'dm-replies',
+    'keyword-dm', 'email-list', 'one-list', 'onboarding', 'milestones'].map(id => `service-${id}`),
+  ...['jobfilter', 'scrap-finance-partners', 'agent-nudge', 'openflowkit', 'khutba-io', 'maz-pocket'].map(id => `case-${id}`),
+]);
+
+export function isEnquirySource(source: string | null | undefined): source is string {
+  return !!source && (isCampaignTag(source) || INTERNAL_SOURCES.has(source));
+}
+
+/** Also accepts the existing first-touch → current-source format, never raw query data. */
+export function cleanEnquirySource(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  const parts = value.split(' → ');
+  const valid = (part: string) => isEnquirySource(part) || /^direct \((homepage|free-plan|contact|brand-kit|3d-printing)\)$/.test(part);
+  if (parts.length === 1) return valid(parts[0]) ? value : '';
+  return parts.length === 2 && isCampaignTag(parts[0]) && valid(parts[1]) ? value : '';
+}
+
 const CAMPAIGN_KEY = 'mw-campaign';
 
 /** Remember the campaign a visitor landed with, for this tab only. Storage can be blocked, so never throw. */

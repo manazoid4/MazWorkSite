@@ -6,27 +6,15 @@ import { PRESETS, presetConfig } from './presets.mjs';
 
 type Config = NonNullable<ReturnType<typeof presetConfig>>;
 
-const BOX_ID = 'vd-try';
-const NAME_ID = 'vd-try-name';
-
-/** Opens the form (it is folded away on phones) and puts the cursor in the first box. */
-export function focusTryYours() {
-  const box = document.getElementById(BOX_ID) as HTMLDetailsElement | null;
-  if (!box) return;
-  box.open = true;
-  box.scrollIntoView({ block: 'center' });
-  document.getElementById(NAME_ID)?.focus({ preventScroll: true });
-}
-
 /**
  * "Try it as your business": name + trade (+ hours) make a demo straight away.
+ * Sits inside the call card (opened from its header, before or after a call).
  * Nothing is stored or sent. The details go into the link's #hash so the page can be shared.
  */
-export function TryYours({ onMade }: { onMade: (config: Config) => void }) {
+export function TryYours({ onMade, onClose, onReset, custom }: { onMade: (config: Config) => void; onClose: () => void; onReset: () => void; custom: boolean }) {
   const [error, setError] = useState('');
-  const box = useRef<HTMLDetailsElement>(null);
-  // Folded on phones so the call stays near the top; open on wide screens where there is room.
-  useEffect(() => { if (box.current && window.matchMedia('(min-width: 900px)').matches) box.current.open = true; }, []);
+  const name = useRef<HTMLInputElement>(null);
+  useEffect(() => { name.current?.focus({ preventScroll: true }); }, []);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,23 +27,27 @@ export function TryYours({ onMade }: { onMade: (config: Config) => void }) {
   };
 
   return (
-    <details className="vd-try" id={BOX_ID} ref={box}>
-      <summary>Try it as your business</summary>
-      <form onSubmit={submit}>
-        <label>Business name
-          <input id={NAME_ID} name="name" required maxLength={40} autoComplete="organization" aria-describedby={error ? 'vd-try-err' : undefined} aria-invalid={error ? true : undefined} />
-        </label>
-        <label>Type of business
-          <select name="type" defaultValue={PRESETS[0].id}>
-            {PRESETS.map((preset) => <option key={preset.id} value={preset.id}>{preset.label}</option>)}
-          </select>
-        </label>
-        <label>Opening hours (optional)
-          <input name="hours" maxLength={80} placeholder="e.g. Monday to Friday 8am to 6pm" />
-        </label>
-        {error ? <p id="vd-try-err" role="alert" className="vd-try-err">{error}</p> : null}
-        <button type="submit" className="button vd-try-go">Make my demo</button>
-      </form>
-    </details>
+    <form className="vd-try" onSubmit={submit} aria-label="Try it as your business">
+      <div className="vd-try-top">
+        <strong>Try it as your business</strong>
+        <button type="button" className="vd-quiet" onClick={onClose}>Close</button>
+      </div>
+      <label>Business name
+        <input id="vd-try-name" ref={name} name="name" required maxLength={40} autoComplete="organization" aria-describedby={error ? 'vd-try-err' : undefined} aria-invalid={error ? true : undefined} />
+      </label>
+      <label>Type of business
+        <select name="type" defaultValue={PRESETS[0].id}>
+          {PRESETS.map((preset) => <option key={preset.id} value={preset.id}>{preset.label}</option>)}
+        </select>
+      </label>
+      <label>Opening hours (optional)
+        <input name="hours" maxLength={80} placeholder="e.g. Monday to Friday 8am to 6pm" />
+      </label>
+      {error ? <p id="vd-try-err" role="alert" className="vd-try-err">{error}</p> : null}
+      <div className="vd-try-actions">
+        <button type="submit" className="vd-btn vd-btn-sun">Make my demo</button>
+        {custom ? <button type="button" className="vd-quiet" onClick={onReset}>Back to the example garage</button> : null}
+      </div>
+    </form>
   );
 }

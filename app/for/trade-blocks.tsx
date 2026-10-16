@@ -1,15 +1,19 @@
 import type { ReactNode } from 'react';
 import { Breadcrumbs } from '../breadcrumbs';
 import { CampaignLink } from '../campaign-link';
-import { HeroDemo, type HeroDemoCopy } from '../hero-demo';
+import { IndustryProof } from './industry-proof';
+import { INDUSTRY_PROOFS } from './industry-proof-data';
+import { INDUSTRY_VOICE } from './industry-voice';
 import { ManazirLine } from '../manazir-line';
 import { KitIcon } from '../brand-kit/kit-icon';
 import { AFTER_HOURS, AUTOMATION_MENU } from '../offers';
 import { MAIN_CTA } from '../site';
+import { buildTradeEnquiryHref } from '../trade-context';
 import { encodeConfig } from '../receptionist-demo/engine.mjs';
 import { presetConfig } from '../receptionist-demo/presets.mjs';
 import { JOB_ICONS, TRADE_EXTRAS } from './trade-extras';
 import './trade-pages.css';
+import './industry-proof.css';
 
 /** Icon for a package or add-on card (kit-icon names). */
 export function iconFor(name: string): string {
@@ -22,11 +26,11 @@ export function iconFor(name: string): string {
   return (job && JOB_ICONS[job.id]) || 'spark';
 }
 
-/** Split hero, like the homepage: words and the main button on the left, the playable phone on the right. */
+/** Split hero, like the homepage: words and the main button on the left, the industry's own playable example on the right. */
 export function TradeHero({ crumbs, icon, eyebrow, title, lede, extra, cta, id, demoFor, note }: {
   crumbs: { href?: string; label: string }[]; icon: string; eyebrow: string; title: string; lede: string; extra?: string; cta: ReactNode; id: string; demoFor: string; note: string;
 }) {
-  const copy: HeroDemoCopy = TRADE_EXTRAS[demoFor]?.demo ?? {};
+  const proof = INDUSTRY_PROOFS[demoFor];
   return (
     <section className="s-hero s-hero-split tp-hero" id="main-content" tabIndex={-1} aria-labelledby={id}>
       <div className="tp-crumbs"><Breadcrumbs items={crumbs} /></div>
@@ -39,7 +43,7 @@ export function TradeHero({ crumbs, icon, eyebrow, title, lede, extra, cta, id, 
         <p className="s-note">{note}</p>
         <ManazirLine />
       </div>
-      <HeroDemo copy={copy} />
+      {proof ? <IndustryProof proof={proof} /> : null}
     </section>
   );
 }
@@ -78,10 +82,25 @@ export function ReceptionistCard({ page, level = 2 }: { page: string; level?: 2 
         <p>Busy on a job, closed for the evening, or it’s a bank holiday? Calls you can’t pick up are answered, and you get a clear message to act on.</p>
       </div>
       <div className="tp-after-links">
-        <CampaignLink className="button button-signal tp-after-go" href={`/free-plan?src=for-${page}&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
+        <CampaignLink className="button button-signal tp-after-go" href={buildTradeEnquiryHref(page, { package: AFTER_HOURS.name })}>{MAIN_CTA}</CampaignLink>
         {match && demoHref ? <a className="tp-after-demo" href={demoHref}>Talk to it as {match.as} <span aria-hidden="true">→</span></a> : null}
         <a className="tp-after-demo" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
       </div>
     </aside>
+  );
+}
+
+/** What customers in this trade actually say, and the worry an owner would raise. Examples of language, not quotes from clients. */
+export function VoiceBlock({ id, level = 3 }: { id: string; level?: 2 | 3 }) {
+  const voice = INDUSTRY_VOICE[id];
+  if (!voice) return null;
+  const Heading = level === 2 ? 'h2' : 'h3';
+  return (
+    <div className="iv-voice">
+      <Heading className="iv-title">{voice.week}</Heading>
+      <p className="iv-label">What your customers say</p>
+      <ul className="iv-words">{voice.words.map((line) => <li key={line}>{line}</li>)}</ul>
+      <div className="iv-ask"><p className="iv-label">The worry</p><p className="iv-q">{voice.objection.q}</p><p>{voice.objection.a}</p></div>
+    </div>
   );
 }

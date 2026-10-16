@@ -67,7 +67,7 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
     // Next steps, tweaks, own-vs-rent and the calculator are said once, on /prices.
     for (const moved of [/class="ex ex-steps"/, /class="ex ex-tweaks"/, /id="own-vs-rent"/]) assert.doesNotMatch(html, moved, `${type.id}: ${moved} belongs on /prices`);
     assert.match(html, /href="\/prices"/, `${type.id}: link to the details`);
-    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}#leak-check-form">Get my free demo<`), `${type.id}: main button`);
+    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free demo<`), `${type.id}: main button`);
     assert.doesNotMatch(html, /quick fix/i, `${type.id}: banned wording`);
     assert.doesNotMatch(html, /\bAI\b/, `${type.id}: no AI copy`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${type.id}"`), `${type.id}: canonical`);
@@ -99,7 +99,7 @@ test('every explainer animation has a reduced-motion still', async () => {
   const animated = (css.match(/animation:/g) || []).length;
   assert.ok(animated >= 4, 'explainers animate');
   assert.ok(css.includes('prefers-reduced-motion: no-preference'), 'motion only when allowed');
-  assert.doesNotMatch(css.replace(/@media [^{]*prefers-reduced-motion: no-preference\)[\s\S]*?\n}\n/g, ''), /animation:/, 'no animation runs outside the no-preference block');
+  assert.doesNotMatch(css.replace(/@media [^{]*prefers-reduced-motion: no-preference\)[\s\S]*?\r?\n}\r?\n/g, ''), /animation:/, 'no animation runs outside the no-preference block');
   const prices = await readPage('/prices');
   // Conversion fixes (2 Oct): the tiles-join animation was removed (unreadable mid-animation; the value line says it).
   assert.doesNotMatch(prices, /class="ex ex-tiles"/);
@@ -108,7 +108,7 @@ test('every explainer animation has a reduced-motion still', async () => {
 test('the drafted free plan quotes only prices from offers.ts and picks the right rung', () => {
   const starter = draft.draftFreePlan({ name: 'Sam Example', trade: 'trades', problem: 'Missed calls' });
   assert.equal(starter.offer.id, 'starter');
-  assert.match(starter.text, /Starter Automation: missed-call text-back \(£149\)/);
+  assert.match(starter.text, /Starter Automation: missed-call text-back \(£99\)/);
   assert.match(starter.text, /Guarantee:/);
   assert.match(starter.text, /Day 0: free demo and fixed price/);
   assert.doesNotMatch(starter.text, /£195|£795|£2,950/);
@@ -132,7 +132,8 @@ test('the drafted free plan quotes only prices from offers.ts and picks the righ
 test('the free plan form sends the draft and the enquiry email shows it', async () => {
   const form = await fs.readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
   assert.match(form, /draftFreePlan\(/);
-  assert.match(form, /draft: `\$\{draft\.subject\}/);
+  // The draft now opens with a one-line owner-review note (trade sprint), then the subject.
+  assert.match(form, /draft: `\$\{reviewNote\}\\n\\n\$\{draft\.subject\}/);
   const api = await fs.readFile(path.join(root, 'api', 'enquiry.js'), 'utf8');
   assert.match(api, /Draft reply \(approve, tweak, send\)/);
   assert.match(api, /'draft'\]/);
@@ -161,6 +162,6 @@ test('sales check: a plumber, a salon owner and a creator reach "Get my free dem
     // Tap 2: the main button on the type page.
     const page = await readPage(`/for/${type}`);
     assert.match(page, /Get my free demo</, `${type}: free plan button`);
-    assert.match(page, /£149/, `${type}: starter price visible`);
+    assert.match(page, /£99/, `${type}: starter price visible`);
   }
 });

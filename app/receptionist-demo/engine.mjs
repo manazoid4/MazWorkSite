@@ -97,6 +97,8 @@ const NUMBER_WORDS = new Set([...Object.keys(WORD_DIGITS), 'ten', 'eleven', 'twe
 const LEAD_IN = /^(?:hi+|hiya|hello|hey+|heya|thanks|thank you|yeah|yes|yep|ok|okay|no|nope|nah|sure|well|sorry|um+|uh+|er+m?|oh|so|it'?s me|it is me|this is me|it'?s|it is|its|this is|i'?m|i am|im|my name is|my name'?s|my names|name'?s|name is|call me)\b[\s,.!:;-]*/i;
 const TRAIL_OUT = /[\s,.!]*\b(?:here|speaking|calling|again|please|thanks|thank you|mate|cheers)\s*$/i;
 const NOT_NAMES = /^(yes|yeah|no|ok|okay|um|uh|er|erm|hello|hi|hey|what|sorry|pardon|why|thanks|thank|you|please|sure|bye|cheers|it|its|is|me|name|my|am|not|so|well|now|just|and|that|this|the|a|an|there|help|look|listen|urgent|emergency|asap|quickly|hurry|actually|anyway|speaking|here)$/i;
+/** Words that make a "name" a sentence: "I am being threatened" is not someone called Being. */
+const NOT_NAME_ANY = /\b(?:being|been|threatened|threatening|scared|worried|frightened|flooding|flooded|stuck|locked|trapped|broken|burst|leaking|attacked|followed|hurt|injured|help|need|needs|want|wants)\b/i;
 const PROFANE = /\b(fuck|shit|piss|cunt|bollock|twat|wank|arse|bastard|bitch|dick)/i;
 
 const nameWords = (text) => {
@@ -121,7 +123,7 @@ function validName(text) {
   const words = nameWords(text);
   if (!words.length || words.length > 3 || words.some((word) => word.length > 20)) return '';
   if (words.some((word) => NUMBER_WORDS.has(word)) || words.every((word) => NOT_NAMES.test(word)) || PROFANE.test(words.join(' '))) return '';
-  if (isClosing(words.join(' '))) return '';
+  if (isClosing(words.join(' ')) || NOT_NAME_ANY.test(words.join(' '))) return '';
   return titleCase(words);
 }
 
@@ -247,7 +249,7 @@ const NUMBER_ASK = 'What’s the best number to call you on?';
 const NOT_UK = 'Sorry, I can only take a UK number in this demo. What’s the best UK number?';
 const DIDNT_CATCH = 'Sorry, I didn’t catch that. Could you say it again?';
 /** Words that mean someone may be hurt or at risk: these get the 999 line. Business-urgent words (the owner's list) only get flagged. */
-const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|(?:is ?n'?t|is not|not|stopped|struggling to|difficulty|trouble|hard to) breath(?:e|ing)|no pulse|unresponsive|(?:can'?t|cannot) wake (?:him|her|them|my \w+) up|(?:turned|turning|going|gone) blue|lips are blue|allergic reaction|electric shock|electrocut\w*|sparks? (?:coming|flying|everywhere)|sparking|burning smell|smells? (?:of )?burning|(?:see|seen) (?:the )?flames|flames (?:coming|everywhere)|(?:there(?:'s| is)|lots of|full of) smoke|smoke (?:coming|everywhere|pouring)|co alarm (?:is )?(?:going off|sounding|beeping|went off)|water (?:\w+ ){0,3}(?:fuse ?box|consumer unit|electrics|sockets?)|(?:fell|fallen) (?:off|from) (?:a |the )?(?:ladder|roof)|head injury|hit (?:his|her|my|their) head|having a (?:fit|seizure)|kill (?:myself|himself|herself)|suicid\w*|end (?:my|his|her) life|hurt (?:myself|himself|herself)|(?:he|she|they)(?:'s| is| are) bleeding|bleeding (?:a lot|everywhere)|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|stabbed|been attacked|attacking (?:me|us|him|her|them)|(?:has|with|pulled) a knife(?! set| block| sharpen)|(?:hurt|injured) (?:badly|bad|really badly)|(?:badly|seriously) hurt|ring 999|call 999|dial 999)(?=\W|$)`, 'i');
+const DANGER = new RegExp(String.raw`(?:^|\W)(?:heart attack|chest pains?|(?:is ?n'?t|is not|not|stopped|struggling to|difficulty|trouble|hard to) breath(?:e|ing)|no pulse|unresponsive|(?:can'?t|cannot) wake (?:him|her|them|my \w+) up|(?:turned|turning|going|gone) blue|lips are blue|allergic reaction|electric shock|electrocut\w*|sparks? (?:(?:are|is|were) )?(?:coming|flying|everywhere|shooting)|sparking|burning smell|smells? (?:of )?burning|(?:see|seen) (?:the )?flames|flames (?:coming|everywhere)|(?:there(?:'s| is)|lots of|full of) smoke|smoke (?:coming|everywhere|pouring)|co alarm (?:is )?(?:going off|sounding|beeping|went off)|water (?:\w+ ){0,3}(?:fuse ?box|consumer unit|electrics|sockets?)|(?:fell|fallen) (?:off|from) (?:a |the )?(?:ladder|roof)|head injury|hit (?:his|her|my|their) head|having a (?:fit|seizure)|kill (?:myself|himself|herself)|suicid\w*|end (?:my|his|her) life|hurt (?:myself|himself|herself)|(?:he|she|they)(?:'s| is| are) bleeding|bleeding (?:a lot|everywhere)|chok(?:ing|ed)|passed out|faint(?:ed|ing)|not breathing|(?:can'?t|cannot|can not) breathe|throat (?:is )?(?:closing|swelling)|stroke|seizure|overdos(?:e|ed)|gas smell|smells? (?:of )?gas|leaking gas|gas leak|caught fire|there(?:'s| is) a fire(?! (?:alarm|extinguisher|door|exit|safety|risk|drill|certificate))|house fire|on fire|smoke coming|full of smoke|carbon monoxide|collapsed|unconscious|in danger|injured|blood everywhere|(?:a )?lot of blood|bleeding (?:heavily|badly)|(?:is|am) bleeding|(?:face|tongue|lips?) (?:is |are )?swelling|anaphyla\w+|stabbed|been attacked|attacking (?:me|us|him|her|them)|(?:has|with|pulled) a knife(?! set| block| sharpen)|(?:hurt|injured) (?:badly|bad|really badly)|(?:badly|seriously) hurt|ring 999|call 999|dial 999|(?:being|been|getting) (?:threatened|attacked|followed|stalked|harassed)|threaten(?:ed|ing|s) (?:me|us|him|her|them|to)|(?:break[ -]?in|break-in)(?! (?:alarm|proof|protection|prevention))|broke into|breaking into|broken into|(?:there(?:'s| is)|an?) (?:intruder|burglar)|someone(?:'s| is) (?:in|trying to get in)|trying to get in(?:to)? (?:my|the|our)|(?:domestic|being) abuse\w*|hurt(?:ing)? (?:me|us|the kids|my kids|my child))(?=\W|$)`, 'i');
 const DANGER_LINE = 'If anyone is in danger, please ring 999 now. I’ve also marked this as urgent for the owner.';
 const URGENT_LINE = 'I’ve marked this as urgent for the owner.';
 const ANON = 'Caller (no name given)';
@@ -311,22 +313,54 @@ function compileUrgent(terms) {
   };
 }
 const GENERIC_URGENT = compileUrgent(['urgent', 'emergency', 'emergencies', 'asap', 'right away', 'as soon as possible']);
-const SERVICE_QUESTION = /\b(?:do|does|can|could|would|will) (?:you|they|your \w+) (?:do|offer|provide|have|handle|cover|run|accept|take|charge|include|deal|sell)\b/;
+const SERVICE_QUESTION = /\b(?:do|does|can|could|would|will) (?:you|they|your \w+) (?:do|offer|provide|have|handle|cover|run|accept|take|charge|include|deal|sell|fix|repair|mend|replace|install|unblock|check|inspect|supply|fit|sort|help with)\b/;
 const NOT_URGENT = /\b(?:not|isn'?t|is not|no|non) (?:that |very |really |all that |too )?(?:urgent|an emergency|a rush)\b|\bno rush\b|\bnot in a hurry\b/;
+
+/** Urgent for ANY business, even if the owner's own list does not say so. Guarded like the word "urgent": questions about a service and "not urgent" do not count. */
+const VULNERABLE = /\b(?:baby|babies|newborn|infant|toddler|elderly|pensioner|disabled|(?:old|elderly) (?:man|lady|woman|person|couple)|nan|nana|gran|granny|grandma|grandad|grandpa|child|children|kids?|pregnant|ill|unwell|sick)\b/;
+const EMERGENCY = [
+  /\b(?:flooding|flooded)\b/,
+  /\b(?:a|the|an|major) flood\b(?! ?(?:light|risk|zone|insurance|defen|barrier))/,
+  /\b(?:pipes?|water main|tank|boiler|radiator|toilet|washing machine) (?:has |have |had |just |is |are |keeps? |just has )?(?:burst|bursting|exploded)\b/,
+  /\b(?:burst|bursting) (?:water )?(?:pipes?|main|tank)\b/,
+  /\bwater (?:is |was |keeps? |has been )?(?:pouring|gushing|streaming|flooding|cascading)\b/,
+  /\bwater\b[^.?!]{0,30}\b(?:through|from|via|down|into) (?:the |my |our |a )?(?:ceiling|roof|light fitting|lights?|walls?)\b/,
+  /\b(?:leak|leaking|dripping|drips?)\b[^.?!]{0,25}\b(?:through|from|in|into|on) (?:the |my |our |a )?(?:ceiling|light fitting|electrics|fuse ?box)\b/,
+  /\bwater (?:is )?coming (?:in|through|out|down|up)\b/,
+  /\blocked (?:myself |ourselves |him |her |them )?out\b/,
+  /\b(?:locked|trapped|stuck) (?:myself |ourselves |him |her |them )?in(?:side)?\b(?! (?:the )?(?:queue|traffic))/,
+];
+const HEATING = /\b(?:heating|heat|hot water|boiler)\b/;
+const HEAT_FAIL = /\b(?:no|without|broken|not working|isn'?t working|stopped|packed up|off|died|gone|failed|down)\b/;
+const isEmergency = (t) => EMERGENCY.some((re) => re.test(t)) || (HEATING.test(t) && HEAT_FAIL.test(t) && VULNERABLE.test(t));
 
 // ---- what the caller asked ------------------------------------------------
 const PRICE_WORDS = /\b(prices?|pricing|costs?|how much|how dear|charges?|charging|quotes?|quid|pounds|rates?|fees?|set me back|cost me)\b/;
 const PERSON = /\b(?:speak|talk|chat|spoke|speaking|talking)\b[^?.!]*\b(?:person|human|someone|somebody|anyone|anybody|owner|manager|boss|staff|operator|receptionist|colleague)\b|\b(?:put me through|transfer me|get me someone)\b|\b(?:anyone|anybody|someone) (?:there|in|about|available)\b/;
 const BOT = /\b(?:are|is|am) (?:you|this|that|i)\b[^?.!]*\b(?:bot|chatbot|robot|ai|a i|computer|machine|recording|recorded|real|human|automated|automatic|live|program|software)\b|\b(?:robot|chatbot|bot|automated|a recording|are you real)\b/;
+/** Asking for the owner's or staff's private contact details, or telling it to drop its rules. It declines and carries on. */
+const STAFF_CONTACT = /\b(?:ignore|forget|disregard|override|bypass)\b[^?.!]*\b(?:rules|instructions|prompt|programming|guidelines|restrictions)\b|\b(?:owner|boss|manager|staff|mechanic|engineer|director|his|her|their)(?:'s|s')?\b[^?.!]*\b(?:mobile|cell|personal (?:number|phone|email)|home (?:number|address)|private (?:number|phone)|direct (?:line|number)|email address|e-?mail)\b|\b(?:give|tell|share|send|text) me (?:the |his |her |their )?(?:owner'?s? |manager'?s? |boss'?s? )?(?:mobile|cell|number|phone number|email|address)\b/;
 const SCAM = /\b(?:is (?:this|that|it)|are (?:you|they)|sounds?)\b[^?.!]*\b(?:scam|scammers?|fraud|spam|dodgy|legit|legitimate|fake|genuine)\b|\b(?:scam|scammer|fraud)\b/;
 const CANCEL = /\b(cancel\w*|reschedul\w*|rearrang\w*|postpon\w*|call off)\b|\b(change|move|swap|alter) (my|the|our|this) (appointment|booking|slot|time|date|visit|mot|service)\b|\bmove (my|the|our) \w+ (to|from)\b/;
 const HOURS_NOW = /\b(?:open|closed)\b[^?.!]*\b(?:now|right now|at the moment|today|tonight|this evening|still|yet)\b|^(?:are you|r u|you) (?:guys )?(?:open|closed)[\s?!.]*$/;
 const INJURY = /\b(?:cut|burn(?:t|ed)?|hurt|broke|broken|slic(?:ed|e)|crush(?:ed)?|trapp?ed|scald(?:ed)?|sprain(?:ed)?|hit|bang(?:ed)?|bitten|stung)\s+(?:my|his|her|their|the|our)\s+(?:\w+\s+)?(?:hand|hands|finger|fingers|thumb|arm|leg|foot|toe|knee|eye|head|face|back)\b/;
 const NOT_COUNTED = /^(um+|uh+|er+m?|hmm+|mm+|ah+)$/;
 
+/** Words that may sit around a service name in a price question without changing what is being priced. */
+const PRICE_FILLER = new Set(('how much is are was a an the it for to of do does you your what whats how much price prices pricing cost costs charge charges charging quote quotes please and or me my our i can could would will with on at in there this that be get have would roughly about approx approximately usually typically normal standard basic full interim annual quick new used small big large car cars van vans vehicle bike bikes motorbike cheap cheapest average starting from just only per much dear expensive erm um uh er so well hi hello hey hiya sorry many quid pound pounds set back rate rates fee fees dear roughly ballpark yeah ok okay then also actually if').split(' '));
+/** True when a price question is really about this listed service, not something else that shares a word with it ("boiler service" is not a garage "Service"). */
+function aboutService(t, service) {
+  const own = service.name.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map((w) => w.replace(/(es|s)$/, ''));
+  const rest = plain(t).split(' ').filter((word) => word && !PRICE_FILLER.has(word) && !own.includes(word.replace(/(es|s)$/, '')));
+  return rest.length === 0;
+}
+/** "07700 900123" or "my number is 07700 900123" and nothing else. */
+const NUMBER_ONLY_FILLER = new Set(['my', 'number', 'is', 'its', "it's", 'it', 'call', 'me', 'on', 'phone', 'mobile', 'the', 'best', 'oh', 'plus', 'contact', 'ring', 'text', 'reach', 'back', 'please']);
+const isBareNumber = (text) => plain(text).split(' ').filter(Boolean).every((word) => /^\d+$/.test(word) || NUMBER_WORDS.has(word) || NUMBER_ONLY_FILLER.has(word));
+
 /** Cut a long line down for the owner's email: no links, 140 characters at most. */
 const clip = (text) => {
-  const out = safeText(String(text), 400);
+  const out = safeText(String(text), 400).replace(/\+?\d(?:[\s().-]?\d){5,}/g, 'a phone number').replace(/\s+/g, ' ').trim();
   return out.length > 140 ? `${out.slice(0, 139).trimEnd()}…` : out;
 };
 /** A spoken number that starts with + or 00 and is not 44: not a UK number. */
@@ -362,7 +396,7 @@ export function createDesk(input) {
   const isUrgent = (text) => {
     if (ownerUrgent(text)) return true;
     const t = norm(text);
-    return GENERIC_URGENT(t) && !SERVICE_QUESTION.test(t) && !NOT_URGENT.test(t);
+    return (GENERIC_URGENT(t) || isEmergency(t)) && !SERVICE_QUESTION.test(t) && !NOT_URGENT.test(t);
   };
   /** @type {DeskStage} */
   let stage = 'open';
@@ -464,17 +498,22 @@ export function createDesk(input) {
       return ask('Of course.');
     }
     // 2. Is it a person, a bot, a scam?
-    if (PERSON.test(t)) {
+    if (PERSON.test(t) && !STAFF_CONTACT.test(t) && !/\bam i (?:talking|speaking|chatting)\b/.test(t)) {
       note(wants, 'Asked to speak to someone');
       return ask(`There’s nobody here right now, but I can take a message and the team will see it ${config.callback}.`);
     }
     if (BOT.test(t) || has(t, ['real person', 'human', 'robot', 'automated', 'machine'])) {
       note(answered, 'Said it is an automated receptionist');
-      return out(`No, I’m the automated receptionist for ${config.name}. I can answer common questions or take a message for the team.`, 'How can I help?');
+      return out(`I’m an automated receptionist for ${config.name}, not a person. I can answer common questions or take a message for the team.`, 'How can I help?');
     }
     if (SCAM.test(t)) {
       note(answered, 'Said it is an automated receptionist');
       return out(`No, this is the automated receptionist for ${config.name}. If you’d rather check, look up their number and ring back when they’re open.`, 'Can I help with anything?');
+    }
+    if (STAFF_CONTACT.test(t)) {
+      note(wants, 'Asked for staff contact details');
+      note(answered, 'Declined to share staff contact details');
+      return ask(`I can’t share staff contact details, but I can take a message and the team will see it ${config.callback}.`);
     }
     // 3. Cancel or change.
     if (CANCEL.test(t)) {
@@ -487,12 +526,12 @@ export function createDesk(input) {
       const refersBack = /((\b(is|are|would|will|does|be) (it|that|this)( cost)?|\b(it|that|this) costs?|\bthe (price|cost)|\bhow much)\s*[?.!]*)$/.test(t);
       const asked = service || (refersBack ? lastService : undefined);
       if (asked) lastService = asked;
-      if (asked?.price) {
+      if (asked?.price && (asked === lastService && !service ? true : aboutService(t, asked))) {
         note(answered, `${asked.name} price`);
         note(wants, asked.name);
         return out(`${asked.name} is ${asked.price}. For an exact price the team will need a few details.`, 'Would you like them to call you back?', 'offer');
       }
-      note(wants, asked ? `Price for ${asked.name}` : `Price enquiry: ${clip(text)}`);
+      note(wants, asked && !asked.price ? `Price for ${asked.name}` : `Price enquiry: ${clip(text)}`);
       return ask('I don’t have a price for that, so I won’t guess. I can take your details so the team can send a proper quote.');
     }
     // 5. Where, then when.
@@ -684,6 +723,8 @@ export function createDesk(input) {
     if (isDanger(text) || isUrgent(text)) {
       return stage === 'name' || stage === 'number' || stage === 'confirm' ? interruptUrgent(text) : open(text);
     }
+    if (STAFF_CONTACT.test(norm(text)) && (stage === 'name' || stage === 'number' || stage === 'confirm')) return aside(text);
+    if (['open', 'offer', 'more'].includes(stage) && held && !number && isBareNumber(text)) { stage = 'confirm'; return readBack(); }
     if (REPEAT.test(p) || (/^(what|huh|eh)$/.test(p) && (stage === 'open' || stage === 'offer' || stage === 'more'))) return repeatLine();
     if (stage === 'name') return takeName(text);
     if (stage === 'number') return takeNumber(text);
@@ -748,7 +789,7 @@ export function createDesk(input) {
       if (number) rows.push(['Number check', numberConfirmed ? 'Confirmed by caller' : 'Not confirmed: ring to check']);
       if (wants.length) rows.push(['Wants', wants.slice(0, 8).join('; ')]);
       if (answered.length) rows.push(['Answered', answered.join('; ')]);
-      const next = !who ? (urgent ? 'Urgent: no details left, check caller ID' : 'Nothing to do')
+      const next = !who ? (urgent ? 'Urgent: no details left, check caller ID' : wants.length ? 'No details left: check caller ID' : 'Nothing to do')
         : !number ? `${urgent ? 'Urgent. ' : ''}No number left: check caller ID`
           : !numberConfirmed ? `${urgent ? 'Urgent. ' : ''}Number not confirmed: check it before ringing`
             : urgent ? 'Urgent: ring back now' : `Call back ${config.callback}`;

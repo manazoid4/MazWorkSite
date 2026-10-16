@@ -1,7 +1,6 @@
 import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { NewsletterSignup } from '../newsletter-signup';
 import { SITE_URL } from '../site';
 
 export const metadata: Metadata = {
@@ -42,7 +41,6 @@ export default function LabPage() {
         </ul>
         <p className="s-small">Want to see a private working demo of an idea first? <a href="/demos">How the free demo works →</a></p>
       </section>
-      <NewsletterSignup />
       <SiteFooter />
     </main>
   );

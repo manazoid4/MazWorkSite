@@ -44,7 +44,7 @@ test('page lengths: homepage under 600 words, type pages short (5 blocks), /pric
     const html = await read(`for/${type}`);
     const sections = (mainWithoutFooter(html).match(/<section /g) ?? []).length;
     assert.ok(sections <= 5, `/for/${type} has ${sections} sections`);
-    assert.ok(words(html) < 800, `/for/${type} has ${words(html)} words`); // 10 Oct: split hero phone, before/after, steps and receptionist card added (was 550)
+    assert.ok(words(html) < 1000, `/for/${type} has ${words(html)} words`); // 11 Oct trade sprint: the hero phone became a step-through industry example (all four steps, owner card, limits) plus a short "in your week" block (was 800, before that 550)
     assert.match(html, /Demo business, not a client/);
     assert.match(html, /href="\/prices"/, `/for/${type} must link to the details on /prices`);
     for (const moved of ['s-calculator', 'cost-calculator', 'builder-trade', 'Own it or rent it']) assert.ok(!html.includes(moved), `/for/${type} still shows ${moved}`);
