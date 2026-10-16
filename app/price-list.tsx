@@ -1,4 +1,4 @@
-import { AFTER_HOURS, ALWAYS_INCLUDED, SOLUTIONS, WAYS_TO_PAY, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, SAME_PRICE_NOTE, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
+import { AFTER_HOURS, ALWAYS_INCLUDED, SOLUTIONS, WAYS_TO_PAY, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, CHOOSER, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -126,7 +126,6 @@ export function PriceList({ checkHref }: { checkHref: string }) {
       <ul className="s-chooser" aria-label="What do you need?">
         {CHOOSER.map((row) => <li key={row.need}><a href={row.href}><strong>{row.need}</strong><span>{row.answer}</span></a></li>)}
       </ul>
-      <p className="s-small">{SAME_PRICE_NOTE}</p>
 
       <h3 className="s-track-title" id="ways">How the prices work</h3>
       <ul className="s-ways" aria-label="How the prices work">

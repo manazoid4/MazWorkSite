@@ -186,7 +186,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /\/contact\?service=/, 'homepage price cards lead to the free plan form, not a second form');
 
   const pricesAgain = await readPage('/prices');
-  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£149'], ['Launch Page', '£595'], ['Website', 'From £1,495']]) {
+  for (const [name, price] of [['Starter Automation', '£149'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450'], ['Starter for creators', '£79'], ['Launch Page', '£295'], ['Website', 'From £1,295']]) {
     assert.match(pricesAgain, new RegExp(name));
     assert.match(pricesAgain, new RegExp(price));
   }
@@ -194,7 +194,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(pricesAgain, /What’s included, and what isn’t/, 'every package shows what it excludes');
   for (const id of ['compare', 'extras']) assert.match(pricesAgain, new RegExp(`id="${id}"`));
   assert.match(pricesAgain, /What’s not included/);
-  assert.match(prices, /Google listing tidy[\s\S]{0,300}£49/);
+  assert.match(prices, /Google listing tidy[\s\S]{0,300}£29/);
   assert.match(prices, /Extra website page[\s\S]{0,300}£295/);
   assert.match(prices, /Team training[\s\S]{0,300}£95/);
   assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
@@ -206,7 +206,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Every Maz Works price in one place/);
 
   const contact = await readPage('/contact');
-  for (const price of ['£149', 'From £595', 'From £2,450', '£595']) assert.match(contact, new RegExp(price));
+  for (const price of ['£149', 'From £595', 'From £2,450', '£295']) assert.match(contact, new RegExp(price));
   assert.match(contact, /No VAT added/);
 });
 
@@ -359,7 +359,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
-  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [149, 595, 2450, 149, 595, 1495]);
+  assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [149, 595, 2450, 79, 295, 1295]);
   for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
     assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
@@ -483,7 +483,7 @@ test('retired offer terms are gone from every public page', async () => {
     '/for/heating-and-plumbing', '/for/salons-and-beauty', '/for/dog-groomers', '/for/garages', '/for/cafes-and-food', '/for/clinics-and-therapists',
   ];
   // £795 was the retired Growth System; from 27 Sep (Offer v8) it is the Business System price.
-  // Offer v11: £595 is the Business System and Creator Launch; the old £395 Brand Kit, £19/month and unlimited changes are retired.
+  // Offer v11: £595 is the Business System (Launch Page £295 from v13); the old £395 Brand Kit, £19/month and unlimited changes are retired.
   const retired = [/£150/, /Quick Win/, /£19\/month/, /founding/i, /hacked/i, /£395/, /£249/, /Enquiry Repair/, /Enquiry Check/, /Contact Setup/, /unlimited changes/i, /Custom Software &amp; Websites/, /pay the rest/i];
   for (const route of routes) {
     const html = await readPage(route);
