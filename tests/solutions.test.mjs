@@ -62,7 +62,7 @@ test('no price is typed in the new component files', async () => {
   const offers = loadOffers(offersSource);
   const data = await src('app/solutions/data.ts');
   for (const read of ['OFFERS', 'AFTER_HOURS', 'CARE_PLAN', 'getExtra']) assert.match(data, new RegExp(`\\b${read}\\b`), `data reads ${read} from offers`);
-  assert.equal(offers.OFFERS[0].price, '£149');
+  assert.equal(offers.OFFERS[0].price, '£99');
 });
 
 test('the CTAs are pre-filled with the package and a source tag', async () => {
@@ -152,7 +152,7 @@ test('the picker never moves focus on load (the skip link must stay hidden), and
   assert.doesNotMatch(css, /\.sol-js > div:not/);
   assert.match(css, /\.sol-biz button \{ min-height: 44px;/);
   const page = text(await read('solutions'));
-  assert.match(page, /£149 once · nothing required monthly/);
+  assert.match(page, /£99 once · nothing required monthly/);
   assert.match(page, /from £595 once · nothing required monthly/);
   assert.match(page, /Or calls answered: £79\/month, set-up included/);
 });
