@@ -11,7 +11,7 @@ test('the demo video, poster and captions exist and the video stays under 2 MB',
   assert.ok(video.size > 50_000 && video.size <= 2 * 1024 * 1024, `demo.mp4 is ${video.size} bytes`);
   await stat(path.join(root, 'public/video/demo-poster.webp'));
   const vtt = await readFile(path.join(root, 'public/video/demo.vtt'), 'utf8');
-  assert.match(vtt, /^WEBVTT\n/);
+  assert.match(vtt, /^WEBVTT\r?\n/);
   assert.match(vtt, /not a real customer/);
   assert.doesNotMatch(vtt, /\bAI\b|£/);
 });

@@ -10,7 +10,9 @@ import { StraightAnswers } from '../straight-answers';
 import { JobLinks } from '../services/job-links';
 import { BeforeAfter } from '../before-after';
 import { WorkSteps } from '../work-steps';
-import { PriceCards, ReceptionistCard, TradeHero, iconFor, type CardItem } from './trade-blocks';
+import { PriceCards, ReceptionistCard, TradeHero, VoiceBlock, iconFor, type CardItem } from './trade-blocks';
+import { INDUSTRY_PROOFS } from './industry-proof-data';
+import { buildTradeEnquiryHref } from '../trade-context';
 import { JOB_ICONS } from './trade-extras';
 import { CalculatorReveal } from '../calculator-reveal';
 import { NICHE_GUIDES } from './niches';
@@ -22,7 +24,8 @@ import type { CustomerType } from '../customer-types';
  * this is the price".
  */
 export function TypePage({ type }: { type: CustomerType }) {
-  const checkHref = `/free-plan?src=for-${type.id}&trade=${type.id}`;
+  const problem = INDUSTRY_PROOFS[type.id]?.problem;
+  const checkHref = buildTradeEnquiryHref(type.id, { problem });
   const niches = NICHE_GUIDES.filter((guide) => type.niches.includes(guide.id));
   const studies = CASE_STUDIES.filter((study) => study.type === type.id);
 
@@ -34,7 +37,7 @@ export function TypePage({ type }: { type: CustomerType }) {
     name: recipe.name,
     price: recipe.offer.price,
     body: recipe.what,
-    href: `/free-plan?src=for-${type.id}&trade=${type.id}&package=${encodeURIComponent(recipe.offer.name)}#leak-check-form`,
+    href: buildTradeEnquiryHref(type.id, { problem, package: recipe.offer.name }),
   }));
 
   return (
@@ -50,7 +53,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         title={type.title}
         lede={type.lede}
         extra={type.examples}
-        cta={<CampaignLink className="button button-signal s-button-lg" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>}
+        cta={<CampaignLink className="button button-signal s-button-lg" href={checkHref}>{MAIN_CTA}</CampaignLink>}
         note={`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}.`}
       />
 
@@ -58,6 +61,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         <p className="eyebrow">Sound familiar?</p>
         <h2 id="type-pains-title">Your problem, and the task that fixes it.</h2>
         <div id="day" className="tp-ba"><BeforeAfter rows={rows} /></div>
+        <VoiceBlock id={type.id} />
         <JobLinks typeId={type.id} who={type.shortName} inline />
       </section>
 
@@ -96,11 +100,11 @@ export function TypePage({ type }: { type: CustomerType }) {
           <StraightAnswers inline />
         </div>
         <div className="mw-actions">
-          <CampaignLink className="button button-signal" href={`${checkHref}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
+          <CampaignLink className="button button-signal" href={checkHref}>{MAIN_CTA}</CampaignLink>
         </div>
       </section>
 
-      <SiteFooter /><StickyCheckCta href={`${checkHref}#leak-check-form`} />
+      <SiteFooter /><StickyCheckCta href={checkHref} />
     </main>
   );
 }

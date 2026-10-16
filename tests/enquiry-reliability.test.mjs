@@ -46,7 +46,7 @@ test('owner mail failure returns 502 and sends nothing else', async () => {
 test('page URL is included in the owner mail when valid, omitted otherwise', async () => {
   process.env.RESEND_API_KEY = 'test-placeholder';
   const run = async (_url) => { const sent = []; await deliverEnquiry({ ...input, _url }, async (u, o) => { sent.push(JSON.parse(o.body)); return ok; }); return sent[0].text; };
-  assert.match(await run('https://www.mazworks.uk/free-plan?package=Starter#x'), /submitted_from: https:\/\/www\.mazworks\.uk\/free-plan\?package=Starter$/m);
+  assert.match(await run('https://www.mazworks.uk/free-plan?package=Starter#x'), /submitted_from: https:\/\/www\.mazworks\.uk\/free-plan$/m);
   assert.match(await run('https://mazos-site-git-x.vercel.app/free-plan'), /submitted_from: https:\/\/mazos-site-git-x\.vercel\.app\/free-plan/);
   for (const bad of ['http://www.mazworks.uk/', 'https://evil.example/free-plan', 'https://www.mazworks.uk.evil.com/', 'javascript:alert(1)', 5, undefined]) assert.doesNotMatch(await run(bad), /submitted_from/);
   assert.equal(cleanPageUrl('https://user:pw@www.mazworks.uk/'), '');

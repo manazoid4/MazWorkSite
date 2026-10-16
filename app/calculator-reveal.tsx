@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { CostCalculator, type CalculatorPreset } from './cost-calculator';
 
 /**
@@ -9,10 +9,15 @@ import { CostCalculator, type CalculatorPreset } from './cost-calculator';
  */
 export function CalculatorReveal({ preset, trade }: { preset?: CalculatorPreset; trade?: string }) {
   const [open, setOpen] = useState(false);
-  if (open) return <CostCalculator preset={preset} trade={trade} buildLink={false} />;
+  const regionId = useId();
   return (
-    <button type="button" className="ce-chip ce-reveal" aria-expanded="false" onClick={() => setOpen(true)}>
-      What are missed calls costing you? Work it out →
-    </button>
+    <div>
+      <button type="button" className="ce-chip ce-reveal" aria-expanded={open} aria-controls={regionId} onClick={() => setOpen(!open)}>
+        {open ? 'Hide the cost estimate' : 'What are missed calls costing you? Work it out →'}
+      </button>
+      <div id={regionId} hidden={!open}>
+        {open ? <CostCalculator preset={preset} trade={trade} buildLink={false} /> : null}
+      </div>
+    </div>
   );
 }

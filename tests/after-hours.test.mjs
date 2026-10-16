@@ -59,8 +59,11 @@ test('the offer is wired in: homepage, services, prices, enquiry, footer, sitema
   assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/after-hours-receptionist</);
+  // The accepted-package list moved from the form into app/trade-context.ts (trade sprint); the form reads it from there.
   const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
-  assert.match(form, /AFTER_HOURS\.name\]/, 'the free demo form accepts ?package=After-Hours Receptionist');
+  const knownPackages = await readFile(path.join(root, 'app', 'trade-context.ts'), 'utf8');
+  assert.match(form, /KNOWN_PACKAGES/);
+  assert.match(knownPackages, /AFTER_HOURS\]/, 'the free demo form accepts ?package=After-Hours Receptionist');
 });
 
 // Pricing structure (11 Oct 2026): pay once by default, monthly only for the

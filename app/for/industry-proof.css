@@ -1,0 +1,58 @@
+/* Industry example (ip-) and "in your week" voice block (iv-). Homepage colours, ink borders, orange action. */
+.ip-proof { --ip-tint: var(--clay); min-width: 0; display: grid; gap: 12px; padding: 16px; border: 2px solid var(--ink); background: var(--surface); box-shadow: var(--card-shadow); }
+/* Four kinds of business get four tints, so the pages do not look cut from one sheet. */
+.ip-proof[data-industry="trades"], .ip-proof[data-industry="heating-and-plumbing"], .ip-proof[data-industry="roofers"], .ip-proof[data-industry="builders"], .ip-proof[data-industry="electricians"], .ip-proof[data-industry="garages"] { --ip-tint: var(--clay); }
+.ip-proof[data-industry="appointments"], .ip-proof[data-industry="salons-and-beauty"], .ip-proof[data-industry="dog-groomers"], .ip-proof[data-industry="cafes-and-food"], .ip-proof[data-industry="clinics-and-therapists"] { --ip-tint: var(--sage); }
+.ip-proof[data-industry="creators"] { --ip-tint: var(--wheat); }
+.ip-proof[data-industry="offices"], .ip-proof[data-industry="architects"] { --ip-tint: var(--mist); }
+.tp-hero.s-hero-split { grid-template-columns: minmax(0, 1fr); }
+.tp-hero.s-hero-split > * { min-width: 0; }
+@media (min-width: 900px) { .tp-hero.s-hero-split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+.ip-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ip-head h2 { margin: 4px 0 6px; font-size: 1.3rem; line-height: 1.15; }
+.ip-moment { color: var(--ink); font-size: .95rem; line-height: 1.4; }
+.ip-progress { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.ip-progress li { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; padding-top: 6px; border-top: 4px solid var(--soft-line); font-size: .72rem; line-height: 1.25; color: var(--muted); }
+.ip-progress li[aria-current="step"] { border-top-color: var(--signal); color: var(--ink); font-weight: 750; }
+.ip-progress span { display: inline-grid; place-items: center; width: 22px; height: 22px; border: 2px solid currentColor; border-radius: 50%; font-weight: 800; font-size: .72rem; }
+.ip-progress em { font-style: normal; overflow-wrap: anywhere; }
+/* On a phone only the current step's name is spelled out. */
+@media (max-width: 639px) { .ip-progress li:not([aria-current="step"]) em { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+.ip-customer { padding: 12px; background: var(--ip-tint); border: 1px solid var(--ink); display: grid; gap: 8px; }
+.ip-customer h3, .ip-owner h3 { font-size: 1rem; letter-spacing: -.01em; line-height: 1.2; }
+.ip-customer > p { font-size: 1rem; line-height: 1.45; }
+.ip-customer fieldset { border: 0; display: grid; gap: 8px; min-width: 0; }
+.ip-customer legend { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 4px; }
+.ip-customer label { display: grid; gap: 4px; font-size: .88rem; font-weight: 700; min-width: 0; }
+.ip-customer select { width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-weight: 500; font-size: 16px; }
+.ip-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.ip-controls button { min-height: 44px; padding: 0 16px; border: 2px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-weight: 750; font-size: .95rem; cursor: pointer; }
+.ip-controls button.ip-next { background: var(--signal); }
+.ip-controls button:disabled { opacity: .55; cursor: default; }
+.ip-owner { padding: 12px; border: 2px dashed var(--ink); display: grid; gap: 8px; min-width: 0; }
+.ip-owner > strong { justify-self: start; padding: 3px 10px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pill, #ffd23f); font-size: .85rem; line-height: 1.3; }
+.ip-owner dl { display: grid; gap: 6px; }
+.ip-owner dl div { display: grid; grid-template-columns: minmax(0, 9em) minmax(0, 1fr); gap: 8px; font-size: .9rem; }
+.ip-owner dt { color: var(--muted); }
+.ip-owner dd { font-weight: 700; overflow-wrap: anywhere; }
+.ip-owner > p { font-size: .92rem; line-height: 1.45; }
+.ip-decision { padding-top: 8px; border-top: 1px solid var(--soft-line); }
+.ip-boundary { font-size: .85rem; color: var(--muted); }
+.ip-boundary summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; color: var(--ink); }
+.ip-boundary p + p { margin-top: 6px; }
+.ip-proof noscript ol { padding-left: 1.2em; font-size: .9rem; }
+.ip-cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; border: 2px solid var(--ink); background: var(--signal); color: var(--ink); font-weight: 800; text-decoration: none; }
+@media (max-width: 380px) { .ip-owner dl div { grid-template-columns: 1fr; gap: 0; } }
+
+/* In your week: what customers say, and the worry. */
+.iv-voice { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--ink); background: var(--surface); box-shadow: var(--card-shadow); }
+.iv-title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); margin: 0; }
+.iv-label { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.iv-words { list-style: none; display: grid; gap: 8px; }
+@media (min-width: 720px) { .iv-words { grid-template-columns: repeat(3, minmax(0, 1fr)); } .iv-voice { grid-template-columns: minmax(0, 1fr); } }
+.iv-words li { padding: 12px 14px; border-left: 4px solid var(--signal); background: var(--wheat); font-size: 1rem; line-height: 1.4; }
+.iv-ask { display: grid; gap: 4px; padding-top: 10px; border-top: 1px solid var(--soft-line); }
+.iv-q { font-weight: 800; font-size: 1.05rem; }
+.iv-ask p:last-child { color: var(--muted); max-width: 62ch; }
+.tp-hero-types .iv-voice { margin-top: 12px; box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .ip-proof *, .iv-voice * { transition: none !important; animation: none !important; } }

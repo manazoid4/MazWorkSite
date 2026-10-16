@@ -55,3 +55,27 @@ test('email recovery preserves punctuation, multiline details and the reply addr
   assert.equal(href.searchParams.get('subject'), 'Quote & question');
   assert.equal(href.searchParams.get('body'), 'Name: Example Customer\nEmail: customer@example.com\nProblem: Bookings & follow-up\nSecond line + £49');
 });
+
+test('plan delivery preserves context through fallback and never bypasses validation', async (t) => {
+  const payload = { problem: 'Chasing quotes', customer_message: 'Keep my own words.', trade: 'roofers', proof_id: 'roofers', source_page: '/for/roofers', interested_in: 'Not chosen' };
+  const calls = [];
+  t.mock.method(globalThis, 'fetch', async (url, options) => {
+    calls.push({ url, body: JSON.parse(options.body) });
+    return url === '/api/enquiry' ? Response.json({ ok: false }, { status: 502 }) : Response.json({ success: 'true' });
+  });
+  assert.deepEqual(await enquiry.sendPlanEnquiry(payload), { ok: true });
+  assert.equal(calls.length, 2);
+  assert.deepEqual(calls[1].body, payload);
+  calls.length = 0;
+  globalThis.fetch = async (url) => { calls.push(url); return Response.json({ ok: false }, { status: 400 }); };
+  assert.deepEqual(await enquiry.sendPlanEnquiry(payload), { ok: false, reason: 'rejected', status: 400 });
+  assert.deepEqual(calls, ['/api/enquiry']);
+});
+
+test('API timeout and fallback failure stay truthful with recoverable context', async (t) => {
+  t.mock.method(globalThis, 'fetch', async url => {
+    if (url === '/api/enquiry') throw new DOMException('Timed out', 'TimeoutError');
+    return Response.json({ success: 'false' });
+  });
+  assert.deepEqual(await enquiry.sendPlanEnquiry({ trade: 'roofers', problem: 'Chasing quotes' }), { ok: false, reason: 'rejected' });
+});

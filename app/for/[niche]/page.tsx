@@ -11,7 +11,10 @@ import { NICHE_ICONS } from '../../brand-kit/kit-icon';
 import { BeforeAfter } from '../../before-after';
 import { WorkSteps } from '../../work-steps';
 import { StickyCheckCta } from '../../sticky-cta';
-import { PriceCards, ReceptionistCard, TradeHero, iconFor, type CardItem } from '../trade-blocks';
+import { PriceCards, ReceptionistCard, TradeHero, VoiceBlock, iconFor, type CardItem } from '../trade-blocks';
+import { INDUSTRY_PROOFS } from '../industry-proof-data';
+import { buildTradeEnquiryHref } from '../../trade-context';
+import { CampaignLink } from '../../campaign-link';
 import { TRADE_EXTRAS } from '../trade-extras';
 import { CUSTOMER_TYPES, getCustomerType } from '../../customer-types';
 import { TypePage } from '../type-page';
@@ -56,11 +59,12 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
   if (type) return <TypePage type={type} />;
   const guide = getNicheGuide(niche);
   if (!guide) notFound();
-  const checkHref = `/free-plan?src=for-${guide.id}&trade=${guide.id}#leak-check-form`;
+  const problem = INDUSTRY_PROOFS[guide.id]?.problem;
+  const checkHref = buildTradeEnquiryHref(guide.id, { problem });
   const parent = CUSTOMER_TYPES.find((item) => item.niches.includes(guide.id));
   const extras = TRADE_EXTRAS[guide.id];
   const trade = tradeForGuide(guide.id);
-  const cards: CardItem[] = guide.fixes.map((fix) => ({ key: fix.name, icon: iconFor(fix.name), name: fix.name, price: fix.price, body: fix.body, href: `/free-plan?src=for-${guide.id}&trade=${guide.id}&package=${encodeURIComponent(fix.pick)}#leak-check-form` }));
+  const cards: CardItem[] = guide.fixes.map((fix) => ({ key: fix.name, icon: iconFor(fix.name), name: fix.name, price: fix.price, body: fix.body, href: buildTradeEnquiryHref(guide.id, { problem, package: fix.pick }) }));
 
   return (
     <main className="s-home">
@@ -75,9 +79,11 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         eyebrow={guide.name}
         title={guide.title}
         lede={guide.lede}
-        cta={<a className="button button-signal s-button-lg" href={checkHref}>{MAIN_CTA}</a>}
+        cta={<CampaignLink className="button button-signal s-button-lg" href={checkHref}>{MAIN_CTA}</CampaignLink>}
         note={`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}.`}
       />
+
+      <section className="s-section" id="week" aria-label="In your week"><VoiceBlock id={guide.id} level={2} /></section>
 
       <section className="s-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
@@ -144,7 +150,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
           <p>Tell me the job. I&apos;ll send a working demo and a fixed price.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href={checkHref}>{MAIN_CTA}</a>
+          <CampaignLink className="button button-signal" href={checkHref}>{MAIN_CTA}</CampaignLink>
         </div>
       </section>
 
