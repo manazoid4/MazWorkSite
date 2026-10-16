@@ -1670,63 +1670,11 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .s-price-value s { font-weight: 700; color: inherit; }
 .s-price-value span { display: block; font-size: .8rem; }
 
-/* "What do you need?" chooser on /prices (conversion fixes, 2 Oct). */
-.s-chooser { list-style: none; padding: 0; margin: 12px 0 8px; display: grid; gap: 10px; }
-.s-chooser a { min-height: 44px; display: grid; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); background: var(--surface); text-decoration: none; }
-.s-chooser a:hover, .s-chooser a:focus-visible { background: var(--paper); }
-.s-chooser strong { font-size: 1.05rem; }
-.s-chooser span { color: var(--muted); }
-@media (min-width: 760px) { .s-chooser { grid-template-columns: repeat(2, 1fr); } }
-
 /* Price card facts: time, payment and running costs, visible without opening the spec (T3). */
 .s-price-facts { margin: .6rem 0; display: grid; gap: 6px; font-size: .88rem; }
 .s-price-facts div { display: grid; grid-template-columns: 4.2rem 1fr; gap: 8px; }
 .s-price-facts dt { font-weight: 700; }
 .s-price-facts dd { margin: 0; color: var(--muted); }
-
-/* How the prices work + prices by problem (11 Oct 2026) */
-.s-ways, .s-solutions { list-style: none; padding: 0; margin: 12px 0 8px; display: grid; gap: 10px; }
-.s-ways a, .s-solutions a { min-height: 44px; height: 100%; display: grid; align-content: start; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-left: 6px solid var(--signal); background: var(--surface); text-decoration: none; }
-.s-ways a:hover, .s-ways a:focus-visible, .s-solutions a:hover, .s-solutions a:focus-visible { background: var(--paper); }
-.s-ways strong, .s-solutions strong { font-size: 1.05rem; }
-.s-ways b { font-size: 1.25rem; }
-.s-ways span, .s-solutions span { color: var(--muted); }
-.s-solutions b { font-size: .95rem; }
-@media (min-width: 760px) { .s-ways { grid-template-columns: repeat(2, 1fr); } .s-solutions { grid-template-columns: repeat(2, 1fr); } }
-
-/* Trade page: that trade's 22 s video under "What changes in your day" (conversion sprint). */
-.tp-trade-video {
-  margin: 0 0 24px;
-  display: grid;
-  gap: 8px;
-  max-width: 360px;
-}
-
-.tp-trade-video video {
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 4 / 5;
-  background: var(--ink);
-}
-
-/* The page already shows this trade's video, so the footer band does not repeat it. */
-.s-home:has(.tp-trade-video) .mw-footer-video {
-  display: none;
-}
-
-/* Footer hook: the one line every visitor reads last. */
-.mw-footer-hook {
-  margin: 0;
-  max-width: 34ch;
-  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
-  font-weight: 750;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-.mw-footer-links a {
-  font-size: .82rem;
-}
 
 @media (max-width: 760px) {
   .mw-footer-links {

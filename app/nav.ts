@@ -32,6 +32,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'What I do',
     links: [
+      { href: '/solutions', label: 'Pick your problem' },
       { href: '/prices', label: 'Packages and prices' },
       { href: '/what-we-do', label: 'What we do' },
       { href: '/services', label: 'Jobs I set up' },

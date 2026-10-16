@@ -136,3 +136,22 @@ Fasthosts £39/£69/£99 a month with one month free. Rosie $49 for 250 minutes.
 ## 10. Model limits
 
 It does not model VAT (none added), seasonal usage, the cost of the Telnyx number if a UK number needs identity verification, text-back build time, or tax. The ICO fee (£52/year) is a fixed business cost, about £4.33 a month, and is not split per customer. Treat the output as a planning tool, not a forecast.
+
+## 11. Proposal: a £99 set-up fee (11 Oct 2026, NOT approved, not live)
+
+The live receptionist has no set-up fee, so the first month loses money and payback is long. This section shows the effect of a one-off £99 fee with the monthly price unchanged (£79, 300 minutes). Every figure comes from `paybackMonths` and `firstMonth` in `scripts/receptionist-model.mjs`, run with `{ ...PLANS.standard, setupFee: 0 }` and `{ ...PLANS.standard, setupFee: 99 }` (the fee is net of Stripe's 1.5% + 20p):
+
+| Provider, minutes used | Payback, no fee | Payback, £99 fee | First-month net, no fee | First-month net, £99 fee |
+|---|---|---|---|---|
+| Telnyx, 150 | 5.6 months | 2.9 months | -£164.42 | -£67.10 |
+| Telnyx, 300 | 7.0 months | 3.6 months | -£171.34 | -£74.03 |
+| Twilio + Vapi, 150 | 6.6 months | 3.4 months | -£169.70 | -£72.39 |
+| Twilio + Vapi, 300 | 10.0 months | 5.1 months | -£180.03 | -£82.72 |
+
+To reproduce:
+
+```
+node --input-type=module -e "import { paybackMonths, PLANS } from './scripts/receptionist-model.mjs'; for (const fee of [0, 99]) console.log(fee, paybackMonths({ plan: { ...PLANS.standard, setupFee: fee }, minutesUsed: 300 }).toFixed(1))"
+```
+
+The fee halves payback but a customer who leaves in the first three months still loses Maz money, and a fee may put off a cold prospect. To switch it on across the site, change one line in `app/offers.ts`: `AFTER_HOURS_SETUP_FEE` from `0` to `99`. Pages then say "£99 set-up, once" instead of "Set-up included". Update the two "set-up included" lines in `DELIVERY-KIT.md` and `PLAYBOOK.md` at the same time.

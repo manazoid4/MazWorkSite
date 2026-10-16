@@ -67,19 +67,21 @@ test('the offer is wired in: homepage, services, prices, enquiry, footer, sitema
 });
 
 // Pricing structure (11 Oct 2026): pay once by default, monthly only for the
-// receptionist, and every figure still read from offers.ts.
-test('/prices explains the two ways to pay and gives the receptionist its own lane', async () => {
+// receptionist, and every figure still read from offers.ts. The old chooser,
+// "how the prices work" strip and "prices by problem" fold are now one
+// Solutions picker (app/solutions).
+test('/prices has the Solutions picker and gives the receptionist its own monthly lane', async () => {
   const html = await read('prices');
   const page = text(html);
-  assert.match(page, /How the prices work/);
-  assert.match(page, /Pay once, own it/);
-  assert.match(page, /Pay monthly, for a live service/);
+  assert.match(page, /What problem do you want gone?/);
+  assert.match(page, /Pay once \(you own it\)/);
+  assert.match(page, /Keeps costing/);
+  assert.doesNotMatch(page, /How the prices work|Prices by problem/);
   assert.match(html, /id="monthly"/);
   assert.match(html, /id="after-hours"/, 'old /prices#after-hours links still land');
   assert.match(html, /id="offer-after-hours"/);
   assert.match(page, /300\s+call minutes included/);
-  assert.match(page, /Stop losing callers to voicemail/);
-  assert.match(page, /Prices by problem/);
+  assert.match(page, /Missed calls/);
 });
 
 test('the receptionist page offers the cheaper fix honestly, and a minutes check', async () => {
@@ -93,14 +95,14 @@ test('the receptionist page offers the cheaper fix honestly, and a minutes check
   assert.match(page, /Your own figures, not a forecast/);
 });
 
-test('the new pricing blocks type no price of their own', async () => {
+test('the new pricing blocks type no price of their own (solutions data and picker too)', async () => {
   const offers = await readFile(path.join(root, 'app', 'offers.ts'), 'utf8');
-  const start = offers.indexOf('"What do you need?"');
+  const start = offers.indexOf('Four ways to deal with a missed call');
   const end = offers.indexOf('How the work is actually set up');
   assert.ok(start > 0 && end > start);
   const block = offers.slice(start, end).replace("price: '£0'", '');
-  assert.doesNotMatch(block, /£\s?\d/, 'chooser, ways to pay, solutions and missed-call options read prices from the offers');
-  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx']) {
+  assert.doesNotMatch(block, /£\s?\d/, 'missed-call options read prices from the offers');
+  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx', 'app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx']) {
     assert.doesNotMatch((await readFile(path.join(root, file), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, ''), /£\s?\d/, file);
   }
 });
