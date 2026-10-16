@@ -56,7 +56,8 @@
  * price I'm charging"). Items an owner can DIY on free tools came down:
  * creator Starter £149→£79, Launch Page £595→£295 (so Website £1,495→£1,295
  * stays cheaper than its parts), set-ups £49→£29, creator add-ons £99→£49,
- * Weekly report £145→£79. Business prices (£149 / £595 / £2,450) unchanged.
+ * Weekly report £145→£79, then Starter Automation £149→£99 (Maz: "149 isn't
+ * justifiable for a simple automation"). System £595 and Custom £2,450 unchanged.
  *
  * AI (Maz, 27 Sep): may be used behind the scenes to build or run things, but
  * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
@@ -149,8 +150,8 @@ export const OFFERS: Offer[] = [
     track: 'automation',
     service: 'repair',
     name: 'Starter Automation',
-    price: '£149',
-    from: 149,
+    price: '£99',
+    from: 99,
     tag: 'The easy way to start',
     body: 'One task from the menu, set up so it happens on its own.',
     bullets: [

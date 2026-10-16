@@ -29,12 +29,12 @@ test('the enquiry captures which service the visitor actually wants', async () =
 
   assert.match(html, /What do you need help with\?/);
   for (const label of [
-    'Starter Automation (£149)',
+    'Starter Automation (£99)',
     'Business System (from £595)',
     'Website with enquiries built in (from £1,295)',
     'Starter for creators: keyword DM, free resource, email list (£79)',
     'Launch Page: one page that books, sells or takes enquiries (£295)',
-    'Review requests and customer reminders (Starter Automation £149)',
+    'Review requests and customer reminders (Starter Automation £99)',
     'Care plan (Keep It Running £39/month, or Keep It Growing £149/month)',
     'Custom software or internal tool (from £2,450)',
     'Tap-to-review stands and signs',
