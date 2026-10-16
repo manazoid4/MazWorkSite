@@ -2,6 +2,9 @@
 
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
 
+## 14 Oct: homepage video swapped
+- Homepage example video replaced with the new 22 second Maz Works clip (quote chased, booking, invoice), 4:5 portrait, captions kept, labelled not a real customer.
+
 ## 11 Oct: event Proof Pass concept (documentation only)
 - Reusable NFC networking card, "I owe you proof. Not a pitch.", with an agreed bounded test demo and optional seven-day personal return walkthrough. Full proposed brief: [EVENT-PROOF-PASS.md](EVENT-PROOF-PASS.md). Canonical strategy in the Maz Works Knowledge Vault. No card production, website feature, new free full-build offer or automation has been launched.
 

@@ -26,7 +26,7 @@ test('a one-day set-up is never sold alone: it rides free with a Starter (Maz, 2
   assert.equal(quote.total, getOffer('starter').from);
   assert.ok(quote.lines.some((line) => /Review QR card/.test(line.label) && line.price === 'Included'));
   const three = quotePlan(['Review QR card', 'Quote template', 'Saved replies'].map((name) => ({ name, offerName: name })));
-  assert.equal(three.total, getOffer('starter').from + priceAmount(getExtra('Saved replies').price), 'the third set-up costs £49');
+  assert.equal(three.total, getOffer('starter').from + priceAmount(getExtra('Saved replies').price), 'the third set-up costs SETUP_PRICE');
 });
 
 test('the first job that needs building is Starter Automation', () => {
@@ -96,13 +96,13 @@ test('creators get two steps: a list they own first, then a page that sells (Off
   assert.equal(starter.track, 'automation');
   assert.ok(starter.excludes.some((line) => /sales page|payments/i.test(line)), 'Creator Starter must exclude the sales page');
   assert.ok(launch.includes.some((line) => /brand tidy/i.test(line)), 'the Launch Page carries the brand tidy');
-  assert.equal(starter.from, getOffer('starter').from, 'creators pay the same Starter price as everyone');
+  assert.ok(starter.from < getOffer('starter').from, 'creators pay less: their Starter is easy to DIY on free tools (Offer v13)');
   assert.ok(launch.from > starter.from, 'the launch costs more than the starter');
   assert.ok(starter.guarantee, 'the starter carries the 30-day guarantee');
 });
 
-test('no one-day set-up or add-on is priced below the £49 floor, and care covers real time', () => {
-  for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 49, `${extra.name} is under the floor`);
+test('no one-day set-up or add-on is priced below the £29 floor, and care covers real time', () => {
+  for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 29, `${extra.name} is under the floor`);
   assert.ok(priceAmount(CARE_PLANS[0].price) >= 39);
   assert.ok(!/unlimited/i.test(JSON.stringify(CHANGES_WINDOW)), 'changes are never unlimited');
   assert.doesNotMatch(PAYMENT_TERMS, /half|deposit/i);

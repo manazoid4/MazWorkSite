@@ -574,14 +574,14 @@ button.text-link {
 }
 
 .mw-qw-lead {
-  margin-top: 12px;
+  margin: 12px 0 20px;
   color: var(--muted);
   font-size: .88rem;
 }
 
 .mw-qw-list {
   margin-top: 14px;
-  padding-left: 1.1em;
+  padding-left: 0;
   display: grid;
   gap: 6px;
   font-size: .95rem;

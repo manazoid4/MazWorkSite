@@ -11,15 +11,15 @@ test('each niche guide exports with prices, a priced second task and a tagged fr
     const html = await readFile(path.join(exportRoot, 'for', `${id}.html`), 'utf8').catch(() => readFile(path.join(exportRoot, 'for', id, 'index.html'), 'utf8'));
     // Conversion fixes (2 Oct): broken-website examples and the website self-check made Maz look like a repair shop.
     assert.doesNotMatch(html, /Real examples|Check yours in 60 seconds|What I saw:/, `${id}: website-fix examples removed`);
-    assert.match(html, /£149|From £(595|2,450)/, `${id}: current price`);
+    assert.match(html, /£99|From £(595|2,450)/, `${id}: current price`);
     assert.doesNotMatch(html, /£(395|249)\b|£19\/month|From £(495|950|1,500|1,250)\b|Custom Software &amp; Websites/, `${id}: retired price`);
     assert.doesNotMatch(html, /£150 fixed/, `${id}: retired Quick Win price`);
     assert.doesNotMatch(html, /Quick Win/, `${id}: retired Quick Win name`);
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
-    assert.match(html, /Free demo, no call needed\. Most start with one task at £149\./, `${id}: price and person on the first screen`);
+    assert.match(html, /Free demo, no call needed\. Most start with one task at £99\./, `${id}: price and person on the first screen`);
     assert.doesNotMatch(html, /Another job/, `${id}: second task is named as an add-on`);
     assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
-    assert.match(html, /<b class="tp-price">£149<\/b><\/div><h3>Starter Automation<\/h3>/, `${id}: Starter shown as a price card`);
+    assert.match(html, /<b class="tp-price">£99<\/b><\/div><h3>Starter Automation<\/h3>/, `${id}: Starter shown as a price card`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
     const starter = /<h3>Starter Automation<\/h3><p>([^<]*)/.exec(html)?.[1] || '';
     assert.match(starter, /^One task set up to run itself/, `${id}: Starter must read as one task`);

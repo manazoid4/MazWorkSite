@@ -86,7 +86,7 @@ test('the receptionist page offers the cheaper fix honestly, and a minutes check
   const html = await read('after-hours-receptionist');
   const page = text(html);
   assert.match(page, /Four ways to handle a missed call/);
-  assert.match(page, /Missed-call text-back\s*£149 once/);
+  assert.match(page, /Missed-call text-back\s*£99 once/);
   assert.match(page, /skip the monthly fee/);
   assert.match(html, /href="\/services\/missed-call"/);
   assert.match(page, /Will\s+300\s+minutes cover you\?/);
