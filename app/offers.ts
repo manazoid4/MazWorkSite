@@ -713,14 +713,13 @@ export const PACKAGE_VALUE: Partial<Record<OfferId, { parts: { label: string; pr
 export const PRICE_RANGE = `${OFFERS[0].price}–${OFFERS[2].price.replace(/^From /, '')}+`;
 
 /**
- * Buy-now links (Stripe payment links) for the two self-serve steps. Empty
- * until Maz creates the links in Stripe; a card only shows "Buy now" when a
- * link exists. The success URL should be /start?package=<name>.
+ * Stripe-hosted checkout links. Only configured offers show "Buy now".
+ * The success URL is /start?package=<name>; payment is checked in Stripe.
  */
 export const BUY_LINKS: Partial<Record<string, string>> = {
   // 'Starter Automation': 'https://buy.stripe.com/…',
   // 'Starter for creators': 'https://buy.stripe.com/…',
-  // 'After-Hours Receptionist': 'https://buy.stripe.com/…',   // £79/month subscription link, success URL /start?package=After-Hours%20Receptionist
+  [AFTER_HOURS.name]: 'https://buy.stripe.com/9B69ALam8eaJ2uweD6abK00',
   // (One-day set-ups are not sold on their own since v12, so no link for them.)
 };
 

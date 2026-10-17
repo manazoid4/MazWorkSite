@@ -7,11 +7,14 @@ import { ChangesWindow } from './demo-path';
 import { MAIN_CTA } from './site';
 import { SolutionsPicker } from './solutions/solutions-picker';
 
-/** "Buy now" only appears once Maz has pasted a Stripe payment link into BUY_LINKS. */
+/** Only offers with a configured Stripe payment link show "Buy now". */
 export function BuyNow({ name }: { name: string }) {
   const href = BUY_LINKS[name];
   if (!href) return null;
-  return <a className="button button-dark s-buy-now" href={href} rel="noopener">Buy now</a>;
+  return <>
+    {name === AFTER_HOURS.name ? <p className="s-small">Already heard your demo? Subscribe below. Your first month is charged at checkout.</p> : null}
+    <a className="button button-dark s-buy-now" href={href} rel="noopener">Buy now</a>
+  </>;
 }
 
 /** One package card with its full spec folded away, so phones stay short. */
@@ -149,6 +152,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <p className="s-small">{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
           <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
           <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
+          <BuyNow name={AFTER_HOURS.name} />
         </article>
       </div>
       <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>

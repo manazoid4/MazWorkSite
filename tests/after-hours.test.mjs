@@ -16,6 +16,19 @@ const read = async (route) => {
 };
 const text = (html) => html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
 
+test('prices and receptionist cards share the configured Stripe checkout', async () => {
+  const offers = await readFile(path.join(root, 'app', 'offers.ts'), 'utf8');
+  const link = offers.match(/\[AFTER_HOURS\.name\]: '(https:\/\/buy\.stripe\.com\/[A-Za-z0-9]+)'/)?.[1];
+  assert.ok(link, 'receptionist checkout has a live Stripe Payment Link');
+  assert.ok(!link.includes('/test_'), 'checkout is not a test-mode link');
+  for (const route of ['prices', 'after-hours-receptionist']) {
+    const html = await read(route);
+    assert.match(text(html), /Already heard your demo\? Subscribe below\. Your first month is charged at checkout\./);
+    const buttons = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>Buy now<\/a>/g)];
+    assert.deepEqual(buttons.map((button) => button[1]), [link], `${route} buys the configured receptionist offer`);
+  }
+});
+
 test('the receptionist page shows the price, both CTAs, safety and FAQ', async () => {
   const html = await read('after-hours-receptionist');
   const page = text(html);

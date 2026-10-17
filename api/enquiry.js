@@ -28,6 +28,8 @@ export function cleanPageUrl(value) {
   } catch { return ''; }
 }
 const PROBLEM_IDS = ['missed-call', 'quote-follow-up', 'booking', 'reminder', 'lead-capture', 'onboarding'];
+const SETUP_SERVICE = 'Setup intake';
+const isSetupIntake = body => body.service === SETUP_SERVICE;
 /** One line, no control characters or angle brackets, capped. Stops a value forging extra lines in the owner email. */
 export const oneLine = (value, max) => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '';
 /** Visitor's own words may keep line breaks, but nothing else unusual. */
@@ -36,7 +38,9 @@ export function cleanEnquiryContext(body) {
   const isTrade = value => typeof value === 'string' && value !== 'hub' && (isEnquirySource(`for-${value}`) || ['creator', 'other'].includes(value));
   const tradeRoute = value => typeof value === 'string' && value.startsWith('/for/') && value !== '/for/hub' && isEnquirySource(`for-${value.slice(5)}`);
   const trade = isTrade(body.trade) ? body.trade : '';
+  const setup = isSetupIntake(body);
   return { ...body,
+    service: setup ? SETUP_SERVICE : '',
     trade,
     industry: trade ? oneLine(body.industry, 60) : '',
     problem_id: PROBLEM_IDS.includes(body.problem_id) ? body.problem_id : '',
@@ -51,7 +55,7 @@ export function cleanEnquiryContext(body) {
     systems: oneLine(body.systems, 400),
     website: oneLine(body.website, 200),
     referred_by: oneLine(body.referred_by, 120),
-    next_step: 'Send a free demo and fixed price; not an order',
+    next_step: setup ? 'Confirm payment in Stripe before setup; the package query is not proof of payment' : 'Send a free demo and fixed price; not an order',
   };
 }
 export async function deliverEnquiry(body, fetchImpl = fetch) {
@@ -70,11 +74,12 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       return typeof result.id === 'string';
     } catch { return false; }
   };
-  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
+  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'service', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
   const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
+  const setup = isSetupIntake(body);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
-    subject: `Maz Works — free demo and quote${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
+    subject: `Maz Works — ${setup ? 'setup details' : 'free demo and quote'}${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
     text: fields.filter(field => body[field]).map(field => `${field}: ${body[field]}`).join('\n\n') + (page ? `\n\nsubmitted_from: ${page}` : '') + draft,
   }, 'owner');
   if (!accepted) return { ok: false, confirmationSent: false };
@@ -84,8 +89,10 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
     syncHubSpot(body, fetchImpl),
     scheduleFollowUps(body, send),
     send({ to: [body.email], reply_to: 'info@mazworks.uk',
-      subject: 'Your Maz Works free demo request',
-      text: `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working demo with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
+      subject: setup ? 'Your Maz Works setup details' : 'Your Maz Works free demo request',
+      text: setup
+        ? `Thanks ${body.name}, I've got your setup details.\n\nI'll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. If anything changes, reply to this email.\n\nManazir, Maz Works`
+        : `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working demo with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
     }, 'visitor'),
   ]);
   const confirmationSent = confirmation.status === 'fulfilled' && confirmation.value === true;
@@ -123,7 +130,7 @@ export const FOLLOW_UPS = [
   { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The demo and price stand whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
 ];
 export async function scheduleFollowUps(body, send) {
-  if (process.env.FOLLOW_UP_EMAILS !== 'on' || !body.email) return false;
+  if (process.env.FOLLOW_UP_EMAILS !== 'on' || !body.email || isSetupIntake(body)) return false;
   const name = String(body.name || '').trim().split(/\s+/)[0] || 'there';
   const results = await Promise.all(FOLLOW_UPS.map((step, index) => send({ to: [body.email], reply_to: 'info@mazworks.uk', subject: step.subject, text: step.text(name), scheduled_at: step.in }, `follow-up-${index + 1}`)));
   const scheduled = results.filter(Boolean).length;
@@ -141,8 +148,9 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
+    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','service','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
+    if (body.service !== undefined && !['Free Demo & Fixed Price', SETUP_SERVICE].includes(body.service)) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});
     if (!allowRequest(String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0])) {res.setHeader('retry-after','60'); return reply(429,{ok:false});}
