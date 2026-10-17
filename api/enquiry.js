@@ -75,7 +75,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
     } catch { return false; }
   };
   const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'service', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
-  const draft = body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
+  const draft = !isSetupIntake(body) && body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
   const setup = isSetupIntake(body);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,

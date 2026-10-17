@@ -39,7 +39,7 @@ test('setup service sends neutral confirmation, verifies payment before setup an
       name: 'Example visitor', email: 'visitor@example.com', problem: 'Call answering setup',
       service: 'Setup intake', interested_in: 'After-Hours Receptionist',
       next_step: 'Payment received; start immediately', _url: 'https://www.mazworks.uk/start?package=After-Hours%20Receptionist',
-      draft: 'Owner action: Confirm payment in Stripe before setup.',
+      draft: 'Payment received; start immediately',
     }, async (_url, options) => { sent.push(JSON.parse(options.body)); return { ok: true, json: async () => ({ id: 'fixture' }) }; });
 
     assert.deepEqual(result, { ok: true, confirmationSent: true });
