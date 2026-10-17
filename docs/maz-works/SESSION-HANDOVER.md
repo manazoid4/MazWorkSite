@@ -1,5 +1,10 @@
 # Maz Works: latest session handover (public copy)
 
+## 17 Oct: Stripe receptionist checkout (#160)
+- Created and verified the live GBP 79/month subscription Payment Link; wired it into the receptionist and prices cards. The first month is charged at checkout, after the customer has heard their demo. No secret key is stored in this repo.
+- Setup intake uses neutral payment wording and asks for call-answering details. Payment must be confirmed in Stripe before setup; visiting `/start` proves nothing about payment.
+- Awaiting merge approval. Phone service provisioning and a real payment transaction are outside this change.
+
 > Start here: the private handoff index (`unified-memory-database/handoffs/LATEST.md`) holds research, plans and build prompts. This public file keeps only the last 3 entries; older ones are in `docs/archive/SESSION-HANDOVER-history.md`.
 
 ## 14 Oct: homepage video swapped

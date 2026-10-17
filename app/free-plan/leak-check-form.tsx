@@ -36,14 +36,18 @@ const FIELD_MESSAGES = {
 // The browser's own type=email rule (HTML spec), plus a dot in the domain so "sam@gmail" is caught too.
 const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-function fieldMessage(field: FieldName, value: string): string {
+function fieldMessage(field: FieldName, value: string, setup = false): string {
   const text = value.trim();
-  if (!text) return FIELD_MESSAGES[field];
+  if (!text) return field === 'problem' && setup
+    ? 'Add a line about what you need set up.'
+    : field === 'email' && setup ? 'Add an email so I can confirm the setup.' : FIELD_MESSAGES[field];
   if (field === 'email' && !EMAIL_PATTERN.test(text)) return FIELD_MESSAGES.emailFormat;
   return '';
 }
 
 const SERVICE_LABEL = FREE_STEP.name;
+const SETUP_SERVICE_LABEL = 'Setup intake';
+const SETUP_NEXT_STEP = 'Confirm payment in Stripe before setup; the package query is not proof of payment';
 
 /** One tap instead of typing: the problems owners name most. Each adds a line to the text box. */
 export const QUICK_PICKS = [
@@ -73,8 +77,9 @@ function ContextLocationSync({ onChange }: { onChange: (search: string) => void 
  * say so), so the in-page route never promises an email confirmation.
  */
 export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a working demo with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
+const SETUP_AUTO_REPLY = `Thanks, I've got your setup details. I'll check your payment and confirm the next steps by email before starting setup. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 
-export function LeakCheckForm() {
+export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
   const requestId = useRef('');
   const sending = useRef(false);
   const started = useRef(false);
@@ -188,9 +193,9 @@ export function LeakCheckForm() {
     const source = enquirySource(window.location.search, campaign);
 
     const found: Record<FieldName, string> = {
-      problem: fieldMessage('problem', task),
+      problem: fieldMessage('problem', task, setup),
       name: fieldMessage('name', name),
-      email: fieldMessage('email', email),
+      email: fieldMessage('email', email, setup),
     };
     const firstInvalid = (['problem', 'name', 'email'] as const).find((field) => found[field]);
     if (firstInvalid) {
@@ -203,7 +208,7 @@ export function LeakCheckForm() {
 
     setErrors({ problem: '', name: '', email: '' });
 
-    const subject = `Maz Works — free demo and price — ${website || name}`;
+    const subject = `Maz Works — ${setup ? 'setup details' : 'free demo and price'} — ${website || name}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
@@ -219,18 +224,18 @@ export function LeakCheckForm() {
     setSubmitState('sending');
     sending.current = true;
 
-    // Free-plan autopilot (C9): a drafted reply Maz can approve in two minutes, built only from offers.ts.
-    const draft = draftFreePlan({ name, trade: context.trade, systems: plan.ids, package: pkg, problem: task });
-
-    const reviewNote = `Owner review required: this is a demo enquiry, not an order. ${pkg ? `Explicit package interest: ${pkg}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.`;
+    const draft = setup ? { subject: '', text: '' } : draftFreePlan({ name, trade: context.trade, systems: plan.ids, package: pkg, problem: task });
+    const reviewNote = setup ? '' : `Owner review required: this is a demo enquiry, not an order. ${pkg ? `Explicit package interest: ${pkg}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.`;
     const result = await sendPlanEnquiry({
       request_id: requestId.current,
-      draft: `${reviewNote}\n\n${draft.subject}\n\n${draft.text}`,
+      ...(setup
+        ? { draft: `Owner action: ${SETUP_NEXT_STEP}. The return URL and package query are not payment verification.` }
+        : { draft: `${reviewNote}\n\n${draft.subject}\n\n${draft.text}` }),
       name,
       email,
       website,
       referred_by: referredBy,
-      service: SERVICE_LABEL,
+      service: setup ? SETUP_SERVICE_LABEL : SERVICE_LABEL,
       problem: task,
       customer_message: ownMessage,
       existing_tools: existingTools,
@@ -241,7 +246,7 @@ export function LeakCheckForm() {
       problem_id: context.problem,
       proof_id: context.proof,
       source_page: context.sourcePage,
-      next_step: 'Send a free demo and fixed price; not an order',
+      next_step: setup ? SETUP_NEXT_STEP : 'Send a free demo and fixed price; not an order',
       source,
       _replyto: email,
       _subject: subject,
@@ -292,10 +297,10 @@ export function LeakCheckForm() {
       }}
     >
       <Suspense fallback={null}><ContextLocationSync onChange={readLocation} /></Suspense>
-      <input type="hidden" name="_subject" value="Maz Works — free demo and price" />
+      <input type="hidden" name="_subject" value={`Maz Works — ${setup ? 'setup details' : 'free demo and price'}`} />
       <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="service" value={SERVICE_LABEL} />
-      <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
+      <input type="hidden" name="service" value={setup ? SETUP_SERVICE_LABEL : SERVICE_LABEL} />
+      <input type="hidden" name="_autoresponse" value={setup ? SETUP_AUTO_REPLY : AUTO_REPLY} />
       <input type="hidden" name="interested_in" value={pkg || 'Not chosen'} />
       <input type="hidden" name="systems" value={plan.systems} />
       <input type="hidden" name="trade" value={context.trade} />
@@ -303,15 +308,15 @@ export function LeakCheckForm() {
       <input type="hidden" name="proof_id" value={context.proof} />
       <input type="hidden" name="problem_id" value={context.problem} />
       <input type="hidden" name="source_page" value={context.sourcePage} />
-      <input type="hidden" name="next_step" value="Send a free demo and fixed price; not an order" />
-      <p className="mw-form-kicker">Tap what fits, then tell me where to send your demo. No call needed.</p>
-      {context.trade ? <p className="mw-form-picked">Your <strong>{tradeLabel(context.trade)}{context.problem ? ` · ${TRADE_PROBLEMS.find(item => item.id === context.problem)?.label}` : ''}</strong> demo enquiry. A free example and fixed price, not an order.</p> : null}
+      <input type="hidden" name="next_step" value={setup ? SETUP_NEXT_STEP : 'Send a free demo and fixed price; not an order'} />
+      <p className="mw-form-kicker">{setup ? 'Share what needs setting up and where to send the confirmation.' : 'Tap what fits, then tell me where to send your demo. No call needed.'}</p>
+      {context.trade && !setup ? <p className="mw-form-picked">Your <strong>{tradeLabel(context.trade)}{context.problem ? ` · ${TRADE_PROBLEMS.find(item => item.id === context.problem)?.label}` : ''}</strong> demo enquiry. A free example and fixed price, not an order.</p> : null}
       {context.proof ? <p className="mw-form-picked">Demo context: <strong>{tradeLabel(context.proof)}</strong> — an illustrative example, not client results. <button type="button" className="text-link" disabled={submitState === 'sending'} onClick={() => updateContext({ ...context, proof: '' })}>Clear demo context</button></p> : null}
       {plan.systems ? <p className="mw-form-picked">Your demo: <strong>{plan.systems}</strong></p> : null}
 
       {hydrated && submitState !== 'sent' ? (
         <div className="mw-form-progress" aria-hidden="true">
-          <span>Step {step} of 2 · {step === 1 ? 'The job' : 'Where to send your demo'}</span>
+          <span>Step {step} of 2 · {step === 1 ? 'The job' : `Where to send ${setup ? 'your confirmation' : 'your demo'}`}</span>
           <i><b style={{ transform: `scaleX(${step / 2})` }} /></i>
         </div>
       ) : null}
@@ -328,7 +333,7 @@ export function LeakCheckForm() {
           </select>
         </label>
         <label>
-          <span>Package preference <small>(optional, not an order)</small></span>
+          <span>Package preference <small>{setup ? '(from your link)' : '(optional, not an order)'}</small></span>
           <select name="package_choice" value={pkg} disabled={submitState === 'sending'} onChange={event => updateContext({ ...context, package: event.target.value })}>
             <option value="">Not chosen — help me decide</option>
             {hydrated ? KNOWN_PACKAGES.map(name => <option key={name} value={name}>{name}</option>) : null}
@@ -336,7 +341,7 @@ export function LeakCheckForm() {
         </label>
         </details> : null}
         <fieldset className="mw-quick-picks">
-          <legend>What’s costing you customers or time? <small>Tap any that fit</small></legend>
+          <legend>{setup ? 'What should be set up?' : 'What’s costing you customers or time?'} <small>{setup ? 'Tap any that fit, or add details below' : 'Tap any that fit'}</small></legend>
           <div>
             {context.trade ? problemsForTrade(context.trade).map(item => (
               <button type="button" key={item.id} aria-pressed={context.problem === item.id} disabled={submitState === 'sending'} onClick={() => {
@@ -352,12 +357,12 @@ export function LeakCheckForm() {
         </fieldset>
 
         <label>
-          <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : 'What job do you want off your plate?'}</span>
+          <span>{hydrated ? <>Anything else I should know? <small>(optional)</small></> : setup ? 'What do you need set up?' : 'What job do you want off your plate?'}</span>
           <textarea
             name="problem"
             rows={3}
             required={!hydrated}
-            placeholder="For example: orders come by DM, customers forget appointments, chasing quotes"
+            placeholder={setup ? 'For call answering: your phone line, hours, common questions and urgent-call rules' : 'For example: orders come by DM, customers forget appointments, chasing quotes'}
             aria-invalid={errors.problem ? true : undefined}
             aria-describedby={errors.problem ? 'leak-check-err-problem' : undefined}
             disabled={submitState === 'sending'}
@@ -436,13 +441,15 @@ export function LeakCheckForm() {
 
         <div className="mw-form-submit">
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-            {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : MAIN_CTA}
+            {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : setup ? 'Send setup details' : MAIN_CTA}
           </button>
-          <p>I usually reply myself within {CHECK_REPLY_TIME} with a working demo of your first job and a fixed price. Free, no obligation. <a href="/privacy">How I use your details</a>.</p>
+          <p>{setup ? `I’ll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. ` : `I usually reply myself within ${CHECK_REPLY_TIME} with a working demo of your first job and a fixed price. Free, no obligation. `}<a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">
             {submitState === 'sent' && (
               <>
-                <span className="mw-form-tick" aria-hidden="true">✓</span> <strong>Got it, thank you.</strong> {confirmationSent ? "Check your inbox. The confirmation is the same kind of instant reply I set up for clients. " : "Your request arrived safely. The instant confirmation email did not go out this time. "} What happens next: I read it myself, look at how you work now, and send your demo and fixed price from {CONTACT_EMAIL}, usually within {CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder.{' '}
+                <span className="mw-form-tick" aria-hidden="true">✓</span> <strong>Got it, thank you.</strong> {setup
+                  ? `${confirmationSent ? 'Check your inbox. ' : 'Your details arrived, but the confirmation email did not go out. '}I’ll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. `
+                  : `${confirmationSent ? 'Check your inbox. The confirmation is the same kind of instant reply I set up for clients. ' : 'Your request arrived safely. The instant confirmation email did not go out this time. '}What happens next: I read it myself, look at how you work now, and send your demo and fixed price from ${CONTACT_EMAIL}, usually within ${CHECK_REPLY_TIME}. Nothing to pay and no call unless you want one. If it hasn’t arrived by then, check your junk folder. `}{' '}
                 <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); setStep(1); window.setTimeout(() => focusField('problem'), 0); }}>Send another</button>
               </>
             )}
