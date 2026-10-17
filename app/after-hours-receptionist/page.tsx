@@ -4,6 +4,7 @@ import { AFTER_HOURS, MISSED_CALL_OPTIONS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { BuyNow } from '../price-list';
 import { ScrollReveal } from '../scroll-reveal';
 import { StickyCheckCta } from '../sticky-cta';
 import { BEST_FOR, CHIPS, COMPARE, EMERGENCY_NOTE, FAQS, NEXT, STEPS, TRUST } from './content';
@@ -115,6 +116,7 @@ export default function AfterHoursPage() {
             <ul className="ah-included">{AFTER_HOURS.included.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
             <p className="ah-card-terms">{`${AFTER_HOURS.minutes} call minutes a month included. ${AFTER_HOURS.terms}`}</p>
             <a className="button button-signal ah-card-cta" href={demoHref}>{MAIN_CTA}</a>
+            <BuyNow name={AFTER_HOURS.name} />
             <p className="ah-card-terms">{AFTER_HOURS.guarantee}</p>
           </article>
           <div className="ah-side">
