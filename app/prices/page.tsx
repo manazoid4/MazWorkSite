@@ -26,8 +26,9 @@ export default function PricesPage() {
       <SiteHeader /><ServiceSchema path="/prices" />
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
         <p className="eyebrow">Prices</p>
-        <h1 id="prices-title">Every price, in one place.</h1>
-        <p className="s-lede">Fixed prices, agreed before any work starts. No VAT added. Not sure what you need? The {FREE_STEP.short} tells you, within {CHECK_REPLY_TIME}.</p>
+        <h1 id="prices-title">Choose the job you want off your plate.</h1>
+        <p className="s-lede">Less chasing, fewer details to copy, a clearer next step for your customers. Agree the work, the price and how we’ll check it works before building starts. No VAT added.</p>
+        <p className="s-small">Start with a {FREE_STEP.short}, within {CHECK_REPLY_TIME}. Choose one useful job; add more when you need it.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free demo</a>
           <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>

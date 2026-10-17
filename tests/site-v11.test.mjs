@@ -37,6 +37,16 @@ const offers = run('offers');
 const types = run('customer-types');
 const draft = run('free-plan/draft');
 
+test('every package is visible on prices with its fit and sign-off check', async () => {
+  const prices = await readPage('/prices');
+  for (const offer of offers.ALL_OFFERS) {
+    assert.equal(prices.split(`id="offer-${offer.id}"`).length - 1, 1, `${offer.name} needs exactly one price card`);
+    assert.ok(prices.includes(offer.forWho), `${offer.name} explains who it helps`);
+    assert.ok(prices.includes(offer.successCheck), `${offer.name} has a concrete sign-off check`);
+  }
+  assert.ok(prices.includes(offers.AFTER_HOURS.successCheck), 'receptionist demo check is visible before checkout');
+});
+
 async function readPage(route) {
   const name = route === '/' ? 'index' : route.replace(/^\//, '');
   for (const candidate of [path.join(exportRoot, `${name}.html`), path.join(exportRoot, name, 'index.html')]) {
