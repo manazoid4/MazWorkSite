@@ -24,18 +24,18 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
       {offer.tag ? <p className="s-price-tag">{offer.tag}</p> : null}
       <h3>{offer.name}</h3>
       <p className="s-price-amount">{offer.price}</p>
-      <PartsValue offer={offer} />
       <p>{offer.body}</p>
-      <dl className="s-price-facts">
-        <div><dt>Time</dt><dd>{offer.delivery}</dd></div>
-        <div><dt>You pay</dt><dd>{offer.payment}</dd></div>
-        <div><dt>After</dt><dd>{runningCost(offer)}</dd></div>
-      </dl>
-      <ul>{offer.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
-      {offer.guarantee ? <p className="s-price-guarantee"><strong>Promise:</strong> {offer.guarantee}</p> : null}
+      <p className="s-small"><strong>Best for:</strong> {offer.forWho}</p>
+      <p className="s-small"><strong>Running costs:</strong> {runningCost(offer)}</p>
+      <p className="s-price-guarantee"><strong>What you’ll see working:</strong> {offer.successCheck}</p>
       <details className="s-offer-spec">
         <summary>What’s included, and what isn’t</summary>
-        <p><strong>Best for:</strong> {offer.forWho}</p>
+        <dl className="s-price-facts">
+          <div><dt>Time</dt><dd>{offer.delivery}</dd></div>
+          <div><dt>You pay</dt><dd>{offer.payment}</dd></div>
+        </dl>
+        <PartsValue offer={offer} />
+        {offer.guarantee ? <p className="s-price-guarantee"><strong>Promise:</strong> {offer.guarantee}</p> : null}
         <p><strong>Included</strong></p>
         <ul>{offer.includes.map((item) => <li key={item}>{item}</li>)}</ul>
         <p><strong>Always included</strong></p>
@@ -148,8 +148,10 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         <article className="s-price" id="offer-after-hours">
           <h3>{AFTER_HOURS.name}</h3>
           <p className="s-price-amount">{AFTER_HOURS.price}</p>
-          <p>Calls answered when you can’t pick up, day or night.</p>
+          <p>{AFTER_HOURS.body}</p>
+          <p className="s-small"><strong>Best for:</strong> {AFTER_HOURS.forWho}</p>
           <p className="s-small">{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
+          <p className="s-price-guarantee"><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
           <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
           <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
           <BuyNow name={AFTER_HOURS.name} />

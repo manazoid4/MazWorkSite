@@ -114,6 +114,7 @@ export default function AfterHoursPage() {
               <p className="ah-card-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup}. No VAT added.</span></p>
             </header>
             <ul className="ah-included">{AFTER_HOURS.included.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
+            <p className="ah-card-terms"><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
             <p className="ah-card-terms">{`${AFTER_HOURS.minutes} call minutes a month included. ${AFTER_HOURS.terms}`}</p>
             <a className="button button-signal ah-card-cta" href={demoHref}>{MAIN_CTA}</a>
             <BuyNow name={AFTER_HOURS.name} />

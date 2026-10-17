@@ -1,5 +1,9 @@
 # Maz Works: latest session handover (public copy)
 
+## 17 Oct: pricing explained through business jobs
+- All six packages now explain the repeat work or customer journey they handle, who they suit and a practical sign-off check. Creator Starter has a full pricing card; receptionist demo checks appear on both pricing pages.
+- Prices, included quantities and payment terms are unchanged. Care descriptions clarify the existing time limits; app, text and hosting costs are agreed before building.
+
 ## 17 Oct: Stripe receptionist checkout (#160)
 - Created and verified the live GBP 79/month subscription Payment Link; wired it into the receptionist and prices cards. The first month is charged at checkout, after the customer has heard their demo. No secret key is stored in this repo.
 - Setup intake uses neutral payment wording and asks for call-answering details. Payment must be confirmed in Stripe before setup; visiting `/start` proves nothing about payment.

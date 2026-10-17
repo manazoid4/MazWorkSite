@@ -97,6 +97,8 @@ export type Offer = {
   /** Three short lines for cards. */
   bullets: string[];
   forWho: string;
+  /** A concrete demonstration of the agreed work, not a promise of revenue. */
+  successCheck: string;
   includes: string[];
   excludes: string[];
   /** When it is working, said plainly. */
@@ -119,14 +121,14 @@ const TWEAKS = '30 days of tweaks after go-live (two rounds), and anything not w
  * Shown on every card. Each item is a template made once, then ≤30 min per client.
  */
 export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
-  { title: 'Written scope sheet first', body: 'Exactly what is built, what isn’t, the date and the price, before you pay anything.' },
+  { title: 'Written scope sheet first', body: 'The job, the date, the price and the example we will use to check it works. You agree what is included before building starts.' },
   { title: 'Tested with you before it goes live', body: 'You see it work on real examples. The invoice comes then, not before.' },
   { title: 'Accounts in your name', body: 'No passwords shared. Add me as a user, remove me after. You own everything.' },
   { title: '2-minute walkthrough video', body: 'Recorded for you, so anyone on your team can see how it works.' },
   { title: 'Short written guide', body: 'One page: what runs, when, and what to do if something changes.' },
   { title: '30 days of tweaks + 90-day fix promise', body: 'Two rounds of tweaks, and anything I built that isn’t working as agreed is fixed free for 90 days.' },
   { title: '30-day “still working?” check', body: 'I check in a month later and fix anything that drifted.' },
-  { title: 'No contracts, no monthly fee', body: 'One-off price. Texts or app costs, if any, are a few pounds a month paid by you straight to the provider. Care plans are optional and cancel any time.' },
+  { title: 'No contracts, no monthly fee', body: 'One-off build price. Any app, text or hosting costs are agreed before work starts and paid by you straight to the provider. Care plans are optional and cancel any time.' },
   { title: 'UK price match', body: 'Found the same done-for-you job cheaper from a UK business? Send me their written quote. I’ll match it, or tell you plainly what’s different.' },
 ];
 
@@ -153,13 +155,14 @@ export const OFFERS: Offer[] = [
     price: '£99',
     from: 99,
     tag: 'The easy way to start',
-    body: 'One task from the menu, set up so it happens on its own.',
+    body: 'Stop doing the same follow-up by hand. Pick one task, such as replying to a missed call, chasing a quote or requesting a review, and have it run on your existing tools.',
     bullets: [
       'Pick one: missed-call text-back, reminders, review requests, quote follow-up…',
       'Set up on the tools you already use, and tested with you',
       'Plus 2 one-day set-ups of your choice, free',
     ],
-    forWho: 'Owners who want one boring task off their plate before committing to more.',
+    forWho: 'Owners repeating one task by hand who want to start small.',
+    successCheck: 'Trigger your chosen task with a test enquiry or booking. Watch the agreed message or update reach the right place without retyping it.',
     includes: [
       'One task from the automation menu: one thing starts it, then up to three things happen automatically',
       'Built on up to two apps you already use',
@@ -185,14 +188,15 @@ export const OFFERS: Offer[] = [
     name: 'Business System',
     price: 'From £595',
     from: 595,
-    tag: 'Most value',
-    body: 'Three tasks from the menu joined up, plus a weekly report, so a customer goes from first enquiry to paid without you chasing.',
+    tag: 'For a joined-up customer journey',
+    body: 'Keep enquiries, follow-ups and the next action together. Three connected tasks, one customer list and a weekly report help your team see who needs attention.',
     bullets: [
       'Three tasks joined up: for example missed calls, quotes and reviews',
       'A weekly email: what came in and what is due',
       'Team training, 3 set-ups and a month of care included',
     ],
     forWho: 'Owners who copy details between apps and chase customers by hand.',
+    successCheck: 'Follow one test customer through all three agreed tasks. Check their details stay together and the weekly report shows the next action.',
     includes: [
       'Three connected tasks from the automation menu',
       'One customer list your team can see',
@@ -219,13 +223,14 @@ export const OFFERS: Offer[] = [
     name: 'Custom Software',
     price: 'From £2,450',
     from: 2450,
-    body: 'Something built just for your business, when normal apps don’t fit.',
+    body: 'Give your team one place to do a job that spreadsheets and off-the-shelf apps cannot handle. Start with a clearly scoped tool, portal or workflow you own.',
     bullets: [
       'A page where customers log in to see their bookings or jobs',
       'A tool your staff use instead of spreadsheets',
       'Your own rules for bookings, quotes or stock',
     ],
     forWho: 'Businesses whose way of working no off-the-shelf app supports.',
+    successCheck: 'Your team completes the agreed real-world job in each stage, including permissions and error cases, before signing that stage off.',
     includes: [
       'A written spec we agree before any building',
       'Built and tested in stages you sign off',
@@ -255,13 +260,14 @@ export const CREATOR_OFFERS: Offer[] = [
     price: '£79',
     from: 79,
     tag: 'Starter, creator job',
-    body: 'A Starter built around the creator job, priced lower because it runs on free tools: someone comments a word, gets your free resource and joins an email list you own.',
+    body: 'Turn interest in a post into a follow-up you control. Send your resource, invite people onto your email list and welcome new subscribers without replying to each person by hand.',
     bullets: [
       'Keyword DM reply → free resource → email list + welcome email',
       'Plus 2 set-ups free: profile tidy and your link everywhere',
       'Usually working within 7 working days',
     ],
     forWho: 'Creators with followers who want a list they own and a path from a post to a sale.',
+    successCheck: 'Use a test follower to request the resource, opt into your list and receive the welcome email. Check every step on your phone.',
     includes: [
       'One task from the menu: a keyword auto-reply on Instagram (or TikTok) that sends your free resource, adds them to your list and sends a welcome email written with you',
       'Email list in your name, so it leaves with you if an app changes its rules',
@@ -288,13 +294,14 @@ export const CREATOR_OFFERS: Offer[] = [
     price: '£295',
     from: 295,
     tag: 'One page that does the selling',
-    body: 'One page, written for you, where people book, buy or enquire, in a look that’s yours, with every customer added to your list. For any business or creator.',
+    body: 'Give people one clear place to understand your offer and book, buy or enquire. Copy, the page and the agreed follow-up are set up together, on accounts you own.',
     bullets: [
       'One page that books, sells up to three things, or takes enquiries',
       'Payments, bookings and emails go to your own accounts',
       'Brand tidy, 12 post templates and 2 set-ups included',
     ],
-    forWho: 'Anyone with one thing to sell or book: a coaching call, a download, a service, a trade with no website yet.',
+    forWho: 'Businesses or creators selling one offer: a service, appointment or download.',
+    successCheck: 'Complete the agreed booking, test-mode purchase or enquiry on a phone. Check it reaches your account and the customer receives the right confirmation.',
     includes: [
       'One page on your own domain, written with you on a 45-minute call',
       'Book, buy or enquire on the page: up to three things, through your own accounts',
@@ -326,13 +333,14 @@ export const WEB_OFFERS: Offer[] = [
     name: 'Website',
     price: 'From £1,295',
     from: 1295,
-    body: 'Everything in a Launch Page, plus four more pages: a full website with enquiries and bookings built in, not just a brochure.',
+    body: 'Help customers choose the right service and take the next step. Five pages, written for you, with enquiries or bookings connected to one list and an instant reply.',
     bullets: [
       'Everything in a Launch Page, plus four more pages (five in all)',
       'Enquiries land in one list with an instant reply (a Starter Automation, included)',
       'Google Maps listing, review QR card and 3 check-ups included',
     ],
     forWho: 'Businesses that need more than one page: several services, areas or audiences.',
+    successCheck: 'Find a service on your phone and send a test enquiry or booking. Check it appears in your list, sends a reply and tells your team what to do next.',
     includes: [
       'Everything in a Launch Page: brand tidy, 12 post templates, email list and welcome series',
       'Up to five pages, copy written for you and built for phones',
@@ -365,6 +373,7 @@ export const ALL_OFFERS: Offer[] = [...OFFERS, ...CREATOR_OFFERS, ...WEB_OFFERS]
 export const LANES: { id: string; title: string; offers: Offer[]; note: string }[] = [
   { id: 'systems', title: 'Automation and custom software', offers: OFFERS, note: `One task, three joined up, or something built for you. Creators: your Starter is comment-to-get-it, for ${CREATOR_OFFERS[0].price}.` },
   { id: 'websites', title: 'Pages and websites', offers: PAGE_OFFERS, note: 'Same prices for every business and creator. A Website is a Launch Page plus four more pages.' },
+  { id: 'creator-tools', title: 'For creators with an audience', offers: [CREATOR_OFFERS[0]], note: 'Follow up on interest in your posts. Need a sales page too? See Launch Page above.' },
 ];
 
 /**
@@ -574,13 +583,13 @@ export const CARE_PLANS = [
     id: 'running',
     name: 'Keep It Running',
     price: '£39/month',
-    body: 'I check everything I built keeps working, fix it if it breaks, and make one small change a month (up to 30 minutes). Reply within 2 working days, Monday to Friday. Cancel any time.',
+    body: 'Keep the system I built useful as your business changes. I check it keeps working, fix it if it breaks, and make one small change a month (up to 30 minutes), such as updating a message or opening hours. Reply within 2 working days, Monday to Friday. Cancel any time.',
   },
   {
     id: 'growing',
     name: 'Keep It Growing',
     price: '£149/month',
-    body: 'Everything in Keep It Running, plus up to 3 hours a month of changes, new tasks or improvements, and a monthly 20-minute review call. Reply within 1 working day, Monday to Friday. Cancel any time.',
+    body: 'Keep improving the work that slows your team down. Everything in Keep It Running, plus up to 3 hours a month of changes, new tasks or improvements. We choose the priority in a monthly 20-minute review call and agree what fits the time. Reply within 1 working day, Monday to Friday. Cancel any time.',
   },
 ] as const;
 
@@ -608,6 +617,9 @@ export const AFTER_HOURS_SETUP_FEE: number = 0; // proposed: 99
 export const AFTER_HOURS = {
   id: 'after-hours-receptionist',
   name: 'After-Hours Receptionist',
+  body: 'Give missed callers a way to explain what they need while you keep working. They hear your greeting, get answers from your information and leave a message for you to follow up.',
+  forWho: 'Businesses where calls arrive while the owner is with a customer, on a job or away from the phone.',
+  successCheck: 'Before subscribing, hear it answer as your business. Test a common question, a message and your urgent-call rule; check the summary reaches you.',
   price: '£79/month',
   monthly: 79,
   href: '/after-hours-receptionist',
