@@ -44,9 +44,10 @@ export default function Page() {
   <SiteHeader />
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
-    <h1 id="intro-title">Every enquiry answered and every booking confirmed, <em>without you chasing</em>.</h1>
-    <p className="s-lede">I set up the replies, reminders and follow-ups you do by hand, on apps you already use. Start with one task for {STARTER.price}, after a free demo.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a><a className="text-link" href="#demo-video">Watch it work (22s) <span aria-hidden="true">→</span></a></div>
+    <h1 id="intro-title">Miss a call and they get a text with a booking link, <em>before they ring someone else</em>.</h1>
+    <p className="s-lede">Missed-call text-back, reminders and follow-ups on the apps you already use. Start with one task for {STARTER.price}, after a free demo.</p>
+    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a></div>
+    <p className="s-note">No working, no invoice.</p>
    <ManazirLine />
    </div><HeroDemo />
   </section>
