@@ -105,7 +105,7 @@ export default function VideoPage() {
 
       <InfoSection eyebrow="Portfolio projects" title="Apply for a Portfolio Project">
         <p className="mw-note">A few places each season for independent businesses. I choose at my discretion, and applying does not mean a place is certain.</p>
-        <div className="mw-actions"><a className="button" href="/contact?service=portfolio-project#contact">Apply for a Portfolio Project</a></div>
+        <div className="mw-actions"><a className="button" href="/portfolio-projects">See Portfolio Projects</a></div>
         <p className="s-small">Tell me your business type, website, what is not working and what you want from the project.</p>
       </InfoSection>
 
