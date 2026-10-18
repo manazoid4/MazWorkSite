@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, workingBy } from '../offers';
+import { CHANGES_WINDOW, NEXT_STEPS, OFFERS, USPS, workingBy } from '../offers';
 import { CHECK_REPLY_TIME, MAIN_CTA } from '../site';
-import { SampleReport } from '../sample-report';
+import { Cards } from '../infographic';
 import { ScrollReveal } from '../scroll-reveal';
 import { ServiceSchema } from '../service-schema';
 import { SystemExplorer } from '../system-explorer';
@@ -35,7 +35,7 @@ export default function WhatWeDo() {
    <DeliveryTabs />
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>
-  <section className="s-section" id="example"><h2>An example of the scope sheet and price you get.</h2><SampleReport /></section>
+  <section className="s-section" id="why"><p className="eyebrow">Why Maz Works</p><h2>What you get that others do not offer.</h2><Cards items={USPS.map(u => ({ title: u.title, body: u.body }))} /></section>
   <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a></section>
   <SiteFooter /><StickyCheckCta href="/free-plan#leak-check-form" /><ScrollReveal />
  </main>;

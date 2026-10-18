@@ -15,12 +15,13 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: '/for', label: 'Who it’s for' },
   { href: '/prices', label: 'Prices' },
   { href: '/what-we-do', label: 'What we do' },
-  { href: '/faq', label: 'FAQ' },
+  { href: '/video', label: 'Video' },
 ];
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
   { href: '/prices', label: 'Packages and prices' },
+  { href: '/video', label: 'Video and filming' },
   { href: '/demos', label: 'Bigger build demos' },
   { href: '/what-we-do', label: 'What we do' },
   { href: '/for', label: 'Who it’s for' },

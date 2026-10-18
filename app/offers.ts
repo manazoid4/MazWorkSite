@@ -600,10 +600,10 @@ export const CARE_PLAN = CARE_PLANS[0];
 export const MANAGED_PRESENCE = {
   id: 'managed-presence',
   name: 'Managed presence',
-  price: 'From £895/month',
-  monthly: 895,
+  price: 'From £129/month',
+  monthly: 129,
   href: '/managed-presence',
-  body: 'Send me the photos, clips and job notes you already have. I organise them and keep your website, Google listing and chosen social channel current.',
+  body: 'I run your online presence for you: website updates, Google listing and social posts, all kept fresh from the photos and jobs you already have.',
   forWho: 'Businesses doing good work but rarely finding time to show it online.',
   successCheck: 'Each month, see the approved project story, Google updates and scheduled posts, with a short record of what went live.',
   included: [
@@ -630,6 +630,16 @@ export const MANAGED_PRESENCE = {
  * Maz (18 Oct): copy says professional-grade cameras; never say they are hired, never name models or claim cinema kit.
  * The full-day rate is a proposed introductory rate (Maz to confirm).
  */
+/** What makes Maz Works different. One list, reused on the video, managed, FAQ and what-we-do pages. */
+export const USPS = [
+  { title: 'See it working before you pay', body: 'No working, no invoice.' },
+  { title: 'One person, start to finish', body: 'You deal with me, not a queue of account managers.' },
+  { title: 'Fixed price in writing', body: 'Agreed up front. No surprise bills.' },
+  { title: 'Website, automation and video', body: 'One team for everything your customers see.' },
+  { title: 'You own everything', body: 'Your accounts, your content, no lock-in.' },
+  { title: 'UK-wide', body: 'Remote work, or on location for filming.' },
+] as const;
+
 export const VIDEO_PRICES = {
   halfDay: 150,
   fullDay: 250,
@@ -684,23 +694,22 @@ export const VIDEO_EDITS = {
   each: formatPrice(VIDEO_PER_VIDEO),
   withShoot: formatPrice(videoQuote('half', true).edits),
   saving: formatPrice(videoQuote('half', true).saving),
-  body: 'Four individually edited short videos for social, your website or adverts. Use footage from a shoot, or your own.',
+  body: 'Four short promotional videos built from your shoot-day photos, clips and brand assets. Ready for social, your website and adverts.',
   included: [
-    'Four separate edits, each 15 to 45 seconds by default',
-    'Basic colour adjustment, captions and licensed audio where it suits',
+    'Four separate videos, 15 to 45 seconds each',
+    'Made from your shoot photos, footage and logo',
+    'Captions, colour and licensed music',
     'One revision round per video',
-    'Your own or previously captured footage is welcome',
   ],
 } as const;
 
 export const VIDEO_SCOPE = [
-  'Filming and editing are priced separately. A shoot does not include edited videos unless you add them.',
-  'Edits cover cuts, basic colour correction, captions and music. Animation or motion graphics are quoted separately.',
-  'Edits usually take 5 to 7 working days from receiving the footage. We agree the date when you book.',
-  'Raw footage is not included. If you want it, ask before the shoot and we agree it in writing.',
-  'I work UK-wide. Travel costs are quoted before you book.',
-  'You confirm that everyone filmed is happy to appear and that you can publish the footage. I use licensed music.',
-  'Nothing is unlimited: footage, revisions and videos are as agreed when you book.',
+  { title: 'Raw footage is yours', body: 'Ask and you get the raw footage. Yes, even the take where I walk into a door.' },
+  { title: 'Fast turnaround', body: 'Videos usually take 5 to 7 working days from your shoot.' },
+  { title: 'One revision each', body: 'One round of changes per video. More complex animation is quoted separately.' },
+  { title: 'Fair extras', body: 'A different crop, a resize or a logo swap? Reasonable asks are fine.' },
+  { title: 'UK-wide', body: 'I come to you. Travel is agreed before you book, never a surprise.' },
+  { title: 'Clean permissions', body: 'You confirm anyone filmed is happy to appear. I use licensed music.' },
 ] as const;
 /**
  * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).

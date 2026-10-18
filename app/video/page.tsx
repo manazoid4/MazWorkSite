@@ -1,30 +1,24 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { VIDEO_EDITS, VIDEO_PRICES, VIDEO_SCOPE, VIDEO_SERVICES, VIDEO_SHOOTS, formatPrice, videoQuote } from '../offers';
+import { USPS, VIDEO_EDITS, VIDEO_PRICES, VIDEO_SCOPE, VIDEO_SERVICES, VIDEO_SHOOTS, formatPrice, videoQuote } from '../offers';
+import { Cards, Chips, InfoSection, Steps } from '../infographic';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { SITE_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
 import { VideoSelector } from './video-selector';
 
 const PAGE_URL = `${SITE_URL}/video`;
 
-const COMBOS = [
-  { name: 'Half-day shoot + 4 edits', total: videoQuote('half', true).total },
-  { name: 'Full-day shoot + 4 edits', total: videoQuote('full', true).total },
-];
-
 const FAQS = [
-  { q: 'Do you work anywhere in the UK?', a: 'Yes. Shoots are UK-wide. Travel outside an agreed area is quoted before you book, so there are no surprises.' },
-  { q: 'What do you film with?', a: 'Professional-grade cameras with a proper shooting setup. The result comes from planning the shots, filming them well and editing them clearly.' },
-  { q: 'Does a shoot include edited videos?', a: 'No. Filming and editing are separate so you only pay for what you need. Add the four-video edit bundle and it is 20% off when booked with a shoot.' },
-  { q: 'How long are the videos and how many changes can I ask for?', a: 'Short: 15 to 45 seconds by default. Each video includes one revision round. More complex requests are quoted separately.' },
-  { q: 'Can I have the raw footage?', a: 'Not by default. Ask when you enquire and we agree it in writing before the shoot.' },
-  { q: 'Can I use my own footage?', a: 'Yes. The four-video edit bundle works with footage you already have, at the full ' + VIDEO_EDITS.price + ' rate.' },
-  { q: 'Why are the prices so low?', a: 'These are introductory prices while I build the video side of Maz Works. They may rise once the portfolio is established.' },
+  { q: 'Do you work anywhere in the UK?', a: 'Yes. I come to you. Travel is agreed before you book.' },
+  { q: 'What do you film with?', a: 'Professional-grade cameras and a proper shooting setup. The result comes from planning the shots, filming them well and editing them clearly.' },
+  { q: 'Does a shoot include the videos?', a: 'No. Filming and the four promotional videos are priced separately, so you only pay for what you need. Add the videos to a shoot and they are 20% off.' },
+  { q: 'Can I have the raw footage?', a: 'Yes, just ask. It is yours.' },
+  { q: 'Can I use my own footage?', a: `Yes. The four videos can be built from your own photos and clips at ${VIDEO_EDITS.price}.` },
 ];
 
 export const metadata: Metadata = {
   title: { absolute: 'Promotional Video & Filming, UK-wide | Maz Works' },
-  description: fitDescription(`Promotional videos, Reels and on-location filming for small businesses across the UK. Half-day shoots from ${formatPrice(VIDEO_PRICES.halfDay)}, four edited videos ${VIDEO_EDITS.price}.`),
+  description: fitDescription(`Filming days from ${formatPrice(VIDEO_PRICES.halfDay)} and four promotional videos for ${VIDEO_EDITS.price}. UK-wide, for small businesses.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Promotional Video & Filming | Maz Works', description: VIDEO_EDITS.body, url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
@@ -40,87 +34,95 @@ const schema = {
     '@type': 'OfferCatalog',
     name: 'Video packages',
     itemListElement: [
-      ...VIDEO_SHOOTS.map(s => ({ '@type': 'Offer', name: s.name, priceCurrency: 'GBP', price: s.price.replace(/[^0-9]/g, '') })),
-      { '@type': 'Offer', name: VIDEO_EDITS.name, priceCurrency: 'GBP', price: VIDEO_EDITS.price.replace(/[^0-9]/g, '') },
+      ...VIDEO_SHOOTS.map(s => ({ '@type': 'Offer', name: s.name, priceCurrency: 'GBP', price: String(s.id === 'half' ? VIDEO_PRICES.halfDay : VIDEO_PRICES.fullDay) })),
+      { '@type': 'Offer', name: VIDEO_EDITS.name, priceCurrency: 'GBP', price: String(VIDEO_PRICES.editBundle) },
     ],
   },
+  mainEntity: { '@type': 'FAQPage', mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
 };
 
 export default function VideoPage() {
+  const halfPlus = videoQuote('half', true);
+  const fullPlus = videoQuote('full', true);
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
       <SiteHeader />
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="video-title">
         <p className="eyebrow">Video and filming · UK-wide</p>
-        <h1 id="video-title">Promotional videos that make your business look as good as it is.</h1>
-        <p>I come to your business, film it, and edit the footage into short videos for social media, your website and adverts. I also build websites and automation, so your video, website and enquiries work together.</p>
+        <h1 id="video-title">I film your business. You get promotional videos that bring in customers.</h1>
+        <p>One day on location. Four videos made from your own photos and footage. Plus the website and automation to turn views into enquiries.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="#packages">Choose a package</a>
+          <a className="button button-signal" href="/contact?service=video#contact">Enquire about a shoot</a>
           <a className="button" href={WHATSAPP_URL} rel="noopener">WhatsApp {WHATSAPP_DISPLAY}</a>
         </div>
-        <p className="mw-hero-note">Introductory prices while I build my video portfolio. Filming and editing are priced separately.</p>
+        <Chips items={['Professional-grade cameras', 'Raw footage is yours', 'UK-wide', 'Fixed prices']} />
       </section>
 
-      <section className="mw-qw-section" aria-labelledby="video-what-title">
-        <p className="eyebrow">What I make</p>
-        <h2 id="video-what-title">Six ways video can help.</h2>
-        <ul className="mw-qw-list">{VIDEO_SERVICES.map(s => <li key={s.title}><strong>{s.title}</strong> {s.body}</li>)}</ul>
-      </section>
+      <InfoSection eyebrow="How it works" title="From shoot day to promo videos">
+        <Steps four items={[
+          { title: 'Book a shoot', body: 'Half day or full day. We plan the shots together.' },
+          { title: 'I film on location', body: 'Photos and video of your premises, products and people.' },
+          { title: 'I build your videos', body: 'Four short promo videos from the day’s photos and assets.' },
+          { title: 'You post, they enquire', body: 'Your content goes live and customers get in touch.' },
+        ]} />
+      </InfoSection>
 
-      <section className="mw-qw-section" id="packages" aria-labelledby="video-packages-title">
-        <p className="eyebrow">Filming packages</p>
-        <h2 id="video-packages-title">Pick a shoot. Add edits if you want them.</h2>
-        <ul className="mw-qw-list">
-          {VIDEO_SHOOTS.map(s => (
-            <li key={s.id}><strong>{s.name} · {s.price}</strong> {s.hours}. {s.body}</li>
-          ))}
-          <li><strong>{VIDEO_EDITS.name} · {VIDEO_EDITS.price}</strong> {VIDEO_EDITS.body} That is {VIDEO_EDITS.each} per video.</li>
-        </ul>
-        <ul className="mw-qw-list">{VIDEO_EDITS.included.map(i => <li key={i}>{i}</li>)}</ul>
-        <p className="mw-qw-lead">Book the edits with any shoot and they drop to {VIDEO_EDITS.withShoot}, saving {VIDEO_EDITS.saving}. The filming fee is never discounted.</p>
-        <ul className="mw-qw-list">{COMBOS.map(c => <li key={c.name}><strong>{c.name}</strong> {formatPrice(c.total)}</li>)}</ul>
+      <InfoSection id="packages" eyebrow="Packages" title="Pick a shoot. Add your videos.">
+        <Cards items={[
+          { big: VIDEO_SHOOTS[0].price, title: VIDEO_SHOOTS[0].name, body: `${VIDEO_SHOOTS[0].hours}. Premises, products, services and behind the scenes.` },
+          { big: VIDEO_SHOOTS[1].price, title: VIDEO_SHOOTS[1].name, body: `${VIDEO_SHOOTS[1].hours}. Several locations or a bigger range.` },
+          { big: VIDEO_EDITS.price, title: VIDEO_EDITS.name, body: `${VIDEO_EDITS.each} each. ${VIDEO_EDITS.withShoot} when booked with a shoot.`, highlight: true },
+        ]} />
+        <Cards two items={[
+          { big: formatPrice(halfPlus.total), title: 'Half day + 4 videos', body: `Save ${formatPrice(halfPlus.saving)} on the videos.` },
+          { big: formatPrice(fullPlus.total), title: 'Full day + 4 videos', body: `Save ${formatPrice(fullPlus.saving)} on the videos.` },
+        ]} />
         <h3>Work out your total</h3>
         <VideoSelector />
-      </section>
+      </InfoSection>
 
-      <section className="mw-qw-section" aria-labelledby="video-samples-title">
-        <p className="eyebrow">Sample work</p>
-        <h2 id="video-samples-title">Real examples are coming.</h2>
-        <p className="mw-qw-lead">I am building my video portfolio now. I will not show made-up clients or stock footage as my own, so real projects will appear here as they are finished. If you would like to see what I have so far, ask and I will send it.</p>
-      </section>
+      <InfoSection eyebrow="Included in the videos" title="What you get">
+        <Cards items={VIDEO_EDITS.included.map(title => ({ title }))} />
+      </InfoSection>
 
-      <section className="mw-qw-section" aria-labelledby="video-scope-title">
-        <p className="eyebrow">Said plainly</p>
-        <h2 id="video-scope-title">What is and is not included.</h2>
-        <ul className="mw-qw-list">{VIDEO_SCOPE.map(i => <li key={i}>{i}</li>)}</ul>
-      </section>
+      <InfoSection eyebrow="What I make" title="Video that does a job">
+        <Cards items={VIDEO_SERVICES.map(s => ({ title: s.title, body: s.body }))} />
+      </InfoSection>
 
-      <section className="mw-qw-section" aria-labelledby="video-portfolio-title">
-        <p className="eyebrow">Portfolio projects</p>
-        <h2 id="video-portfolio-title">Apply for a Portfolio Project.</h2>
-        <p className="mw-qw-lead">Now and then I pick an independent business for an introductory project. Places are limited and I choose at my discretion. Applying does not mean you will be chosen or get free work. The paid packages above are the normal way to work with me.</p>
+      <InfoSection eyebrow="Why Maz Works" title="More than a camera">
+        <Cards items={USPS.map(u => ({ title: u.title, body: u.body }))} />
+      </InfoSection>
+
+      <InfoSection eyebrow="Style" title="A Maz Works promo, made in-house">
+        <video className="mw-video" controls preload="none" playsInline src="/assets/video/vertical.mp4" aria-label="Maz Works promotional video" />
+      </InfoSection>
+
+      <InfoSection eyebrow="Simple terms" title="No small print surprises">
+        <Cards items={VIDEO_SCOPE.map(s => ({ title: s.title, body: s.body }))} />
+      </InfoSection>
+
+      <InfoSection eyebrow="Portfolio projects" title="Apply for a Portfolio Project">
+        <p className="mw-note">A few places each season for independent businesses. I choose at my discretion, and applying does not mean a place is certain.</p>
         <div className="mw-actions"><a className="button" href="/contact?service=portfolio-project#contact">Apply for a Portfolio Project</a></div>
-        <p className="s-small">In your message, tell me your type of business, your website (if you have one), what is not working and what you want from the project.</p>
-      </section>
+        <p className="s-small">Tell me your business type, website, what is not working and what you want from the project.</p>
+      </InfoSection>
 
       <section className="s-section" aria-labelledby="video-faq-title">
         <p className="eyebrow">Questions</p>
-        <h2 id="video-faq-title">What owners ask about video.</h2>
+        <h2 id="video-faq-title">Quick answers</h2>
         <div className="s-faq">{FAQS.map(f => <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
-        <p className="s-small">More in the <a href="/privacy">privacy notice</a> and <a href="/terms">terms of work</a>.</p>
       </section>
 
       <section className="mw-resource-cta" id="video-cta" aria-labelledby="video-cta-title">
         <div>
           <p className="eyebrow">Next step</p>
-          <h2 id="video-cta-title">Tell me about your business and what you want to show.</h2>
-          <p>I will tell you honestly whether a shoot, edits or something else is right for you.</p>
+          <h2 id="video-cta-title">Tell me about your business.</h2>
+          <p>I will tell you honestly what is worth filming.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href="/contact?service=video#contact">Send an enquiry</a>
           <a className="button" href={WHATSAPP_URL} rel="noopener">WhatsApp {WHATSAPP_DISPLAY}</a>
-          <a className="button" href="/prices">See all prices</a>
         </div>
       </section>
       <SiteFooter />
