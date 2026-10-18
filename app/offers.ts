@@ -600,18 +600,19 @@ export const CARE_PLAN = CARE_PLANS[0];
 export const MANAGED_PRESENCE = {
   id: 'managed-presence',
   name: 'Managed presence',
-  price: 'From £129/month',
-  monthly: 129,
+  price: 'From £180/month',
+  monthly: 180,
   href: '/managed-presence',
   body: 'I run your online presence for you: website updates, Google listing and social posts, all kept fresh from the photos and jobs you already have.',
   forWho: 'Businesses doing good work but rarely finding time to show it online.',
   successCheck: 'Each month, see the approved project story, Google updates and scheduled posts, with a short record of what went live.',
   included: [
-    'A simple monthly handoff for your existing photos, clips, reviews and job notes',
-    'One project story or proof update on your website, where you can give access',
-    'Two Google Business Profile updates and up to eight posts on one chosen social channel',
-    'Captions, selection, scheduling and one approval round before publication',
-    'A short monthly summary of what was published and any enquiries we can trace',
+    { title: 'Website update', body: 'One project story or proof update each month, plus one small change: a price, hours or photo.' },
+    { title: 'Google listing', body: 'Two Google Business Profile updates, with fresh photos and your opening hours kept right.' },
+    { title: 'Social posts', body: 'Up to eight posts on one channel of your choice, with captions and scheduling.' },
+    { title: 'Review boost', body: 'A monthly nudge list of customers to ask for reviews, plus draft replies to the reviews you get.' },
+    { title: 'Website health check', body: 'Monthly check for broken links, forms and slow pages, fixed where it is in scope.' },
+    { title: 'Monthly report', body: 'One short page: what went live, what changed and the enquiries we can trace.' },
   ],
   notIncluded: [
     'Photography or filming on site; this can be quoted separately',
@@ -638,6 +639,14 @@ export const USPS = [
   { title: 'Website, automation and video', body: 'One team for everything your customers see.' },
   { title: 'You own everything', body: 'Your accounts, your content, no lock-in.' },
   { title: 'UK-wide', body: 'Remote work, or on location for filming.' },
+] as const;
+
+/** Per-business hooks, written from the owner's side of the counter. */
+export const AUDIENCES = [
+  { name: 'Trades', video: 'Show finished jobs, not just promises. Before and after clips win quotes.', managed: 'Every finished job becomes a project story, Google update and post.' },
+  { name: 'Salons and clinics', video: 'Let people see the room and the result before they book.', managed: 'Fresh results, opening hours and offers, always up to date.' },
+  { name: 'Cafes and shops', video: 'Make people hungry or curious from their phone screen.', managed: 'New menus, stock and events posted without you lifting a finger.' },
+  { name: 'Local services', video: 'Put a face and a place to your name so customers trust you faster.', managed: 'Reviews, hours and news kept current so you look open for business.' },
 ] as const;
 
 export const VIDEO_PRICES = {
@@ -694,7 +703,7 @@ export const VIDEO_EDITS = {
   each: formatPrice(VIDEO_PER_VIDEO),
   withShoot: formatPrice(videoQuote('half', true).edits),
   saving: formatPrice(videoQuote('half', true).saving),
-  body: 'Four short promotional videos built from your shoot-day photos, clips and brand assets. Ready for social, your website and adverts.',
+  body: 'Four short promotional videos, edited from the photos and footage I shoot at your business, plus your own assets. Ready for social, your website and adverts.',
   included: [
     'Four separate videos, 15 to 45 seconds each',
     'Made from your shoot photos, footage and logo',
@@ -704,6 +713,7 @@ export const VIDEO_EDITS = {
 } as const;
 
 export const VIDEO_SCOPE = [
+  { title: 'You own it all', body: 'Every photo, clip and video from your shoot belongs to you. It is written into the agreement that comes with your invoice.' },
   { title: 'Raw footage is yours', body: 'Ask and you get the raw footage. Yes, even the take where I walk into a door.' },
   { title: 'Fast turnaround', body: 'Videos usually take 5 to 7 working days from your shoot.' },
   { title: 'One revision each', body: 'One round of changes per video. More complex animation is quoted separately.' },

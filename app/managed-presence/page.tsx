@@ -1,6 +1,6 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { MANAGED_PRESENCE, USPS } from '../offers';
+import { AUDIENCES, MANAGED_PRESENCE, USPS } from '../offers';
 import { Cards, InfoSection, Steps } from '../infographic';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { SITE_URL } from '../site';
@@ -29,11 +29,7 @@ export default function ManagedPresencePage() {
       </section>
 
       <InfoSection eyebrow="Every month" title="What I take off your plate">
-        <Cards items={[
-          { title: 'Website', body: 'A fresh project story or update.' },
-          { title: 'Google listing', body: 'Two updates, so you show up and stay current.' },
-          { title: 'Social', body: 'Up to eight posts on one channel of your choice.' },
-        ]} />
+        <Cards items={[...MANAGED_PRESENCE.included]} />
       </InfoSection>
 
       <InfoSection eyebrow="How it works" title="Three steps. One of them is yours.">
@@ -45,7 +41,7 @@ export default function ManagedPresencePage() {
         <p className="mw-note">Go on, get on with the actual work. Someone has to be good at it, and it is you. The posting is my job.</p>
       </InfoSection>
 
-      <InfoSection eyebrow="Why Maz Works" title="What you get with me">
+      <InfoSection eyebrow="Made for" title="Whatever you run, I keep it current">`n        <Cards items={AUDIENCES.map(a => ({ title: a.name, body: a.managed }))} />`n      </InfoSection>`n`n      <InfoSection eyebrow="Why Maz Works" title="What you get with me">
         <Cards items={USPS.slice(0, 3).map(u => ({ title: u.title, body: u.body }))} />
       </InfoSection>
 

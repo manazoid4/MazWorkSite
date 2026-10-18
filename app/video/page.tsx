@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { USPS, VIDEO_EDITS, VIDEO_PRICES, VIDEO_SCOPE, VIDEO_SERVICES, VIDEO_SHOOTS, formatPrice, videoQuote } from '../offers';
+import { AUDIENCES, USPS, VIDEO_EDITS, VIDEO_PRICES, VIDEO_SCOPE, VIDEO_SERVICES, VIDEO_SHOOTS, formatPrice, videoQuote } from '../offers';
 import { Cards, Chips, InfoSection, Steps } from '../infographic';
 import { OG_IMAGE, fitDescription } from '../seo';
 import { SITE_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
@@ -12,7 +12,8 @@ const FAQS = [
   { q: 'Do you work anywhere in the UK?', a: 'Yes. I come to you. Travel is agreed before you book.' },
   { q: 'What do you film with?', a: 'Professional-grade cameras and a proper shooting setup. The result comes from planning the shots, filming them well and editing them clearly.' },
   { q: 'Does a shoot include the videos?', a: 'No. Filming and the four promotional videos are priced separately, so you only pay for what you need. Add the videos to a shoot and they are 20% off.' },
-  { q: 'Can I have the raw footage?', a: 'Yes, just ask. It is yours.' },
+  { q: 'Can I have the raw footage?', a: 'Yes, just ask. Everything from the shoot is yours.' },
+  { q: 'Who owns the photos, footage and videos?', a: 'You do. Every asset from your shoot belongs to you, and it is written into the agreement sent with your invoice.' },
   { q: 'Can I use my own footage?', a: `Yes. The four videos can be built from your own photos and clips at ${VIDEO_EDITS.price}.` },
 ];
 
@@ -51,19 +52,19 @@ export default function VideoPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="video-title">
         <p className="eyebrow">Video and filming · UK-wide</p>
         <h1 id="video-title">I film your business. You get promotional videos that bring in customers.</h1>
-        <p>One day on location. Four videos made from your own photos and footage. Plus the website and automation to turn views into enquiries.</p>
+        <p>I shoot the photos and footage at your business, then edit them into promotional videos. You own every asset, in writing. Plus the website and automation to turn views into enquiries.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="/contact?service=video#contact">Enquire about a shoot</a>
           <a className="button" href={WHATSAPP_URL} rel="noopener">WhatsApp {WHATSAPP_DISPLAY}</a>
         </div>
-        <Chips items={['Professional-grade cameras', 'Raw footage is yours', 'UK-wide', 'Fixed prices']} />
+        <Chips items={['Professional-grade cameras', 'You own every asset', 'Raw footage is yours', 'UK-wide']} />
       </section>
 
       <InfoSection eyebrow="How it works" title="From shoot day to promo videos">
         <Steps four items={[
           { title: 'Book a shoot', body: 'Half day or full day. We plan the shots together.' },
           { title: 'I film on location', body: 'Photos and video of your premises, products and people.' },
-          { title: 'I build your videos', body: 'Four short promo videos from the day’s photos and assets.' },
+          { title: 'I edit your videos', body: 'Four promo videos edited from the shoot photos and footage.' },
           { title: 'You post, they enquire', body: 'Your content goes live and customers get in touch.' },
         ]} />
       </InfoSection>
@@ -90,7 +91,7 @@ export default function VideoPage() {
         <Cards items={VIDEO_SERVICES.map(s => ({ title: s.title, body: s.body }))} />
       </InfoSection>
 
-      <InfoSection eyebrow="Why Maz Works" title="More than a camera">
+      <InfoSection eyebrow="Made for" title="Video that fits your business">`n        <Cards items={AUDIENCES.map(a => ({ title: a.name, body: a.video }))} />`n      </InfoSection>`n`n      <InfoSection eyebrow="Why Maz Works" title="More than a camera">
         <Cards items={USPS.map(u => ({ title: u.title, body: u.body }))} />
       </InfoSection>
 
