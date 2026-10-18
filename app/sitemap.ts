@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/services`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/after-hours-receptionist`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/managed-presence`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/content-day`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.85 },
     ...SERVICE_JOBS.map((job) => ({
       url: `${SITE_URL}/services/${job.id}`,
       lastModified: new Date('2026-10-09'),
