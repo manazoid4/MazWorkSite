@@ -87,9 +87,10 @@ export function contextSearch(search: string, context: TradeContext): string {
   return params.toString();
 }
 
-export function enquirySource(search: string, remembered: string): string {
+/** Fallback is the page the form lives on, so a plain homepage submit is not logged as /free-plan. */
+export function enquirySource(search: string, remembered: string, fallback = 'free-plan'): string {
   const value = new URLSearchParams(search).get('src');
-  const current = isEnquirySource(value) ? value : 'direct (free-plan)';
+  const current = isEnquirySource(value) ? value : `direct (${fallback})`;
   return isCampaignTag(remembered) && remembered !== current ? `${remembered} → ${current}` : current;
 }
 

@@ -92,7 +92,7 @@ test('the homepage asks "What do you run?" and reaches every type page and the l
   assert.match(html, /What do you run\?/);
   for (const type of types.CUSTOMER_TYPES) assert.match(html, new RegExp(`href="/for/${type.id}"`));
   assert.match(html, /href="\/prices"/);
-  assert.match(html, /href="#check">Get my free demo</);
+  assert.match(html, /id="hero-quick-form"/);
   assert.doesNotMatch(html, /href="\/brand-kit"/, 'creators link goes to /for/creators now');
   const hub = await readPage('/for');
   for (const type of types.CUSTOMER_TYPES) assert.match(hub, new RegExp(`href="/for/${type.id}"`));

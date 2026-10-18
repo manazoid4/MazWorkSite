@@ -197,7 +197,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       name: fieldMessage('name', name),
       email: fieldMessage('email', email, setup),
     };
-    const firstInvalid = (['problem', 'name', 'email'] as const).find((field) => found[field]);
+    const firstInvalid = (['problem', 'email', 'name'] as const).find((field) => found[field]);
     if (firstInvalid) {
       if (firstInvalid === 'problem') setStep(1);
       setErrors(found);
@@ -403,18 +403,6 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
         ) : null}
         <div className="mw-form-row">
           <label>
-            <span>Name</span>
-            <input
-              name="name"
-              autoComplete="name"
-              required
-              aria-invalid={errors.name ? true : undefined}
-              aria-describedby={errors.name ? 'leak-check-err-name' : undefined}
-              disabled={submitState === 'sending'}
-            />
-            <span id="leak-check-err-name" className="mw-field-error" role="alert">{errors.name}</span>
-          </label>
-          <label>
             <span>Email</span>
             <input
               name="email"
@@ -426,6 +414,18 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
               disabled={submitState === 'sending'}
             />
             <span id="leak-check-err-email" className="mw-field-error" role="alert">{errors.email}</span>
+          </label>
+          <label>
+            <span>Name</span>
+            <input
+              name="name"
+              autoComplete="name"
+              required
+              aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? 'leak-check-err-name' : undefined}
+              disabled={submitState === 'sending'}
+            />
+            <span id="leak-check-err-name" className="mw-field-error" role="alert">{errors.name}</span>
           </label>
         </div>
         <label>
