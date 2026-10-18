@@ -26,7 +26,7 @@ Every change must help a visitor understand, trust or buy faster, or help Maz re
 - Lead with outcomes: more enquiries become customers, less chasing, hours back.
 - No AI in the offer; it may be used behind the scenes, never sold.
 - Never invent testimonials, clients or results. Never publish Maz's location, personal email or phone; the public contact is info@mazworks.uk.
-- Offers and prices live only in `app/offers.ts`. Branch + PR, never push to main.
+- Offers and prices live only in `app/offers.ts`. Branch + PR, then merge to main once the checks are green.
 
 ## Not doing (cut on purpose)
 Funnel tracking (skipped by Maz, 2 Oct 2026). "Unlimited changes". Narrowing the site to one niche.
