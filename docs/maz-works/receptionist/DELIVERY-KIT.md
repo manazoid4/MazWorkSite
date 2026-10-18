@@ -1,6 +1,6 @@
 # Receptionist delivery kit (first paying customer)
 
-For the After-Hours Receptionist: an automated receptionist that answers calls the owner can't pick up, answers approved FAQs, takes a message, follows urgent-call rules and emails a summary. £79/month, 300 minutes, set-up included, month to month, one month's notice. Cost model: `PRICING-MODEL.md`. Status on 11 Oct 2026: NOT yet connected to a real phone line (no provider account, billing or real number). The browser demo exists. Do not promise a go-live date until the "Only Maz can do these" list is done.
+For the After-Hours Receptionist: an automated receptionist that answers calls the owner can't pick up, answers approved FAQs, takes a message, follows urgent-call rules and emails a summary. £79/month, 300 minutes, £99 one-off set-up, month to month, one month's notice. Cost model: `PRICING-MODEL.md`. Status on 11 Oct 2026: NOT yet connected to a real phone line (no provider account, billing or real number). The browser demo exists. Do not promise a go-live date until the "Only Maz can do these" list is done.
 
 Customer-facing wording: "automated receptionist". Never "AI". It tells callers it is automated. Never claim legal compliance.
 
@@ -142,10 +142,11 @@ Options priced in `PRICING-MODEL.md`: Telnyx (cheapest checked), Twilio + Vapi. 
 
 ## 9. Payment and cancellation checklist
 
-- [ ] Price stated in writing: £79/month, set-up included, 300 minutes, over that the price is agreed first.
+- [ ] Price stated in writing: £79/month, £99 one-off set-up, 300 minutes, over that the price is agreed first.
 - [ ] Month to month. Cancel with one month's notice.
 - [ ] No VAT is added to the price.
 - [ ] Stripe subscription link created (Maz only) and tested with a real £79 payment.
+- [ ] £99 set-up collected as a separate one-off (a second Stripe one-off link, or a Stripe invoice) before the number is bought. The Buy now link covers the monthly only, so the first charge a customer sees on it is £79.
 - [ ] First bill only after the customer has heard it answering as their business.
 - [ ] Customer knows who to contact for a problem.
 - [ ] Cancellation: customer emails; Maz confirms the date and the last billing day; stop the subscription in Stripe; close the number (section 14).
@@ -228,6 +229,7 @@ Stop at 30 minutes. If more is needed regularly, that is a price conversation, n
 - [ ] Create the provider account and pass any ID and business check.
 - [ ] Fund the prepaid balance and keep auto top-up off.
 - [ ] Create the Stripe subscription link and test a £79 payment.
+- [ ] Create the £99 one-off set-up link (or set up a Stripe invoice) and test it.
 - [ ] Pay the ICO data protection fee (check whether it applies) and get section 8 checked by a professional.
 - [ ] Approve the service wording on the site and in terms (what it does, minutes, month to month).
 - [ ] Decide the after-hours versus always-on divert approach.

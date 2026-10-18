@@ -111,21 +111,21 @@ test('/prices uses the picker in place of the chooser, ways-to-pay strip and by-
   for (const dead of ['CHOOSER', 'WAYS_TO_PAY', 'SAME_PRICE_NOTE']) assert.doesNotMatch(offersSource, new RegExp(`export const ${dead}\\b`), `${dead} deleted`);
 });
 
-test('receptionist set-up fee is one switch, defaults to the live value, and both states read right', async () => {
+test('receptionist set-up fee is one switch, live at the approved value, and both states read right', async () => {
   assert.match(offersSource, FEE_LINE);
   const live = loadOffers(offersSource);
-  assert.equal(live.AFTER_HOURS_SETUP_FEE, 0, 'branch ships the live value');
-  assert.equal(live.AFTER_HOURS.setup, 'Set-up included');
-  const proposed = loadOffers(offersSource.replace(FEE_LINE, 'export const AFTER_HOURS_SETUP_FEE: number = 99;'));
-  assert.equal(proposed.AFTER_HOURS.setup, '£99 set-up, once');
-  assert.equal(proposed.AFTER_HOURS.price, live.AFTER_HOURS.price, 'monthly price does not move');
-  assert.equal(proposed.AFTER_HOURS.minutes, 300);
+  assert.equal(live.AFTER_HOURS_SETUP_FEE, 99, 'branch ships the approved live value');
+  assert.equal(live.AFTER_HOURS.setup, '£99 set-up, once');
+  const free = loadOffers(offersSource.replace(FEE_LINE, 'export const AFTER_HOURS_SETUP_FEE: number = 0;'));
+  assert.equal(free.AFTER_HOURS.setup, 'Set-up included');
+  assert.equal(free.AFTER_HOURS.price, live.AFTER_HOURS.price, 'monthly price does not move');
+  assert.equal(free.AFTER_HOURS.minutes, 300);
   // Every page reads the switch: no page types its own set-up wording.
   const files = ['app/after-hours-receptionist/page.tsx', 'app/after-hours-receptionist/content.ts', 'app/price-list.tsx', 'app/services/page.tsx', 'app/solutions/data.ts'];
   for (const file of files) assert.doesNotMatch(await src(file), /Set-up included|£99 set-up/, file);
   // Built pages show the live state.
-  for (const route of ['after-hours-receptionist', 'services', 'solutions', 'prices']) assert.match(text(await read(route)), /Set-up included/, route);
-  assert.doesNotMatch(text(await read('after-hours-receptionist')), /set-up, once/);
+  for (const route of ['after-hours-receptionist', 'services', 'solutions', 'prices']) assert.match(text(await read(route)), /£99 set-up, once/, route);
+  assert.doesNotMatch(text(await read('after-hours-receptionist')), /set-up included/i);
 });
 
 test('/solutions is in the sitemap, the site map page, the footer groups and carries schema', async () => {
@@ -154,5 +154,5 @@ test('the picker never moves focus on load (the skip link must stay hidden), and
   const page = text(await read('solutions'));
   assert.match(page, /£99 once · nothing required monthly/);
   assert.match(page, /from £595 once · nothing required monthly/);
-  assert.match(page, /Or calls answered: £79\/month, set-up included/);
+  assert.match(page, /Or calls answered: £79\/month, £99 set-up, once/);
 });

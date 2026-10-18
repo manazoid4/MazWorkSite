@@ -38,9 +38,9 @@ Yes on cash, thin on time. The model assumes 10 urgent texts a month and, in the
 
 At 300 Telnyx minutes the cost is £14.61 for calls and the number, then £0.40 for ten urgent texts, which gives the £15.01. Contribution margin is revenue minus calls, number, texts, card fees and the 5% contingency. It does not include Maz's time.
 
-**First month, one customer, 300 minutes on Telnyx.** Net is -£171.34. Month one earns £28.66 after labour, but set-up (3 hours, £120) and winning the customer (2 hours, £80) cost £200. On Twilio + Vapi the first month is -£180.03.
+**First month, one customer, 300 minutes on Telnyx.** Net is -£74.03. Month one earns £28.66 after labour and the £99 set-up fee (about £97.31 net of card fees), but set-up (3 hours, £120) and winning the customer (2 hours, £80) cost £200. On Twilio + Vapi the first month is -£82.72.
 
-**Payback.** 7.0 months on Telnyx at 300 minutes (5.6 months at 150 minutes). 10.0 months on Twilio + Vapi at 300 minutes. A customer who leaves before then loses Maz money. That is the real risk, more than call cost.
+**Payback.** 3.6 months on Telnyx at 300 minutes (2.9 months at 150 minutes). 5.1 months on Twilio + Vapi at 300 minutes. A customer who leaves before then loses Maz money. That is the real risk, more than call cost.
 
 ## 3. Founder hours
 
@@ -89,11 +89,11 @@ All figures: Telnyx, 300 minutes, one customer, assumptions as above. "PROPOSAL,
 |---|---|---|---|---|
 | Idea | Sell the receptionist alone at £79/month | Customer picks the problem. Missed-call text-back (£149 once) is the default answer. Receptionist is the monthly option for those who want calls answered | Maz sets it up on the customer's own provider account for a one-off fee. Customer pays the provider directly. Optional care plan | Start every missed-call conversation with the £149 text-back. Offer the receptionist after it has proved useful |
 | Prices | £79/month, 300 minutes (approved) | £149 once (approved), £79/month (approved) | £295 set-up (PROPOSAL, not live), £39/month care (approved care plan price, but not yet for this use) | Same as B |
-| First-month net | -£171.34 | Text-back: not modelled, build time unknown. Receptionist: -£171.34 | +£96.64 (set-up fee covers the £200 of time) | As B |
+| First-month net | -£74.03 | Text-back: not modelled, build time unknown. Receptionist: -£74.03 | +£96.64 (set-up fee covers the £200 of time) | As B |
 | Monthly profit after labour | £28.66 | £28.66 on receptionist customers only | £6.27 (care plan only) | As B |
 | Cash risk to Maz | Prepaid balance per customer | Same, but only for the smaller group who need the receptionist | None for usage; customer holds the account | Low |
 | Founder time | 0.75 h/month each, forever | Text-back is one-off; monthly time only where the receptionist is sold | Set-up time up front, little after unless care taken | As B |
-| Main weakness | Hard sell to a cold prospect. Payback 7 months | Needs the solutions pages to be clear | Customers must create a provider account and pass ID checks; harder for non-technical owners | Two sales steps |
+| Main weakness | Hard sell to a cold prospect. Payback 3.6 months | Needs the solutions pages to be clear | Customers must create a provider account and pass ID checks; harder for non-technical owners | Two sales steps |
 
 C is attractive for cash but a poor fit for trades and small shops who will not create a Twilio or Telnyx account. Keep it as a fallback for the technical customer who asks for it.
 
@@ -103,7 +103,7 @@ C is attractive for cash but a poor fit for trades and small shops who will not 
 
 - Lead with the problem ("I miss calls when I'm on a job"). The default answer is the **£149 missed-call text-back, once** (approved price). It is one-off and cheap for the customer. Its own running costs (a texting service) are not modelled here and need checking.
 - When the customer wants calls actually answered, or an enquiry needs more than a text, offer the **After-Hours Receptionist at £79/month, 300 minutes** (approved price).
-- Do not sell the receptionist cold as a standalone first purchase. Payback of 7 months on a customer Maz has never worked with is the weakest part of the business.
+- Do not sell the receptionist cold as a standalone first purchase. Payback of 3.6 months on a customer Maz has never worked with is still the weakest part of the business.
 
 Approved prices used above: £79/month for 300 minutes, £149 one-off, Business System from £595, Keep It Running £39/month.
 Proposals needing Maz's approval before anything uses them:
@@ -129,7 +129,7 @@ Fasthosts £39/£69/£99 a month with one month free. Rosie $49 for 250 minutes.
 | SMS cost | Assumed 4p | Send 5 test texts and read the charge |
 | Set-up and tuning time | The labour cost dominates | Time the first customer's set-up and first tuning, with a clock |
 | Divert behaviour on the customer's network | Whether calls reach the line | Test-call checklist in the delivery kit |
-| Churn | 5% monthly churn turns 12-month profit on 10 customers from £1,438.60 to £238.60; 10% churn makes it -£961.40 | Nothing cheap; watch the first six months |
+| Churn | 5% monthly churn turns 12-month profit on 10 customers from £2,411.75 to £1,795.64; 10% churn cuts it to £1,179.53 | Nothing cheap; watch the first six months |
 | Stripe fee | Assumed | Read the first payout |
 | Compliance wording | Not legal advice | Have a professional check the client data note before the first customer |
 
@@ -137,9 +137,9 @@ Fasthosts £39/£69/£99 a month with one month free. Rosie $49 for 250 minutes.
 
 It does not model VAT (none added), seasonal usage, the cost of the Telnyx number if a UK number needs identity verification, text-back build time, or tax. The ICO fee (£52/year) is a fixed business cost, about £4.33 a month, and is not split per customer. Treat the output as a planning tool, not a forecast.
 
-## 11. Proposal: a £99 set-up fee (11 Oct 2026, NOT approved, not live)
+## 11. The £99 set-up fee (approved and live, 18 Oct 2026)
 
-The live receptionist has no set-up fee, so the first month loses money and payback is long. This section shows the effect of a one-off £99 fee with the monthly price unchanged (£79, 300 minutes). Every figure comes from `paybackMonths` and `firstMonth` in `scripts/receptionist-model.mjs`, run with `{ ...PLANS.standard, setupFee: 0 }` and `{ ...PLANS.standard, setupFee: 99 }` (the fee is net of Stripe's 1.5% + 20p):
+The live receptionist charges a one-off £99 set-up fee (Maz, 18 Oct 2026), so the first month loses less and payback is shorter. This section keeps both sides side by side, with the monthly price unchanged (£79, 300 minutes). Every figure comes from `paybackMonths` and `firstMonth` in `scripts/receptionist-model.mjs`, run with `{ ...PLANS.standard, setupFee: 0 }` and `{ ...PLANS.standard, setupFee: 99 }` (the fee is net of Stripe's 1.5% + 20p):
 
 | Provider, minutes used | Payback, no fee | Payback, £99 fee | First-month net, no fee | First-month net, £99 fee |
 |---|---|---|---|---|
@@ -154,4 +154,4 @@ To reproduce:
 node --input-type=module -e "import { paybackMonths, PLANS } from './scripts/receptionist-model.mjs'; for (const fee of [0, 99]) console.log(fee, paybackMonths({ plan: { ...PLANS.standard, setupFee: fee }, minutesUsed: 300 }).toFixed(1))"
 ```
 
-The fee halves payback but a customer who leaves in the first three months still loses Maz money, and a fee may put off a cold prospect. To switch it on across the site, change one line in `app/offers.ts`: `AFTER_HOURS_SETUP_FEE` from `0` to `99`. Pages then say "£99 set-up, once" instead of "Set-up included". Update the two "set-up included" lines in `DELIVERY-KIT.md` and `PLAYBOOK.md` at the same time.
+The fee roughly halves payback, and it is live: `AFTER_HOURS_SETUP_FEE` in `app/offers.ts` is `99`, so pages say "£99 set-up, once" instead of "Set-up included". A customer who leaves in the first three months can still lose Maz money, and a fee may put off a cold prospect; both were accepted on 18 Oct 2026. To reverse it, set the one line back to `0` and update the two set-up lines in `DELIVERY-KIT.md` and `PLAYBOOK.md`.

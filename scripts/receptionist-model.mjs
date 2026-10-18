@@ -33,7 +33,7 @@ export const ASSUMPTIONS = deepFreeze({
 });
 
 export const PLANS = deepFreeze({
-  standard: { id: 'standard', status: 'approved', monthly: 79, minutes: 300, setupFee: 0 },
+  standard: { id: 'standard', status: 'approved', monthly: 79, minutes: 300, setupFee: 99 },
   // PROPOSALS: ideas for the owner to approve. Not live prices.
   lite: { id: 'lite', status: 'proposal', monthly: 49, minutes: 100, setupFee: 0 },
   busy: { id: 'busy', status: 'proposal', monthly: 129, minutes: 600, setupFee: 0 },

@@ -623,12 +623,12 @@ export const MANAGED_PRESENCE = {
 
 /**
  * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).
- * LIVE value is 0 ("Set-up included"). PROPOSED value is 99, a one-off fee:
- * the cost model (docs/maz-works/receptionist/PRICING-MODEL.md) shows free
- * set-up takes about 7.0 months to pay back the founder's time, 3.6 with a 99
- * fee. Not approved: leave at 0 until Maz says so, then change only this line.
+ * LIVE value is 99, a one-off fee (approved by Maz, 18 Oct 2026). The cost
+ * model (docs/maz-works/receptionist/PRICING-MODEL.md) shows a free set-up
+ * takes about 7.0 months to pay back the founder's time; with a 99 fee it is
+ * about 3.6 months. Change only this line and the docs that quote it.
  */
-export const AFTER_HOURS_SETUP_FEE: number = 0; // proposed: 99
+export const AFTER_HOURS_SETUP_FEE: number = 99;
 
 /**
  * After-Hours Receptionist (launched 9 Oct 2026): a monthly call-answering
