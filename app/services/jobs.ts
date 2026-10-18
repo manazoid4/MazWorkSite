@@ -42,9 +42,9 @@ export const SERVICE_JOBS: ServiceJob[] = [
       { name: 'It runs by itself', body: 'Every missed call gets the text. You get a note of who rang, so you can call back when you’re free.' },
     ],
     suits: 'Anyone who can’t always pick up: tradespeople on site, salons and clinics with someone in the chair, garages, and small teams where the phone rings while everyone is busy.',
-    notIncluded: ['Changing your phone provider or phone system. If yours can’t send a text on a missed call, the free demo stage tells you before you pay anything.'],
+    notIncluded: ['Changing your phone provider or phone system. If yours can’t send a text on a missed call, the free preview stage tells you before you pay anything.'],
     faqs: [
-      { q: 'Will it work with my phone number?', a: 'Usually, yes. It depends on your phone provider and how you take calls. Tell me what you use in the free demo form and I’ll say plainly whether it works, and what it would need, before you pay anything.' },
+      { q: 'Will it work with my phone number?', a: 'Usually, yes. It depends on your phone provider and how you take calls. Tell me what you use in the free preview form and I’ll say plainly whether it works, and what it would need, before you pay anything.' },
       { q: 'Who pays for the texts?', a: 'The texts are sent through a texting service you pay directly, at its own price. I tell you the cost up front in your scope sheet, before you pay me anything. You own the account.' },
       { q: 'What does the caller see?', a: 'A short text from your business with your link, worded the way you’d say it. You approve the wording before it goes live.' },
       { q: 'What if someone isn’t a customer, like a sales caller?', a: 'We can set it to skip numbers you choose. Anything beyond the agreed set-up is priced first, never added without telling you.' },
@@ -67,7 +67,7 @@ export const SERVICE_JOBS: ServiceJob[] = [
     suits: 'Salons and beauty, groomers, clinics and therapists, garages with booked-in jobs, and trades who book site visits.',
     notIncluded: ['A new booking system. If you don’t have one yet, Online booking is a separate task from the menu.'],
     faqs: [
-      { q: 'Does it work with my booking app?', a: 'Usually, because I build on the apps you already have. If yours can’t send what’s needed, the free demo stage says so before you pay.' },
+      { q: 'Does it work with my booking app?', a: 'Usually, because I build on the apps you already have. If yours can’t send what’s needed, the free preview stage says so before you pay.' },
       { q: 'Will customers be able to rearrange?', a: 'Yes. The message gives them a way to confirm or ask to move, and you see the reply. How automatic the move is depends on your booking app.' },
       { q: 'Does it guarantee no-shows go away?', a: 'No. A reminder makes it easy to confirm or move, which helps, but I can’t promise a particular number and I won’t quote one.' },
       { q: 'Who pays for the texts?', a: 'Text-message costs, if you use texts, are paid directly to the provider at its own price, and I quote them in your scope sheet before you pay me.' },
@@ -92,7 +92,7 @@ export const SERVICE_JOBS: ServiceJob[] = [
     faqs: [
       { q: 'Is this allowed by Google?', a: 'Asking real customers for an honest review is fine. I don’t set anything up that offers rewards for reviews or filters out unhappy customers, because that breaks Google’s rules.' },
       { q: 'What if a customer leaves a bad review?', a: 'You’re told when any review arrives, so you can reply properly. The request goes to everyone, not only the happy ones.' },
-      { q: 'Does it work with my invoicing or booking app?', a: 'Usually, yes. I build on the tools you already use. If yours can’t trigger a message, the free demo stage says so up front.' },
+      { q: 'Does it work with my invoicing or booking app?', a: 'Usually, yes. I build on the tools you already use. If yours can’t trigger a message, the free preview stage says so up front.' },
       { q: 'How many reviews will I get?', a: 'I can’t promise a number. It makes asking effortless and consistent; how many people respond is up to them.' },
     ],
   },
@@ -111,10 +111,10 @@ export const SERVICE_JOBS: ServiceJob[] = [
       { name: 'Quiet quotes get nudged', body: 'Reminders go out on their own and stop when the customer answers. You see which quotes are still waiting.' },
     ],
     suits: 'Trades and installers, architects and designers, agencies and professional services: anyone who sends quotes and waits.',
-    notIncluded: ['Writing your quotes. A quote template is a free one-day set-up with a package; the follow-up is the automated part.'],
+    notIncluded: ['Writing your quotes. A quote template is a free small set-up with a package; the follow-up is the automated part.'],
     faqs: [
       { q: 'Will it feel pushy?', a: 'Not if we word it well. Two short, polite reminders is the default, and you can change the timing or the tone.' },
-      { q: 'Does it work with my quoting app?', a: 'Usually, as I build on what you already use. If your app can’t do it, the free demo stage tells you before you pay.' },
+      { q: 'Does it work with my quoting app?', a: 'Usually, as I build on what you already use. If your app can’t do it, the free preview stage tells you before you pay.' },
       { q: 'What happens when they reply?', a: 'The reminders stop straight away and you carry on the conversation yourself.' },
       { q: 'Can it follow up by text or WhatsApp too?', a: 'Email is the usual route. Text costs are paid direct to the provider, and anything extra is quoted in the scope sheet first.' },
     ],
@@ -136,7 +136,7 @@ export const SERVICE_JOBS: ServiceJob[] = [
     suits: 'Trades, agencies, consultants and professional firms who invoice after the work and wait for payment.',
     notIncluded: ['Taking payment or debt recovery. This reminds people to pay; it does not collect money or take legal steps.'],
     faqs: [
-      { q: 'Which invoicing apps does it work with?', a: 'Most mainstream ones can send reminders in some form. Tell me yours in the free demo form and I’ll say plainly what’s possible before you pay anything.' },
+      { q: 'Which invoicing apps does it work with?', a: 'Most mainstream ones can send reminders in some form. Tell me yours in the free preview form and I’ll say plainly what’s possible before you pay anything.' },
       { q: 'Will it upset my customers?', a: 'It’s a polite reminder in your own words. You choose how gentle or firm it is, and you approve it first.' },
       { q: 'Does it guarantee I’ll be paid?', a: 'No. It makes sure no one is forgotten, but I can’t promise anyone will pay, or by when.' },
       { q: 'Are there extra monthly costs?', a: 'Not from me. If your invoicing app charges for reminders, that’s paid direct to them and I’d tell you first.' },
@@ -157,10 +157,10 @@ export const SERVICE_JOBS: ServiceJob[] = [
       { name: 'Customers book, you turn up', body: 'Bookings arrive in your diary and customers get a confirmation. Reminders are a separate task from the menu.' },
     ],
     suits: 'Salons and beauty, clinics and therapists, groomers, coaches and creators selling sessions or classes, and anyone who books by appointment.',
-    notIncluded: ['Taking card payments or deposits beyond what the booking tool already offers. Ask in the free demo request and I’ll say what’s possible.'],
+    notIncluded: ['Taking card payments or deposits beyond what the booking tool already offers. Ask in the free preview request and I’ll say what’s possible.'],
     faqs: [
       { q: 'Do I have to swap my current booking system?', a: 'Not necessarily. If you already have one, I’ll often connect it instead. If you need one, I tell you the cost before you pay anything.' },
-      { q: 'Will it connect to my calendar?', a: 'Usually, yes. Google and Outlook calendars are common. If yours isn’t supported, the free demo stage says so up front.' },
+      { q: 'Will it connect to my calendar?', a: 'Usually, yes. Google and Outlook calendars are common. If yours isn’t supported, the free preview stage says so up front.' },
       { q: 'Can customers book from Instagram?', a: 'Yes, your booking link goes in your bio and replies. Auto-replies in DMs are a separate menu task.' },
       { q: 'Who pays for the booking tool?', a: 'If the tool has a paid plan, you pay that company directly and I tell you the price first. You own the account.' },
     ],
@@ -182,7 +182,7 @@ export const SERVICE_JOBS: ServiceJob[] = [
     suits: 'Trades and offices that get enquiries from several places, and any small team that loses track of who has been answered.',
     notIncluded: ['Replying to enquiries for you. The instant reply acknowledges; you or your team still handle the conversation.'],
     faqs: [
-      { q: 'Which channels can it bring together?', a: 'Email and website forms are straightforward. Some social apps limit what can be connected, so I say plainly in the free demo request what is possible for yours.' },
+      { q: 'Which channels can it bring together?', a: 'Email and website forms are straightforward. Some social apps limit what can be connected, so I say plainly in the free preview request what is possible for yours.' },
       { q: 'Where does the list live?', a: 'In an account in your name, so you own it and can keep using it without me.' },
       { q: 'Will the instant reply sound robotic?', a: 'It’s written with you, in your voice, and you approve it before it goes live.' },
       { q: 'Are there monthly app costs?', a: 'Some tools have a free tier; some don’t. Any paid app is paid direct to the provider and quoted in the scope sheet before you pay me.' },
@@ -205,7 +205,7 @@ export const SERVICE_JOBS: ServiceJob[] = [
     suits: 'Trades, installers, garages and any business that visits customers or holds their property for a job.',
     notIncluded: ['Live GPS tracking or a customer app. This sends plain stage texts only; anything bigger is priced as custom software.'],
     faqs: [
-      { q: 'Can it say exactly when I’ll arrive?', a: 'It can send an “on the way” text when you trigger it. Exact arrival times depend on your tools, and I’ll say what’s possible in the free demo request.' },
+      { q: 'Can it say exactly when I’ll arrive?', a: 'It can send an “on the way” text when you trigger it. Exact arrival times depend on your tools, and I’ll say what’s possible in the free preview request.' },
       { q: 'Who pays for the texts?', a: 'The texting service is paid direct to the provider at its own price, quoted in your scope sheet before you pay me. You own the account.' },
       { q: 'Does it replace my diary?', a: 'No. It reads from the diary or job list you already use.' },
       { q: 'Can I change the wording later?', a: 'Yes. You get 30 days of tweaks after it goes live, and a 90-day fix promise if anything isn’t working the way we agreed.' },

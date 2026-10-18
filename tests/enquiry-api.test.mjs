@@ -30,13 +30,13 @@ test('owner gets separate customer message, tools, safe source and next action',
   const sent = [];
   const result = await deliverEnquiry({ ...input, trade: 'roofers', industry: 'Roofers', proof_id: 'roofers', problem_id: 'quote-follow-up',
     customer_message: 'Please work with my calendar.', existing_tools: 'GarageHive', interested_in: 'Not chosen',
-    next_step: 'Send a free demo and fixed price; not an order', source: 'li-3 → for-roofers', source_page: '/for/roofers',
+    next_step: 'Send a free preview and fixed price; not an order', source: 'li-3 → for-roofers', source_page: '/for/roofers',
     _url: 'https://www.mazworks.uk/free-plan?email=private@example.com',
   }, async (_url, options) => { sent.push(JSON.parse(options.body)); return { ok: true, json: async () => ({ id: 'fixture' }) }; });
   assert.equal(result.ok, true);
   for (const value of ['customer_message: Please work with my calendar.', 'existing_tools: GarageHive', 'industry: Roofers',
     'proof_id: roofers', 'problem_id: quote-follow-up', 'source_page: /for/roofers', 'interested_in: Not chosen',
-    'next_step: Send a free demo and fixed price; not an order', 'source: li-3 → for-roofers']) assert.ok(sent[0].text.includes(value), value);
+    'next_step: Send a free preview and fixed price; not an order', 'source: li-3 → for-roofers']) assert.ok(sent[0].text.includes(value), value);
   assert.doesNotMatch(sent[0].text, /private@example.com/);
 });
 

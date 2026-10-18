@@ -14,10 +14,10 @@ import { enquirySource, safeEnquiryPageUrl } from './trade-context';
  * A visitor who is not ready to describe the job can still start in one tap.
  * The job detail arrives by reply, so the hero does not ask for an essay.
  */
-const DEFAULT_PROBLEM = 'Quick request from the homepage hero. Send a working demo and a fixed price; I will add the job details by reply.';
-const NEXT_STEP = 'Send a free demo and fixed price; not an order';
-const SUBJECT = 'Maz Works — free demo and price';
-const AUTO_REPLY = `Thanks, I've got your request. I'll email you a working demo with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. Manazir, Maz Works`;
+const DEFAULT_PROBLEM = 'Quick request from the homepage hero. Send a working preview and a fixed price; I will add the job details by reply.';
+const NEXT_STEP = 'Send a free preview and fixed price; not an order';
+const SUBJECT = 'Maz Works — free preview and price';
+const AUTO_REPLY = `Thanks, I've got your request. I'll email you a working preview with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. Manazir, Maz Works`;
 
 // The browser's own type=email rule, plus a dot in the domain so "sam@gmail" is caught too.
 const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;

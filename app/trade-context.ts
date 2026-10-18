@@ -108,6 +108,6 @@ export function tradeContextFields(context: TradeContext): Array<[string, string
     ['Problem focus', TRADE_PROBLEMS.find(item => item.id === context.problem)?.label || 'Not selected'],
     ['Package preference', context.package ? `${context.package} (explicit interest, not an order)` : 'Not chosen — help me decide'],
     ['Source page', context.sourcePage],
-    ['Request', 'Free demo and fixed price; no order or obligation'],
+    ['Request', 'Free preview and fixed price; no order or obligation'],
   ];
 }

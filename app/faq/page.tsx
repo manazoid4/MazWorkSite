@@ -10,7 +10,7 @@ const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
   title: 'FAQ',
-  description: fitDescription(`Straight answers about automation for small businesses: the free demo and fixed price, Starter Automation from ${OFFERS[0].price}, optional extras, delivery dates, payment and ownership. No VAT added.`),
+  description: fitDescription(`Straight answers about automation for small businesses: the free preview and fixed price, Starter Automation from ${OFFERS[0].price}, optional extras, delivery dates, payment and ownership. No VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',
@@ -44,7 +44,7 @@ export default function FaqPage() {
         <h1 id="faq-title">Questions? Straight answers.</h1>
         <p>Plain answers. No call needed.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan#leak-check-form">Get my free demo</a>
+          <a className="button button-signal" href="/free-plan#leak-check-form">Get my free preview</a>
         </div>
       </section>
 

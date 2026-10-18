@@ -15,9 +15,9 @@ const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
   title: { absolute: 'Automation prices for UK small businesses | Maz Works' },
-  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('creator-launch').name} ${getOffer('creator-launch').price}, free one-day set-ups and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
+  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('creator-launch').name} ${getOffer('creator-launch').price}, free small set-ups and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Free one-day set-ups with every package. UK price match. No VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Free small set-ups with every package. UK price match. No VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 export default function PricesPage() {
@@ -30,7 +30,7 @@ export default function PricesPage() {
         <p className="s-lede">Less chasing, fewer details to copy, a clearer next step for your customers. Agree the work, the price and how we’ll check it works before building starts. No VAT added.</p>
         <p className="s-small">Start with a {FREE_STEP.short}, within {CHECK_REPLY_TIME}. Choose one useful job; add more when you need it.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free demo</a>
+          <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free preview</a>
           <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>
         </div>
       </section>
@@ -40,7 +40,7 @@ export default function PricesPage() {
         <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
         <PriceList checkHref="/free-plan" />
         <div className="s-actions">
-          <a className="button button-signal" href="/free-plan?src=prices#leak-check-form">Get my free demo</a>
+          <a className="button button-signal" href="/free-plan?src=prices#leak-check-form">Get my free preview</a>
         </div>
       </section>
       <SiteFooter />

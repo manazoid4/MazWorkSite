@@ -36,7 +36,7 @@ test('the receptionist page shows the price, both CTAs, safety and FAQ', async (
   assert.match(page, /Calls answered when\s+you can’t\s+pick\s+up/);
   assert.doesNotMatch(page, /never miss|first ring|every call answered|guarantee[sd]? (more|bookings|leads)/i);
   assert.match(html, /href="\/free-plan\?src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
-  assert.match(page, /Get my free demo/);
+  assert.match(page, /Get my free preview/);
   assert.match(html, /href="#try"/);
   assert.match(page, /Safety and privacy/);
   assert.match(page, /not an emergency service/i);
@@ -76,7 +76,7 @@ test('the offer is wired in: homepage, services, prices, enquiry, footer, sitema
   const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
   const knownPackages = await readFile(path.join(root, 'app', 'trade-context.ts'), 'utf8');
   assert.match(form, /KNOWN_PACKAGES/);
-  assert.match(knownPackages, /AFTER_HOURS\]/, 'the free demo form accepts ?package=After-Hours Receptionist');
+  assert.match(knownPackages, /AFTER_HOURS\]/, 'the free preview form accepts ?package=After-Hours Receptionist');
 });
 
 // Pricing structure (11 Oct 2026): pay once by default, monthly only for the

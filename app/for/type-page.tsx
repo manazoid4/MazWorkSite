@@ -54,7 +54,7 @@ export function TypePage({ type }: { type: CustomerType }) {
         lede={type.lede}
         extra={type.examples}
         cta={<CampaignLink className="button button-signal s-button-lg" href={checkHref}>{MAIN_CTA}</CampaignLink>}
-        note={`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}.`}
+        note={`Free preview, no call needed. Most start with one task at ${OFFERS[0].price}.`}
       />
 
       <section className="s-section" id="pains" aria-labelledby="type-pains-title">

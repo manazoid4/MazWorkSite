@@ -25,7 +25,7 @@ export default function SolutionsPage() {
         <Breadcrumbs items={[{ label: 'Solutions' }]} />
         <p className="eyebrow">Solutions</p>
         <h1 id="solutions-title">Pick the problem. See the answer.</h1>
-        <p className="s-lede">Same four answers for every business: the problem, what you get, what it costs and what happens next. Fixed prices, no VAT added. The free demo reaches you within {CHECK_REPLY_TIME}.</p>
+        <p className="s-lede">Same four answers for every business: the problem, what you get, what it costs and what happens next. Fixed prices, no VAT added. The free preview reaches you within {CHECK_REPLY_TIME}.</p>
       </section>
 
       <section className="s-section" id="pick" aria-labelledby="solutions-pick-title">

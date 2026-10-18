@@ -8,7 +8,7 @@ import { AUTOMATION_MENU, CREATOR_OFFERS, OFFERS, WEB_OFFERS, getMenuJob, getOff
 
 export type PainRow = {
   pain: string;
-  /** One-day set-up that eases it (free with a Starter), or null. */
+  /** Small set-up that eases it (free with a Starter), or null. */
   setup: string | null;
   /** Automation-menu job id that fixes it (a Starter). */
   starter: string | null;

@@ -7,8 +7,8 @@ export type MazWorksFaq = {
 
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
-    question: 'What’s in the free demo?',
-    answer: `Tell me the job you want off your plate and, usually within ${CHECK_REPLY_TIME}, I send a working demo of it with your business name on, plus a fixed price and a written scope sheet. It’s built from a template on my own test setup, so it’s not on your apps yet; that happens once you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
+    question: 'What’s in the free preview?',
+    answer: `Tell me the job you want off your plate and, usually within ${CHECK_REPLY_TIME}, I send a working preview of it with your business name on, plus a fixed price and a written scope sheet. It’s built from a template on my own test setup, so it’s not on your apps yet; that happens once you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
   },
   {
     question: 'What do you actually build?',
@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation is ${OFFERS[0].price} for one task from the automation menu, set up to run itself, with two one-day set-ups free. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get a cheaper Starter (comment-to-get-it) at ${getOffer('creator-starter').price}. Every package includes free one-day set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
+    answer: `Starter Automation is ${OFFERS[0].price} for one task from the automation menu, set up to run itself, with two small set-ups free. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get a cheaper Starter (comment-to-get-it) at ${getOffer('creator-starter').price}. Every package includes free small set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
@@ -24,7 +24,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: `Add-ons go with a package, on the same invoice, so there are no surprise costs. One-day set-ups (small things like a review QR card, a quote template or your booking link added everywhere) come free with every package: two with a Starter, three with a Business System, and more are ${SETUP_PRICE} each. Anything that runs on its own is a task from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another.`,
+    answer: `Add-ons go with a package, on the same invoice, so there are no surprise costs. Small set-ups (small things like a review QR card, a quote template or your booking link added everywhere) come free with every package: two with a Starter, three with a Business System, and more are ${SETUP_PRICE} each. Anything that runs on its own is a task from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another.`,
   },
   {
     question: 'What isn’t included?',
@@ -87,7 +87,7 @@ const pick = (question: string) => {
 };
 
 export const HOMEPAGE_FAQS = [
-  pick('What’s in the free demo?'),
+  pick('What’s in the free preview?'),
   pick('Can I buy an add-on on its own?'),
   pick('What isn’t included?'),
   pick('Is this only for certain trades?'),

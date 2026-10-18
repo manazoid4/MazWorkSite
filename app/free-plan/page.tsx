@@ -14,12 +14,12 @@ import { NextSteps } from '../explainers';
 const PAGE_URL = `${SITE_URL}/free-plan`;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Free demo and fixed price | Maz Works' },
-  description: fitDescription(`Tell me the job that eats your week or loses you customers. I usually reply within ${CHECK_REPLY_TIME} with a working demo with your business name on, and a fixed price from ${OFFERS[0].price}. Free, no obligation, no call needed.`),
+  title: { absolute: 'Free preview and fixed price | Maz Works' },
+  description: fitDescription(`Tell me the job that eats your week or loses you customers. I usually reply within ${CHECK_REPLY_TIME} with a working preview with your business name on, and a fixed price from ${OFFERS[0].price}. Free, no obligation, no call needed.`),
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: `${FREE_STEP.name} — Maz Works`,
-    description: fitDescription('Tell me the job you want off your plate. A working demo and fixed price, usually within 1 working day.'),
+    description: fitDescription('Tell me the job you want off your plate. A working preview and fixed price, usually within 1 working day.'),
     url: PAGE_URL,
     type: 'website',
     images: [OG_IMAGE],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 const RETURN = [
-  'A working demo of your first job with your business name on it, to try on your phone',
+  'A working preview of your first job with your business name on it, to try on your phone',
   'A fixed price and written scope sheet for setting it up on your own apps',
   'What to automate first, and why',
   'What I would leave alone, and why',
@@ -41,7 +41,7 @@ export default function LeakCheckPage() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: `Maz Works ${FREE_STEP.name}`,
-    description: fitDescription('A free working demo and fixed price for automating a job a small business does by hand.'),
+    description: fitDescription('A free working preview and fixed price for automating a job a small business does by hand.'),
     url: PAGE_URL,
     provider: { '@type': 'Organization', name: 'Maz Works', url: SITE_URL },
     areaServed: [
@@ -60,8 +60,8 @@ export default function LeakCheckPage() {
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="leak-check-title">
         <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
-        <h1 id="leak-check-title">Tell me the job. I’ll send a working demo and a price.</h1>
-        <p>Tell me what you keep chasing, copying or doing by hand. I’ll build a working demo with your business name on it and tell you what it costs. It’s a template on my test setup, not on your apps yet.</p>
+        <h1 id="leak-check-title">Tell me the job. I’ll send a working preview and a price.</h1>
+        <p>Tell me what you keep chasing, copying or doing by hand. I’ll build a working preview with your business name on it and tell you what it costs. It’s a template on my test setup, not on your apps yet.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="#leak-check-form">{MAIN_CTA}</a>
           <a className="button" href="#leak-check-return-title">See an example</a>
@@ -70,7 +70,7 @@ export default function LeakCheckPage() {
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">
-        <p className="eyebrow">Your free demo</p>
+        <p className="eyebrow">Your free preview</p>
         <h2 id="leak-check-send-title">Tap what’s costing you.</h2>
         <p className="mw-qw-lead">A few taps is enough. Free for any UK business, in any trade.</p>
         <LeakCheckForm />

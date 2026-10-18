@@ -10,7 +10,7 @@ const STEP_MS = 650;
 
 /**
  * "Every system, explained" as a picker. Tap a job, watch its steps run,
- * then ask for it or book a free demo.
+ * then ask for it or book a free preview.
  * - All panels are in the page (search, no-JavaScript); with JavaScript one shows.
  * - Deep links like /what-we-do#missed-calls open that system.
  * - Reduced motion shows every step at once.

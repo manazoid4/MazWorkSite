@@ -20,7 +20,7 @@ test('nothing picked: start with Starter Automation', () => {
   assert.equal(quote.totalLabel, getOffer('starter').price);
 });
 
-test('a one-day set-up is never sold alone: it rides free with a Starter (Maz, 2 Oct)', () => {
+test('a small set-up is never sold alone: it rides free with a Starter (Maz, 2 Oct)', () => {
   const quote = quotePlan([{ name: 'Review QR card', offerName: 'Review QR card' }]);
   assert.equal(quote.offer.id, 'starter');
   assert.equal(quote.total, getOffer('starter').from);
@@ -101,7 +101,7 @@ test('creators get two steps: a list they own first, then a page that sells (Off
   assert.ok(starter.guarantee, 'the starter carries the 30-day guarantee');
 });
 
-test('no one-day set-up or add-on is priced below the £29 floor, and care covers real time', () => {
+test('no small set-up or add-on is priced below the £29 floor, and care covers real time', () => {
   for (const extra of EXTRAS) assert.ok(priceAmount(extra.price) >= 29, `${extra.name} is under the floor`);
   assert.ok(priceAmount(CARE_PLANS[0].price) >= 39);
   assert.ok(!/unlimited/i.test(JSON.stringify(CHANGES_WINDOW)), 'changes are never unlimited');
@@ -123,6 +123,6 @@ test('Offer v12: pages add up and every package is cheaper than its parts', () =
     assert.ok(value.total > getOffer(id).from, `${id}: parts (${value.total}) must cost more than the package`);
   }
   for (const id of ['starter', 'creator-starter', 'business-system', 'creator-launch']) {
-    assert.ok(getOffer(id).includes.some((line) => /set-ups? .*free/i.test(line)), `${id}: free one-day set-ups included`);
+    assert.ok(getOffer(id).includes.some((line) => /set-ups? .*free/i.test(line)), `${id}: free small set-ups included`);
   }
 });

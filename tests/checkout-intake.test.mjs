@@ -25,7 +25,7 @@ test('the checkout intake uses neutral wording and covers receptionist setup', a
   assert.match(html, /name="next_step" value="Confirm payment in Stripe before setup; the package query is not proof of payment"/);
   assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your setup details/);
   assert.match(page, /Send setup details/);
-  assert.doesNotMatch(html, /name="next_step" value="Send a free demo and fixed price; not an order"/);
+  assert.doesNotMatch(html, /name="next_step" value="Send a free preview and fixed price; not an order"/);
 });
 
 test('setup service sends neutral confirmation, verifies payment before setup and skips sales follow-ups', async () => {

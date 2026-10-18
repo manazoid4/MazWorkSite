@@ -45,7 +45,7 @@ export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: strin
         <p><strong>Changes:</strong> {offer.changes}</p>
         <p><strong>Next step:</strong> {offer.upsell}</p>
       </details>
-      <PackageLink href={checkHref} pick={offer.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
+      <PackageLink href={checkHref} pick={offer.name}>Get my free preview <span aria-hidden="true">→</span></PackageLink>
       <BuyNow name={offer.name} />
     </article>
   );
@@ -153,7 +153,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
           <p className="s-small">{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
           <p className="s-price-guarantee"><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
           <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
-          <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free demo <span aria-hidden="true">→</span></PackageLink>
+          <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free preview <span aria-hidden="true">→</span></PackageLink>
           <BuyNow name={AFTER_HOURS.name} />
         </article>
       </div>
@@ -195,7 +195,7 @@ export function PriceList({ checkHref }: { checkHref: string }) {
         </div>
       </Fold>
 
-      <Fold id="extras" title="One-day set-ups, add-ons and care">
+      <Fold id="extras" title="Small set-ups, add-ons and care">
         <div className="s-extras">
           {EXTRA_GROUPS.map((group) => (
             <div className="s-extras-group" key={group.id} id={group.id}>

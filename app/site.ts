@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://www.mazworks.uk';
 export const SITE_NAME = 'Maz Works';
 /** The one main action on every page (audit 2 Oct). Every primary button uses this label. */
-export const MAIN_CTA = 'Get my free demo';
+export const MAIN_CTA = 'Get my free preview';
 export const PERSON_NAME = 'Manazir Hussain';
 export const CONTACT_EMAIL = 'info@mazworks.uk';
 // FormSubmit's private alias for the activated inbox. Never put a personal email address here:

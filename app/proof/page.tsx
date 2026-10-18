@@ -97,7 +97,7 @@ export default function ProofPage() {
 
       <section className="mw-resource-hero" aria-labelledby="proof-cta-title">
         <h2 id="proof-cta-title">Want to be one of the first?</h2>
-        <p>Tell me the job. You get a working demo with your business name and a fixed price first, then the Founding Client discount if you go ahead.</p>
+        <p>Tell me the job. You get a working preview with your business name and a fixed price first, then the Founding Client discount if you go ahead.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a>
           <a className="button" href="/prices">See the prices</a>

@@ -10,7 +10,7 @@ import { DeliveryTabs } from '../delivery-tabs';
 import { StickyCheckCta } from '../sticky-cta';
 export const metadata: Metadata = {
  title: 'What we do: systems that work for you',
- description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free demo for your business.',
+ description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free preview for your business.',
  alternates: {canonical:'/what-we-do'},
 };
 export default function WhatWeDo() {
@@ -29,9 +29,9 @@ export default function WhatWeDo() {
    <p>Use the tools you already have where possible. Anything bigger gets a fixed quote first.</p>
    <SystemExplorer />
   </section>
-  <section className="s-section" id="process"><p className="eyebrow">From free demo to live</p><h2>How it works.</h2>
+  <section className="s-section" id="process"><p className="eyebrow">From free preview to live</p><h2>How it works.</h2>
    <ol className="mw-qw-list">{NEXT_STEPS.map((step) => <li key={step.day}><strong>{step.day}: {step.title}.</strong> {step.body}</li>)}</ol>
-   <p className="s-small">Want to see it first? Bigger jobs can start with a <a href="/demos">free demo</a>.</p>
+   <p className="s-small">Want to see it first? Bigger jobs can start with a <a href="/demos">free preview</a>.</p>
    <DeliveryTabs />
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>

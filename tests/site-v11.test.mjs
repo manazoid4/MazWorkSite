@@ -77,7 +77,7 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
     // Next steps, tweaks, own-vs-rent and the calculator are said once, on /prices.
     for (const moved of [/class="ex ex-steps"/, /class="ex ex-tweaks"/, /id="own-vs-rent"/]) assert.doesNotMatch(html, moved, `${type.id}: ${moved} belongs on /prices`);
     assert.match(html, /href="\/prices"/, `${type.id}: link to the details`);
-    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free demo<`), `${type.id}: main button`);
+    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free preview<`), `${type.id}: main button`);
     assert.doesNotMatch(html, /quick fix/i, `${type.id}: banned wording`);
     assert.doesNotMatch(html, /\bAI\b/, `${type.id}: no AI copy`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${type.id}"`), `${type.id}: canonical`);
@@ -120,7 +120,7 @@ test('the drafted free plan quotes only prices from offers.ts and picks the righ
   assert.equal(starter.offer.id, 'starter');
   assert.match(starter.text, /Starter Automation: missed-call text-back \(£99\)/);
   assert.match(starter.text, /Guarantee:/);
-  assert.match(starter.text, /Day 0: free demo and fixed price/);
+  assert.match(starter.text, /Day 0: free preview and fixed price/);
   assert.doesNotMatch(starter.text, /£195|£795|£2,950/);
 
   const system = draft.draftFreePlan({ name: 'Sam', trade: 'trades', problem: 'Missed calls\nChasing quotes\nGetting more reviews' });
@@ -163,7 +163,7 @@ test('scope sheet and buy-now intake pages export, noindexed, reading from offer
   assert.doesNotMatch(sheet, /£\s?\d/, 'scope sheet hard-codes no prices');
 });
 
-test('sales check: a plumber, a salon owner and a creator reach "Get my free demo" in two taps knowing the price', async () => {
+test('sales check: a plumber, a salon owner and a creator reach "Get my free preview" in two taps knowing the price', async () => {
   const home = await readPage('/');
   for (const [type, recipe] of [['trades', 'missed-call text-back'], ['appointments', 'reminders that cut no-shows'], ['creators', 'comment a word, get your guide']]) {
     // Tap 1: the tile on the homepage, which already shows a recipe and its price.
@@ -171,7 +171,7 @@ test('sales check: a plumber, a salon owner and a creator reach "Get my free dem
     assert.match(home, tile, `${type}: tile shows recipe and price`);
     // Tap 2: the main button on the type page.
     const page = await readPage(`/for/${type}`);
-    assert.match(page, /Get my free demo</, `${type}: free plan button`);
+    assert.match(page, /Get my free preview</, `${type}: free plan button`);
     assert.match(page, /£99/, `${type}: starter price visible`);
   }
 });

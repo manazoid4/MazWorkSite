@@ -90,7 +90,7 @@ test('journey: a niche page link pre-fills industry and job, and the delivered e
     source: 'li-3 → for-roofers', interested_in: 'Not chosen',
   }, async (_url, options) => { sent.push(JSON.parse(options.body)); return { ok: true, json: async () => ({ id: 'fixture' }) }; });
   assert.equal(result.ok, true);
-  for (const line of ['trade: roofers', 'industry: Roofers', 'problem_id: lead-capture', 'source_page: /for/roofers', 'source: li-3 → for-roofers', 'next_step: Send a free demo and fixed price; not an order']) {
+  for (const line of ['trade: roofers', 'industry: Roofers', 'problem_id: lead-capture', 'source_page: /for/roofers', 'source: li-3 → for-roofers', 'next_step: Send a free preview and fixed price; not an order']) {
     assert.ok(sent[0].text.includes(line), line);
   }
 });
@@ -127,5 +127,5 @@ test('API sanitises and limits every new context field before it reaches the own
   assert.ok(tools.length <= 'existing_tools: '.length + 500 && !tools.includes('\n'));
   assert.ok(/customer_message: (a+)/.exec(text)[1].length === 2000);
   assert.equal((text.match(/^next_step:/gm) || []).length, 1);
-  assert.match(text, /next_step: Send a free demo and fixed price; not an order/);
+  assert.match(text, /next_step: Send a free preview and fixed price; not an order/);
 });

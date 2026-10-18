@@ -15,7 +15,7 @@ import { MinutesCheck } from './minutes-check';
 import './receptionist.css';
 
 const TITLE = 'After-hours call answering for small businesses | Maz Works';
-const DESCRIPTION = fitDescription(`Stop sending missed calls to voicemail. When you can’t pick up, day or night, calls are answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free demo first.`);
+const DESCRIPTION = fitDescription(`Stop sending missed calls to voicemail. When you can’t pick up, day or night, calls are answered in your business name, messages taken and a summary emailed to you. ${AFTER_HOURS.price}, free preview first.`);
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -171,7 +171,7 @@ export default function AfterHoursPage() {
 
       <section className="ah-section" data-reveal aria-labelledby="ah-next-title">
         <p className="eyebrow">What happens next</p>
-        <h2 id="ah-next-title">From free demo to answered calls.</h2>
+        <h2 id="ah-next-title">From free preview to answered calls.</h2>
         <ol className="ah-steps ah-next">{NEXT.map((step, index) => <li key={step.title} style={{ ['--i' as string]: index }}><span className="ah-n" aria-hidden="true">{index + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol>
       </section>
 
@@ -186,7 +186,7 @@ export default function AfterHoursPage() {
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="ah-cta-title">See if it would work for your business.</h2>
-          <p>Tell me your business and hours. I’ll send a free demo answering as you, and tell you plainly if your phone setup works with it.</p>
+          <p>Tell me your business and hours. I’ll send a free preview answering as you, and tell you plainly if your phone setup works with it.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>

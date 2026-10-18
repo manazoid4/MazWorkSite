@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ job: stri
   const job = getServiceJob(id);
   if (!job) return {};
   const menu = getMenuJob(id);
-  const description = fitDescription(`${menu.what} Starter Automation ${OFFERS[0].price}, fixed price, free demo first. For UK small businesses.`);
+  const description = fitDescription(`${menu.what} Starter Automation ${OFFERS[0].price}, fixed price, free preview first. For UK small businesses.`);
   return {
     title: { absolute: job.title },
     description,
@@ -72,7 +72,7 @@ export default async function ServiceJobPage({ params }: { params: Promise<{ job
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>
         </div>
-        <p className="mw-hero-note">{`Free demo, no call needed. Starter Automation is ${starter.price}, fixed. Manazir plans and builds it himself.`}</p>
+        <p className="mw-hero-note">{`Free preview, no call needed. Starter Automation is ${starter.price}, fixed. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="job-does-title">
@@ -104,7 +104,7 @@ export default async function ServiceJobPage({ params }: { params: Promise<{ job
       <section className="mw-qw-section" id="price" aria-labelledby="job-price-title">
         <p className="eyebrow">The price</p>
         <h2 id="job-price-title">{starter.name}: {starter.price}, fixed.</h2>
-        <p>{`One job from the automation menu, set up to run by itself on the tools you already use, with two one-day set-ups free. ${STARTER_GUARANTEE} You get a written scope sheet and a fixed price before any work.`}</p>
+        <p>{`One job from the automation menu, set up to run by itself on the tools you already use, with two small set-ups free. ${STARTER_GUARANTEE} You get a written scope sheet and a fixed price before any work.`}</p>
         <p>{`After it goes live you get ${CHANGES_WINDOW.short} and a 90-day fix promise. `}<a className="s-details-link" href="/prices">See every price and what’s included →</a></p>
         <div className="mw-actions"><a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a></div>
       </section>
@@ -131,7 +131,7 @@ export default async function ServiceJobPage({ params }: { params: Promise<{ job
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="job-cta-title">Want {menu.name.toLowerCase()} in your business?</h2>
-          <p>Tell me the job. I’ll send a working demo and a fixed price.</p>
+          <p>Tell me the job. I’ll send a working preview and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>

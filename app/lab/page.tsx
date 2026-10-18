@@ -39,7 +39,7 @@ export default function LabPage() {
             </li>
           ))}
         </ul>
-        <p className="s-small">Want to see a private working demo of an idea first? <a href="/demos">How the free demo works →</a></p>
+        <p className="s-small">Want to see a private working preview of an idea first? <a href="/demos">How the free preview works →</a></p>
       </section>
       <SiteFooter />
     </main>

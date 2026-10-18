@@ -71,7 +71,7 @@ test('the CTAs are pre-filled with the package and a source tag', async () => {
   for (const [id, pkg] of Object.entries(expected)) {
     assert.match(html, new RegExp(`href="/free-plan\\?src=solutions-${id}&amp;package=${pkg}#leak-check-form"`), id);
   }
-  assert.match(html, /Get my free demo/);
+  assert.match(html, /Get my free preview/);
 });
 
 test('picker keeps its choice in the URL hash and steps back through choices', async () => {

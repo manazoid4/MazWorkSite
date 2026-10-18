@@ -40,7 +40,7 @@ test('/proof is live, honest about the gap, and offers the Founding Client deal'
   assert.match(html, /You can say no to any of the three/i);
   // The guardrail is stated and the main action is the free plan.
   assert.match(html, /Never invent a client, a logo, a result or a number\./);
-  assert.match(html, /href="\/free-plan#leak-check-form">Get my free demo</);
+  assert.match(html, /href="\/free-plan#leak-check-form">Get my free preview</);
 });
 
 test('/proof makes no invented proof claims', async () => {

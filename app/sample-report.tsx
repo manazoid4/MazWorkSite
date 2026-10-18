@@ -5,7 +5,7 @@ import { OFFERS, getExtra, formatPrice, priceAmount } from './offers';
 import './interactive.css';
 
 /**
- * A clearly labelled, interactive example of the scope sheet and fixed price that follow the free demo.
+ * A clearly labelled, interactive example of the scope sheet and fixed price that follow the free preview.
  * The business is fictional; the kind of plan matches what a real reply looks like.
  * - Findings open and close (native <details>, so it works without JavaScript).
  * - The quote is a little builder: switch the add-on on or off and watch the

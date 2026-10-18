@@ -7,7 +7,7 @@ import { THIRD_PARTY_NOTE } from './offers';
  * new promise.
  */
 export const STRAIGHT_ANSWERS: { q: string; a: string }[] = [
-  { q: 'Will it work with my phone and booking app?', a: 'Usually, yes: I build on the apps you already have. If yours can’t do it, the free demo stage says so before you pay anything.' },
+  { q: 'Will it work with my phone and booking app?', a: 'Usually, yes: I build on the apps you already have. If yours can’t do it, the free preview stage says so before you pay anything.' },
   { q: 'What will it cost me each month?', a: `Nothing to me unless you choose a care plan. ${THIRD_PARTY_NOTE}` },
   { q: 'My app already does this.', a: 'Then I’ll tell you how to switch it on, and you don’t pay me for it.' },
   { q: 'What if you’re ill or stop trading?', a: 'Everything runs in accounts in your name, with a short written guide, so it keeps working without me.' },

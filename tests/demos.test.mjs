@@ -14,10 +14,10 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-// 30 Sep (Maz): the free demo comes after a call, arrives by a date agreed on
+// 30 Sep (Maz): the free preview comes after a call, arrives by a date agreed on
 // the call, and is followed by the full plan. Offer v10 (2 Oct): then 30 days of
 // tweaks and a 90-day fix promise, never "unlimited changes".
-test('free demo page explains the call-first route and books a call', async () => {
+test('the bigger-build demos page explains the call-first route and books a call', async () => {
   const [home, demos, sitemap] = await Promise.all([readPage('/'), readPage('/demos'), readFile(path.join(out, 'sitemap.xml'), 'utf8')]);
   assert.match(home, /href="\/demos"[^>]*>[^<]*bigger build demos/i);
   assert.match(demos, /Book a 15-minute call/);

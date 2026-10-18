@@ -38,7 +38,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
       { href: '/what-we-do#example', label: 'Example plan' },
-      { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free demo' },
+      { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
   },
@@ -77,6 +77,6 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 export const HOME_SECTIONS: NavLink[] = [
   { href: '#build', label: 'What I build' },
   { href: '#how', label: 'See it working' },
-  { href: '#check', label: 'Get my free demo' },
+  { href: '#check', label: 'Get my free preview' },
   { href: '#about', label: 'About Maz' },
 ];

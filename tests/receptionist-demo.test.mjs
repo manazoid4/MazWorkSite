@@ -609,7 +609,7 @@ test('an order or part number in the opener is never taken as the callback numbe
 test('roofer, builder and electrician pages exist, and roofers can talk to the receptionist as a roofer', async () => {
   for (const id of ['roofers', 'builders', 'electricians']) {
     const html = await readFile(path.join(root, 'out', 'for', `${id}.html`), 'utf8');
-    assert.match(html, /Get my free demo/, id);
+    assert.match(html, /Get my free preview/, id);
     assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b/, id);
   }
   assert.match(await readFile(path.join(root, 'out', 'for', 'roofers.html'), 'utf8'), /Talk to it as (?:<!-- -->)?a roofer/);

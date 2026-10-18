@@ -45,7 +45,7 @@ export default function Page() {
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Miss a call and they get a text with a booking link, <em>before they ring someone else</em>.</h1>
-    <p className="s-lede">Missed-call text-back, reminders and follow-ups. Start with one task for {STARTER.price}, after a free demo.</p>
+    <p className="s-lede">Missed-call text-back, reminders and follow-ups. Start with one task for {STARTER.price}, after a free preview.</p>
     <HeroQuickForm />
    <ManazirLine />
    </div><HeroDemo />
@@ -66,9 +66,9 @@ export default function Page() {
    <p className="s-small">Example of what changes, not a client result.</p>
   </section>
   <section className="s-section s-check" id="check" aria-labelledby="check-title">
-   <div className="s-check-copy"><p className="eyebrow">Your free demo</p><h2 id="check-title">Tell me the job. I’ll send a working demo and a price.</h2>
+   <div className="s-check-copy"><p className="eyebrow">Your free preview</p><h2 id="check-title">Tell me the job. I’ll send a working preview and a price.</h2>
     <ul className="s-check-list">
-     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> A working demo of your first job, or a straight answer if it isn’t.</li>
+     <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> A working preview of your first job, made on my own test setup, or a straight answer if it isn’t.</li>
      <li><strong>A written scope sheet and fixed price</strong> before you pay anything.</li>
     </ul>
    </div><LeakCheckForm />
