@@ -1,4 +1,4 @@
-import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
+import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, MANAGED_PRESENCE, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
@@ -126,9 +126,12 @@ function Fold({ id, title, children }: { id: string; title: string; children: Re
 export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
+      <h3 className="s-track-title">One-off or monthly</h3>
+      <p className="s-small"><a href="#systems">One-off prices</a> · <a href="#monthly">Monthly services</a></p>
       <h3 className="s-track-title" id="need">What problem do you want gone?</h3>
       <SolutionsPicker startOpen={false} firstSelected={false} />
 
+      <span id="systems" />
       <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
       <Ladder />
 
@@ -145,13 +148,30 @@ export function PriceList({ checkHref }: { checkHref: string }) {
       <span id="after-hours" />
       <h3 className="s-track-title" id="monthly">Monthly service</h3>
       <div className="s-prices">
+        <article className="s-price" id="offer-managed-presence">
+          <h3>{MANAGED_PRESENCE.name}</h3>
+          <p className="s-price-amount">{MANAGED_PRESENCE.price}</p>
+          <p>You send existing photos. I keep your website, Google and social posts current.</p>
+          <details className="s-offer-spec">
+            <summary>What’s included and how it works</summary>
+            <p>{MANAGED_PRESENCE.body}</p>
+            <p><strong>Best for:</strong> {MANAGED_PRESENCE.forWho}</p>
+            <p><strong>What you’ll see each month:</strong> {MANAGED_PRESENCE.successCheck}</p>
+            <p>{MANAGED_PRESENCE.terms}</p>
+          </details>
+          <a className="text-link" href={MANAGED_PRESENCE.href}>What’s included →</a>
+          <a className="mw-service-link" href="/contact?service=managed-presence#contact">Ask about managed presence →</a>
+        </article>
         <article className="s-price" id="offer-after-hours">
           <h3>{AFTER_HOURS.name}</h3>
           <p className="s-price-amount">{AFTER_HOURS.price}</p>
           <p>{AFTER_HOURS.body}</p>
-          <p className="s-small"><strong>Best for:</strong> {AFTER_HOURS.forWho}</p>
-          <p className="s-small">{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
-          <p className="s-price-guarantee"><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
+          <details className="s-offer-spec">
+            <summary>What’s included and how it works</summary>
+            <p><strong>Best for:</strong> {AFTER_HOURS.forWho}</p>
+            <p>{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
+            <p><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
+          </details>
           <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
           <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free preview <span aria-hidden="true">→</span></PackageLink>
           <BuyNow name={AFTER_HOURS.name} />

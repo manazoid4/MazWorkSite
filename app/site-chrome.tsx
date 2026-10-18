@@ -32,6 +32,7 @@ export function SiteFooter() {
 
       <nav className="mw-footer-links" aria-label="Footer">
         <a href="/prices">Prices</a>
+        <a href="/managed-presence">Managed presence</a>
         <a href="/what-we-do">How it works</a>
         <a href="/for">Who it’s for</a>
         <a href="/proof">Proof</a>

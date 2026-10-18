@@ -26,8 +26,8 @@ export default function PricesPage() {
       <SiteHeader /><ServiceSchema path="/prices" />
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
         <p className="eyebrow">Prices</p>
-        <h1 id="prices-title">Choose the job you want off your plate.</h1>
-        <p className="s-lede">Less chasing, fewer details to copy, a clearer next step for your customers. Agree the work, the price and how we’ll check it works before building starts. No VAT added.</p>
+        <h1 id="prices-title">Choose a one-off build or monthly help.</h1>
+        <p className="s-lede">I can build a system once, keep your online presence current each month, or answer calls you miss. The scope and price are agreed before work starts. No VAT added.</p>
         <p className="s-small">Start with a {FREE_STEP.short}, within {CHECK_REPLY_TIME}. Choose one useful job; add more when you need it.</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free preview</a>
