@@ -1727,3 +1727,27 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-chips li { background: var(--wheat); border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: .92rem; }
 .mw-note { background: var(--sage); border-radius: 12px; padding: 12px 16px; margin: 1rem 0; font-weight: 600; }
 .mw-video { width: 100%; max-width: 22rem; border-radius: 14px; border: 2px solid var(--line); background: var(--paper); }
+
+/* Colour and conversion pass: calmer cream base, clear accent colours, loud primary actions */
+.s-section:nth-of-type(even), .mw-qw-section:nth-of-type(even) { background: var(--sage); }
+.mw-info:nth-of-type(odd) { background: transparent; }
+.mw-resource-hero { background: linear-gradient(135deg, var(--wheat) 0%, var(--clay) 100%); border-bottom: 4px solid var(--signal); }
+.eyebrow { display: inline-block; background: var(--charcoal); color: var(--wheat); padding: 3px 10px; border-radius: 999px; font-size: .75rem; letter-spacing: .08em; }
+.button-signal { background: var(--signal); color: #fff; border: 2px solid var(--charcoal); box-shadow: 0 4px 0 var(--charcoal); font-weight: 800; transition: transform .1s, box-shadow .1s; }
+.button-signal:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--charcoal); }
+.button-signal:active { transform: translateY(4px); box-shadow: 0 0 0 var(--charcoal); }
+.s-price-amount, .mw-cards li .mw-big { color: var(--signal-text); }
+.mw-cards li { border-top-width: 6px; background: #fff; }
+.mw-cards li:nth-child(3n+1) { border-top-color: var(--signal); }
+.mw-cards li:nth-child(3n+2) { border-top-color: var(--ok); }
+.mw-cards li:nth-child(3n) { border-top-color: #2b6cb0; }
+.mw-cards li.mw-hl { background: var(--wheat); }
+.mw-steps li { background: #fff; border-left: 6px solid var(--ok); }
+.mw-steps li b { background: var(--ok); color: #fff; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; }
+.mw-chips li { background: #fff; border-color: var(--ok); color: var(--ok); }
+.mw-chips li::before { content: '✓ '; }
+.mw-note { background: var(--wheat); border-left: 6px solid var(--signal); }
+.mw-resource-cta { background: var(--charcoal); color: #fff; }
+.mw-resource-cta .eyebrow { background: var(--signal); color: #fff; }
+.mw-resource-cta a.button:not(.button-signal) { background: #fff; color: var(--ink); }
+.s-final { background: var(--charcoal); color: #fff; }
