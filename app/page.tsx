@@ -9,7 +9,7 @@ import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
-import { AFTER_HOURS, FREE_STEP, OFFERS, getMenuJob } from './offers';
+import { AFTER_HOURS, FREE_STEP, MANAGED_PRESENCE, OFFERS, getMenuJob } from './offers';
 import { BeforeAfter } from './before-after';
 import { WorkSteps } from './work-steps';
 import { ManazirLine } from './manazir-line';
@@ -45,19 +45,20 @@ export default function Page() {
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Miss a call and they get a text with a booking link, <em>before they ring someone else</em>.</h1>
-    <p className="s-lede">Missed-call text-back, reminders and follow-ups. Start with one task for {STARTER.price}, after a free preview.</p>
+    <p className="s-lede">Start with one task for {STARTER.price}. Free preview first.</p>
     <HeroQuickForm />
    <ManazirLine />
    </div><HeroDemo />
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
-   <p className="eyebrow">What do you run?</p><h2 id="build-title">Pick yours. See the problems, set-up and price.</h2>
+   <p className="eyebrow">What do you run?</p><h2 id="build-title">Choose your business.</h2>
    <ul className="s-types" aria-label="Kinds of business">{CUSTOMER_TYPES.map(type => <li key={type.id}><a href={`/for/${type.id}`}>
     <span className="s-type-icon" aria-hidden="true"><KitIcon name={type.icon} /></span>
     <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(': ')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
    </a></li>)}</ul>
    <p><a className="s-details-link" href="/prices">Every price and what’s included →</a></p>
    <a className="s-teaser s-teaser-slim" href={AFTER_HOURS.href}><span className="s-teaser-tag">New</span><strong>After-hours call answering {AFTER_HOURS.price}</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
+   <a className="s-teaser s-teaser-slim" href={MANAGED_PRESENCE.href}><span className="s-teaser-tag">Monthly help</span><strong>Your work kept current online · {MANAGED_PRESENCE.price}</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">One quote, chased for you.</h2><WalkthroughVideo />

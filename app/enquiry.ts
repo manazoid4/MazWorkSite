@@ -1,4 +1,4 @@
-import { AFTER_HOURS, OFFERS, CARE_PLANS, getExtra, getOffer } from './offers';
+import { AFTER_HOURS, MANAGED_PRESENCE, OFFERS, CARE_PLANS, getExtra, getOffer } from './offers';
 import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
@@ -22,6 +22,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'brand-sales-page', label: `Launch Page: one page that books, sells or takes enquiries (${getOffer('creator-launch').price})` },
   { id: 'reviews', label: `Review requests and customer reminders (${OFFERS[0].name} ${OFFERS[0].price})` },
   { id: 'after-hours', label: `${AFTER_HOURS.name}: calls answered when you can’t pick up (${AFTER_HOURS.price})` },
+  { id: 'managed-presence', label: `${MANAGED_PRESENCE.name}: website, Google and social updates (${MANAGED_PRESENCE.price.toLowerCase()})` },
   { id: 'care', label: `Care plans (${CARE_PLANS[0].price} or ${CARE_PLANS[1].price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
   { id: 'google-profile', label: `Google listing tidy (small set-up, free with a Starter ${getOffer('starter').price})` },

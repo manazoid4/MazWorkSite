@@ -596,6 +596,31 @@ export const CARE_PLANS = [
 /** The entry care plan, for one-line mentions. */
 export const CARE_PLAN = CARE_PLANS[0];
 
+/** Monthly help turning a client's existing work into useful sales material. */
+export const MANAGED_PRESENCE = {
+  id: 'managed-presence',
+  name: 'Managed presence',
+  price: 'From £895/month',
+  monthly: 895,
+  href: '/managed-presence',
+  body: 'Send me the photos, clips and job notes you already have. I organise them and keep your website, Google listing and chosen social channel current.',
+  forWho: 'Businesses doing good work but rarely finding time to show it online.',
+  successCheck: 'Each month, see the approved project story, Google updates and scheduled posts, with a short record of what went live.',
+  included: [
+    'A simple monthly handoff for your existing photos, clips, reviews and job notes',
+    'One project story or proof update on your website, where you can give access',
+    'Two Google Business Profile updates and up to eight posts on one chosen social channel',
+    'Captions, selection, scheduling and one approval round before publication',
+    'A short monthly summary of what was published and any enquiries we can trace',
+  ],
+  notIncluded: [
+    'Photography or filming on site; this can be quoted separately',
+    'Daily inbox replies, paid ads or a promise of leads or rankings',
+    'A new website or work beyond the agreed monthly scope',
+  ],
+  terms: 'Set-up included. Month to month; cancel with a month’s notice. You keep your accounts and content.',
+} as const;
+
 /**
  * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).
  * LIVE value is 0 ("Set-up included"). PROPOSED value is 99, a one-off fee:
