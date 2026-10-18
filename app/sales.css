@@ -1751,4 +1751,3 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-resource-cta .eyebrow { background: var(--signal); color: #fff; }
 .mw-resource-cta a.button:not(.button-signal) { background: #fff; color: var(--ink); }
 .s-final { background: var(--charcoal); color: #fff; }
-.s-about-points { margin: 10px 0 14px; padding-left: 20px; max-width: 680px; display: grid; gap: 8px; }
