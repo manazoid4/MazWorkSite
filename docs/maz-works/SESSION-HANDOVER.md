@@ -1,5 +1,9 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: homepage colour and offer cards
+- The homepage now fades from the sand hero through sage to the paper background. Its three extra offer links use light cards, clearer outcome-led wording and a small hover/focus movement. The receptionist and managed-presence prices still come from `app/offers.ts`.
+- `npm run verify` passed (305 tests). Rendered screenshots at 390px and 1440px are in `docs/evidence/2026-10-18-home-colour/`; neither width scrolls horizontally.
+
 ## 18 Oct: receptionist flat price + £99 set-up, and a Content Day offer
 - `/after-hours-receptionist` gains a "One flat price, not a meter" block that sets the flat fee against a metered service, and the **£99 one-off set-up is now live site-wide** from one switch in `app/offers.ts` (the receptionist page, `/services`, `/solutions`, `/prices` and the contact line all follow it). The in-page example call now answers as the visitor's own business, with no microphone and no phone line. Cost model updated: payback falls from 7.0 to 3.6 months.
 - New offer and page `/content-day`: a flat **£300 day rate** for a full day on site — full photos and short clips, edited and sorted for the website, Google listing and social. Paired with a Launch Page at its live £295, the two come to **£595**. The page spells out the exact files, a named step-by-step process, a private review gallery, a plain usage licence and the honest limits.
