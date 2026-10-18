@@ -129,7 +129,7 @@ Fasthosts £39/£69/£99 a month with one month free. Rosie $49 for 250 minutes.
 | SMS cost | Assumed 4p | Send 5 test texts and read the charge |
 | Set-up and tuning time | The labour cost dominates | Time the first customer's set-up and first tuning, with a clock |
 | Divert behaviour on the customer's network | Whether calls reach the line | Test-call checklist in the delivery kit |
-| Churn | 5% monthly churn turns 12-month profit on 10 customers from £1,438.60 to £238.60; 10% churn makes it -£961.40 | Nothing cheap; watch the first six months |
+| Churn | 5% monthly churn turns 12-month profit on 10 customers from £2,411.75 to £1,795.64; 10% churn cuts it to £1,179.53 | Nothing cheap; watch the first six months |
 | Stripe fee | Assumed | Read the first payout |
 | Compliance wording | Not legal advice | Have a professional check the client data note before the first customer |
 

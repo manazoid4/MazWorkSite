@@ -146,6 +146,7 @@ Options priced in `PRICING-MODEL.md`: Telnyx (cheapest checked), Twilio + Vapi. 
 - [ ] Month to month. Cancel with one month's notice.
 - [ ] No VAT is added to the price.
 - [ ] Stripe subscription link created (Maz only) and tested with a real £79 payment.
+- [ ] £99 set-up collected as a separate one-off (a second Stripe one-off link, or a Stripe invoice) before the number is bought. The Buy now link covers the monthly only, so the first charge a customer sees on it is £79.
 - [ ] First bill only after the customer has heard it answering as their business.
 - [ ] Customer knows who to contact for a problem.
 - [ ] Cancellation: customer emails; Maz confirms the date and the last billing day; stop the subscription in Stripe; close the number (section 14).
@@ -228,6 +229,7 @@ Stop at 30 minutes. If more is needed regularly, that is a price conversation, n
 - [ ] Create the provider account and pass any ID and business check.
 - [ ] Fund the prepaid balance and keep auto top-up off.
 - [ ] Create the Stripe subscription link and test a £79 payment.
+- [ ] Create the £99 one-off set-up link (or set up a Stripe invoice) and test it.
 - [ ] Pay the ICO data protection fee (check whether it applies) and get section 8 checked by a professional.
 - [ ] Approve the service wording on the site and in terms (what it does, minutes, month to month).
 - [ ] Decide the after-hours versus always-on divert approach.
