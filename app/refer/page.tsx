@@ -14,7 +14,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 const PAGE_URL = `${SITE_URL}/refer`;
 
 export const metadata: Metadata = {
-  title: 'Refer a business, earn £50–£300',
+  title: `Refer a business, earn ${REFERRAL_RANGE}`,
   description: fitDescription(`Introduce a UK business that isn't already talking to me, and earn ${REFERRAL_RANGE} when they pay their first invoice. Paid by bank transfer within 7 days.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Refer a business — Maz Works', description: fitDescription(`Introduce a business and earn ${REFERRAL_RANGE} when they pay their first invoice.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },

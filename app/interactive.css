@@ -30,6 +30,9 @@
 .ce-chip:hover { background: #fff6d1; }
 .ce-chip:active { transform: scale(.95); }
 .ce-chip.is-on { background: #ffd23f; }
+.ce-chip { position: relative; display: inline-flex; align-items: center; }
+.ce-chip-input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.ce-chip:has(.ce-chip-input:focus-visible) { outline: 3px solid var(--signal); outline-offset: 4px; }
 .ce-reveal { display: block; margin-top: 16px; max-width: 100%; text-align: left; line-height: 1.3; }
 .ce-result { display: grid; gap: 10px; padding: 18px; border-radius: 14px; background: #f3f1ea; transition: background-color 250ms ease-out; }
 .ce-result.is-ready { background: #e6f7ee; }

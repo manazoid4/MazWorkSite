@@ -1,5 +1,6 @@
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
+import { REFERRAL_RANGE } from './offers';
 
 /**
  * One map of the site, used by the header menu, the footer and tests, so every
@@ -55,7 +56,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'Help',
     links: [
-      { href: '/refer', label: 'Refer a business (earn £50–£300)' },
+      { href: '/refer', label: `Refer a business (earn ${REFERRAL_RANGE})` },
       { href: '/faq', label: 'FAQ' },
       { href: '/work/scrap-finance-partners', label: 'Client work' },
       { href: '/terms', label: 'Terms of work' },

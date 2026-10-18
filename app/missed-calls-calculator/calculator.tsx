@@ -22,11 +22,11 @@ const SUBJECT = 'Maz Works — missed-calls calculator';
 const NEXT_STEP = 'Send a free preview and fixed price; not an order';
 const AUTO_REPLY = `Thanks, I've got your request. I'll email you a working preview with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. Manazir, Maz Works`;
 
-function Slider({ id, label, value, max, step, money, onChange }: { id: string; label: string; value: number; max: number; step: number; money?: boolean; onChange: (value: number) => void }) {
+function Slider({ id, label, value, max, step, money, name, onChange }: { id: string; label: string; value: number; max: number; step: number; money?: boolean; name: string; onChange: (value: number) => void }) {
   return (
     <div className="ce-slider">
       <label htmlFor={id}><span>{label}</span><output htmlFor={id}>{money ? formatPrice(value) : value}</output></label>
-      <input id={id} type="range" min={0} max={max} step={step} value={value} onChange={(event) => onChange(Number(event.target.value))} style={{ ['--fill' as string]: `${(value / max) * 100}%` }} />
+      <input id={id} type="range" name={name} min={0} max={max} step={step} value={value} onChange={(event) => onChange(Number(event.target.value))} style={{ ['--fill' as string]: `${(value / max) * 100}%` }} />
     </div>
   );
 }
@@ -105,16 +105,19 @@ export function MissedCallsCalculator() {
       <h3 id="mcc-title">What are missed calls costing you?</h3>
       <p className="ce-lede">Drag the sliders to your week. Nothing is saved, and nothing is sent until you ask for the number.</p>
 
-      <Slider id="mcc-week" label="Calls or enquiries you get a week" value={perWeek} max={60} step={1} onChange={setPerWeek} />
+      <Slider id="mcc-week" label="Calls or enquiries you get a week" value={perWeek} max={60} step={1} name="Calls a week" onChange={setPerWeek} />
       <div className="ce-slider">
         <p className="ce-label" id="mcc-share-label"><span>How many slip away?</span><output>{share ? `${share}%` : 'Tap one'}</output></p>
         <div className="ce-chips" role="radiogroup" aria-labelledby="mcc-share-label">
           {SHARES.map((option) => (
-            <button key={option} type="button" role="radio" aria-checked={share === option} className={`ce-chip${share === option ? ' is-on' : ''}`} onClick={() => setShare(option)}>{option}%</button>
+            <label key={option} className={`ce-chip${share === option ? ' is-on' : ''}`}>
+              <input className="ce-chip-input" type="radio" name="Share missed" value={`${option}%`} checked={share === option} onChange={() => setShare(option)} />
+              {option}%
+            </label>
           ))}
         </div>
       </div>
-      <Slider id="mcc-value" label="What a job is worth" value={value} max={1000} step={10} money onChange={setValue} />
+      <Slider id="mcc-value" label="What a job is worth" value={value} max={1000} step={10} money name="Value of a job" onChange={setValue} />
 
       <div className={`ce-result${gate === 'open' ? ' is-ready' : ''}`} aria-live="polite">
         {gate === 'open' ? (
@@ -137,7 +140,7 @@ export function MissedCallsCalculator() {
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_autoresponse" value={AUTO_REPLY} />
               <input type="hidden" name="service" value={FREE_STEP.name} />
-              <input type="hidden" name="problem" value={`Missed-calls calculator: ${numbers}`} />
+              <input type="hidden" name="problem" value="Missed-calls calculator: the visitor's figures are in the Calls a week, Share missed and Value of a job fields above." />
               <input type="hidden" name="next_step" value={NEXT_STEP} />
               <div className="s-quick-fields">
                 <input name="email" type="email" autoComplete="email" inputMode="email" placeholder="you@business.co.uk" aria-label="Email" required disabled={gate === 'sending'} />
