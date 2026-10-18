@@ -1,5 +1,9 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: CRO Move 2 — the proof gap, honestly
+- New `/proof` page. It shows the two things anyone can open today (JobFilter, Scrap Finance Partners), states plainly that there are no published client quotes or reviews yet, and sets out the Founding Client offer (your first job at a founder's discount, agreed in writing, in exchange for a nameable quote, a photo and a review — all optional).
+- Guardrail written into the page and locked by a test: never invent a client, logo, result or number. Linked from the footer, the homepage ("Proof →") and the sitemap.
+
 ## 18 Oct: CRO Move 1 — homepage hero names the pain
 - The homepage hero now leads with the missed-call pain ("Miss a call and they get a text with a booking link, before they ring someone else"), one primary CTA ("Get my free demo"), and a risk-reversal line ("No working, no invoice.") above the fold. The secondary "Watch it work (22s)" hero link moved out; the 22-second example still sits in the "See it working" section.
 - Homepage stays inside its 600-word budget (582). `npm run verify` green (287 tests, smoke pass). Before/after browser shots at 390px and 1280px in `docs/evidence/2026-10-18-cro-move1/`.

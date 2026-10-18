@@ -34,6 +34,7 @@ export function SiteFooter() {
         <a href="/prices">Prices</a>
         <a href="/what-we-do">How it works</a>
         <a href="/for">Who it’s for</a>
+        <a href="/proof">Proof</a>
         <a href="/faq">FAQ</a>
         <a href="/work/scrap-finance-partners">Client work</a>
         <a href="/contact">Contact</a>
