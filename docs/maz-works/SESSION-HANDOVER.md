@@ -1,5 +1,9 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: founder bio readability
+- The homepage founder section keeps its two factual paragraphs but gives each a bold lead-in and more space. The heading is calmer, contact links sit together, and the proof heading is clearer. At phone width, the photo stacks above the copy.
+- `npm run verify` passed (305 tests). Browser screenshots at 390px and 1440px are in `docs/evidence/2026-10-18-founder-bio/`; neither width scrolls horizontally.
+
 ## 18 Oct: homepage colour and offer cards
 - The homepage now fades from the sand hero through sage to the paper background. Its three extra offer links use light cards, clearer outcome-led wording and a small hover/focus movement. The receptionist and managed-presence prices still come from `app/offers.ts`.
 - `npm run verify` passed (305 tests). Rendered screenshots at 390px and 1440px are in `docs/evidence/2026-10-18-home-colour/`; neither width scrolls horizontally.
