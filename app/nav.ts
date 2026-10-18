@@ -40,7 +40,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
       { href: '/managed-presence', label: 'Managed presence' },
-      { href: '/content-day', label: 'Content Day (a day of photos)' },
+      { href: '/video', label: 'Video and filming' },
       { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
       { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },

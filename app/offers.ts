@@ -622,77 +622,86 @@ export const MANAGED_PRESENCE = {
 } as const;
 
 /**
- * Content Day (Maz, 18 Oct 2026): a full day on site with me, full photos and
- * short clips. Brains borrowed from commercial photography pricing
- * (a published flat day rate, concrete deliverables, a set turnaround) and
- * pointed at what Maz Works actually does: the photos then get used, not left
- * in a folder. £300 the day. Paired with a Launch Page (its live £295) the two
- * come to £595. No "AI" wording, and never a promise of leads, rankings or a
- * number of enquiries. The day rate is Maz's call, not part of the fix ladder.
+ * Video and filming (Maz, 18 Oct 2026), replacing the flat £300 Content Day.
+ * Introductory, portfolio-building prices. ONE place for every number: pages,
+ * the package selector, schema and tests all read from here.
+ * The 20% saving applies ONLY to the four-edit bundle and only when it is booked
+ * with a shoot; the filming fee is never discounted and nothing stacks.
+ * Maz (18 Oct): copy says professional-grade cameras; never say they are hired, never name models or claim cinema kit.
+ * The full-day rate is a proposed introductory rate (Maz to confirm).
  */
-export const CONTENT_DAY = {
-  id: 'content-day',
-  name: 'Content Day',
-  price: '£300',
-  day: 300,
-  href: '/content-day',
-  body: 'A full day with me at your business: real photos and short clips of the work, your people and the place, edited, sorted and ready to use.',
-  forWho: 'Businesses doing good work with no current photos of it: nothing decent for the website, Google listing or social.',
-  successCheck: 'Before I leave, you see the day’s shots on the camera. Within the agreed days you get the edited set, sorted into what each photo is for.',
-  turnaround: 'Edited set within 5 working days of the shoot.',
+export const VIDEO_PRICES = {
+  halfDay: 150,
+  fullDay: 250,
+  editBundle: 200,
+  editCount: 4,
+  /** Whole percent off the edit bundle when booked with any shoot. */
+  bundleDiscountPercent: 20,
+} as const;
+
+export type VideoShoot = 'none' | 'half' | 'full';
+
+/** Integer pounds in, integer pounds out. No floats, so totals never drift. */
+export function videoQuote(shoot: VideoShoot, withEdits: boolean) {
+  const filming = shoot === 'half' ? VIDEO_PRICES.halfDay : shoot === 'full' ? VIDEO_PRICES.fullDay : 0;
+  const editsFull = withEdits ? VIDEO_PRICES.editBundle : 0;
+  const saving = withEdits && shoot !== 'none' ? Math.round((editsFull * VIDEO_PRICES.bundleDiscountPercent) / 100) : 0;
+  const edits = editsFull - saving;
+  return { filming, editsFull, saving, edits, total: filming + edits };
+}
+
+export const VIDEO_PER_VIDEO = VIDEO_PRICES.editBundle / VIDEO_PRICES.editCount;
+
+export const VIDEO_SERVICES = [
+  { title: 'Business promotional videos', body: 'Short videos that show what you do and why customers should choose you.' },
+  { title: 'Reels and short-form content', body: 'Vertical clips made for Instagram, TikTok, Facebook and YouTube Shorts.' },
+  { title: 'Premises and product filming', body: 'Your shop, workshop, kitchen or stock, shot so it looks as good as it is.' },
+  { title: 'Website hero and intro videos', body: 'A short loop or introduction for the top of your website.' },
+  { title: 'Editing and repurposing', body: 'Footage you already have, cut into clean short videos with captions.' },
+  { title: 'Filming sessions', body: 'A planned session at your business anywhere in the UK. Travel is agreed before you book.' },
+] as const;
+
+export const VIDEO_SHOOTS = [
+  {
+    id: 'half' as const,
+    name: 'Half-Day Content Shoot',
+    price: formatPrice(VIDEO_PRICES.halfDay),
+    hours: 'Up to 5 hours on location',
+    body: 'I film your premises, products, services and the people behind them, using professional-grade cameras and a planned shot list. Made for small businesses.',
+  },
+  {
+    id: 'full' as const,
+    name: 'Full-Day Content Shoot',
+    price: formatPrice(VIDEO_PRICES.fullDay),
+    hours: 'Up to 8 hours on location',
+    body: 'More time for several locations, a bigger range of products or longer filming. Same approach as the half day.',
+  },
+] as const;
+
+export const VIDEO_EDITS = {
+  name: '4 Promotional Videos',
+  price: formatPrice(VIDEO_PRICES.editBundle),
+  each: formatPrice(VIDEO_PER_VIDEO),
+  withShoot: formatPrice(videoQuote('half', true).edits),
+  saving: formatPrice(videoQuote('half', true).saving),
+  body: 'Four individually edited short videos for social, your website or adverts. Use footage from a shoot, or your own.',
   included: [
-    { title: 'A full day on site', body: 'Up to 8 hours in one place, planned with you beforehand so nothing gets missed.' },
-    { title: 'Everything provided', body: 'You rent or buy nothing. The price covers the day of shooting and all the editing.' },
-    { title: 'Full photos, edited', body: 'Every usable photo is edited: exposure, colour and straightening, at web and print sizes.' },
-    { title: 'Short clips', body: 'Short video clips of the work happening, for the website and social.' },
-    { title: 'Sorted for where they go', body: 'Cropped and named for your website, Google Business Profile and social, not one big folder.' },
-    { title: 'Used, not filed', body: 'The best ones go up: a section on your site, Google posts and social crops, when you want them.' },
+    'Four separate edits, each 15 to 45 seconds by default',
+    'Basic colour adjustment, captions and licensed audio where it suits',
+    'One revision round per video',
+    'Your own or previously captured footage is welcome',
   ],
-  /** The exact files, so nobody is guessing what lands (a gap on the sites we learned from). */
-  formats: [
-    'Print-size and web-size versions of every chosen photo',
-    'Square and portrait crops for Google and social',
-    'Vertical and wide clips for social and the website',
-    'An index that says what each photo shows and where it belongs',
-  ],
-  /** The named run-through, with a timeframe on each step. */
-  process: [
-    { title: 'Planning call', when: 'Before the day', body: 'A short call to agree the shots that matter, who is in them and the best time of day.' },
-    { title: 'The day', when: 'Up to 8 hours', body: 'I follow the real work and get the photos your website is missing.' },
-    { title: 'You see the shots', when: 'Before I leave', body: 'We look through the day’s set on the camera so you know it is right.' },
-    { title: 'Private gallery', when: 'Next day', body: 'The shortlist goes into a private gallery you can pick from before I edit.' },
-    { title: 'Edited set', when: 'Within 5 working days', body: 'Every chosen photo and clip is edited, cropped and named.' },
-    { title: 'Put live', when: 'When you are ready', body: 'The best go on your site, Google profile and social, with words if you want a Launch Page.' },
-  ],
-  /** What the buyer may do with the files. */
-  licence: [
-    'Use the finished photos and clips for anything your business needs: website, Google, social, print, ads.',
-    'No time limit and no charge for each use.',
-    'I keep the copyright and ask to show a few in my own work.',
-  ],
-  /** Site access and consent, borrowed from working on live public and industrial sites. */
-  onSite: [
-    'You tell me who is happy to be photographed and anywhere I should not go.',
-    'I follow your site rules: sign-in, PPE and an escort on construction or industrial sites.',
-    'Anyone taking part agrees for themselves; nobody is photographed against their wishes.',
-  ],
-  repeat: 'Two days, or a repeat visit, costs less than the day rate twice. Ask before you book.',
-  notIncluded: [
-    'Drone or aerial filming',
-    'Printing, albums or framed prints',
-    'Written copy for the pages the photos go on (a Launch Page covers that)',
-    'A promise of leads, rankings or enquiries',
-  ],
-  terms: 'One day, one price. Local travel is included; a long trip is agreed before you book.',
 } as const;
 
-/** Content Day plus a Launch Page, built from the day's own photos. */
-export const CONTENT_DAY_BUNDLE = {
-  name: `${CONTENT_DAY.name} + Launch Page`,
-  price: formatPrice(CONTENT_DAY.day + (PAGE_OFFERS[0].from ?? 0)),
-  body: 'Book the Content Day and a Launch Page together and the page is built from the day’s own photos. You get the pictures and the page they sell for you.',
-} as const;
-
+export const VIDEO_SCOPE = [
+  'Filming and editing are priced separately. A shoot does not include edited videos unless you add them.',
+  'Edits cover cuts, basic colour correction, captions and music. Animation or motion graphics are quoted separately.',
+  'Edits usually take 5 to 7 working days from receiving the footage. We agree the date when you book.',
+  'Raw footage is not included. If you want it, ask before the shoot and we agree it in writing.',
+  'I work UK-wide. Travel costs are quoted before you book.',
+  'You confirm that everyone filmed is happy to appear and that you can publish the footage. I use licensed music.',
+  'Nothing is unlimited: footage, revisions and videos are as agreed when you book.',
+] as const;
 /**
  * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).
  * LIVE value is 99, a one-off fee (approved by Maz, 18 Oct 2026). The cost
