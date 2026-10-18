@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-10-02'), changeFrequency: 'weekly', priority: 0.4 },
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/proof`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE_URL}/refer`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/missed-calls-calculator`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/terms`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/services`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.9 },

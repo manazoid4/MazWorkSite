@@ -1,5 +1,6 @@
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
+import { REFERRAL_RANGE } from './offers';
 
 /**
  * One map of the site, used by the header menu, the footer and tests, so every
@@ -24,6 +25,7 @@ export const MENU_LINKS: NavLink[] = [
   { href: '/what-we-do', label: 'What we do' },
   { href: '/for', label: 'Who it’s for' },
   { href: '/work/scrap-finance-partners', label: 'Client work' },
+  { href: '/refer', label: 'Refer a business' },
   { href: '/faq', label: 'FAQ' },
   { href: '/site-map', label: 'Everything else' },
 ];
@@ -37,6 +39,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/what-we-do', label: 'What we do' },
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
+      { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
       { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
       { href: '/contact', label: 'Bigger jobs' },
@@ -53,6 +56,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'Help',
     links: [
+      { href: '/refer', label: `Refer a business (earn ${REFERRAL_RANGE})` },
       { href: '/faq', label: 'FAQ' },
       { href: '/work/scrap-finance-partners', label: 'Client work' },
       { href: '/terms', label: 'Terms of work' },

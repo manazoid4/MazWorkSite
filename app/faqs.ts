@@ -76,7 +76,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you pay for referrals?',
-    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit on how many. Introduce a business that isn't already talking to me and ask them to put your name in their first message. When they book any package and pay their first invoice, I send you ${REFERRAL_REWARD} within 7 days. Add-ons on their own and care plans don't count, and there's no reward if the job is cancelled or refunded. If you share this publicly, mention you're paid for referrals.`,
+    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit on how many — and bigger jobs pay more. Introduce a business that isn't already talking to me and ask them to put your name in their first message. When they pay their first invoice, I send your reward within 7 days. Add-ons on their own and care plans don't count, and there's no reward if the job is cancelled or refunded. The full tiers are on the <a href="/refer">Refer a business</a> page. If you share this publicly, mention you're paid for referrals.`,
   },
 ];
 

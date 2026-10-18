@@ -24,7 +24,7 @@ export function SiteFooter() {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       <FooterConvert />
 
-      {/* Minimal on purpose (Maz, 15 Oct): one hook, six links. Every page link lives in the menu and on /site-map. */}
+      {/* Minimal on purpose (Maz, 15 Oct): one hook, a short line of links. Every page link lives in the menu and on /site-map. */}
       <div className="mw-footer-brand">
         <p className="mw-footer-hook">Every enquiry answered. Every booking confirmed. You stay on the job.</p>
         <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
@@ -36,6 +36,7 @@ export function SiteFooter() {
         <a href="/for">Who it’s for</a>
         <a href="/proof">Proof</a>
         <a href="/faq">FAQ</a>
+        <a href="/refer">Refer a business</a>
         <a href="/work/scrap-finance-partners">Client work</a>
         <a href="/contact">Contact</a>
       </nav>

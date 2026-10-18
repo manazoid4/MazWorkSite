@@ -1,5 +1,11 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: CRO Move 5 — the three loops
+- New `/refer` page with a tiered reward: £50 for a Starter or a Launch Page, £150 for a Business System, a Website or After-Hours call answering, and £300 for custom software, paid by bank transfer within 7 days of the referral's first invoice. Linked in the menu and the footer. The tiers live in `REFERRAL_TIERS` in `offers.ts`; the FAQ keeps its short line and points at the page.
+- New standalone `/missed-calls-calculator`: the visitor's own calls-a-week, share missed and job value give a monthly figure, and that number is gated behind the same two-field demo form as the hero, posting to the same place as `/free-plan`. Linked from `/refer` and the sitemap, and it keeps working without JavaScript.
+- A quiet build-credit line ("Built by Maz Works") now sits in shipped artefacts: the example scope sheet and the demo-business message example, and it is explained on `/refer`. Nothing about clients, results or testimonials is invented.
+- Homepage stays inside its 600-word budget (598). `npm run verify` green (300 tests, smoke pass). Before/after browser shots at 390px and 1280px in `docs/evidence/2026-10-18-cro-move5/`.
+
 ## 18 Oct: CRO Move 4 — the offer is named "free preview"
 - "Free demo" is renamed to "free preview" site-wide, and the free step now carries the honest one-line explanation: it is built from a template on a test setup, so it is not on your apps yet. The honest line sits in `FREE_STEP`, on the homepage, `/free-plan` and the FAQ.
 - The internal package labels are plain words now: "one-day set-ups" → "small set-ups", "Keep It Running" → "Care plan", "Keep It Growing" → "Care plan plus". The offer name, the primary CTA (`Get my free preview`), the enquiry emails and the API service whitelist all match.

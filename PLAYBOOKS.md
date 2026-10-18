@@ -6,7 +6,7 @@ Guides and copy-paste prompts so any agent (Codex, Gemini, Hermes, OpenCode, ano
 Paste this as the first message, then add the task:
 
 ```
-You are working for Maz Works (repo manazoid4/mazos-site). Read AGENTS.md and PLAYBOOKS.md, then the playbook for this task. Follow its steps and quality bar exactly. Work on a branch and open a PR; never push to main. Never publish lead names, Maz's location, personal email or phone. No AI in the offer. Finish with: what you did, proof (command output, test result, screenshot or URL), and what Maz must do next, in plain words.
+You are working for Maz Works (repo manazoid4/mazos-site). Read AGENTS.md and PLAYBOOKS.md, then the playbook for this task. Follow its steps and quality bar exactly. Work on a branch and open a PR; merge it to main once the checks are green. Never publish lead names, Maz's location, personal email or phone. No AI in the offer. Finish with: what you did, proof (command output, test result, screenshot or URL), and what Maz must do next, in plain words.
 
 Task: <what you want>
 ```
@@ -36,7 +36,7 @@ Task: <what you want>
 - Mon/Wed/Fri: one LinkedIn post from playbook 7.
 
 ## Golden rules
-- Branch + PR, never push to main.
+- Branch + PR, then merge to main once the checks are green.
 - Never invent clients, results or testimonials.
 - Lead data stays in the private `maz-works-leads` repo and HubSpot, never in this public repo.
 - Never publish Maz's location, personal email or phone. Public contact: info@mazworks.uk.
