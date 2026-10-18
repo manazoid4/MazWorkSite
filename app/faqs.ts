@@ -1,4 +1,4 @@
-import { CHECK_REPLY_TIME } from './site';
+import { CHECK_REPLY_TIME, VAT_NOTE } from './site';
 import { OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getOffer, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation ${OFFERS[0].price}. Business System from ${OFFERS[1].price.replace('From ', '')}. Custom Software from ${OFFERS[2].price.replace('From ', '')}. Launch Page ${getOffer('creator-launch').price}. Website from ${getOffer('website').price.replace('From ', '')}. Care plans ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. Video and filming is priced on its own page. No VAT added.`,
+    answer: `Starter Automation ${OFFERS[0].price}. Business System from ${OFFERS[1].price.replace('From ', '')}. Custom Software from ${OFFERS[2].price.replace('From ', '')}. Launch Page ${getOffer('creator-launch').price}. Website from ${getOffer('website').price.replace('From ', '')}. Care plans ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. Video and filming is priced on its own page. ${VAT_NOTE}`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
@@ -37,6 +37,14 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'How does payment work?',
     answer: `${PAYMENT_TERMS} Software subscriptions or text-message costs, if any, are paid by you directly at cost.`,
+  },
+  {
+    question: 'What if we disagree about the work?',
+    answer: 'Before any work I send a one-page written scope: what you get, what it costs and what done looks like. You pay once you have seen it working. If something is not what we agreed, I fix it free for 90 days, and you do not pay for any part that does not work. I spent five years handling complaints and escalations in regulated finance, including ombudsman cases, so I write scopes that cannot be misread. That protects you as much as me.',
+  },
+  {
+    question: 'Why should I trust you?',
+    answer: 'You always deal with me directly. I studied Computer Science, then spent five years in complaints and finance in regulated settings. At an internet service provider I was the main contact for escalations from business park owners and company directors on accounts worth hundreds of thousands of pounds. Everything I build lives in accounts in your name with a written guide, so it keeps working without me.',
   },
   {
     question: 'Do I own what you build?',

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { AFTER_HOURS, MISSED_CALL_OPTIONS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
-import { MAIN_CTA, SITE_URL } from '../site';
+import { MAIN_CTA, SITE_URL, VAT_NOTE } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BuyNow } from '../price-list';
 import { ScrollReveal } from '../scroll-reveal';
@@ -111,7 +111,7 @@ export default function AfterHoursPage() {
           <article className="ah-card">
             <header>
               <h3>{AFTER_HOURS.name}</h3>
-              <p className="ah-card-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup}. No VAT added.</span></p>
+              <p className="ah-card-price"><strong>{AFTER_HOURS.price}</strong><span>{AFTER_HOURS.setup}. {VAT_NOTE}</span></p>
             </header>
             <ul className="ah-included">{AFTER_HOURS.included.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.body}</span></li>)}</ul>
             <p className="ah-card-terms"><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>

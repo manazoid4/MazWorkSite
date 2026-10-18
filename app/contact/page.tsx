@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL, VAT_NOTE } from '../site';
 import { ALL_OFFERS, FREE_STEP, MANAGED_PRESENCE, OFFERS, PAYMENT_TERMS, LOWEST_EXTRA_PRICE } from '../offers';
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function ContactPage() {
           <h2 id="contact-title">Send it straight to me.</h2>
           <p><CallLink href={BOOKING_URL} placement="contact">Book a 15-minute call</CallLink> or email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
           <p className="s-small">{BIGGER_JOBS.map((job, index) => <span key={job.name}>{index ? ' · ' : ''}{job.name} {job.price}</span>)}</p>
-          <p className="s-small">{FREE_STEP.name} is free. No VAT added.</p>
+          <p className="s-small">{FREE_STEP.name} is free. {VAT_NOTE}</p>
         </div>
         <DemoRequestForm />
       </section>

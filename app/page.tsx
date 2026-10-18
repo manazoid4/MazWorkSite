@@ -86,7 +86,7 @@ export default function Page() {
             <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
-        <p className="s-small">Work you can open:</p>
+        <p className="s-small">Real work:</p>
         <div className="s-proof">
           {PROOF.map((item) => (
             <a className="s-proof-card" href={item.href} key={item.name}>
