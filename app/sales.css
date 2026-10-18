@@ -1733,7 +1733,7 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-info:nth-of-type(odd) { background: transparent; }
 .mw-resource-hero { background: linear-gradient(135deg, var(--wheat) 0%, var(--clay) 100%); border-bottom: 4px solid var(--signal); }
 .eyebrow { display: inline-block; background: var(--charcoal); color: var(--wheat); padding: 3px 10px; border-radius: 999px; font-size: .75rem; letter-spacing: .08em; }
-.button-signal { background: var(--signal); color: #fff; border: 2px solid var(--charcoal); box-shadow: 0 4px 0 var(--charcoal); font-weight: 800; transition: transform .1s, box-shadow .1s; }
+.button-signal { background: var(--signal); color: #000; border: 2px solid var(--charcoal); box-shadow: 0 4px 0 var(--charcoal); font-weight: 800; transition: transform .1s, box-shadow .1s; }
 .button-signal:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--charcoal); }
 .button-signal:active { transform: translateY(4px); box-shadow: 0 0 0 var(--charcoal); }
 .s-price-amount, .mw-cards li .mw-big { color: var(--signal-text); }
