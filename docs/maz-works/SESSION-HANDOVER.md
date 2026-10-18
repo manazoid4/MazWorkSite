@@ -1,5 +1,10 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: receptionist flat price + £99 set-up, and a Content Day offer
+- `/after-hours-receptionist` gains a "One flat price, not a meter" block that sets the flat fee against a metered service, and the **£99 one-off set-up is now live site-wide** from one switch in `app/offers.ts` (the receptionist page, `/services`, `/solutions`, `/prices` and the contact line all follow it). The in-page example call now answers as the visitor's own business, with no microphone and no phone line. Cost model updated: payback falls from 7.0 to 3.6 months.
+- New offer and page `/content-day`: a flat **£300 day rate** for a full day on site — full photos and short clips, edited and sorted for the website, Google listing and social. Paired with a Launch Page at its live £295, the two come to **£595**. The page spells out the exact files, a named step-by-step process, a private review gallery, a plain usage licence and the honest limits.
+- No competitor is named and no price is typed outside `app/offers.ts`; nothing about clients, results or testimonials is invented, and no camera-hire wording is used. `npm run verify` green (304 tests).
+
 ## 18 Oct: CRO Move 5 — the three loops
 - New `/refer` page with a tiered reward: £50 for a Starter or a Launch Page, £150 for a Business System, a Website or After-Hours call answering, and £300 for custom software, paid by bank transfer within 7 days of the referral's first invoice. Linked in the menu and the footer. The tiers live in `REFERRAL_TIERS` in `offers.ts`; the FAQ keeps its short line and points at the page.
 - New standalone `/missed-calls-calculator`: the visitor's own calls-a-week, share missed and job value give a monthly figure, and that number is gated behind the same two-field demo form as the hero, posting to the same place as `/free-plan`. Linked from `/refer` and the sitemap, and it keeps working without JavaScript.
