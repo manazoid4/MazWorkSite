@@ -101,22 +101,22 @@
 
 /* Pill labels: a bold colour with dark text (high contrast), a different one per
    section so the page reads as several colours, none of them an "error" red/orange. */
-:root { --pill: #ffd23f; }
+:root { --pill: #ffe9a3; }
 .s-hero .eyebrow,
 .s-section > .eyebrow,
 .s-check-copy .eyebrow,
 .s-about .eyebrow,
 .mw-section-heading .eyebrow,
 .mw-resource-hero .eyebrow {
-  display: inline-block; padding: 5px 14px; border: 2px solid var(--ink); border-radius: 999px;
+  display: inline-block; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 999px;
   background: var(--pill); color: var(--ink); font-weight: 800; letter-spacing: .06em;
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: none;
 }
-.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: #ffd23f; }
-.s-section:nth-of-type(4n + 1) > .eyebrow, .mw-section:nth-of-type(4n + 1) .eyebrow { --pill: #8fe3b8; }
-.s-section:nth-of-type(4n + 2) > .eyebrow, .mw-section:nth-of-type(4n + 2) .eyebrow { --pill: #9bd4ff; }
-.s-section:nth-of-type(4n + 3) > .eyebrow, .mw-section:nth-of-type(4n + 3) .eyebrow { --pill: #ffb9d9; }
-.s-section:nth-of-type(4n) > .eyebrow, .mw-section:nth-of-type(4n) .eyebrow { --pill: #ffd23f; }
+.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: #ffe9a3; }
+.s-section:nth-of-type(4n + 1) > .eyebrow, .mw-section:nth-of-type(4n + 1) .eyebrow { --pill: #c4ecd7; }
+.s-section:nth-of-type(4n + 2) > .eyebrow, .mw-section:nth-of-type(4n + 2) .eyebrow { --pill: #cde5fa; }
+.s-section:nth-of-type(4n + 3) > .eyebrow, .mw-section:nth-of-type(4n + 3) .eyebrow { --pill: #fad0e3; }
+.s-section:nth-of-type(4n) > .eyebrow, .mw-section:nth-of-type(4n) .eyebrow { --pill: #ffe9a3; }
 .s-check-copy .eyebrow, .s-about .eyebrow { --pill: var(--surface); }
 
 /* Soft colour glow behind the phone mockups (never wider than the column). */
