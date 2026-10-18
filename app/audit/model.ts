@@ -1,4 +1,4 @@
-import { AFTER_HOURS, COMPLAINTS_SETUP, OFFERS } from '../offers';
+import { AFTER_HOURS, COMPLAINT_PACKAGES, OFFERS } from '../offers';
 
 /**
  * Maths for the free automation audit. Plain arithmetic on the visitor's own
@@ -13,7 +13,7 @@ export type TaskId = 'complaints' | 'onboarding' | 'proposals' | 'invoices' | 'c
 export type Solution = { name: string; price: string; href: string; why: string };
 
 export const TASKS: { id: TaskId; label: string; hint: string; hours: number; solution: Solution }[] = [
-  { id: 'complaints', label: 'Logging and chasing complaints', hint: 'Finding them in inboxes, tracking dates, reminding people', hours: 3, solution: { name: COMPLAINTS_SETUP.name, price: COMPLAINTS_SETUP.price, href: COMPLAINTS_SETUP.href, why: 'One log, your own deadlines, alerts when a case is due.' } },
+  { id: 'complaints', label: 'Tracking and reporting on complaints', hint: 'Chasing cases, piecing the numbers together, explaining them to management', hours: 3, solution: { name: COMPLAINT_PACKAGES[0].name, price: COMPLAINT_PACKAGES[0].price, href: '/complaints', why: 'A short report on what your complaints are telling you, and what to fix first.' } },
   { id: 'onboarding', label: 'Onboarding new clients', hint: 'Chasing ID, signed letters, forms and details', hours: 4, solution: { name: OFFERS[1].name, price: OFFERS[1].price, href: '/prices', why: 'Joined-up forms, reminders and a weekly list of who is stuck.' } },
   { id: 'proposals', label: 'Chasing proposals and quotes', hint: 'Following up when nothing comes back', hours: 2, solution: { name: OFFERS[0].name, price: OFFERS[0].price, href: '/services', why: 'One automatic follow-up job, set up and tested with you.' } },
   { id: 'invoices', label: 'Chasing invoices and payments', hint: 'Reminders to late payers', hours: 2, solution: { name: OFFERS[0].name, price: OFFERS[0].price, href: '/services', why: 'Polite reminders on your own schedule.' } },

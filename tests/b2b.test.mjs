@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import ts from 'typescript';
-import { acknowledgementEmail, addWorkingDays, caseHealth, countByCategory, DEMO_CASES, draftReply, nextCaseId, workingDaysBetween } from '../app/complaints/model.ts';
+import { ACTIONS, CATEGORIES, COMPLAINTS, TARGET_DAYS, byCategory, buildComplaints, findings, rootCauseTable, summary } from '../app/complaints/sample-data.ts';
 import { attributionLine } from '../app/linkedin-source.ts';
 import { deliverEnquiry } from '../api/enquiry.js';
 import demoTrigger, { allowDemo, toE164 } from '../api/demo-trigger.js';
@@ -21,31 +21,29 @@ const offers = await load('app/offers.ts');
 const auditModel = await load('app/audit/model.ts', { '../offers': offers });
 const { audit, summarise, TASKS } = auditModel;
 
-test('working-day maths skips weekends', () => {
-  assert.equal(addWorkingDays('2026-10-16', 1), '2026-10-19'); // Friday → Monday
-  assert.equal(addWorkingDays('2026-10-14', 2), '2026-10-16');
-  assert.equal(workingDaysBetween('2026-10-16', '2026-10-19'), 1);
-  assert.equal(workingDaysBetween('2026-10-19', '2026-10-16'), -1);
-  assert.equal(workingDaysBetween('2026-10-19', '2026-10-19'), 0);
+test('the sample complaints data is fixed, complete and internally consistent', () => {
+  assert.equal(COMPLAINTS.length, 120);
+  assert.deepEqual(buildComplaints(), COMPLAINTS); // same seed, same records
+  assert.equal(new Set(COMPLAINTS.map((row) => row.ref)).size, 120);
+  assert.ok(COMPLAINTS.every((row) => CATEGORIES.includes(row.category) && row.daysToClose >= 3 && row.redress >= 0));
+  assert.equal(byCategory(COMPLAINTS).reduce((sum, row) => sum + row.total, 0), 120);
+  const s = summary(COMPLAINTS);
+  assert.equal(s.total, 120);
+  assert.ok(s.lastQuarter > s.firstQuarter, 'the story: more complaints late in the year than early');
+  assert.ok(s.withinTarget > 0 && s.withinTarget < 100);
 });
 
-test('demo cases cover on-track, due soon and overdue, and the most urgent sorts first', () => {
-  const health = Object.fromEntries(DEMO_CASES.map((item) => [item.id, caseHealth(item).health]));
-  assert.equal(health['C-1003'], 'overdue');
-  assert.equal(health['C-1001'], 'due-soon');
-  assert.equal(health['C-1002'], 'on-track');
-  const sorted = [...DEMO_CASES].sort((a, b) => caseHealth(a).daysLeft - caseHealth(b).daysLeft);
-  assert.equal(sorted[0].id, 'C-1003');
-  assert.equal(nextCaseId(DEMO_CASES), 'C-1006');
-  assert.equal(Object.values(countByCategory(DEMO_CASES)).reduce((a, b) => a + b, 0), DEMO_CASES.length);
-});
-
-test('draft replies are drafts for a person: placeholders left, no compliance or outcome promises', () => {
-  for (const item of DEMO_CASES) {
-    const text = draftReply(item) + acknowledgementEmail(item);
-    assert.match(text, /\[Your name\]/);
-    assert.doesNotMatch(text, /complian|guarantee|ombudsman|resolved/i);
-  }
+test('findings are computed from the records and the actions answer them', () => {
+  const [first, , handover, training] = findings(COMPLAINTS);
+  const top = rootCauseTable(COMPLAINTS)[0];
+  assert.ok(first.headline.startsWith(top.cause));
+  assert.match(first.evidence, new RegExp(`${top.total} of 120 complaints`));
+  assert.match(handover.evidence, new RegExp(`against a ${TARGET_DAYS}-day target`));
+  assert.match(training.evidence, /complaints \(\d+%\) trace to it/);
+  assert.equal(ACTIONS.length, 6);
+  assert.ok(ACTIONS.every((item) => item.owner && item.due && ['High', 'Medium', 'Low'].includes(item.priority)));
+  const text = JSON.stringify(findings(COMPLAINTS)) + ACTIONS.map((item) => item.action).join(' ');
+  assert.doesNotMatch(text, /\bAI\b|complian|guarantee/i);
 });
 
 test('audit sums use the visitor numbers and one visible assumption', () => {
@@ -54,17 +52,20 @@ test('audit sums use the visitor numbers and one visible assumption', () => {
   assert.equal(result.yearHours, 322);
   assert.equal(result.savedHours, 161);
   assert.equal(result.savedValue, 6440);
-  assert.deepEqual(result.recommended.map((item) => item.name), ['Business System', 'Complaints & Escalation Tracker']);
+  assert.deepEqual(result.recommended.map((item) => item.name), ['Business System', 'Complaints Health Check']);
   assert.deepEqual(audit([], 40, 50), { weekly: 0, yearHours: 0, savedHours: 0, savedValue: 0, recommended: [] });
   assert.equal(audit([{ id: 'copying', hours: 0 }, { id: 'nonsense', hours: 5 }], 40, 50).weekly, 0);
   assert.equal(audit(TASKS.map((task) => ({ id: task.id, hours: 2 })), 40, 50).recommended.length, 3);
   assert.match(summarise([{ id: 'copying', hours: 2 }], 40, 50, ['Xero']), /Tools in use: Xero/);
 });
 
-test('the complaints offer never promises compliance or resolution', () => {
-  const text = JSON.stringify(offers.COMPLAINTS_SETUP) + JSON.stringify(offers.B2B_SYSTEMS);
-  assert.doesNotMatch(text, /\bAI\b|guarantee|compliant/i);
-  assert.equal(offers.COMPLAINTS_SETUP.from, 795);
+test('the four complaints packages carry the agreed starting prices and no AI or guarantee wording', () => {
+  const packs = offers.COMPLAINT_PACKAGES;
+  assert.deepEqual(packs.map((pack) => pack.from), [295, 895, 495, 1495]);
+  assert.deepEqual(packs.map((pack) => pack.name), ['Complaints Health Check', 'Post-Complaints Analysis & Board Reporting', 'Tailored Complaints Workflows & Staff Toolkit', 'Complete Complaints Improvement Sprint']);
+  const text = JSON.stringify(packs) + JSON.stringify(offers.COMPLAINT_DATA_HANDLING) + JSON.stringify(offers.B2B_SYSTEMS);
+  assert.doesNotMatch(text, /\bAI\b|guarantee|fully compliant/i);
+  assert.ok(packs.every((pack) => pack.limits.length >= 2 && pack.needs.length >= 2 && pack.turnaround));
 });
 
 test('campaign capture keeps only safe labels', () => {
@@ -150,14 +151,25 @@ test('the new pages are built, sit in the sitemap, and keep the one main action'
   }
   assert.match(await page('b2b'), /Automate your practice operations without hiring more admin staff\./);
   assert.match(await page('b2b'), /Get my free preview/);
-  assert.match(await page('complaints'), /From £795/);
+  assert.match(await page('complaints'), /From £295/);
 });
 
-test('complaints page is honest about what it is not', async () => {
+test('complaints page shows the four packages, the samples and the honest limits', async () => {
   const html = await page('complaints');
-  assert.match(html, /Legal advice, or a promise that your process meets any regulator/);
-  assert.match(html, /invented/i);
+  for (const name of ['Complaints Health Check', 'Post-Complaints Analysis &amp; Board Reporting', 'Tailored Complaints Workflows &amp; Staff Toolkit', 'Complete Complaints Improvement Sprint']) assert.ok(html.includes(name), name);
+  for (const price of ['From £295', 'From £895', 'From £495', 'From £1,495']) assert.ok(html.includes(price), price);
+  assert.match(html, /Not legal or regulatory advice/);
+  assert.match(html, /Fictional example for Northgate Advisory/);
+  assert.match(html, /Easy to see\. Easy to understand\. Easy to act on\./);
+  assert.match(html, /What this tells you/);
+  assert.doesNotMatch(html, /excel|powerpoint|spreadsheet|xlsx/i, 'complaints page names the tools clients could use themselves');
   assert.doesNotMatch(html, /fully compliant|guaranteed|ombudsman-proof/i);
+});
+
+test('the downloadable sample PDFs exist and are real files', async () => {
+  const dir = path.join(process.cwd(), 'public', 'samples', 'complaints');
+  for (const file of ['sample-health-check-report.pdf', 'sample-board-report.pdf']) assert.equal((await readFile(path.join(dir, file))).subarray(0, 4).toString(), '%PDF', file);
+  for (const route of ['complaints/sample/health-check', 'complaints/sample/board-report']) assert.match(await page(route), /Fictional example for Northgate Advisory/);
 });
 
 test('proof labels demonstrations and publishes no invented results', async () => {

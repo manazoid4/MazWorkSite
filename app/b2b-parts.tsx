@@ -1,5 +1,5 @@
 import { LINKEDIN_URL, PERSON_NAME } from './site';
-import { B2B_SYSTEMS, COMPLAINTS_SETUP, GHL_PARTNER, OFFERS, formatPrice, ghlThreeYearGbp } from './offers';
+import { B2B_SYSTEMS, COMPLAINT_PACKAGES, GHL_PARTNER, OFFERS, formatPrice, ghlThreeYearGbp } from './offers';
 import './b2b.css';
 
 /**
@@ -49,7 +49,7 @@ export function PracticeTier() {
           <h3>Joined-up operations systems</h3>
           <p className="b2b-price">{system.price.replace('From ', 'From ')} to {custom.price.replace('From ', '')}</p>
           <ul className="b2b-list">
-            <li>{COMPLAINTS_SETUP.name}: {COMPLAINTS_SETUP.price}</li>
+            {COMPLAINT_PACKAGES.map((item) => <li key={item.id}>{item.name}: {item.price}</li>)}
             {B2B_SYSTEMS.map((item) => <li key={item.id}>{item.name}: {item.price}</li>)}
           </ul>
           <p className="b2b-fine"><a href="/b2b">More on the B2B page</a></p>

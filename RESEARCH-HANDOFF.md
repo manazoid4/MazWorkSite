@@ -91,3 +91,44 @@ Next step: 10 buyer conversations before more building (mom-test skill), then ru
 - Copy never says "AI" (site rule) or "compliant". Reply drafting is described as template wording for a person to approve. The demo's 2 and 20 working-day targets are the client's own, not DISP deadlines.
 - No demand quotes were found, so the pages quote none.
 - The B2B systems from Maz's brief (£850 / £595 / £450–£750 / £99 / £145) are in `B2B_SYSTEMS`, also **proposed and unapproved**.
+
+## 7. Comparable services for the four complaints packages (research of 19 Oct 2026)
+
+Method: 13 searches/fetches. **Headline: no UK complaints consultancy publishes a fixed price.** Verita and TCC list complaints health check / RCA / MI services with no prices on their pages (TCC page checked: no fees stated; Verita page not retrievable, price status unverified). So there is no direct price comparable; only proxies below.
+
+**Proxy prices seen**
+- UK contract consultants: median "£500 to £600 a day" across titles ([consultingdemand.com](https://consultingdemand.com/blog/consultant-day-rates-2024/), search excerpt; not complaints-specific, regulatory/compliance rate not on page).
+- Freelance analysts (US-centric, USD): dashboards from $45 fixed, avg $142.66 per project, $20-$100/h; reports avg $99.47; advanced analysis $80-$300/h ([Fiverr cost guide](https://www.fiverr.com/resources/guides/costs/business-data-analyst)). Fiverr's Excel-dashboard page showed no prices ([page](https://www.fiverr.com/hire/excel-dashboard-design)). PeoplePerHour/Upwork listings not priced in what I could retrieve: unverified.
+- Big-firm managed service (KPMG) and Verita/TCC/Sigma are bespoke-quoted: [KPMG](https://kpmg.com/uk/en/services/consulting/managed-services/complaint-handling.html), [Verita](https://www.verita.net/solution/complaints-handling/), [TCC](https://tcc.group/complaints-claims-handling/), [Sigma](https://sigmaconnected.com/service/complaint-management/). Any figure for them is **unverified**.
+
+**What regulators say good looks like (what buyers need)**
+- FCA DISP 1.3.3: firms must analyse causes of complaints to find root causes common to types of complaint, consider whether they affect other products/processes, and keep records of senior-personnel analysis and decisions on MI ([FCA Handbook DISP 1](https://handbook.fca.org.uk/handbook/disp1)).
+- FCA thematic review: good firms had dashboards, data packs setting out root causes and actions, and triangulated with external sources such as social media ([FCA good/poor practice](https://www.fca.org.uk/publications/good-and-poor-practice/complaints-and-root-cause-analysis-good-practice-and-areas-improvement)).
+- DISP 1.10/1.10A (reporting) and Financial Ombudsman / Ombudsman Association "learning from complaints" pages were not fetched: **unverified**. Check before quoting.
+
+**(b) Pay for vs commodity (judgement, from the above; not buyer interviews)**
+- Buyers pay for: root cause with action and owner (DISP wording), a board pack a non-specialist can act on, and an honest recommendation list. Records of senior decisions are an FCA expectation, so the deck and action tracker carry real value.
+- Commodity: Excel trackers, flowcharts, checklists, infographics. A freelance dashboard is ~$45-$180 on Fiverr. Sell the thinking, not the files.
+
+**(c) Comparison**
+
+| Package | Closest comparable | Their price | Verdict |
+|---|---|---|---|
+| Health Check £295 | Consultancy "health check" (Verita, quote-only) | not published | Cheap vs consultancies; fair vs freelancers. Unverified |
+| Analysis & Board £895 | Fiverr dashboard ($142 avg) + consultant analysis at ~£500-600/day | ~£150 + 1.5-2 days = ~£900-1,350 (derived) | Fair-to-cheap |
+| Workflows & Toolkit £495 | Freelance flowchart/infographic gigs | not retrieved: unverified | Fair, drifting dear if sold as templates |
+| Sprint £1,495 | Sum of parts £1,685 minus ~11% | n/a | Cheap for 28h (see d) |
+
+**(d) Underpricing note.** Hourly equivalents £42 / £43 / £43 / £53 sit well under a £500-600/day market median (about £62-75/h at 8h), and ignore selling time, rework, insurance and PI cover. Packages 1, 2 and 4 look underpriced; 3 is nearer fair because its output is closest to commodity. Recommended published prices (my judgement, **untested with buyers**):
+- Health Check: **From £395** (~£56/h). Keep £295 only as a launch offer for the first 2-3 clients.
+- Analysis & Board Reporting: **From £1,195** (~£57/h), the package where judgement and board-readiness show.
+- Workflows & Toolkit: **From £595** (~£52/h).
+- Sprint: **From £1,995** (~£71/h); with hard limits (150 records, 2 revision rounds, one workflow). Bundle discount of roughly 10% against the parts (£2,185).
+- Honesty risk: do not sell as "compliance". Offer analysis and drafts for the client's own sign-off; Maz is not an FCA-authorised adviser (unverified: check wording).
+
+**(e) Data protection must-dos (small processor, UK)**
+- Get a written contract (controller instructions, confidentiality, security, sub-processors, deletion/return, audit help) before receiving any records: [ICO contracts and liabilities](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/contracts-and-liabilities-between-controllers-and-processors-multi/what-needs-to-be-included-in-the-contract/). Processors also have direct duties: [ICO processor liabilities](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/contracts-and-liabilities-between-controllers-and-processors-multi/responsibilities-and-liabilities-for-processors-in-their-own-right/); overview: [controllers and processors](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/controllers-and-processors/).
+- Ask clients to anonymise before sending (the "anonymised cases" in the Health Check). Key-coded or pseudonymised data is still personal data ([ICO anonymisation intro](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/anonymisation/introduction-to-anonymisation/)).
+- If pseudonymising, keep the key separate from the data ([ICO pseudonymisation](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/anonymisation/pseudonymisation/)).
+- Set and state a retention period in the contract; delete or anonymise at project end, including backups ([ICO storage limitation](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/)).
+- Practical: encrypted storage, no personal data in AI tools or chat without contract cover, no sub-processors without client approval. Security/ICO registration (fee) status for Maz Works: **unverified**.

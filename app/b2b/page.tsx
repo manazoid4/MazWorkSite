@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
 import { CHECK_REPLY_TIME, MAIN_CTA, SITE_URL } from '../site';
-import { B2B_SYSTEMS, COMPLAINTS_SETUP, PROMISES, STARTER_GUARANTEE } from '../offers';
+import { B2B_SYSTEMS, COMPLAINT_PACKAGES, PROMISES, STARTER_GUARANTEE } from '../offers';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CampaignLink } from '../campaign-link';
 import { BookCall } from '../booking-modal';
@@ -64,10 +64,10 @@ export default function B2BPage() {
         <ul className="b2b-grid is-three">
           <li className="is-feature">
             <span className="b2b-tag">My specialism</span>
-            <strong>{COMPLAINTS_SETUP.name}</strong>
-            <span className="b2b-price">{COMPLAINTS_SETUP.price}</span>
-            <span>Every complaint logged the same way, acknowledged on time and tracked to a reply you have approved.</span>
-            <a href="/complaints">See the demo →</a>
+            <strong>Complaints Health Check, reporting and staff workflows</strong>
+            <span className="b2b-price">{COMPLAINT_PACKAGES[0].price}</span>
+            <span>Find what your complaints are telling you and report it clearly to management and the board. Four fixed-scope packages, with worked examples.</span>
+            <a href="/complaints">See the examples →</a>
           </li>
           {B2B_SYSTEMS.slice(0, 3).map((item) => (
             <li key={item.id}>
