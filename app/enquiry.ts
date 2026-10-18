@@ -1,4 +1,4 @@
-import { AFTER_HOURS, MANAGED_PRESENCE, OFFERS, CARE_PLANS, getExtra, getOffer } from './offers';
+import { VIDEO_PRICES, formatPrice, AFTER_HOURS, MANAGED_PRESENCE, OFFERS, CARE_PLANS, getExtra, getOffer } from './offers';
 import { CONTACT_EMAIL, FORM_DELIVERY_EMAIL } from './site';
 
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${FORM_DELIVERY_EMAIL}`;
@@ -29,6 +29,8 @@ export const ENQUIRY_SERVICES = [
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'brand-kit', label: `Starter for creators: keyword DM, free resource, email list (${getOffer('creator-starter').price})` },
+  { id: 'video', label: `Video and filming: shoots from ${formatPrice(VIDEO_PRICES.halfDay)}, edits ${formatPrice(VIDEO_PRICES.editBundle)}` },
+  { id: 'portfolio-project', label: 'Apply for a Portfolio Project (limited places, chosen at our discretion)' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
 

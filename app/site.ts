@@ -14,3 +14,7 @@ export const BOOKING_URL = 'https://cal.com/mazworks/quick-chat';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/maz-works';
 // The free-check reply promise. Change it here and every page follows.
 export { CHECK_REPLY_TIME } from './reply-time.js';
+
+// Public WhatsApp for video enquiries (Maz approved publishing this number, 18 Oct 2026). No address or town.
+export const WHATSAPP_URL = 'https://wa.me/447544965187';
+export const WHATSAPP_DISPLAY = '07544 965187';
