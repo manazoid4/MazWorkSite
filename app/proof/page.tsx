@@ -26,7 +26,7 @@ export default function ProofPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="proof-title">
         <p className="eyebrow">Proof</p>
         <h1 id="proof-title">Real work. Open it and see.</h1>
-        <p>Everything here is real. Open it and check.</p>
+        <p>Each item is labelled for what it is: my own product, a client build, or a demonstration with invented data.</p>
       </section>
 
       <section className="mw-info" aria-label="Real work">

@@ -22,7 +22,7 @@ export default function AuditPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="au-title">
         <p className="eyebrow">Free audit</p>
         <h1 id="au-title">Where is your team’s time going?</h1>
-        <p>Pick the repeat jobs that eat your week. You get an estimate of the hours and three sensible places to start before you share any details.</p>
+        <p>Pick the repeat jobs that eat your week. You get an estimate of the hours and up to three sensible places to start before you share any details.</p>
         <p className="mw-hero-note">Your numbers only · nothing sent until you ask for the plan</p>
       </section>
       <section className="mw-qw-section" aria-label="The audit" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

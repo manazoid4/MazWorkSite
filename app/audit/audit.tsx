@@ -117,7 +117,7 @@ export function AutomationAudit({ page = 'audit' }: { page?: string }) {
           <>
             <p className="au-total">{result.yearHours.toLocaleString('en-GB')} hours a year</p>
             <p className="ce-line">on the jobs you ticked. If {share}% of that could be automated, that is about <strong>{result.savedHours.toLocaleString('en-GB')} hours</strong>, or <strong>{formatPrice(result.savedValue)}</strong> of time at {formatPrice(rate)} an hour. An estimate from your own numbers, not a promise of savings.</p>
-            <h4>Three places to start</h4>
+            <h4>Where to start</h4>
             <ul className="au-recs">
               {result.recommended.map((item) => (
                 <li key={item.name}><strong>{item.name} · {item.price}</strong><span>{item.why} (You said {item.hours} {item.hours === 1 ? 'hour' : 'hours'} a week on the related job.)</span><a href={item.href}>See details →</a></li>

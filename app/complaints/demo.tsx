@@ -46,7 +46,7 @@ export function ComplaintsDemo() {
   function logComplaint() {
     const text = summary.trim();
     if (!text) return;
-    const item: DemoCase = { id: nextCaseId(cases), client: 'Your client (example)', category, summary: text.slice(0, 160), received: DEMO_TODAY, stage: 'Received', owner: 'You' };
+    const item: DemoCase = { id: nextCaseId(cases), client: 'Your client (example)', category, summary: text.slice(0, 160), received: DEMO_TODAY, stage: 'Received', owner: 'Alex' };
     setCases([...cases, item]);
     setLogged(item);
     setReplyId(item.id);

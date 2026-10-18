@@ -85,23 +85,26 @@ export function countByCategory(cases: Pick<DemoCase, 'category'>[]): Record<Cat
 }
 
 const TEMPLATES: Record<Category, string> = {
-  Delay: 'Thank you for raising this. You are right that {what} took longer than we agreed. I have looked at what happened and {owner} will confirm a firm date with you by {date}. I am sorry for the wait.',
-  'Service quality': 'Thank you for telling us about this. I have checked {what} and found {finding}. We will put it right and send you the corrected version by {date}.',
-  Billing: 'Thank you for raising the invoice. I have gone through {what} against our records. {finding} I will write to you again by {date} with the outcome.',
-  Communication: 'Thank you for your patience, and I am sorry you did not get a reply. {owner} now has your case and will contact you by {date}. You can reply to this email at any time.',
+  Delay: 'Thank you for raising this, and I am sorry for the delay. I have read your complaint ("{what}"). {owner} will confirm a firm date with you by {date}.',
+  'Service quality': 'Thank you for telling us about this. I have checked your complaint ("{what}") and found [add what you found]. We will put it right and write to you by {date}.',
+  Billing: 'Thank you for raising the invoice. I have gone through it against our records ("{what}"). [Add what you found.] I will write to you again by {date}.',
+  Communication: 'I am sorry you did not get a reply ("{what}"). {owner} now has your case and will contact you by {date}. You can reply to this email at any time.',
 };
+
+export function longDate(iso: string): string {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+}
 
 /** Draft built from the business's own template wording. It is never sent until a person approves it. */
 export function draftReply(item: Pick<DemoCase, 'category' | 'summary' | 'client' | 'owner' | 'received'>): string {
-  const date = caseDeadlines(item.received).respond;
+  const date = longDate(caseDeadlines(item.received).respond);
   const body = TEMPLATES[item.category]
-    .replace('{what}', item.summary.replace(/\.$/, '').toLowerCase())
-    .replace('{finding}', '[add what you found]')
+    .replace('{what}', item.summary.replace(/\.$/, ''))
     .replace('{owner}', item.owner)
     .replace('{date}', date);
   return `Dear ${item.client},\n\n${body}\n\nKind regards,\n[Your name]`;
 }
 
 export function acknowledgementEmail(item: Pick<DemoCase, 'id' | 'client' | 'received'>): string {
-  return `Subject: We have received your complaint (${item.id})\n\nDear ${item.client},\n\nThank you for getting in touch. Your complaint is logged as ${item.id}. We will reply properly by ${caseDeadlines(item.received).respond}, and will update you sooner if anything changes.`;
+  return `Subject: We have received your complaint (${item.id})\n\nDear ${item.client},\n\nThank you for getting in touch. Your complaint is logged as ${item.id}. We will reply properly by ${longDate(caseDeadlines(item.received).respond)}, and will update you sooner if anything changes.`;
 }

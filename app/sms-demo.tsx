@@ -49,7 +49,7 @@ export function SmsDemo() {
         {state === 'preview' && 'Live texting is not switched on here, so here is the message as it would arrive.'}
         {state === 'idle' && 'One text, to your own number only. Nothing is sent until you tick the box.'}
       </p>
-      <pre className="cx" style={{ boxShadow: 'none', border: 0, padding: 14, margin: 0 }} aria-label="Example text message">{SAMPLE}</pre>
+      <pre className="cx-pre" aria-label="Example text message">{SAMPLE}</pre>
     </div>
   );
 }
