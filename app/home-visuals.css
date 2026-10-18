@@ -31,12 +31,19 @@
 .hv-play:focus-visible { outline: 4px solid var(--signal); outline-offset: -8px; }
 .hv-vcap { margin-top: 10px; font-size: 1rem; line-height: 1.4; }
 
-/* Offer teaser card (homepage, /services): one link, dark night motif to match /after-hours-receptionist. */
-.s-teaser { margin-top: 18px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 16px 18px; border: 3px solid var(--ink); background: #1b1d22; color: #f3f1ec; text-decoration: none; transition: transform 160ms ease-out, box-shadow 160ms ease-out; }
+/* The business cards fade out of the hero's sand before the next section. */
+.s-home #build { position: relative; isolation: isolate; background: transparent; padding-bottom: var(--s-gap); }
+.s-home #build::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100cqw - 100%) / -2); background: linear-gradient(180deg, var(--sand), var(--sage) 28%, var(--sage) 75%, var(--paper)); pointer-events: none; }
+
+/* Offer links share the site's light cards and keep orange for the action. */
+.s-teaser { margin-top: 12px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 18px 20px; border: 1px solid var(--ink); border-left: 5px solid var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: var(--card-shadow); transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out; }
 .s-teaser > * { grid-column: 1; }
 .s-teaser-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #ffb36b; }
+.s-teaser > .s-teaser-tag { color: var(--muted); }
 .s-teaser strong { font-size: 1.15rem; }
-.s-teaser span:not(.s-teaser-tag):not(.s-teaser-go) { color: #d8d5cd; }
-.s-teaser-go { grid-column: 2; grid-row: 1 / span 3; font-size: 1.6rem; font-weight: 800; color: #ffb36b; }
-.s-teaser:hover { transform: translateY(-2px); box-shadow: 6px 6px 0 var(--signal); }
-@media (prefers-reduced-motion: reduce) { .s-teaser { transition: none; } }
+.s-teaser span:not(.s-teaser-tag):not(.s-teaser-go) { color: var(--muted); font-size: .94rem; }
+.s-teaser-go { grid-column: 2; grid-row: 1 / span 3; font-size: 1.6rem; font-weight: 800; color: var(--signal-text); transition: transform 160ms ease-out; }
+.s-teaser:hover, .s-teaser:focus-visible { transform: translateY(-2px); background: var(--wheat); box-shadow: 4px 4px 0 var(--ink); }
+.s-teaser:hover .s-teaser-go, .s-teaser:focus-visible .s-teaser-go { transform: translateX(4px); }
+.s-teaser:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .s-teaser, .s-teaser-go { transition: none; } }

@@ -57,9 +57,9 @@ export default function Page() {
     <strong>{type.name}</strong><span>{type.examples}</span><em>{type.recipes[0].name.split(': ')[1]?.trim() ?? type.recipes[0].name} · {type.recipes[0].offer.price}</em>
    </a></li>)}</ul>
    <p><a className="s-details-link" href="/prices">Every price and what’s included →</a></p>
-   <a className="s-teaser s-teaser-slim" href="/video"><span className="s-teaser-tag">New</span><strong>Promo video</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
-   <a className="s-teaser s-teaser-slim" href={AFTER_HOURS.href}><span className="s-teaser-tag">Calls</span><strong>After-hours call answering {AFTER_HOURS.price}</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
-   <a className="s-teaser s-teaser-slim" href={MANAGED_PRESENCE.href}><span className="s-teaser-tag">Monthly</span><strong>Managed presence</strong><span className="s-teaser-go" aria-hidden="true">→</span></a>
+   <a className="s-teaser s-teaser-slim" href="/video"><span className="s-teaser-tag">Video</span><strong>Show customers what you do</strong><span>For websites and socials.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
+   <a className="s-teaser s-teaser-slim" href={AFTER_HOURS.href}><span className="s-teaser-tag">Calls · {AFTER_HOURS.price}</span><strong>Answer calls when you can’t pick up</strong><span>Your greeting and messages.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
+   <a className="s-teaser s-teaser-slim" href={MANAGED_PRESENCE.href}><span className="s-teaser-tag">Online · {MANAGED_PRESENCE.price}</span><strong>Stay visible without doing the posting</strong><span>Website, Google and social updates.</span><span className="s-teaser-go" aria-hidden="true">→</span></a>
   </section>
   <section className="s-section" id="how" data-reveal aria-labelledby="how-title">
    <p className="eyebrow">See it working</p><h2 id="how-title">One quote, chased for you.</h2><WalkthroughVideo />
