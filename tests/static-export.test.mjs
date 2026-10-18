@@ -77,8 +77,9 @@ async function internalTargetExists(urlPath) {
 
 test('homepage positions Maz Works as a systems builder, not a website-fix shop (Maz, 27 Sep)', async () => {
   const html = await readPage('/');
-  // Conversion rebuild (29 Sep): the hero leads with one concrete outcome, then the positioning line.
-  assert.match(html, /Every enquiry answered and every booking confirmed, (<em>)?without you chasing/);
+  // CRO Move 1 (18 Oct): the hero names the pain (missed calls), with one primary CTA.
+  assert.match(html, /Miss a call and they get a text with a booking link/);
+  assert.match(html, /before they ring someone else/);
   assert.match(html, /Start with one task for/);
   assert.match(html, /Automation, connected tools and custom software/);
   assert.match(html, /For small businesses and teams, in any trade/);

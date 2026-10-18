@@ -1,5 +1,9 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: CRO Move 1 — homepage hero names the pain
+- The homepage hero now leads with the missed-call pain ("Miss a call and they get a text with a booking link, before they ring someone else"), one primary CTA ("Get my free demo"), and a risk-reversal line ("No working, no invoice.") above the fold. The secondary "Watch it work (22s)" hero link moved out; the 22-second example still sits in the "See it working" section.
+- Homepage stays inside its 600-word budget (582). `npm run verify` green (287 tests, smoke pass). Before/after browser shots at 390px and 1280px in `docs/evidence/2026-10-18-cro-move1/`.
+
 ## 17 Oct: pricing explained through business jobs
 - All six packages now explain the repeat work or customer journey they handle, who they suit and a practical sign-off check. Creator Starter has a full pricing card; receptionist demo checks appear on both pricing pages.
 - Prices, included quantities and payment terms are unchanged. Care descriptions clarify the existing time limits; app, text and hosting costs are agreed before building.
