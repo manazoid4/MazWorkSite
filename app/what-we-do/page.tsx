@@ -8,6 +8,8 @@ import { ServiceSchema } from '../service-schema';
 import { SystemExplorer } from '../system-explorer';
 import { DeliveryTabs } from '../delivery-tabs';
 import { StickyCheckCta } from '../sticky-cta';
+import { FounderMoat } from '../b2b-parts';
+import { WorkflowSimulator } from '../workflow-sim';
 export const metadata: Metadata = {
  title: 'What we do: systems that work for you',
  description: 'See how enquiries, bookings and follow-ups work together. Three packages, clear prices, and a free preview for your business.',
@@ -36,6 +38,8 @@ export default function WhatWeDo() {
    <p><a className="s-details-link" href="/prices#next">{CHANGES_WINDOW.name}, what’s included and the cost calculator →</a></p>
   </section>
   <section className="s-section" id="why"><p className="eyebrow">Why Maz Works</p><h2>What you get that others do not offer.</h2><Cards items={USPS.map(u => ({ title: u.title, body: u.body }))} /></section>
+  <section className="s-section" id="simulator"><p className="eyebrow">See the flow</p><h2>Watch a job move between your tools.</h2><WorkflowSimulator /></section>
+  <FounderMoat />
   <section className="s-final"><h2>Start with the job that costs you time.</h2><p>A personal reply, usually within {CHECK_REPLY_TIME}.</p><a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a></section>
   <SiteFooter /><StickyCheckCta href="/free-plan#leak-check-form" /><ScrollReveal />
  </main>;

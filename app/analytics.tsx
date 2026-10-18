@@ -2,7 +2,7 @@
 
 import { track } from '@vercel/analytics';
 import { useEffect, useRef, type ReactNode } from 'react';
-import { rememberCampaign } from './linkedin-source';
+import { rememberAttribution, rememberCampaign } from './linkedin-source';
 
 /**
  * Conversion events for Vercel Web Analytics. Custom events only show in the
@@ -49,6 +49,7 @@ export function PricingViewTracker({ targetId }: { targetId: string }) {
 export function ConversionTracker() {
  useEffect(() => {
   rememberCampaign(location.search);
+  rememberAttribution(location.search, document.referrer);
   const click = (event: MouseEvent) => { const link = (event.target as Element).closest?.('a'); if (!link) return;
    const href = link.getAttribute('href') || '';
    if (href.includes('/free-plan') || href === '#check') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname});

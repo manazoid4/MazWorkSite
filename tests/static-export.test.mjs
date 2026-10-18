@@ -593,9 +593,9 @@ test('six wayfinding helps big sites use are in place', async () => {
   assert.ok(nf.includes('href="/site-map"') && nf.includes('href="/for"'));
   // 5. Back to top.
   assert.match(home, /class="mw-back-top" href="#main-content"/);
-  // 6. The header marks the current section.
-  const guide = await readPage('/for/architects');
-  assert.match(guide, /href="\/for" aria-current="page"/);
+  // 6. The header marks the current section (the header holds Solutions, Prices, What we do and Proof since 19 Oct).
+  const guide = await readPage('/prices');
+  assert.match(guide, /href="\/prices" aria-current="page"/);
 });
 
 test('scroll reveal hides nothing without JavaScript and respects reduced motion (Codex brief 05)', async () => {

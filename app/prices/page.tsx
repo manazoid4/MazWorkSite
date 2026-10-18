@@ -7,6 +7,8 @@ import { OG_IMAGE } from '../seo';
 import { PricingViewTracker } from '../analytics';
 import { CARE_PLAN, FREE_STEP, OFFERS, getOffer } from '../offers';
 import { PriceList } from '../price-list';
+import { PracticeTier } from '../b2b-parts';
+import '../b2b.css';
 
 const PAGE_URL = `${SITE_URL}/prices`;
 
@@ -43,6 +45,7 @@ export default function PricesPage() {
           <a className="button button-signal" href="/free-plan?src=prices#leak-check-form">Get my free preview</a>
         </div>
       </section>
+      <PracticeTier />
       <SiteFooter />
     </main>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ConversionTracker } from './analytics';
+import { LinkedInInsight } from './linkedin-insight';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import './enquiry.css';
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
         <Analytics /><ConversionTracker />
+        <LinkedInInsight />
       </body>
     </html>
   );

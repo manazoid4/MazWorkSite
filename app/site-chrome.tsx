@@ -44,7 +44,7 @@ export function SiteFooter() {
 
       <div className="mw-footer-bottom">
         <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a></span>
-        <span>Fixed quotes · Not VAT-registered · <a href="/3d-printing">Objects</a> · <a href="/lab">Lab</a> · <a className="mw-back-top" href="#main-content">Back to top ↑</a></span>
+        <span>Fixed quotes · Not VAT-registered · Lab / Physical products: <a href="/video">Video</a> · <a href="/3d-printing">Objects</a> · <a href="/lab">Lab</a> · <a className="mw-back-top" href="#main-content">Back to top ↑</a></span>
       </div>
     </footer>
   );

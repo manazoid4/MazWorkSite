@@ -950,3 +950,60 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
   if (builds >= BUSINESS_SYSTEM_JOBS) return packageQuote(business, `${builds} tasks to build is a ${business.name}: joined up, with the weekly report included.`);
   return { offer: builds ? starter : null, lines, total, totalLabel: formatPrice(total), workingBy: workingBy('starter'), note: 'Fixed price, agreed before any work starts. No VAT added.' };
 }
+
+/**
+ * Complaints & Escalation Tracker (PROPOSED 19 Oct 2026, price needs Maz's go before it goes live).
+ * A fixed-scope set-up on the tools the client already has: one intake form, an
+ * acknowledgement email, a case log with deadline dates, escalation alerts and a
+ * monthly summary. Drafting uses the client's own template wording and a person
+ * approves every reply. It never promises regulatory compliance, resolution or savings.
+ * Richer systems are quoted (Custom Software starts at £2,450).
+ */
+export const COMPLAINTS_SETUP = {
+  id: 'complaints-tracker',
+  name: 'Complaints & Escalation Tracker',
+  price: 'From £795',
+  from: 795,
+  href: '/complaints',
+  body: 'One place for every complaint, with replies and deadlines that stop slipping. Built on the tools you already use, and you see it working before you pay.',
+  includes: [
+    'An intake form (on your site, or a link) that logs each complaint the same way every time',
+    'An automatic acknowledgement email in your wording',
+    'A case log with your own acknowledge-by and reply-by dates',
+    'Alerts to you or a colleague when a case is due soon or overdue',
+    'Reply templates in your wording, drafted for a person to check and send',
+    'A monthly summary: how many, what about, how long they took',
+    'A written guide, one training session and 30 days of tweaks',
+  ],
+  notIncluded: [
+    'Legal advice, or a promise that your process meets any regulator’s rules. Your own compliance lead or adviser decides that.',
+    'Automatic replies or automatic resolution. A person approves every reply.',
+    'Rebuilding your CRM or helpdesk, or moving old records (quoted separately).',
+    'The monthly cost of the tools you choose, which you pay to those companies directly.',
+  ],
+  quoted: 'Several teams, a CRM or helpdesk integration, or evidence storage: quoted from a free scope call. Care from £39/month.',
+} as const;
+
+/**
+ * B2B operations systems for professional practices (PROPOSED 19 Oct 2026 from Maz's brief;
+ * every price here needs Maz's go before it goes live). One-off set-ups on the client's own
+ * tools, sold through the same free preview and "no working, no invoice" terms as the ladder.
+ * Wording rule: aims and typical times, never guarantees. Sending texts needs a paid texting
+ * service the client pays directly.
+ */
+export const B2B_SYSTEMS = [
+  { id: 'intake', name: 'Client Intake & Document Chaser', price: '£850', from: 850, tag: 'Accountants, solicitors, brokers',
+    body: 'A secure upload link and a reminder every few days by email or text until the ID, proof of address and signed letters are in, filed to your Google Drive or OneDrive.' },
+  { id: 'speed', name: 'Speed-to-Lead Reply', price: '£595', from: 595, tag: 'Anyone who pays for enquiries',
+    body: 'A web-form or Google enquiry gets a text or email reply in about a minute, with your Cal.com booking link, and you are told.' },
+  { id: 'proposal', name: 'Proposal Chaser', price: '£450–£750', from: 450, tag: 'Agencies and consultancies',
+    body: 'A short run of polite follow-ups on quotes you sent from Xero, PandaDoc or DocuSign, stopped the moment they reply.' },
+  { id: 'feedback', name: 'Feedback Filter', price: '£99', from: 99, tag: 'Add-on to any system',
+    body: 'After a job, happy customers are sent to your Google review page and unhappy ones go to a private form that alerts you first.' },
+  { id: 'digest', name: 'Monday Morning Digest', price: '£145', from: 145, tag: 'Add-on, or £79/month if you want it kept running',
+    body: 'One email or WhatsApp message at 8am: money in, open proposals and new enquiries from the tools you already use.' },
+] as const;
+
+/** GoHighLevel partner pricing from docs/maz-works/PRICE-AUDIT-2026-10.md (gohighlevel.partners, checked 2 Oct 2026; $1 = £0.75, approximate). */
+export const GHL_PARTNER = { setupUsd: 850, monthlyUsd: 38.8, usdToGbp: 0.75 } as const;
+export const ghlThreeYearGbp = (): number => Math.round((GHL_PARTNER.setupUsd + GHL_PARTNER.monthlyUsd * 36) * GHL_PARTNER.usdToGbp / 10) * 10;
