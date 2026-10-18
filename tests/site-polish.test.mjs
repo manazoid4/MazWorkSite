@@ -38,8 +38,9 @@ test('the free preview is a secondary link, never the main button', async () => 
   }
 });
 
-test('page lengths: homepage under 600 words, type pages short (5 blocks), /prices folded', async () => {
-  assert.ok(words(await read('index')) < 600, `homepage has ${words(await read('index'))} words`);
+// 600 -> 680 on 18 Oct: Maz asked for his own two-paragraph bio on the landing page.
+test('page lengths: homepage under 680 words, type pages short (5 blocks), /prices folded', async () => {
+  assert.ok(words(await read('index')) < 680, `homepage has ${words(await read('index'))} words`);
   for (const type of TYPES) {
     const html = await read(`for/${type}`);
     const sections = (mainWithoutFooter(html).match(/<section /g) ?? []).length;

@@ -82,7 +82,9 @@ export default function Page() {
           <div>
             <p className="eyebrow">Who you’re dealing with</p>
             <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-            <p>Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+            <p>I studied computer science, then spent five years resolving complex financial complaints and managing business accounts across the UK and Europe.</p>
+<p>I’ve seen firsthand where businesses lose time, money and customers. That’s why I created Maz Works: to build smarter websites, automations and practical solutions that solve real problems. I personally handle every project.</p>
+<p>Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
             <p><a className="button button-dark s-linkedin" href={LINKEDIN_URL} rel="me noopener" target="_blank">Connect on LinkedIn</a></p>
           </div>
         </div>
