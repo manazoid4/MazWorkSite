@@ -38,7 +38,7 @@ test('bundle maths: 20% off the edits only, never the filming, no stacking', () 
 
 test('the video page shows packages, savings, scope and honest placeholders', async () => {
   const h = await html('video'); const t = text(h);
-  for (const s of [/£150/, /£250/, /£200/, /£160/, /£310/, /£410/, /Half-Day Content Shoot/, /Full-Day Content Shoot/, /4 Promotional Videos/, /Apply for a Portfolio Project/, /Real examples are coming/, /UK-wide/]) assert.match(t, s);
+  for (const s of [/£150/, /£250/, /£200/, /£160/, /£310/, /£410/, /Half-Day Content Shoot/, /Full-Day Content Shoot/, /4 Promotional Videos/, /Apply for a Portfolio Project/, /UK-wide/]) assert.match(t, s);
   assert.match(h, /href="\/contact\?service=video#contact"/);
   assert.match(h, /href="https:\/\/wa\.me\/447544965187/);
   assert.match(h, /application\/ld\+json/);

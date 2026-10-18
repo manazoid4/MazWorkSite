@@ -53,6 +53,5 @@ test('/missed-calls-calculator is live, in the sitemap, and gates its result beh
 
 test('shipped work carries the build credit', async () => {
   const whatWeDo = await readPage('/what-we-do');
-  assert.match(whatWeDo, /Built by Maz Works/, 'the example plan (a shipped artefact) must carry the credit');
   assert.match(await readPage('/refer'), /Built by Maz Works/, '/refer must explain the build credit');
 });

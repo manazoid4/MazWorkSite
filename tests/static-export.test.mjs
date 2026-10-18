@@ -130,12 +130,11 @@ test('trade guides stay reachable and the homepage shows a labelled missed-call 
   assert.match(html, /Example of what changes, not a client result\./);
 });
 
-test('what-we-do shows a clearly labelled example report, not a real client', async () => {
+test('what-we-do shows why Maz Works, with no fictional example report', async () => {
   const html = await readPage('/what-we-do');
-  assert.match(html, /id="example"/);
-  assert.match(html, /A fictional business, made up to show the format/);
-  for (const level of ['Fix now', 'Fix soon', 'Working well']) assert.match(html, new RegExp(level));
-  assert.match(html, /Total £198/);
+  assert.match(html, /id="why"/);
+  assert.match(html, /See it working before you pay/);
+  assert.doesNotMatch(html, /A fictional business/);
 });
 
 test('homepage has one set of service routes, not a duplicate problem chooser', async () => {
@@ -487,7 +486,7 @@ test('retired offer terms are gone from every public page', async () => {
   ];
   // £795 was the retired Growth System; from 27 Sep (Offer v8) it is the Business System price.
   // Offer v11: £595 is the Business System (Launch Page £295 from v13); the old £395 Brand Kit, £19/month and unlimited changes are retired.
-  const retired = [/£150/, /Quick Win/, /£19\/month/, /founding/i, /hacked/i, /£395/, /£249/, /Enquiry Repair/, /Enquiry Check/, /Contact Setup/, /unlimited changes/i, /Custom Software &amp; Websites/, /pay the rest/i];
+  const retired = [/£150 fixed/, /Quick Win/, /£19\/month/, /founding/i, /hacked/i, /£395/, /£249/, /Enquiry Repair/, /Enquiry Check/, /Contact Setup/, /unlimited changes/i, /Custom Software &amp; Websites/, /pay the rest/i];
   for (const route of routes) {
     const html = await readPage(route);
     for (const pattern of retired) {

@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation is ${OFFERS[0].price} for one task from the automation menu, set up to run itself, with two small set-ups free. A Business System, where three jobs are joined up with a weekly report, starts from ${OFFERS[1].price.replace('From ', '')}. Custom Software starts from ${OFFERS[2].price.replace('From ', '')}. A Launch Page (one page that books, sells or takes enquiries) is ${getOffer('creator-launch').price}, and a Website (a Launch Page plus four more pages) starts from ${getOffer('website').price.replace('From ', '')}. Creators get a cheaper Starter (comment-to-get-it) at ${getOffer('creator-starter').price}. Every package includes free small set-ups. Care plans are ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. No VAT added.`,
+    answer: `Starter Automation ${OFFERS[0].price}. Business System from ${OFFERS[1].price.replace('From ', '')}. Custom Software from ${OFFERS[2].price.replace('From ', '')}. Launch Page ${getOffer('creator-launch').price}. Website from ${getOffer('website').price.replace('From ', '')}. Care plans ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. Video and filming is priced on its own page. No VAT added.`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,
@@ -24,7 +24,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Can I buy an add-on on its own?',
-    answer: `Add-ons go with a package, on the same invoice, so there are no surprise costs. Small set-ups (small things like a review QR card, a quote template or your booking link added everywhere) come free with every package: two with a Starter, three with a Business System, and more are ${SETUP_PRICE} each. Anything that runs on its own is a task from the automation menu: the first is Starter Automation (${OFFERS[0].price}), and Extra automation (${getExtra('Extra automation').price}) adds another.`,
+    answer: `Add-ons go with a package, on the same invoice. Small set-ups are free with every package (two with a Starter, three with a Business System); extra ones are ${SETUP_PRICE} each. Extra automation is ${getExtra('Extra automation').price}.`,
   },
   {
     question: 'What isn’t included?',
@@ -76,7 +76,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you pay for referrals?',
-    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit on how many — and bigger jobs pay more. Introduce a business that isn't already talking to me and ask them to put your name in their first message. When they pay their first invoice, I send your reward within 7 days. Add-ons on their own and care plans don't count, and there's no reward if the job is cancelled or refunded. The full tiers are on the <a href="/refer">Refer a business</a> page. If you share this publicly, mention you're paid for referrals.`,
+    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit, bigger jobs pay more. Ask the business to put your name in their first message. I pay within 7 days of their first invoice being paid. Details on the <a href="/refer">Refer a business</a> page.`,
   },
 ];
 

@@ -23,23 +23,13 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-test('/proof is live, honest about the gap, and offers the Founding Client deal', async () => {
+test('/proof is live, short, shows real work and has no founding offer', async () => {
   const html = await readPage('/proof');
 
-  assert.match(html, /Proof: what’s real, and what isn’t\./);
-  // The real, openable work.
+  assert.match(html, /Real work\. Open it and see\./);
   assert.match(html, /JobFilter/);
   assert.match(html, /Scrap Finance Partners/);
-  // The gap is named, not papered over.
-  assert.match(html, /no published client quotes yet/i);
-  assert.match(html, /I would rather show you none than make one up/i);
-  // The Founding Client deal: bounded, in writing, with an opt-out.
-  assert.match(html, /Founding Client offer/);
-  assert.match(html, /founder’s discount/i);
-  assert.match(html, /agreed in writing in your scope sheet/i);
-  assert.match(html, /You can say no to any of the three/i);
-  // The guardrail is stated and the main action is the free plan.
-  assert.match(html, /Never invent a client, a logo, a result or a number\./);
+  assert.doesNotMatch(html, /founding|founder’s discount/i);
   assert.match(html, /href="\/free-plan#leak-check-form">Get my free preview</);
 });
 
