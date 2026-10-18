@@ -92,11 +92,13 @@ test('homepage positions Maz Works as a systems builder, not a website-fix shop 
   }
 });
 
-test('homepage has one way in: the free check form, with the call as the fallback', async () => {
+test('the homepage offers a two-field start above the fold and the full check form below it', async () => {
   const page = await readPage('/');
   assert.match(page, /id="footer-signup"/, 'the mailing list lives in the shared footer band (conversion sprint, 15 Oct)');
   const html = stripNavChrome(page);
-  assert.equal((html.match(/<form/g) || []).length, 1, 'the homepage itself carries exactly one form, the free check');
+  // CRO Move 3 (18 Oct): the hero two-field start (email, then name) joins the full check form.
+  assert.equal((html.match(/<form/g) || []).length, 2, 'the homepage carries the hero start and the full check form');
+  assert.match(html, /id="hero-quick-form"/);
   assert.match(html, /id="leak-check-form"/);
   assert.doesNotMatch(html, /Send enquiry/);
   assert.doesNotMatch(html, /class="mw-newsletter"/);

@@ -1,10 +1,10 @@
-import { BOOKING_URL, CONTACT_EMAIL, LINKEDIN_URL, MAIN_CTA } from './site';
+import { CONTACT_EMAIL, LINKEDIN_URL } from './site';
 import { WalkthroughVideo } from './walkthrough-video';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { LeakCheckForm } from './free-plan/leak-check-form';
-import { CallLink } from './analytics';
 import { StickyCheckCta } from './sticky-cta';
 import { HeroDemo } from './hero-demo';
+import { HeroQuickForm } from './hero-quick-form';
 import './home-visuals.css';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
@@ -45,9 +45,8 @@ export default function Page() {
   <section className="s-hero s-hero-split" id="main-content" tabIndex={-1} aria-labelledby="intro-title">
    <div><p className="eyebrow">For small businesses and teams, in any trade</p>
     <h1 id="intro-title">Miss a call and they get a text with a booking link, <em>before they ring someone else</em>.</h1>
-    <p className="s-lede">Missed-call text-back, reminders and follow-ups on the apps you use. Start with one task for {STARTER.price}, after a free demo.</p>
-    <div className="s-actions"><a className="button button-signal s-button-lg" href="#check">{MAIN_CTA}</a></div>
-    <p className="s-note">No working, no invoice.</p>
+    <p className="s-lede">Missed-call text-back, reminders and follow-ups. Start with one task for {STARTER.price}, after a free demo.</p>
+    <HeroQuickForm />
    <ManazirLine />
    </div><HeroDemo />
   </section>
@@ -72,7 +71,6 @@ export default function Page() {
      <li><strong>{FREE_STEP.name}: {FREE_STEP.price}.</strong> A working demo of your first job, or a straight answer if it isn’t.</li>
      <li><strong>A written scope sheet and fixed price</strong> before you pay anything.</li>
     </ul>
-    <p className="s-small"><CallLink href={BOOKING_URL} className="text-link" placement="free-plan">Prefer to talk? Book a 15-minute call →</CallLink></p>
    </div><LeakCheckForm />
    <WorkSteps />
   </section>

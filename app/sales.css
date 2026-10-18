@@ -1156,6 +1156,27 @@ main {
 .s-small { margin-top: 14px; color: var(--muted); font-size: .92rem; }
 .s-small a, .s-note a { color: var(--ink); font-weight: 700; }
 
+/* CRO Move 3: the two-field hero start (email first, then name), a native form so it still works without JavaScript. */
+.s-quick-form { margin-top: 28px; }
+.s-quick-fields { display: flex; flex-wrap: wrap; gap: 12px; }
+.s-quick-fields input {
+  flex: 1 1 200px;
+  min-height: 56px;
+  padding: 12px 14px;
+  border: 1px solid var(--soft-line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: .95rem;
+}
+.s-quick-fields input:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+.s-quick-fields input:disabled { opacity: .62; cursor: wait; }
+.s-quick-fields .button { flex: 1 1 100%; }
+.s-quick-status { margin-top: 10px; color: var(--muted); font-size: .9rem; }
+.s-quick-status:empty { display: none; }
+.s-quick-status a { color: var(--ink); font-weight: 700; }
+
 .s-trust { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .s-trust li { padding: 16px 14px 16px 0; display: grid; gap: 3px; border-bottom: 1px solid var(--soft-line); }
 .s-trust li:nth-child(n+3) { border-bottom: 0; }

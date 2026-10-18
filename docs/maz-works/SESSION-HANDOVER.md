@@ -1,5 +1,10 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: CRO Move 3 — a two-field start in the hero
+- The homepage hero no longer sends people to a section to start. It asks for an email and a name (email first) and posts to the same place as /free-plan, with a "Book a time now →" slot for anyone who would rather talk. It is a real form, so it still posts without JavaScript, and no phone number is published.
+- The full /free-plan form now asks for the email before the name. The hero carries the only booking link on the homepage; the duplicate call link in the "Your free demo" block is gone.
+- Homepage stays inside its 600-word budget (589). `npm run verify` green (291 tests, smoke pass). Before/after browser shots at 390px and 1280px in `docs/evidence/2026-10-18-cro-move3/`.
+
 ## 18 Oct: CRO Move 2 — the proof gap, honestly
 - New `/proof` page. It shows the two things anyone can open today (JobFilter, Scrap Finance Partners), states plainly that there are no published client quotes or reviews yet, and sets out the Founding Client offer (your first job at a founder's discount, agreed in writing, in exchange for a nameable quote, a photo and a review — all optional).
 - Guardrail written into the page and locked by a test: never invent a client, logo, result or number. Linked from the footer, the homepage ("Proof →") and the sitemap.
