@@ -178,9 +178,9 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.doesNotMatch(html, /id="compare"/);
   assert.doesNotMatch(html, /Team training/);
   assert.match(html, /href="\/prices"/);
-  assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
+  assert.match(prices, /Care plan[\s\S]{0,30}£39\/month/);
   assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
-  assert.match(html, /Free Demo &amp; Fixed Price/);
+  assert.match(html, /Free Preview &amp; Fixed Price/);
   // Offer v11 (2 Oct): £149, £595, £2,450 and £39/month are the live prices; £19/month, the £395 Brand Kit and unlimited changes are retired.
   for (const retired of [/£150/, /£395/, /£249/, /Quick Win/, /£19\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£1,250/, /Custom Software &amp; Websites/, /unlimited changes/i]) {
     assert.doesNotMatch(html, retired, `retired offer still on homepage: ${retired}`);
@@ -200,8 +200,8 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
   assert.match(prices, /Google listing tidy[\s\S]{0,300}£29/);
   assert.match(prices, /Extra website page[\s\S]{0,300}£295/);
   assert.match(prices, /Team training[\s\S]{0,300}£95/);
-  assert.match(prices, /Keep It Running[\s\S]{0,30}£39\/month/);
-  assert.match(prices, /Keep It Growing[\s\S]{0,30}£149\/month/);
+  assert.match(prices, /Care plan[\s\S]{0,30}£39\/month/);
+  assert.match(prices, /Care plan plus[\s\S]{0,30}£149\/month/);
   assert.match(prices, /\/free-plan\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/free-plan\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
@@ -506,7 +506,7 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.doesNotMatch(faq, /deposit|final payment|pay the rest/i, 'no payment-split wording (Maz, 1 Oct)');
 });
 
-// 30 Sep: the free demo is real now, but only after a call (date agreed on the call).
+// 30 Sep: the free preview is real now, but only after a call (date agreed on the call).
 // Case study bodies still lead to the free plan form; the shared nav may link /demos.
 test('case studies route to a plan and fixed price, not a blanket free live demo', async () => {
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
@@ -631,14 +631,14 @@ test('terms and privacy pages exist, are linked from every footer and match the 
   }
   assert.match(terms, /The quote is the agreement/);
   assert.match(terms, /the date moves by the same number of days/);
-  assert.match(terms, /Keep It Running is £39\/month/);
+  assert.match(terms, /Care plan is £39\/month/);
   assert.match(terms, /limited to the price you paid/);
   assert.doesNotMatch(terms, /unlimited|deposit|pay the rest/i);
   for (const processor of ['Resend', 'FormSubmit', 'HubSpot', 'Cal.com', 'Vercel', 'Supabase', 'ico.org.uk']) assert.match(privacy, new RegExp(processor));
   assert.match(leak, /href="\/privacy"[^>]*>How I use your details/);
 });
 
-test('free demos are fenced to bigger jobs; small jobs get a written plan', async () => {
+test('free previews are fenced to bigger jobs; small jobs get a written plan', async () => {
   const demos = await readPage('/demos');
-  assert.match(demos, /Smaller jobs go straight from the free demo to a fixed price/);
+  assert.match(demos, /Smaller jobs go straight from the free preview to a fixed price/);
 });

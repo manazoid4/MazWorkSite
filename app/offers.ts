@@ -11,7 +11,7 @@
  * Offer v11 (2 Oct 2026, PROPOSED: prices need Maz's go before merge).
  * Built from the offer map and competitor teardown in the private handoff
  * folder `handoffs/2026-10-02-offer-v11/`. What changed and why:
- * - One fix ladder for every customer: Free demo £0 → One-day set-up £49 →
+ * - One fix ladder for every customer: Free preview £0 → Small set-up £49 →
  *   Starter £149 → Business System from £595 → Custom from £2,450. A buyer
  *   picks their business type, sees their problems, then the step that fixes them.
  * - "Automation" is now a menu of 16 plain-English jobs (AUTOMATION_MENU).
@@ -43,9 +43,9 @@
  * - Pages add up: a Launch Page is one page; a Website is a Launch Page plus
  *   four more pages (same inclusions), so £1,495 is visibly less than
  *   £595 + 4 × £295.
- * - Every package includes free one-day set-ups (Starter 2, bigger packages 3),
+ * - Every package includes free small set-ups (Starter 2, bigger packages 3),
  *   because those are the items free tools and £30 gigs undercut on their own.
- * - Business System adds team training and a first month of Keep It Running,
+ * - Business System adds team training and a first month of Care plan,
  *   so it is clearly cheaper than buying the parts (PACKAGE_VALUE).
  * Competitor check behind it: docs/maz-works/PRICE-AUDIT-2026-10.md.
  * Approved by Maz (2 Oct) on top: a UK price match (PRICE_MATCH), one-day
@@ -66,10 +66,10 @@
 export const POSITIONING = 'Automation, connected tools and custom software for UK small businesses.';
 
 export const FREE_STEP = {
-  name: 'Free Demo & Fixed Price',
-  short: 'free demo and price',
+  name: 'Free Preview & Fixed Price',
+  short: 'free preview and price',
   price: '£0',
-  body: 'Tell me the job that eats your week or loses you customers. Usually within 1 working day you get a working demo of it with your business name on, plus a fixed price and a written scope sheet.',
+  body: 'Tell me the job that eats your week or loses you customers. Usually within 1 working day you get a working preview of it with your business name on, plus a fixed price and a written scope sheet. It is built from a template on my own test setup, so it is not on your apps yet.',
 } as const;
 
 /** The four kinds of work. Every offer belongs to one, and the copy never blurs them. */
@@ -159,7 +159,7 @@ export const OFFERS: Offer[] = [
     bullets: [
       'Pick one: missed-call text-back, reminders, review requests, quote follow-up…',
       'Set up on the tools you already use, and tested with you',
-      'Plus 2 one-day set-ups of your choice, free',
+      'Plus 2 small set-ups of your choice, free',
     ],
     forWho: 'Owners repeating one task by hand who want to start small.',
     successCheck: 'Trigger your chosen task with a test enquiry or booking. Watch the agreed message or update reach the right place without retyping it.',
@@ -167,7 +167,7 @@ export const OFFERS: Offer[] = [
       'One task from the automation menu: one thing starts it, then up to three things happen automatically',
       'Built on up to two apps you already use',
       'Tested on real examples with you, then switched on',
-      'Two one-day set-ups of your choice, free (for example your Google listing tidy and a review QR card)',
+      'Two small set-ups of your choice, free (for example your Google listing tidy and a review QR card)',
       'Everything in “always included” below',
     ],
     excludes: [
@@ -202,8 +202,8 @@ export const OFFERS: Offer[] = [
       'One customer list your team can see',
       'Weekly report email (worth the add-on price on its own)',
       'Team training: a one-hour call for your staff, plus a cheat sheet',
-      'Three one-day set-ups of your choice, free',
-      'First month of Keep It Running free, then only if you want it',
+      'Three small set-ups of your choice, free',
+      'First month of care free, then only if you want it',
       'Everything in “always included” below',
     ],
     excludes: [
@@ -214,7 +214,7 @@ export const OFFERS: Offer[] = [
     delivery: 'Date agreed in your scope sheet, usually 2 to 3 weeks after access.',
     payment: `${PAY_ONE_INVOICE} If your scope comes to £1,000 or more, it’s billed in signed-off stages instead.`,
     changes: TWEAKS,
-    upsell: 'Keep It Growing, to keep adding tasks each month.',
+    upsell: 'Care plan plus, to keep adding tasks each month.',
   },
   {
     id: 'custom',
@@ -240,13 +240,13 @@ export const OFFERS: Offer[] = [
     ],
     excludes: [
       'Features not in the agreed spec (priced first)',
-      'Changes after the tweaks window, unless you have Keep It Growing',
+      'Changes after the tweaks window, unless you have Care plan plus',
       'Hosting and third-party fees (at cost, paid by you)',
     ],
     delivery: 'A dated plan in your scope sheet, billed in stages.',
     payment: 'Two or three stages, each one signed off by you, as set out in your scope sheet.',
     changes: TWEAKS,
-    upsell: 'Keep It Growing for ongoing improvements.',
+    upsell: 'Care plan plus for ongoing improvements.',
   },
 ];
 
@@ -271,7 +271,7 @@ export const CREATOR_OFFERS: Offer[] = [
     includes: [
       'One task from the menu: a keyword auto-reply on Instagram (or TikTok) that sends your free resource, adds them to your list and sends a welcome email written with you',
       'Email list in your name, so it leaves with you if an app changes its rules',
-      'Two one-day set-ups free: profile tidy (bio, link, highlight covers) and your link added everywhere',
+      'Two small set-ups free: profile tidy (bio, link, highlight covers) and your link added everywhere',
       'Built on tools with free plans where they fit your size, so running it can cost £0 a month',
       'Everything in “always included” below',
     ],
@@ -308,7 +308,7 @@ export const CREATOR_OFFERS: Offer[] = [
       'Digital resources sent automatically after payment, or an instant reply to every enquiry',
       'Email sign-up plus a 3-email welcome series, list in your name',
       'Brand tidy: colours, fonts and logo tidied; 12 Canva post templates; 3 launch posts; QR poster',
-      'Two one-day set-ups of your choice, free',
+      'Two small set-ups of your choice, free',
       'Launch checklist and a 30-day stats check',
       'Everything in “always included” below',
     ],
@@ -358,7 +358,7 @@ export const WEB_OFFERS: Offer[] = [
     delivery: 'Live by the date in your scope sheet, usually 4 to 6 weeks, billed in two stages.',
     payment: 'Two stages, each one signed off by you, as set out in your scope sheet.',
     changes: `Two rounds of changes per page before launch, then ${TWEAKS.charAt(0).toLowerCase()}${TWEAKS.slice(1)}`,
-    upsell: 'A Business System behind it, or Keep It Growing.',
+    upsell: 'A Business System behind it, or Care plan plus.',
   },
 ];
 
@@ -381,8 +381,8 @@ export const LANES: { id: string; title: string; offers: Offer[]; note: string }
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
-  { step: 'Free demo', what: 'A working demo with your business name, and a fixed price.', price: FREE_STEP.price, href: '/free-plan' },
-  { step: 'Starter', what: 'One task from the automation menu that runs by itself, plus 2 one-day set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
+  { step: 'Free preview', what: 'A working preview with your business name, and a fixed price.', price: FREE_STEP.price, href: '/free-plan' },
+  { step: 'Starter', what: 'One task from the automation menu that runs by itself, plus 2 small set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three tasks joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
 ];
@@ -420,7 +420,7 @@ export function getMenuJob(id: string): MenuJob {
 }
 
 /**
- * One-day set-ups (Offer v11): one small thing set up in a day for a fixed £49.
+ * Small set-ups (Offer v11): one small thing set up in a day for a fixed £49.
  * No automation, no ongoing work: templates and settings on tools the client
  * already has. Anything that needs to run on its own is a Starter. (Never
  * call these "quick fixes" in copy: positioning rule, 27 Sep.)
@@ -433,7 +433,7 @@ export const SETUP_PRICE = '£29';
 export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Extra[] }[] = [
   {
     id: 'set-ups',
-    title: 'One-day set-ups, free with every package',
+    title: 'Small set-ups, free with every package',
     note: `One small thing, set up in a day, on tools you already have. Two come free with a Starter or Launch Page, three with a Business System. Want more? ${SETUP_PRICE} each, added to a package. Not sold on their own.`,
     items: [
       { name: 'Booking link everywhere', price: SETUP_PRICE, what: 'Your booking or quote link added to Instagram, your Google listing and WhatsApp, with a voicemail that mentions it.' },
@@ -545,19 +545,19 @@ export const CHANGES_WINDOW = {
  * for. Day 0 is the day the scope sheet is approved.
  */
 export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
-  { day: 'Day 0', title: 'Free demo and fixed price', body: 'You tell me the job. Usually within 1 working day I send a working demo with your business name on, a fixed price and a written scope sheet. Nothing to pay.' },
+  { day: 'Day 0', title: 'Free preview and fixed price', body: 'You tell me the job. Usually within 1 working day I send a working preview with your business name on, a fixed price and a written scope sheet. Nothing to pay.' },
   { day: 'Day 1', title: 'You say yes and add me to your apps', body: 'As a user, never with passwords. I confirm the messages and timings with you.' },
   { day: 'Day 3', title: 'Set up on your apps, shown working', body: 'You see it run on your own apps and your own phone, before you pay.' },
   { day: 'Day 7', title: 'Live, then care is optional', body: 'Invoice when you’ve seen it working. Then 30 days of tweaks (two rounds) and a 90-day fix promise. Ongoing care is only if you want it.' },
 ];
 
 /**
- * The free demo (Maz, 30 Sep): not a self-serve toy and not a blanket promise.
+ * The free preview (Maz, 30 Sep): not a self-serve toy and not a blanket promise.
  * Fenced 2 Oct: demos only for jobs from the Business System / Creator Launch up.
  * A demo for a £149 job costs more time than the job pays; small jobs get a written plan.
  */
 export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
-  { title: 'Start with the free demo', body: 'Tell me the job in a few taps. I send a working demo with your business name and a fixed price, usually within 1 working day. No call needed.', note: 'Free' },
+  { title: 'Start with the free preview', body: 'Tell me the job in a few taps. I send a working preview with your business name and a fixed price, usually within 1 working day. No call needed.', note: 'Free' },
   { title: 'Bigger build? A preview', body: 'For a Business System, Launch Page, Website or Custom Software, your scope sheet says what the bigger-build preview shows and when you get it. Smaller jobs go straight to the fixed price, which is quicker for you.', note: 'Date in your scope sheet' },
   { title: 'Your bigger-build preview arrives', body: 'A clickable preview of one screen, built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your scope sheet', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges from me beyond the quote.', note: 'Nothing to pay yet' },
@@ -565,7 +565,7 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free demo first', body: 'A working demo and a fixed price, no call needed. Bigger builds also get a working preview. No charge.' },
+  { title: 'Free preview first', body: 'A working preview and a fixed price, no call needed. Bigger builds also get a full-build preview. No charge.' },
   { title: 'One fixed price', body: 'A written scope sheet before any work, so you know the full cost.' },
   { title: 'No contracts', body: 'Every package is a one-off you own. Care plans are monthly, cancel any time.' },
 ];
@@ -581,15 +581,15 @@ export const NOT_INCLUDED = [
 export const CARE_PLANS = [
   {
     id: 'running',
-    name: 'Keep It Running',
+    name: 'Care plan',
     price: '£39/month',
     body: 'Keep the system I built useful as your business changes. I check it keeps working, fix it if it breaks, and make one small change a month (up to 30 minutes), such as updating a message or opening hours. Reply within 2 working days, Monday to Friday. Cancel any time.',
   },
   {
     id: 'growing',
-    name: 'Keep It Growing',
+    name: 'Care plan plus',
     price: '£149/month',
-    body: 'Keep improving the work that slows your team down. Everything in Keep It Running, plus up to 3 hours a month of changes, new tasks or improvements. We choose the priority in a monthly 20-minute review call and agree what fits the time. Reply within 1 working day, Monday to Friday. Cancel any time.',
+    body: 'Keep improving the work that slows your team down. Everything in the Care plan, plus up to 3 hours a month of changes, new tasks or improvements. We choose the priority in a monthly 20-minute review call and agree what fits the time. Reply within 1 working day, Monday to Friday. Cancel any time.',
   },
 ] as const;
 
@@ -667,11 +667,11 @@ export const DELIVERY: { title: string; body: string }[] = [
 ];
 
 /** Shown on the site. Internal detail: under £1,000 = one invoice before go-live, 7-day terms; £1,000+ = two or three signed-off stages. */
-export const PAYMENT_TERMS = 'A free demo, a written scope sheet and a fixed price before any work. You pay when you’ve seen it working, before it goes live. Bigger jobs are billed in stages you sign off. No VAT added.';
+export const PAYMENT_TERMS = 'A free preview, a written scope sheet and a fixed price before any work. You pay when you’ve seen it working, before it goes live. Bigger jobs are billed in stages you sign off. No VAT added.';
 
 /**
  * What it keeps costing after the build, derived from CARE_PLANS (never typed).
- * Business System includes a first month of Keep It Running (Offer v12).
+ * Business System includes a first month of Care plan (Offer v12).
  */
 export function runningCost(offer: Offer): string {
   const care = `${CARE_PLANS[0].name} is optional, ${CARE_PLANS[0].price}.`;
@@ -708,15 +708,15 @@ export const PACKAGE_VALUE: Partial<Record<OfferId, { parts: { label: string; pr
   const page = priceAmount(getExtra('Extra website page').price);
   const build = (parts: { label: string; price: number }[]) => ({ parts, total: parts.reduce((sum, part) => sum + part.price, 0) });
   return {
-    starter: build([{ label: 'one automation task', price: OFFERS[0].from }, { label: '2 one-day set-ups', price: 2 * setup }]),
-    'creator-starter': build([{ label: 'one automation task', price: CREATOR_OFFERS[0].from }, { label: '2 one-day set-ups', price: 2 * setup }]),
+    starter: build([{ label: 'one automation task', price: OFFERS[0].from }, { label: '2 small set-ups', price: 2 * setup }]),
+    'creator-starter': build([{ label: 'one automation task', price: CREATOR_OFFERS[0].from }, { label: '2 small set-ups', price: 2 * setup }]),
     'business-system': build([
       { label: 'first automation task', price: OFFERS[0].from },
       { label: '2 more tasks', price: 2 * extraJob },
       { label: 'weekly report', price: priceAmount(getExtra('Weekly report').price) },
       { label: 'team training', price: priceAmount(getExtra('Team training').price) },
-      { label: '3 one-day set-ups', price: 3 * setup },
-      { label: 'a month of Keep It Running', price: priceAmount(CARE_PLANS[0].price) },
+      { label: '3 small set-ups', price: 3 * setup },
+      { label: 'a month of care', price: priceAmount(CARE_PLANS[0].price) },
     ]),
     website: build([{ label: 'Launch Page', price: CREATOR_OFFERS[1].from }, { label: '4 more pages', price: 4 * page }]),
   };
@@ -732,7 +732,7 @@ export const BUY_LINKS: Partial<Record<string, string>> = {
   // 'Starter Automation': 'https://buy.stripe.com/…',
   // 'Starter for creators': 'https://buy.stripe.com/…',
   [AFTER_HOURS.name]: 'https://buy.stripe.com/9B69ALam8eaJ2uweD6abK00',
-  // (One-day set-ups are not sold on their own since v12, so no link for them.)
+  // (Small set-ups are not sold on their own since v12, so no link for them.)
 };
 
 export function getOffer(id: OfferId): Offer {
@@ -766,7 +766,7 @@ export type PlanQuote = {
   note: string;
 };
 
-/** One-day set-ups that come free with a Starter. */
+/** Small set-ups that come free with a Starter. */
 const INCLUDED_SETUPS = 2;
 
 /** Three or more tasks to build is a Business System, whatever the parts add up to. */
@@ -775,7 +775,7 @@ const BUSINESS_SYSTEM_JOBS = 3;
 /**
  * Prices a set of chosen jobs by the offer rules above, for the
  * "Build my system" tool. Everything is read from this file:
- * - one-day set-ups are never sold alone: two ride free with a Starter, SETUP_PRICE each after that;
+ * - small set-ups are never sold alone: two ride free with a Starter, SETUP_PRICE each after that;
  * - a task from the automation menu is Starter Automation, and each further
  *   one is Extra automation (which only ever adds to a package);
  * - asking for a package (Business System, Custom) quotes that package;
@@ -805,9 +805,9 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
     lines.push(builds === 0 ? { label: `${starter.name}: ${job.name.toLowerCase()}`, price: starter.price } : { label: `${extraJob.name}: ${job.name.toLowerCase()}`, price: extraJob.price });
     builds++;
   }
-  // One-day set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, SETUP_PRICE each beyond two.
+  // Small set-ups are not sold on their own (Maz, 2 Oct): they ride free with a Starter, SETUP_PRICE each beyond two.
   if (setups.length && !builds) { lines.unshift({ label: `${starter.name}: one task of your choice`, price: starter.price }); builds = 1; }
-  setups.forEach((name, index) => lines.push({ label: `${name} (one-day set-up)`, price: index < INCLUDED_SETUPS ? 'Included' : SETUP_PRICE }));
+  setups.forEach((name, index) => lines.push({ label: `${name} (small set-up)`, price: index < INCLUDED_SETUPS ? 'Included' : SETUP_PRICE }));
   const total = lines.reduce((sum, line) => sum + priceAmount(line.price), 0);
   if (total > business.from) return packageQuote(business, `Your picks add up to ${formatPrice(total)} on their own, more than a ${business.name}, so I would quote that instead, with the weekly report included.`);
   if (builds >= BUSINESS_SYSTEM_JOBS) return packageQuote(business, `${builds} tasks to build is a ${business.name}: joined up, with the weekly report included.`);

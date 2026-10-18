@@ -18,7 +18,7 @@ test('/brag includes a finite, seekable 20-second film with replay and pause',()
 });
 
 test('the film tells a specific flow without fabricated client results',()=>{
- for(const text of ['THE PHONE','FOLLOW-UP','Missed call','Helpful text','Request captured','JobFilter','Scrap Finance Partners','Get my free demo']){
+ for(const text of ['THE PHONE','FOLLOW-UP','Missed call','Helpful text','Request captured','JobFilter','Scrap Finance Partners','Get my free preview']){
   assert.ok(scene.includes(text),'film missing '+text);
  }
  assert.match(scene,/Illustrative workflow, not connected to a real customer or phone line/);

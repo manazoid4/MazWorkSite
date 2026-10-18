@@ -55,13 +55,13 @@ export const FAQS = [
   { q: 'Can I change the greeting or opening hours?', a: 'Yes. Email me and I update it, usually within 2 working days. Holidays and closures are included in the monthly price.' },
   { q: 'Are calls recorded?', a: 'Only if you want them to be. If recording is on, callers are told at the start of the call. Otherwise you get the written summary only.' },
   { q: 'How is my customers’ information handled?', a: 'Call details go to you by email and are used only to run your service. To answer and summarise calls, the audio passes through a telephone provider and a speech-processing provider. I never sell caller details or share them for marketing. Transcripts are kept for 30 days by default, then deleted, and you can ask for them to be deleted sooner. Details are in the privacy notice.' },
-  { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you send calls on when you don’t answer. I check your setup in the free demo stage and tell you plainly before you pay anything.' },
+  { q: 'Will it work with my phone number?', a: 'Usually, yes. Most UK phone providers let you send calls on when you don’t answer. I check your setup in the free preview stage and tell you plainly before you pay anything.' },
   { q: 'What if I get lots of calls?', a: `${AFTER_HOURS.minutes} call minutes a month are included. If you regularly need more, I tell you and we agree a price first. You are never billed for extra minutes by surprise.` },
   { q: 'Does it answer in the day as well as after hours?', a: 'Yes, both, for the same price. In the day it only gets the calls you don’t pick up, so you still answer as normal when you can. When you’re closed it says so and takes a message.' },
   { q: 'Can I cancel?', a: `Yes. ${AFTER_HOURS.terms} Turn off call forwarding and your phone works as it did before.` },
 ];
 
-/** What happens after the visitor asks for the free demo. */
+/** What happens after the visitor asks for the free preview. */
 export const NEXT = [
   { title: 'Tell me about your business', body: 'A few taps in the form. Your website helps.' },
   { title: 'Hear your demo', body: `I reply within ${CHECK_REPLY_TIME} to check your phone setup, then set up a demo answering as your business for you to hear.` },

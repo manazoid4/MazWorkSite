@@ -12,9 +12,9 @@ const PAGE_URL = '/services';
 
 export const metadata: Metadata = {
   title: { absolute: 'Automation jobs for UK small businesses | Maz Works' },
-  description: fitDescription(`Missed-call text-back, appointment reminders, review requests, quote follow-up and more, set up for you. Starter Automation ${OFFERS[0].price}, free demo first.`),
+  description: fitDescription(`Missed-call text-back, appointment reminders, review requests, quote follow-up and more, set up for you. Starter Automation ${OFFERS[0].price}, free preview first.`),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Automation jobs for UK small businesses', description: fitDescription('Pick the job you want off your plate. Fixed price, free demo first.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Automation jobs for UK small businesses', description: fitDescription('Pick the job you want off your plate. Fixed price, free preview first.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 export default function ServicesPage() {
@@ -38,7 +38,7 @@ export default function ServicesPage() {
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>
         </div>
-        <p className="mw-hero-note">{`Free demo, no call needed. One job is ${OFFERS[0].price} as a Starter Automation. Manazir plans and builds it himself.`}</p>
+        <p className="mw-hero-note">{`Free preview, no call needed. One job is ${OFFERS[0].price} as a Starter Automation. Manazir plans and builds it himself.`}</p>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="services-monthly-title">
@@ -69,7 +69,7 @@ export default function ServicesPage() {
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="services-cta-title">Not sure which job?</h2>
-          <p>Tell me what eats your time. I’ll send a working demo and a fixed price.</p>
+          <p>Tell me what eats your time. I’ll send a working preview and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <a className="button button-signal" href={ctaHref}>{MAIN_CTA}</a>

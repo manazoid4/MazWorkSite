@@ -75,7 +75,7 @@ export function SystemBuilder({ presetTrade = '' }: { presetTrade?: string }) {
       </div>
       {/* ConversionTracker records this as 'CTA clicked'; the systems travel in the URL. */}
       <a className="button button-signal" href={builderHref(trade, headaches)}>{MAIN_CTA}</a>
-      <p className="s-small">Opens the free demo form with your picks filled in. No call, no obligation.</p>
+      <p className="s-small">Opens the free preview form with your picks filled in. No call, no obligation.</p>
       <noscript>
         <p className="s-small">Or see each system: {HEADACHE_PICKS.map((pick, index) => <span key={pick.id}>{index ? ' · ' : ''}<a href={`/what-we-do#${pick.system}`}>{pick.label}</a></span>)}</p>
       </noscript>

@@ -35,7 +35,7 @@ test('the enquiry captures which service the visitor actually wants', async () =
     'Starter for creators: keyword DM, free resource, email list (£79)',
     'Launch Page: one page that books, sells or takes enquiries (£295)',
     'Review requests and customer reminders (Starter Automation £99)',
-    'Care plan (Keep It Running £39/month, or Keep It Growing £149/month)',
+    'Care plans (£39/month or £149/month)',
     'Custom software or internal tool (from £2,450)',
     'Tap-to-review stands and signs',
     'Not sure yet',
@@ -54,7 +54,7 @@ test('an enquiry can ask for a quote or an answer instead of an unpaid build', a
   const html = await readPage('/contact');
 
   assert.match(html, /What would be most useful next\?/);
-  assert.match(html, /A free demo and fixed price/);
+  assert.match(html, /A free preview and fixed price/);
   // The free first step is the templated demo (9 Oct); a live bigger-build demo is never offered here.
   const withoutNavLink = html.replace(/\/demos.{0,40}?Bigger build demos/g, '');
   assert.doesNotMatch(withoutNavLink, /free live demo/i);

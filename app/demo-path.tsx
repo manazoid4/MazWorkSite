@@ -4,7 +4,7 @@ import './demo-path.css';
 import { CampaignLink } from './campaign-link';
 
 /**
- * The free demo route, as five plain numbered steps (Maz, 30 Sep).
+ * The free preview route, as five plain numbered steps (Maz, 30 Sep).
  * Server-rendered, no animation: it should read like a promise, not a show.
  */
 export function DemoPath({ source = 'site', compact = false }: { source?: string; compact?: boolean }) {

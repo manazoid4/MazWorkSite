@@ -22,9 +22,9 @@ export const ENQUIRY_SERVICES = [
   { id: 'brand-sales-page', label: `Launch Page: one page that books, sells or takes enquiries (${getOffer('creator-launch').price})` },
   { id: 'reviews', label: `Review requests and customer reminders (${OFFERS[0].name} ${OFFERS[0].price})` },
   { id: 'after-hours', label: `${AFTER_HOURS.name}: calls answered when you can’t pick up (${AFTER_HOURS.price})` },
-  { id: 'care', label: `Care plan (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}, or ${CARE_PLANS[1].name} ${CARE_PLANS[1].price})` },
+  { id: 'care', label: `Care plans (${CARE_PLANS[0].price} or ${CARE_PLANS[1].price})` },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
-  { id: 'google-profile', label: `Google listing tidy (one-day set-up, free with a Starter ${getOffer('starter').price})` },
+  { id: 'google-profile', label: `Google listing tidy (small set-up, free with a Starter ${getOffer('starter').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'brand-kit', label: `Starter for creators: keyword DM, free resource, email list (${getOffer('creator-starter').price})` },
@@ -38,7 +38,7 @@ export const DEFAULT_SERVICE_ID: EnquiryServiceId = 'unsure';
 /** Next step the visitor actually wants. */
 export const ENQUIRY_NEXT_STEPS = [
   'A fixed quote for a specific job',
-  'A free demo and fixed price',
+  'A free preview and fixed price',
   'A 15-minute call',
   'Just answer my question first',
 ] as const;

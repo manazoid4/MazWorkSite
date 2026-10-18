@@ -5,7 +5,7 @@ import { DELIVERY } from './offers';
 import './interactive.css';
 
 const OWN = 'Your accounts, your customer data, and everything I build. A written handover explains how it works. You can remove my access.';
-const NEED = 'Add me as a user to the tools we agree on; never send passwords. Allow one setup call if the job needs it, and sign off the test before launch. You do not need a call to request your free demo.';
+const NEED = 'Add me as a user to the tools we agree on; never send passwords. Allow one setup call if the job needs it, and sign off the test before launch. You do not need a call to request your free preview.';
 
 const TABS = [
   ...DELIVERY.map((item) => ({ title: item.title, body: item.body })),

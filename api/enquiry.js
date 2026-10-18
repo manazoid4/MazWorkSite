@@ -55,7 +55,7 @@ export function cleanEnquiryContext(body) {
     systems: oneLine(body.systems, 400),
     website: oneLine(body.website, 200),
     referred_by: oneLine(body.referred_by, 120),
-    next_step: setup ? 'Confirm payment in Stripe before setup; the package query is not proof of payment' : 'Send a free demo and fixed price; not an order',
+    next_step: setup ? 'Confirm payment in Stripe before setup; the package query is not proof of payment' : 'Send a free preview and fixed price; not an order',
   };
 }
 export async function deliverEnquiry(body, fetchImpl = fetch) {
@@ -79,7 +79,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
   const page = cleanPageUrl(body._url);
   const setup = isSetupIntake(body);
   const accepted = await send({ to: ['info@mazworks.uk'], reply_to: body.email,
-    subject: `Maz Works — ${setup ? 'setup details' : 'free demo and quote'}${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
+    subject: `Maz Works — ${setup ? 'setup details' : 'free preview and quote'}${body.interested_in && body.interested_in !== 'Not chosen' ? ` — ${body.interested_in}` : ''}`,
     text: fields.filter(field => body[field]).map(field => `${field}: ${body[field]}`).join('\n\n') + (page ? `\n\nsubmitted_from: ${page}` : '') + draft,
   }, 'owner');
   if (!accepted) return { ok: false, confirmationSent: false };
@@ -89,10 +89,10 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
     syncHubSpot(body, fetchImpl),
     scheduleFollowUps(body, send),
     send({ to: [body.email], reply_to: 'info@mazworks.uk',
-      subject: setup ? 'Your Maz Works setup details' : 'Your Maz Works free demo request',
+      subject: setup ? 'Your Maz Works setup details' : 'Your Maz Works free preview request',
       text: setup
         ? `Thanks ${body.name}, I've got your setup details.\n\nI'll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. If anything changes, reply to this email.\n\nManazir, Maz Works`
-        : `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working demo with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
+        : `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working preview with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
     }, 'visitor'),
   ]);
   const confirmationSent = confirmation.status === 'fulfilled' && confirmation.value === true;
@@ -125,9 +125,9 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
  * replies, Maz cancels the rest in Resend (the ids are in the Resend log).
  */
 export const FOLLOW_UPS = [
-  { in: 'in 2 days', subject: 'Did you try the demo?', text: (name) => `Hi ${name},\n\nJust checking the demo reached you and worked on your phone. If anything is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
+  { in: 'in 2 days', subject: 'Did you try the preview?', text: (name) => `Hi ${name},\n\nJust checking the preview reached you and worked on your phone. If anything is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
   { in: 'in 5 days', subject: 'One question', text: (name) => `Hi ${name},\n\nWhat's the one thing that would make this an easy yes? Price, timing, a worry about your apps? Tell me and I'll answer straight.\n\nManazir, Maz Works` },
-  { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The demo and price stand whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
+  { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The preview and price stand whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
 ];
 export async function scheduleFollowUps(body, send) {
   if (process.env.FOLLOW_UP_EMAILS !== 'on' || !body.email || isSetupIntake(body)) return false;
@@ -150,7 +150,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
     const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','service','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
-    if (body.service !== undefined && !['Free Demo & Fixed Price', SETUP_SERVICE].includes(body.service)) return reply(400,{ok:false});
+    if (body.service !== undefined && !['Free Preview & Fixed Price', SETUP_SERVICE].includes(body.service)) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
     if (body.request_id && !/^[a-zA-Z0-9-]{1,64}$/.test(body.request_id)) return reply(400,{ok:false});
     if (!allowRequest(String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0])) {res.setHeader('retry-after','60'); return reply(429,{ok:false});}

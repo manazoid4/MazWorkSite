@@ -76,7 +76,7 @@ function ContextLocationSync({ onChange }: { onChange: (search: string) => void 
  * autoresponses for AJAX submissions (checked 28 Sep: none arrived; its docs
  * say so), so the in-page route never promises an email confirmation.
  */
-export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a working demo with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
+export const AUTO_REPLY = `Thanks, I've got your message. I'll read it myself and email you a working preview with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 const SETUP_AUTO_REPLY = `Thanks, I've got your setup details. I'll check your payment and confirm the next steps by email before starting setup. If anything changes, email ${CONTACT_EMAIL}. Manazir, Maz Works`;
 
 export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
@@ -208,7 +208,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
 
     setErrors({ problem: '', name: '', email: '' });
 
-    const subject = `Maz Works — ${setup ? 'setup details' : 'free demo and price'} — ${website || name}`;
+    const subject = `Maz Works — ${setup ? 'setup details' : 'free preview and price'} — ${website || name}`;
     setRecoveryHref(buildRecoveryMailto(subject, [
       ['Name', name],
       ['Email', email],
@@ -246,7 +246,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       problem_id: context.problem,
       proof_id: context.proof,
       source_page: context.sourcePage,
-      next_step: setup ? SETUP_NEXT_STEP : 'Send a free demo and fixed price; not an order',
+      next_step: setup ? SETUP_NEXT_STEP : 'Send a free preview and fixed price; not an order',
       source,
       _replyto: email,
       _subject: subject,
@@ -297,7 +297,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       }}
     >
       <Suspense fallback={null}><ContextLocationSync onChange={readLocation} /></Suspense>
-      <input type="hidden" name="_subject" value={`Maz Works — ${setup ? 'setup details' : 'free demo and price'}`} />
+      <input type="hidden" name="_subject" value={`Maz Works — ${setup ? 'setup details' : 'free preview and price'}`} />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="service" value={setup ? SETUP_SERVICE_LABEL : SERVICE_LABEL} />
       <input type="hidden" name="_autoresponse" value={setup ? SETUP_AUTO_REPLY : AUTO_REPLY} />
@@ -308,7 +308,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       <input type="hidden" name="proof_id" value={context.proof} />
       <input type="hidden" name="problem_id" value={context.problem} />
       <input type="hidden" name="source_page" value={context.sourcePage} />
-      <input type="hidden" name="next_step" value={setup ? SETUP_NEXT_STEP : 'Send a free demo and fixed price; not an order'} />
+      <input type="hidden" name="next_step" value={setup ? SETUP_NEXT_STEP : 'Send a free preview and fixed price; not an order'} />
       <p className="mw-form-kicker">{setup ? 'Share what needs setting up and where to send the confirmation.' : 'Tap what fits, then tell me where to send your demo. No call needed.'}</p>
       {context.trade && !setup ? <p className="mw-form-picked">Your <strong>{tradeLabel(context.trade)}{context.problem ? ` · ${TRADE_PROBLEMS.find(item => item.id === context.problem)?.label}` : ''}</strong> demo enquiry. A free example and fixed price, not an order.</p> : null}
       {context.proof ? <p className="mw-form-picked">Demo context: <strong>{tradeLabel(context.proof)}</strong> — an illustrative example, not client results. <button type="button" className="text-link" disabled={submitState === 'sending'} onClick={() => updateContext({ ...context, proof: '' })}>Clear demo context</button></p> : null}
@@ -443,7 +443,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
           <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
             {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : setup ? 'Send setup details' : MAIN_CTA}
           </button>
-          <p>{setup ? `I’ll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. ` : `I usually reply myself within ${CHECK_REPLY_TIME} with a working demo of your first job and a fixed price. Free, no obligation. `}<a href="/privacy">How I use your details</a>.</p>
+          <p>{setup ? `I’ll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. ` : `I usually reply myself within ${CHECK_REPLY_TIME} with a working preview of your first job and a fixed price. Free, no obligation. `}<a href="/privacy">How I use your details</a>.</p>
           <p className="mw-form-status" role="status" aria-live="polite">
             {submitState === 'sent' && (
               <>

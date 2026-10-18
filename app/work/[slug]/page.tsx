@@ -79,7 +79,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p>Tell me the job. You get a plan and a fixed price before any paid work.</p>
           </div>
           <div className="case-cta-actions">
-            <a className="button button-signal" href={`/free-plan?src=case-${project.id}#leak-check-form`}>Get my free demo</a>
+            <a className="button button-signal" href={`/free-plan?src=case-${project.id}#leak-check-form`}>Get my free preview</a>
             {otherStudy && <a className="text-link" href={`/work/${otherStudy.id}`}>Read {otherStudy.name} <span aria-hidden="true">→</span></a>}
           </div>
         </footer>

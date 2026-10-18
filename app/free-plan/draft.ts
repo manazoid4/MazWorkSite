@@ -98,7 +98,7 @@ export function draftFreePlan(input: DraftInput): Draft {
   const lines: string[] = [
     `Hi ${first},`,
     '',
-    `Thanks for the message. Here is your free demo and fixed price, in plain words.`,
+    `Thanks for the message. Here is your free preview and fixed price, in plain words.`,
     '',
     `Your demo: [paste the demo link here]. It uses your business name and is built from a template on my test setup, so it is not on your apps yet.`,
     '',
@@ -115,7 +115,7 @@ export function draftFreePlan(input: DraftInput): Draft {
     `What happens next: ${NEXT_STEPS.map((step) => `${step.day}: ${step.title.toLowerCase()}`).join(' · ')}.`,
     `After that: ${CHANGES_WINDOW.short}, and a 90-day fix promise. Help afterwards is optional (${CARE_PLANS[0].name} ${CARE_PLANS[0].price}).`,
     '',
-    `Costs you pay directly, if any: a texting or booking app's own fee. I tell you before anything is switched on. Two one-day set-ups come free with a Starter. No VAT added.`,
+    `Costs you pay directly, if any: a texting or booking app's own fee. I tell you before anything is switched on. Two small set-ups come free with a Starter. No VAT added.`,
     '',
     `Reply "yes" and I'll send the written scope sheet, or ask me anything first.`,
     '',
@@ -127,7 +127,7 @@ export function draftFreePlan(input: DraftInput): Draft {
     offer,
     jobs,
     price: offer.price,
-    subject: `Your free demo: ${recipe}, ${offer.price}`,
+    subject: `Your free preview: ${recipe}, ${offer.price}`,
     text: lines.filter((line, index, all) => !(line === '' && all[index - 1] === '')).join('\n'),
   };
 }

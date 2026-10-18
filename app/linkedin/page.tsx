@@ -9,7 +9,7 @@ const STARTER = OFFERS[0];
 
 /**
  * LinkedIn landing page (30 Sep): the one link in Maz's profile, Featured
- * section and first comments. It says hello, shows the free demo route and
+ * section and first comments. It says hello, shows the free preview route and
  * the promises. Links are tagged so leads show where they came from.
  * Kept out of search and the sitemap: it is a channel page, not new content.
  */
@@ -38,7 +38,7 @@ export default function LinkedInPage() {
 
       <section className="s-section" aria-labelledby="li-demo-title">
         <p className="eyebrow">See it before you pay</p>
-        <h2 id="li-demo-title">Start with a free demo.</h2>
+        <h2 id="li-demo-title">Start with a free preview.</h2>
         <DemoPath source="linkedin" />
         <p className="s-small">I usually reply within {CHECK_REPLY_TIME}.</p>
         <div className="s-faq"><details>

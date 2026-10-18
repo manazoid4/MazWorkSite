@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   if (type) {
     return {
       title: `${type.shortName}: what to set up and the price`,
-      description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free demo.`),
+      description: fitDescription(`${type.lede} Named recipes from ${OFFERS[0].price}, what’s included, and a free preview.`),
       alternates: { canonical: `/for/${type.id}` },
       openGraph: { title: `${type.title} — Maz Works`, description: fitDescription(type.lede), url: `/for/${type.id}`, images: [OG_IMAGE] },
     };
@@ -80,7 +80,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         title={guide.title}
         lede={guide.lede}
         cta={<CampaignLink className="button button-signal s-button-lg" href={checkHref}>{MAIN_CTA}</CampaignLink>}
-        note={`Free demo, no call needed. Most start with one task at ${OFFERS[0].price}.`}
+        note={`Free preview, no call needed. Most start with one task at ${OFFERS[0].price}.`}
       />
 
       <section className="s-section" id="week" aria-label="In your week"><VoiceBlock id={guide.id} level={2} /></section>
@@ -147,7 +147,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="niche-cta-title">Not sure where to start?</h2>
-          <p>Tell me the job. I&apos;ll send a working demo and a fixed price.</p>
+          <p>Tell me the job. I&apos;ll send a working preview and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <CampaignLink className="button button-signal" href={checkHref}>{MAIN_CTA}</CampaignLink>

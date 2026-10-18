@@ -1,5 +1,11 @@
 # Maz Works: latest session handover (public copy)
 
+## 18 Oct: CRO Move 4 — the offer is named "free preview"
+- "Free demo" is renamed to "free preview" site-wide, and the free step now carries the honest one-line explanation: it is built from a template on a test setup, so it is not on your apps yet. The honest line sits in `FREE_STEP`, on the homepage, `/free-plan` and the FAQ.
+- The internal package labels are plain words now: "one-day set-ups" → "small set-ups", "Keep It Running" → "Care plan", "Keep It Growing" → "Care plan plus". The offer name, the primary CTA (`Get my free preview`), the enquiry emails and the API service whitelist all match.
+- "Bigger build demos", "demo business" and private-demo-gating keep the word "demo" on purpose; those are examples, not the free offer. A new `tests/naming.test.mjs` locks the name, the honest line and the retired phrases.
+- Homepage stays inside its 600-word budget (595). `npm run verify` green (296 tests, smoke pass). Before/after browser shots at 390px and 1280px in `docs/evidence/2026-10-18-cro-move4/`.
+
 ## 18 Oct: CRO Move 3 — a two-field start in the hero
 - The homepage hero no longer sends people to a section to start. It asks for an email and a name (email first) and posts to the same place as /free-plan, with a "Book a time now →" slot for anyone who would rather talk. It is a real form, so it still posts without JavaScript, and no phone number is published.
 - The full /free-plan form now asks for the email before the name. The hero carries the only booking link on the homepage; the duplicate call link in the "Your free demo" block is gone.

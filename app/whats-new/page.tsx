@@ -94,10 +94,10 @@ export default function WhatsNewPage() {
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="updates-cta-title">Tell me the job that eats your week.</h2>
-          <p>I’ll send a working demo and a fixed price. No call needed.</p>
+          <p>I’ll send a working preview and a fixed price. No call needed.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan?src=whats-new#leak-check-form">Get my free demo</a>
+          <a className="button button-signal" href="/free-plan?src=whats-new#leak-check-form">Get my free preview</a>
           <a className="text-link" href="/site-map">Site map <span aria-hidden="true">→</span></a>
         </div>
       </section>

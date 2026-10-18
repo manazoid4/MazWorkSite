@@ -51,7 +51,7 @@ export default function BragPreview() {
         <p className="eyebrow">Post-ready writing</p>
         <h2 id="brag-copy-title">The caption</h2>
         <blockquote>
-          A missed call shouldn&apos;t mean a missed opportunity. Here&apos;s an example of the kind of simple, connected system I build at Maz Works: a helpful reply, a customer request, and a clear next step. Built independently, with a working demo before any quote becomes a job.
+          A missed call shouldn&apos;t mean a missed opportunity. Here&apos;s an example of the kind of simple, connected system I build at Maz Works: a helpful reply, a customer request, and a clear next step. Built independently, with a working preview before any quote becomes a job.
         </blockquote>
         <p className="brag-disclaimer">Film made from a code-rendered illustrative workflow. Proof shown here is a concept, not a client result. Read the <a href="/work/jobfilter">JobFilter product</a> and <a href="/work/scrap-finance-partners">Scrap Finance Partners work</a> separately for published work examples.</p>
       </section>

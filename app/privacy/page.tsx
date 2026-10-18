@@ -28,7 +28,7 @@ const SECTIONS: { title: string; body: string[] }[] = [
   {
     title: 'What I collect',
     body: [
-      'Enquiry and free demo forms: your name, email, and anything you choose to add (phone, business, website, the job you describe, the package you picked).',
+      'Enquiry and free preview forms: your name, email, and anything you choose to add (phone, business, website, the job you describe, the package you picked).',
       'Mailing list: your email address, only if you sign up.',
       'Calls: if you book a call, the booking tool (Cal.com) collects your name, email and chosen time.',
       'Visits: simple, anonymous visit counts (Vercel Web Analytics). No advertising trackers and no tracking cookies.',

@@ -39,7 +39,7 @@ export type Solution = {
   own: string;
   /** Optional second cost line, e.g. the monthly alternative. */
   also?: string;
-  /** Package named in the pre-filled free demo form. */
+  /** Package named in the pre-filled free preview form. */
   pkg: string;
   /** Extra line for upgrades and bundles. */
   upgrade: string;
@@ -50,7 +50,7 @@ const [STARTER, SYSTEM] = OFFERS;
 const extra = getExtra('Extra automation').price;
 const TEXTS: CostLine = { label: 'Texts and any booking app', value: 'A few pence a text, paid direct to the provider. You are told the cost before you pay me.' };
 const CARE: CostLine = { label: `${CARE_PLAN.name} (optional)`, value: `${CARE_PLAN.price}, cancel any time` };
-const SETUPS: CostLine = { label: 'Two one-day set-ups of your choice', value: 'Included' };
+const SETUPS: CostLine = { label: 'Two small set-ups of your choice', value: 'Included' };
 const OWN_STARTER = 'Your accounts, your customer list and every message. If you stop paying me, it keeps running.';
 const STARTER_UPGRADE = `Want another task later? Extra automation is ${extra}. Three or more tasks is a ${SYSTEM.name}. ${UPGRADE_CREDITS[0]}`;
 const starterOnce = (label: string): CostLine[] => [{ label: `${label} (${STARTER.name})`, value: STARTER.price }, SETUPS];
@@ -180,7 +180,7 @@ export const SOLUTIONS: Solution[] = [
     flow: { start: 'A customer gets in touch.', does: 'Three tasks run one after another, on one customer list.', result: 'A weekly email shows what came in and what is due.' },
     jobs: ['missed-call', 'quote-follow-up', 'reviews', 'one-list', 'weekly-report'],
     get: ['Three tasks from the menu, joined up', 'A weekly report, team training and a month of care'],
-    once: [{ label: SYSTEM.name, value: SYSTEM.price }, { label: 'Weekly report, team training and 3 one-day set-ups', value: 'Included' }],
+    once: [{ label: SYSTEM.name, value: SYSTEM.price }, { label: 'Weekly report, team training and 3 small set-ups', value: 'Included' }],
     onceHead: SYSTEM.price,
     keeps: [{ label: `First month of ${CARE_PLAN.name}`, value: 'Included' }, { label: `${CARE_PLAN.name} after that (optional)`, value: `${CARE_PLAN.price}, cancel any time` }, TEXTS],
     keepsHead: 'Nothing required',
@@ -201,7 +201,7 @@ export function jobNames(ids: string[]): string[] {
   return ids.map((id) => AUTOMATION_MENU.find((job) => job.id === id)?.name).filter((name): name is string => Boolean(name));
 }
 
-/** Pre-filled free demo link: package and source tag, same pattern as the other pages. */
+/** Pre-filled free preview link: package and source tag, same pattern as the other pages. */
 export function demoHref(solution: Solution): string {
   return `/free-plan?src=solutions-${solution.id}&package=${encodeURIComponent(solution.pkg)}#leak-check-form`;
 }
