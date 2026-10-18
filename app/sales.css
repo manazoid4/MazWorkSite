@@ -1748,6 +1748,6 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-chips li::before { content: '✓ '; }
 .mw-note { background: var(--wheat); border-left: 6px solid var(--signal); }
 .mw-resource-cta { background: var(--charcoal); color: #fff; }
-.mw-resource-cta .eyebrow { background: var(--signal); color: #fff; }
+.mw-resource-cta .eyebrow { background: var(--signal); color: #000; }
 .mw-resource-cta a.button:not(.button-signal) { background: #fff; color: var(--ink); }
 .s-final { background: var(--charcoal); color: #fff; }
