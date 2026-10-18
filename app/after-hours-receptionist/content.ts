@@ -28,6 +28,36 @@ export const COMPARE = [
   { before: 'A morning of ringing people back with no context.', after: 'One clear summary in your inbox before you open.' },
 ];
 
+/**
+ * Why this is one flat price, not a meter (18 Oct 2026). Some call-answering
+ * services look cheap at the door and charge for the calls inside. The point
+ * is the shape of the pricing, not any named company. Our side reads every
+ * figure from AFTER_HOURS; nothing here is typed. No "AI" wording.
+ */
+export const COST_MODEL = {
+  title: 'One flat price, not a meter.',
+  lede: 'Some call-answering services look cheap at the door and charge for the calls inside: a low monthly price, only a few calls included, then a charge for every extra call, with prices shown before VAT. A busy week is when that bill lands.',
+  them: {
+    title: 'A metered service',
+    points: [
+      'A low headline price, with only a handful of calls included.',
+      'Every extra call is charged, so a busy week costs more.',
+      'Prices often shown before VAT, so the real figure is higher.',
+      'You watch the counter and hope it stays quiet.',
+    ],
+  },
+  ours: {
+    title: 'This receptionist',
+    points: [
+      `${AFTER_HOURS.minutes} call minutes included, with no per-call charge.`,
+      'Over that, the price is agreed with you first, never billed by surprise.',
+      'The price is the price: no VAT added.',
+      `${AFTER_HOURS.setup}, then one flat monthly fee.`,
+    ],
+  },
+  close: 'Quiet week or busy week, the same:',
+} as const;
+
 export const STEPS = [
   { title: 'I learn your business', body: 'Your hours, services, areas, prices you’re happy to share, and the questions people always ask.' },
   { title: 'We set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
@@ -79,6 +109,9 @@ export type Scenario = {
   summary: { title: string; rows: [string, string][]; flag?: string };
 };
 
+/** The made-up business the example calls answer as. Swapped for the visitor's own name in the browser (call-demo.tsx). */
+export const DEMO_BUSINESS = 'Harbour Street Garage';
+
 /** Example calls for the in-page demo. A made-up business, labelled as such. */
 export const SCENARIOS: Scenario[] = [
   {
@@ -86,7 +119,7 @@ export const SCENARIOS: Scenario[] = [
     label: 'A new customer',
     time: '8:52pm',
     lines: [
-      { who: 'desk', text: 'Good evening, Harbour Street Garage. We’re closed right now, but I can help or take a message. How can I help?' },
+      { who: 'desk', text: `Good evening, ${DEMO_BUSINESS}. We’re closed right now, but I can help or take a message. How can I help?` },
       { who: 'caller', text: 'Hi, do you do MOTs on a Saturday?' },
       { who: 'desk', text: 'Yes, Saturday mornings from 8 till 12. Would you like the team to call you to book one in?' },
       { who: 'caller', text: 'Please. It’s Sam, on 07700 900123.' },
@@ -99,7 +132,7 @@ export const SCENARIOS: Scenario[] = [
     label: 'An urgent call',
     time: '10:17pm',
     lines: [
-      { who: 'desk', text: 'Good evening, Harbour Street Garage. We’re closed right now. How can I help?' },
+      { who: 'desk', text: `Good evening, ${DEMO_BUSINESS}. We’re closed right now. How can I help?` },
       { who: 'caller', text: 'My car’s broken down outside your yard and it’s blocking the road.' },
       { who: 'desk', text: 'Thanks for telling me. If anyone is in danger, please ring 999. I’ll pass this to the owner as urgent. Can I take your name and number?' },
       { who: 'caller', text: 'Priya, 07700 900456.' },
@@ -112,7 +145,7 @@ export const SCENARIOS: Scenario[] = [
     label: 'A question it can’t answer',
     time: '7:05am',
     lines: [
-      { who: 'desk', text: 'Good morning, Harbour Street Garage. We open at 8. How can I help?' },
+      { who: 'desk', text: `Good morning, ${DEMO_BUSINESS}. We open at 8. How can I help?` },
       { who: 'caller', text: 'How much would a new clutch be for a 2015 Focus?' },
       { who: 'desk', text: 'I don’t have prices for that job, so I won’t guess. I can take your details and the team will call you with a proper quote.' },
       { who: 'caller', text: 'OK. Jo, 07700 900789.' },

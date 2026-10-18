@@ -1,6 +1,6 @@
 # Receptionist delivery kit (first paying customer)
 
-For the After-Hours Receptionist: an automated receptionist that answers calls the owner can't pick up, answers approved FAQs, takes a message, follows urgent-call rules and emails a summary. £79/month, 300 minutes, set-up included, month to month, one month's notice. Cost model: `PRICING-MODEL.md`. Status on 11 Oct 2026: NOT yet connected to a real phone line (no provider account, billing or real number). The browser demo exists. Do not promise a go-live date until the "Only Maz can do these" list is done.
+For the After-Hours Receptionist: an automated receptionist that answers calls the owner can't pick up, answers approved FAQs, takes a message, follows urgent-call rules and emails a summary. £79/month, 300 minutes, £99 one-off set-up, month to month, one month's notice. Cost model: `PRICING-MODEL.md`. Status on 11 Oct 2026: NOT yet connected to a real phone line (no provider account, billing or real number). The browser demo exists. Do not promise a go-live date until the "Only Maz can do these" list is done.
 
 Customer-facing wording: "automated receptionist". Never "AI". It tells callers it is automated. Never claim legal compliance.
 
@@ -142,7 +142,7 @@ Options priced in `PRICING-MODEL.md`: Telnyx (cheapest checked), Twilio + Vapi. 
 
 ## 9. Payment and cancellation checklist
 
-- [ ] Price stated in writing: £79/month, set-up included, 300 minutes, over that the price is agreed first.
+- [ ] Price stated in writing: £79/month, £99 one-off set-up, 300 minutes, over that the price is agreed first.
 - [ ] Month to month. Cancel with one month's notice.
 - [ ] No VAT is added to the price.
 - [ ] Stripe subscription link created (Maz only) and tested with a real £79 payment.

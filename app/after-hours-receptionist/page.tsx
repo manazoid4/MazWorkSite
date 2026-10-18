@@ -7,7 +7,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BuyNow } from '../price-list';
 import { ScrollReveal } from '../scroll-reveal';
 import { StickyCheckCta } from '../sticky-cta';
-import { BEST_FOR, CHIPS, COMPARE, EMERGENCY_NOTE, FAQS, NEXT, STEPS, TRUST } from './content';
+import { BEST_FOR, CHIPS, COMPARE, COST_MODEL, EMERGENCY_NOTE, FAQS, NEXT, STEPS, TRUST } from './content';
 import { NightCall } from './night-call';
 import { CallDemo } from './call-demo';
 import { ValueCheck } from './value-check';
@@ -129,6 +129,23 @@ export default function AfterHoursPage() {
             <ul className="ah-not">{AFTER_HOURS.notIncluded.map((item) => <li key={item}>{item}</li>)}</ul>
           </div>
         </div>
+      </section>
+
+      <section className="ah-section" id="why-price" data-reveal aria-labelledby="ah-cost-title">
+        <p className="eyebrow">Why it costs what it costs</p>
+        <h2 id="ah-cost-title">{COST_MODEL.title}</h2>
+        <p className="ah-sub">{COST_MODEL.lede}</p>
+        <div className="ah-cost">
+          <article className="ah-cost-col ah-cost-them">
+            <h3>{COST_MODEL.them.title}</h3>
+            <ul>{COST_MODEL.them.points.map((point) => <li key={point}>{point}</li>)}</ul>
+          </article>
+          <article className="ah-cost-col ah-cost-ours">
+            <h3>{COST_MODEL.ours.title}</h3>
+            <ul>{COST_MODEL.ours.points.map((point) => <li key={point}>{point}</li>)}</ul>
+          </article>
+        </div>
+        <p className="ah-cost-close">{COST_MODEL.close} <strong>{AFTER_HOURS.price}</strong>.</p>
       </section>
 
       <section className="ah-section" id="which" data-reveal aria-labelledby="ah-which-title">

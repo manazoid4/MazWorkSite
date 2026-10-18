@@ -113,6 +113,13 @@
 .ah-try { scroll-margin-top: 20px; }
 .ah-demo { margin-top: 20px; border: 3px solid var(--ink); background: var(--night); color: #f3f1ec; border-radius: 18px; padding: clamp(14px, 3vw, 24px); display: grid; gap: 16px; }
 .ah-demo-picks { display: flex; flex-wrap: wrap; gap: 8px; }
+.ah-demo-name { display: grid; gap: 6px; }
+.ah-demo-name span { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--glow); }
+.ah-demo-name span em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: .7; }
+.ah-demo-name input { min-height: 48px; padding: 8px 14px; border: 2px solid #f3f1ec; border-radius: 12px; background: transparent; color: inherit; font: inherit; font-weight: 700; width: 100%; max-width: 22em; }
+.ah-demo-name input::placeholder { color: #b9b6ae; font-weight: 500; }
+.ah-demo-name input:focus-visible { outline: 3px solid var(--glow); outline-offset: 2px; }
+.ah-demo-name small { color: #b9b6ae; font-size: .82rem; }
 .ah-pick { display: grid; text-align: left; gap: 2px; min-height: 48px; padding: 8px 14px; border: 2px solid #f3f1ec; border-radius: 12px; background: transparent; color: inherit; font: inherit; font-weight: 800; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out; }
 .ah-pick small { font-family: var(--mono); font-weight: 600; font-size: .72rem; opacity: .8; }
 .ah-pick[aria-pressed="true"] { background: var(--glow); color: var(--ink); border-color: var(--glow); }
@@ -173,3 +180,17 @@
 .ah-which dd { margin: 2px 0 0; line-height: 1.4; }
 @media (min-width: 760px) { .ah-which { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .ah-which { grid-template-columns: repeat(4, 1fr); } }
+
+/* One flat price, not a meter (18 Oct 2026) */
+.ah-cost { margin-top: 22px; display: grid; gap: 14px; }
+.ah-cost-col { border: 3px solid var(--ink); background: var(--surface); padding: 16px 18px; display: grid; align-content: start; gap: 10px; }
+.ah-cost-col h3 { font-size: 1.1rem; }
+.ah-cost-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.ah-cost-col li { padding-left: 22px; position: relative; line-height: 1.4; }
+.ah-cost-col li::before { content: ""; position: absolute; left: 4px; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.ah-cost-them { border-style: dashed; }
+.ah-cost-ours { box-shadow: 6px 6px 0 var(--signal); }
+.ah-cost-ours li::before { background: var(--signal-text); }
+.ah-cost-ours h3 { color: var(--signal-text); }
+.ah-cost-close { margin-top: 18px; font-size: 1.05rem; }
+@media (min-width: 760px) { .ah-cost { grid-template-columns: repeat(2, 1fr); } }

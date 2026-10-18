@@ -10,7 +10,7 @@ Nothing paid for now: no phone line, number, provider credit or subscription. Se
 Until then, agents do not propose a provider account or a real number as the next step.
 
 ## Files
-- Price and promises: `app/offers.ts` (`AFTER_HOURS`: £79/month, 300 minutes, set-up included, month to month, one month's notice).
+- Price and promises: `app/offers.ts` (`AFTER_HOURS`: £79/month, 300 minutes, £99 one-off set-up, month to month, one month's notice).
 - Background, decisions and honest-by-design rules: `docs/maz-works/AFTER-HOURS-RECEPTIONIST.md`.
 - Demo answers: `app/receptionist-demo/engine.mjs` (rules, only the business's own details, never guesses a price). Tests: `tests/receptionist-demo.test.mjs`.
 - Costs and recommendation: `docs/maz-works/receptionist/PRICING-MODEL.md`. Model: `scripts/receptionist-model.mjs`. Tests: `tests/receptionist-model.test.mjs`.
