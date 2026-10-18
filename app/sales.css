@@ -1397,8 +1397,16 @@ main {
 
 .s-about-head { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; }
 .s-about-head > div > p { max-width: 680px; }
+.s-about h2 { font-size: clamp(2rem, 3vw, 2.6rem); }
+.s-about-bio { display: grid; gap: 14px; max-width: 760px; }
+.s-about-bio p { padding-left: 16px; border-left: 3px solid var(--ink); }
+.s-about-bio strong { display: block; }
+.s-about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 24px; }
+.s-about-actions > a:first-child { font-weight: 700; overflow-wrap: anywhere; }
+.s-about-work-title { margin-top: 36px; font-size: 1.3rem; }
 .s-face { width: 72px; height: 72px; object-fit: cover; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); }
 
+@media (max-width: 720px) { .s-about-head { grid-template-columns: 1fr; } }
 @media (min-width: 721px) {
   .s-trades { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .s-running { grid-template-columns: repeat(3, minmax(0, 1fr)); }
