@@ -30,7 +30,7 @@ export default function ProofPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="proof-title">
         <p className="eyebrow">Proof</p>
         <h1 id="proof-title">Real work. Open it and see.</h1>
-        <p>Everything here is real. Client quotes go up as clients agree to them.</p>
+        <p>Everything here is real. Open it and check.</p>
       </section>
 
       <section className="mw-info" aria-label="Real work">
@@ -45,7 +45,17 @@ export default function ProofPage() {
         </ul>
       </section>
 
-      <section className="mw-resource-cta" aria-labelledby="proof-cta-title">
+      <section className="mw-info" aria-labelledby="proof-terms-title">
+<h2 id="proof-terms-title">Why the terms are safe</h2>
+<ul className="mw-cards mw-two">
+<li><strong>Fixed price, written scope</strong><span>You know what you get and what it costs before any work.</span></li>
+<li><strong>Pay after you have seen it work</strong><span>If I cannot get it working as agreed, you do not pay.</span></li>
+<li><strong>Your accounts, your data</strong><span>Everything runs in accounts in your name, with a written guide.</span></li>
+<li><strong>Written by someone who has been on the other side</strong><span>Five years in complaints and finance, including regulated work and ombudsman cases.</span></li>
+</ul>
+</section>
+
+<section className="mw-resource-cta" aria-labelledby="proof-cta-title">
         <div>
           <h2 id="proof-cta-title">Want to see what I would do for you?</h2>
           <p>You get a working preview and a fixed price first.</p>

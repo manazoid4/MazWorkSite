@@ -209,7 +209,7 @@ test('homepage sells one first step: Starter, four popular add-ons, bigger jobs 
 
   const contact = await readPage('/contact');
   for (const price of ['£99', 'From £595', 'From £2,450', '£295']) assert.match(contact, new RegExp(price));
-  assert.match(contact, /No VAT added/);
+  assert.match(contact, /Not VAT-registered/);
 });
 
 test('the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply', async () => {
@@ -498,9 +498,9 @@ test('retired offer terms are gone from every public page', async () => {
 test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions require them', async () => {
   const home = await readPage('/');
   const faq = await readPage('/faq');
-  assert.match(home, /No VAT added/);
+  assert.match(home, /Not VAT-registered/);
   // The referral offer lives in the FAQ (homepage kept under 600 words, 2 Oct).
-  assert.match(faq, /No VAT added/);
+  assert.match(faq, /Not VAT-registered/);
   assert.match(faq, /£50 by bank transfer, no limit/);
   assert.doesNotMatch(faq, /deposit|final payment|pay the rest/i, 'no payment-split wording (Maz, 1 Oct)');
 });
