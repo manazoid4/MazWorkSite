@@ -30,7 +30,7 @@
 .ip-controls button.ip-next { background: var(--signal); }
 .ip-controls button:disabled { opacity: .55; cursor: default; }
 .ip-owner { padding: 12px; border: 2px dashed var(--ink); display: grid; gap: 8px; min-width: 0; }
-.ip-owner > strong { justify-self: start; padding: 3px 10px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pill, #efebe3); font-size: .85rem; line-height: 1.3; }
+.ip-owner > strong { justify-self: start; padding: 3px 10px; border: 2px solid var(--ink); border-radius: 999px; background: var(--pill, #ffd23f); font-size: .85rem; line-height: 1.3; }
 .ip-owner dl { display: grid; gap: 6px; }
 .ip-owner dl div { display: grid; grid-template-columns: minmax(0, 9em) minmax(0, 1fr); gap: 8px; font-size: .9rem; }
 .ip-owner dt { color: var(--muted); }

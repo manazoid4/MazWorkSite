@@ -33,7 +33,7 @@
 
 /* The business cards fade out of the hero's sand before the next section. */
 .s-home #build { position: relative; isolation: isolate; background: transparent; padding-bottom: var(--s-gap); }
-.s-home #build::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100cqw - 100%) / -2); background: none; pointer-events: none; }
+.s-home #build::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100cqw - 100%) / -2); background: linear-gradient(180deg, var(--sand), var(--sage) 28%, var(--sage) 75%, var(--paper)); pointer-events: none; }
 
 /* Offer links share the site's light cards and keep orange for the action. */
 .s-teaser { margin-top: 12px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 18px 20px; border: 1px solid var(--ink); border-left: 5px solid var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: var(--card-shadow); transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out; }

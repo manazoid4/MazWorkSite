@@ -1,13 +1,13 @@
 /* Calm colour layer (30 Sep): muted, warm tones instead of candy pastels.
    Orange (--signal) stays the one loud colour, used only for actions. */
 :root {
-  --sand: #f1eee8;
-  --stone: #efebe3;
-  --sage: #f4f1eb;
-  --mist: #f4f1eb;
-  --clay: #f4f1eb;
-  --wheat: #f4f1eb;
-  --slate: #20211f;
+  --sand: #efe9dd;
+  --stone: #e6e3db;
+  --sage: #dfe6db;
+  --mist: #dde5ea;
+  --clay: #f0e0d4;
+  --wheat: #f2e9cf;
+  --slate: #2e3a4a;
   --card-shadow: 0 1px 2px rgba(20, 22, 18, .06), 0 6px 18px rgba(20, 22, 18, .06);
 }
 
@@ -68,7 +68,7 @@
 .s-promises span { color: var(--charcoal); }
 .s-guarantee { background: var(--sage); border: 1px solid var(--line); border-left: 4px solid var(--charcoal); box-shadow: var(--card-shadow); }
 .s-compare thead th:nth-child(2) { background: var(--ink); }
-.s-compare thead th:nth-child(3) { background: var(--ink); }
+.s-compare thead th:nth-child(3) { background: #4a5a4c; }
 .s-compare thead th:nth-child(4) { background: var(--slate); }
 .s-extras-group h4 { display: inline-block; padding: 2px 10px; border: 1px solid var(--line); background: var(--sand); }
 .s-extras-group:nth-of-type(2n) h4 { background: var(--clay); }
@@ -101,22 +101,29 @@
 
 /* Pill labels: a bold colour with dark text (high contrast), a different one per
    section so the page reads as several colours, none of them an "error" red/orange. */
-:root { --pill: #fff; }
+:root { --pill: #ffe9a3; }
 .s-hero .eyebrow,
 .s-section > .eyebrow,
 .s-check-copy .eyebrow,
 .s-about .eyebrow,
 .mw-section-heading .eyebrow,
 .mw-resource-hero .eyebrow {
-  display: inline-block; padding: 5px 14px; border: 1px solid var(--line); border-radius: 999px;
-  background: var(--surface); color: var(--ink); font-weight: 700; letter-spacing: .06em;
+  display: inline-block; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 999px;
+  background: var(--pill); color: var(--ink); font-weight: 800; letter-spacing: .06em;
+  box-shadow: none;
 }
+.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: #ffe9a3; }
+.s-section:nth-of-type(4n + 1) > .eyebrow, .mw-section:nth-of-type(4n + 1) .eyebrow { --pill: #c4ecd7; }
+.s-section:nth-of-type(4n + 2) > .eyebrow, .mw-section:nth-of-type(4n + 2) .eyebrow { --pill: #cde5fa; }
+.s-section:nth-of-type(4n + 3) > .eyebrow, .mw-section:nth-of-type(4n + 3) .eyebrow { --pill: #fad0e3; }
+.s-section:nth-of-type(4n) > .eyebrow, .mw-section:nth-of-type(4n) .eyebrow { --pill: #ffe9a3; }
+.s-check-copy .eyebrow, .s-about .eyebrow { --pill: var(--surface); }
 
 /* Soft colour glow behind the phone mockups (never wider than the column). */
 .s-demo, .ld-stage { position: relative; isolation: isolate; }
 .s-demo::before, .ld-stage::before {
   content: ""; position: absolute; z-index: -1; inset: -4% 0; pointer-events: none;
-  background: none;
+  background: radial-gradient(45% 40% at 30% 35%, rgb(255 107 26 / .20), transparent 70%), radial-gradient(45% 45% at 75% 70%, rgb(143 227 184 / .35), transparent 70%);
 }
 
 /* Trade cards: one tint each, dark icon chip. */
@@ -125,7 +132,7 @@
 .s-trades li:nth-child(6n + 3) a { background: var(--mist); }
 .s-trades li:nth-child(6n + 4) a { background: var(--wheat); }
 .s-trades li:nth-child(6n + 5) a { background: var(--sand); }
-.s-trades li:nth-child(6n) a { background: var(--sand); }
+.s-trades li:nth-child(6n) a { background: #e6f4ea; }
 .s-trades a { border-color: transparent; }
 .s-trades svg { background: var(--ink); stroke: #fff; border-color: var(--ink); border-radius: 8px; }
 
