@@ -748,8 +748,20 @@ export function getExtra(name: string): Extra {
 export function workingBy(id: OfferId): string {
   return id === 'starter' || id === 'creator-starter' ? 'Usually within 7 working days of you adding me to your apps' : 'Date agreed in your scope sheet';
 }
-/** Scales with the job, costs nothing unless a sale happens (Offer v10; was a flat £40). */
-export const REFERRAL_REWARD = '£50';
+/**
+ * Referral reward, tiered by the job your referral buys (CRO Move 5, 18 Oct;
+ * earlier a flat £50). The reward scales with the work, so the biggest jobs pay
+ * the most. Nothing is paid until the referral pays their first invoice.
+ */
+export const REFERRAL_TIERS: { id: string; reward: string; job: string; note: string }[] = [
+  { id: 'starter', reward: '£50', job: 'A Starter or a Launch Page', note: 'One task from the automation menu, or one page that books, sells or takes enquiries.' },
+  { id: 'system', reward: '£150', job: 'A Business System, a Website or After-Hours call answering', note: 'Three jobs joined up, a five-page site, or calls answered when you can’t pick up.' },
+  { id: 'custom', reward: '£300', job: 'Custom software', note: 'A portal, an app or a tool built around how you already work.' },
+];
+/** The reward most referrals earn: the Starter tier. Kept for copy that needs one number. */
+export const REFERRAL_REWARD = REFERRAL_TIERS[0].reward;
+/** Shown wherever the whole range is named. Derived, so the tiers stay the source. */
+export const REFERRAL_RANGE = `${REFERRAL_TIERS[0].reward}–${REFERRAL_TIERS[REFERRAL_TIERS.length - 1].reward}`;
 
 export function priceAmount(price: string): number { return Number(price.replace(/[^0-9.]/g, '')); }
 export function formatPrice(amount: number): string { return `£${amount.toLocaleString('en-GB')}`; }

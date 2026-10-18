@@ -1,4 +1,5 @@
 import type { CustomerTypeId } from './offers';
+import { BUILD_CREDIT } from './site';
 
 /**
  * Honest proof (audit 2 Oct, finding 6): one made-up demo business per
@@ -92,7 +93,7 @@ export function DemoBusiness({ type }: { type: CustomerTypeId }) {
         <Phone screen={demo.after} tone="after" />
       </div>
       <figcaption>
-        <strong>{demo.name}, {demo.trade}.</strong> {demo.what} <em>Demo business, not a client.</em>
+        <strong>{demo.name}, {demo.trade}.</strong> {demo.what} <em>Demo business, not a client.</em> <small className="db-credit">{BUILD_CREDIT}</small>
       </figcaption>
     </figure>
   );
