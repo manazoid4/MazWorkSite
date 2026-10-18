@@ -622,6 +622,78 @@ export const MANAGED_PRESENCE = {
 } as const;
 
 /**
+ * Content Day (Maz, 18 Oct 2026): a full day on site with me, full photos and
+ * short clips. Brains borrowed from commercial photography pricing
+ * (a published flat day rate, concrete deliverables, a set turnaround) and
+ * pointed at what Maz Works actually does: the photos then get used, not left
+ * in a folder. £300 the day. Paired with a Launch Page (its live £295) the two
+ * come to £595. No "AI" wording, and never a promise of leads, rankings or a
+ * number of enquiries. The day rate is Maz's call, not part of the fix ladder.
+ */
+export const CONTENT_DAY = {
+  id: 'content-day',
+  name: 'Content Day',
+  price: '£300',
+  day: 300,
+  href: '/content-day',
+  body: 'A full day with me at your business: real photos and short clips of the work, your people and the place, edited, sorted and ready to use.',
+  forWho: 'Businesses doing good work with no current photos of it: nothing decent for the website, Google listing or social.',
+  successCheck: 'Before I leave, you see the day’s shots on the camera. Within the agreed days you get the edited set, sorted into what each photo is for.',
+  turnaround: 'Edited set within 5 working days of the shoot.',
+  included: [
+    { title: 'A full day on site', body: 'Up to 8 hours in one place, planned with you beforehand so nothing gets missed.' },
+    { title: 'Everything provided', body: 'You rent or buy nothing. The price covers the day of shooting and all the editing.' },
+    { title: 'Full photos, edited', body: 'Every usable photo is edited: exposure, colour and straightening, at web and print sizes.' },
+    { title: 'Short clips', body: 'Short video clips of the work happening, for the website and social.' },
+    { title: 'Sorted for where they go', body: 'Cropped and named for your website, Google Business Profile and social, not one big folder.' },
+    { title: 'Used, not filed', body: 'The best ones go up: a section on your site, Google posts and social crops, when you want them.' },
+  ],
+  /** The exact files, so nobody is guessing what lands (a gap on the sites we learned from). */
+  formats: [
+    'Print-size and web-size versions of every chosen photo',
+    'Square and portrait crops for Google and social',
+    'Vertical and wide clips for social and the website',
+    'An index that says what each photo shows and where it belongs',
+  ],
+  /** The named run-through, with a timeframe on each step. */
+  process: [
+    { title: 'Planning call', when: 'Before the day', body: 'A short call to agree the shots that matter, who is in them and the best time of day.' },
+    { title: 'The day', when: 'Up to 8 hours', body: 'I follow the real work and get the photos your website is missing.' },
+    { title: 'You see the shots', when: 'Before I leave', body: 'We look through the day’s set on the camera so you know it is right.' },
+    { title: 'Private gallery', when: 'Next day', body: 'The shortlist goes into a private gallery you can pick from before I edit.' },
+    { title: 'Edited set', when: 'Within 5 working days', body: 'Every chosen photo and clip is edited, cropped and named.' },
+    { title: 'Put live', when: 'When you are ready', body: 'The best go on your site, Google profile and social, with words if you want a Launch Page.' },
+  ],
+  /** What the buyer may do with the files. */
+  licence: [
+    'Use the finished photos and clips for anything your business needs: website, Google, social, print, ads.',
+    'No time limit and no charge for each use.',
+    'I keep the copyright and ask to show a few in my own work.',
+  ],
+  /** Site access and consent, borrowed from working on live public and industrial sites. */
+  onSite: [
+    'You tell me who is happy to be photographed and anywhere I should not go.',
+    'I follow your site rules: sign-in, PPE and an escort on construction or industrial sites.',
+    'Anyone taking part agrees for themselves; nobody is photographed against their wishes.',
+  ],
+  repeat: 'Two days, or a repeat visit, costs less than the day rate twice. Ask before you book.',
+  notIncluded: [
+    'Drone or aerial filming',
+    'Printing, albums or framed prints',
+    'Written copy for the pages the photos go on (a Launch Page covers that)',
+    'A promise of leads, rankings or enquiries',
+  ],
+  terms: 'One day, one price. Local travel is included; a long trip is agreed before you book.',
+} as const;
+
+/** Content Day plus a Launch Page, built from the day's own photos. */
+export const CONTENT_DAY_BUNDLE = {
+  name: `${CONTENT_DAY.name} + Launch Page`,
+  price: formatPrice(CONTENT_DAY.day + (PAGE_OFFERS[0].from ?? 0)),
+  body: 'Book the Content Day and a Launch Page together and the page is built from the day’s own photos. You get the pictures and the page they sell for you.',
+} as const;
+
+/**
  * Receptionist set-up fee: ONE switch for the whole site (copy, tests, docs).
  * LIVE value is 99, a one-off fee (approved by Maz, 18 Oct 2026). The cost
  * model (docs/maz-works/receptionist/PRICING-MODEL.md) shows a free set-up
