@@ -1729,7 +1729,7 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-video { width: 100%; max-width: 22rem; border-radius: 14px; border: 2px solid var(--line); background: var(--paper); }
 
 /* Colour and conversion pass: calmer cream base, clear accent colours, loud primary actions */
-.s-section:nth-of-type(even), .mw-qw-section:nth-of-type(even) { background: transparent; }
+.s-section:nth-of-type(even), .mw-qw-section:nth-of-type(even) { background: var(--sage); }
 .mw-info:nth-of-type(odd) { background: transparent; }
 .mw-resource-hero { background: linear-gradient(135deg, var(--wheat) 0%, var(--clay) 100%); border-bottom: 4px solid var(--signal); }
 .eyebrow { display: inline-block; background: var(--charcoal); color: var(--wheat); padding: 3px 10px; border-radius: 999px; font-size: .75rem; letter-spacing: .08em; }
