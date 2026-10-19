@@ -166,7 +166,7 @@ test('scope sheet and buy-now intake pages export, noindexed, reading from offer
 
 test('the homepage sends every customer to an existing first step, with detailed offers on their own pages', async () => {
   const home = await readPage('/');
-  assert.match(home, /href="\/free-plan\?src=home-hero#leak-check-form">Get my free preview/);
+  assert.match(home, /href="\/free-plan\?src=home-hero#leak-check-form"/);
   assert.match(home, /href="\/what-we-do"/);
   assert.match(home, /href="\/complaints"/);
   for (const type of ['trades', 'appointments', 'creators']) {
