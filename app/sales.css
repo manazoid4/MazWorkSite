@@ -1184,6 +1184,10 @@ main {
 
 .s-check { display: grid; gap: 28px; align-items: start; }
 .s-check .mw-demo-form { margin: 0; width: 100%; }
+.mw-contact-landing { padding-top: clamp(24px, 4vw, 48px); }
+.mw-contact-landing .s-check-copy h1 { max-width: 18ch; margin: 8px 0 12px; font-size: clamp(2rem, 5vw, 3.4rem); }
+.mw-contact-landing .s-lede { margin-top: 0; }
+.mw-contact-alternatives { margin-top: 12px; }
 .s-subhead { margin: 26px 0 12px; font-size: 1.2rem; }
 
 .s-report-wrap { margin-top: 24px; }
