@@ -87,17 +87,18 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
   assert.match(creators, /Comment to get it/, 'creators page shows the keyword-DM scene');
 });
 
-test('the homepage asks "What do you run?" and reaches every type page and the ladder in one tap', async () => {
+test('the homepage has two clear service routes; niche pages remain discoverable elsewhere', async () => {
   const html = await readPage('/');
-  assert.match(html, /What do you run\?/);
-  for (const type of types.CUSTOMER_TYPES) assert.match(html, new RegExp(`href="/for/${type.id}"`));
+  for (const id of ['services', 'work', 'about']) assert.match(html, new RegExp('id="' + id + '"'));
+  assert.match(html, /href="\/what-we-do"/);
+  assert.match(html, /href="\/complaints"/);
   assert.match(html, /href="\/prices"/);
-  assert.match(html, /id="hero-quick-form"/);
-  assert.doesNotMatch(html, /href="\/brand-kit"/, 'creators link goes to /for/creators now');
+  assert.match(html, /href="\/site-map"/);
+  assert.doesNotMatch(html, /id="hero-quick-form"/, 'no competing forms on the new homepage');
   const hub = await readPage('/for');
-  for (const type of types.CUSTOMER_TYPES) assert.match(hub, new RegExp(`href="/for/${type.id}"`));
+  for (const type of types.CUSTOMER_TYPES) assert.match(hub, new RegExp('href="/for/' + type.id + '"'));
   const sitemap = await fs.readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
-  for (const type of types.CUSTOMER_TYPES) assert.match(sitemap, new RegExp(`/for/${type.id}<`));
+  for (const type of types.CUSTOMER_TYPES) assert.match(sitemap, new RegExp('/for/' + type.id + '<'));
   assert.doesNotMatch(sitemap, /\/brand-kit</);
   const moved = await readPage('/brand-kit');
   assert.match(moved, /noindex/);
@@ -163,15 +164,14 @@ test('scope sheet and buy-now intake pages export, noindexed, reading from offer
   assert.doesNotMatch(sheet, /£\s?\d/, 'scope sheet hard-codes no prices');
 });
 
-test('sales check: a plumber, a salon owner and a creator reach "Get my free preview" in two taps knowing the price', async () => {
+test('the homepage sends every customer to an existing first step, with detailed offers on their own pages', async () => {
   const home = await readPage('/');
-  for (const [type, recipe] of [['trades', 'missed-call text-back'], ['appointments', 'reminders that cut no-shows'], ['creators', 'comment a word, get your guide']]) {
-    // Tap 1: the tile on the homepage, which already shows a recipe and its price.
-    const tile = new RegExp(`<a href="/for/${type}">[\\s\\S]*?<em>[^<]*${recipe}[^<]*£\\d+</em>`, 'i');
-    assert.match(home, tile, `${type}: tile shows recipe and price`);
-    // Tap 2: the main button on the type page.
-    const page = await readPage(`/for/${type}`);
-    assert.match(page, /Get my free preview</, `${type}: free plan button`);
-    assert.match(page, /£99/, `${type}: starter price visible`);
+  assert.match(home, /href="\/free-plan\?src=home-hero#leak-check-form">Get my free preview/);
+  assert.match(home, /href="\/what-we-do"/);
+  assert.match(home, /href="\/complaints"/);
+  for (const type of ['trades', 'appointments', 'creators']) {
+    const page = await readPage('/for/' + type);
+    assert.match(page, /Get my free preview</);
+    assert.match(page, /£99/);
   }
 });
