@@ -5,5 +5,5 @@ export function fitDescription(text: string, limit = DESCRIPTION_LIMIT): string 
   return text.slice(0, limit - 1).replace(/\s+\S*$/, '').replace(/[,. :;]+$/, '') + '…';
 }
 export const SITE_TITLE = 'Websites & Customer Operations | Maz Works';
-export const SITE_DESCRIPTION = 'Maz Works designs thoughtful websites and improves the complaints, reporting and customer processes behind UK businesses. Real work, clear scope, fixed quotes.';
+export const SITE_DESCRIPTION = 'Thoughtful websites, customer journeys, complaints reporting and practical business workflows. Maz Works delivers considered work and fixed quotes.';
 export const OG_IMAGE = {url:'/og-card.png',width:1200,height:630,alt:'Maz Works: websites, customer operations and practical business systems.'};
