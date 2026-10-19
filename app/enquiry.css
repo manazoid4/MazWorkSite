@@ -637,3 +637,19 @@ button.text-link {
 .mw-demo-form [aria-invalid="true"] {
   border-color: #a3241d;
 }
+
+/* Dark form fields with a clear focus ring; 16px stops iOS zooming on focus (UX P1-03). */
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+  background: var(--bg-surface);
+  color: var(--ink-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 16px;
+}
+input::placeholder, textarea::placeholder { color: var(--ink-secondary); opacity: 1; }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--signal);
+  box-shadow: 0 0 0 3px rgba(255, 107, 26, .25);
+}
