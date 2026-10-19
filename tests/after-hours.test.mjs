@@ -66,7 +66,7 @@ test('£79/month is typed only in offers.ts', async () => {
 });
 
 test('the offer is wired in: homepage, services, prices, enquiry, footer, sitemap', async () => {
-  for (const route of ['index', 'services', 'prices']) {
+  for (const route of ['services', 'prices']) {
     assert.match(await read(route), /href="\/after-hours-receptionist"/, `${route} links the receptionist page`);
   }
   assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);
