@@ -12,24 +12,22 @@ export type NavLink = { href: string; label: string };
 
 /** Shown in the header on desktop. Keep to four plus the free plan button. */
 export const PRIMARY_NAV: NavLink[] = [
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/prices', label: 'Prices' },
-  { href: '/what-we-do', label: 'What we do' },
+  { href: '/what-we-do', label: 'Services' },
+  { href: '/for', label: 'Who it’s for' },
+  { href: '/prices', label: 'Pricing' },
   { href: '/proof', label: 'Proof' },
 ];
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/b2b', label: 'For agencies and practices' },
-  { href: '/prices', label: 'Packages and prices' },
-  { href: '/what-we-do', label: 'What we do' },
-  { href: '/proof', label: 'Proof' },
-  { href: '/demos', label: 'Bigger build demos' },
+  { href: '/what-we-do', label: 'Services' },
   { href: '/for', label: 'Who it’s for' },
-  { href: '/refer', label: 'Refer a business' },
+  { href: '/b2b', label: 'For practices & teams' },
+  { href: '/prices', label: 'Packages & pricing' },
+  { href: '/proof', label: 'Proof & artifacts' },
+  { href: '/audit', label: 'Free automation audit' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/site-map', label: 'Everything else' },
+  { href: '/contact', label: 'Contact Manazir' },
 ];
 
 export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
