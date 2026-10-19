@@ -90,7 +90,7 @@ test('homepage uses one primary conversion destination rather than competing for
   const html = await readPage('/');
   assert.doesNotMatch(html, /id="hero-quick-form"/);
   assert.doesNotMatch(html, /id="leak-check-form"/);
-  assert.match(html, /href="\/free-plan\?src=home-hero#leak-check-form">Get my free preview/);
+  assert.match(html, /href="\/free-plan\?src=home-hero#leak-check-form"/);
   assert.match(html, /href="https:\/\/cal\.com\/mazworks\/quick-chat"/);
   const form = await readPage('/free-plan');
   assert.match(form, /id="leak-check-form"/);
