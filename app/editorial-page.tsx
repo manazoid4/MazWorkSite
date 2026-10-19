@@ -43,7 +43,7 @@ export function EditorialHome() {
               <a href="/free-plan?src=home-hero#leak-check-form" className="mw-ed-action-primary">{MAIN_CTA}<span aria-hidden="true">↗</span></a>
               <a href="#work" className="mw-ed-action-secondary">Take a look at the work <span aria-hidden="true">↓</span></a>
             </div>
-            <p className="mw-ed-first-step">Start with a working preview and a fixed quote. No obligation.</p>
+            <p className="mw-ed-first-step">A working preview on my test set-up and a fixed quote, usually within 1 working day. No obligation.</p>
           </div>
           <figure className="mw-ed-hero-project">
             <div className="mw-ed-project-window">
@@ -94,7 +94,7 @@ export function EditorialHome() {
             </article>
           ))}
         </div>
-        <p className="mw-ed-proof-note">One real client build and one independent product. No borrowed testimonials or made-up results.</p>
+        <p className="mw-ed-proof-note">One client build and one independent product. Open either project to see what was actually made.</p>
       </section>
 
       <section className="mw-ed-about" id="about" aria-labelledby="about-title">
@@ -119,9 +119,9 @@ export function EditorialHome() {
       <footer className="mw-ed-footer">
         <div><a href="/" className="mw-ed-wordmark" aria-label="Maz Works homepage">maz<span>works</span><b aria-hidden="true">.</b></a><p>Considered work for better business.</p></div>
         <nav className="mw-footer-links mw-ed-footer-links" aria-label="Footer">
-          <a href="/proof">Proof</a><a href="/prices">Prices</a><a href="/complaints">Complaints</a><a href="/contact">Contact</a><a href="/site-map">Everything else</a>
+          <a href="/proof">Proof</a><a href="/prices">Prices</a><a href="/complaints">Complaints</a><a href="/contact">Contact</a><a href="/refer">Refer a business</a><a href="/site-map">Everything else</a>
         </nav>
-        <div className="mw-ed-footer-bottom"><span>© 2026 Maz Works · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span><a href={'mailto:' + CONTACT_EMAIL}>{CONTACT_EMAIL}</a></div>
+        <div className="mw-ed-footer-bottom"><span>© 2026 Maz Works · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · Not VAT-registered · <a className="mw-back-top" href="#main-content">Back to top ↑</a></span><a href={'mailto:' + CONTACT_EMAIL}>{CONTACT_EMAIL}</a></div>
       </footer>
     </main>
   );
