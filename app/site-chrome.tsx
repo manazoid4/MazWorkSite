@@ -3,7 +3,7 @@ import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
 import { CONTACT_EMAIL, LINKEDIN_URL } from './site';
 
-export function SiteHeader() {
+export function SiteHeader({ ctaHref = '/free-plan?src=nav#leak-check-form', ctaLabel = 'Free preview' }: { ctaHref?: string; ctaLabel?: string } = {}) {
   return (
     <header className="site-header mw-site-header">
       <a className="brand" href="/">
@@ -13,21 +13,21 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <NavLinks />
         <SiteMenu />
-        <a className="mw-nav-cta" href="/free-plan?src=nav#leak-check-form">Free preview</a>
+        <a className="mw-nav-cta" href={ctaHref}>{ctaLabel}</a>
       </nav>
     </header>
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ homepage = false }: { homepage?: boolean } = {}) {
   return (
     <footer className="site-footer mw-site-footer mw-footer-clean">
-      <FooterConvert />
+      {!homepage && <FooterConvert />}
 
       {/* Minimal on purpose (Maz, 15 Oct): one hook, a short line of links. Every page link lives in the menu and on /site-map. */}
       <div className="mw-footer-brand">
-        <p className="mw-footer-hook">Every enquiry answered. Every booking confirmed. You stay on the job.</p>
-        <span>Automation, connected tools and custom software for UK small businesses, by Manazir Hussain. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
+        <p className="mw-footer-hook">{homepage ? 'Business problems, understood. Better ways of working, made practical.' : 'Every enquiry answered. Every booking confirmed. You stay on the job.'}</p>
+        <span>{homepage ? 'Practical customer and operations improvements for UK businesses' : 'Automation, connected tools and custom software for UK small businesses'}, by Manazir Hussain. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
       </div>
 
       <nav className="mw-footer-links" aria-label="Footer">

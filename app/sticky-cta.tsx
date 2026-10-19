@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import { CHECK_REPLY_TIME, MAIN_CTA } from './site';
 
 /**
- * Phone-only bar that keeps the free plan one tap away (Batch 3). It appears
+ * Phone-only bar that keeps the primary enquiry route one tap away. It appears
  * once the hero has left the screen, and hides again while the form or the
  * footer is on screen so it never covers fields or links. Without JavaScript
  * it stays hidden: the page's own buttons do the job.
  */
-export function StickyCheckCta({ href, hideWhenVisible }: { href: string; hideWhenVisible?: string }) {
+export function StickyCheckCta({ href, hideWhenVisible, label = MAIN_CTA, note = `Free · reply in ${CHECK_REPLY_TIME}` }: { href: string; hideWhenVisible?: string; label?: string; note?: string }) {
   const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
@@ -30,8 +30,8 @@ export function StickyCheckCta({ href, hideWhenVisible }: { href: string; hideWh
 
   return (
     <div className={`s-sticky${hidden ? ' s-sticky-hidden' : ''}`} aria-hidden={hidden || undefined}>
-      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>{MAIN_CTA}</a>
-      <span>Free · reply in {CHECK_REPLY_TIME}</span>
+      <a className="button button-signal" href={href} tabIndex={hidden ? -1 : undefined}>{label}</a>
+      <span>{note}</span>
     </div>
   );
 }

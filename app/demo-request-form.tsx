@@ -164,7 +164,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: I want my own website and a way for people to book or buy."
+          placeholder="For example: New enquiries get missed, the same task keeps being repeated, or customers are unsure what to do next."
         />
       </label>
 
