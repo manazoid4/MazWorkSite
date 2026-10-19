@@ -16,13 +16,10 @@ test('the demo video, poster and captions exist and the video stays under 2 MB',
   assert.doesNotMatch(vtt, /\bAI\b|£/);
 });
 
-test('the homepage plays the demo with a poster, captions and an example label', async () => {
+test('the editorial homepage uses real project work rather than a generic autoplay demo', async () => {
   const html = await readFile(path.join(root, 'out/index.html'), 'utf8');
-  const figure = html.slice(html.indexOf('id="demo-video"'), html.indexOf('</figure>', html.indexOf('id="demo-video"')));
-  assert.ok(figure.length > 0, 'homepage has no #demo-video');
-  assert.match(figure, /src="\/video\/demo\.mp4"/);
-  assert.match(figure, /poster="\/video\/demo-poster\.webp"/);
-  assert.match(figure, /kind="captions" src="\/video\/demo\.vtt"/);
-  assert.match(figure, /preload="none"/);
-  assert.match(figure, /not a real customer/i);
+  assert.match(html, /scrap-finance-partners\.webp/);
+  assert.match(html, /jobfilter-home\.webp/);
+  assert.doesNotMatch(html, /autoplay/);
+  assert.doesNotMatch(html, /id="demo-video"/);
 });
