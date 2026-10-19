@@ -18,13 +18,14 @@ html { container-type: inline-size; scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-underline-offset: .22em; }
 p, li { text-wrap: pretty; }
-h1, h2, h3 { line-height: 1.06; letter-spacing: -.035em; text-wrap: balance; }
+p, .project-summary, .hero-copy { max-width: 65ch; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
 /* `small` carries a ~0.83em browser shrink, so nesting it inside already-small
    text lands under 10px. Component rules are more specific and still win. */
 small { font-size: .72rem; }
-h1 { max-width: 1050px; font-size: clamp(2.5rem, 5.5vw, 4.5rem); }
-h2 { font-size: clamp(1.9rem, 3.8vw, 3.1rem); }
-h3 { font-size: clamp(1.3rem, 2.2vw, 1.85rem); }
+h1 { max-width: 1050px; font-size: clamp(2.2rem, 4.5vw, 3.8rem); line-height: 1.18; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.6rem); line-height: 1.22; }
+h3 { font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.28; }
 h4 { font-family: var(--mono); font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; }
 :focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; box-shadow: 0 0 0 6px var(--ink); }
 .skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 10px 14px; border: 1px solid var(--line); background: var(--signal); color: var(--ink); font-weight: 900; text-decoration: none; transform: translateY(-180%); }
@@ -267,7 +268,7 @@ section { scroll-margin-top: 80px; }
 
 h1, h2, h3 {
   font-weight: 600;
-  letter-spacing: -.035em;
+  letter-spacing: -.02em;
 }
 
 .eyebrow,
