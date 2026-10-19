@@ -179,10 +179,10 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /View a scope sheet/);
 });
 
-test('header has the four main links, video and objects moved to the Lab group', async () => {
+test('editorial header prioritises work and keeps secondary projects out of the main navigation', async () => {
   const html = await page('index');
-  assert.match(html, /Lab \/ Physical products/);
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  assert.match(header, /href="\/proof"/);
-  assert.doesNotMatch(header, /href="\/video"/);
+  for (const href of ['#services','#work','#about']) assert.match(header, new RegExp('href="' + href + '"'));
+  assert.match(html, /href="\/proof"/);
+  assert.doesNotMatch(header, /href="\/video"|href="\/3d-printing"/);
 });
