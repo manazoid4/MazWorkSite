@@ -12,20 +12,21 @@ export type NavLink = { href: string; label: string };
 
 /** Shown in the header on desktop. Keep to four plus the free plan button. */
 export const PRIMARY_NAV: NavLink[] = [
-  { href: '/for', label: 'Who it’s for' },
+  { href: '/solutions', label: 'Solutions' },
   { href: '/prices', label: 'Prices' },
   { href: '/what-we-do', label: 'What we do' },
-  { href: '/video', label: 'Video' },
+  { href: '/proof', label: 'Proof' },
 ];
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
+  { href: '/solutions', label: 'Solutions' },
+  { href: '/b2b', label: 'For agencies and practices' },
   { href: '/prices', label: 'Packages and prices' },
-  { href: '/video', label: 'Video and filming' },
-  { href: '/demos', label: 'Bigger build demos' },
   { href: '/what-we-do', label: 'What we do' },
+  { href: '/proof', label: 'Proof' },
+  { href: '/demos', label: 'Bigger build demos' },
   { href: '/for', label: 'Who it’s for' },
-  { href: '/work/scrap-finance-partners', label: 'Client work' },
   { href: '/refer', label: 'Refer a business' },
   { href: '/faq', label: 'FAQ' },
   { href: '/site-map', label: 'Everything else' },
@@ -41,7 +42,9 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
       { href: '/managed-presence', label: 'Managed presence' },
-      { href: '/video', label: 'Video and filming' },
+      { href: '/b2b', label: 'For agencies and practices' },
+      { href: '/complaints', label: 'Complaints tracking' },
+      { href: '/audit', label: 'Free automation audit' },
       { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
       { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
@@ -71,8 +74,9 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     // Kept apart from the service on purpose (29 Sep rebuild): Objects is a
     // concept range and the Lab holds Maz's own products, so neither competes
     // with the one thing a small business can buy today.
-    title: 'Other projects',
+    title: 'Lab / Physical products',
     links: [
+      { href: '/video', label: 'Video and filming' },
       { href: '/3d-printing', label: 'Objects (concept range)' },
       { href: '/3d-printing#architecture-property', label: 'Architecture models' },
       { href: '/lab', label: 'Lab: my own products' },

@@ -10,6 +10,8 @@ import { SampleReport } from '../sample-report';
 import { LeakCheckForm } from './leak-check-form';
 import { NICHE_GUIDES } from '../for/niches';
 import { NextSteps } from '../explainers';
+import '../b2b.css';
+import { AutomationAudit } from '../audit/audit';
 
 const PAGE_URL = `${SITE_URL}/free-plan`;
 
@@ -67,6 +69,15 @@ export default function LeakCheckPage() {
           <a className="button" href="#leak-check-return-title">See an example</a>
         </div>
         <p className="mw-hero-note">Made by me · usually sent within {CHECK_REPLY_TIME} · no call needed</p>
+      </section>
+
+      <section className="mw-qw-section" aria-labelledby="free-audit-title">
+        <details className="b2b-box" style={{ maxWidth: '44rem', width: '100%' }}>
+          <summary id="free-audit-title"><strong>Not sure what to ask for? Try the one-minute audit first</strong></summary>
+          <p className="s-small">Tick the repeat jobs eating your week. Your result carries over to the form below.</p>
+          <AutomationAudit page="free-plan" />
+          <p className="s-small"><a href="/free-plan?audit=1#leak-check-form">Use this result in the form below</a></p>
+        </details>
       </section>
 
       <section className="mw-qw-section" aria-labelledby="leak-check-send-title">

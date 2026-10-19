@@ -9,7 +9,8 @@ import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../e
 import { CHECK_PICK_EVENT } from '../package-link';
 import { FREE_STEP } from '../offers';
 import { HEADACHE_PICKS, SYSTEMS } from '../systems';
-import { rememberedCampaign } from '../linkedin-source';
+import { rememberedAttribution, rememberedCampaign } from '../linkedin-source';
+import { readStoredAudit } from '../audit/model';
 import { changeTrade, contextSearch, enquirySource, KNOWN_PACKAGES, problemsForTrade, readTradeContext, safeEnquiryPageUrl, TRADE_CHOICES, TRADE_PROBLEMS, tradeContextFields, tradeLabel, type TradeContext } from '../trade-context';
 import { draftFreePlan } from './draft';
 
@@ -136,6 +137,10 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       const value = params.get(param)?.replace(/[<>]/g, '').slice(0, 80);
       if (input && value && !input.value) input.value = value;
     }
+    // The free audit stores its result so the visitor does not have to retype it.
+    const stored = params.get('audit') ? readStoredAudit() : '';
+    const problemBox = formRef.current?.querySelector<HTMLTextAreaElement>('[name="problem"]');
+    if (problemBox && stored && !problemBox.value) problemBox.value = stored;
     const business = params.get('business')?.replace(/[<>]/g, '').slice(0, 80);
     const website = formRef.current?.querySelector<HTMLInputElement>('[name="website"]');
     if (website && business && !website.value) website.value = business;
@@ -248,6 +253,7 @@ export function LeakCheckForm({ setup = false }: { setup?: boolean }) {
       source_page: context.sourcePage,
       next_step: setup ? SETUP_NEXT_STEP : 'Send a free preview and fixed price; not an order',
       source,
+      attribution: rememberedAttribution(),
       _replyto: email,
       _subject: subject,
       _template: 'table',

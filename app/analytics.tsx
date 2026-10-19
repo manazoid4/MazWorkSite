@@ -2,14 +2,14 @@
 
 import { track } from '@vercel/analytics';
 import { useEffect, useRef, type ReactNode } from 'react';
-import { rememberCampaign } from './linkedin-source';
+import { rememberedAttribution, rememberAttribution, rememberCampaign } from './linkedin-source';
 
 /**
  * Conversion events for Vercel Web Analytics. Custom events only show in the
  * dashboard on a paid Vercel plan; on Hobby the calls are harmless no-ops, so
  * the site is ready the day the plan changes.
  */
-export type ConversionEvent = 'Check submitted' | 'Enquiry sent' | 'Call clicked' | 'Pricing viewed' | 'CTA clicked' | 'Form started' | 'Form submitted' | 'Confirmation sent' | 'What-we-do section viewed';
+export type ConversionEvent = 'Check submitted' | 'Enquiry sent' | 'Call clicked' | 'Pricing viewed' | 'CTA clicked' | 'Form started' | 'Form submitted' | 'Confirmation sent' | 'What-we-do section viewed' | 'Campaign visit' | 'Assessment started' | 'Assessment completed' | 'Assessment submitted' | 'Booking opened';
 
 export function trackConversion(name: ConversionEvent, data?: Record<string, string>) {
   try {
@@ -49,9 +49,17 @@ export function PricingViewTracker({ targetId }: { targetId: string }) {
 export function ConversionTracker() {
  useEffect(() => {
   rememberCampaign(location.search);
+  rememberAttribution(location.search, document.referrer);
+  // A LinkedIn post should be visible as a campaign visit, not only as a pageview.
+  // One event per tab: later pages the visitor opens should not inflate the count.
+  const attribution = rememberedAttribution();
+  if (attribution) {
+    try { if (!sessionStorage.getItem('mw-campaign-visit')) { sessionStorage.setItem('mw-campaign-visit', '1'); trackConversion('Campaign visit', { attribution, page: location.pathname }); } }
+    catch { trackConversion('Campaign visit', { attribution, page: location.pathname }); }
+  }
   const click = (event: MouseEvent) => { const link = (event.target as Element).closest?.('a'); if (!link) return;
    const href = link.getAttribute('href') || '';
-   if (href.includes('/free-plan') || href === '#check') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname});
+   if (href.includes('/free-plan') || href.includes('/b2b/assessment') || href === '#check' || href === '#assessment') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname,attribution:rememberedAttribution()});
   };
   document.addEventListener('click', click);
   const observer = new IntersectionObserver(entries => { for (const entry of entries) if (entry.isIntersecting) {trackConversion('What-we-do section viewed',{section:entry.target.id});observer.unobserve(entry.target);} },{threshold:0.1});

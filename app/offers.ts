@@ -950,3 +950,149 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
   if (builds >= BUSINESS_SYSTEM_JOBS) return packageQuote(business, `${builds} tasks to build is a ${business.name}: joined up, with the weekly report included.`);
   return { offer: builds ? starter : null, lines, total, totalLabel: formatPrice(total), workingBy: workingBy('starter'), note: 'Fixed price, agreed before any work starts. No VAT added.' };
 }
+
+/**
+ * Complaints packages (PROPOSED 19 Oct 2026, starting prices set by Maz; margins flagged in
+ * HANDOFF.md, final public prices need his go). The value is Maz's own experience: he kept a
+ * post-complaints tracking spreadsheet, analysed outcomes and reported to a company board.
+ * Work complements the client's existing case-management system; it does not replace it.
+ * No AI wording, no guaranteed outcomes, no promise a firm will meet any regulator's rules.
+ * Turnaround counts working days from receipt of the client's anonymised data.
+ */
+export type ComplaintPackage = {
+  id: 'health-check' | 'board-reporting' | 'workflows' | 'sprint';
+  name: string;
+  price: string;
+  from: number;
+  /** Plain-English problem it solves. */
+  purpose: string;
+  /** Why it is easy to see, understand and act on. */
+  easy: string;
+  receives: readonly string[];
+  /** What the client supplies. */
+  needs: readonly string[];
+  /** Scope limits that keep the fixed price honest. */
+  limits: readonly string[];
+  formats: string;
+  turnaround: string;
+  flagship?: boolean;
+};
+
+export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
+  {
+    id: 'health-check',
+    name: 'Complaints Health Check',
+    price: 'From £295',
+    from: 295,
+    purpose: 'Find out where your complaint handling is weak, before a customer, a regulator or your board does.',
+    easy: 'One page of scores and a ranked list. You can see the problem and the first fix in two minutes.',
+    receives: [
+      'A review of up to 15 anonymised complaint cases',
+      'A visual performance scorecard',
+      'A breakdown of response quality, investigation weaknesses and recurring issues',
+      'Your top 5 improvements, ranked by priority',
+      'A concise 2–3 page PDF report with charts, findings and actions',
+      'A 30-minute walkthrough of the findings',
+    ],
+    needs: ['Up to 15 anonymised cases: the complaint, the investigation notes and the reply sent', 'Your complaints procedure, if you have one written down'],
+    limits: ['More than 15 cases, or more than one team or department, is quoted', 'A review of your cases, not a legal or regulatory opinion'],
+    formats: 'PDF report, scorecard graphic, a call',
+    turnaround: 'About 5 working days',
+  },
+  {
+    id: 'board-reporting',
+    name: 'Post-Complaints Analysis & Board Reporting',
+    price: 'From £895',
+    from: 895,
+    flagship: true,
+    purpose: 'Turn a pile of complaint records into clear decisions for management and the board.',
+    easy: 'Every chart carries a one-line headline and every finding an owner and a date, so the board can decide in the meeting.',
+    receives: [
+      'A complaints tracker built around your own categories, ready for your team to keep up to date',
+      'Analysis of up to 150 complaint records you supply',
+      'An interactive dashboard: volumes, outcomes, handling times and recurring themes',
+      'Root-cause analysis of operational weaknesses, where the data supports it',
+      'A board-ready presentation of 5–7 visual slides',
+      'A management action tracker with priorities, owners and deadlines',
+      'An executive summary of findings and recommended actions',
+    ],
+    needs: ['Up to 150 complaint records as an anonymised export from your system, or a simple list', 'Your complaint categories and outcome labels', 'Who the audience is (board, committee, regulator-facing team)'],
+    limits: ['Up to 150 records, one department, one reporting period', 'The dashboard covers the records you supply; connecting it live to your systems is quoted', 'Ongoing monthly or quarterly reporting is quoted separately'],
+    formats: 'Interactive dashboard, board slides (with a PDF copy), PDF executive summary',
+    turnaround: 'About 10 working days',
+  },
+  {
+    id: 'workflows',
+    name: 'Tailored Complaints Workflows & Staff Toolkit',
+    price: 'From £495',
+    from: 495,
+    purpose: 'Help your people handle complaints the same way, with confidence, every time.',
+    easy: 'One-page guides and a simple decision tree that staff can follow on a busy day without asking anyone.',
+    receives: [
+      'A review of one of your existing complaints workflows',
+      'One tailored, easy-to-follow process flowchart',
+      'One escalation decision tree',
+      'Three branded employee infographics: investigation quality, customer communication and resolution',
+      'A practical employee checklist',
+      'Editable source files and a 30-minute team walkthrough',
+    ],
+    needs: ['Your current procedure or a walkthrough of how a complaint really moves', 'Your logo and brand colours', 'The names of your escalation points'],
+    limits: ['One workflow and one department; further workflows are quoted', 'Built from your actual procedure, not a downloaded template', 'Printing and in-house training sessions beyond the walkthrough are not included'],
+    formats: 'Editable source files, PDF and PNG exports',
+    turnaround: 'About 7 working days',
+  },
+  {
+    id: 'sprint',
+    name: 'Complete Complaints Improvement Sprint',
+    price: 'From £1,495',
+    from: 1495,
+    purpose: 'Diagnose the problem, report it properly and give staff a better way of working, in one piece of work.',
+    easy: 'Diagnosis, reporting and a plan that fit together, so nothing needs translating before people can act.',
+    receives: [
+      'Everything in the Complaints Health Check',
+      'One customised complaints tracker and management dashboard',
+      'A concise management reporting pack',
+      'One tailored staff workflow and two branded infographics',
+      'A prioritised improvement action plan',
+      'An implementation walkthrough and one follow-up review within 30 days',
+    ],
+    needs: ['Up to 15 anonymised cases for the Health Check', 'Up to 60 complaint records for the tracker and dashboard', 'Your procedure and brand basics'],
+    limits: ['Up to 60 records, one department and one workflow', 'Larger datasets, extra departments, ongoing reporting and integrations are quoted', 'The follow-up review is one session within 30 days of delivery'],
+    formats: 'PDF report, interactive dashboard, board pack, editable workflow files',
+    turnaround: 'About 15 working days',
+  },
+];
+
+export const COMPLAINT_EXTRAS_QUOTED = ['Larger datasets or further departments', 'A monthly or quarterly report refresh', 'Connecting the dashboard to a system you already use', 'Additional workflows or infographics'];
+
+/** How complaint records are handled. The 30-day deletion is a proposal for Maz to confirm. */
+export const COMPLAINT_DATA_HANDLING = [
+  'You send anonymised extracts: names, contact details and account numbers removed or replaced with reference numbers before they reach me.',
+  'Files move through a private folder in your own Google Drive or OneDrive, shared only with me and removed when the work ends.',
+  'I work on them on one device, and delete my working copies within 30 days of delivery unless you ask me to keep them.',
+  'A short written agreement on data handling is part of the scope sheet before any records are shared.',
+] as const;
+
+/**
+ * B2B operations systems for professional practices (PROPOSED 19 Oct 2026 from Maz's brief;
+ * every price here needs Maz's go before it goes live). One-off set-ups on the client's own
+ * tools, sold through the same free preview and "no working, no invoice" terms as the ladder.
+ * Wording rule: aims and typical times, never guarantees. Sending texts needs a paid texting
+ * service the client pays directly.
+ */
+export const B2B_SYSTEMS = [
+  { id: 'intake', name: 'Client Intake & Document Chaser', price: '£850', from: 850, tag: 'Accountants, solicitors, brokers',
+    body: 'A secure upload link and a reminder every few days by email or text until the ID, proof of address and signed letters are in, filed to your Google Drive or OneDrive.' },
+  { id: 'speed', name: 'Speed-to-Lead Reply', price: '£595', from: 595, tag: 'Anyone who pays for enquiries',
+    body: 'A web-form or Google enquiry gets a text or email reply in about a minute, with your Cal.com booking link, and you are told.' },
+  { id: 'proposal', name: 'Proposal Chaser', price: '£450–£750', from: 450, tag: 'Agencies and consultancies',
+    body: 'A short run of polite follow-ups on quotes you sent from Xero, PandaDoc or DocuSign, stopped the moment they reply.' },
+  { id: 'feedback', name: 'Feedback Filter', price: '£99', from: 99, tag: 'Add-on to any system',
+    body: 'After a job, happy customers are sent to your Google review page and unhappy ones go to a private form that alerts you first.' },
+  { id: 'digest', name: 'Monday Morning Digest', price: '£145', from: 145, tag: 'Add-on, or £79/month if you want it kept running',
+    body: 'One email or WhatsApp message at 8am: money in, open proposals and new enquiries from the tools you already use.' },
+] as const;
+
+/** GoHighLevel partner pricing from docs/maz-works/PRICE-AUDIT-2026-10.md (gohighlevel.partners, checked 2 Oct 2026; $1 = £0.75, approximate). */
+export const GHL_PARTNER = { setupUsd: 850, monthlyUsd: 38.8, usdToGbp: 0.75 } as const;
+export const ghlThreeYearGbp = (): number => Math.round((GHL_PARTNER.setupUsd + GHL_PARTNER.monthlyUsd * 36) * GHL_PARTNER.usdToGbp / 10) * 10;

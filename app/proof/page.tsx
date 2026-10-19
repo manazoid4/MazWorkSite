@@ -1,7 +1,8 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
 import { CONTACT_EMAIL, MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { CaseStudyGrid, ScopeSheetPreview, TestimonialList } from '../proof-parts';
 
 /**
  * Proof hub. The rule is absolute: never invent a client, logo, quote or
@@ -18,11 +19,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'Maz Works proof', description: fitDescription('Real work you can open and check today.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
-const REAL_WORK = [
-  { name: 'JobFilter', kind: 'My own product', body: 'Finds and filters public contracts for small trades firms. Live, with paid plans.', href: '/work/jobfilter' },
-  { name: 'Scrap Finance Partners', kind: 'Client website', body: 'Designed and built for a specialist finance firm.', href: '/work/scrap-finance-partners' },
-];
-
 export default function ProofPage() {
   return (
     <main>
@@ -30,19 +26,21 @@ export default function ProofPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="proof-title">
         <p className="eyebrow">Proof</p>
         <h1 id="proof-title">Real work. Open it and see.</h1>
-        <p>Everything here is real. Open it and check.</p>
+        <p>Each item is labelled for what it is: my own product, a client build, or a demonstration with invented data.</p>
       </section>
 
       <section className="mw-info" aria-label="Real work">
-        <ul className="mw-cards mw-two">
-          {REAL_WORK.map(item => (
-            <li key={item.name}>
-              <strong>{item.name}</strong>
-              <span>{item.kind}. {item.body}</span>
-              <a href={item.href}>Open {item.name} →</a>
-            </li>
-          ))}
-        </ul>
+        <CaseStudyGrid />
+      </section>
+
+      <section className="mw-info" aria-labelledby="proof-quotes-title">
+        <h2 id="proof-quotes-title">What clients say</h2>
+        <TestimonialList />
+      </section>
+
+      <section className="mw-info" aria-labelledby="proof-scope-title">
+        <h2 id="proof-scope-title">What you get before you pay</h2>
+        <ScopeSheetPreview />
       </section>
 
       <section className="mw-info" aria-labelledby="proof-terms-title">

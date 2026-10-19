@@ -13,7 +13,7 @@ export function isCampaignTag(source: string | null | undefined): source is stri
 const INTERNAL_SOURCES = new Set([
   'site', 'nav', 'footer', 'contact', 'brand-kit', 'for-hub', 'prices', 'prices-hero',
   'builder', 'estimator', 'example-plan', 'scope-sheet', 'services', 'demos',
-  'after-hours', 'voice-demo', 'whats-new',
+  'after-hours', 'voice-demo', 'whats-new', 'b2b', 'b2b-assessment', 'audit', 'complaints', 'proof',
   ...['trades', 'appointments', 'creators', 'offices', 'heating-and-plumbing', 'roofers',
     'builders', 'electricians', 'salons-and-beauty', 'dog-groomers', 'garages',
     'cafes-and-food', 'clinics-and-therapists', 'architects'].map(id => `for-${id}`),
@@ -34,7 +34,7 @@ export function isEnquirySource(source: string | null | undefined): source is st
 export function cleanEnquirySource(value: unknown): string {
   if (typeof value !== 'string') return '';
   const parts = value.split(' → ');
-  const valid = (part: string) => isEnquirySource(part) || /^direct \((homepage|free-plan|contact|brand-kit|3d-printing)\)$/.test(part);
+  const valid = (part: string) => isEnquirySource(part) || /^direct \((homepage|free-plan|contact|brand-kit|3d-printing|b2b-assessment)\)$/.test(part);
   if (parts.length === 1) return valid(parts[0]) ? value : '';
   return parts.length === 2 && isCampaignTag(parts[0]) && valid(parts[1]) ? value : '';
 }
@@ -60,7 +60,7 @@ export function linkedInHref(href: string, search: string): string {
   if (!isCampaignTag(source)) return href;
   const base = 'https://www.mazworks.uk';
   const url = new URL(href, base);
-  if (url.origin === base && ['/free-plan', '/brand-kit'].includes(url.pathname)) {
+  if (url.origin === base && ['/free-plan', '/brand-kit', '/audit', '/complaints', '/b2b', '/b2b/assessment'].includes(url.pathname)) {
     url.searchParams.set('src', source);
     return `${url.pathname}${url.search}${url.hash}`;
   }
@@ -69,4 +69,29 @@ export function linkedInHref(href: string, search: string): string {
     return url.href;
   }
   return href;
+}
+
+const ATTRIBUTION_KEY = 'mw-attribution';
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'] as const;
+const UTM_VALUE = /^[a-z0-9][a-z0-9._-]{0,39}$/i;
+
+/** One short line of campaign labels (UTM values and a LinkedIn referrer), or '' when there is nothing safe to keep. */
+export function attributionLine(search: string, referrer: string): string {
+  const params = new URLSearchParams(search);
+  const parts = UTM_KEYS.flatMap((key) => { const value = params.get(key) || ''; return UTM_VALUE.test(value) ? [`${key.slice(4)}=${value}`] : []; });
+  let host = '';
+  try { host = new URL(referrer).hostname.replace(/^www\./, ''); } catch { /* no referrer */ }
+  if (host === 'linkedin.com' || host === 'lnkd.in' || host.endsWith('.linkedin.com')) parts.push('referrer=linkedin');
+  return parts.join('; ');
+}
+
+/** First touch wins, for this tab only. Storage can be blocked, so never throw. */
+export function rememberAttribution(search: string, referrer: string): void {
+  const line = attributionLine(search, referrer);
+  if (!line) return;
+  try { if (!sessionStorage.getItem(ATTRIBUTION_KEY)) sessionStorage.setItem(ATTRIBUTION_KEY, line); } catch { /* storage blocked */ }
+}
+
+export function rememberedAttribution(): string {
+  try { const value = sessionStorage.getItem(ATTRIBUTION_KEY) || ''; return /^[a-z0-9=._; -]{0,200}$/i.test(value) ? value : ''; } catch { return ''; }
 }

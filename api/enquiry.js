@@ -46,6 +46,7 @@ export function cleanEnquiryContext(body) {
     problem_id: PROBLEM_IDS.includes(body.problem_id) ? body.problem_id : '',
     proof_id: trade && body.proof_id === trade && tradeRoute(`/for/${trade}`) ? trade : '',
     source: cleanEnquirySource(body.source),
+    attribution: typeof body.attribution === 'string' && /^[a-z0-9=._; -]{1,200}$/i.test(body.attribution) ? body.attribution : '',
     source_page: tradeRoute(body.source_page) ? body.source_page : '',
     name: oneLine(body.name, 120),
     problem: ownWords(body.problem, 4000),
@@ -74,7 +75,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       return typeof result.id === 'string';
     } catch { return false; }
   };
-  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'service', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'next_step'];
+  const fields = ['name', 'email', 'problem', 'customer_message', 'existing_tools', 'website', 'referred_by', 'interested_in', 'service', 'systems', 'trade', 'industry', 'problem_id', 'proof_id', 'source_page', 'source', 'attribution', 'next_step'];
   const draft = !isSetupIntake(body) && body.draft ? `\n\n----- Draft reply (approve, tweak, send) -----\n${body.draft}` : '';
   const page = cleanPageUrl(body._url);
   const setup = isSetupIntake(body);
@@ -85,8 +86,9 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
   if (!accepted) return { ok: false, confirmationSent: false };
   // The owner has the enquiry, so everything below runs concurrently and can never fail it.
   // Total time is owner (<=9s) + one parallel stage (<=9s), not the sum of every call.
-  const [, , confirmation] = await Promise.allSettled([
+  const [, , , confirmation] = await Promise.allSettled([
     syncHubSpot(body, fetchImpl),
+    notifyTelegram(body, fetchImpl),
     scheduleFollowUps(body, send),
     send({ to: [body.email], reply_to: 'info@mazworks.uk',
       subject: setup ? 'Your Maz Works setup details' : 'Your Maz Works free preview request',
@@ -99,6 +101,19 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
   return { ok: true, confirmationSent };
 }
 /**
+ * Instant phone alert for a new lead. Needs TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID (a bot Maz
+ * creates with @BotFather); does nothing without them. Name, source and the first line of the
+ * message only: the email address stays in the owner email and HubSpot.
+ */
+export async function notifyTelegram(body, fetchImpl = fetch) {
+  const token = process.env.TELEGRAM_BOT_TOKEN, chat = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chat) return false;
+  const text = ['New Maz Works lead', body.name, body.interested_in && body.interested_in !== 'Not chosen' ? body.interested_in : '', body.source && `Source: ${body.source}`, body.attribution && `Campaign: ${body.attribution}`, String(body.problem || '').slice(0, 300)].filter(Boolean).join('\n');
+  const response = await fetchImpl(`https://api.telegram.org/bot${token}/sendMessage`, { method: 'POST', signal: AbortSignal.timeout(9000), headers: { 'content-type': 'application/json' }, body: JSON.stringify({ chat_id: chat, text }) });
+  return response.ok;
+}
+
+/**
  * HubSpot sync (C12): upsert the contact by email with the message and source.
  * Needs HUBSPOT_TOKEN (private app token, crm.objects.contacts write). Standard
  * properties only, so it works on a fresh portal; Maz tiers it by hand after.
@@ -108,7 +123,7 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
   if (!token) return false;
   const [firstname, ...rest] = String(body.name || '').trim().split(/\s+/);
   const properties = { email: body.email, firstname, lastname: rest.join(' ') || undefined, website: body.website || undefined, lifecyclestage: 'lead', hs_lead_status: 'NEW',
-    message: [body.problem, body.interested_in && body.interested_in !== 'Not chosen' ? `Interested in: ${body.interested_in}` : '', body.trade ? `Type: ${body.trade}` : '', body.referred_by ? `Referred by: ${body.referred_by}` : '', body.source ? `Source: ${body.source}` : ''].filter(Boolean).join('\n') };
+    message: [body.problem, body.interested_in && body.interested_in !== 'Not chosen' ? `Interested in: ${body.interested_in}` : '', body.trade ? `Type: ${body.trade}` : '', body.referred_by ? `Referred by: ${body.referred_by}` : '', body.source ? `Source: ${body.source}` : '', body.attribution ? `Campaign: ${body.attribution}` : ''].filter(Boolean).join('\n') };
   for (const key of Object.keys(properties)) if (properties[key] === undefined) delete properties[key];
   const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
   const signal = AbortSignal.timeout(9000); // shared, so create + update together stay within 9s
@@ -148,7 +163,7 @@ export default async function handler(req, res, fetchImpl = fetch) {
     const body = JSON.parse(raw);
     if (!body || typeof body !== 'object' || Array.isArray(body)) return reply(400,{ok:false});
     if (body._honey) return reply(200, {ok:true,confirmationSent:false});
-    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','service','systems','trade','industry','problem_id','proof_id','source_page','source','next_step','request_id','_url','draft'];
+    const fields = ['name','email','problem','customer_message','existing_tools','website','referred_by','interested_in','service','systems','trade','industry','problem_id','proof_id','source_page','source','attribution','next_step','request_id','_url','draft'];
     if (fields.some(field => body[field] !== undefined && (typeof body[field] !== 'string' || body[field].length > 4000))) return reply(400,{ok:false});
     if (body.service !== undefined && !['Free Preview & Fixed Price', SETUP_SERVICE].includes(body.service)) return reply(400,{ok:false});
     if (!body.name?.trim() || !body.problem?.trim() || !/^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/.test(body.email || '') || body.name.length > 120) return reply(400,{ok:false});
