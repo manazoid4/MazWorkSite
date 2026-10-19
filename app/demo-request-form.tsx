@@ -143,7 +143,7 @@ export function DemoRequestForm() {
     }}>
       <input type="hidden" name="_subject" value="Maz Works — business enquiry" />
       <input type="hidden" name="_template" value="table" />
-      <p className="mw-form-kicker">Just your name, email and what you need.</p>
+      <p className="mw-form-kicker">Just your name, email and what you want to improve. No service choice needed.</p>
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -164,7 +164,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: I want my own website and a way for people to book or buy."
+          placeholder="For example: I miss customer calls while working, or need a clearer way to track and report complaints."
         />
       </label>
 

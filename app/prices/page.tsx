@@ -2,10 +2,10 @@ import { ServiceSchema } from '../service-schema';
 import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHECK_REPLY_TIME, SITE_URL, VAT_NOTE } from '../site';
+import { ENQUIRY_CTA, SITE_URL, VAT_NOTE } from '../site';
 import { OG_IMAGE } from '../seo';
 import { PricingViewTracker } from '../analytics';
-import { CARE_PLAN, FREE_STEP, OFFERS, getOffer } from '../offers';
+import { CARE_PLAN, OFFERS, getOffer } from '../offers';
 import { PriceList } from '../price-list';
 import { PracticeTier } from '../b2b-parts';
 import '../b2b.css';
@@ -16,8 +16,8 @@ const [STARTER, SYSTEM, CUSTOM] = OFFERS;
 const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Automation prices for UK small businesses | Maz Works' },
-  description: fitDescription(`Every Maz Works price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, ${getOffer('creator-launch').name} ${getOffer('creator-launch').price}, free small set-ups and ${CARE_PLAN.name} ${CARE_PLAN.price}. Fixed quote first, no VAT added.`),
+  title: { absolute: 'Maz Works prices for websites, systems and support' },
+  description: fitDescription(`Every Maz Works price in one place: websites, customer workflows, software and monthly support. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}. Professional complaints work is quoted to scope. No VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Free small set-ups with every package. UK price match. No VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
@@ -28,13 +28,22 @@ export default function PricesPage() {
       <SiteHeader /><ServiceSchema path="/prices" />
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
         <p className="eyebrow">Prices</p>
-        <h1 id="prices-title">Choose a one-off build or monthly help.</h1>
-        <p className="s-lede">I can build a system once, keep your online presence current each month, or answer calls you miss. The scope and price are agreed before work starts. {VAT_NOTE}</p>
-        <p className="s-small">Start with a {FREE_STEP.short}, within {CHECK_REPLY_TIME}. Choose one useful job; add more when you need it.</p>
+        <h1 id="prices-title">Prices for getting customers, serving them and improving.</h1>
+        <p className="s-lede">Clear prices for one-off work and optional monthly support. Complaints work is quoted to scope. {VAT_NOTE}</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free preview</a>
-          <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>
+          <a className="button button-signal s-button-lg" href="/contact?src=prices#contact">{ENQUIRY_CTA}</a>
+          <a className="text-link" href="/what-we-do#serve-customers">See how it works <span aria-hidden="true">→</span></a>
         </div>
+      </section>
+
+      <section className="s-section" aria-labelledby="price-paths-title">
+        <h2 id="price-paths-title">What are you working on?</h2>
+        <ul className="s-recipes">
+          <li><strong>Get Customers</strong><span>Websites and online presence.</span><a href="#websites">See page options →</a></li>
+          <li><strong>Serve Customers</strong><span>Bookings and follow-up.</span><a href="#systems">See automation and software →</a></li>
+          <li id="keep-improve"><strong>Keep &amp; Improve</strong><span>Feedback and complaints reporting: quoted to scope.</span><a href="/complaints-improvement">See insight and improvement work →</a></li>
+        </ul>
+        <p className="s-small">Need care or maintenance? <a href="#extras">See options</a>.</p>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">

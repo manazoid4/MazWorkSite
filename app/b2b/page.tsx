@@ -92,7 +92,7 @@ export default function B2BPage() {
             <li key={item.id}>
               <span className="b2b-tag">{item.tag}</span>
               <h3>{item.name}</h3>
-              <span className="b2b-price">{item.price}</span>
+              <span className="b2b-price">Quoted to scope</span>
               <span>{item.body}</span>
             </li>
           ))}

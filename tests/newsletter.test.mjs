@@ -151,11 +151,15 @@ test('the signup email to Maz names the trade the visitor picked', async () => {
   assert.match(f.calls[1].body.text, /signed up from: footer/);
 });
 
-test('every page footer offers the trade chooser, the demo button and the list', async () => {
+test('every page footer offers the general enquiry, optional preview and newsletter', async () => {
   const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
-  assert.match(src, /Which one are you\?/);
-  assert.match(src, /Something else/, 'businesses outside the five trades can pick themselves too');
-  assert.match(src, /src=footer-/);
+  assert.match(src, /ENQUIRY_CTA/);
+  assert.match(src, /You don.t need to name the right service/);
+  assert.match(src, /free-plan\?src=footer-convert/);
   assert.match(src, /<NewsletterSignup/);
-  assert.match(await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8'), /<FooterConvert \/>/);
+  const chrome = await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8');
+  assert.match(chrome, /<FooterConvert \/>/);
+  const home = await readFile(new URL('../out/index.html', import.meta.url), 'utf8');
+  assert.match(home, /href="\/contact\?src=footer-convert#contact"/);
+  assert.match(home, /id="footer-signup"/);
 });
