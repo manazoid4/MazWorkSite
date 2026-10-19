@@ -1,5 +1,5 @@
 import './three-buckets.css';
-import { CARE_PLANS, OFFERS, getOffer } from './offers';
+import { OFFERS, getOffer } from './offers';
 
 type Bucket = {
   number: string;
@@ -40,11 +40,11 @@ const BUCKETS: Bucket[] = [
     number: '03',
     id: 'keep-improve',
     name: 'Keep & improve',
-    purpose: 'Understand what keeps going wrong and make the work better.',
+    purpose: 'Use feedback and reporting to understand what needs to improve.',
     problem: '“We keep hearing the same complaint.”',
-    examples: ['Customer feedback and reviews', 'Complaints insight', 'Reporting and improvement'],
+    examples: ['Customer feedback and complaints', 'Reporting and trends', 'Improvement actions'],
     href: '/complaints-improvement',
-    link: 'Improve the customer experience',
+    link: 'See insight and improvement work',
     art: 'improve',
   },
 ];
@@ -81,12 +81,13 @@ export function ThreeBuckets({ compact = false, showPrices = false }: { compact?
             <ul>{bucket.examples.map((example) => <li key={example}>{example}</li>)}</ul>
             {showPrices && bucket.id === 'get-customers' && <p className="mw-bucket-price">{getOffer('creator-launch').name} {getOffer('creator-launch').price} · Website {getOffer('website').price}</p>}
             {showPrices && bucket.id === 'serve-customers' && <p className="mw-bucket-price">{OFFERS[0].name} {OFFERS[0].price} · {OFFERS[1].name} {OFFERS[1].price}</p>}
-            {showPrices && bucket.id === 'keep-improve' && <p className="mw-bucket-price">Care {CARE_PLANS[0].price} or {CARE_PLANS[1].price} · Complaints quoted to scope</p>}
+            {showPrices && bucket.id === 'keep-improve' && <p className="mw-bucket-price">Complaints and reporting: quoted to scope</p>}
             <a href={bucket.href}>{bucket.link} <span aria-hidden="true">→</span></a>
-            {showPrices && <a className="mw-bucket-price-link" href={bucket.id === 'get-customers' ? '/prices#websites' : bucket.id === 'serve-customers' ? '/prices#systems' : '/prices#care'}>See prices and what’s included</a>}
+            {showPrices && <a className="mw-bucket-price-link" href={bucket.id === 'get-customers' ? '/prices#websites' : bucket.id === 'serve-customers' ? '/prices#systems' : '/prices#keep-improve'}>{bucket.id === 'keep-improve' ? 'Complaints work is quoted to scope' : 'See prices and what’s included'}</a>}
           </li>
         ))}
       </ol>
+      {showPrices && <p className="mw-bucket-support">Need someone to look after the systems after they’re built? <a href="/prices#extras">See optional care and maintenance support</a>.</p>}
     </section>
   );
 }
