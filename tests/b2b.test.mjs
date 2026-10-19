@@ -149,8 +149,8 @@ test('the new pages are built, sit in the sitemap, and keep the one main action'
     assert.match(sitemap, new RegExp(`/${route}<`));
     assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b|ai assistant|ai agent/i, `${route} advertises AI`);
   }
-  assert.match(await page('b2b'), /Automate your practice operations without hiring more admin staff\./);
-  assert.match(await page('b2b'), /Get my free preview/);
+  assert.match(await page('b2b'), /Your team is losing hours to admin\./);
+  assert.match(await page('b2b'), /Get a Free Business Assessment/);
   assert.match(await page('complaints'), /From £295/);
 });
 

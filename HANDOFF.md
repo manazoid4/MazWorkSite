@@ -18,8 +18,9 @@ Branch `feat/b2b-complaints-launch` in `mazos-site` (not `MazWorkSite`, which si
 | MW-10 Tracking and alerts | `app/linkedin-source.ts` (UTM + LinkedIn referrer), `api/enquiry.js` | UTM capture, owner email, HubSpot message and optional Telegram alert are done. The Insight Tag component exists but is **off** (below). A separate `/api/lead` was not needed: `/api/enquiry` is already the lead route. |
 
 ## Tests
-- `npm run verify` on the branch: typecheck, build, **318/318 tests**, smoke all pass. Baseline on `main` was 305/305.
-- 13 new tests in `tests/b2b.test.mjs`: working-day maths, demo case states, audit sums, UTM sanitising, a mocked test enquiry reaching owner email + HubSpot + Telegram (campaign data included, email address not in the Telegram text), forged-attribution rejection, the SMS endpoint (consent, UK numbers, simulated mode, per-number limit) and the built pages.
+- `npm run verify` on the branch: typecheck, build, **326/326 tests**, smoke all pass. Baseline on `main` was 305/305.
+- 13 tests in `tests/b2b.test.mjs`: working-day maths, demo case states, audit sums, UTM sanitising, a mocked test enquiry reaching owner email + HubSpot + Telegram (campaign data included, email address not in the Telegram text), forged-attribution rejection, the SMS endpoint (consent, UK numbers, simulated mode, per-number limit) and the built pages.
+- 8 tests in `tests/b2b-journey.test.mjs`: assessment scoring and arithmetic, recommendations and free fixes, the plain-text summary, `b2b-assessment` as an accepted source, the LinkedIn tag and UTM line reaching the booking link, forged labels dropped, and both built pages (`/b2b` and `/b2b/assessment`).
 - Two older tests changed on purpose: the header "current section" check now uses `/prices` (the header no longer holds `/for`).
 - Browser QA by an independent agent at 390 px and 1440 px: see the PR.
 
@@ -54,3 +55,12 @@ Branch `feat/b2b-complaints-launch` in `mazos-site` (not `MazWorkSite`, which si
 - Your claim "I kept the complaints tracking, analysed outcomes and reported to the board" is taken from you, and worded without naming an employer. Please confirm you are happy with it being public.
 - Turnaround times (about 5 / 10 / 7 / 15 working days) are my estimates.
 - Not built: a real Excel tracker download (removed on purpose to keep the offer about judgement and clarity, not tools). The delivered format for the tracker and dashboard is decided per client.
+
+## LinkedIn B2B journey: update of 19 Oct
+- `/b2b` was rebuilt around one journey: recognise the problem (six tappable problems in the hero), see the actual deliverable formats (dashboard, board paper, staff checklist), check the honest proof, then **Get a Free Business Assessment** or **Book a 15-Minute Call**. The old generic audit embed and workflow simulator were removed from `/b2b` to keep it short; the audit tool still lives on `/audit` and `/free-plan`, and `SmsDemo` stays as the live Speed-to-Lead example.
+- New `/b2b/assessment`: six questions, one at a time, with the result (score, hours, time value), the first two fixes and three free fixes shown **before** any contact details. Hourly value (£30–£75) and the planning assumption (30–60%) are visible and adjustable. The visitor can print or save the result, book a 15-minute call, or send it for a written scope and fixed price. Logic and copy are in `app/b2b/assessment/model.ts`.
+- Mobile gets a two-action sticky bar ("Free assessment" / "15-minute call") that hides over the hero and the final section so it never covers a form.
+- Tracking: `Campaign visit`, `Assessment started`, `Assessment completed`, `Assessment submitted` and `Booking opened` join the existing events. The LinkedIn tag and UTM line are stored for the tab, forwarded into the enquiry (`source`, `attribution`) and into the Cal.com notes and `utm_*` fields. Link templates and where the data shows up: `docs/maz-works/LINKEDIN-B2B-UTM.md`.
+- Prices on the page still come from `app/offers.ts` and still need Maz's approval before merge (see "Needs Maz" above). The assessment deliberately publishes no benchmark and no promise of savings; every figure is the visitor's own arithmetic.
+- Browser QA at 390 px and 1440 px walked the full journey with a mocked enquiry endpoint: problem tap, deliverable tabs, six questions, instant result, send, and the booking link carrying `utm_source=linkedin`, `utm_medium=social`, `utm_campaign=b2b-post-01`. Screenshots: `%TEMP%\b2b-after-1440.png`, `b2b-after-390.png`, `assessment-1440.png`, `assessment-result-1440.png`, `b2b-sticky-390.png`.
+- Still to verify before merge: live Cal.com framing, HubSpot/Resend/Twilio/Telegram production settings, and the LinkedIn Insight Tag (off until a partner ID, CSP entries and a consent banner exist).

@@ -1,0 +1,18 @@
+/* Interactive deliverable previews on /b2b. The samples themselves keep their
+   own styles from /complaints; this only controls the frame and the tabs. */
+.b2b-deliverables { display: grid; gap: 14px; }
+.b2b-deliverables-top { display: grid; grid-template-columns: 1fr; gap: 8px; align-items: end; }
+@media (min-width: 840px) { .b2b-deliverables-top { grid-template-columns: minmax(0, 1fr) minmax(280px, .75fr); gap: 30px; } }
+.b2b-deliverables-top h2 { margin: 4px 0 0; }
+.b2b-deliverables-top > p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+.b2b-deliverable-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.b2b-deliverable-tabs button { min-height: 44px; padding: 8px 14px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 800; font-size: .86rem; cursor: pointer; }
+.b2b-deliverable-tabs button:hover { background: var(--sand); }
+.b2b-deliverable-tabs button[aria-selected="true"] { background: var(--ink); color: var(--surface); }
+.b2b-deliverable-tabs button:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+.b2b-deliverable-note { margin: 0; color: var(--muted); font-size: .84rem; }
+.b2b-deliverables [role="tabpanel"] { display: grid; gap: 12px; }
+.b2b-deliverables [role="tabpanel"] > .sx-card { margin: 0; }
+.b2b-deliverables .sx-card { max-width: 100%; }
+.b2b-deliverables .cx-table-wrap { max-width: 100%; }
+.b2b-fine a { font-weight: 700; }

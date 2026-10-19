@@ -13,7 +13,7 @@ export function isCampaignTag(source: string | null | undefined): source is stri
 const INTERNAL_SOURCES = new Set([
   'site', 'nav', 'footer', 'contact', 'brand-kit', 'for-hub', 'prices', 'prices-hero',
   'builder', 'estimator', 'example-plan', 'scope-sheet', 'services', 'demos',
-  'after-hours', 'voice-demo', 'whats-new', 'b2b', 'audit', 'complaints', 'proof',
+  'after-hours', 'voice-demo', 'whats-new', 'b2b', 'b2b-assessment', 'audit', 'complaints', 'proof',
   ...['trades', 'appointments', 'creators', 'offices', 'heating-and-plumbing', 'roofers',
     'builders', 'electricians', 'salons-and-beauty', 'dog-groomers', 'garages',
     'cafes-and-food', 'clinics-and-therapists', 'architects'].map(id => `for-${id}`),
@@ -34,7 +34,7 @@ export function isEnquirySource(source: string | null | undefined): source is st
 export function cleanEnquirySource(value: unknown): string {
   if (typeof value !== 'string') return '';
   const parts = value.split(' → ');
-  const valid = (part: string) => isEnquirySource(part) || /^direct \((homepage|free-plan|contact|brand-kit|3d-printing)\)$/.test(part);
+  const valid = (part: string) => isEnquirySource(part) || /^direct \((homepage|free-plan|contact|brand-kit|3d-printing|b2b-assessment)\)$/.test(part);
   if (parts.length === 1) return valid(parts[0]) ? value : '';
   return parts.length === 2 && isCampaignTag(parts[0]) && valid(parts[1]) ? value : '';
 }
@@ -60,7 +60,7 @@ export function linkedInHref(href: string, search: string): string {
   if (!isCampaignTag(source)) return href;
   const base = 'https://www.mazworks.uk';
   const url = new URL(href, base);
-  if (url.origin === base && ['/free-plan', '/brand-kit', '/audit', '/complaints', '/b2b'].includes(url.pathname)) {
+  if (url.origin === base && ['/free-plan', '/brand-kit', '/audit', '/complaints', '/b2b', '/b2b/assessment'].includes(url.pathname)) {
     url.searchParams.set('src', source);
     return `${url.pathname}${url.search}${url.hash}`;
   }
