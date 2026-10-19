@@ -7,6 +7,7 @@ import { HeroDemo } from './hero-demo';
 import { HeroQuickForm } from './hero-quick-form';
 import './home-visuals.css';
 import './shadow-cameo.css';
+import { ShadowCameo } from './shadow-cameo';
 import { ScrollReveal } from './scroll-reveal';
 import { CUSTOMER_TYPES } from './customer-types';
 import { KitIcon } from './brand-kit/kit-icon';
@@ -49,7 +50,7 @@ export default function Page() {
     <p className="s-lede">Start with one task for {STARTER.price}. Free preview first.</p>
     <HeroQuickForm />
    <ManazirLine />
-   </div><div className="s-hero-demo-wrap"><HeroDemo /><figure className="s-shadow-cameo"><img src="/shadow-mascot.png" alt="A curled grey cat mascot keeping watch beside the example" width={900} height={721} /><figcaption>Shadow: quality control, mostly naps.</figcaption></figure></div>
+   </div><div className="s-hero-demo-wrap"><HeroDemo /><ShadowCameo /></div>
   </section>
   <section className="s-section" id="build" aria-labelledby="build-title">
    <p className="eyebrow">What do you run?</p><h2 id="build-title">Choose your business.</h2>
