@@ -24,6 +24,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'after-hours', label: `${AFTER_HOURS.name}: calls answered when you can’t pick up (${AFTER_HOURS.price})` },
   { id: 'managed-presence', label: `${MANAGED_PRESENCE.name}: website, Google and social updates (${MANAGED_PRESENCE.price.toLowerCase()})` },
   { id: 'care', label: `Care plans (${CARE_PLANS[0].price} or ${CARE_PLANS[1].price})` },
+  { id: 'complaints', label: 'Complaints and customer experience improvement (quoted to scope)' },
   { id: 'rebuild', label: 'Rebuild of an existing site or system' },
   { id: 'google-profile', label: `Google listing tidy (small set-up, free with a Starter ${getOffer('starter').price})` },
   { id: 'bundle', label: 'Starter plus optional extras' },

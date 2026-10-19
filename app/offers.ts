@@ -3,10 +3,11 @@
  * Every page, the schema, the enquiry form and the tests read from here.
  * Never hard-code a price anywhere else.
  *
- * Positioning (Maz, 27 Sep 2026): Maz Works builds the systems small
- * businesses run on: automation, connected tools and custom software that win
- * customers and take admin off the owner. It is not a website-fix shop and not
- * a cheap web agency. Never describe it as "website repairs" or "small fixes".
+ * Positioning (Maz, 19 Oct 2026): Maz Works makes the customer side of
+ * businesses work better: help customers find and choose a business, make it
+ * easier to serve them, and understand what to improve. Websites, connected
+ * tools, reporting and custom software support that purpose. Never present
+ * those capabilities as unrelated businesses or describe the work as quick fixes.
  *
  * Offer v11 (2 Oct 2026, PROPOSED: prices need Maz's go before merge).
  * Built from the offer map and competitor teardown in the private handoff
@@ -63,7 +64,7 @@
  * is never advertised or sold as an offer. No 'AI assistant' or 'AI agent' copy.
  */
 
-export const POSITIONING = 'Automation, connected tools and custom software for UK small businesses.';
+export const POSITIONING = 'Making businesses better, one problem at a time.';
 
 export const FREE_STEP = {
   name: 'Free Preview & Fixed Price',
@@ -952,8 +953,8 @@ export function quotePlan(jobs: PlanJob[]): PlanQuote {
 }
 
 /**
- * Complaints packages (PROPOSED 19 Oct 2026, starting prices set by Maz; margins flagged in
- * HANDOFF.md, final public prices need his go). The value is Maz's own experience: he kept a
+ * Complaints packages (draft 19 Oct 2026; no approved public price). Quote each engagement to
+ * scope; do not add numeric floors without an approved decision. The value is Maz's own experience: he kept a
  * post-complaints tracking spreadsheet, analysed outcomes and reported to a company board.
  * Work complements the client's existing case-management system; it does not replace it.
  * No AI wording, no guaranteed outcomes, no promise a firm will meet any regulator's rules.
@@ -963,7 +964,6 @@ export type ComplaintPackage = {
   id: 'health-check' | 'board-reporting' | 'workflows' | 'sprint';
   name: string;
   price: string;
-  from: number;
   /** Plain-English problem it solves. */
   purpose: string;
   /** Why it is easy to see, understand and act on. */
@@ -982,8 +982,7 @@ export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
   {
     id: 'health-check',
     name: 'Complaints Health Check',
-    price: 'From £295',
-    from: 295,
+    price: 'Quoted to scope',
     purpose: 'Find out where your complaint handling is weak, before a customer, a regulator or your board does.',
     easy: 'One page of scores and a ranked list. You can see the problem and the first fix in two minutes.',
     receives: [
@@ -1002,8 +1001,7 @@ export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
   {
     id: 'board-reporting',
     name: 'Post-Complaints Analysis & Board Reporting',
-    price: 'From £895',
-    from: 895,
+    price: 'Quoted to scope',
     flagship: true,
     purpose: 'Turn a pile of complaint records into clear decisions for management and the board.',
     easy: 'Every chart carries a one-line headline and every finding an owner and a date, so the board can decide in the meeting.',
@@ -1024,8 +1022,7 @@ export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
   {
     id: 'workflows',
     name: 'Tailored Complaints Workflows & Staff Toolkit',
-    price: 'From £495',
-    from: 495,
+    price: 'Quoted to scope',
     purpose: 'Help your people handle complaints the same way, with confidence, every time.',
     easy: 'One-page guides and a simple decision tree that staff can follow on a busy day without asking anyone.',
     receives: [
@@ -1044,8 +1041,7 @@ export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
   {
     id: 'sprint',
     name: 'Complete Complaints Improvement Sprint',
-    price: 'From £1,495',
-    from: 1495,
+    price: 'Quoted to scope',
     purpose: 'Diagnose the problem, report it properly and give staff a better way of working, in one piece of work.',
     easy: 'Diagnosis, reporting and a plan that fit together, so nothing needs translating before people can act.',
     receives: [

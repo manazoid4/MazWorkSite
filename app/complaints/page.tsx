@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
-import { MAIN_CTA, SITE_URL } from '../site';
+import { ENQUIRY_CTA, SITE_URL } from '../site';
 import { COMPLAINT_DATA_HANDLING, COMPLAINT_EXTRAS_QUOTED, COMPLAINT_PACKAGES, type ComplaintPackage } from '../offers';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CampaignLink } from '../campaign-link';
@@ -15,7 +15,7 @@ const PAGE_URL = `${SITE_URL}/complaints`;
 
 export const metadata: Metadata = {
   title: 'Complaints Health Check and board reporting',
-  description: fitDescription('Complaints Health Checks from £295, board reporting from £895 and staff workflows from £495, built from years of real complaints experience.'),
+  description: fitDescription('Complaints Health Checks, board reporting and practical staff workflows, scoped around your records and quoted to scope.'),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Complaints Health Check and board reporting — Maz Works', description: fitDescription('Find what your complaints are telling you, and report it clearly to management and the board.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
@@ -54,10 +54,11 @@ export default function ComplaintsPage() {
         <h1 id="cp-title">Complaints findings your managers can see, understand and act on.</h1>
         <p>In a previous role I kept the complaints tracking, analysed the outcomes and presented the reporting to the board. I now do that work for other firms: clear findings, honest root causes and a short list of what management should do next.</p>
         <div className="b2b-cta">
-          <CampaignLink className="button button-signal" href="/free-plan?src=complaints#leak-check-form">{MAIN_CTA}</CampaignLink>
+          <CampaignLink className="button button-signal" href="/contact?src=complaints&service=complaints#contact">{ENQUIRY_CTA}</CampaignLink>
           <BookCall interest="Complaints analysis" />
         </div>
-        <p className="mw-hero-note">Fixed prices from £295 · works alongside the case system you already use · all examples below use invented data</p>
+        <p className="mw-hero-note">Quoted to scope · works alongside the case system you already use · all examples below use invented data</p>
+        <p className="b2b-fine"><a href="/complaints-improvement">See the complaints improvement offering and sample reports →</a></p>
       </section>
 
       <section className="b2b-wrap" aria-labelledby="cp-why">
@@ -77,14 +78,14 @@ export default function ComplaintsPage() {
       </section>
 
       <section className="b2b-wrap" aria-labelledby="cp-packs">
-        <h2 id="cp-packs">Four packages, fixed scope</h2>
+        <h2 id="cp-packs">Four outlines, scoped to your records and team</h2>
         <ul className="b2b-grid b2b-packs">
           <PackageCard pack={health} />
           <PackageCard pack={board} />
           <PackageCard pack={flows} />
           <PackageCard pack={sprint} />
         </ul>
-        <p className="b2b-fine">“From” prices cover the scope shown. Quoted separately: {COMPLAINT_EXTRAS_QUOTED.join('; ').toLowerCase()}. No VAT is added.</p>
+        <p className="b2b-fine">Each engagement is priced after the scope and inputs are agreed. Quoted separately: {COMPLAINT_EXTRAS_QUOTED.join('; ').toLowerCase()}. No VAT is added.</p>
       </section>
 
       <section className="b2b-wrap" id="health-check" aria-labelledby="cp-health">
@@ -164,7 +165,7 @@ export default function ComplaintsPage() {
         <h2 id="cp-cta-title">Start with a conversation</h2>
         <p>Tell me how complaints reach you today and what your board or managers ask for. I will recommend the smallest package that helps, with a fixed price.</p>
         <div className="b2b-cta">
-          <CampaignLink className="button button-signal" href="/free-plan?src=complaints#leak-check-form">{MAIN_CTA}</CampaignLink>
+          <CampaignLink className="button button-signal" href="/contact?src=complaints&service=complaints#contact">{ENQUIRY_CTA}</CampaignLink>
           <BookCall interest="Complaints analysis" />
         </div>
       </section>

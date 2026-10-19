@@ -28,7 +28,7 @@ export default function ComplaintsImprovementPage() {
         <p className="eyebrow">Complaints analysis and improvement</p>
         <h1 id="ci-title">Turn complaint records into clear findings and practical action.</h1>
         <p>I have five years’ experience in complaints and finance, including regulated work and ombudsman cases. I now help teams review their records, report what they show and make agreed improvements to how work is handled.</p>
-        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=complaints-improvement">Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=complaints-improvement&amp;service=complaints#contact">Tell me what's not working</a></p>
         <p className="mw-hero-note">Engagements are quoted to scope. Examples use synthetic data.</p>
       </section>
 
@@ -58,7 +58,7 @@ export default function ComplaintsImprovementPage() {
       <section className="mw-resource-hero" aria-labelledby="ci-cta">
         <h2 id="ci-cta">Tell me what is not working.</h2>
         <p>Describe the reporting question or process that is taking time. We can agree what data is suitable and what a useful piece of work should include.</p>
-        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=complaints-improvement">Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=complaints-improvement&amp;service=complaints#contact">Tell me what's not working</a></p>
       </section>
       <SiteFooter />
     </main>

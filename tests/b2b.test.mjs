@@ -59,9 +59,10 @@ test('audit sums use the visitor numbers and one visible assumption', () => {
   assert.match(summarise([{ id: 'copying', hours: 2 }], 40, 50, ['Xero']), /Tools in use: Xero/);
 });
 
-test('the four complaints packages carry the agreed starting prices and no AI or guarantee wording', () => {
+test('the four complaints packages have scoped deliverables, quote-to-scope pricing and no AI or guarantee wording', () => {
   const packs = offers.COMPLAINT_PACKAGES;
-  assert.deepEqual(packs.map((pack) => pack.from), [295, 895, 495, 1495]);
+  assert.deepEqual(packs.map((pack) => pack.price), ['Quoted to scope', 'Quoted to scope', 'Quoted to scope', 'Quoted to scope']);
+  assert.ok(packs.every((pack) => !('from' in pack)), 'unapproved numeric price floors are removed');
   assert.deepEqual(packs.map((pack) => pack.name), ['Complaints Health Check', 'Post-Complaints Analysis & Board Reporting', 'Tailored Complaints Workflows & Staff Toolkit', 'Complete Complaints Improvement Sprint']);
   const text = JSON.stringify(packs) + JSON.stringify(offers.COMPLAINT_DATA_HANDLING) + JSON.stringify(offers.B2B_SYSTEMS);
   assert.doesNotMatch(text, /\bAI\b|guarantee|fully compliant/i);
@@ -142,22 +143,28 @@ const page = async (route) => {
   throw new Error(`Missing static page ${route}`);
 };
 
-test('the new pages are built, sit in the sitemap, and keep the one main action', async () => {
+test('the professional routes are built, discoverable and use scoped pricing', async () => {
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
-  for (const route of ['b2b', 'complaints', 'audit']) {
+  for (const route of ['b2b', 'complaints', 'audit', 'professional-teams', 'complaints-improvement']) {
     const html = await page(route);
     assert.match(sitemap, new RegExp(`/${route}<`));
     assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b|ai assistant|ai agent/i, `${route} advertises AI`);
   }
   assert.match(await page('b2b'), /Your team is losing hours to admin\./);
   assert.match(await page('b2b'), /Get a Free Business Assessment/);
-  assert.match(await page('complaints'), /From £295/);
+  assert.match(await page('complaints'), /Quoted to scope/);
+  assert.match(await page('professional-teams'), /Tell me what's not working/);
+  assert.match(await page('complaints-improvement'), /Tell me what's not working/);
 });
 
 test('complaints page shows the four packages, the samples and the honest limits', async () => {
   const html = await page('complaints');
   for (const name of ['Complaints Health Check', 'Post-Complaints Analysis &amp; Board Reporting', 'Tailored Complaints Workflows &amp; Staff Toolkit', 'Complete Complaints Improvement Sprint']) assert.ok(html.includes(name), name);
-  for (const price of ['From £295', 'From £895', 'From £495', 'From £1,495']) assert.ok(html.includes(price), price);
+  const packagesStart = html.indexOf('<ul class="b2b-grid b2b-packs">');
+  const samplesStart = html.indexOf('<section class="b2b-wrap" id="health-check"', packagesStart);
+  const packageCards = html.slice(packagesStart, samplesStart);
+  assert.equal((packageCards.match(/class="b2b-price">Quoted to scope/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /From £(?:295|895|495|1,495)/);
   assert.match(html, /Not legal or regulatory advice/);
   assert.match(html, /Fictional example for Northgate Advisory/);
   assert.match(html, /Easy to see\. Easy to understand\. Easy to act on\./);
@@ -179,10 +186,13 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /View a scope sheet/);
 });
 
-test('header has the four main links, video and objects moved to the Lab group', async () => {
+test('the header stays focused and the footer keeps video and objects in the separate Lab area', async () => {
   const html = await page('index');
-  assert.match(html, /Lab \/ Physical products/);
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
   assert.match(header, /href="\/proof"/);
   assert.doesNotMatch(header, /href="\/video"/);
+  const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
+  assert.match(footer, /Other work:[\s\S]*href="\/video"/);
+  assert.match(footer, /href="\/3d-printing"/);
+  assert.match(footer, /href="\/lab"/);
 });

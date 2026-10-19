@@ -21,7 +21,7 @@ export default function ProfessionalTeamsPage() {
         <p className="eyebrow">For professional teams</p>
         <h1 id="teams-title">Make complaints easier to understand and act on.</h1>
         <p>I build clear reporting and practical workflows from the records and processes your team already has. The work is scoped with you, and findings depend on the quality of the anonymised data available.</p>
-        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=professional-teams">Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=professional-teams&amp;service=complaints#contact">Tell me what's not working</a></p>
       </section>
       <section className="b2b-wrap" aria-labelledby="teams-work">
         <p className="eyebrow">Where I can help</p>
@@ -41,7 +41,7 @@ export default function ProfessionalTeamsPage() {
       <section className="mw-resource-hero" aria-labelledby="teams-cta">
         <h2 id="teams-cta">Start with what is getting in the way.</h2>
         <p>Share the process you want to improve and the kind of records available. We can agree the scope from there.</p>
-        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=professional-teams">Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href="/contact?src=professional-teams&amp;service=complaints#contact">Tell me what's not working</a></p>
       </section>
       <SiteFooter />
     </main>

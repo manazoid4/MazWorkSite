@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL, VAT_NOTE } from '../site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, ENQUIRY_CTA, SITE_URL, VAT_NOTE } from '../site';
 import { ALL_OFFERS, FREE_STEP, MANAGED_PRESENCE, OFFERS, PAYMENT_TERMS, LOWEST_EXTRA_PRICE } from '../offers';
 
 export const metadata: Metadata = {
@@ -23,11 +23,11 @@ export default function ContactPage() {
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="contact-page-title">
         <p className="eyebrow">Contact</p>
         <h1 id="contact-page-title">Tell me what you need help with.</h1>
-        <p className="s-lede">One line is enough. I usually reply within {CHECK_REPLY_TIME} with the next step; the fixed price follows once I understand the job.</p>
+        <p className="s-lede">One line is enough. You do not need to choose a service first. I usually reply within {CHECK_REPLY_TIME} with the next step; the fixed price follows once I understand the job.</p>
         <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan?src=contact#leak-check-form">Get my free preview</a>
+          <a className="button button-signal s-button-lg" href="#contact">{ENQUIRY_CTA}</a>
         </div>
-        <p className="s-note">Want ongoing help or a bigger build? Use the form below.</p>
+        <p className="s-note">Want to see a working automation first? <a href="/free-plan?src=contact">See how the free preview works</a>.</p>
       </section>
 
       <section className="s-section s-check" id="contact" aria-labelledby="contact-title">
