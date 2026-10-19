@@ -5,7 +5,7 @@ import test from 'node:test';
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
 test('both exported enquiry forms provide a native POST fallback instead of leaking fields into a GET URL', async () => {
-  for (const route of ['index', '3d-printing']) {
+  for (const route of ['free-plan', '3d-printing']) {
     const html = await read(`out/${route}.html`);
     const form = html.match(/<form\b[^>]*>/)?.[0];
     assert.ok(form, `missing ${route} form`);
