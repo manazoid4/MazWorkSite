@@ -312,7 +312,7 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
   assert.deepEqual(business.makesOffer.slice(1).map((offer) => offer.priceSpecification.minPrice), [99, 595, 2450, 79, 295, 1295]);
-  for (const term of ['booking', 'enquiry', 'Google Business Profile', 'Websites', 'rebuilds', 'automation', 'software']) {
+  for (const term of ['websites', 'customer journeys', 'complaints', 'reporting', 'workflows']) {
     assert.ok(business.description.toLowerCase().includes(term.toLowerCase()), `structured data missing ${term}`);
   }
 });
