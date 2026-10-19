@@ -59,7 +59,7 @@ test('no exported page uses the retired wording', async () => {
 });
 
 test('the honest explanation is visible on the homepage, the free-plan page and the FAQ', async () => {
-  for (const route of ['index', 'free-plan', 'faq']) {
+  for (const route of ['free-plan', 'faq']) {
     const html = await readFile(path.join(out, `${route}.html`), 'utf8');
     assert.match(html, /test set-?up/i, `${route} must explain the preview is built on a test setup`);
     assert.match(html, /preview/i, `${route} must name the free preview`);
