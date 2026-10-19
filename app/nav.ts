@@ -26,6 +26,7 @@ export const MENU_LINKS: NavLink[] = [
   { href: '/prices', label: 'Packages & pricing' },
   { href: '/proof', label: 'Proof & artifacts' },
   { href: '/audit', label: 'Free automation audit' },
+  { href: '/demos', label: 'Bigger build demos' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Contact Manazir' },
 ];
@@ -43,6 +44,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/b2b', label: 'For agencies and practices' },
       { href: '/complaints', label: 'Complaints tracking' },
       { href: '/audit', label: 'Free automation audit' },
+  { href: '/demos', label: 'Bigger build demos' },
       { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
       { href: '/what-we-do#example', label: 'Example plan' },
       { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
