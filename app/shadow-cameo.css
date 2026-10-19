@@ -1,0 +1,11 @@
+/* Shadow cameo: a small, quiet companion to the homepage example. */
+.s-hero-demo-wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 8px 12px; }
+.s-demo { flex: 1 1 280px; min-width: 0; }
+.s-shadow-cameo { flex: 0 0 126px; width: 126px; margin: 0; text-align: center; }
+.s-shadow-cameo img { display: block; width: 100%; height: auto; object-fit: contain; }
+.s-shadow-cameo figcaption { margin-top: 3px; color: var(--muted); font-size: .72rem; line-height: 1.25; }
+@media (prefers-reduced-motion: no-preference) {
+  .s-shadow-cameo img { animation: shadow-watch 5.5s ease-in-out infinite; transform-origin: 50% 90%; }
+}
+@keyframes shadow-watch { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-1deg); } }
+@media (prefers-reduced-motion: reduce) { .s-shadow-cameo img { animation: none; } }
