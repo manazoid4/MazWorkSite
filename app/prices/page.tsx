@@ -41,9 +41,9 @@ export default function PricesPage() {
         <ul className="s-recipes">
           <li><strong>Get Customers</strong><span>Websites and online presence.</span><a href="#websites">See page options →</a></li>
           <li><strong>Serve Customers</strong><span>Bookings and follow-up.</span><a href="#systems">See automation and software →</a></li>
-          <li id="keep-improve"><strong>Keep &amp; Improve</strong><span>Feedback, complaints insight and reporting help show what needs to improve. Complaints work is quoted to scope.</span><a href="/complaints-improvement">See insight and improvement work →</a></li>
+          <li id="keep-improve"><strong>Keep &amp; Improve</strong><span>Feedback and complaints reporting: quoted to scope.</span><a href="/complaints-improvement">See insight and improvement work →</a></li>
         </ul>
-        <p className="s-small">Need optional help maintaining work that’s already built? <a href="#extras">See care and maintenance support</a>.</p>
+        <p className="s-small">Need care or maintenance? <a href="#extras">See options</a>.</p>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">

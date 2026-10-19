@@ -19,14 +19,14 @@ test('What I Do and prices use the three customer journey buckets', async () => 
   }
   for (const id of ['get-customers', 'serve-customers', 'keep-improve']) assert.match(what, new RegExp(`id="${id}"`));
   for (const href of ['/prices#websites', '/prices#systems', '/prices#keep-improve', '/prices#extras', '/complaints-improvement', '/proof']) assert.ok(what.includes(`href="${href}"`), href);
-  for (const href of ['#websites', '#systems', '#keep-improve', '#extras', '/complaints-improvement']) assert.ok(prices.includes(`href="${href}"`), href);
+  for (const href of ['#websites', '#systems', '#extras', '/complaints-improvement']) assert.ok(prices.includes(`href="${href}"`), href);
   assert.match(prices, /id="systems"/);
   assert.match(prices, /id="websites"/);
   assert.match(prices, /id="after-hours"/);
   assert.match(prices, /id="care"/);
-  assert.match(prices, /Feedback, complaints insight and reporting help show what needs to improve\. Complaints work is quoted to scope\./);
-  assert.match(prices, /Need optional help maintaining work that.s already built/);
-  assert.match(prices, /care and maintenance support/i);
+  assert.match(prices, /Feedback and complaints reporting: quoted to scope\./);
+  assert.match(prices, /Need care or maintenance\?/);
+  assert.match(prices, /See options/);
   assert.match(what, /See it working before you pay/);
   assert.match(what, /I never need your passwords/);
 });

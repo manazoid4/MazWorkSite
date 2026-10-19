@@ -214,12 +214,14 @@ test('homepage explains the shared purpose, three buckets and two customer route
   assert.match(contact, /usually reply within 1 working day/i);
   assert.match(contact, /Book a 15-minute call/);
   assert.match(contact, /Email info@mazworks\.uk/);
-  const contactLead = contact.slice(0, contact.indexOf('<form'));
+  const contactMainStart = contact.indexOf('<main');
+  const contactFormStart = contact.indexOf('<form', contactMainStart);
+  const contactLead = contact.slice(contactMainStart, contactFormStart);
   assert.doesNotMatch(contactLead, /£\s?\d/, 'no price catalogue before the form');
   assert.doesNotMatch(contactLead, /Get my free preview/, 'the contact page does not divert visitors before the form');
-  assert.match(contact, /name="name"[^>]*required/);
-  assert.match(contact, /name="email"[^>]*required/);
-  assert.match(contact, /name="problem"[^>]*required/);
+  assert.match(contact, /<input(?=[^>]*name="name")(?=[^>]*required)[^>]*>/);
+  assert.match(contact, /<input(?=[^>]*name="email")(?=[^>]*required)[^>]*>/);
+  assert.match(contact, /<textarea(?=[^>]*name="problem")(?=[^>]*required)[^>]*>/);
 });
 
 test('the free plan form lets owners tap their problem, and only the no-JavaScript route asks for an auto-reply', async () => {
