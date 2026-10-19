@@ -28,6 +28,7 @@ export default function ComplaintsImprovementPage() {
         <p className="eyebrow">Complaints analysis and improvement</p>
         <h1 id="ci-title">Turn complaint records into clear findings and practical action.</h1>
         <p>I have five years’ experience in complaints and finance, including regulated work and ombudsman cases. I now help teams review their records, report what they show and make agreed improvements to how work is handled.</p>
+        <p>To enquire, describe your current process; no records are needed at this stage. Suitable anonymised extracts and data handling and retention terms are agreed in the written scope before any records are shared.</p>
         <p className="b2b-cta"><a className="button button-signal" href="/contact?src=complaints-improvement&amp;service=complaints#contact">Tell me what's not working</a></p>
         <p className="mw-hero-note">Engagements are quoted to scope. Examples use synthetic data.</p>
       </section>
@@ -46,6 +47,8 @@ export default function ComplaintsImprovementPage() {
         <ul className="b2b-grid is-three">
           <li><h3>Complaints Health Check</h3><p>A sample review report showing scores, findings and ranked actions.</p><p className="b2b-fine">{FICTION_NOTE}</p><a href="/complaints/sample/health-check">View the sample Health Check →</a></li>
           <li><h3>Board reporting</h3><p>A sample report turning a fictional dataset into oversight and actions.</p><p className="b2b-fine">{FICTION_NOTE}</p><a href="/complaints/sample/board-report">View the sample board report →</a></li>
+          <li><h3>Dashboard demonstration</h3><p>A synthetic dashboard and action tracker built from the fictional complaints dataset.</p><p className="b2b-fine">{FICTION_NOTE}</p><a href="/complaints#board-reporting">View the dashboard and reporting demonstration →</a></li>
+          <li><h3>Synthetic workflow demonstration</h3><p>Illustrative process flow, escalation decision tree and staff guides.</p><p>Examples show possible formats, not client outcomes.</p><a href="/complaints#workflows">View workflow and staff guide demonstrations →</a></li>
         </ul>
         <p className="b2b-fine">Synthetic data disclaimer: Northgate Advisory and all records, people, events, figures and findings in these examples are fictional and invented for demonstration. They do not describe a real organisation or client outcome.</p>
       </section>

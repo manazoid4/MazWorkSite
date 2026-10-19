@@ -32,11 +32,17 @@ export default function ProfessionalTeamsPage() {
           <li><h3>Workflows and staff guides</h3><p>Make an existing process easier to follow with a flowchart, decision tree and practical guides.</p></li>
         </ul>
         <p><a href="/complaints-improvement">See complaints improvement services and examples →</a></p>
+        <h3>See the demonstrations</h3>
+        <ul className="b2b-list">
+          <li><a href="/complaints#board-reporting">Synthetic dashboard and board reporting demonstration →</a></li>
+          <li><a href="/complaints#workflows">Synthetic workflow and staff guide demonstration →</a></li>
+        </ul>
       </section>
       <section className="b2b-wrap" aria-labelledby="teams-background">
         <h2 id="teams-background">Built from hands-on complaints work.</h2>
         <p>Manazir Hussain is a Computer Science graduate (Swansea University) with five years in complaints and finance, including regulated work and ombudsman cases. He builds every job himself.</p>
         <p>These services support analysis, reporting and implementation. They are not legal or regulatory advice, and no particular outcome is promised.</p>
+        <p>For an initial enquiry, a description of your current process is enough. Suitable anonymised extracts and data handling and retention terms are agreed in the written scope before records are shared.</p>
       </section>
       <section className="mw-resource-hero" aria-labelledby="teams-cta">
         <h2 id="teams-cta">Start with what is getting in the way.</h2>

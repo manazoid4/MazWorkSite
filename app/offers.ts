@@ -1061,31 +1061,31 @@ export const COMPLAINT_PACKAGES: readonly ComplaintPackage[] = [
 
 export const COMPLAINT_EXTRAS_QUOTED = ['Larger datasets or further departments', 'A monthly or quarterly report refresh', 'Connecting the dashboard to a system you already use', 'Additional workflows or infographics'];
 
-/** How complaint records are handled. The 30-day deletion is a proposal for Maz to confirm. */
+/** Complaint record handling terms, including retention, are agreed in the written scope before records are shared. */
 export const COMPLAINT_DATA_HANDLING = [
   'You send anonymised extracts: names, contact details and account numbers removed or replaced with reference numbers before they reach me.',
-  'Files move through a private folder in your own Google Drive or OneDrive, shared only with me and removed when the work ends.',
-  'I work on them on one device, and delete my working copies within 30 days of delivery unless you ask me to keep them.',
-  'A short written agreement on data handling is part of the scope sheet before any records are shared.',
+  'Files move through a private folder in your own Google Drive or OneDrive, shared only with me.',
+  'Retention and deletion timing for working copies are agreed in the written scope.',
+  'A written agreement on data handling is part of the scope sheet before any records are shared.',
 ] as const;
 
 /**
- * B2B operations systems for professional practices (PROPOSED 19 Oct 2026 from Maz's brief;
- * every price here needs Maz's go before it goes live). One-off set-ups on the client's own
+ * B2B operations systems for professional practices (prices are quoted to scope).
+ * One-off set-ups on the client's own
  * tools, sold through the same free preview and "no working, no invoice" terms as the ladder.
  * Wording rule: aims and typical times, never guarantees. Sending texts needs a paid texting
  * service the client pays directly.
  */
 export const B2B_SYSTEMS = [
-  { id: 'intake', name: 'Client Intake & Document Chaser', price: '£850', from: 850, tag: 'Accountants, solicitors, brokers',
+  { id: 'intake', name: 'Client Intake & Document Chaser', price: 'Quoted to scope', tag: 'Accountants, solicitors, brokers',
     body: 'A secure upload link and a reminder every few days by email or text until the ID, proof of address and signed letters are in, filed to your Google Drive or OneDrive.' },
-  { id: 'speed', name: 'Speed-to-Lead Reply', price: '£595', from: 595, tag: 'Anyone who pays for enquiries',
+  { id: 'speed', name: 'Speed-to-Lead Reply', price: 'Quoted to scope', tag: 'Anyone who pays for enquiries',
     body: 'A web-form or Google enquiry gets a text or email reply in about a minute, with your Cal.com booking link, and you are told.' },
-  { id: 'proposal', name: 'Proposal Chaser', price: '£450–£750', from: 450, tag: 'Agencies and consultancies',
+  { id: 'proposal', name: 'Proposal Chaser', price: 'Quoted to scope', tag: 'Agencies and consultancies',
     body: 'A short run of polite follow-ups on quotes you sent from Xero, PandaDoc or DocuSign, stopped the moment they reply.' },
-  { id: 'feedback', name: 'Feedback Filter', price: '£99', from: 99, tag: 'Add-on to any system',
+  { id: 'feedback', name: 'Feedback Filter', price: 'Quoted to scope', tag: 'Add-on to any system',
     body: 'After a job, happy customers are sent to your Google review page and unhappy ones go to a private form that alerts you first.' },
-  { id: 'digest', name: 'Monday Morning Digest', price: '£145', from: 145, tag: 'Add-on, or £79/month if you want it kept running',
+  { id: 'digest', name: 'Monday Morning Digest', price: 'Quoted to scope', tag: 'Add-on to an agreed system',
     body: 'One email or WhatsApp message at 8am: money in, open proposals and new enquiries from the tools you already use.' },
 ] as const;
 

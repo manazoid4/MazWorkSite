@@ -47,10 +47,12 @@ export function PracticeTier() {
         </div>
         <div className="b2b-box">
           <h3>Joined-up operations systems</h3>
-          <p className="b2b-price">{system.price.replace('From ', 'From ')} to {custom.price.replace('From ', '')}</p>
+          <p className="b2b-price">Business System: {system.price}</p>
+          <p className="b2b-price">Custom Software: {custom.price}</p>
+          <p className="b2b-fine">These are separate starting prices, not a combined price range.</p>
           <ul className="b2b-list">
-            {COMPLAINT_PACKAGES.map((item) => <li key={item.id}>{item.name}: {item.price}</li>)}
-            {B2B_SYSTEMS.map((item) => <li key={item.id}>{item.name}: {item.price}</li>)}
+            {COMPLAINT_PACKAGES.map((item) => <li key={item.id}>{item.name}: Quoted to scope</li>)}
+            {B2B_SYSTEMS.map((item) => <li key={item.id}>{item.name}: Quoted to scope</li>)}
           </ul>
           <p className="b2b-fine"><a href="/b2b">More on the B2B page</a></p>
         </div>

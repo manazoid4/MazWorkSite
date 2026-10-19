@@ -66,7 +66,10 @@ test('the four complaints packages have scoped deliverables, quote-to-scope pric
   assert.deepEqual(packs.map((pack) => pack.name), ['Complaints Health Check', 'Post-Complaints Analysis & Board Reporting', 'Tailored Complaints Workflows & Staff Toolkit', 'Complete Complaints Improvement Sprint']);
   const text = JSON.stringify(packs) + JSON.stringify(offers.COMPLAINT_DATA_HANDLING) + JSON.stringify(offers.B2B_SYSTEMS);
   assert.doesNotMatch(text, /\bAI\b|guarantee|fully compliant/i);
+  assert.doesNotMatch(JSON.stringify(offers.COMPLAINT_DATA_HANDLING), /30 days|within 30 days/i);
+  assert.match(JSON.stringify(offers.COMPLAINT_DATA_HANDLING), /retention.*agreed in the written scope/i);
   assert.ok(packs.every((pack) => pack.limits.length >= 2 && pack.needs.length >= 2 && pack.turnaround));
+  assert.ok(offers.B2B_SYSTEMS.every((item) => item.price === 'Quoted to scope'));
 });
 
 test('campaign capture keeps only safe labels', () => {
@@ -171,6 +174,28 @@ test('complaints page shows the four packages, the samples and the honest limits
   assert.match(html, /What this tells you/);
   assert.doesNotMatch(html, /excel|powerpoint|spreadsheet|xlsx/i, 'complaints page names the tools clients could use themselves');
   assert.doesNotMatch(html, /fully compliant|guaranteed|ombudsman-proof/i);
+  assert.doesNotMatch(html, /£(295|895|495|1,495)/);
+  assert.match(html, /no records are needed for the initial enquiry/i);
+  assert.match(html, /retention terms are agreed in the written scope before records are shared/i);
+  const handling = html.match(/<section[^>]*aria-labelledby="cp-data"[\s\S]*?<\/section>/)?.[0] || '';
+  assert.doesNotMatch(handling, /within 30 days of delivery|delete my working copies within 30 days/i);
+  assert.match(handling, /Retention and deletion timing for working copies are agreed in the written scope/);
+});
+
+test('professional routes show no proposed figures and offer labelled report and workflow demonstrations', async () => {
+  const [prices, b2b, improvement, teams] = await Promise.all(['prices', 'b2b', 'complaints-improvement', 'professional-teams'].map(page));
+  const practices = prices.slice(prices.indexOf('id="practices"'));
+  assert.match(practices, /Business System: From £595/);
+  assert.match(practices, /Custom Software: From £2,450/);
+  assert.doesNotMatch(practices, /From £595 to £2,450|£2,450 maximum|up to £2,450/i);
+  for (const html of [prices, b2b]) {
+    assert.doesNotMatch(html, /£850|£450–£750/);
+    assert.match(html, /Quoted to scope/);
+  }
+  for (const href of ['/complaints/sample/board-report', '/complaints#board-reporting', '/complaints#workflows']) assert.ok(improvement.includes(`href="${href}"`), href);
+  for (const href of ['/complaints#board-reporting', '/complaints#workflows']) assert.ok(teams.includes(`href="${href}"`), href);
+  assert.match(improvement, /no records are needed at this stage/i);
+  assert.match(improvement, /retention terms are agreed in the written scope before any records are shared/i);
 });
 
 test('the downloadable sample PDFs exist and are real files', async () => {

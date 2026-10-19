@@ -15,7 +15,7 @@ const PAGE_URL = `${SITE_URL}/complaints`;
 
 export const metadata: Metadata = {
   title: 'Complaints Health Check and board reporting',
-  description: fitDescription('Complaints Health Checks, board reporting and practical staff workflows, scoped around your records and quoted to scope.'),
+  description: fitDescription('Complaints Health Checks, reporting and staff workflows built from hands-on complaints experience. Engagements are quoted to scope.'),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Complaints Health Check and board reporting — Maz Works', description: fitDescription('Find what your complaints are telling you, and report it clearly to management and the board.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
@@ -118,7 +118,7 @@ export default function ComplaintsPage() {
       <section className="b2b-wrap" id="workflows" aria-labelledby="cp-flows">
         <p className="eyebrow">Example: {flows.name}</p>
         <h2 id="cp-flows">Staff who know what to do next</h2>
-        <p className="b2b-lede">Built from your actual procedure: a process chart, a decision tree for escalation, one-page guides for staff and a checklist.</p>
+        <p className="b2b-lede">Synthetic workflow demonstration: a process chart, a decision tree for escalation, one-page guides for staff and a checklist. These illustrative examples are not client work.</p>
         <div className="b2b-two">
           <div><h3>Process flowchart</h3><FlowchartSample /></div>
           <div><h3>Escalation decision tree</h3><DecisionTreeSample /></div>
@@ -148,6 +148,7 @@ export default function ComplaintsPage() {
 
       <section className="b2b-wrap" aria-labelledby="cp-data">
         <h2 id="cp-data">How your complaint records are handled</h2>
+        <p>To start, describe your current process; no records are needed for the initial enquiry. Suitable anonymised extracts and data handling and retention terms are agreed in the written scope before records are shared.</p>
         <ul className="b2b-list">{COMPLAINT_DATA_HANDLING.map((item) => <li key={item}>{item}</li>)}</ul>
         <p className="b2b-fine">This is a summary, not legal advice. The written agreement in your scope sheet sets out the exact terms.</p>
       </section>
