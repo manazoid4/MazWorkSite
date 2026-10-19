@@ -19,7 +19,9 @@ async function readPage(route) {
 // tweaks and a 90-day fix promise, never "unlimited changes".
 test('the bigger-build demos page explains the call-first route and books a call', async () => {
   const [home, demos, sitemap] = await Promise.all([readPage('/'), readPage('/demos'), readFile(path.join(out, 'sitemap.xml'), 'utf8')]);
-  assert.match(home, /href="\/demos"[^>]*>[^<]*bigger build demos/i);
+  assert.match(home, /href="\/site-map"/);
+  const map = await readPage('/site-map');
+  assert.match(map, /href="\/demos"/, 'bigger build demos remain one step from the site map');
   assert.match(demos, /Book a 15-minute call/);
   assert.match(demos, /date (we agree|you get it|agreed on the call)/i);
   assert.match(demos, /Nothing to pay yet/);
