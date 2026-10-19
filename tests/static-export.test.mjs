@@ -109,6 +109,9 @@ test('the price details live on /prices and the founder is visible on home', asy
 
 test('detailed trade guides remain available without cluttering the homepage', async () => {
   const home = await readPage('/');
+  const homepage = await readPage('/');
+  for (const href of ['/prices', '/site-map', '/proof', '/complaints']) assert.ok(homepage.includes('href="' + href + '"'), 'homepage needs ' + href);
+  assert.match(homepage, /href="\/free-plan\?src=home-hero#leak-check-form"/);
   const hub = await readPage('/for');
   for (const guide of ['salons-and-beauty', 'dog-groomers', 'garages', 'cafes-and-food', 'clinics-and-therapists', 'architects']) {
     assert.match(hub, new RegExp('href="/for/' + guide + '"'));
@@ -494,7 +497,7 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
 test('every main page is one tap from the key routes, and the trade guides have a hub', async () => {
   // Navigation audit, 27 Sep: guides were only linked from inside the quote form
   // and phones only saw "Free quote". Now every page carries the same map.
-  for (const route of ['/', '/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
+  for (const route of ['/free-plan', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
     // 15 Oct (Maz: footer minimal): the long footer list went; trade guides and architecture models stay one tap away via /for and /site-map.
     for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/site-map']) {
