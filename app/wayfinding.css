@@ -132,3 +132,11 @@ html { scroll-behavior: smooth; }
 .mw-example-fix { font-weight: 800; color: var(--signal-text); }
 .s-check-list { padding-left: 0; list-style: none; display: grid; gap: 10px; margin: 14px 0 18px; }
 .s-check-copy .button { margin: 4px 0 14px; }
+
+/* Mobile menu as a slide-over drawer with a backdrop (UX P0-02). */
+.mw-menu-backdrop { position: fixed; inset: 0; z-index: 998; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); }
+.mw-menu-backdrop[hidden] { display: none; }
+.mw-menu .mw-menu-panel { position: fixed; z-index: 999; top: 0; right: 0; bottom: 0; left: auto; width: min(340px, 85vw); max-height: none; padding: 24px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; background: var(--bg-surface, var(--surface)); border: 0; border-left: 1px solid var(--border-default, var(--line)); box-shadow: none; }
+.mw-menu .mw-menu-panel[hidden] { display: none; }
+.mw-menu-close { align-self: flex-end; min-height: 48px; min-width: 48px; padding: 0 14px; border: 1px solid var(--border-default, var(--line)); background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer; }
+.mw-site-header nav .mw-menu .mw-menu-panel a { min-height: 48px; }

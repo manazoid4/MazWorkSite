@@ -16,11 +16,13 @@ export function SiteMenu() {
     if (open) document.body.dataset.menuOpen = '';
     else delete document.body.dataset.menuOpen;
     if (!open) return;
+    const scrollLock = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); };
     const onClick = (event: MouseEvent) => { if (wrap.current && !wrap.current.contains(event.target as Node)) setOpen(false); };
     document.addEventListener('keydown', onKey);
     document.addEventListener('click', onClick);
-    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('click', onClick); };
+    return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('click', onClick); document.body.style.overflow = scrollLock; };
   }, [open]);
 
   return (
@@ -29,7 +31,9 @@ export function SiteMenu() {
         <span aria-hidden="true" className="mw-menu-icon" />
         {open ? 'Close' : 'Menu'}
       </button>
-      <div className="mw-menu-panel" id={panelId} hidden={!open}>
+      <div className="mw-menu-backdrop" hidden={!open} onClick={() => setOpen(false)} />
+      <div className="mw-menu-panel" id={panelId} hidden={!open} role="dialog" aria-label="Site menu">
+        <button type="button" className="mw-menu-close" onClick={() => setOpen(false)}>Close</button>
         <ul>
           {MENU_LINKS.map((link) => <li key={link.href}><a href={link.href} onClick={() => setOpen(false)}>{link.label}</a></li>)}
         </ul>
