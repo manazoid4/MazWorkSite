@@ -46,7 +46,7 @@ export default function LocalBusinessesPage() {
         </aside>
       </section>
 
-      <section className="lb-section" aria-labelledby="lb-start-title">
+      <section className="lb-section" id="serve-customers" aria-labelledby="lb-start-title">
         <div className="lb-section-intro">
           <p className="eyebrow">Start with the job</p>
           <h2 id="lb-start-title">A better way to handle the busy bits.</h2>
@@ -82,6 +82,24 @@ export default function LocalBusinessesPage() {
         </div>
         <ul className="lb-industry-list">{industries.map((industry) => <li key={industry.href}><a href={industry.href}><strong>{industry.label}</strong><span>{industry.text}</span><b aria-hidden="true">↗</b></a></li>)}</ul>
         <a className="lb-text-link" href="/for">See all business types and trades →</a>
+      </section>
+
+      <section className="lb-section lb-customer-paths" id="find-customers" aria-labelledby="lb-find-title">
+        <div className="lb-section-intro">
+          <p className="eyebrow">Get customers</p>
+          <h2 id="lb-find-title">Help the right people find you and choose you.</h2>
+          <p>A clear place to land, up-to-date details when people search, and useful content can all help. What makes sense depends on your business and what you already have.</p>
+        </div>
+        <ul className="lb-find-list">
+          <li><strong>A page that makes the next step clear</strong><span>A landing page or website can explain what you do and make it easy to enquire, book or buy.</span><a href="/prices">See page and website options →</a></li>
+          <li><strong>Useful local details</strong><span>Keep your website and Google listing current, with clear services, hours and ways to contact you. No one can promise a particular search position.</span><a href="/managed-presence">See managed presence →</a></li>
+          <li><strong>Content people can understand</strong><span>Short videos can show your work, answer a common question or introduce what you offer.</span><a href="/video">See video and filming →</a></li>
+        </ul>
+        <div className="lb-work-evidence" aria-label="Examples of real work">
+          <span>See real work</span>
+          <a href="/work/jobfilter">JobFilter · a live product →</a>
+          <a href="/work/scrap-finance-partners">Scrap Finance Partners · client website →</a>
+        </div>
       </section>
 
       <section className="lb-close" aria-labelledby="lb-close-title">

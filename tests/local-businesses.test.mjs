@@ -23,8 +23,18 @@ test('local business links point to existing trades, appointment, garage and foo
   }
 });
 
+test('local business page separates finding customers from serving them and links to real examples', () => {
+  assert.match(page, /id="serve-customers"/);
+  assert.match(page, /id="find-customers"/);
+  for (const route of ['/prices', '/managed-presence', '/video', '/work/jobfilter', '/work/scrap-finance-partners']) {
+    assert.ok(page.includes(`href="${route}"`), `expected ${route}`);
+  }
+  assert.match(page, /No one can promise a particular search position/);
+});
+
 test('page styles keep the layout mobile friendly and honour reduced motion', () => {
   assert.match(styles, /@media \(max-width: 700px\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(styles, /:focus-visible/);
+  assert.match(styles, /\.lb-find-list \{ grid-template-columns: 1fr; \}/);
 });
