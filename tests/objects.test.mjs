@@ -122,21 +122,18 @@ test('Objects includes an honest architecture and property use case', async () =
   assert.doesNotMatch(text, /museum quality|resin quality|precision manufacturing|any scale/i);
 });
 
-test('Objects is discoverable from shared chrome, homepage and sitemap while digital services remain', async () => {
-  const [home, objects, sitemap, readme] = await Promise.all([
-    readPage('/'),
-    readPage('/3d-printing'),
+test('Objects remains available via the site map without being marketed on the homepage', async () => {
+  const [home, objects, sitemap, readme, map, lab] = await Promise.all([
+    readPage('/'), readPage('/3d-printing'),
     readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8'),
     readFile(path.join(root, 'README.md'), 'utf8'),
+    readPage('/site-map'), readPage('/lab'),
   ]);
-
-  // Objects left the homepage in the 27 Sep sales overhaul; since 29 Sep it sits under "Other projects" in the menu and footer.
-  const lab = await readPage('/lab');
-  assert.match(home, /href="\/3d-printing"[^>]*>Objects/);
+  assert.doesNotMatch(home, /href="\/3d-printing"/);
+  assert.match(home, /href="\/site-map"/);
+  assert.match(map, /href="\/3d-printing"/);
   assert.match(lab, /Maz Works Objects/);
   assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
-  assert.match(home, /Tell me the job/);
-  assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);
   assert.match(objects, /href="\/lab"/);
   assert.match(objects, /href="\/demos"/);
