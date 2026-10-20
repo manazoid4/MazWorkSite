@@ -163,6 +163,8 @@ test('the homepage footer has a direct enquiry form while other footers keep the
   assert.match(homeSource, /HomeFooterConvert/);
   const home = await readFile(new URL('../out/index.html', import.meta.url), 'utf8');
   assert.match(home, /id="home-enquiry-title"/);
+  assert.match(home, /Just your name, email and what you need\./);
+  assert.match(home, /New enquiries get missed, the same task keeps being repeated/);
   assert.match(home, /name="problem"/);
   assert.doesNotMatch(home, /id="footer-signup"/);
   const other = await readFile(new URL('../out/proof.html', import.meta.url), 'utf8');

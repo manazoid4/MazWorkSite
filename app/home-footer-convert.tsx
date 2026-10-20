@@ -11,7 +11,10 @@ export function HomeFooterConvert() {
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
       <div className="mw-home-footer-form">
-        <DemoRequestForm />
+        <DemoRequestForm
+          kicker="Just your name, email and what you need."
+          problemPlaceholder="For example: New enquiries get missed, the same task keeps being repeated, or customers are unsure what to do next."
+        />
       </div>
     </section>
   );
