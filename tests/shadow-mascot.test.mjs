@@ -6,12 +6,9 @@ import test from 'node:test';
 const root = process.cwd();
 const exportRoot = path.join(root, 'out');
 
-test('homepage Shadow cameo uses an accessible, genuinely transparent PNG', async () => {
+test('the removed homepage workflow no longer renders Shadow; the transparent asset stays valid', async () => {
   const html = await readFile(path.join(exportRoot, 'index.html'), 'utf8');
-  assert.match(html, /class="s-shadow-cameo"/);
-  assert.match(html, /src="\/shadow-mascot\.png"/);
-  assert.match(html, /alt="A curled grey cat mascot keeping watch beside the example"/);
-  assert.match(html, /Shadow: quality control, mostly naps\./);
+  assert.doesNotMatch(html, /class="s-shadow-cameo"|shadow-mascot\.png|Shadow: quality control/);
 
   const png = await readFile(path.join(exportRoot, 'shadow-mascot.png'));
   assert.equal(png.subarray(1, 4).toString('ascii'), 'PNG');

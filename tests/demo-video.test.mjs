@@ -18,11 +18,12 @@ test('the demo video, poster and captions exist and the video stays under 2 MB',
 
 test('the standalone demo asset has captions and remains clearly labelled', async () => {
   const html = await readFile(path.join(root, 'out/index.html'), 'utf8');
-  assert.match(html, /Illustrative workflow/);
+  assert.doesNotMatch(html, /class="mw-home-demo"|Illustrative workflow/, 'the removed homepage workflow panel stays removed');
   const source = await readFile(path.join(root, 'app', 'walkthrough-video.tsx'), 'utf8');
   assert.match(source, /src: '\/video\/demo\.mp4'/);
   assert.match(source, /poster: '\/video\/demo-poster\.webp'/);
   assert.match(source, /captions: '\/video\/demo\.vtt'/);
   assert.match(source, /<track kind="captions" src=\{WALKTHROUGH_VIDEO\.captions\}/);
+  assert.match(source, /Not a real customer/);
   assert.match(source, /preload="none"/);
 });

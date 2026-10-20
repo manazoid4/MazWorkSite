@@ -49,6 +49,77 @@ const BUCKETS: Bucket[] = [
   },
 ];
 
+const CUSTOMER_JOURNEY = [
+  {
+    title: 'Get Customers',
+    description: 'Help people find you, understand what you offer and take the next step.',
+    link: 'Websites, visibility & enquiries',
+    href: '/local-businesses#find-customers',
+    art: 'find' as const,
+  },
+  {
+    title: 'Serve Customers',
+    description: 'Make bookings, replies and follow-ups easier to manage, even on your busiest days.',
+    link: 'Bookings, communication & workflows',
+    href: '/local-businesses#serve-customers',
+    art: 'serve' as const,
+  },
+  {
+    title: 'Keep & Improve',
+    description: 'See where work gets stuck, spot recurring problems and make better-informed decisions.',
+    link: 'Reporting, processes & software',
+    href: '/professional-teams#demonstrations',
+    art: 'improve' as const,
+  },
+];
+
+function JourneyArt({ kind }: { kind: Bucket['art'] }) {
+  return (
+    <svg className={`mw-journey-art is-${kind}`} viewBox="0 0 180 120" aria-hidden="true" focusable="false">
+      {kind === 'find' && <>
+        <path className="mw-journey-stroke" d="M23 49 38 25h82l15 24v54H30V49m-7 0h119M49 103V70h25v33m17-33h26v17H91" />
+        <path className="mw-journey-accent" d="M38 25h82l15 24H23z" />
+        <circle className="mw-journey-badge" cx="148" cy="39" r="17" />
+        <path className="mw-journey-stroke" d="M148 30v18m-9-9h18M17 108h137" />
+      </>}
+      {kind === 'serve' && <>
+        <rect className="mw-journey-stroke" x="27" y="27" width="91" height="75" rx="4" />
+        <path className="mw-journey-stroke" d="M27 48h91M45 21v13m55-13v13M43 64h18m14 0h18M43 80h18" />
+        <circle className="mw-journey-badge-blue" cx="145" cy="71" r="18" />
+        <path className="mw-journey-stroke" d="m136 71 6 6 12-14" />
+      </>}
+      {kind === 'improve' && <>
+        <rect className="mw-journey-stroke" x="23" y="28" width="111" height="72" />
+        <path className="mw-journey-stroke" d="M78 100v9m-29 0h59M39 82h19V66H39zm32 0h19V54H71zm32 0h19V41h-19z" />
+        <path className="mw-journey-accent" d="M39 82h19V66H39zm32 0h19V54H71zm32 0h19V41h-19z" />
+        <circle className="mw-journey-badge" cx="143" cy="36" r="17" />
+        <path className="mw-journey-stroke" d="m135 36 6 6 11-13M14 109h141" />
+      </>}
+    </svg>
+  );
+}
+
+function HomeCustomerJourney() {
+  return (
+    <section className="mw-bucket-section mw-bucket-journey" id="customer-buckets" aria-labelledby="mw-buckets-title">
+      <header className="mw-journey-heading">
+        <h2 id="mw-buckets-title">Help at every part of the customer journey.</h2>
+        <p>A better website is sometimes the answer. Sometimes it’s what happens after someone gets in touch.</p>
+      </header>
+      <ol className="mw-journey-grid">
+        {CUSTOMER_JOURNEY.map((item) => (
+          <li className="mw-journey-item" key={item.title}>
+            <JourneyArt kind={item.art} />
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <a href={item.href}>{item.link}<span aria-hidden="true"> ↗</span></a>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 function BucketArt({ kind }: { kind: Bucket['art'] }) {
   return (
     <svg className={`mw-bucket-art is-${kind}`} viewBox="0 0 180 142" aria-hidden="true" focusable="false">
@@ -64,6 +135,8 @@ function BucketArt({ kind }: { kind: Bucket['art'] }) {
 }
 
 export function ThreeBuckets({ compact = false, showPrices = false }: { compact?: boolean; showPrices?: boolean }) {
+  if (!compact && !showPrices) return <HomeCustomerJourney />;
+
   return (
     <section className={`mw-bucket-section${compact ? ' is-compact' : ''}`} id="customer-buckets" aria-labelledby="mw-buckets-title">
       <header className="mw-bucket-heading">
