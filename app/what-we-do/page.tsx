@@ -25,7 +25,7 @@ export default function WhatWeDo() {
 
       <section className="s-section" id="why" aria-labelledby="how-title">
         <p className="eyebrow">Clear scope, first</p><h2 id="how-title">Choose the next useful job.</h2>
-        <p>One task can start with {OFFERS[0].price}. Larger work gets a written scope and a fixed quote before building. See it working before you pay. Professional complaints engagements are quoted to scope.</p>
+        <p>One task can start with {OFFERS[0].price}. Larger work gets a written scope and a fixed quote before building. See it working before you pay. Professional reporting and complaints engagements are quoted to scope.</p>
         <h3>How I set it up</h3>
         <ul className="s-recipes">
           <li><strong>Built on what you already use</strong><span>Your booking app, email, calendar or accounts software.</span></li>

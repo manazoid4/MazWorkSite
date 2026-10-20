@@ -20,6 +20,28 @@ test('professional team routes export clear, factual pages with the agreed enqui
     assert.match(html, new RegExp(`/contact\\?src=${source}`));
     assert.match(html, /Tell me what's not working/);
   }
+  assert.match(teams, /Better oversight\. Clearer decisions\. Smoother operations\./);
+  assert.match(teams, /See what's happening/);
+  assert.match(teams, /Stay on top of the work/);
+  assert.match(teams, /Find and fix the problem/);
+  assert.match(teams, /Illustrative demonstrations/);
+  assert.match(teams, /Synthetic data/);
+  assert.match(teams, /Department performance/);
+  assert.match(teams, /SLA and workload oversight/);
+  assert.match(teams, /Complaints analysis remains a specialist part/);
+  assert.match(teams, /cannot guarantee that an SLA will never be missed/);
+  assert.match(teams, /\/contact\?src=professional-teams&amp;service=reporting#contact/);
+  assert.match(teams, /Closed on time<\/dt><dd>94%<\/dd><span>102 of 108 completed/);
+  assert.equal(Math.round(102 / 108 * 100), 94);
+
+  const weeklyFlow = [...teams.matchAll(/aria-label="(\d+) received, (\d+) completed"/g)];
+  assert.equal(weeklyFlow.reduce((sum, match) => sum + Number(match[1]), 0), 124);
+  assert.equal(weeklyFlow.reduce((sum, match) => sum + Number(match[2]), 0), 108);
+  assert.equal(20 + weeklyFlow.reduce((sum, match) => sum + Number(match[1]) - Number(match[2]), 0), 36);
+  const workload = teams.match(/class="pt-workload"[\s\S]*?<h4>Open work by owner<\/h4>([\s\S]*?)<\/aside>/)?.[1];
+  assert.ok(workload, 'workload breakdown is present');
+  assert.equal([...workload.matchAll(/<strong>(\d+)<\/strong>/g)].reduce((sum, match) => sum + Number(match[1]), 0), 36);
+
   for (const label of ['Complaints Health Check', 'Reporting &amp; Oversight', 'Improvement &amp; Implementation']) assert.match(complaints, new RegExp(label));
   assert.match(complaints, /Quoted to scope/);
   assert.deepEqual([...complaints.matchAll(/<p class="b2b-price">([^<]+)<\/p>/g)].map((match) => match[1]), ['Quoted to scope', 'Quoted to scope', 'Quoted to scope']);

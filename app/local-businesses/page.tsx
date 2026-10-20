@@ -31,7 +31,7 @@ export default function LocalBusinessesPage() {
         <div className="lb-hero-copy">
           <p className="eyebrow">For local businesses</p>
           <h1 id="lb-title">You’re serving customers. The admin can wait.</h1>
-          <p className="lb-lede">Missed calls, quiet quotes and bookings to chase can cost you the next job. I connect the tools you already use, so customers get a clear next step and you spend less time keeping things moving.</p>
+          <p className="lb-lede">Missed calls, quiet quotes and bookings to chase can cost you the next job. I connect the tools you already use, improve your website and make the everyday work easier to manage.</p>
           <a className="button button-signal lb-primary" href="/contact?src=local-businesses">Tell me what's not working</a>
           <p className="lb-note">One person to deal with. A clear scope and fixed price before any paid work.</p>
         </div>

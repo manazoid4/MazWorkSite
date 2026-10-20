@@ -24,7 +24,7 @@ test('What I Do and prices use the three customer journey buckets', async () => 
   assert.match(prices, /id="websites"/);
   assert.match(prices, /id="after-hours"/);
   assert.match(prices, /id="care"/);
-  assert.match(prices, /Feedback and complaints reporting: quoted to scope\./);
+  assert.match(prices, /Dashboards, reporting and complaints improvement: quoted to scope\./);
   assert.match(prices, /Need care or maintenance\?/);
   assert.match(prices, /See options/);
   assert.match(what, /See it working before you pay/);

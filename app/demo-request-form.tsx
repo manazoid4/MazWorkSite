@@ -164,7 +164,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: I miss customer calls while working, or need a clearer way to track and report complaints."
+          placeholder="For example: I need more website enquiries, a clearer team dashboard, or help tracking deadlines and complaints."
         />
       </label>
 
@@ -180,7 +180,7 @@ export function DemoRequestForm() {
           </label>
 
           <label>
-            <span>What do you need help with?</span>
+            <span>Service <small>optional</small></span>
             <select
               name="service"
               value={service}
