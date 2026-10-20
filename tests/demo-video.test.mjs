@@ -16,13 +16,13 @@ test('the demo video, poster and captions exist and the video stays under 2 MB',
   assert.doesNotMatch(vtt, /\bAI\b|£/);
 });
 
-test('the homepage plays the demo with a poster, captions and an example label', async () => {
+test('the standalone demo asset has captions and remains clearly labelled', async () => {
   const html = await readFile(path.join(root, 'out/index.html'), 'utf8');
-  const figure = html.slice(html.indexOf('id="demo-video"'), html.indexOf('</figure>', html.indexOf('id="demo-video"')));
-  assert.ok(figure.length > 0, 'homepage has no #demo-video');
-  assert.match(figure, /src="\/video\/demo\.mp4"/);
-  assert.match(figure, /poster="\/video\/demo-poster\.webp"/);
-  assert.match(figure, /kind="captions" src="\/video\/demo\.vtt"/);
-  assert.match(figure, /preload="none"/);
-  assert.match(figure, /not a real customer/i);
+  assert.match(html, /Illustrative workflow/);
+  const source = await readFile(path.join(root, 'app', 'walkthrough-video.tsx'), 'utf8');
+  assert.match(source, /src: '\/video\/demo\.mp4'/);
+  assert.match(source, /poster: '\/video\/demo-poster\.webp'/);
+  assert.match(source, /captions: '\/video\/demo\.vtt'/);
+  assert.match(source, /<track kind="captions" src=\{WALKTHROUGH_VIDEO\.captions\}/);
+  assert.match(source, /preload="none"/);
 });

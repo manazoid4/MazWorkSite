@@ -70,38 +70,24 @@ test('the Leak Check reuses the resilient enquiry delivery path', async () => {
   assert.match(source, /role="status"/);
 });
 
-test('homepage and shared navigation send the free first step to the dedicated page', async () => {
-  const home = await readPage('/');
+test('homepage and shared navigation make the main enquiry easy while preserving the free preview', async () => {
+  const home = (await readPage('/')).replace(/&#x27;/g, "'");
 
-  // The homepage carries the check form itself; shared navigation points at the dedicated page.
-  assert.match(home, /id="check"/);
-  assert.match(home, /id="leak-check-form"/);
-  // CRO Move 3 (18 Oct): the hero two-field start posts where /free-plan posts.
-  assert.match(home, /id="hero-quick-form"/);
-  assert.match(home, /action="https:\/\/formsubmit\.co\/cdecd22760836a83422b51da0a853f94"/);
-  assert.match(home, /href="\/free-plan\?src=nav#leak-check-form">Free preview</);
-  // One name for the free first step everywhere (29 Sep, renamed 18 Oct): "free preview", never "leak check" in visible copy.
-  assert.doesNotMatch(home.replace(/<[^>]+>/g, ' '), /leak check/i);
-  assert.doesNotMatch(home, /\?service=leak-check#contact/);
+  assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact"[^>]*>Tell me what.s not working/);
+  assert.match(home, /href="\/contact\?src=home#contact">Tell me what.s not working/);
+  assert.match(home, /href="\/free-plan\?src=home">See how the free preview works/);
+  assert.doesNotMatch(home, /id="hero-quick-form"|id="leak-check-form"/);
 });
 
-test('CRO Move 3: the hero start asks email before name and posts where /free-plan posts', async () => {
-  const home = await readPage('/');
-  const form = /<form[^>]*id="hero-quick-form"[\s\S]*?<\/form>/.exec(home)?.[0] || '';
-  assert.ok(form, 'the hero two-field start should be present');
-  assert.match(form, /method="post"/);
-  assert.match(form, /action="https:\/\/formsubmit\.co\/cdecd22760836a83422b51da0a853f94"/, 'the hero posts to the same place as /free-plan');
-  // Email first, then name (audit Move 3): the shorter ask leads with the reply address.
-  assert.ok(form.indexOf('name="email"') < form.indexOf('name="name"'), 'email comes before name');
-  // /api/enquiry rejects a body without a non-empty problem and a known service; the hero supplies both hidden.
-  assert.match(form, /name="problem" value="[^"]+"/);
-  assert.match(form, /name="service" value="Free Preview &amp; Fixed Price"/);
+test('the main enquiry form stays short and does not require a service choice', async () => {
+  const html = await readPage('/contact');
+  const formSource = await readFile(new URL('../app/demo-request-form.tsx', import.meta.url), 'utf8');
+  const form = /<form[^>]*class="mw-demo-form"[\s\S]*?<\/form>/.exec(html)?.[0] || '';
+  assert.ok(form, 'the shared enquiry form is present');
+  for (const name of ['name', 'email', 'problem']) assert.match(form, new RegExp(`name="${name}"`));
+  assert.match(form, /No service choice needed/);
+  assert.match(form, /Optional details/);
   assert.match(form, /name="_honey"/);
-  assert.match(form, />Get my free preview</);
-  // No personal phone number is ever published in the public hero.
-  assert.doesNotMatch(form, /(?:\+44|\b0\d{3,4}\s?\d{6,7}\b)/);
-  const source = await readFile(path.join(root, 'app', 'hero-quick-form.tsx'), 'utf8');
-  assert.match(source, /sendPlanEnquiry/);
-  assert.match(source, /crypto\.randomUUID\(\)/);
-  assert.match(source, /id="hero-quick-form"/);
+  assert.match(form, /role="alert"/);
+  assert.match(formSource, /Nothing you typed has been lost/);
 });

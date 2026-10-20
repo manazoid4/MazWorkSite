@@ -36,6 +36,8 @@ test('the enquiry captures which service the visitor actually wants', async () =
     'Launch Page: one page that books, sells or takes enquiries (£295)',
     'Review requests and customer reminders (Starter Automation £99)',
     'Care plans (£39/month or £149/month)',
+    'Complaints and customer experience improvement (quoted to scope)',
+    'Dashboards, KPI reporting and SLA oversight (quoted to scope)',
     'Custom software or internal tool (from £2,450)',
     'Tap-to-review stands and signs',
     'Not sure yet',
@@ -44,7 +46,7 @@ test('the enquiry captures which service the visitor actually wants', async () =
   }
 
   // CTAs deep-link with ?service=<id>; the ids must stay stable for those links to work.
-  for (const id of ['repair', 'google-profile', 'bundle', 'website', 'automation', 'software', 'objects', 'unsure']) {
+  for (const id of ['repair', 'google-profile', 'bundle', 'website', 'automation', 'software', 'objects', 'complaints', 'reporting', 'unsure']) {
     assert.match(enquirySource, new RegExp(`id: '${id}'`));
   }
   assert.match(enquirySource, /readServiceFromLocation/);

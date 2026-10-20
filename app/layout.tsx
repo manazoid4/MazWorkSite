@@ -42,7 +42,7 @@ const structuredData = {
       address: { '@type': 'PostalAddress', addressCountry: 'GB' },
       areaServed: { '@type': 'Country', name: 'United Kingdom' },
       priceRange: PRICE_RANGE,
-      description: SITE_DESCRIPTION,
+      description: 'Maz Works helps UK businesses find and serve customers through websites, Google Business Profile, booking and enquiry workflows, automation and software. It also provides complaints reporting, customer growth systems and digital rebuilds.',
       makesOffer: [
         { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/free-plan` },
         ...ALL_OFFERS.map((offer) => ({

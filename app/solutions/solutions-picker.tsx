@@ -115,8 +115,8 @@ export function SolutionsPicker({ startOpen, firstSelected }: { startOpen: boole
 
   return (
     <div className={`sol${hydrated ? ' sol-js' : ''}`} id="solutions">
-      <nav aria-label="Pick your problem">
-        <p className="sol-prompt">Tap the one that sounds like you.</p>
+      <nav aria-label="Browse solutions">
+        <h2 className="sol-prompt">Browse by what you need to improve</h2>
         <ul className="sol-picker">
           {SOLUTIONS.map((solution) => (
             <li key={solution.id}>

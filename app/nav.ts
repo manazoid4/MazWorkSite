@@ -12,19 +12,20 @@ export type NavLink = { href: string; label: string };
 
 /** Shown in the header on desktop. Keep to four plus the free plan button. */
 export const PRIMARY_NAV: NavLink[] = [
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/prices', label: 'Prices' },
-  { href: '/what-we-do', label: 'What we do' },
-  { href: '/proof', label: 'Proof' },
+  { href: '/what-we-do', label: 'What I do' },
+  { href: '/local-businesses', label: 'Local businesses' },
+  { href: '/professional-teams', label: 'Professional teams' },
+  { href: '/proof', label: 'Our work' },
 ];
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/b2b', label: 'For agencies and practices' },
+  { href: '/what-we-do', label: 'What I do' },
+  { href: '/local-businesses', label: 'Local businesses' },
+  { href: '/professional-teams', label: 'Professional teams' },
+  { href: '/complaints-improvement', label: 'Complaints improvement' },
   { href: '/prices', label: 'Packages and prices' },
-  { href: '/what-we-do', label: 'What we do' },
-  { href: '/proof', label: 'Proof' },
+  { href: '/proof', label: 'Our work' },
   { href: '/demos', label: 'Bigger build demos' },
   { href: '/for', label: 'Who it’s for' },
   { href: '/refer', label: 'Refer a business' },
@@ -39,6 +40,9 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/solutions', label: 'Pick your problem' },
       { href: '/prices', label: 'Packages and prices' },
       { href: '/what-we-do', label: 'What we do' },
+      { href: '/local-businesses', label: 'Local businesses' },
+      { href: '/professional-teams', label: 'Professional teams' },
+      { href: '/complaints-improvement', label: 'Complaints analysis and improvement' },
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
       { href: '/managed-presence', label: 'Managed presence' },
@@ -46,7 +50,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/complaints', label: 'Complaints tracking' },
       { href: '/audit', label: 'Free automation audit' },
       { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
-      { href: '/what-we-do#example', label: 'Example plan' },
+      { href: '/what-we-do#why', label: 'How I work' },
       { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
       { href: '/contact', label: 'Bigger jobs' },
     ],
@@ -86,8 +90,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 
 /** Homepage "On this page" jump bar, in page order. */
 export const HOME_SECTIONS: NavLink[] = [
-  { href: '#build', label: 'What I build' },
-  { href: '#how', label: 'See it working' },
-  { href: '#check', label: 'Get my free preview' },
-  { href: '#about', label: 'About Maz' },
+  { href: '#customer-buckets', label: 'What I do' },
+  { href: '#doors-title', label: 'Who I help' },
+  { href: '#proof-title', label: 'Work you can see' },
+  { href: '#about-title', label: 'About Maz' },
 ];

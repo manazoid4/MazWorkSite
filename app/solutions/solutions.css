@@ -2,17 +2,20 @@
 .sol { --sol-gap: 14px; display: grid; gap: var(--sol-gap); margin-top: 8px; }
 .sol-prompt { font-weight: 700; font-size: 1.05rem; margin-bottom: 10px; }
 
-/* Picker: one tap per problem. Two columns on phones. */
-.sol-picker { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.sol-picker a { display: grid; align-content: space-between; gap: 4px; min-height: 64px; height: 100%; padding: 10px 12px; border: 2px solid var(--ink); background: var(--surface); text-decoration: none; box-shadow: 3px 3px 0 var(--ink); font-weight: 700; line-height: 1.2; }
-.sol-picker a span { font-size: .98rem; }
-.sol-picker a b { font-family: var(--mono); font-size: .78rem; font-weight: 700; color: var(--muted); }
-.sol-picker a:hover { background: var(--wheat); }
-.sol-picker a:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
-.sol-picker a[aria-current='true'] { background: var(--ink); color: #fff; box-shadow: 3px 3px 0 var(--signal); }
-.sol-picker a[aria-current='true'] b { color: #fff; }
-.sol-picker a[aria-current='true'] span::before { content: '✓ '; }
-@media (min-width: 760px) { .sol-picker { grid-template-columns: repeat(3, 1fr); } }
+/* A calm, scannable chooser: clear labels, price and one obvious route. */
+.sol-picker { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr; border-top: 1px solid #d8d2c8; }
+.sol-picker li { border-bottom: 1px solid #d8d2c8; }
+.sol-picker a { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 18px; min-height: 56px; padding: 10px 8px; border: 0; background: transparent; text-decoration: none; font-weight: 700; line-height: 1.3; }
+.sol-picker a span { font-size: 1rem; }
+.sol-picker a b { font-family: inherit; font-size: .9rem; font-weight: 700; font-variant-numeric: tabular-nums; color: #333; }
+.sol-picker a::after { content: '→'; color: #333; font-size: 1.15rem; }
+.sol-picker a:hover { background: #fff2e7; }
+.sol-picker a:focus-visible { outline: 3px solid #a74310; outline-offset: -3px; }
+.sol-picker a[aria-current='true'] { background: #f4df91; color: #171715; box-shadow: inset 4px 0 #171715; }
+.sol-picker a[aria-current='true'] b { color: #171715; }
+.sol-picker a[aria-current='true'] span::before { content: none; }
+@media (min-width: 760px) { .sol-picker { grid-template-columns: 1fr 1fr; column-gap: 36px; } }
+@media (max-width: 520px) { .sol-picker a { gap: 10px; padding-inline: 5px; } }
 
 /* Optional "I run a…" switch: examples only. */
 .sol-biz { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }

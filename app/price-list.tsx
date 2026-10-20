@@ -1,10 +1,11 @@
-import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, formatPrice, PROMISES, type Offer } from './offers';
+import { AFTER_HOURS, ALWAYS_INCLUDED, AUTOMATION_MENU, BUY_LINKS, CARE_PLANS, COMPARISON, DELIVERY_PROMISE, EXTRA_GROUPS, LADDER, LANES, MANAGED_PRESENCE, NOT_INCLUDED, OFFERS, RUNNING_COSTS_NOTE, runningCost, OWN_VS_RENT, PACKAGE_VALUE, PRICE_MATCH, formatPrice, PROMISES, STARTER_GUARANTEE, UPGRADE_CREDITS, type Offer } from './offers';
 import { PackageLink } from './package-link';
 import { NextSteps, TweaksTimeline } from './explainers';
 import { CostCalculator } from './cost-calculator';
 import { SystemBuilder } from './system-builder';
 import { ChangesWindow } from './demo-path';
 import { MAIN_CTA } from './site';
+import { SolutionsPicker } from './solutions/solutions-picker';
 
 /** Only offers with a configured Stripe payment link show "Buy now". */
 export function BuyNow({ name }: { name: string }) {
@@ -16,28 +17,37 @@ export function BuyNow({ name }: { name: string }) {
   </>;
 }
 
-/** A package's full spec, folded away so phones stay short. */
-export function OfferSpec({ offer }: { offer: Offer }) {
+/** One package card with its full spec folded away, so phones stay short. */
+export function OfferCard({ offer, checkHref }: { offer: Offer; checkHref: string }) {
   return (
-    <details className="s-offer-spec">
-      <summary>What’s included, and what isn’t</summary>
-      <p><strong>Running costs:</strong> {runningCost(offer)}</p>
+    <article className={`s-price${offer.tag ? ' s-price-main' : ''}`} id={`offer-${offer.id}`}>
+      {offer.tag ? <p className="s-price-tag">{offer.tag}</p> : null}
+      <h3>{offer.name}</h3>
+      <p className="s-price-amount">{offer.price}</p>
+      <p>{offer.body}</p>
+      <p className="s-small"><strong>Best for:</strong> {offer.forWho}</p>
+      <p className="s-small"><strong>Running costs:</strong> {runningCost(offer)}</p>
       <p className="s-price-guarantee"><strong>What you’ll see working:</strong> {offer.successCheck}</p>
-      <dl className="s-price-facts">
-        <div><dt>Time</dt><dd>{offer.delivery}</dd></div>
-        <div><dt>You pay</dt><dd>{offer.payment}</dd></div>
-      </dl>
-      <PartsValue offer={offer} />
-      {offer.guarantee ? <p className="s-price-guarantee"><strong>Promise:</strong> {offer.guarantee}</p> : null}
-      <p><strong>Included</strong></p>
-      <ul>{offer.includes.map((item) => <li key={item}>{item}</li>)}</ul>
-      <p><strong>Always included</strong></p>
-      <ul>{ALWAYS_INCLUDED.map((item) => <li key={item.title}>{item.title}</li>)}</ul>
-      <p><strong>Not included</strong></p>
-      <ul>{offer.excludes.map((item) => <li key={item}>{item}</li>)}</ul>
-      <p><strong>Changes:</strong> {offer.changes}</p>
-      <p><strong>Next step:</strong> {offer.upsell}</p>
-    </details>
+      <details className="s-offer-spec">
+        <summary>What’s included, and what isn’t</summary>
+        <dl className="s-price-facts">
+          <div><dt>Time</dt><dd>{offer.delivery}</dd></div>
+          <div><dt>You pay</dt><dd>{offer.payment}</dd></div>
+        </dl>
+        <PartsValue offer={offer} />
+        {offer.guarantee ? <p className="s-price-guarantee"><strong>Promise:</strong> {offer.guarantee}</p> : null}
+        <p><strong>Included</strong></p>
+        <ul>{offer.includes.map((item) => <li key={item}>{item}</li>)}</ul>
+        <p><strong>Always included</strong></p>
+        <ul>{ALWAYS_INCLUDED.map((item) => <li key={item.title}>{item.title}</li>)}</ul>
+        <p><strong>Not included</strong></p>
+        <ul>{offer.excludes.map((item) => <li key={item}>{item}</li>)}</ul>
+        <p><strong>Changes:</strong> {offer.changes}</p>
+        <p><strong>Next step:</strong> {offer.upsell}</p>
+      </details>
+      <PackageLink href={checkHref} pick={offer.name}>Get my free preview <span aria-hidden="true">→</span></PackageLink>
+      <BuyNow name={offer.name} />
+    </article>
   );
 }
 
@@ -46,6 +56,19 @@ function PartsValue({ offer }: { offer: Offer }) {
   const value = PACKAGE_VALUE[offer.id];
   if (!value || value.total <= offer.from) return null;
   return <p className="s-price-value">Bought one by one: <s>{formatPrice(value.total)}</s> <span>({value.parts.map((part) => part.label).join(', ')})</span></p>;
+}
+
+/** The fix ladder: five rungs, same for every kind of business. */
+export function Ladder() {
+  return (
+    <ol className="s-ladder" aria-label="The fix ladder">
+      {LADDER.map((rung, index) => (
+        <li key={rung.step} style={{ ['--i' as string]: index }}>
+          <a href={rung.href}><strong>{rung.step}</strong><span>{rung.what}</span><b>{rung.price}</b></a>
+        </li>
+      ))}
+    </ol>
+  );
 }
 
 /** What every package gets, said once. */
@@ -100,9 +123,63 @@ function Fold({ id, title, children }: { id: string; title: string; children: Re
   );
 }
 
-export function PriceFolds({ checkHref }: { checkHref: string }) {
+export function PriceList({ checkHref }: { checkHref: string }) {
   return (
     <>
+      <h3 className="s-track-title">One-off or monthly</h3>
+      <p className="s-small"><a href="#systems">One-off prices</a> · <a href="#monthly">Monthly services</a></p>
+      <h3 className="s-track-title" id="need">What problem do you want gone?</h3>
+      <SolutionsPicker startOpen={false} firstSelected={false} />
+
+      <span id="systems" />
+      <h3 className="s-track-title" id="ladder">Four steps, one for every size of job</h3>
+      <Ladder />
+
+      {LANES.map((lane) => (
+        <div key={lane.id}>
+          {lane.id === 'websites' ? <span id="creators" /> : null}
+          <h3 className="s-track-title" id={lane.id}>{lane.title}</h3>
+          <p className="s-small">{lane.note}</p>
+          <div className="s-prices">
+            {lane.offers.map((offer) => <OfferCard offer={offer} checkHref={checkHref} key={offer.id} />)}
+          </div>
+        </div>
+      ))}
+      <span id="after-hours" />
+      <h3 className="s-track-title" id="monthly">Monthly service</h3>
+      <div className="s-prices">
+        <article className="s-price" id="offer-managed-presence">
+          <h3>{MANAGED_PRESENCE.name}</h3>
+          <p className="s-price-amount">{MANAGED_PRESENCE.price}</p>
+          <p>You send existing photos. I keep your website, Google and social posts current.</p>
+          <details className="s-offer-spec">
+            <summary>What’s included and how it works</summary>
+            <p>{MANAGED_PRESENCE.body}</p>
+            <p><strong>Best for:</strong> {MANAGED_PRESENCE.forWho}</p>
+            <p><strong>What you’ll see each month:</strong> {MANAGED_PRESENCE.successCheck}</p>
+            <p>{MANAGED_PRESENCE.terms}</p>
+          </details>
+          <a className="text-link" href={MANAGED_PRESENCE.href}>What’s included →</a>
+          <a className="mw-service-link" href="/contact?service=managed-presence#contact">Ask about managed presence →</a>
+        </article>
+        <article className="s-price" id="offer-after-hours">
+          <h3>{AFTER_HOURS.name}</h3>
+          <p className="s-price-amount">{AFTER_HOURS.price}</p>
+          <p>{AFTER_HOURS.body}</p>
+          <details className="s-offer-spec">
+            <summary>What’s included and how it works</summary>
+            <p><strong>Best for:</strong> {AFTER_HOURS.forWho}</p>
+            <p>{AFTER_HOURS.minutes} call minutes included. {AFTER_HOURS.setup}. {AFTER_HOURS.terms}</p>
+            <p><strong>What you’ll hear first:</strong> {AFTER_HOURS.successCheck}</p>
+          </details>
+          <a className="text-link" href={AFTER_HOURS.href}>How it works <span aria-hidden="true">→</span></a>
+          <PackageLink href={checkHref} pick={AFTER_HOURS.name}>Get my free preview <span aria-hidden="true">→</span></PackageLink>
+          <BuyNow name={AFTER_HOURS.name} />
+        </article>
+      </div>
+      <p className="s-small">{STARTER_GUARANTEE} {UPGRADE_CREDITS.join(' ')}</p>
+      <p className="s-guarantee" id="price-match"><strong>UK price match.</strong> {PRICE_MATCH}</p>
+
       <Fold id="automation-menu" title="The automation menu: what each job does">
         <p className="s-small">A Starter is one of these. A Business System is three joined up, plus the weekly report.</p>
         <AutomationMenu checkHref={checkHref} />
@@ -138,7 +215,7 @@ export function PriceFolds({ checkHref }: { checkHref: string }) {
         </div>
       </Fold>
 
-      <Fold id="extras" title="Small set-ups and add-ons">
+      <Fold id="extras" title="Small set-ups, add-ons and care">
         <div className="s-extras">
           {EXTRA_GROUPS.map((group) => (
             <div className="s-extras-group" key={group.id} id={group.id}>
@@ -149,6 +226,10 @@ export function PriceFolds({ checkHref }: { checkHref: string }) {
               </ul>
             </div>
           ))}
+          <div className="s-extras-care" id="care">
+            <h4>After it’s built</h4>
+            {CARE_PLANS.map((plan) => <p key={plan.id}><strong>{plan.name}, {plan.price}.</strong> {plan.body}</p>)}
+          </div>
         </div>
       </Fold>
 

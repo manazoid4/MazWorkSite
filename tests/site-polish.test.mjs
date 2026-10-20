@@ -20,14 +20,17 @@ const mainWithoutFooter = (html) => {
 const words = (html) => text(mainWithoutFooter(html)).split(/\s+/).filter(Boolean).length;
 const TYPES = ['trades', 'appointments', 'creators', 'offices'];
 
-test('one main action: every primary button says "Get my free preview"', async () => {
-  const banned = /Free demo|Get my free demo|Send me this plan|Ask for this system|Free preview and price|Get my free preview and price|Get my free preview for this|Book a call for your free preview|Get my free preview instead|Get my free plan/;
-  for (const route of ['index', 'prices', 'free-plan', 'demos', 'linkedin', 'what-we-do', ...TYPES.map((t) => `for/${t}`)]) {
+test('the main customer journey uses one clear enquiry action', async () => {
+  for (const route of ['index', 'what-we-do', 'local-businesses', 'professional-teams', 'complaints-improvement', 'complaints', 'prices', 'contact']) {
     const html = await read(route);
-    assert.doesNotMatch(html, banned, `${route} still has an old button label`);
-    const signals = [...html.matchAll(/class="[^"]*button-signal[^"]*"[^>]*>([^<]*)</g)].map((m) => m[1].trim()).filter(Boolean);
-    for (const label of signals) assert.equal(label, 'Get my free preview', `${route}: primary button "${label}"`);
+    assert.match(html, /Tell me what.s not working/, `${route} must offer the shared enquiry action`);
+    assert.match(html, /href="\/contact[^\"]*#contact/, `${route} must make the general enquiry form reachable`);
   }
+  const home = await read('index');
+  assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact/);
+  const preview = await read('free-plan');
+  assert.match(preview, /Get my free preview/);
+  assert.match(preview, /Free Preview &amp; Fixed Price/);
 });
 
 test('the free preview is a secondary link, never the main button', async () => {
@@ -65,7 +68,7 @@ test('page lengths: homepage under 680 words, type pages short (5 blocks), /pric
     }
     visible = visible.slice(0, start) + visible.slice(end);
   }
-  assert.ok(words(visible) < 1600, `/prices shows ${words(visible)} words before any fold is opened`);
+  assert.ok(words(visible) < 1100, `/prices shows ${words(visible)} words before any fold is opened`);
 });
 
 test('positioning: no quick-fix wording, no AI in the offer, /rotareason out of the sitemap', async () => {
