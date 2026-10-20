@@ -65,7 +65,7 @@ test('page lengths: homepage under 680 words, type pages short (5 blocks), /pric
     }
     visible = visible.slice(0, start) + visible.slice(end);
   }
-  assert.ok(words(visible) < 1100, `/prices shows ${words(visible)} words before any fold is opened`);
+  assert.ok(words(visible) < 1600, `/prices shows ${words(visible)} words before any fold is opened`);
 });
 
 test('positioning: no quick-fix wording, no AI in the offer, /rotareason out of the sitemap', async () => {

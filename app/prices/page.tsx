@@ -2,11 +2,17 @@ import { ServiceSchema } from '../service-schema';
 import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHECK_REPLY_TIME, SITE_URL, VAT_NOTE } from '../site';
+import { SITE_URL, VAT_NOTE } from '../site';
 import { OG_IMAGE } from '../seo';
 import { PricingViewTracker } from '../analytics';
-import { CARE_PLAN, FREE_STEP, OFFERS, getOffer } from '../offers';
-import { PriceList } from '../price-list';
+import { CARE_PLAN, OFFERS, getOffer } from '../offers';
+import { PriceFolds } from '../price-list';
+import { SolutionsPicker } from '../solutions/solutions-picker';
+import { Hero } from './hero';
+import { Outcomes } from './outcomes';
+import { OneOffBoard, MonthlyBoard } from './pricing-board';
+import { Journey } from './journey';
+import { Founder, Route } from './story';
 import { PracticeTier } from '../b2b-parts';
 import '../b2b.css';
 
@@ -24,28 +30,34 @@ export const metadata: Metadata = {
 
 export default function PricesPage() {
   return (
-    <main className="s-home">
+    <main className="pz-main">
       <SiteHeader /><ServiceSchema path="/prices" />
-      <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
-        <p className="eyebrow">Prices</p>
-        <h1 id="prices-title">Choose a one-off build or monthly help.</h1>
-        <p className="s-lede">I can build a system once, keep your online presence current each month, or answer calls you miss. The scope and price are agreed before work starts. {VAT_NOTE}</p>
-        <p className="s-small">Start with a {FREE_STEP.short}, within {CHECK_REPLY_TIME}. Choose one useful job; add more when you need it.</p>
-        <div className="s-actions">
-          <a className="button button-signal s-button-lg" href="/free-plan?src=prices-hero#leak-check-form">Get my free preview</a>
-          <a className="text-link" href="/what-we-do#systems">See how it works <span aria-hidden="true">→</span></a>
+      <Hero />
+      <Outcomes />
+
+      <section className="pz-section" id="pricing" aria-labelledby="prices-list-title">
+        <PricingViewTracker targetId="pricing" />
+        <h2 id="prices-list-title">What it costs</h2>
+        <p className="pz-intro">Prices are for the finished work, agreed in writing before I start. {VAT_NOTE}</p>
+        <h3 className="pz-group">Build it once. You own it.</h3>
+        <OneOffBoard />
+        <h3 className="pz-group">Or have it looked after every month.</h3>
+        <MonthlyBoard />
+      </section>
+      <PracticeTier />
+
+      <section className="pz-section pz-tools" aria-labelledby="tools-title">
+        <h2 id="tools-title">Not sure what you need?</h2>
+        <h3 className="pz-group" id="need">What problem do you want gone?</h3>
+        <SolutionsPicker startOpen={false} firstSelected={false} />
+        <div className="pz-folds">
+          <PriceFolds checkHref="/free-plan" />
         </div>
       </section>
 
-      <section className="s-section" id="pricing" aria-labelledby="prices-list-title">
-        <PricingViewTracker targetId="pricing" />
-        <h2 id="prices-list-title" className="s-visually-hidden">Packages, add-ons and terms</h2>
-        <PriceList checkHref="/free-plan" />
-        <div className="s-actions">
-          <a className="button button-signal" href="/free-plan?src=prices#leak-check-form">Get my free preview</a>
-        </div>
-      </section>
-      <PracticeTier />
+      <Journey />
+      <Founder />
+      <Route />
       <SiteFooter />
     </main>
   );
