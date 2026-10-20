@@ -98,7 +98,7 @@
 .pz-panel-customers { grid-column: span 5; border-radius: 56px 0 0 0; margin-top: 36px; }
 .pz-panel-easier { grid-column: span 5; border-radius: 0 0 0 56px; margin-top: -18px; }
 .pz-panel-better { grid-column: span 7; border-radius: 0 0 56px 0; }
-.pz-who { margin-top: 36px; max-width: 70ch; font-size: 1.1rem; border-left: 6px solid var(--pz-coral); padding-left: 16px; }
+.pz-who { margin-top: 36px; max-width: 70ch; font-size: 1.1rem; border-top: 4px solid var(--pz-coral); padding-top: 14px; }
 
 /* C. Pricing */
 .pz-intro { margin-top: 16px; font-size: 1.1rem; max-width: 56ch; }
@@ -168,7 +168,7 @@
 .pz .s-fold { margin-top: 12px; border: 3px solid var(--pz-ink); background: #fff; border-radius: 0; }
 .pz .s-fold > summary { font-family: var(--pz-display), var(--sans); font-size: 1.15rem; }
 .pz .s-fold:nth-of-type(odd) > summary { background: #fff; }
-.pz .s-fold[open] > summary { background: var(--pz-yellow); border-bottom: 3px solid var(--pz-ink); }
+.pz .s-fold[open] > summary { background: var(--pz-yellow); box-shadow: 0 3px 0 var(--pz-ink); }
 .pz .s-fold > div { padding-top: 18px; }
 
 /* D. Journey */
@@ -197,7 +197,7 @@
 .pz-portrait figcaption { margin-top: 18px; font-family: var(--mono); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; background: var(--pz-ink); color: #fff7e8; display: inline-block; padding: 8px 12px; }
 .pz-founder-copy { display: grid; gap: 16px; max-width: 64ch; }
 .pz-founder h2 { max-width: 20ch; font-size: clamp(1.9rem, 4.2vw, 3.2rem); }
-.pz-pull { font-family: var(--pz-display), var(--sans); font-weight: 800; font-size: clamp(1.25rem, 2.4vw, 1.7rem); line-height: 1.15; letter-spacing: -.03em; border-left: 6px solid var(--pz-coral); padding-left: 16px; }
+.pz-pull { font-family: var(--pz-display), var(--sans); font-weight: 800; font-size: clamp(1.25rem, 2.4vw, 1.7rem); line-height: 1.15; letter-spacing: -.03em; border-top: 4px solid var(--pz-coral); padding-top: 14px; }
 .pz-founder .pz-textlink { justify-self: start; }
 
 /* F. Start */
