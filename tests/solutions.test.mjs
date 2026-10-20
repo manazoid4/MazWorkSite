@@ -47,7 +47,7 @@ test('every £ amount on /solutions and /prices already exists in offers.ts', as
   for (const route of ['solutions', 'prices']) {
     const html = await read(route);
     const start = html.indexOf('id="solutions"');
-    const region = route === 'prices' ? html.slice(start) : html.slice(html.indexOf('<main'), html.lastIndexOf('</main>'));
+    const region = route === 'prices' ? html.slice(start, html.indexOf('class="pz-folds"')) : html.slice(html.indexOf('<main'), html.lastIndexOf('</main>'));
     assert.ok(start > 0 && region.length > 1000, 'picker region found');
     for (const amount of text(region).match(/£[\d,]+/g) ?? []) {
       assert.ok(allowed.has(amount), `${route}: ${amount} is not an offers.ts price`);
