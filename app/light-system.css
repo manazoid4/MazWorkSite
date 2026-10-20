@@ -1,0 +1,14 @@
+/* Opt-in shared identity. Legacy pages, including /prices, remain unchanged. */
+@font-face{font-family:Manrope;src:url('/fonts/manrope-variable.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
+.mw-light{font-family:Manrope,var(--sans)}
+.mw-light{--mw-paper:#fbf8f2;--mw-ink:#302535;--mw-plum:#653e58;--mw-sky:#ddecf5;--mw-peach:#f5d3bf;--mw-sun:#f4df91;--ink:var(--mw-ink);--paper:var(--mw-paper);--surface:#fffdf9;--muted:#625663;--line:#ded4d8;--signal:var(--mw-plum);--signal-text:var(--mw-plum);color:var(--mw-ink);background:var(--mw-paper);min-height:100vh}
+.mw-light h1,.mw-light h2,.mw-light h3{color:var(--mw-ink);text-wrap:balance;letter-spacing:-.025em}
+.mw-light p{text-wrap:pretty}.mw-light a{text-underline-offset:4px}.mw-light ::selection{background:var(--mw-sun);color:var(--mw-ink)}
+.mw-light :focus-visible{outline:3px solid var(--mw-plum);outline-offset:5px}.mw-light input,.mw-light textarea{caret-color:var(--mw-plum)}
+.mw-light .mw-site-header{width:100%;max-width:1400px;margin:auto;padding:18px clamp(20px,4vw,64px);background:var(--mw-paper);border-bottom:1px solid var(--line);box-shadow:none;gap:24px}
+.mw-light .brand-mark{background:var(--mw-plum);color:#fffdf9;border-radius:9px;font-family:var(--sans);font-size:15px;letter-spacing:-1px}
+.mw-light .brand strong{font-size:20px;color:var(--mw-ink)}.mw-light .brand small{font-family:var(--sans);font-size:12px;color:var(--muted)}
+.mw-light .mw-site-header nav{gap:22px}.mw-light .mw-site-header nav a{font-size:14px}.mw-light .mw-nav-cta{background:var(--mw-plum);color:#fffdf9;border:0;border-radius:5px;padding:12px 20px;box-shadow:none}
+.mw-light .mw-site-footer{background:var(--mw-paper);color:var(--mw-ink);border-top:1px solid var(--line);padding:40px clamp(20px,4vw,64px);margin:0;max-width:none}
+.mw-light .mw-site-footer a,.mw-light .mw-footer-hook{color:var(--mw-ink)}.mw-light .mw-footer-brand span,.mw-light .mw-footer-bottom{color:var(--muted)}
+@media(max-width:760px){.mw-light .mw-site-header{gap:12px;padding:14px 20px}.mw-light .mw-site-header nav{gap:10px}.mw-light .mw-site-header .mw-nav-cta{font-size:13px;padding:10px 12px}.mw-light .brand strong{font-size:17px}}

@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const home=fs.readFileSync('app/home-transformation.tsx','utf8');
+const hub=fs.readFileSync('app/for/page.tsx','utf8');
+const team=fs.readFileSync('app/b2b/page.tsx','utf8');
+test('homepage preserves founder, real proof, three outcomes and enquiry form',()=>{for(const value of ['Get Customers','Serve Customers','Keep & Improve',"I plan it and build it myself",'scrap-finance-partners','jobfilter','shadow-mascot.png','<DemoRequestForm','id="enquiry"'])assert.ok(home.includes(value),value)});
+test('audience routes retain business directory and professional scope',()=>{assert.match(hub,/NICHE_GUIDES\.map/);assert.match(hub,/CUSTOMER_TYPES\.map/);assert.match(hub,/href="\/b2b"/);for(const word of ['SLA','Finance','reporting'])assert.ok(team.includes(word),word);assert.match(team,/fictional data/);assert.match(team,/b2b\/assessment/)});
+test('new identity is scoped so pricing does not opt in',()=>{assert.ok(!fs.readFileSync('app/prices/page.tsx','utf8').includes('mw-light'));assert.match(fs.readFileSync('app/light-system.css','utf8'),/\.mw-light/)});
+test('self hosted display font and licence are present',()=>{assert.ok(fs.statSync('public/fonts/manrope-variable.ttf').size>1000);assert.match(fs.readFileSync('public/fonts/manrope-OFL.txt','utf8'),/SIL OPEN FONT LICENSE/)});

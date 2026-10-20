@@ -1,0 +1,46 @@
+.for-refresh.mw-light { background: var(--mw-paper, #fbf8f2); color: var(--mw-ink, #302535); }
+.for-refresh .s-section, .for-refresh .tp-hero { max-width: 1200px; margin-inline: auto; padding: 72px 40px; background: transparent; border: 0; }
+.for-refresh .tp-hero { padding-top: 38px; padding-bottom: 64px; }
+.for-refresh .tp-crumbs { margin-bottom: 32px; }
+.for-refresh .tp-hero h1 { max-width: 1050px; font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 1.07; letter-spacing: -.035em; color: var(--mw-ink, #302535); }
+.for-refresh .tp-hero h1 span { color: var(--mw-plum, #653e58); }
+.for-refresh .s-lede { max-width: 720px; margin-top: 26px; color: inherit; font-size: 1.2rem; line-height: 1.65; }
+.for-refresh h2 { color: inherit; font-size: clamp(2rem, 3.3vw, 3.1rem); line-height: 1.14; letter-spacing: -.025em; text-wrap: balance; }
+.for-refresh p { line-height: 1.7; }
+.for-refresh .for-jump { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; }
+.for-refresh .for-jump a { color: var(--mw-plum, #653e58); padding: 12px 0; font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+.for-refresh .for-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 40px; }
+.for-refresh .for-feature p { margin-top: 20px; max-width: 60ch; }
+.for-refresh .for-art { background: var(--mw-peach, #f5d3bf); border-radius: 48% 48% 12px 12px; padding: 24px 12px 0; }
+.for-refresh .for-art-office { background: var(--mw-sun, #f4df91); border-radius: 12px; }
+.for-refresh .for-scene { display: block; width: 100%; height: auto; color: var(--mw-plum, #653e58); }
+.for-refresh .tp-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 32px 0 0; padding: 0; gap: 0 40px; }
+.for-refresh .tp-tiles li { min-width: 0; border-top: 1px solid #cdbec6; }
+.for-refresh .tp-tile { display: flex; flex-direction: column; gap: 12px; padding: 25px 0; color: inherit; text-decoration: none; background: transparent; border: 0; box-shadow: none; height: 100%; }
+.for-refresh .tp-tile strong { font-size: 1.5rem; line-height: 1.25; color: var(--mw-plum, #653e58); }
+.for-refresh .tp-tile > span { line-height: 1.6; }
+.for-refresh .tp-tile em { font-size: .9rem; font-style: normal; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+.for-refresh .tp-card-icon { display: none; }
+.for-refresh .tp-tile-tag { color: var(--mw-plum, #653e58); font-size: .8rem; }
+.for-refresh .for-team { background: var(--mw-sky, #ddecf5); max-width: none; padding-inline: max(40px, calc((100vw - 1120px) / 2)); }
+.for-refresh .for-primary { display: inline-flex; margin-top: 22px; background: var(--mw-plum, #653e58); color: #fff; padding: 16px 22px; border-radius: 6px; font-weight: 700; text-decoration: none; }
+.for-refresh .for-capabilities { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 48px; margin: 40px 0; }
+.for-refresh .for-capabilities > div { border-top: 1px solid #a5b9c6; padding-top: 20px; }
+.for-refresh .for-capabilities dt { font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
+.for-refresh .for-capabilities dd { margin: 0; line-height: 1.65; }
+.for-refresh .for-directory .tp-tile { gap: 8px; }
+.for-refresh .for-directory .tp-tile strong { font-size: 1.2rem; }
+.for-refresh a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.for-refresh a:focus-visible { outline: 3px solid var(--mw-plum, #653e58); outline-offset: 5px; }
+.for-refresh ::selection { background: var(--mw-sun, #f4df91); color: var(--mw-ink, #302535); }
+.for-refresh [id] { scroll-margin-top: 110px; }
+@media (max-width: 700px) {
+  .for-refresh .s-section, .for-refresh .tp-hero { padding: 44px 22px; }
+  .for-refresh .tp-hero { padding-top: 24px; }
+  .for-refresh .for-feature, .for-refresh .for-capabilities { grid-template-columns: 1fr; gap: 28px; }
+  .for-refresh .for-team .for-feature > .for-art { order: 2; }
+  .for-refresh .for-art { max-width: 450px; width: 100%; margin-inline: auto; }
+  .for-refresh .tp-tiles { grid-template-columns: 1fr; }
+  .for-refresh .for-primary { line-height: 1.5; }
+  .for-refresh .s-lede { font-size: 1.05rem; }
+}

@@ -12,6 +12,8 @@ import { ProblemPicker } from './problem-picker';
 import { Deliverables } from './deliverables';
 import { StickyJourney } from './sticky-journey';
 import '../b2b.css';
+import '../light-system.css';
+import './b2b-refresh.css';
 
 /**
  * Landing page for LinkedIn visitors who run agencies, consultancies,
@@ -21,7 +23,7 @@ import '../b2b.css';
  * here is a client result that has not happened.
  */
 const PAGE_URL = `${SITE_URL}/b2b`;
-const TITLE = 'Business systems for agencies and practices';
+const TITLE = 'Clearer operations for professional teams';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -40,24 +42,49 @@ const STEPS = [
 
 export default function B2BPage() {
   return (
-    <main className="b2b-page">
+    <main className="b2b-page b2b-refresh mw-light">
       <SiteHeader />
 
       <section className="b2b-hero" id="main-content" tabIndex={-1} aria-labelledby="b2b-title">
         <div className="b2b-hero-grid">
           <div className="b2b-hero-copy">
-            <p className="eyebrow">For agencies, consultancies and professional practices</p>
-            <h1 id="b2b-title">Your team is losing hours to admin. I build the systems that take it back.</h1>
-            <p className="b2b-hero-lede">Complaints, client intake, reporting and follow-up, set up on the tools you already use. Fixed price. A written scope. You see it working before you pay.</p>
-            <p className="b2b-hero-founder"><strong>Built by Manazir Hussain.</strong> Computer Science graduate (Swansea University), then five years in complaints and finance, including regulated work and ombudsman cases. I do every build myself.</p>
+            <p className="b2b-audience">For operations, finance and professional teams</p>
+            <h1 id="b2b-title">Know what’s due. Who owns it. What needs attention.</h1>
+            <p className="b2b-hero-lede">When the work lives across inboxes, spreadsheets and people’s heads, even simple questions take time. I build practical systems for clearer workloads, reliable follow-up and reporting you can use.</p>
+            <p className="b2b-hero-founder"><strong>You work directly with Manazir Hussain.</strong> A Computer Science graduate with five years in financial complaints and business accounts. I understand the handoffs as well as the software.</p>
             <div className="b2b-hero-actions">
               <CampaignLink className="button button-signal" href="/b2b/assessment?src=b2b-assessment">Get a Free Business Assessment</CampaignLink>
               <BookCall className="button button-dark" interest="Business systems">Book a 15-Minute Call</BookCall>
             </div>
             <p className="mw-hero-note">Assessment: about 2 minutes, instant result, no contact details needed. Call: 15 minutes, no pitch deck, no obligation.</p>
           </div>
-          <ProblemPicker />
+          <figure className="b2br-workload" aria-labelledby="workload-title">
+            <figcaption><span className="b2br-example">Illustrative workflow · fictional data</span><h2 id="workload-title">The work, in one place.</h2><p>A shared view of the next action, not another spreadsheet to reconcile.</p></figcaption>
+            <div className="b2br-table-scroll" role="region" aria-label="Sample team workload, scroll horizontally for all columns" tabIndex={0}>
+              <table>
+                <caption className="s-visually-hidden">Fictional workload: task, owner, deadline and status</caption>
+                <thead><tr><th scope="col">Task</th><th scope="col">Owner</th><th scope="col">Deadline</th><th scope="col">Status</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Approve supplier invoice<small>Finance · approval needed</small></th><td>Aisha</td><td>Today, 14:00</td><td><span className="b2br-status is-attention">Needs review</span></td></tr>
+                  <tr><th scope="row">Follow up client documents<small>Operations · onboarding</small></th><td>Sam</td><td>Today, 16:00</td><td><span className="b2br-status is-waiting">Waiting on client</span></td></tr>
+                  <tr><th scope="row">Respond to service query<small>Client service · SLA deadline</small></th><td>Jo</td><td>Tomorrow, 10:00</td><td><span className="b2br-status is-progress">In progress</span></td></tr>
+                  <tr><th scope="row">Check weekly KPI report<small>Reporting · source checks</small></th><td>Aisha</td><td>Friday, 12:00</td><td><span className="b2br-status">Scheduled</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="b2br-workload-note">A sample of the clarity to aim for. Your tools, permissions, data and reporting needs determine the actual build.</p>
+          </figure>
         </div>
+      </section>
+
+      <section className="b2b-wrap b2br-problems" aria-labelledby="b2br-problems-title">
+        <div><h2 id="b2br-problems-title">Less chasing. A clearer working day.</h2><p className="b2b-lede">For agencies, consultancies, finance teams and professional practices. Start with the point where work gets stuck, not a new platform.</p></div>
+        <dl className="b2br-needs">
+          <div><dt>Operations &amp; workload</dt><dd>Make ownership, capacity, deadlines and SLA risks visible before a handoff gets missed.</dd></div>
+          <div><dt>Finance &amp; admin</dt><dd>Give invoices, approvals and document requests a clear next step, with a person accountable for it.</dd></div>
+          <div><dt>KPI &amp; management reporting</dt><dd>Bring fragmented data into a useful view, with agreed definitions and checks against the source.</dd></div>
+          <div><dt>Client follow-up &amp; service</dt><dd>Keep enquiries, outstanding actions and complaints moving without relying on someone remembering.</dd></div>
+        </dl>
       </section>
 
       <section className="b2b-steps" aria-labelledby="b2b-steps-title">
@@ -76,9 +103,9 @@ export default function B2BPage() {
       </section>
 
       <section className="b2b-wrap" id="systems" aria-labelledby="b2b-systems">
-        <p className="eyebrow">What I set up</p>
-        <h2 id="b2b-systems">Pick the job that is costing you most.</h2>
-        <p className="b2b-lede">Each one is a fixed-scope build on the tools you already use. You see it working before you pay.</p>
+        <h2 id="b2b-systems">Start with one useful improvement.</h2>
+        <p className="b2b-lede">These are starting points, not a limit on what we can discuss. First I check your existing tools, the data available and who needs to use the result. Then we agree a written scope and price.</p>
+        <details className="b2br-picker-details"><summary>Find a starting point for your team</summary><ProblemPicker /></details>
         <ul className="b2b-grid is-three b2b-systems-grid">
           <li className="is-feature">
             <span className="b2b-tag">My specialism</span>
@@ -101,6 +128,8 @@ export default function B2BPage() {
       </section>
 
       <section className="b2b-wrap" aria-labelledby="b2b-deliverables-title">
+        <h2 id="b2b-deliverables-title">Examples you can inspect.</h2>
+        <p className="b2b-lede">These complaints samples show how I structure a report, an operational view and a staff guide. They are examples of the approach, not a ready-made enterprise platform or a replacement for your finance, CRM or case-management system.</p>
         <Deliverables />
       </section>
 
@@ -124,7 +153,7 @@ export default function B2BPage() {
       <section className="b2b-wrap" aria-labelledby="b2b-own">
         <p className="eyebrow">Own it, do not rent it</p>
         <h2 id="b2b-own">The accounts stay in your name.</h2>
-        <p className="b2b-lede">Many agencies rent you a platform. For example, GoHighLevel partners list a set-up fee from $850 plus $38.80 a month (gohighlevel.partners, checked 2 Oct 2026), and the accounts stay theirs. Here you pay once, the accounts are in your name, and it keeps running if you stop working with me.</p>
+        <p className="b2b-lede">Keep the tools that already work. Accounts stay in your name, and any ongoing software costs are made clear before the build. We agree access, data handling, handover and the limits of the system as part of the scope.</p>
       </section>
 
       <section className="b2b-wrap" aria-labelledby="b2b-trust">
@@ -161,7 +190,7 @@ export default function B2BPage() {
               <li><span>828h</span> a year, at 46 working weeks</li>
               <li><span>£13,248</span> time value if 40% is removed, at £40/h</li>
             </ul>
-            <p className="b2b-sample-fix"><strong>First step:</strong> {health.name} · {health.price}</p>
+            <p className="b2b-sample-fix"><strong>Example next step:</strong> make the owner and next action visible for each outstanding task.</p>
             <p className="b2b-fine">An example of the format, not a real assessment or a promise of savings.</p>
           </div>
         </div>

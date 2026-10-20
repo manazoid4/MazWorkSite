@@ -14,14 +14,14 @@ export type NavLink = { href: string; label: string };
 export const PRIMARY_NAV: NavLink[] = [
   { href: '/solutions', label: 'Solutions' },
   { href: '/prices', label: 'Prices' },
-  { href: '/what-we-do', label: 'What we do' },
-  { href: '/proof', label: 'Proof' },
+  { href: '/for', label: 'Who it’s for' },
+  { href: '/proof', label: 'Work & proof' },
 ];
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
   { href: '/solutions', label: 'Solutions' },
-  { href: '/b2b', label: 'For agencies and practices' },
+  { href: '/b2b', label: 'For professional teams' },
   { href: '/prices', label: 'Packages and prices' },
   { href: '/what-we-do', label: 'What we do' },
   { href: '/proof', label: 'Proof' },
@@ -42,7 +42,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
       { href: '/managed-presence', label: 'Managed presence' },
-      { href: '/b2b', label: 'For agencies and practices' },
+      { href: '/b2b', label: 'For professional teams' },
       { href: '/complaints', label: 'Complaints tracking' },
       { href: '/audit', label: 'Free automation audit' },
       { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
