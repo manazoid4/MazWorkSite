@@ -29,7 +29,7 @@ export default function PricesPage() {
       <section className="s-hero s-hero-short" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
         <p className="eyebrow">Prices</p>
         <h1 id="prices-title">Prices for getting customers, serving them and improving.</h1>
-        <p className="s-lede">Clear prices for one-off work and optional monthly support. Complaints work is quoted to scope. {VAT_NOTE}</p>
+        <p className="s-lede">One-off work and optional monthly support. Reporting and complaints improvement are quoted to scope. {VAT_NOTE}</p>
         <div className="s-actions">
           <a className="button button-signal s-button-lg" href="/contact?src=prices#contact">{ENQUIRY_CTA}</a>
           <a className="text-link" href="/what-we-do#serve-customers">See how it works <span aria-hidden="true">→</span></a>
@@ -41,9 +41,10 @@ export default function PricesPage() {
         <ul className="s-recipes">
           <li><strong>Get Customers</strong><span>Websites and online presence.</span><a href="#websites">See page options →</a></li>
           <li><strong>Serve Customers</strong><span>Bookings and follow-up.</span><a href="#systems">See automation and software →</a></li>
-          <li id="keep-improve"><strong>Keep &amp; Improve</strong><span>Feedback and complaints reporting: quoted to scope.</span><a href="/complaints-improvement">See insight and improvement work →</a></li>
+          <li id="keep-improve"><strong>Keep &amp; Improve</strong><span>Dashboards, reporting and complaints improvement: quoted to scope.</span><a href="/professional-teams">See reporting and improvement work →</a></li>
         </ul>
         <p className="s-small">Need care or maintenance? <a href="#extras">See options</a>.</p>
+        <details className="s-fold"><summary>How professional work is priced</summary><p>The quote sets out the data sources, deliverables and any ongoing costs before you commit. <a href="/complaints-improvement">Explore specialist complaints work</a>.</p></details>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">

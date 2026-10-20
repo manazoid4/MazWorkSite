@@ -23,7 +23,7 @@ test('contact keeps required answers, optional service selection and the preserv
   assert.match(form, /setFailureReason\(result\.reason\)/);
   assert.match(form, /Nothing you typed has been lost/);
   assert.match(form, /send it by email instead/);
-  assert.match(form, /miss customer calls while working, or need a clearer way to track and report complaints/i);
+  assert.match(form, /website enquiries, a clearer team dashboard, or help tracking deadlines and complaints/i);
 });
 
 test('contact styles keep the introduction compact on small screens', () => {

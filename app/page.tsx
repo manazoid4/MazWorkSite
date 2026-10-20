@@ -48,10 +48,10 @@ export default function Page() {
         <div className="mw-home-hero-copy">
           <p className="eyebrow">Making businesses better, one problem at a time.</p>
           <h1 id="home-title">Less hassle. <em>Better business.</em></h1>
-          <p className="mw-home-lede">I help businesses win customers, look after them better and solve the problems holding them back — from websites and enquiries to complaints, reporting and the work behind the scenes.</p>
+          <p className="mw-home-lede">I build websites, customer workflows and reporting tools that help businesses win work, look after customers and see what needs attention.</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
-            <a className="mw-home-secondary" href="/proof">See our work <span aria-hidden="true">↗</span></a>
+            <a className="mw-home-secondary" href="/proof">See my work <span aria-hidden="true">↗</span></a>
           </div>
           <p className="mw-home-reassurance">One person to deal with. I usually reply within 1 working day. Clear scope and price before paid work. <a href="/free-plan?src=home">See how the free preview works</a>.</p>
         </div>
@@ -62,11 +62,11 @@ export default function Page() {
             <div className="mw-flow-connector" aria-hidden="true">↓</div>
             <div className="mw-flow-step is-highlight"><span>02</span><strong>They get a clear next step</strong><small>A useful reply or booking route</small></div>
             <div className="mw-flow-connector" aria-hidden="true">↓</div>
-            <div className="mw-flow-step"><span>03</span><strong>You pick it up when ready</strong><small>Details are there to follow up</small></div>
+            <div className="mw-flow-step"><span>03</span><strong>You can see what needs attention</strong><small>Owner · next step · due date</small></div>
           </div>
           <ShadowCameo />
-          <p className="mw-home-demo-link"><a href="/after-hours-receptionist">See an answering option for when you can’t pick up →</a></p>
-          <p className="mw-home-demo-note">A simple example of how a business can respond when the phone is busy. Every setup is scoped around the tools already in use.</p>
+          <p className="mw-home-demo-link"><a href="/professional-teams#demonstrations">See reporting and workload examples →</a></p>
+          <p className="mw-home-demo-note">An illustrative workflow, shaped around the tools and people already in your business. <a href="/after-hours-receptionist">Need help answering calls? See the option</a>.</p>
         </aside>
       </section>
 
@@ -88,9 +88,20 @@ export default function Page() {
           <article className="mw-door-card mw-door-professional">
             <p className="eyebrow">For teams and organisations</p>
             <h3>I work in a professional team.</h3>
-            <p>Recurring complaints, reporting without clear actions or a process that creates repeat work. Get scoped analysis and practical implementation.</p>
+            <p>Scattered reports, approaching deadlines or recurring complaints. Get clearer oversight and practical tools around the way your team works.</p>
             <a href="/professional-teams">Explore work for professional teams <span aria-hidden="true">→</span></a>
           </article>
+        </div>
+      </section>
+
+      <section className="mw-home-about" aria-labelledby="about-title">
+        <img src="/maz.webp" alt="Manazir Hussain, who scopes and builds the work" width={112} height={112} loading="lazy" />
+        <div>
+          <p className="eyebrow">Who you’re dealing with</p>
+          <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
+          <p><strong>My background.</strong> Computer Science graduate with five years resolving complex financial complaints and managing business accounts across the UK and Europe.</p>
+          <p><strong>What I build.</strong> Websites, automations and practical software, including dashboards and reporting, to help customers reach you and make day-to-day work easier.</p>
+          <a href={`mailto:${CONTACT_EMAIL}`}>Email {CONTACT_EMAIL}</a>
         </div>
       </section>
 
@@ -112,16 +123,7 @@ export default function Page() {
           ))}
         </div>
         <p className="mw-home-proof-note">Complaints work examples use synthetic data and are labelled as demonstrations. <a href="/complaints-improvement">See the sample reports →</a></p>
-      </section>
-
-      <section className="mw-home-about" aria-labelledby="about-title">
-        <img src="/maz.webp" alt="Manazir Hussain, who scopes and builds the work" width={112} height={112} loading="lazy" />
-        <div>
-          <p className="eyebrow">Who you’re dealing with</p>
-          <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-          <p>Computer Science graduate from Swansea University, with five years in complex complaints and finance, including managing business accounts across the UK and Europe. I bring analytical thinking and practical building together, then stay responsible for the work.</p>
-          <a href={`mailto:${CONTACT_EMAIL}`}>Email {CONTACT_EMAIL}</a>
-        </div>
+        <p className="mw-home-proof-note">For professional teams: <a href="/professional-teams#demonstrations">see dashboard and workflow demonstrations →</a></p>
       </section>
 
       <section className="mw-home-close" aria-labelledby="home-close-title">

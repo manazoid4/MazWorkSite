@@ -41,9 +41,9 @@ const BUCKETS: Bucket[] = [
     id: 'keep-improve',
     name: 'Keep & improve',
     purpose: 'Use feedback and reporting to understand what needs to improve.',
-    problem: '“We keep hearing the same complaint.”',
-    examples: ['Customer feedback and complaints', 'Reporting and trends', 'Improvement actions'],
-    href: '/complaints-improvement',
+    problem: '“I need to see what needs attention.”',
+    examples: ['Dashboards, KPIs and deadlines', 'Customer feedback and complaints', 'Improvement actions'],
+    href: '/professional-teams',
     link: 'See insight and improvement work',
     art: 'improve',
   },
@@ -81,9 +81,9 @@ export function ThreeBuckets({ compact = false, showPrices = false }: { compact?
             <ul>{bucket.examples.map((example) => <li key={example}>{example}</li>)}</ul>
             {showPrices && bucket.id === 'get-customers' && <p className="mw-bucket-price">{getOffer('creator-launch').name} {getOffer('creator-launch').price} · Website {getOffer('website').price}</p>}
             {showPrices && bucket.id === 'serve-customers' && <p className="mw-bucket-price">{OFFERS[0].name} {OFFERS[0].price} · {OFFERS[1].name} {OFFERS[1].price}</p>}
-            {showPrices && bucket.id === 'keep-improve' && <p className="mw-bucket-price">Complaints and reporting: quoted to scope</p>}
+            {showPrices && bucket.id === 'keep-improve' && <p className="mw-bucket-price">Reporting and improvement: quoted to scope</p>}
             <a href={bucket.href}>{bucket.link} <span aria-hidden="true">→</span></a>
-            {showPrices && <a className="mw-bucket-price-link" href={bucket.id === 'get-customers' ? '/prices#websites' : bucket.id === 'serve-customers' ? '/prices#systems' : '/prices#keep-improve'}>{bucket.id === 'keep-improve' ? 'Complaints work is quoted to scope' : 'See prices and what’s included'}</a>}
+            {showPrices && <a className="mw-bucket-price-link" href={bucket.id === 'get-customers' ? '/prices#websites' : bucket.id === 'serve-customers' ? '/prices#systems' : '/prices#keep-improve'}>{bucket.id === 'keep-improve' ? 'Reporting and improvement are quoted to scope' : 'See prices and what’s included'}</a>}
           </li>
         ))}
       </ol>

@@ -79,7 +79,7 @@ test('homepage makes the shared customer-side purpose clear without reducing the
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
   assert.match(visible, /Less hassle\. Better business\./);
-  assert.match(html, /win customers, look after them better and solve the problems holding them back/);
+  assert.match(html, /I build websites, customer workflows and reporting tools that help businesses win work, look after customers and see what needs attention/);
   assert.match(html, /Get customers/);
   assert.match(html, /Serve customers/);
   assert.match(html, /Keep &amp; improve/);
@@ -112,6 +112,9 @@ test('the fixed terms remain on /prices and the homepage keeps its founder and p
   assert.match(html, /href="\/prices"/);
   assert.match(html, /I’m Manazir. I plan it and build it myself/);
   assert.match(html, /src="\/maz\.webp"/, 'founder photo remains part of the personal studio identity');
+  assert.match(html, /My background\.[\s\S]*five years resolving complex financial complaints[\s\S]*What I build\.[\s\S]*dashboards and reporting/);
+  assert.ok(html.indexOf('Who you’re dealing with') < html.indexOf('Work you can see'), 'founder appears before the proof section');
+  assert.match(html, /href="\/professional-teams#demonstrations"/);
 });
 
 test('trade guides remain reachable and the homepage labels its illustrative workflow', async () => {
