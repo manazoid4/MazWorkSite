@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { ThreeBuckets } from './three-buckets';
 import { HomeFooterConvert } from './home-footer-convert';
-import { CONTACT_EMAIL, ENQUIRY_CTA } from './site';
+import { ManazirLine } from './manazir-line';
+import { ENQUIRY_CTA } from './site';
 import { OG_IMAGE } from './seo';
 import './home-transformation.css';
 
@@ -15,7 +16,7 @@ const PROOF = [
     href: '/work/scrap-finance-partners',
     img: '/scrap-finance-partners.webp',
     alt: 'Scrap Finance Partners website, designed for a specialist finance firm',
-    tone: 'clay',
+    tone: 'peach',
   },
   {
     name: 'JobFilter',
@@ -24,7 +25,7 @@ const PROOF = [
     href: '/work/jobfilter',
     img: '/jobfilter-home.webp',
     alt: 'JobFilter helps small trades firms find relevant public contracts',
-    tone: 'mist',
+    tone: 'sky',
   },
 ];
 
@@ -67,13 +68,13 @@ export default function Page() {
       <section className="mw-home-hero" id="main-content" tabIndex={-1} aria-labelledby="home-title">
         <div className="mw-home-hero-copy">
           <p className="eyebrow">Making businesses better, one problem at a time.</p>
-          <h1 id="home-title">Less hassle. <em>Better business.</em></h1>
+          <h1 id="home-title">Less hassle. <mark>Better</mark> business.</h1>
           <p className="mw-home-lede">I build websites, customer workflows and reporting tools that help businesses win work, look after customers and see what needs attention.</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
             <a className="mw-home-secondary" href="/proof">See my work <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="mw-home-reassurance">One person to deal with. I usually reply within 1 working day. Clear scope and price before paid work. <a href="/free-plan?src=home">See how the free preview works</a>.</p>
+          <p className="mw-home-reassurance">One person to deal with. I usually reply within 1 working day. Clear scope and price before paid work. <a href="/contact?src=home#contact">Ask for a free preview</a>.</p>
         </div>
 
       </section>
@@ -81,7 +82,7 @@ export default function Page() {
       <ThreeBuckets />
 
       <section className="mw-home-doors" aria-labelledby="doors-title">
-        <header><h2 id="doors-title">Different businesses. Real problems worth solving.</h2></header>
+        <header><h2 id="doors-title">Different businesses.<br />Real problems worth solving.</h2></header>
         <div className="mw-door-grid">
           <article className="mw-door-card mw-door-local">
             <AudienceIcon kind="local" />
@@ -102,20 +103,9 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mw-home-about" aria-labelledby="about-title">
-        <img src="/maz.webp" alt="Manazir Hussain, who scopes and builds the work" width={112} height={112} loading="lazy" />
-        <div>
-          <p className="eyebrow">Who you’re dealing with</p>
-          <h2 id="about-title">I’m Manazir. I plan it and build it myself.</h2>
-          <p><strong>My background.</strong> Computer Science graduate with five years resolving complex financial complaints and managing business accounts across the UK and Europe.</p>
-          <p><strong>What I build.</strong> Websites, automations and practical software, including dashboards and reporting, to help customers reach you and make day-to-day work easier.</p>
-          <a href={`mailto:${CONTACT_EMAIL}`}>Email {CONTACT_EMAIL}</a>
-        </div>
-      </section>
-
       <section className="mw-home-proof" aria-labelledby="proof-title">
         <header>
-          <h2 id="proof-title">Made to be used. Have a look around.</h2>
+          <h2 id="proof-title">Made to be used.<br />Have a look around.</h2>
           <p>Client work and a product of my own. Open an example and see the thinking behind it.</p>
         </header>
         <div className="mw-home-proof-grid">
@@ -133,11 +123,13 @@ export default function Page() {
         <details className="mw-home-proof-more">
           <summary>Explore workflow demonstrations</summary>
           <div>
-            <p>Complaints examples use synthetic data and are labelled demonstrations. <a href="/complaints-improvement">See sample reports ↗</a></p>
+            <p>Complaints examples use synthetic data and are labelled demonstrations. <a href="/complaints/sample/board-report">See a sample report ↗</a></p>
             <p>For professional teams: <a href="/professional-teams#demonstrations">see dashboard and workflow demonstrations ↗</a></p>
           </div>
         </details>
       </section>
+
+      <ManazirLine block />
 
       <SiteFooter conversion={<HomeFooterConvert />} />
     </main>

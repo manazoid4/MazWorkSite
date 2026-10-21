@@ -1,0 +1,9 @@
+.mw-about-block { padding: clamp(48px, 6vw, 76px) 0; display: grid; grid-template-columns: 154px 1fr; align-items: start; gap: 32px; }
+.mw-about-block > img { width: 154px; height: 154px; object-fit: cover; border-radius: 50%; }
+.mw-about-block p { max-width: 65ch; margin-top: 14px; color: var(--muted); }
+.mw-about-block h2 + p { margin-top: 16px; }
+.mw-about-block a { min-height: 44px; margin-top: 12px; display: inline-flex; align-items: center; color: var(--plum); font-weight: 700; text-underline-offset: 4px; }
+@media (max-width: 620px) {
+  .mw-about-block { grid-template-columns: 72px 1fr; gap: 18px; }
+  .mw-about-block > img { width: 72px; height: 72px; }
+}

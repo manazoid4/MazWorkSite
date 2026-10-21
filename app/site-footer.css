@@ -1,0 +1,7 @@
+/* Short footer: one row of links, the email, one legal line. Overrides the older footer rules in sales.css. */
+.mw-site-footer.mw-footer-clean { padding: 0 0 28px; display: block; border-top: 0; }
+.mw-site-footer.mw-footer-clean > .mw-footer-links { margin-top: clamp(24px, 4vw, 40px); padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2px 24px; border-top: 1px solid var(--line); }
+.mw-site-footer.mw-footer-clean .mw-footer-links a { min-height: 44px; color: var(--ink); font-size: .9rem; font-weight: 600; text-decoration: none; }
+.mw-site-footer.mw-footer-clean .mw-footer-links a:last-child { color: var(--plum); text-decoration: underline; }
+.mw-site-footer.mw-footer-clean .mw-footer-links a:hover { text-decoration: underline; }
+.mw-site-footer.mw-footer-clean > .mw-footer-bottom { margin-top: 6px; padding: 0; display: block; border: 0; color: var(--muted); font-size: .85rem; }

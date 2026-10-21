@@ -13,11 +13,11 @@ const visibleText = (source) => source
   .replace(/&[a-z#0-9]+;/gi, ' ')
   .replace(/\s+/g, ' ');
 
- test('homepage leads with the broad business outcome and real founder credibility', () => {
+ test('homepage leads with the broad business outcome and real founder credibility', async () => {
   const text = visibleText(main);
-  assert.match(text, /Less hassle\.\s*Better business\./);
-  assert.match(text, /Computer Science graduate/);
-  assert.match(text, /five years/);
+  assert.match(text, /Less hassle\.\s*Better\s+business\./);
+  assert.match(text, /thousands of angry customers/);
+  assert.match(visibleText(await readFile(path.join(root, 'out', 'about.html'), 'utf8')), /Computer Science graduate/);
   assert.doesNotMatch(text, /Miss a call and they get a text with a booking link/);
 });
 

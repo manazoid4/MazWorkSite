@@ -18,14 +18,12 @@ const readPage = async (route) => {
 };
 const readSitemap = () => readFile(path.join(out, 'sitemap.xml'), 'utf8');
 
-test('/refer is live, names all three tiers, and is discoverable from the menu, the footer and the sitemap', async () => {
+test('/refer is live, names all three tiers, and is discoverable from the menu and the sitemap', async () => {
   const refer = await readPage('/refer');
   for (const tier of ['£50', '£150', '£300']) assert.ok(refer.includes(tier), `/refer does not name the ${tier} tier`);
 
   const home = await readPage('/');
   assert.match(home, /href="\/refer"/, 'the menu must link /refer');
-  const footer = home.slice(home.indexOf('mw-footer-links'));
-  assert.match(footer, /href="\/refer">/, 'the footer must link /refer');
 
   assert.match(await readSitemap(), /\/refer<\/loc>/, '/refer must be in the sitemap');
 });

@@ -211,13 +211,11 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /View a scope sheet/);
 });
 
-test('the header stays focused and the footer keeps video and objects in the separate Lab area', async () => {
+test('the header stays focused and the footer is the short list of eight links', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
   assert.match(header, /href="\/proof"/);
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
-  assert.match(footer, /Other work:[\s\S]*href="\/video"/);
-  assert.match(footer, /href="\/3d-printing"/);
-  assert.match(footer, /href="\/lab"/);
+  for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));
 });

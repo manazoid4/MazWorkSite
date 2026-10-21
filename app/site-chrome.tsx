@@ -2,7 +2,11 @@ import type { ReactNode } from 'react';
 import { FooterConvert } from './footer-convert';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
-import { CONTACT_EMAIL, ENQUIRY_CTA, LINKEDIN_URL } from './site';
+import { CONTACT_EMAIL, ENQUIRY_CTA } from './site';
+import './site-footer.css';
+
+// Hard-coded: nav.ts belongs to another builder.
+const FOOTER_LINKS = [['What I do', '/what-we-do'], ['Prices', '/prices'], ['Proof', '/proof'], ['About', '/about'], ['Contact', '/contact'], ['FAQ', '/faq'], ['Privacy', '/privacy'], ['Terms', '/terms']];
 
 export function SiteHeader() {
   return (
@@ -25,31 +29,12 @@ export function SiteFooter({ conversion }: { conversion?: ReactNode } = {}) {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       {conversion ?? <FooterConvert />}
 
-      {/* Minimal on purpose (Maz, 15 Oct): one hook, a short line of links. Every page link lives in the menu and on /site-map. */}
-      <div className="mw-footer-brand">
-        <p className="mw-footer-hook">Making businesses better, one problem at a time.</p>
-        <span>Practical customer experience, reporting and tools for businesses and teams, by Manazir Hussain. <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
-      </div>
-
+      {/* Short on purpose (Maz, round 1A): one row of links plus the email. Every other page lives in the menu and on /site-map. */}
       <nav className="mw-footer-links" aria-label="Footer">
-        <a href="/prices">Prices</a>
-        <a href="/local-businesses">Local businesses</a>
-        <a href="/professional-teams">Professional teams</a>
-        <a href="/complaints-improvement">Complaints improvement</a>
-        <a href="/managed-presence">Managed presence</a>
-        <a href="/what-we-do">How it works</a>
-        <a href="/for">Who it’s for</a>
-        <a href="/proof">Proof</a>
-        <a href="/faq">FAQ</a>
-        <a href="/refer">Refer a business</a>
-        <a href="/work/scrap-finance-partners">Client work</a>
-        <a href="/contact">Contact</a>
+        {FOOTER_LINKS.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </nav>
-
-      <div className="mw-footer-bottom">
-        <span>© 2026 Maz Works · <a href="/site-map">Site map</a> · <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a> · <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">LinkedIn ↗</a></span>
-        <span>Fixed quotes · Not VAT-registered · Other work: <a href="/video">Video</a> · <a href="/3d-printing">Objects</a> · <a href="/lab">Lab</a> · <a className="mw-back-top" href="#main-content">Back to top ↑</a></span>
-      </div>
+      <p className="mw-footer-bottom">© 2026 Maz Works · Fixed quotes · Not VAT-registered</p>
     </footer>
   );
 }
