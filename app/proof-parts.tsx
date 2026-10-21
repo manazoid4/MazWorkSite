@@ -98,7 +98,7 @@ export function ScopeSheetPreview() {
         <dt>Running costs that aren’t mine</dt><dd>The apps you pay directly and roughly what they cost.</dd>
         <dt>Price and date</dt><dd>One fixed price and a delivery date. You sign it off before any work starts.</dd>
       </dl>
-      <p className="b2b-fine">A blank template. <a href="/scope-sheet">See the scope sheet page</a>.</p>
+      <p className="b2b-fine">A blank template. <a href="/contact#scope">See the scope sheet page</a>.</p>
     </details>
   );
 }

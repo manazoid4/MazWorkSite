@@ -97,10 +97,10 @@ export default function LocalBusinessesPage() {
           <p>Pick the one that costs you most. Each is a single task that runs by itself.</p>
         </div>
         <ul className="lb-jobs">
-          <li><a href="/services/missed-call"><strong>Missed calls</strong><span>Give callers a clear next step while your hands are full.</span><em>See missed-call text-back →</em></a></li>
-          <li><a href="/services/quote-follow-up"><strong>Quotes gone quiet</strong><span>Send a polite follow-up without remembering to chase.</span><em>See quote follow-up →</em></a></li>
-          <li><a href="/services/reminders"><strong>Bookings and no-shows</strong><span>Help customers confirm or move an appointment.</span><em>See appointment reminders →</em></a></li>
-          <li><a href="/services/reviews"><strong>Remembering to ask for reviews</strong><span>Ask real customers at the right point after a job.</span><em>See review requests →</em></a></li>
+          <li><a href="/for#job-missed-call"><strong>Missed calls</strong><span>Give callers a clear next step while your hands are full.</span><em>See missed-call text-back →</em></a></li>
+          <li><a href="/for#job-quote-follow-up"><strong>Quotes gone quiet</strong><span>Send a polite follow-up without remembering to chase.</span><em>See quote follow-up →</em></a></li>
+          <li><a href="/for#job-reminders"><strong>Bookings and no-shows</strong><span>Help customers confirm or move an appointment.</span><em>See appointment reminders →</em></a></li>
+          <li><a href="/for#job-reviews"><strong>Remembering to ask for reviews</strong><span>Ask real customers at the right point after a job.</span><em>See review requests →</em></a></li>
         </ul>
       </section>
 

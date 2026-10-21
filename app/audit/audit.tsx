@@ -136,7 +136,7 @@ export function AutomationAudit({ page = 'audit' }: { page?: string }) {
                   </div>
                   <label className="mw-honeypot" aria-hidden="true"><input name="_honey" tabIndex={-1} autoComplete="off" /></label>
                 </form>
-                <p className="s-note">I use your details only to reply to this. See the <a href="/privacy">privacy page</a>. Free, no obligation. Prefer the full form? <a href="/free-plan?audit=1&src=audit#leak-check-form">{MAIN_CTA}</a>.</p>
+                <p className="s-note">I use your details only to reply to this. See the <a href="/privacy">privacy page</a>. Free, no obligation. Prefer the full form? <a href="/contact?audit=1&src=audit#leak-check-form">{MAIN_CTA}</a>.</p>
                 {send === 'error' && <p className="s-quick-status" role="status">{message} <a href={recovery}>Send it by email instead</a>.</p>}
               </>
             )}

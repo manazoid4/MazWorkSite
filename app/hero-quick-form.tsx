@@ -10,7 +10,7 @@ import { enquirySource, safeEnquiryPageUrl } from './trade-context';
 
 /**
  * CRO Move 3 (18 Oct): a two-field start in the hero, email first then name,
- * posting to the same place as /free-plan (api/enquiry, FormSubmit fallback).
+ * posting to the same place as /contact (api/enquiry, FormSubmit fallback).
  * A visitor who is not ready to describe the job can still start in one tap.
  * The job detail arrives by reply, so the hero does not ask for an essay.
  */

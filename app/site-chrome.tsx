@@ -2,7 +2,8 @@ import type { ReactNode } from 'react';
 import { FooterConvert } from './footer-convert';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
-import { CONTACT_EMAIL, ENQUIRY_CTA } from './site';
+import { CONTACT_EMAIL } from './site';
+import { NAV_CTA } from './nav';
 import './site-footer.css';
 
 // Hard-coded: nav.ts belongs to another builder.
@@ -18,7 +19,7 @@ export function SiteHeader() {
       <nav aria-label="Primary navigation">
         <NavLinks />
         <SiteMenu />
-        <a className="mw-nav-cta" href="/contact?src=nav#contact">{ENQUIRY_CTA}</a>
+        <a className="mw-nav-cta" href="/contact?src=nav#contact">{NAV_CTA.label}</a>
       </nav>
     </header>
   );

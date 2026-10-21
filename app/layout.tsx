@@ -44,7 +44,7 @@ const structuredData = {
       priceRange: PRICE_RANGE,
       description: 'Maz Works helps UK businesses find and serve customers through websites, Google Business Profile, booking and enquiry workflows, automation and software. It also provides complaints reporting, customer growth systems and digital rebuilds.',
       makesOffer: [
-        { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/free-plan` },
+        { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/contact` },
         ...ALL_OFFERS.map((offer) => ({
           '@type': 'Offer',
           name: offer.name,

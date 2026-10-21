@@ -85,7 +85,7 @@ export function ScenePlayer({ tabs, children }: { tabs: Tab[]; children: ReactNo
           {child}
         </div>
       ))}
-      <div className="s-scene-action"><a className="button button-signal" href={`/free-plan?src=scene-${tabs[active].id}#leak-check-form`}>Get my free preview</a><p className="s-small">No call, no obligation.</p></div>
+      <div className="s-scene-action"><a className="button button-signal" href={`/contact?src=scene-${tabs[active].id}#leak-check-form`}>Get my free preview</a><p className="s-small">No call, no obligation.</p></div>
       <noscript><style>{'.s-scene-panel[hidden]{display:block;visibility:visible}.s-scene-panel{grid-row:auto}.s-player-tabs{display:none}'}</style></noscript>
     </div>
   );

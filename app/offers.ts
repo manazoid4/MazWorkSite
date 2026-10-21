@@ -382,7 +382,7 @@ export const LANES: { id: string; title: string; offers: Offer[]; note: string }
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
-  { step: 'Free preview', what: 'A working preview with your business name, and a fixed price.', price: FREE_STEP.price, href: '/free-plan' },
+  { step: 'Free preview', what: 'A working preview with your business name, and a fixed price.', price: FREE_STEP.price, href: '/contact' },
   { step: 'Starter', what: 'One task from the automation menu that runs by itself, plus 2 small set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three tasks joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
@@ -603,7 +603,7 @@ export const MANAGED_PRESENCE = {
   name: 'Managed presence',
   price: 'From £180/month',
   monthly: 180,
-  href: '/managed-presence',
+  href: '/local-businesses#managed-presence',
   body: 'I run your online presence for you: website updates, Google listing and social posts, all kept fresh from the photos and jobs you already have.',
   forWho: 'Businesses doing good work but rarely finding time to show it online.',
   successCheck: 'Each month, see the approved project story, Google updates and scheduled posts, with a short record of what went live.',
@@ -779,7 +779,7 @@ export const AFTER_HOURS = {
  */
 export const MISSED_CALL_OPTIONS: { id: string; name: string; price: string; caller: string; you: string; fits: string; href?: string }[] = [
   { id: 'voicemail', name: 'Voicemail', price: '£0', caller: 'Hears a beep. Many hang up.', you: 'A missed-call list and the odd message.', fits: 'You ring everyone back within minutes anyway.' },
-  { id: 'text-back', name: 'Missed-call text-back', price: `${OFFERS[0].price} once`, caller: 'Gets a text with your booking or quote link.', you: 'The enquiry in writing. Texts cost a few pence each, paid to the provider.', fits: 'Your callers are happy to book or reply by text.', href: '/services/missed-call' },
+  { id: 'text-back', name: 'Missed-call text-back', price: `${OFFERS[0].price} once`, caller: 'Gets a text with your booking or quote link.', you: 'The enquiry in writing. Texts cost a few pence each, paid to the provider.', fits: 'Your callers are happy to book or reply by text.', href: '/for#job-missed-call' },
   { id: 'receptionist', name: AFTER_HOURS.name, price: AFTER_HOURS.price, caller: 'Is answered, gets common questions answered and leaves details.', you: 'A summary of every call, and urgent ones passed on.', fits: 'Callers want to speak to someone, or ask questions before they book.', href: '#price' },
   { id: 'system', name: OFFERS[1].name, price: `${OFFERS[1].price} once`, caller: 'Gets the text back, then reminders and follow-ups.', you: 'Calls, quotes and reviews in one list, with a weekly report.', fits: 'Missed calls are one of several things you chase by hand.', href: '/prices#systems' },
 ];

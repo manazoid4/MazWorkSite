@@ -1,7 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/enquiry.js": { "maxDuration": 30 }
+    "api/enquiry.js": {
+      "maxDuration": 30
+    }
   },
   "rewrites": [
     {
@@ -57,12 +59,157 @@
   "redirects": [
     {
       "source": "/leak-check",
-      "destination": "/free-plan",
+      "destination": "/contact?intent=preview",
       "permanent": true
     },
     {
       "source": "/quick-win",
       "destination": "/prices",
+      "permanent": true
+    },
+    {
+      "source": "/free-plan",
+      "destination": "/contact?intent=preview",
+      "permanent": true
+    },
+    {
+      "source": "/start",
+      "destination": "/contact?intent=setup",
+      "permanent": true
+    },
+    {
+      "source": "/scope-sheet",
+      "destination": "/contact#scope",
+      "permanent": true
+    },
+    {
+      "source": "/refer",
+      "destination": "/contact#refer",
+      "permanent": true
+    },
+    {
+      "source": "/video",
+      "destination": "/local-businesses#video",
+      "permanent": true
+    },
+    {
+      "source": "/managed-presence",
+      "destination": "/local-businesses#managed-presence",
+      "permanent": true
+    },
+    {
+      "source": "/missed-calls-calculator",
+      "destination": "/local-businesses#missed-calls-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/content-day",
+      "destination": "/local-businesses#video",
+      "permanent": true
+    },
+    {
+      "source": "/demos",
+      "destination": "/after-hours-receptionist#bigger-builds",
+      "permanent": true
+    },
+    {
+      "source": "/b2b",
+      "destination": "/professional-teams",
+      "permanent": true
+    },
+    {
+      "source": "/b2b/assessment",
+      "destination": "/professional-teams",
+      "permanent": true
+    },
+    {
+      "source": "/complaints",
+      "destination": "/professional-teams#complaints",
+      "permanent": true
+    },
+    {
+      "source": "/complaints-improvement",
+      "destination": "/professional-teams#complaints",
+      "permanent": true
+    },
+    {
+      "source": "/audit",
+      "destination": "/professional-teams#what-i-set-up",
+      "permanent": true
+    },
+    {
+      "source": "/lab",
+      "destination": "/proof#built",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/proof",
+      "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/for#problems",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/for#jobs",
+      "permanent": true
+    },
+    {
+      "source": "/brand-kit",
+      "destination": "/for/creators",
+      "permanent": true
+    },
+    {
+      "source": "/linkedin",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/brag",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/missed-call",
+      "destination": "/for#job-missed-call",
+      "permanent": true
+    },
+    {
+      "source": "/services/reminders",
+      "destination": "/for#job-reminders",
+      "permanent": true
+    },
+    {
+      "source": "/services/reviews",
+      "destination": "/for#job-reviews",
+      "permanent": true
+    },
+    {
+      "source": "/services/quote-follow-up",
+      "destination": "/for#job-quote-follow-up",
+      "permanent": true
+    },
+    {
+      "source": "/services/payment-reminders",
+      "destination": "/for#job-payment-reminders",
+      "permanent": true
+    },
+    {
+      "source": "/services/online-booking",
+      "destination": "/for#job-online-booking",
+      "permanent": true
+    },
+    {
+      "source": "/services/one-list",
+      "destination": "/for#job-one-list",
+      "permanent": true
+    },
+    {
+      "source": "/services/job-updates",
+      "destination": "/for#job-job-updates",
       "permanent": true
     }
   ]

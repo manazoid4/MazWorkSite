@@ -53,7 +53,7 @@ export function summarise(entries: Entry[], rate: number, share: number, tools: 
 export const TOOLS = ['Gmail', 'Outlook', 'Xero', 'HubSpot', 'Pipedrive', 'Spreadsheets', 'Cal.com'] as const;
 const STORE_KEY = 'mw-audit';
 
-/** Keeps the audit result for this tab so /free-plan can pre-fill its message box. Storage may be blocked, so never throw. */
+/** Keeps the audit result for this tab so /contact can pre-fill its message box. Storage may be blocked, so never throw. */
 export function storeAudit(text: string): void {
   try { sessionStorage.setItem(STORE_KEY, text.slice(0, 900)); } catch { /* storage blocked */ }
 }

@@ -18,14 +18,14 @@ export default function Page() {
           <span><strong>Maz Works</strong><small>by Manazir Hussain</small></span>
         </Link>
         <nav aria-label="Page navigation">
-          <Link href="/lab">Work</Link><Link href="/#pricing">What I build</Link><Link href="/contact#contact">Contact</Link>
+          <Link href="/proof#built">Work</Link><Link href="/#pricing">What I build</Link><Link href="/contact#contact">Contact</Link>
         </nav>
       </header>
       <section className="moved-page" id="main-content" tabIndex={-1} aria-labelledby="moved-title">
         <p className="eyebrow">Portfolio update</p>
         <h1 id="moved-title">This page has moved.</h1>
         <p className="hero-copy">The MAZos concept is no longer a separate page. The shipped projects it used to describe now live in the Maz Works portfolio, described by outcome.</p>
-        <Link className="button button-dark" href="/lab">View Maz Works</Link>
+        <Link className="button button-dark" href="/proof#built">View Maz Works</Link>
       </section>
     </main>
   );

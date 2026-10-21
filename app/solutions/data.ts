@@ -203,7 +203,7 @@ export function jobNames(ids: string[]): string[] {
 
 /** Pre-filled free preview link: package and source tag, same pattern as the other pages. */
 export function demoHref(solution: Solution): string {
-  return `/free-plan?src=solutions-${solution.id}&package=${encodeURIComponent(solution.pkg)}#leak-check-form`;
+  return `/contact?src=solutions-${solution.id}&package=${encodeURIComponent(solution.pkg)}#leak-check-form`;
 }
 
 /** Day 0, 3 and 7 from the shared next-steps list. */

@@ -23,7 +23,7 @@ export function DemoPath({ source = 'site', compact = false }: { source?: string
         ))}
       </ol>
       <div className="dp-cta">
-        <CampaignLink className="button button-signal s-button-lg" href={`/free-plan?src=${encodeURIComponent(source)}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
+        <CampaignLink className="button button-signal s-button-lg" href={`/contact?src=${encodeURIComponent(source)}#leak-check-form`}>{MAIN_CTA}</CampaignLink>
         <p className="dp-micro"><CampaignLink className="text-link" href={`${BOOKING_URL}?utm_source=${encodeURIComponent(source)}`}>Prefer to talk? Book a 15-minute call →</CampaignLink></p>
       </div>
     </div>

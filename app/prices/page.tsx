@@ -34,7 +34,7 @@ export default function PricesPage() {
         <h2 id="price-paths-title" className="s-visually-hidden">Where to look</h2>
         <p><a href="#websites">Websites</a> · <a href="#systems">Automation and software</a> · <a href="#monthly">Monthly support</a> · <a href="/what-we-do">What I do →</a></p>
         <p className="s-small" id="keep-improve">Dashboards, reporting and complaints improvement are quoted to scope: <a href="/professional-teams">see how that works</a>. Need care or maintenance? <a href="#extras">See options</a>.</p>
-        <details className="s-fold"><summary>How professional work is priced</summary><p>The quote sets out the data sources, deliverables and any ongoing costs before you commit. <a href="/complaints-improvement">Explore specialist complaints work</a>.</p></details>
+        <details className="s-fold"><summary>How professional work is priced</summary><p>The quote sets out the data sources, deliverables and any ongoing costs before you commit. <a href="/professional-teams#complaints">Explore specialist complaints work</a>.</p></details>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">

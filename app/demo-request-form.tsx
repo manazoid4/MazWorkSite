@@ -76,7 +76,7 @@ export function DemoRequestForm({
   useEffect(() => {
     requestId.current = crypto.randomUUID();
     if (!contact) return;
-    // Deep links from the rest of the site (and the old /free-plan and /start addresses) say what the visitor came for.
+    // Deep links from the rest of the site (and the old /contact and /start addresses) say what the visitor came for.
     const params = new URLSearchParams(window.location.search);
     const intent = params.get('intent');
     if (intent === 'setup') setSetup(true);
