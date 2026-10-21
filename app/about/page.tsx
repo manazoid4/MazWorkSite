@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
-import { CHECK_REPLY_TIME, ENQUIRY_CTA, SITE_URL } from '../site';
+import { CHECK_REPLY_TIME, SITE_URL } from '../site';
 import './about.css';
 
 export const metadata: Metadata = {
@@ -46,11 +46,6 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      <section className="mw-about-cta" aria-labelledby="about-cta-title">
-        <h2 id="about-cta-title">Want to talk it through?</h2>
-        <p>Tell me what’s not working. One line is enough to start.</p>
-        <a className="button button-signal" href="/contact?src=about#contact">{ENQUIRY_CTA}</a>
-      </section>
       <SiteFooter />
     </main>
   );

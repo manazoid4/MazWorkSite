@@ -24,6 +24,8 @@ for (const w of widths) {
     try {
       const res = await page.goto(base + r, { waitUntil: 'networkidle', timeout: 45000 });
       const sw = await page.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
+      // Scroll through once so scroll-reveal sections are shown before the full-page capture.
+      await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } scrollTo(0, 0); await new Promise((r) => setTimeout(r, 400)); });
       await page.screenshot({ path: file, fullPage: true });
       const bad = (res && res.status() >= 400) ? `HTTP ${res.status()}` : sw[0] > sw[1] ? `h-scroll ${sw[0]}>${sw[1]}` : '';
       console.log(`${bad ? 'FAIL' : 'PASS'} ${file}${bad ? ' ' + bad : ''}`);

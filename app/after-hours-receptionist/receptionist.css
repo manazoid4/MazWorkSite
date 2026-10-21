@@ -1,7 +1,7 @@
 /* After-Hours Receptionist page. Same ink/surface/signal system as the rest of
    the site; one night-time motif (plum card, warm sun light). Motion is
    light, CSS-only transitions, and switched off for reduced motion. */
-.ah { --night: var(--plum); --night-2: color-mix(in srgb, var(--plum) 82%, var(--ink)); --glow: var(--sun); --night-text: var(--cream); --night-mute: color-mix(in srgb, var(--cream) 72%, var(--plum)); }
+.ah { --night: var(--peach); --night-2: var(--surface); --glow: var(--sun); --night-text: var(--ink); --night-mute: var(--muted); }
 
 /* Hero */
 .ah-hero { display: grid; gap: 32px; align-items: center; padding: clamp(28px, 5vw, 72px) 0 clamp(28px, 4vw, 48px); }
@@ -18,18 +18,18 @@
 .ah-night { margin: 0; width: 100%; max-width: 380px; justify-self: center; }
 .ah-night-card { background: var(--night); color: var(--night-text); border-radius: 16px; padding: 18px; display: grid; gap: 12px; min-height: 330px; align-content: start; }
 .ah-night-top { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .8rem; }
-.ah-moon { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset -5px -2px 0 0 var(--glow); transform: rotate(-20deg); }
+.ah-moon { width: 18px; height: 18px; border-radius: 50%; box-shadow: inset -5px -2px 0 0 var(--signal); transform: rotate(-20deg); }
 .ah-clock { font-weight: 800; }
-.ah-sign { margin-left: auto; padding: 3px 9px; border: 1px solid var(--night-text); border-radius: 99px; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; }
+.ah-sign { margin-left: auto; padding: 3px 9px; border: 1px solid var(--ink); border-radius: 99px; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; }
 .ah-ring, .ah-bubble, .ah-mail { opacity: .4; transform: translateY(6px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
 .ah-sign { opacity: .4; transition: opacity 360ms ease-out; }
 .ah-sign.is-on, .ah-ring.is-on, .ah-bubble.is-on, .ah-mail.is-on { opacity: 1; transform: none; }
 .ah-ring { display: flex; align-items: center; gap: 12px; background: var(--night-2); border-radius: 14px; padding: 12px 14px; }
 .ah-ring small { display: block; color: var(--night-mute); font-family: var(--mono); font-size: .75rem; }
-.ah-ring-dot { position: relative; flex: 0 0 14px; height: 14px; border-radius: 50%; background: var(--glow); }
-.ah-ring.is-ringing .ah-ring-dot::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--glow); animation: ah-pulse 900ms ease-out infinite; }
+.ah-ring-dot { position: relative; flex: 0 0 14px; height: 14px; border-radius: 50%; background: var(--signal); }
+.ah-ring.is-ringing .ah-ring-dot::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--signal); animation: ah-pulse 900ms ease-out infinite; }
 @keyframes ah-pulse { from { opacity: .9; transform: scale(.6); } to { opacity: 0; transform: scale(1.6); } }
-.ah-bubble { background: var(--night-text); color: var(--ink); border-radius: 14px 14px 14px 4px; padding: 12px 14px; font-size: .95rem; line-height: 1.4; margin: 0; }
+.ah-bubble { background: var(--surface); color: var(--ink); border-radius: 14px 14px 14px 4px; padding: 12px 14px; font-size: .95rem; line-height: 1.4; margin: 0; }
 .ah-mail { background: var(--surface); color: var(--ink); border-left: 6px solid var(--signal); border-radius: 10px; padding: 10px 14px; display: grid; gap: 2px; font-size: .9rem; }
 .ah-mail-label { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--signal-text); }
 .ah-night figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: .82rem; color: var(--muted); }
@@ -110,19 +110,19 @@
 
 /* Try it */
 .ah-try { scroll-margin-top: 20px; }
-.ah-demo { margin-top: 20px; background: var(--night); color: var(--night-text); border-radius: 18px; padding: clamp(14px, 3vw, 24px); display: grid; gap: 16px; }
+.ah-demo { margin-top: 20px; background: var(--sky-tint); color: var(--night-text); border-radius: 18px; padding: clamp(14px, 3vw, 24px); display: grid; gap: 16px; }
 .ah-demo-picks { display: flex; flex-wrap: wrap; gap: 8px; }
 .ah-demo-name { display: grid; gap: 6px; }
-.ah-demo-name span { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--glow); }
+.ah-demo-name span { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink); }
 .ah-demo-name span em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: .7; }
-.ah-demo-name input { min-height: 48px; padding: 8px 14px; border: 1px solid var(--night-text); border-radius: 12px; background: transparent; color: inherit; font: inherit; font-weight: 700; width: 100%; max-width: 22em; }
+.ah-demo-name input { min-height: 48px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 700; width: 100%; max-width: 22em; }
 .ah-demo-name input::placeholder { color: var(--night-mute); font-weight: 500; }
-.ah-demo-name input:focus-visible { outline: 3px solid var(--glow); outline-offset: 2px; }
+.ah-demo-name input:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
 .ah-demo-name small { color: var(--night-mute); font-size: .82rem; }
-.ah-pick { display: grid; text-align: left; gap: 2px; min-height: 48px; padding: 8px 14px; border: 1px solid var(--night-text); border-radius: 12px; background: transparent; color: inherit; font: inherit; font-weight: 800; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out; }
+.ah-pick { display: grid; text-align: left; gap: 2px; min-height: 48px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 800; cursor: pointer; transition: background-color 120ms ease-out, color 120ms ease-out; }
 .ah-pick small { font-family: var(--mono); font-weight: 600; font-size: .72rem; opacity: .8; }
 .ah-pick[aria-pressed="true"] { background: var(--glow); color: var(--ink); border-color: var(--glow); }
-.ah-pick:hover { border-color: var(--glow); }
+.ah-pick:hover { border-color: var(--ink); }
 .ah-demo-stage { display: grid; gap: 16px; }
 @media (min-width: 900px) { .ah-demo-stage { grid-template-columns: 1.3fr 1fr; align-items: start; } }
 .ah-transcript { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; min-height: 300px; align-content: start; }
@@ -131,8 +131,8 @@
 .ah-line-caller { justify-self: end; text-align: right; }
 .ah-who { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--night-mute); }
 .ah-said { padding: 10px 14px; border-radius: 14px; line-height: 1.4; }
-.ah-line-desk .ah-said { background: var(--night-text); color: var(--ink); border-bottom-left-radius: 4px; }
-.ah-line-caller .ah-said { background: var(--night-2); border: 1px solid var(--night-mute); border-bottom-right-radius: 4px; }
+.ah-line-desk .ah-said { background: var(--surface); color: var(--ink); border-bottom-left-radius: 4px; }
+.ah-line-caller .ah-said { background: var(--peach); border: 0; border-bottom-right-radius: 4px; }
 .ah-typing { display: flex; gap: 5px; padding: 6px 2px; }
 .ah-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--night-mute); animation: ah-dot 900ms ease-in-out infinite; }
 .ah-typing i:nth-child(2) { animation-delay: 150ms; }

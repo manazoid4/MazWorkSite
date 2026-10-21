@@ -11,3 +11,10 @@
 .mw-info + .mw-info { margin-top: clamp(32px, 5vw, 56px); }
 .mw-info .mw-cards li { border: 0; border-top: 0; border-radius: 12px; background: var(--peach); }
 .mw-info .mw-cards li:nth-child(2n) { background: var(--sky-tint); }
+/* Case-study cards: equal height, matching hero-crop screenshots, and the odd card out spans the row. */
+.mw-info > ul.pf-grid { align-items: stretch; }
+.mw-info > ul.pf-grid > .pf-card { display: flex; flex-direction: column; }
+.mw-info > ul.pf-grid > .pf-card img { aspect-ratio: 16 / 10; height: auto; object-fit: cover; object-position: top center; }
+.mw-info > ul.pf-grid > .pf-card .pf-body { flex: 1; display: flex; flex-direction: column; }
+.mw-info > ul.pf-grid > .pf-card .pf-body > a { margin-top: auto; }
+@media (min-width: 720px) { .mw-info > ul.pf-grid > .pf-card:last-child:nth-child(odd) { grid-column: 1 / -1; } }

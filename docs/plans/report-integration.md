@@ -11,3 +11,10 @@ Links: header CTA is now "Free preview" (NAV_CTA, /contact?src=nav#contact); foo
 Tests: new tests/redirects.test.mjs (every removed route redirects, no destination is removed). Updated to the new reality: after-hours, local-businesses, customer-journey-pages, loops (referral on /contact#refer), leak-check (nav CTA "Free preview"), newsletter, niche-guides, site-v11, solutions, trade-context, trade-journey, objects. No price, contact, accessibility or analytics assertion was weakened. Vercel Analytics chunk test passes under Turbopack (it was a webpack artefact).
 
 Verify: `npm run verify` green: typecheck, build, 337/337 tests, smoke.
+
+## Final-gate fixes
+- vercel.json: query-carrying /start?package and /free-plan?src|trade redirects placed before the generic rules; tests assert order.
+- Contact form: default path sends source and attribution; EMAIL_PATTERN plus "email looks incomplete"; HTTP 400 maps to an invalid-input message.
+- After-hours page: plum blocks restyled to peach/sky on cream; demo-path.css tokenised. Blank gaps came from the scroll-driven view() reveal in sales.css, now removed (IntersectionObserver reveal only, added by JS). scripts/shots.mjs scrolls before capture.
+- sales.css .button-signal override removed; /prices hero focus ring; /about CTA card removed; /proof cards equal height with the odd card full width; /what-we-do 2x2 recipes with no left border and plain "quoted to scope"; home buckets stack art above title at 375; audit hrefs point at /for#jobs; /contact "Refer a business" link.
+- Not reproduced: the /about orange CTA underline artifact (the CTA card was removed; footer CTA shows no underline). Screenshots: planning/shots/after-fix.

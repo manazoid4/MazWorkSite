@@ -29,7 +29,13 @@ const PREVIEW_STEP = ENQUIRY_NEXT_STEPS[1];
 const SETUP_SERVICE = 'Setup intake';
 const SETUP_STEP = 'Confirm payment in Stripe before setup; the package query is not proof of payment';
 
-const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
+type FailureReason = 'rejected' | 'timeout' | 'network' | 'invalid';
+
+// The browser's own type=email rule (HTML spec), plus a dot in the domain so "sam@gmail" is caught too.
+const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+const FAILURE_COPY: Record<FailureReason, string> = {
+  invalid: 'Something in the form was not accepted. Please check your email address and that your name and message are filled in, then try again.',
   rejected: 'Delivery was not confirmed.',
   timeout: 'That took too long to send.',
   network: 'That could not reach me — your connection may have dropped.',
@@ -70,7 +76,7 @@ export function DemoRequestForm({
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [validationError, setValidationError] = useState('');
   const [invalidField, setInvalidField] = useState('');
-  const [failureReason, setFailureReason] = useState<'rejected' | 'timeout' | 'network'>('rejected');
+  const [failureReason, setFailureReason] = useState<FailureReason>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
 
   useEffect(() => {
@@ -122,13 +128,15 @@ export function DemoRequestForm({
     const nextStep = contact ? next : String(data.get('nextStep') || DEFAULT_NEXT_STEP).trim();
     const honey = String(data.get('_honey') || '').trim();
 
-    const missing = !name ? 'name' : !email ? 'email' : !problem ? 'problem' : '';
+    const missing = !name ? 'name' : !email || !EMAIL_PATTERN.test(email) ? 'email' : !problem ? 'problem' : '';
     if (missing) {
       setInvalidField(missing);
       setValidationError(
         missing === 'problem'
           ? 'Add a short description of what you want to improve.'
-          : `Add your ${missing} so I can reply.`,
+          : missing === 'email' && email
+            ? 'That email looks incomplete. It should look like name@example.co.uk.'
+            : `Add your ${missing} so I can reply.`,
       );
       focusField(missing);
       return;
@@ -155,11 +163,10 @@ export function DemoRequestForm({
     const preview = contact && !setup && nextStep === PREVIEW_STEP;
     const common = { name, email, problem, referred_by: referredBy, _replyto: email, _honey: honey };
     let result;
-    let source = '';
+    const source = enquirySource(window.location.search, rememberedCampaign(), 'contact');
     if (contact && (setup || preview)) {
       // Free preview and post-payment setup go through api/enquiry (confirmation email, draft reply), then the FormSubmit fallback.
       const context = readTradeContext(window.location.search);
-      source = enquirySource(window.location.search, rememberedCampaign(), 'contact');
       const planSubject = `Maz Works — ${setup ? 'setup details' : 'free preview and price'} — ${business || name}`;
       const draft = setup ? null : draftFreePlan({ name, trade: context.trade, package: context.package, problem });
       result = await sendPlanEnquiry({
@@ -190,6 +197,8 @@ export function DemoRequestForm({
         business: business || 'Not provided',
         service: serviceLabel,
         next_step: nextStep,
+        source,
+        attribution: rememberedAttribution(),
         _subject: subject,
         _template: 'table',
         _url: window.location.href,
@@ -209,7 +218,7 @@ export function DemoRequestForm({
       return;
     }
 
-    setFailureReason(result.reason);
+    setFailureReason(result.status === 400 ? 'invalid' : result.reason);
     setSubmitState('error');
   }
 

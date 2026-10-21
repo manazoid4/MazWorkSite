@@ -58,6 +58,42 @@
   ],
   "redirects": [
     {
+      "source": "/start",
+      "has": [
+        {
+          "type": "query",
+          "key": "package",
+          "value": "(?<pkg>.*)"
+        }
+      ],
+      "destination": "/contact?intent=setup&package=:pkg",
+      "permanent": true
+    },
+    {
+      "source": "/free-plan",
+      "has": [
+        {
+          "type": "query",
+          "key": "src",
+          "value": "(?<src>.*)"
+        }
+      ],
+      "destination": "/contact?intent=preview&src=:src",
+      "permanent": true
+    },
+    {
+      "source": "/free-plan",
+      "has": [
+        {
+          "type": "query",
+          "key": "trade",
+          "value": "(?<trade>.*)"
+        }
+      ],
+      "destination": "/contact?intent=preview&trade=:trade",
+      "permanent": true
+    },
+    {
       "source": "/leak-check",
       "destination": "/contact?intent=preview",
       "permanent": true

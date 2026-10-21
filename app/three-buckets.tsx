@@ -50,7 +50,7 @@ const BUCKETS: {
     examples: ['Dashboards, KPIs and deadlines', 'Customer feedback and complaints', 'Improvement actions'],
     price: 'Reporting and improvement: quoted to scope',
     priceHref: '/prices#keep-improve',
-    priceLink: 'Reporting and improvement are quoted to scope',
+    priceLink: 'See how reporting is priced',
   },
 ];
 

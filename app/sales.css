@@ -1532,11 +1532,6 @@ main {
   .s-package-icon path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: s-draw-in 630ms ease-out 140ms both; }
   .js-reveal .s-board-steps::before { animation: s-line-in 2310ms linear 140ms both; }
   [data-offscreen] .s-board-steps::before { animation-play-state: paused; }
-  /* Scroll-driven reveal where supported; the IntersectionObserver version stays as the fallback. */
-  @supports (animation-timeline: view()) {
-    .js-reveal [data-reveal]:not([data-shown]) > *, .js-reveal [data-reveal] > * { opacity: 1; transform: none; transition: none; }
-    [data-reveal] > * { animation: s-reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
-  }
   details { interpolate-size: allow-keywords; }
   details::details-content { height: 0; overflow: clip; transition: height 182ms ease-out, content-visibility 182ms allow-discrete; }
   details[open]::details-content { height: auto; }
@@ -1544,7 +1539,6 @@ main {
 @keyframes s-build-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
 @keyframes s-draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes s-line-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes s-reveal-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   .s-demo[data-live] .s-demo-row, .s-package-card { transition: none; }
 }
@@ -1642,13 +1636,14 @@ main {
 .s-pains tbody th { font-weight: 700; width: 30%; }
 .s-pains td:nth-child(3) { font-weight: 750; }
 .s-recipes { list-style: none; margin-top: 16px; display: grid; gap: 12px; }
-.s-recipes li { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-left: 3px solid var(--peach); background: var(--surface); }
+.s-recipes li { display: grid; gap: 4px; padding: 14px 16px; border-radius: 12px; background: var(--peach); }
+.s-recipes li:nth-child(even) { background: var(--sky-tint); }
 .s-recipes strong { font-size: 1.05rem; }
 .s-recipes b { font-size: 1.6rem; font-weight: 850; letter-spacing: -.03em; line-height: 1; }
 .s-recipes span { color: var(--muted); font-size: .95rem; line-height: 1.45; }
 .s-recipes small { font-size: .82rem; color: var(--muted); }
 .s-recipes .mw-service-link { margin-top: 6px; font-size: .9rem; font-weight: 750; }
-@media (min-width: 721px) { .s-recipes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 721px) { .s-recipes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .mw-hub-types .mw-hub-examples { font-size: .82rem; opacity: .85; }
 .ce-preset { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 10px 0 4px; }
 
@@ -1734,9 +1729,6 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-info:nth-of-type(odd) { background: transparent; }
 .mw-resource-hero { background: var(--peach); border-bottom: 0; }
 .eyebrow { display: inline-block; background: var(--charcoal); color: var(--wheat); padding: 3px 10px; border-radius: 999px; font-size: .75rem; letter-spacing: .08em; }
-.button-signal { background: var(--signal); color: #000; border: 1px solid var(--line); box-shadow: 0 4px 0 var(--charcoal); font-weight: 800; transition: transform .1s, box-shadow .1s; }
-.button-signal:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--charcoal); }
-.button-signal:active { transform: translateY(4px); box-shadow: 0 0 0 var(--charcoal); }
 .s-price-amount, .mw-cards li .mw-big { color: var(--signal-text); }
 .mw-cards li { border-top-width: 6px; background: #fff; }
 .mw-cards li:nth-child(3n+1) { border-top-color: var(--signal); }

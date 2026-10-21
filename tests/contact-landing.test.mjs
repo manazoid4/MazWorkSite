@@ -19,7 +19,7 @@ test('contact keeps required answers, optional service selection and the preserv
   for (const field of ['name', 'email', 'problem']) assert.match(form, new RegExp(`name="${field}"[\\s\\S]{0,240}?required`));
   assert.match(form, /name="service"/);
   assert.match(form, /readServiceFromLocation\(\)/);
-  assert.match(form, /setFailureReason\(result\.reason\)/);
+  assert.match(form, /setFailureReason\(result\.status === 400/);
   assert.match(form, /Nothing you typed has been lost/);
   assert.match(form, /send it by email instead/);
   assert.match(form, /website enquiries, a clearer team dashboard, or help tracking deadlines and complaints/i);
@@ -31,4 +31,12 @@ test('contact is one form with a free-preview choice, and stacks on small screen
   assert.match(contact, /contact formId="leak-check-form"/);
   const css = await readFile(new URL('../app/contact/contact.css', import.meta.url), 'utf8');
   assert.match(css, /@media \(max-width: 860px\)[\s\S]*\.ct-band \{ grid-template-columns: 1fr/);
+});
+
+test('the default enquiry path carries source and attribution and validates the email', () => {
+  assert.match(form, /const source = enquirySource\(window\.location\.search, rememberedCampaign\(\), 'contact'\)/);
+  assert.match(form, /sendEnquiry\(\{[\s\S]{0,400}?source,\s*attribution: rememberedAttribution\(\)/);
+  assert.match(form, /const EMAIL_PATTERN = /);
+  assert.match(form, /That email looks incomplete/);
+  assert.match(form, /invalid: 'Something in the form was not accepted/);
 });

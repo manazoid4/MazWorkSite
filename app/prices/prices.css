@@ -16,6 +16,7 @@
 .pz-lede { max-width: 46ch; margin-top: 22px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
 .pz-actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; }
 .pz-hero .button-signal { border-color: var(--signal); }
+.pz-hero :focus-visible { outline-color: var(--pop-yellow); box-shadow: 0 0 0 6px var(--cream); }
 .pz-textlink { color: var(--cream); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: .22em; }
 .pz-textlink:hover { text-decoration-color: var(--pop-yellow); }
 
