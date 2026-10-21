@@ -33,7 +33,7 @@
 .ct-head { max-width: 44rem; margin-bottom: 28px; }
 .ct-head h2 { margin: 8px 0 14px; }
 .ct-head p:not(.eyebrow) { max-width: 65ch; line-height: 1.6; }
-.ct-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.ct-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: start; }
 .ct-tile { padding: clamp(20px, 3vw, 32px); border-radius: 12px; }
 .ct-peach { background: var(--peach); }
 .ct-sky { background: var(--sky-tint); }
