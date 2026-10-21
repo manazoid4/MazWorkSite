@@ -1,0 +1,11 @@
+[
+  {"source":"/free-plan","destination":"/contact?intent=preview"},
+  {"source":"/start","destination":"/contact?intent=setup"},
+  {"source":"/scope-sheet","destination":"/contact#scope"},
+  {"source":"/refer","destination":"/contact#refer"},
+  {"source":"/video","destination":"/local-businesses#video"},
+  {"source":"/managed-presence","destination":"/local-businesses#managed-presence"},
+  {"source":"/missed-calls-calculator","destination":"/local-businesses#missed-calls-calculator"},
+  {"source":"/content-day","destination":"/local-businesses#video"},
+  {"source":"/demos","destination":"/after-hours-receptionist#bigger-builds"}
+]

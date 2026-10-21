@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { CONTACT_EMAIL } from './site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
 import { EnquiryRecovery } from './enquiry-recovery';
 import { trackConversion } from './analytics';
 import {
@@ -13,10 +13,21 @@ import {
   buildRecoveryMailto,
   readServiceFromLocation,
   sendEnquiry,
+  sendPlanEnquiry,
   type EnquiryServiceId,
 } from './enquiry';
+import { FREE_STEP } from './offers';
+import { rememberedAttribution, rememberedCampaign } from './linkedin-source';
+import { readStoredAudit } from './audit/model';
+import { draftFreePlan } from './contact/draft';
+import { enquirySource, readTradeContext, safeEnquiryPageUrl, tradeLabel } from './trade-context';
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'error';
+
+/** The next-step choice that means "send a free preview"; it uses the transactional route and carries the link context. */
+const PREVIEW_STEP = ENQUIRY_NEXT_STEPS[1];
+const SETUP_SERVICE = 'Setup intake';
+const SETUP_STEP = 'Confirm payment in Stripe before setup; the package query is not proof of payment';
 
 const FAILURE_COPY: Record<'rejected' | 'timeout' | 'network', string> = {
   rejected: 'Delivery was not confirmed.',
@@ -40,17 +51,44 @@ export function ServiceEnquiryLink({ service, children }: { service: string; chi
 export function DemoRequestForm({
   kicker,
   problemPlaceholder,
+  contact = false,
+  formId,
 }: {
   kicker?: string;
   problemPlaceholder?: string;
+  /** The /contact form: shows the next-step choice up front (free preview is one) and reads deep-link context. */
+  contact?: boolean;
+  formId?: string;
 } = {}) {
   const formRef = useRef<HTMLFormElement>(null);
+  const requestId = useRef('');
+  const [next, setNext] = useState<string>(DEFAULT_NEXT_STEP);
+  const [setup, setSetup] = useState(false);
+  const [sentAs, setSentAs] = useState<'enquiry' | 'preview' | 'setup'>('enquiry');
+  const [confirmation, setConfirmation] = useState(false);
   const [service, setService] = useState<EnquiryServiceId>(DEFAULT_SERVICE_ID);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [validationError, setValidationError] = useState('');
   const [invalidField, setInvalidField] = useState('');
   const [failureReason, setFailureReason] = useState<'rejected' | 'timeout' | 'network'>('rejected');
   const [recoveryHref, setRecoveryHref] = useState(`mailto:${CONTACT_EMAIL}`);
+
+  useEffect(() => {
+    requestId.current = crypto.randomUUID();
+    if (!contact) return;
+    // Deep links from the rest of the site (and the old /free-plan and /start addresses) say what the visitor came for.
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get('intent');
+    if (intent === 'setup') setSetup(true);
+    else if (intent === 'preview' || params.has('package') || params.has('trade') || params.has('audit')) setNext(PREVIEW_STEP);
+    const fill = (name: string, value: string | null) => {
+      const input = formRef.current?.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`);
+      if (input && value && !input.value) input.value = value.replace(/[<>]/g, '').slice(0, name === 'problem' ? 4000 : 80);
+    };
+    fill('name', params.get('name'));
+    fill('business', params.get('business') || params.get('website'));
+    if (params.get('audit')) fill('problem', readStoredAudit());
+  }, [contact]);
 
   useEffect(() => {
     const syncService = () => setService(readServiceFromLocation() ?? DEFAULT_SERVICE_ID);
@@ -79,8 +117,9 @@ export function DemoRequestForm({
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
     const business = String(data.get('business') || '').trim();
+    const referredBy = String(data.get('referred_by') || '').trim();
     const problem = String(data.get('problem') || '').trim();
-    const nextStep = String(data.get('nextStep') || DEFAULT_NEXT_STEP).trim();
+    const nextStep = contact ? next : String(data.get('nextStep') || DEFAULT_NEXT_STEP).trim();
     const honey = String(data.get('_honey') || '').trim();
 
     const missing = !name ? 'name' : !email ? 'email' : !problem ? 'problem' : '';
@@ -105,6 +144,7 @@ export function DemoRequestForm({
       ['Name', name],
       ['Email', email],
       ['Business', business],
+      ['Referred by', referredBy],
       ['Service', serviceLabel],
       ['What to improve', problem],
       ['Most useful next step', nextStep],
@@ -112,25 +152,60 @@ export function DemoRequestForm({
 
     setSubmitState('sending');
 
-    const result = await sendEnquiry({
-      name,
-      email,
-      business: business || 'Not provided',
-      service: serviceLabel,
-      problem,
-      next_step: nextStep,
-      _replyto: email,
-      _subject: subject,
-      _template: 'table',
-      _honey: honey,
-      _url: window.location.href,
-    });
+    const preview = contact && !setup && nextStep === PREVIEW_STEP;
+    const common = { name, email, problem, referred_by: referredBy, _replyto: email, _honey: honey };
+    let result;
+    let source = '';
+    if (contact && (setup || preview)) {
+      // Free preview and post-payment setup go through api/enquiry (confirmation email, draft reply), then the FormSubmit fallback.
+      const context = readTradeContext(window.location.search);
+      source = enquirySource(window.location.search, rememberedCampaign(), 'contact');
+      const planSubject = `Maz Works — ${setup ? 'setup details' : 'free preview and price'} — ${business || name}`;
+      const draft = setup ? null : draftFreePlan({ name, trade: context.trade, package: context.package, problem });
+      result = await sendPlanEnquiry({
+        ...common,
+        request_id: requestId.current,
+        draft: draft
+          ? `Owner review required: this is a demo enquiry, not an order. ${context.package ? `Explicit package interest: ${context.package}.` : 'No package selected; the suggestion below is provisional.'} Check the customer’s existing tools before proposing new functionality.\n\n${draft.subject}\n\n${draft.text}`
+          : `Owner action: ${SETUP_STEP}. The return URL and package query are not payment verification.`,
+        website: business,
+        service: setup ? SETUP_SERVICE : FREE_STEP.name,
+        customer_message: '',
+        interested_in: context.package || 'Not chosen',
+        trade: context.trade,
+        industry: tradeLabel(context.trade),
+        problem_id: context.problem,
+        proof_id: context.proof,
+        source_page: context.sourcePage,
+        next_step: setup ? SETUP_STEP : 'Send a free preview and fixed price; not an order',
+        source,
+        attribution: rememberedAttribution(),
+        _subject: planSubject,
+        _template: 'table',
+        _url: safeEnquiryPageUrl(window.location.href),
+      });
+    } else {
+      result = await sendEnquiry({
+        ...common,
+        business: business || 'Not provided',
+        service: serviceLabel,
+        next_step: nextStep,
+        _subject: subject,
+        _template: 'table',
+        _url: window.location.href,
+      });
+    }
 
     if (result.ok) {
       form.reset();
       setService(DEFAULT_SERVICE_ID);
+      setNext(DEFAULT_NEXT_STEP);
+      setSentAs(setup ? 'setup' : preview ? 'preview' : 'enquiry');
+      setConfirmation('confirmationSent' in result && result.confirmationSent === true);
       setSubmitState('sent');
+      requestId.current = crypto.randomUUID();
       trackConversion('Enquiry sent', { service });
+      if (contact && (setup || preview)) trackConversion('Form submitted', { source });
       return;
     }
 
@@ -138,10 +213,11 @@ export function DemoRequestForm({
     setSubmitState('error');
   }
 
+  const previewing = contact && !setup && next === PREVIEW_STEP;
   const selectedServiceLabel = ENQUIRY_SERVICES.find((option) => option.id === service)?.label ?? 'Not sure yet';
 
   return (
-    <form className="mw-demo-form" action={NATIVE_FORM_ENDPOINT} method="post" ref={formRef} onSubmit={submitRequest} onInput={(event) => {
+    <form className="mw-demo-form" id={formId} action={NATIVE_FORM_ENDPOINT} method="post" ref={formRef} onSubmit={submitRequest} onInput={(event) => {
       if ((event.target as HTMLInputElement).name === invalidField) {
         setInvalidField('');
         setValidationError('');
@@ -149,7 +225,7 @@ export function DemoRequestForm({
     }}>
       <input type="hidden" name="_subject" value="Maz Works — business enquiry" />
       <input type="hidden" name="_template" value="table" />
-      <p className="mw-form-kicker">{kicker ?? 'Just your name, email and what you want to improve. No service choice needed.'}</p>
+      <p className="mw-form-kicker">{setup ? 'Share what needs setting up and where to send the confirmation.' : kicker ?? 'Just your name, email and what you want to improve. No service choice needed.'}</p>
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -162,7 +238,7 @@ export function DemoRequestForm({
       </div>
 
       <label>
-        <span>What do you need help with?</span>
+        <span>{setup ? 'What do you need set up?' : 'What do you need help with?'}</span>
         <textarea
           name="problem"
           aria-invalid={invalidField === 'problem' || undefined}
@@ -170,14 +246,27 @@ export function DemoRequestForm({
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder={problemPlaceholder ?? 'For example: I need more website enquiries, a clearer team dashboard, or help tracking deadlines and complaints.'}
+          placeholder={setup ? 'For call answering: your phone line, hours, common questions and urgent-call rules' : problemPlaceholder ?? 'For example: I need more website enquiries, a clearer team dashboard, or help tracking deadlines and complaints.'}
         />
       </label>
+
+      {contact && !setup ? (
+        <fieldset className="ct-next">
+          <legend>What would be most useful next?</legend>
+          {ENQUIRY_NEXT_STEPS.map((option) => (
+            <label key={option} className="ct-next-option">
+              <input type="radio" name="nextStep" value={option} checked={next === option} onChange={() => setNext(option)} disabled={submitState === 'sending'} />
+              <span>{option}</span>
+            </label>
+          ))}
+          {previewing ? <p className="ct-next-note">Free and no obligation. I reply myself within {CHECK_REPLY_TIME} with a working preview that has your business name on it, and a fixed price. No call needed.</p> : null}
+        </fieldset>
+      ) : null}
 
       <details className="mw-form-options">
         <summary>
           <span>Optional details</span>
-          <small>{service === DEFAULT_SERVICE_ID ? 'Business, service and preferred next step' : `Selected: ${selectedServiceLabel}`}</small>
+          <small>{service === DEFAULT_SERVICE_ID ? (contact ? 'Business and service' : 'Business, service and preferred next step') : `Selected: ${selectedServiceLabel}`}</small>
         </summary>
         <div className="mw-form-options-body">
           <label>
@@ -197,12 +286,17 @@ export function DemoRequestForm({
             </select>
           </label>
 
-          <label>
+          {contact ? <label>
+            <span>Who sent you? <small>optional</small></span>
+            <input name="referred_by" autoComplete="off" placeholder="Their name, so I can thank them" disabled={submitState === 'sending'} />
+          </label> : null}
+
+          {contact ? null : <label>
             <span>What would be most useful next?</span>
             <select name="nextStep" defaultValue={DEFAULT_NEXT_STEP} disabled={submitState === 'sending'}>
               {ENQUIRY_NEXT_STEPS.map((option) => <option key={option}>{option}</option>)}
             </select>
-          </label>
+          </label>}
         </div>
       </details>
 
@@ -213,14 +307,18 @@ export function DemoRequestForm({
 
       <div className="mw-form-submit">
         <button className="button button-dark" type="submit" disabled={submitState === 'sending' || submitState === 'sent'}>
-          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : 'Send enquiry'}
+          {submitState === 'sending' ? 'Sending…' : submitState === 'sent' ? 'Sent' : setup ? 'Send setup details' : previewing ? 'Get my free preview' : 'Send enquiry'}
         </button>
         <p>Sent directly from this form to my inbox. No account or booking step. <a href="/privacy">How I use your details</a>.</p>
         <p id="business-enquiry-error" className="mw-form-status mw-form-error" role="alert">{validationError}</p>
         <p className="mw-form-status" role="status" aria-live="polite">
           {submitState === 'sent' && (
             <>
-              Enquiry sent. I’ll reply by email.{' '}
+              {sentAs === 'setup'
+                ? `Setup details sent. I’ll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup.`
+                : sentAs === 'preview'
+                  ? `Got it, thank you. ${confirmation ? 'Check your inbox. ' : ''}I’ll read it myself and send your preview and fixed price from ${CONTACT_EMAIL}, usually within ${CHECK_REPLY_TIME}. If it hasn’t arrived by then, check your junk folder.`
+                  : 'Enquiry sent. I’ll reply by email.'}{' '}
               <button type="button" className="text-link" onClick={() => { setSubmitState('idle'); focusField('name'); }}>Send another</button>
             </>
           )}

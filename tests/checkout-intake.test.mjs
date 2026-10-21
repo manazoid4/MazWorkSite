@@ -8,24 +8,16 @@ import handler, { deliverEnquiry } from '../api/enquiry.js';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 test('the checkout intake uses neutral wording and covers receptionist setup', async () => {
-  let html;
-  for (const candidate of [path.join(root, 'out', 'start.html'), path.join(root, 'out', 'start', 'index.html')]) {
-    try { html = await readFile(candidate, 'utf8'); break; } catch { /* try the other export shape */ }
-  }
-  assert.ok(html, 'missing exported /start page');
-  const page = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ');
-
-  assert.match(page, /Tell me what you need set up/);
-  assert.match(page, /phone provider or line, business hours, common questions and what counts as urgent/);
-  assert.match(page, /Day 0/);
-  assert.doesNotMatch(page, /payment received|paid yet|Paid: tell/i);
-  assert.doesNotMatch(page, /Live in about a week for a Starter Automation/i);
-  assert.match(html, /id="leak-check-form"/);
-  assert.match(html, /name="service" value="Setup intake"/);
-  assert.match(html, /name="next_step" value="Confirm payment in Stripe before setup; the package query is not proof of payment"/);
-  assert.match(html, /name="_autoresponse" value="Thanks, I&#x27;ve got your setup details/);
-  assert.match(page, /Send setup details/);
-  assert.doesNotMatch(html, /name="next_step" value="Send a free preview and fixed price; not an order"/);
+  // /start is now /contact?intent=setup: the one form switches to setup mode in the browser.
+  const source = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
+  assert.match(source, /intent === 'setup'/);
+  assert.match(source, /const SETUP_SERVICE = 'Setup intake'/);
+  assert.match(source, /Confirm payment in Stripe before setup; the package query is not proof of payment/);
+  assert.match(source, /Send setup details/);
+  assert.match(source, /phone line, hours, common questions and urgent-call rules/);
+  assert.doesNotMatch(source, /payment received|paid yet|Paid: tell/i);
+  const redirects = JSON.parse(await readFile(path.join(root, 'docs', 'plans', 'redirects-b2.json'), 'utf8'));
+  assert.equal(redirects.find((row) => row.source === '/start')?.destination, '/contact?intent=setup');
 });
 
 test('setup service sends neutral confirmation, verifies payment before setup and skips sales follow-ups', async () => {

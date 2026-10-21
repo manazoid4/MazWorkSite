@@ -35,7 +35,7 @@ test('the receptionist page shows the price, both CTAs, safety and FAQ', async (
   assert.match(page, /£79\/month/);
   assert.match(page, /Calls answered when\s+you can’t\s+pick\s+up/);
   assert.doesNotMatch(page, /never miss|first ring|every call answered|guarantee[sd]? (more|bookings|leads)/i);
-  assert.match(html, /href="\/free-plan\?src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
+  assert.match(html, /href="\/contact\?intent=preview&amp;src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
   assert.match(page, /Get my free preview/);
   assert.match(html, /href="#try"/);
   assert.match(page, /Safety and privacy/);
@@ -74,9 +74,8 @@ test('the offer stays discoverable without the removed homepage workflow panel',
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/after-hours-receptionist</);
   // The accepted-package list moved from the form into app/trade-context.ts (trade sprint); the form reads it from there.
-  const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
+  const form = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
   const knownPackages = await readFile(path.join(root, 'app', 'trade-context.ts'), 'utf8');
-  assert.match(form, /KNOWN_PACKAGES/);
   assert.match(knownPackages, /AFTER_HOURS\]/, 'the free preview form accepts ?package=After-Hours Receptionist');
 });
 

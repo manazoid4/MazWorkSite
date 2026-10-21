@@ -15,7 +15,7 @@ test('the shared third bucket consistently describes feedback, reporting and imp
 });
 
 test('prices links the third bucket to professional improvement and labels optional maintenance separately', () => {
-  assert.match(prices, /<li id="keep-improve"><strong>Keep &amp; Improve<\/strong>[\s\S]*?Dashboards, reporting and complaints improvement: quoted to scope\.[\s\S]*?href="\/professional-teams"/);
+  assert.match(prices, /id="keep-improve">Dashboards, reporting and complaints improvement are quoted to scope:[\s\S]*?href="\/professional-teams"/);
   assert.match(prices, /Need care or maintenance\?[\s\S]*?href="#extras">See options/);
   assert.match(priceList, /<Fold id="extras" title="Small set-ups, add-ons and care">/);
   assert.match(priceList, /<div className="s-extras-care" id="care">/);

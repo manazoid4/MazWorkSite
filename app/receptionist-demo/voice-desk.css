@@ -1,10 +1,10 @@
 /* Talk-to-it demo + link maker. A night-time call card: one "now" panel carries the whole call. */
-.vd-page { --night: #15171c; --night-2: #22252d; --line-n: #3b3f4a; --text-n: #f3f1ec; --mute: #b9b6ae; --sun: #ffd23f; --mint: #8fe3b8; --sky: #9bd4ff; --pink: #ffb9d9; --sig: #ff6b1a; --ease: cubic-bezier(.3, .8, .3, 1); }
+.vd-page { --night: var(--plum); --night-2: color-mix(in srgb, var(--plum) 82%, var(--ink)); --line-n: color-mix(in srgb, var(--cream) 30%, var(--plum)); --text-n: var(--cream); --mute: color-mix(in srgb, var(--cream) 72%, var(--plum)); --sun: var(--pop-yellow); --mint: var(--sky-tint); --sky: var(--sky-tint); --pink: var(--pop-pink); --sig: var(--pop-orange); --ease: cubic-bezier(.3, .8, .3, 1); }
 .vd-hero { padding: clamp(24px, 5vw, 52px) 0 16px; max-width: 760px; }
 .vd-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); margin: 10px 0; }
 .vd-hero p:last-child { color: var(--charcoal); }
 
-.vd { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 980px; border: 2px solid var(--ink); border-radius: 24px; background: var(--night); color: var(--text-n); padding: clamp(18px, 4vw, 32px); }
+.vd { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 980px; border-radius: 16px; background: var(--night); color: var(--text-n); padding: clamp(18px, 4vw, 32px); }
 .vd > * { min-width: 0; }
 .vd-truth { justify-self: start; margin: 0; font-family: var(--mono); font-size: .75rem; letter-spacing: .02em; color: var(--mute); line-height: 1.4; }
 .vd-truth::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--sun); }
@@ -18,8 +18,8 @@
 .vd-quiet:hover { border-color: var(--sun); }
 .vd-swap { flex: none; }
 
-.vd-problem { margin: 0; padding: 12px 16px; border-radius: 14px; background: #2a2618; font-size: .92rem; line-height: 1.45; }
-.vd-problem.is-hard { background: #2b1d25; }
+.vd-problem { margin: 0; padding: 12px 16px; border-radius: 14px; background: var(--night-2); font-size: .92rem; line-height: 1.45; }
+.vd-problem.is-hard { background: var(--night-2); }
 .vd-problem.is-calm { padding: 0; background: transparent; color: var(--mute); font-size: .88rem; }
 .vd-problem.is-calm strong { font-weight: 700; color: var(--text-n); }
 
@@ -28,11 +28,11 @@
 
 /* The one "now" panel. Colour, tail side, border style and icon all change with the phase; so does the label. */
 .vd-now { --tint: var(--night-2); --on: var(--text-n); position: relative; min-height: 200px; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; padding: 20px 22px 18px; border: 0; border-radius: 24px; background: var(--tint); color: var(--on); transition: background-color .35s var(--ease), color .35s var(--ease), border-radius .35s var(--ease); }
-.vd-now-speaking { --tint: #f3f1ec; --on: var(--ink); border-radius: 24px 24px 24px 6px; }
+.vd-now-speaking { --tint: var(--text-n); --on: var(--ink); border-radius: 24px 24px 24px 6px; }
 .vd-now-listening, .vd-now-waiting, .vd-now-interrupted { --tint: var(--sky); --on: var(--ink); border-radius: 24px 24px 6px 24px; }
 .vd-now-thinking { --tint: var(--night-2); box-shadow: inset 0 0 0 1.5px var(--line-n); }
 .vd-now-ringing { --tint: var(--sun); --on: var(--ink); }
-.vd-now-paused { --tint: #2a2d36; box-shadow: inset 0 0 0 1.5px var(--mute); }
+.vd-now-paused { --tint: var(--night-2); box-shadow: inset 0 0 0 1.5px var(--mute); }
 .vd-now-ended { --tint: var(--mint); --on: var(--ink); }
 .vd-now-idle { --tint: var(--night-2); }
 
@@ -63,11 +63,11 @@
 .vd-main:disabled { background: var(--night-2); color: var(--mute); cursor: default; }
 .vd-ctls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .vd-ctl { min-height: 64px; display: grid; justify-items: center; align-content: center; gap: 3px; padding: 6px 4px; border: 0; border-radius: 16px; background: var(--night-2); color: var(--text-n); font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; line-height: 1.15; text-align: center; }
-.vd-ctl:hover:not(:disabled) { background: #2d313b; }
+.vd-ctl:hover:not(:disabled) { background: color-mix(in srgb, var(--night-2) 85%, var(--cream)); }
 .vd-ctl[aria-pressed='true'] { background: var(--sun); color: var(--ink); }
 .vd-ctl:disabled { opacity: .45; cursor: default; }
-.vd-ctl-end { background: #b4462f; color: #fff; }
-.vd-ctl-end:hover { background: #c4523a; }
+.vd-ctl-end { background: var(--pop-ink); color: #fff; }
+.vd-ctl-end:hover { background: var(--pop-ink); }
 
 .vd-type { display: flex; gap: 8px; }
 .vd-type.is-primary { flex-direction: column; }
@@ -91,25 +91,25 @@
 .vd-try-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .vd-try label { display: grid; gap: 4px; font-size: .85rem; color: var(--mute); }
 .vd-try input, .vd-try select { min-height: 48px; border: 1.5px solid var(--line-n); border-radius: 12px; background: var(--night); color: var(--text-n); font: inherit; padding: 6px 12px; }
-.vd-try-err { color: #ffb4a2; font-weight: 700; margin: 0; }
+.vd-try-err { color: var(--pop-pink); font-weight: 700; margin: 0; }
 .vd-try-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 
 /* The message the owner would get */
 .vd-mail { background: var(--surface); color: var(--ink); border: 0; border-left: 8px solid var(--mint); border-radius: 18px; padding: 18px 20px; display: grid; gap: 10px; }
-.vd-mail.is-urgent { border-left-color: #b4462f; }
+.vd-mail.is-urgent { border-left-color: var(--pop-ink); }
 .vd-mail:focus { outline: none; }
 .vd-mail :focus-visible { outline-color: var(--ink); }
 .vd-mhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
-.vd-mail .vd-tag { color: #1c6b49; font-weight: 800; }
+.vd-mail .vd-tag { color: var(--ok); font-weight: 800; }
 .vd-stamp { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; border: 1px dashed var(--muted); padding: 2px 8px; color: var(--muted); }
 .vd-meta { margin: 0; font-size: .85rem; color: var(--charcoal); line-height: 1.5; }
 .vd-subject { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 1.2rem; }
-.vd-urgent { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; background: #b4462f; color: #fff; padding: 2px 8px; border-radius: 99px; }
+.vd-urgent { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; background: var(--pop-ink); color: #fff; padding: 2px 8px; border-radius: 99px; }
 .vd-mail dl { margin: 0; display: grid; gap: 6px; }
 .vd-mail dl div { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 8px; border-top: 1px solid var(--soft-line); padding-top: 6px; }
 .vd-mail dt { color: var(--muted); }
 .vd-mail dd { margin: 0; font-weight: 700; }
-.vd-mail dl div.is-urgent dd { color: #b4462f; }
+.vd-mail dl div.is-urgent dd { color: var(--pop-ink); }
 .vd-real { margin: 0; color: var(--charcoal); font-size: .9rem; }
 .vd-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .vd-actions .vd-btn { flex: 1 1 150px; }
@@ -123,7 +123,7 @@
 .vd-desk { justify-self: start; }
 .vd-caller { justify-self: end; text-align: right; }
 .vd-said { padding: 10px 14px; border-radius: 14px; line-height: 1.4; }
-.vd-desk .vd-said { background: #f3f1ec; color: var(--ink); border-bottom-left-radius: 4px; }
+.vd-desk .vd-said { background: var(--text-n); color: var(--ink); border-bottom-left-radius: 4px; }
 .vd-caller .vd-said { background: var(--sky); color: var(--ink); border-bottom-right-radius: 4px; }
 .vd-small { margin: 0; font-size: .82rem; color: var(--mute); line-height: 1.5; }
 
@@ -159,9 +159,9 @@
 
 .vd + .mw-resource-cta { margin-top: 40px; }
 
-.vm { max-width: 760px; display: grid; gap: 14px; border: 3px solid var(--ink); background: var(--surface); padding: clamp(16px, 3vw, 24px); }
+.vm { max-width: 760px; display: grid; gap: 14px; border-radius: 12px; background: var(--sky-tint); padding: clamp(16px, 3vw, 24px); }
 .vm label { display: grid; gap: 6px; font-weight: 750; }
-.vm input, .vm textarea { font: inherit; font-weight: 400; border: 2px solid var(--ink); padding: 10px 12px; min-height: 48px; background: var(--paper); }
+.vm input, .vm textarea { font: inherit; font-weight: 400; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 48px; background: var(--surface); }
 .vm-out { border-top: 1px solid var(--soft-line); padding-top: 14px; display: grid; gap: 10px; }
 .vm-link { font-family: var(--mono); font-size: .78rem; word-break: break-all; background: var(--paper); padding: 10px; border: 1px solid var(--soft-line); }
 
