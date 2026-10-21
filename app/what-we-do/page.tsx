@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { OFFERS } from '../offers';
-import { ENQUIRY_CTA, SITE_URL } from '../site';
+import { SITE_URL } from '../site';
 import { ServiceSchema } from '../service-schema';
 import { ThreeBuckets } from '../three-buckets';
 
@@ -19,7 +19,6 @@ export default function WhatWeDo() {
         <p className="eyebrow">What I do</p>
         <h1 id="what-title">Get customers. Serve customers. Keep improving.</h1>
         <p className="s-lede">I build connected tools and custom software that help small businesses bring in work, look after customers and spend less time chasing admin.</p>
-        <div className="s-actions"><a className="button button-signal s-button-lg" href="/contact?src=what-we-do#contact">{ENQUIRY_CTA}</a></div>
       </section>
       <ThreeBuckets detailed />
 
@@ -32,7 +31,6 @@ export default function WhatWeDo() {
           <li><strong>What you own at the end</strong><span>The agreed build, plus a short guide to what runs and what to do if something changes.</span></li>
           <li><strong>What I need from you</strong><span>The job to solve, access as a user to the relevant tools, and examples to check it works.</span></li>
         </ul>
-        <div className="s-actions"><a className="button button-signal" href="/contact?src=what-we-do#contact">{ENQUIRY_CTA}</a></div>
       </section>
       <SiteFooter />
     </main>

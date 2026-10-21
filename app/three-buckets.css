@@ -32,14 +32,14 @@
 .mw-journey-badge-blue { fill: var(--sky-tint); }
 .mw-journey-item h3 { margin-top: 13px; font-size: clamp(1.2rem, 1.8vw, 1.45rem); font-weight: 650; }
 .mw-journey-item > p { max-width: 340px; margin-top: 8px; color: var(--muted); }
-.mw-journey-item > a { width: fit-content; min-height: 44px; margin-top: auto; padding-top: 10px; display: inline-flex; align-items: center; color: var(--plum); font-size: .9rem; font-weight: 700; text-underline-offset: 4px; }
+.mw-journey-item > a { width: fit-content; padding-block: 10px; margin-top: auto; display: block; color: var(--plum); font-size: .9rem; font-weight: 700; text-underline-offset: 4px; }
 .mw-journey-item > a:hover { text-decoration-thickness: 2px; }
 .mw-journey-included { margin: 12px 0 0; padding-left: 18px; color: var(--muted); }
 .mw-journey-item > .mw-journey-price { margin-top: 10px; color: var(--ink); font-size: .9rem; }
-.mw-journey-item > a.mw-journey-price-link { margin-top: 0; padding-top: 0; font-weight: 600; }
+.mw-journey-item > a.mw-journey-price-link { margin-top: 0; padding-top: 0; min-height: 0; font-weight: 600; }
 .mw-journey-support { margin-top: 28px; color: var(--muted); }
 .mw-journey-support a { color: var(--plum); }
-.mw-bucket-section.is-detailed .mw-journey-item > a:not(.mw-journey-price-link) { margin-top: 8px; padding-top: 0; }
+.mw-bucket-section.is-detailed .mw-journey-item > a:not(.mw-journey-price-link) { margin-top: 8px; padding-bottom: 0; }
 @media (max-width: 740px) {
   .mw-bucket-section { margin-top: 44px; padding: 26px 22px; }
   .mw-journey-heading { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
@@ -47,9 +47,9 @@
   .mw-journey-grid { grid-template-columns: 1fr; gap: 0; }
   .mw-journey-item { display: grid; grid-template-columns: 82px minmax(0, 1fr); column-gap: 16px; align-items: start; padding: 17px 0; border-top: 1px solid var(--line); }
   .mw-journey-item > * { grid-column: 2; }
-  .mw-journey-art { width: 78px; height: 78px; grid-column: 1; grid-row: 1 / span 6; align-self: center; }
+  .mw-journey-art { width: 78px; height: 78px; grid-column: 1; grid-row: 1 / span 6; align-self: start; }
   .mw-journey-item h3 { margin-top: 0; }
-  .mw-journey-item > a { margin-top: 4px; padding-top: 0; }
+  .mw-journey-item > a { margin-top: 0; }
 }
 @media (max-width: 420px) {
   .mw-bucket-section { padding-inline: 18px; }
