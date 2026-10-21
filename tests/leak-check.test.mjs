@@ -69,7 +69,7 @@ test('the contact form reuses the resilient enquiry delivery path', async () => 
 test('homepage and shared navigation make the main enquiry easy while preserving the free preview', async () => {
   const home = (await readPage('/')).replace(/&#x27;/g, "'");
 
-  assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact"[^>]*>Tell me what.s not working/);
+  assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact"[^>]*>Free preview/);
   assert.match(home, /href="\/contact\?src=home#contact">Tell me what.s not working/);
   assert.match(home, /href="\/contact\?src=home#contact">Ask for a free preview/);
   assert.doesNotMatch(home, /id="hero-quick-form"|id="leak-check-form"/);

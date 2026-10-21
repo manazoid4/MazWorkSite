@@ -155,7 +155,7 @@ test('the homepage footer has a direct enquiry form while other footers keep the
   const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
   assert.match(src, /ENQUIRY_CTA/);
   assert.match(src, /You don.t need to name the right service/);
-  assert.match(src, /free-plan\?src=footer-convert/);
+  assert.match(src, /contact\?src=footer-convert/);
   assert.match(src, /<NewsletterSignup/);
   const chrome = await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8');
   assert.match(chrome, /<FooterConvert \/>/);

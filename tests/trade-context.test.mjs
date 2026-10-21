@@ -25,7 +25,7 @@ const { ALL_OFFERS } = load('app/offers.ts');
 test('every registered trade builds bounded enquiry context without inventing a package', () => {
   for (const item of [...CUSTOMER_TYPES, ...NICHE_GUIDES]) {
     const url = new URL(context.buildTradeEnquiryHref(item.id), 'https://example.test');
-    assert.equal(url.pathname, '/free-plan');
+    assert.equal(url.pathname, '/contact');
     assert.equal(url.hash, '#leak-check-form');
     assert.equal(url.searchParams.get('src'), `for-${item.id}`);
     assert.equal(url.searchParams.get('trade'), item.id);
@@ -46,7 +46,7 @@ test('known problem and explicitly named canonical package survive', () => {
 
 test('invalid trades, proof pairings, problems and personal input fail safely', () => {
   for (const trade of ['unknown', '../contact', 'other', 'creator', 'name@example.com']) {
-    assert.equal(context.buildTradeEnquiryHref(trade), '/free-plan#leak-check-form');
+    assert.equal(context.buildTradeEnquiryHref(trade), '/contact#leak-check-form');
   }
   const url = new URL(context.buildTradeEnquiryHref('roofers', {
     proof: 'builders', problem: 'onboarding', package: 'Contact me at private@example.com',
@@ -108,7 +108,7 @@ test('only real campaign/internal links can enter source or safe submission URL'
   for (const src of ['private@example.com', 'https://evil.example', 'for-unknown', 'scene-private', 'service-private', 'estimator-private']) {
     assert.equal(context.enquirySource(`?src=${encodeURIComponent(src)}`, ''), 'direct (free-plan)');
   }
-  const url = new URL(context.safeEnquiryPageUrl('https://www.mazworks.uk/free-plan?src=footer&name=Private&token=secret&trade=roofers&proof=builders'));
+  const url = new URL(context.safeEnquiryPageUrl('https://www.mazworks.uk/contact?src=footer&name=Private&token=secret&trade=roofers&proof=builders'));
   assert.equal(url.searchParams.get('src'), 'footer');
   for (const key of ['name', 'token', 'proof']) assert.equal(url.searchParams.has(key), false);
 });

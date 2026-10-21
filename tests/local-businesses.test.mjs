@@ -18,7 +18,7 @@ test('local business page has its agreed contact path, metadata, and canonical o
 });
 
 test('local business links point to existing trades, appointment, garage and food journeys and service pages', () => {
-  for (const route of ['/for/trades', '/for/appointments', '/for/garages', '/for/cafes-and-food', '/services/missed-call', '/services/quote-follow-up', '/services/reminders', '/services/reviews']) {
+  for (const route of ['/for/trades', '/for/appointments', '/for/garages', '/for/cafes-and-food', '/for#job-missed-call', '/for#job-quote-follow-up', '/for#job-reminders', '/for#job-reviews']) {
     assert.ok(page.includes(`'${route}'`) || page.includes(`href="${route}"`), `expected ${route}`);
   }
 });

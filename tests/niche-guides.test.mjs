@@ -18,14 +18,14 @@ test('each niche guide exports with prices, a priced second task and a tagged fr
     assert.doesNotMatch(html, /hacked/i, `${id}: must not say hacked`);
     assert.match(html, /Free preview, no call needed\. Most start with one task at £99\./, `${id}: price and person on the first screen`);
     assert.doesNotMatch(html, /Another job/, `${id}: second task is named as an add-on`);
-    assert.match(html, new RegExp(`/free-plan\\?src=for-${id}`), `${id}: tagged free check link`);
+    assert.match(html, new RegExp(`/contact\\?src=for-${id}`), `${id}: tagged free check link`);
     assert.match(html, /<b class="tp-price">£99<\/b><\/div><h3>Starter Automation<\/h3>/, `${id}: Starter shown as a price card`);
     // Offer v9: Starter is one job. Anything more on a guide is a separately priced add-on or a bigger package.
     const starter = /<h3>Starter Automation<\/h3><p>([^<]*)/.exec(html)?.[1] || '';
     assert.match(starter, /^One task set up to run itself/, `${id}: Starter must read as one task`);
     assert.doesNotMatch(starter, /\b(plus|reminders? go out|follow-up|review requests)\b/i, `${id}: Starter line bundles a second job`);
     assert.doesNotMatch(html, /quoted in your free plan/, `${id}: fixed-price add-ons must show their price`);
-    assert.match(html, new RegExp(`/free-plan\\?src=for-${id}&amp;trade=${id}&amp;[^"]*package=Starter(%20|\\+)Automation#leak-check-form`), `${id}: Starter pre-fills the form`);
+    assert.match(html, new RegExp(`/contact\\?src=for-${id}&amp;trade=${id}&amp;[^"]*package=Starter(%20|\\+)Automation#leak-check-form`), `${id}: Starter pre-fills the form`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${id}"`), `${id}: canonical`);
     // Anonymised on purpose: never name the businesses the examples came from.
     for (const name of ['Vines', 'Yumi', 'Casa Bake', 'Sandiacre', 'Hurley', 'Revive', 'Aeternum', 'Old Smithy', 'Lana', 'Dorsi', 'Elm Tree', 'Pawfect', 'A Small Studio', 'Range Studio', 'Morizzo', 'Arrigoni']) {

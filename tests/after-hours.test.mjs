@@ -103,7 +103,7 @@ test('the receptionist page offers the cheaper fix honestly, and a minutes check
   assert.match(page, /Four ways to handle a missed call/);
   assert.match(page, /Missed-call text-back\s*£99 once/);
   assert.match(page, /skip the monthly fee/);
-  assert.match(html, /href="\/services\/missed-call"/);
+  assert.match(html, /href="\/for\#job-missed-call"/);
   assert.match(page, /Will\s+300\s+minutes cover you\?/);
   assert.match(page, /Your own figures, not a forecast/);
 });

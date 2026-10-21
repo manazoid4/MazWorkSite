@@ -24,10 +24,10 @@ test('the referral section on /contact names all three tiers', async () => {
   for (const tier of ['£50', '£150', '£300']) assert.ok(refer.includes(tier), `/contact#refer does not name the ${tier} tier`);
 });
 
-test('the referral reward keeps the live line, points at /refer, and leaves the tiers to that page', async () => {
+test('the referral reward keeps the live line, points at /contact#refer, and leaves the tiers to that page', async () => {
   const faq = await readPage('/faq');
   assert.match(faq, /£50 by bank transfer, no limit/, 'keep the referral line the site already published');
-  assert.match(faq, /href="\/refer"/, 'the FAQ must point at the referral page');
+  assert.match(faq, /href="\/contact\#refer"/, 'the FAQ must point at the referral page');
   // The tier amounts (£150 is one) live on /refer, so the retired-price guard on
   // /faq stays intact.
   assert.doesNotMatch(faq, /£150/, 'tier amounts belong on /refer, not /faq');

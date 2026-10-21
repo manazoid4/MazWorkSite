@@ -69,7 +69,7 @@ test('the CTAs are pre-filled with the package and a source tag', async () => {
   const html = await read('for');
   const expected = { 'missed-calls': 'Starter%20Automation', bookings: 'Starter%20Automation', quotes: 'Starter%20Automation', updates: 'Starter%20Automation', reviews: 'Starter%20Automation', 'joined-up': 'Business%20System' };
   for (const [id, pkg] of Object.entries(expected)) {
-    assert.match(html, new RegExp(`href="/free-plan\\?src=solutions-${id}&amp;package=${pkg}#leak-check-form"`), id);
+    assert.match(html, new RegExp(`href="/contact\\?src=solutions-${id}&amp;package=${pkg}#leak-check-form"`), id);
   }
   assert.match(html, /Get my free preview/);
 });

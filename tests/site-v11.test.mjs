@@ -77,7 +77,7 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
     // Next steps, tweaks, own-vs-rent and the calculator are said once, on /prices.
     for (const moved of [/class="ex ex-steps"/, /class="ex ex-tweaks"/, /id="own-vs-rent"/]) assert.doesNotMatch(html, moved, `${type.id}: ${moved} belongs on /prices`);
     assert.match(html, /href="\/prices"/, `${type.id}: link to the details`);
-    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free preview<`), `${type.id}: main button`);
+    assert.match(html, new RegExp(`href="/contact\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free preview<`), `${type.id}: main button`);
     assert.doesNotMatch(html, /quick fix/i, `${type.id}: banned wording`);
     assert.doesNotMatch(html, /\bAI\b/, `${type.id}: no AI copy`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${type.id}"`), `${type.id}: canonical`);
