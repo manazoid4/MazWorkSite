@@ -17,15 +17,21 @@ const EXTRA_GROUPS = [
   {
     title: 'Get started',
     links: [
-      { href: '/free-plan', label: 'Get my free preview' },
-      { href: '/contact', label: 'Bigger jobs and contact' },
-      { href: '/demos', label: 'Bigger build demos' },
+      { href: '/contact', label: 'Free preview, enquiries and bigger jobs' },
       { href: '/whats-new', label: 'What’s new' },
     ],
   },
   {
     title: 'Work',
-    links: CASE_STUDY_PROJECTS.map((project) => ({ href: `/work/${project.id}`, label: project.name })),
+    links: [
+      { href: '/proof', label: 'Proof and things I’ve built' },
+      ...CASE_STUDY_PROJECTS.map((project) => ({ href: `/work/${project.id}`, label: project.name })),
+      { href: '/rotareason', label: 'RotaReason' },
+      { href: '/maz-core', label: 'MAZ Core' },
+      { href: '/maz-pocket-ai', label: 'MAZ Pocket' },
+      { href: '/complaints/sample/health-check', label: 'Sample complaints health check' },
+      { href: '/complaints/sample/board-report', label: 'Sample complaints board report' },
+    ],
   },
 ];
 

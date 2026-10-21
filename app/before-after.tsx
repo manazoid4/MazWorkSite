@@ -1,5 +1,5 @@
 import './home-visuals.css';
-import { KitIcon } from './brand-kit/kit-icon';
+import { KitIcon } from './kit-icon';
 
 /** One row of the "Today / Set up" graphic: the owner's pain, the menu job that fixes it, what happens instead. */
 export type ChangeRow = { key: string; icon: string; before: string; name: string; after: string };

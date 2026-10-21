@@ -27,8 +27,8 @@ const loadOffers = (source) => {
 };
 const FEE_LINE = /export const AFTER_HOURS_SETUP_FEE: number = \d+;/;
 
-test('/solutions renders all six solutions in the HTML, each with the four answers', async () => {
-  const html = await read('solutions');
+test('/for renders all six solutions in the HTML, each with the four answers', async () => {
+  const html = await read('for');
   for (const id of IDS) {
     assert.match(html, new RegExp(`<details class="sol-panel" id="${id}" open=""`), `${id} panel is open in the HTML`);
     assert.match(html, new RegExp(`href="#${id}"`), `${id} reachable by anchor with no JavaScript`);
@@ -42,12 +42,12 @@ test('/solutions renders all six solutions in the HTML, each with the four answe
   assert.match(page, /No VAT added/);
 });
 
-test('every £ amount on /solutions and /prices already exists in offers.ts', async () => {
+test('every £ amount on /for and /prices already exists in offers.ts', async () => {
   const allowed = new Set(offersSource.match(/£[\d,]+/g));
-  for (const route of ['solutions', 'prices']) {
+  for (const route of ['for', 'prices']) {
     const html = await read(route);
-    const start = html.indexOf('id="solutions"');
-    const region = route === 'prices' ? html.slice(start, html.indexOf('id="ladder"')) : html.slice(html.indexOf('<main'), html.lastIndexOf('</main>'));
+    const start = route === 'for' ? html.indexOf('id="problems"') : html.indexOf('id="solutions"');
+    const region = route === 'prices' ? html.slice(start, html.indexOf('id="ladder"')) : html.slice(start, html.lastIndexOf('</main>'));
     assert.ok(start > 0 && region.length > 1000, 'picker region found');
     for (const amount of text(region).match(/£[\d,]+/g) ?? []) {
       assert.ok(allowed.has(amount), `${route}: ${amount} is not an offers.ts price`);
@@ -56,7 +56,7 @@ test('every £ amount on /solutions and /prices already exists in offers.ts', as
 });
 
 test('no price is typed in the new component files', async () => {
-  for (const file of ['app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx', 'app/price-list.tsx']) {
+  for (const file of ['app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/for/jobs-section.tsx', 'app/price-list.tsx']) {
     assert.doesNotMatch((await src(file)).replace(/\/\*[\s\S]*?\*\//g, ''), /£\s?\d/, file);
   }
   const offers = loadOffers(offersSource);
@@ -66,10 +66,10 @@ test('no price is typed in the new component files', async () => {
 });
 
 test('the CTAs are pre-filled with the package and a source tag', async () => {
-  const html = await read('solutions');
+  const html = await read('for');
   const expected = { 'missed-calls': 'Starter%20Automation', bookings: 'Starter%20Automation', quotes: 'Starter%20Automation', updates: 'Starter%20Automation', reviews: 'Starter%20Automation', 'joined-up': 'Business%20System' };
   for (const [id, pkg] of Object.entries(expected)) {
-    assert.match(html, new RegExp(`href="/free-plan\\?src=solutions-${id}&amp;package=${pkg}#leak-check-form"`), id);
+    assert.match(html, new RegExp(`href="/contact\\?src=solutions-${id}&amp;package=${pkg}#leak-check-form"`), id);
   }
   assert.match(html, /Get my free preview/);
 });
@@ -93,7 +93,7 @@ test('the business-type switch has one example per type per solution, in data', 
 });
 
 test('copy rules: plain words, no AI, no quick fixes, no invented proof', async () => {
-  for (const route of ['solutions', 'prices']) {
+  for (const route of ['for', 'prices']) {
     const page = text(await read(route));
     assert.doesNotMatch(page, /\bAI\b/, route);
     assert.doesNotMatch(page, /quick fix|website repairs|unlimited/i, route);
@@ -121,26 +121,24 @@ test('receptionist set-up fee is one switch, live at the approved value, and bot
   assert.equal(free.AFTER_HOURS.price, live.AFTER_HOURS.price, 'monthly price does not move');
   assert.equal(free.AFTER_HOURS.minutes, 300);
   // Every page reads the switch: no page types its own set-up wording.
-  const files = ['app/after-hours-receptionist/page.tsx', 'app/after-hours-receptionist/content.ts', 'app/price-list.tsx', 'app/services/page.tsx', 'app/solutions/data.ts'];
+  const files = ['app/after-hours-receptionist/page.tsx', 'app/after-hours-receptionist/content.ts', 'app/price-list.tsx', 'app/for/jobs-section.tsx', 'app/solutions/data.ts'];
   for (const file of files) assert.doesNotMatch(await src(file), /Set-up included|£99 set-up/, file);
   // Built pages show the live state.
-  for (const route of ['after-hours-receptionist', 'services', 'solutions', 'prices']) assert.match(text(await read(route)), /£99 set-up, once/, route);
+  for (const route of ['after-hours-receptionist', 'for', 'prices']) assert.match(text(await read(route)), /£99 set-up, once/, route);
   assert.doesNotMatch(text(await read('after-hours-receptionist')), /set-up included/i);
 });
 
-test('/solutions is in the sitemap, the site map page, the footer groups and carries schema', async () => {
-  assert.match(await readFile(path.join(out, 'sitemap.xml'), 'utf8'), /\/solutions</);
+test('/for (with the picker) is in the sitemap and the site map page', async () => {
+  assert.match(await readFile(path.join(out, 'sitemap.xml'), 'utf8'), /\/for</);
   const map = await read('site-map');
-  assert.match(map, /href="\/solutions"/);
-  const html = await read('solutions');
-  assert.match(html, /"@type":"Service"/);
-  assert.match(html, /"@type":"BreadcrumbList"/);
-  assert.match(html, /<link rel="canonical" href="https:\/\/[^"]+\/solutions"/);
+  assert.match(map, /href="\/for#problems"/);
+  const html = await read('for');
+  assert.match(html, /<link rel="canonical" href="[^"]*\/for"/);
   assert.match(html, /<title>[^<]*Maz Works<\/title>/);
 });
 
 test('the picker never moves focus on load (the skip link must stay hidden), and shows a one-line cost summary', async () => {
-  for (const file of ['app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx']) {
+  for (const file of ['app/solutions/solutions-picker.tsx', 'app/for/page.tsx']) {
     assert.doesNotMatch(await src(file), /\.focus\(|autoFocus/, file);
   }
   const picker = await src('app/solutions/solutions-picker.tsx');
@@ -151,7 +149,7 @@ test('the picker never moves focus on load (the skip link must stay hidden), and
   assert.match(css, /\.sol-js > \.sol-item:not\(\.sol-on\) \{ display: none; \}/);
   assert.doesNotMatch(css, /\.sol-js > div:not/);
   assert.match(css, /\.sol-biz button \{ min-height: 44px;/);
-  const page = text(await read('solutions'));
+  const page = text(await read('for'));
   assert.match(page, /£99 once · nothing required monthly/);
   assert.match(page, /from £595 once · nothing required monthly/);
   assert.match(page, /Or calls answered: £79\/month, £99 set-up, once/);

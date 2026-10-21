@@ -1,0 +1,18 @@
+/* Short footer: one row of links, the email, one legal line. Overrides the older footer rules in sales.css. */
+.mw-site-footer.mw-footer-clean { padding: 0 0 28px; display: block; border-top: 0; }
+.mw-site-footer.mw-footer-clean > .mw-footer-links { margin-top: clamp(24px, 4vw, 40px); padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2px 24px; border-top: 1px solid var(--line); }
+.mw-site-footer.mw-footer-clean .mw-footer-links a { min-height: 44px; color: var(--ink); font-size: .9rem; font-weight: 600; text-decoration: none; }
+.mw-site-footer.mw-footer-clean .mw-footer-links a:last-child { color: var(--plum); text-decoration: underline; }
+.mw-site-footer.mw-footer-clean .mw-footer-links a:hover { text-decoration: underline; }
+.mw-site-footer.mw-footer-clean > .mw-footer-bottom { margin-top: 6px; padding: 0; display: block; border: 0; color: var(--muted); font-size: .85rem; }
+
+/* Default contact band on every other page: pale blue, soft, sans (replaces the old mono look). */
+.site-footer > .mw-footer-convert { margin: clamp(40px, 6vw, 72px) 0 0; padding: clamp(32px, 5vw, 56px) clamp(18px, 4vw, 48px); border: 0; background: var(--sky-tint); box-shadow: 0 0 0 100vmax var(--sky-tint); clip-path: inset(0 -100vmax); font-family: var(--sans); font-size: 17px; color: var(--ink); }
+.mw-footer-convert .eyebrow { padding: 0; border: 0; background: transparent; color: var(--muted); font-family: var(--sans); font-size: .95rem; letter-spacing: 0; text-transform: none; }
+.mw-footer-convert .mw-footer-ask { font-family: var(--sans); font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.15; }
+.mw-footer-convert .mw-footer-line, .mw-footer-convert .mw-newsletter p, .mw-footer-convert .mw-newsletter label { font-family: var(--sans); font-size: 1rem; }
+.mw-footer-convert .button { border: 0; border-radius: 8px; box-shadow: none; font-family: var(--sans); }
+.mw-footer-convert .text-link { color: var(--plum); font-family: var(--sans); font-size: .95rem; }
+.mw-footer-convert input { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-family: var(--sans); }
+.mw-footer-convert .mw-newsletter button { border: 0; border-radius: 8px; background: var(--plum); color: var(--cream); font-family: var(--sans); }
+.mw-site-footer.mw-footer-clean .mw-footer-links a, .mw-site-footer.mw-footer-clean > .mw-footer-bottom { font-family: var(--sans); }

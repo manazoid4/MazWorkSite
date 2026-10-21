@@ -59,7 +59,7 @@ test('copy rules hold in the example and voice data: no price, no AI, no quick f
 
 test('every enquiry link on a page carries the industry, the origin page and the job', () => {
   for (const id of IDS) {
-    const links = [...page(id).matchAll(/href="(\/free-plan\?[^"]*src=for-[^"]*)"/g)].map(match => decode(match[1]));
+    const links = [...page(id).matchAll(/href="(\/contact\?[^"]*src=for-[^"]*)"/g)].map(match => decode(match[1]));
     assert.ok(links.length >= 3, `${id}: has trade links`);
     for (const link of links) {
       const url = new URL(link, 'https://example.test');
@@ -74,7 +74,7 @@ test('every enquiry link on a page carries the industry, the origin page and the
 
 test('journey: a niche page link pre-fills industry and job, and the delivered enquiry contains them', async () => {
   process.env.RESEND_API_KEY = 'test-placeholder';
-  const link = decode(/href="(\/free-plan\?[^"]*src=for-roofers[^"]*)"/.exec(page('roofers'))[1]);
+  const link = decode(/href="(\/contact\?[^"]*src=for-roofers[^"]*)"/.exec(page('roofers'))[1]);
   const read = context.readTradeContext(new URL(link, 'https://example.test').search);
   assert.equal(read.trade, 'roofers');
   assert.equal(read.problem, 'lead-capture');

@@ -15,7 +15,7 @@ export function FooterConvert() {
         <p className="mw-footer-line">Tell me what happens today and what you would like to change. I’ll read it myself and reply with a sensible next step.</p>
         <p className="mw-footer-actions">
           <a className="button button-signal" href="/contact?src=footer-convert#contact">{ENQUIRY_CTA}</a>
-          <a className="text-link" href="/free-plan?src=footer-convert">See how the free preview works</a>
+          <a className="text-link" href="/contact?src=footer-convert">See how the free preview works</a>
         </p>
       </div>
       <NewsletterSignup

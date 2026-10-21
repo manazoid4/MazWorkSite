@@ -97,10 +97,10 @@ test('only POST is accepted', async () => {
   assert.equal(res.statusCode, 405);
 });
 
-test('the /lab signup posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
-  const html = await readFile(new URL('../out/lab.html', import.meta.url), 'utf8');
+test('the footer signup (seen on /proof) posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
+  const html = await readFile(new URL('../out/proof.html', import.meta.url), 'utf8');
   const section = html.match(/<section class="mw-newsletter"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(section, '/lab should include the mailing-list signup');
+  assert.ok(section, '/proof should include the mailing-list signup');
   const form = section.match(/<form[^>]*>/)?.[0] ?? '';
   assert.match(form, /method="post"/);
   assert.match(form, /action="\/api\/subscribe"/);
@@ -155,7 +155,7 @@ test('the homepage footer has a direct enquiry form while other footers keep the
   const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
   assert.match(src, /ENQUIRY_CTA/);
   assert.match(src, /You don.t need to name the right service/);
-  assert.match(src, /free-plan\?src=footer-convert/);
+  assert.match(src, /contact\?src=footer-convert/);
   assert.match(src, /<NewsletterSignup/);
   const chrome = await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8');
   assert.match(chrome, /<FooterConvert \/>/);

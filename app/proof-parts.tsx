@@ -20,7 +20,7 @@ export type DemoItem = { name: string; bottleneck: string; built: string[]; href
 
 /** Demonstrations built by Maz Works with invented data. Shown separately from real projects. */
 export const DEMOS: DemoItem[] = [
-  { name: 'Complaints dashboard, board report and staff toolkit', bottleneck: 'Complaint records that nobody has turned into decisions for management or the board.', built: ['A tracker and dashboard', 'A board-ready slide deck and PDF', 'An action tracker, escalation tree and staff guides'], href: '/complaints', note: 'Invented data for a fictional firm. No client uses these yet.' },
+  { name: 'Complaints dashboard, board report and staff toolkit', bottleneck: 'Complaint records that nobody has turned into decisions for management or the board.', built: ['A tracker and dashboard', 'A board-ready slide deck and PDF', 'An action tracker, escalation tree and staff guides'], href: '/professional-teams#more-demos', note: 'Invented data for a fictional firm. No client uses these yet.' },
 ];
 
 function Card({ kind, name, image, bottleneck, built, impact, href, hrefLabel, limit }: { kind: Kind; name: string; image?: Project['image']; bottleneck: string; built: readonly string[]; impact: string; href: string; hrefLabel: string; limit: string }) {
@@ -98,7 +98,7 @@ export function ScopeSheetPreview() {
         <dt>Running costs that aren’t mine</dt><dd>The apps you pay directly and roughly what they cost.</dd>
         <dt>Price and date</dt><dd>One fixed price and a delivery date. You sign it off before any work starts.</dd>
       </dl>
-      <p className="b2b-fine">A blank template. <a href="/scope-sheet">See the scope sheet page</a>.</p>
+      <p className="b2b-fine">A blank template. <a href="/contact#scope">See the scope sheet page</a>.</p>
     </details>
   );
 }

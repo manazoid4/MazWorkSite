@@ -35,7 +35,7 @@ test('the receptionist page shows the price, both CTAs, safety and FAQ', async (
   assert.match(page, /£79\/month/);
   assert.match(page, /Calls answered when\s+you can’t\s+pick\s+up/);
   assert.doesNotMatch(page, /never miss|first ring|every call answered|guarantee[sd]? (more|bookings|leads)/i);
-  assert.match(html, /href="\/free-plan\?src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
+  assert.match(html, /href="\/contact\?intent=preview&amp;src=after-hours&amp;package=After-Hours%20Receptionist#leak-check-form"/);
   assert.match(page, /Get my free preview/);
   assert.match(html, /href="#try"/);
   assert.match(page, /Safety and privacy/);
@@ -67,16 +67,15 @@ test('£79/month is typed only in offers.ts', async () => {
 
 test('the offer stays discoverable without the removed homepage workflow panel', async () => {
   assert.match(await read('index'), /href="\/local-businesses"/, 'the homepage still routes local businesses to the relevant services');
-  for (const route of ['services', 'prices']) {
+  for (const route of ['for', 'prices']) {
     assert.match(await read(route), /href="\/after-hours-receptionist"/, `${route} links the receptionist page`);
   }
   assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /\/after-hours-receptionist</);
   // The accepted-package list moved from the form into app/trade-context.ts (trade sprint); the form reads it from there.
-  const form = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
+  const form = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
   const knownPackages = await readFile(path.join(root, 'app', 'trade-context.ts'), 'utf8');
-  assert.match(form, /KNOWN_PACKAGES/);
   assert.match(knownPackages, /AFTER_HOURS\]/, 'the free preview form accepts ?package=After-Hours Receptionist');
 });
 
@@ -104,7 +103,7 @@ test('the receptionist page offers the cheaper fix honestly, and a minutes check
   assert.match(page, /Four ways to handle a missed call/);
   assert.match(page, /Missed-call text-back\s*£99 once/);
   assert.match(page, /skip the monthly fee/);
-  assert.match(html, /href="\/services\/missed-call"/);
+  assert.match(html, /href="\/for\#job-missed-call"/);
   assert.match(page, /Will\s+300\s+minutes cover you\?/);
   assert.match(page, /Your own figures, not a forecast/);
 });
@@ -116,7 +115,7 @@ test('the new pricing blocks type no price of their own (solutions data and pick
   assert.ok(start > 0 && end > start);
   const block = offers.slice(start, end).replace("price: '£0'", '');
   assert.doesNotMatch(block, /£\s?\d/, 'missed-call options read prices from the offers');
-  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx', 'app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx']) {
+  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx', 'app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/for/jobs-section.tsx']) {
     assert.doesNotMatch((await readFile(path.join(root, file), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, ''), /£\s?\d/, file);
   }
 });

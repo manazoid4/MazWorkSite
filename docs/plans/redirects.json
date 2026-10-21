@@ -1,0 +1,118 @@
+[
+  {
+    "source": "/free-plan",
+    "destination": "/contact?intent=preview"
+  },
+  {
+    "source": "/start",
+    "destination": "/contact?intent=setup"
+  },
+  {
+    "source": "/scope-sheet",
+    "destination": "/contact#scope"
+  },
+  {
+    "source": "/refer",
+    "destination": "/contact#refer"
+  },
+  {
+    "source": "/video",
+    "destination": "/local-businesses#video"
+  },
+  {
+    "source": "/managed-presence",
+    "destination": "/local-businesses#managed-presence"
+  },
+  {
+    "source": "/missed-calls-calculator",
+    "destination": "/local-businesses#missed-calls-calculator"
+  },
+  {
+    "source": "/content-day",
+    "destination": "/local-businesses#video"
+  },
+  {
+    "source": "/demos",
+    "destination": "/after-hours-receptionist#bigger-builds"
+  },
+  {
+    "source": "/b2b",
+    "destination": "/professional-teams"
+  },
+  {
+    "source": "/b2b/assessment",
+    "destination": "/professional-teams"
+  },
+  {
+    "source": "/complaints",
+    "destination": "/professional-teams#complaints"
+  },
+  {
+    "source": "/complaints-improvement",
+    "destination": "/professional-teams#complaints"
+  },
+  {
+    "source": "/audit",
+    "destination": "/professional-teams#what-i-set-up"
+  },
+  {
+    "source": "/lab",
+    "destination": "/proof#built"
+  },
+  {
+    "source": "/work",
+    "destination": "/proof"
+  },
+  {
+    "source": "/solutions",
+    "destination": "/for#problems"
+  },
+  {
+    "source": "/services",
+    "destination": "/for#jobs"
+  },
+  {
+    "source": "/brand-kit",
+    "destination": "/for/creators"
+  },
+  {
+    "source": "/linkedin",
+    "destination": "/"
+  },
+  {
+    "source": "/brag",
+    "destination": "/"
+  },
+  {
+    "source": "/services/missed-call",
+    "destination": "/for#job-missed-call"
+  },
+  {
+    "source": "/services/reminders",
+    "destination": "/for#job-reminders"
+  },
+  {
+    "source": "/services/reviews",
+    "destination": "/for#job-reviews"
+  },
+  {
+    "source": "/services/quote-follow-up",
+    "destination": "/for#job-quote-follow-up"
+  },
+  {
+    "source": "/services/payment-reminders",
+    "destination": "/for#job-payment-reminders"
+  },
+  {
+    "source": "/services/online-booking",
+    "destination": "/for#job-online-booking"
+  },
+  {
+    "source": "/services/one-list",
+    "destination": "/for#job-one-list"
+  },
+  {
+    "source": "/services/job-updates",
+    "destination": "/for#job-job-updates"
+  }
+]

@@ -1,15 +1,15 @@
 /* Homepage visuals: before/after (what changes), steps (how we work), video overlay. */
 .hv-ba { display: grid; gap: 10px; margin: 8px 0 14px; max-width: 860px; }
-.hv-col { border: 3px solid var(--ink); padding: 16px 16px 8px; background: var(--surface); }
+.hv-col { border: 1px solid var(--line); padding: 16px 16px 8px; background: var(--surface); }
 .hv-col h3 { font-family: var(--mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
 .hv-col ul { list-style: none; padding: 0; margin: 0; }
 .hv-col li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--soft-line); line-height: 1.35; min-height: 44px; }
 .hv-col li:first-child { border-top: 0; }
 .hv-col strong { display: block; }
-.hv-icon { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 50%; }
-.hv-before { background: #f1ede6; }
+.hv-icon { flex: 0 0 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; }
+.hv-before { background: var(--peach); }
 .hv-before li { color: var(--muted); }
-.hv-before .hv-icon { background: #ffd9d2; }
+.hv-before .hv-icon { background: var(--cream); }
 .hv-after .hv-icon { background: var(--ok); color: var(--surface); border-color: var(--ink); }
 .hv-arrow { justify-self: center; font-size: 1.6rem; font-weight: 800; line-height: 1; }
 @media (min-width: 720px) {
@@ -17,7 +17,7 @@
   .hv-arrow { align-self: center; transform: rotate(-90deg); }
 }
 .hv-steps { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 10px; }
-.hv-steps li { display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; align-items: center; border: 2px solid var(--ink); padding: 10px 14px; background: var(--surface); }
+.hv-steps li { display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; align-items: center; border: 1px solid var(--line); padding: 10px 14px; background: var(--surface); }
 .hv-steps li > span:last-child { grid-column: 2; color: var(--muted); }
 .hv-n { grid-row: span 2; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: var(--surface); font-weight: 800; font-family: var(--mono); }
 @media (min-width: 900px) { .hv-steps { grid-template-columns: repeat(4, 1fr); } .hv-steps li { grid-template-columns: 1fr; row-gap: 4px; align-items: start; align-content: start; } .hv-steps li > span:last-child { grid-column: 1; } .hv-n { grid-row: auto; } }
@@ -26,24 +26,24 @@
 .s-video { position: relative; }
 .hv-vframe { position: relative; }
 .hv-play { position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 0; background: rgba(20, 22, 18, .28); color: #fff; cursor: pointer; font: inherit; font-weight: 800; text-shadow: 0 1px 6px rgba(0,0,0,.5); padding: 0; }
-.hv-play-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--signal); border: 3px solid var(--ink); display: grid; place-items: center; }
+.hv-play-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--signal); border: 1px solid var(--line); display: grid; place-items: center; }
 .hv-play-icon::after { content: ""; margin-left: 6px; border-style: solid; border-width: 13px 0 13px 22px; border-color: transparent transparent transparent var(--ink); }
 .hv-play:focus-visible { outline: 4px solid var(--signal); outline-offset: -8px; }
 .hv-vcap { margin-top: 10px; font-size: 1rem; line-height: 1.4; }
 
 /* The business cards fade out of the hero's sand before the next section. */
 .s-home #build { position: relative; isolation: isolate; background: transparent; padding-bottom: var(--s-gap); }
-.s-home #build::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100cqw - 100%) / -2); background: linear-gradient(180deg, var(--sand), var(--sage) 28%, var(--sage) 75%, var(--paper)); pointer-events: none; }
+.s-home #build::before { content: ""; position: absolute; z-index: -1; inset: 0 calc((100cqw - 100%) / -2); background: linear-gradient(180deg, var(--cream), var(--peach) 28%, var(--peach) 75%, var(--paper)); pointer-events: none; }
 
 /* Offer links share the site's light cards and keep orange for the action. */
-.s-teaser { margin-top: 12px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 18px 20px; border: 1px solid var(--ink); border-left: 5px solid var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: var(--card-shadow); transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out; }
+.s-teaser { margin-top: 12px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 18px 20px; border: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; box-shadow: none; transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out; }
 .s-teaser > * { grid-column: 1; }
-.s-teaser-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: #ffb36b; }
+.s-teaser-tag { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--plum); }
 .s-teaser > .s-teaser-tag { color: var(--muted); }
 .s-teaser strong { font-size: 1.15rem; }
 .s-teaser span:not(.s-teaser-tag):not(.s-teaser-go) { color: var(--muted); font-size: .94rem; }
 .s-teaser-go { grid-column: 2; grid-row: 1 / span 3; font-size: 1.6rem; font-weight: 800; color: var(--signal-text); transition: transform 160ms ease-out; }
-.s-teaser:hover, .s-teaser:focus-visible { transform: translateY(-2px); background: var(--wheat); box-shadow: 4px 4px 0 var(--ink); }
+.s-teaser:hover, .s-teaser:focus-visible { transform: translateY(-2px); background: var(--wheat); box-shadow: none; }
 .s-teaser:hover .s-teaser-go, .s-teaser:focus-visible .s-teaser-go { transform: translateX(4px); }
 .s-teaser:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .s-teaser, .s-teaser-go { transition: none; } }

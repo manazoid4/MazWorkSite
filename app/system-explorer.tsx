@@ -69,8 +69,8 @@ export function SystemExplorer() {
             <p className={`se-result${!live || (isActive && step >= system.steps.length) ? ' is-on' : ''}`}><strong>{system.result}</strong></p>
             <p className="se-price">{systemPrice(system)}</p>
             <div className="se-actions">
-              <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(system.offerName)}#leak-check-form`}>{MAIN_CTA}</a>
-              <a className="se-try" href="/demos">Bigger build? See a free preview →</a>
+              <a className="button button-signal" href={`/contact?package=${encodeURIComponent(system.offerName)}#leak-check-form`}>{MAIN_CTA}</a>
+              <a className="se-try" href="/after-hours-receptionist#bigger-builds">Bigger build? See a free preview →</a>
               {live ? <button type="button" className="se-replay" onClick={() => play(system.id)}>Replay</button> : null}
             </div>
           </div>

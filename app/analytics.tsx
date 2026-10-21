@@ -59,7 +59,7 @@ export function ConversionTracker() {
   }
   const click = (event: MouseEvent) => { const link = (event.target as Element).closest?.('a'); if (!link) return;
    const href = link.getAttribute('href') || '';
-   if (href.includes('/free-plan') || href.includes('/b2b/assessment') || href === '#check' || href === '#assessment') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname,attribution:rememberedAttribution()});
+   if (href.includes('/contact') || href.includes('/b2b/assessment') || href === '#check' || href === '#assessment') trackConversion('CTA clicked', {placement: link.closest('section')?.id || 'navigation',page:location.pathname,attribution:rememberedAttribution()});
   };
   document.addEventListener('click', click);
   const observer = new IntersectionObserver(entries => { for (const entry of entries) if (entry.isIntersecting) {trackConversion('What-we-do section viewed',{section:entry.target.id});observer.unobserve(entry.target);} },{threshold:0.1});

@@ -84,7 +84,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'Do you pay for referrals?',
-    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit, bigger jobs pay more. Ask the business to put your name in their first message. I pay within 7 days of their first invoice being paid. Details on the <a href="/refer">Refer a business</a> page.`,
+    answer: `Yes, ${REFERRAL_REWARD} by bank transfer, no limit, bigger jobs pay more. Ask the business to put your name in their first message. I pay within 7 days of their first invoice being paid. Details on the <a href="/contact#refer">Refer a business</a> page.`,
   },
 ];
 

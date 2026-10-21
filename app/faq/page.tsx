@@ -45,7 +45,7 @@ export default function FaqPage() {
         <h1 id="faq-title">Questions? Straight answers.</h1>
         <p>Tap a question. No call needed.</p>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan#leak-check-form">Get my free preview</a>
+          <a className="button button-signal" href="/contact#leak-check-form">Get my free preview</a>
         </div>
       </section>
 

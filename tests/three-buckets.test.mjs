@@ -7,15 +7,15 @@ const prices = await readFile(new URL('../app/prices/page.tsx', import.meta.url)
 const priceList = await readFile(new URL('../app/price-list.tsx', import.meta.url), 'utf8');
 
 test('the shared third bucket consistently describes feedback, reporting and improvement', () => {
-  assert.match(buckets, /purpose: 'Use feedback and reporting to understand what needs to improve\.'/);
+  assert.match(buckets, /description: 'See where work gets stuck, spot recurring problems and make better-informed decisions\.'/);
   assert.match(buckets, /examples: \['Dashboards, KPIs and deadlines', 'Customer feedback and complaints', 'Improvement actions'\]/);
-  assert.match(buckets, /href: '\/professional-teams'/);
+  assert.match(buckets, /href: '\/professional-teams#demonstrations'/);
   assert.match(buckets, /Reporting and improvement: quoted to scope/);
   assert.doesNotMatch(buckets, /CARE_PLANS|Care \$\{/);
 });
 
 test('prices links the third bucket to professional improvement and labels optional maintenance separately', () => {
-  assert.match(prices, /<li id="keep-improve"><strong>Keep &amp; Improve<\/strong>[\s\S]*?Dashboards, reporting and complaints improvement: quoted to scope\.[\s\S]*?href="\/professional-teams"/);
+  assert.match(prices, /id="keep-improve">Dashboards, reporting and complaints improvement are quoted to scope:[\s\S]*?href="\/professional-teams"/);
   assert.match(prices, /Need care or maintenance\?[\s\S]*?href="#extras">See options/);
   assert.match(priceList, /<Fold id="extras" title="Small set-ups, add-ons and care">/);
   assert.match(priceList, /<div className="s-extras-care" id="care">/);

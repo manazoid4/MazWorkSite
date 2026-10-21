@@ -93,8 +93,8 @@ test('both enquiry forms fail safely with a recoverable email fallback', async (
   }
 });
 
-test('free-plan referral attribution survives the JavaScript submit path', async () => {
-  const source = await readSource('app', 'free-plan', 'leak-check-form.tsx');
+test('contact referral attribution survives the JavaScript submit path', async () => {
+  const source = await readSource('app', 'demo-request-form.tsx');
   const api = await readSource('api', 'enquiry.js');
 
   assert.match(source, /data\.get\('referred_by'\)/);

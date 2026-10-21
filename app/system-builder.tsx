@@ -16,7 +16,7 @@ export function builderHref(trade: string, headaches: string[]): string {
   if (trade) params.set('trade', trade);
   if (systems.length) params.set('systems', systems.join(','));
   if (quote.offer) params.set('package', quote.offer.name);
-  return `/free-plan?${params.toString()}#leak-check-form`;
+  return `/contact?${params.toString()}#leak-check-form`;
 }
 
 /**

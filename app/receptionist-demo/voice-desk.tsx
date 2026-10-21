@@ -570,7 +570,7 @@ export function VoiceDesk() {
   const message = summary ? ownerMessage(summary, { business: config.name, time: madeAt, seconds }) : null;
   const truth = source === 'default' ? 'Demo in your browser, not a real phone line.'
     : `Demo in your browser, not a real phone line. Made for ${config.name}: not ${config.name}’s real line.`;
-  const planHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
+  const planHref = `/contact?intent=preview&src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
   const chips = phase === 'idle' ? starter : phase === 'ended' ? [] : hints;
   const live_ = isLive(phase);
   /** No usable microphone (none, blocked, muted): the box under the panel is the way to answer. */

@@ -58,13 +58,13 @@ export function readTradeContext(search: string): TradeContext {
 
 /** Public contract used by trade CTAs. No package is inferred from a demo. */
 export function buildTradeEnquiryHref(trade: string, options: { problem?: string; proof?: string; package?: string } = {}): string {
-  if (!isTrade(trade)) return '/free-plan#leak-check-form';
+  if (!isTrade(trade)) return '/contact#leak-check-form';
   const params = new URLSearchParams({ src: `for-${trade}`, trade, from: `/for/${trade}` });
   if (options.problem && problemsForTrade(trade).some(item => item.id === options.problem)) params.set('problem', options.problem);
   const proof = options.proof;
   if (proof === trade) params.set('proof', proof);
   if (options.package && KNOWN_PACKAGES.includes(options.package)) params.set('package', options.package);
-  return `/free-plan?${params}#leak-check-form`;
+  return `/contact?${params}#leak-check-form`;
 }
 
 export function changeTrade(context: TradeContext, trade: string): TradeContext {
@@ -87,7 +87,7 @@ export function contextSearch(search: string, context: TradeContext): string {
   return params.toString();
 }
 
-/** Fallback is the page the form lives on, so a plain homepage submit is not logged as /free-plan. */
+/** Fallback is the page the form lives on, so a plain homepage submit is not logged as /contact. */
 export function enquirySource(search: string, remembered: string, fallback = 'free-plan'): string {
   const value = new URLSearchParams(search).get('src');
   const current = isEnquirySource(value) ? value : `direct (${fallback})`;

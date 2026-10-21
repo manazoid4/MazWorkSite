@@ -60,7 +60,7 @@ export function linkedInHref(href: string, search: string): string {
   if (!isCampaignTag(source)) return href;
   const base = 'https://www.mazworks.uk';
   const url = new URL(href, base);
-  if (url.origin === base && ['/free-plan', '/brand-kit', '/audit', '/complaints', '/b2b', '/b2b/assessment'].includes(url.pathname)) {
+  if (url.origin === base && ['/free-plan', '/brand-kit', '/audit', '/complaints', '/b2b', '/b2b/assessment', '/professional-teams', '/contact'].includes(url.pathname)) {
     url.searchParams.set('src', source);
     return `${url.pathname}${url.search}${url.hash}`;
   }

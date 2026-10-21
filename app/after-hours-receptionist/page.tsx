@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
-import { AFTER_HOURS, MISSED_CALL_OPTIONS } from '../offers';
+import { AFTER_HOURS, CHANGES_WINDOW, MISSED_CALL_OPTIONS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
-import { MAIN_CTA, SITE_URL, VAT_NOTE } from '../site';
+import { CHECK_REPLY_TIME, MAIN_CTA, SITE_URL, VAT_NOTE } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BuyNow } from '../price-list';
 import { ScrollReveal } from '../scroll-reveal';
 import { StickyCheckCta } from '../sticky-cta';
+import { DemoPath } from '../demo-path';
 import { BEST_FOR, CHIPS, COMPARE, COST_MODEL, EMERGENCY_NOTE, FAQS, NEXT, STEPS, TRUST } from './content';
 import { NightCall } from './night-call';
 import { CallDemo } from './call-demo';
@@ -24,6 +25,15 @@ export const metadata: Metadata = {
   openGraph: { title: 'Calls answered when you can’t pick up', description: DESCRIPTION, url: AFTER_HOURS.href, type: 'website', images: [OG_IMAGE] },
 };
 
+/** Folded in from the old /demos page: how a bigger build is previewed before you pay. */
+const BUILD_FAQ = [
+  ['Is the preview really free?', 'Yes. You pay nothing for the free preview or the bigger-build preview, and you are under no obligation to go ahead.'],
+  ['When do I get it?', 'The date is in your scope sheet, based on what the preview needs to show. Prefer to talk it through? A 15-minute call is optional.'],
+  ['What if a preview won’t help?', 'Some jobs are clearer as the free preview and a fixed price alone. If so, that is all you need.'],
+  ['What happens after the preview?', 'If you like it, I send the full scope sheet with one fixed price. Every item is listed and invoiced clearly, with no extra charges later.'],
+  ['What counts as a tweak in the 30 days?', 'Anything that adjusts what I built: wording, timings, steps, notifications, small layout changes, in up to two rounds. Anything not working as agreed is fixed free for 90 days. Something new, like another page, system or app, is priced first so it stays fair.'],
+];
+
 const json = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 
 /** Small line icons for the trust cards (own paths, 24px grid). */
@@ -37,7 +47,7 @@ const TRUST_ICONS: Record<string, string> = {
 };
 
 export default function AfterHoursPage() {
-  const demoHref = `/free-plan?src=after-hours&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`;
+  const demoHref = `/contact?intent=preview&src=after-hours&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`;
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -70,7 +80,7 @@ export default function AfterHoursPage() {
 
       <section className="ah-hero" id="main-content" tabIndex={-1} aria-labelledby="ah-title">
         <div className="ah-hero-copy">
-          <Breadcrumbs items={[{ href: '/services', label: 'Jobs I set up' }, { label: AFTER_HOURS.name }]} />
+          <Breadcrumbs items={[{ href: '/local-businesses', label: 'Local businesses' }, { label: AFTER_HOURS.name }]} />
           <p className="eyebrow">{AFTER_HOURS.name} · new</p>
           <h1 id="ah-title">Calls answered when <em>you can’t pick up</em>.</h1>
           <p className="ah-lede">Busy on a job in the day or closed at night, your calls are answered in your business name. Common questions get answered, details get taken, and you get a clear summary by email.</p>
@@ -190,6 +200,17 @@ export default function AfterHoursPage() {
         <p className="eyebrow">What happens next</p>
         <h2 id="ah-next-title">From free preview to answered calls.</h2>
         <ol className="ah-steps ah-next">{NEXT.map((step, index) => <li key={step.title} style={{ ['--i' as string]: index }}><span className="ah-n" aria-hidden="true">{index + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol>
+      </section>
+
+      <section className="ah-section" id="bigger-builds" aria-labelledby="ah-builds-title">
+        <span id="demos" />
+        <p className="eyebrow">Bigger builds</p>
+        <h2 id="ah-builds-title">Bigger build? See it working before you pay.</h2>
+        <p className="ah-sub">Start with the free preview: no call needed. If your job is a Business System, Launch Page, Website or Custom Software, a full-build preview comes next, by a date we agree. Smaller jobs go straight from the free preview to a fixed price. I usually reply within {CHECK_REPLY_TIME}.</p>
+        <DemoPath source="after-hours-demos" />
+        <p className="s-small"><a href="/prices#next">After it goes live: {CHANGES_WINDOW.name} →</a></p>
+        <div className="s-faq">{BUILD_FAQ.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div>
+        <p className="s-small">Your demo sits behind a private link and access code. Only the people you choose see it.</p>
       </section>
 
       <section className="s-section" id="answers" aria-labelledby="ah-faq-title">

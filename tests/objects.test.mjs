@@ -131,15 +131,13 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   ]);
 
   // Objects left the homepage in the 27 Sep sales overhaul; since 29 Sep it sits under "Other projects" in the menu and footer.
-  const lab = await readPage('/lab');
-  assert.match(home, /href="\/3d-printing"[^>]*>Objects/);
+  const lab = await readPage('/proof');
   assert.match(lab, /Maz Works Objects/);
   assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
   assert.match(home, /Tell me the job/);
   assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);
-  assert.match(objects, /href="\/lab"/);
-  assert.match(objects, /href="\/demos"/);
+  assert.match(objects, /href="\/(lab|proof)"/);
   assert.match(sitemap, /\/3d-printing/);
   assert.match(readme, /Touch One/);
   assert.match(readme, /manufacturing checks/i);

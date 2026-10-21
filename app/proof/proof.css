@@ -1,0 +1,20 @@
+.proof-intro { max-width: 65ch; color: var(--muted); }
+.proof-built { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: 1fr; }
+.proof-built li { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: 12px; background: var(--peach); }
+.proof-built li:nth-child(2n) { background: var(--sky-tint); }
+.proof-built h3 { margin: 0; font-size: 1.2rem; }
+.proof-built p { margin: 0; max-width: 65ch; }
+.proof-built a { color: var(--plum); font-weight: 700; text-underline-offset: 3px; }
+.proof-tag { justify-self: start; padding: 2px 10px; border-radius: 999px; background: var(--surface); font-size: .8rem; font-weight: 700; }
+@media (min-width: 720px) { .proof-built { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .proof-built { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.mw-info + .mw-info { margin-top: clamp(32px, 5vw, 56px); }
+.mw-info .mw-cards li { border: 0; border-top: 0; border-radius: 12px; background: var(--peach); }
+.mw-info .mw-cards li:nth-child(2n) { background: var(--sky-tint); }
+/* Case-study cards: equal height, matching hero-crop screenshots, and the odd card out spans the row. */
+.mw-info > ul.pf-grid { align-items: stretch; }
+.mw-info > ul.pf-grid > .pf-card { display: flex; flex-direction: column; }
+.mw-info > ul.pf-grid > .pf-card img { aspect-ratio: 16 / 10; height: auto; object-fit: cover; object-position: top center; }
+.mw-info > ul.pf-grid > .pf-card .pf-body { flex: 1; display: flex; flex-direction: column; }
+.mw-info > ul.pf-grid > .pf-card .pf-body > a { margin-top: auto; }
+@media (min-width: 720px) { .mw-info > ul.pf-grid > .pf-card:last-child:nth-child(odd) { grid-column: 1 / -1; } }

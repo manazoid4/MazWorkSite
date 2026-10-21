@@ -19,7 +19,7 @@ const load = (name) => {
 const sources = {};
 async function readSource(name) { sources[name] ??= await fs.readFile(path.join(root, 'app', `${name}.ts`), 'utf8'); return sources[name]; }
 function require(name) { if (!sources[name]) throw new Error(`load ${name} first`); return sources[name]; }
-for (const name of ['reply-time', 'site', 'offers', 'systems', 'customer-types', 'free-plan/draft']) {
+for (const name of ['reply-time', 'site', 'offers', 'systems', 'customer-types', 'contact/draft']) {
   if (name === 'reply-time') { sources[name] = (await fs.readFile(path.join(root, 'app', 'reply-time.js'), 'utf8')); continue; }
   await readSource(name);
 }
@@ -35,7 +35,7 @@ const run = (name) => {
 };
 const offers = run('offers');
 const types = run('customer-types');
-const draft = run('free-plan/draft');
+const draft = run('contact/draft');
 
 test('every package is visible on prices with its fit and sign-off check', async () => {
   const prices = await readPage('/prices');
@@ -77,7 +77,7 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
     // Next steps, tweaks, own-vs-rent and the calculator are said once, on /prices.
     for (const moved of [/class="ex ex-steps"/, /class="ex ex-tweaks"/, /id="own-vs-rent"/]) assert.doesNotMatch(html, moved, `${type.id}: ${moved} belongs on /prices`);
     assert.match(html, /href="\/prices"/, `${type.id}: link to the details`);
-    assert.match(html, new RegExp(`href="/free-plan\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free preview<`), `${type.id}: main button`);
+    assert.match(html, new RegExp(`href="/contact\\?src=for-${type.id}&amp;trade=${type.id}&amp;[^"]*#leak-check-form">Get my free preview<`), `${type.id}: main button`);
     assert.doesNotMatch(html, /quick fix/i, `${type.id}: banned wording`);
     assert.doesNotMatch(html, /\bAI\b/, `${type.id}: no AI copy`);
     assert.match(html, new RegExp(`<link rel="canonical" href="[^"]*/for/${type.id}"`), `${type.id}: canonical`);
@@ -102,9 +102,6 @@ test('the homepage serves local and professional visitors and keeps deeper trade
   const sitemap = await fs.readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   for (const type of types.CUSTOMER_TYPES) assert.match(sitemap, new RegExp(`/for/${type.id}<`));
   assert.doesNotMatch(sitemap, /\/brand-kit</);
-  const moved = await readPage('/brand-kit');
-  assert.match(moved, /noindex/);
-  assert.match(moved, /href="\/for\/creators"/);
 });
 
 test('every explainer animation has a reduced-motion still', async () => {
@@ -143,10 +140,10 @@ test('the drafted free plan quotes only prices from offers.ts and picks the righ
 });
 
 test('the free plan form sends the draft and the enquiry email shows it', async () => {
-  const form = await fs.readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
+  const form = await fs.readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
   assert.match(form, /draftFreePlan\(/);
-  // The draft now opens with a one-line owner-review note (trade sprint), then the subject.
-  assert.match(form, /draft: `\$\{reviewNote\}\\n\\n\$\{draft\.subject\}/);
+  // The draft opens with a one-line owner-review note, then the subject.
+  assert.match(form, /Owner review required[\s\S]*\$\{draft\.subject\}/);
   const api = await fs.readFile(path.join(root, 'api', 'enquiry.js'), 'utf8');
   assert.match(api, /Draft reply \(approve, tweak, send\)/);
   assert.match(api, /'draft'\]/);
@@ -154,16 +151,14 @@ test('the free plan form sends the draft and the enquiry email shows it', async 
   assert.match(api, /FOLLOW_UP_EMAILS/);
 });
 
-test('scope sheet and buy-now intake pages export, noindexed, reading from offers.ts', async () => {
-  const scope = await readPage('/scope-sheet');
-  assert.match(scope, /noindex/);
-  assert.match(scope, /Loading your scope sheet/);
-  const start = await readPage('/start');
-  assert.match(start, /noindex/);
-  assert.match(start, /id="leak-check-form"/);
-  assert.match(start, /Day 0/);
-  const sheet = await fs.readFile(path.join(root, 'app', 'scope-sheet', 'scope-sheet.tsx'), 'utf8');
-  assert.doesNotMatch(sheet, /£\s?\d/, 'scope sheet hard-codes no prices');
+test('scope sheet and buy-now intake now live on /contact, reading from offers.ts', async () => {
+  const contact = await readPage('/contact');
+  assert.match(contact, /id="scope"/);
+  assert.match(contact, /Every quote comes as a scope sheet/);
+  assert.match(contact, /id="leak-check-form"/);
+  assert.match(contact, /Day 0/);
+  const page = await fs.readFile(path.join(root, 'app', 'contact', 'page.tsx'), 'utf8');
+  assert.doesNotMatch(page.replace(/\$\{[^}]*\}/g, ''), /£\s?\d/, 'contact page hard-codes no prices except the referral amounts from offers.ts');
 });
 
 test('the local visitor route makes the offer and prices easy to find while trade pages retain their specific preview', async () => {
