@@ -5,7 +5,7 @@ import { IndustryProof } from './industry-proof';
 import { INDUSTRY_PROOFS } from './industry-proof-data';
 import { INDUSTRY_VOICE } from './industry-voice';
 import { ManazirLine } from '../manazir-line';
-import { KitIcon } from '../brand-kit/kit-icon';
+import { KitIcon } from '../kit-icon';
 import { AFTER_HOURS, AUTOMATION_MENU } from '../offers';
 import { MAIN_CTA } from '../site';
 import { buildTradeEnquiryHref } from '../trade-context';

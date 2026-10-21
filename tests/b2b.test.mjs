@@ -146,56 +146,39 @@ const page = async (route) => {
   throw new Error(`Missing static page ${route}`);
 };
 
-test('the professional routes are built, discoverable and use scoped pricing', async () => {
+test('/professional-teams is built, in the sitemap and uses scoped pricing', async () => {
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
-  for (const route of ['b2b', 'complaints', 'audit', 'professional-teams', 'complaints-improvement']) {
-    const html = await page(route);
-    assert.match(sitemap, new RegExp(`/${route}<`));
-    assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b|ai assistant|ai agent/i, `${route} advertises AI`);
-  }
-  assert.match(await page('b2b'), /Your team is losing hours to admin\./);
-  assert.match(await page('b2b'), /Get a Free Business Assessment/);
-  assert.match(await page('complaints'), /Quoted to scope/);
-  assert.match(await page('professional-teams'), /Tell me what's not working/);
-  assert.match(await page('complaints-improvement'), /Tell me what's not working/);
+  const html = await page('professional-teams');
+  assert.match(sitemap, /\/professional-teams</);
+  assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b|ai assistant|ai agent/i, 'advertises AI');
+  assert.match(html, /Tell me what(?:'|&#x27;)s not working/);
+  assert.match(html, /Quoted to scope/);
+  // The retired routes are gone from the export (they redirect in vercel.json).
+  for (const route of ['b2b', 'b2b/assessment', 'complaints', 'complaints-improvement', 'audit']) await assert.rejects(page(route), /Missing static page/, route);
 });
 
-test('complaints page shows the four packages, the samples and the honest limits', async () => {
-  const html = await page('complaints');
+test('professional-teams shows the four packages, the samples and the honest limits', async () => {
+  const html = await page('professional-teams');
   for (const name of ['Complaints Health Check', 'Post-Complaints Analysis &amp; Board Reporting', 'Tailored Complaints Workflows &amp; Staff Toolkit', 'Complete Complaints Improvement Sprint']) assert.ok(html.includes(name), name);
-  const packagesStart = html.indexOf('<ul class="b2b-grid b2b-packs">');
-  const samplesStart = html.indexOf('<section class="b2b-wrap" id="health-check"', packagesStart);
-  const packageCards = html.slice(packagesStart, samplesStart);
-  assert.equal((packageCards.match(/class="b2b-price">Quoted to scope/g) ?? []).length, 4);
-  assert.doesNotMatch(html, /From £(?:295|895|495|1,495)/);
-  assert.match(html, /Not legal or regulatory advice/);
-  assert.match(html, /Fictional example for Northgate Advisory/);
-  assert.match(html, /Easy to see\. Easy to understand\. Easy to act on\./);
-  assert.match(html, /What this tells you/);
-  assert.doesNotMatch(html, /excel|powerpoint|spreadsheet|xlsx/i, 'complaints page names the tools clients could use themselves');
-  assert.doesNotMatch(html, /fully compliant|guaranteed|ombudsman-proof/i);
+  const cards = html.slice(html.indexOf('id="complaints"'), html.indexOf('id="systems"'));
+  assert.equal((cards.match(/class="pt-price">Quoted to scope/g) ?? []).length, 4);
   assert.doesNotMatch(html, /£(295|895|495|1,495)/);
-  assert.match(html, /no records are needed for the initial enquiry/i);
-  assert.match(html, /retention terms are agreed in the written scope before records are shared/i);
-  const handling = html.match(/<section[^>]*aria-labelledby="cp-data"[\s\S]*?<\/section>/)?.[0] || '';
-  assert.doesNotMatch(handling, /within 30 days of delivery|delete my working copies within 30 days/i);
-  assert.match(handling, /Retention and deletion timing for working copies are agreed in the written scope/);
+  assert.doesNotMatch(html, /fully compliant|guaranteed|ombudsman-proof/i);
+  assert.match(html, /Fictional example for Northgate Advisory|invented/);
+  for (const href of ['/complaints/sample/health-check', '/complaints/sample/board-report']) assert.ok(html.includes(`href="${href}"`), href);
+  assert.match(html, /no records are needed to ask/i);
+  assert.match(html, /Retention and deletion timing for working copies are agreed in the written scope/);
+  assert.match(html, /Manazir Hussain/);
 });
 
-test('professional routes show no proposed figures and offer labelled report and workflow demonstrations', async () => {
-  const [prices, b2b, improvement, teams] = await Promise.all(['prices', 'b2b', 'complaints-improvement', 'professional-teams'].map(page));
+test('prices keeps the practice tier with no proposed figures', async () => {
+  const prices = await page('prices');
   const practices = prices.slice(prices.indexOf('id="practices"'));
   assert.match(practices, /Business System: From £595/);
   assert.match(practices, /Custom Software: From £2,450/);
   assert.doesNotMatch(practices, /From £595 to £2,450|£2,450 maximum|up to £2,450/i);
-  for (const html of [prices, b2b]) {
-    assert.doesNotMatch(html, /£850|£450–£750/);
-    assert.match(html, /Quoted to scope/);
-  }
-  for (const href of ['/complaints/sample/board-report', '/complaints#board-reporting', '/complaints#workflows']) assert.ok(improvement.includes(`href="${href}"`), href);
-  for (const href of ['/complaints#board-reporting', '/complaints#workflows']) assert.ok(teams.includes(`href="${href}"`), href);
-  assert.match(improvement, /no records are needed at this stage/i);
-  assert.match(improvement, /retention terms are agreed in the written scope before any records are shared/i);
+  assert.doesNotMatch(prices, /£850|£450–£750/);
+  assert.match(prices, /Quoted to scope/);
 });
 
 test('the downloadable sample PDFs exist and are real files', async () => {
@@ -211,10 +194,10 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /View a scope sheet/);
 });
 
-test('the header stays focused and the footer is the short list of eight links', async () => {
+test('the header stays focused (six links and the Free preview button) and the footer is the short list of eight links', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  assert.match(header, /href="\/proof"/);
+  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
   for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));

@@ -51,7 +51,7 @@ export default function WhatsNewPage() {
         <p>Real changes to the site and customer journey. Short release notes, what changed, and no invented results.</p>
         <div className="mw-actions">
           <a className="button button-signal" href={`#${LATEST_MAZ_WORKS_UPDATE.id}`}>Latest update</a>
-          <a className="text-link" href="/lab">See the work <span aria-hidden="true">→</span></a>
+          <a className="text-link" href="/proof">See the work <span aria-hidden="true">→</span></a>
         </div>
       </section>
 
@@ -97,7 +97,7 @@ export default function WhatsNewPage() {
           <p>I’ll send a working preview and a fixed price. No call needed.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan?src=whats-new#leak-check-form">Get my free preview</a>
+          <a className="button button-signal" href="/contact?src=whats-new#contact">Get my free preview</a>
           <a className="text-link" href="/site-map">Site map <span aria-hidden="true">→</span></a>
         </div>
       </section>

@@ -150,13 +150,14 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.match(html, /Finding relevant public contracts for small trades firms/);
   assert.match(html, /Scrap Finance Partners/);
   assert.match(html, /A clear digital home for a specialist finance business/);
+  assert.match(html, /href="\/(lab|proof)/);
   for (const name of ['Agent Nudge', 'OpenFlowKit', 'Khutba', 'MAZ Pocket', 'tap-to-review']) {
     assert.doesNotMatch(html, new RegExp(name), `${name} belongs on /lab, not the homepage`);
   }
   assert.doesNotMatch(html, /paid (client|contract|engagement)|client paid|testimonial/i);
 
-  const lab = await readPage('/lab');
-  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress', 'Ask about this build']) {
+  const lab = await readPage('/proof');
+  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress']) {
     assert.match(lab, new RegExp(name));
   }
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
@@ -522,7 +523,7 @@ test('case studies route to a plan and fixed price, not a blanket free live demo
   for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = (await readPage(route)).replace(/\/demos.{0,40}?Bigger build demos/g, '');
     assert.doesNotMatch(html, /free live demo/i, `${route} still offers a free live demo`);
-    assert.match(html, /\/free-plan\?src=case-[a-z-]+#leak-check-form/, `${route} should lead to the free plan form`);
+    assert.match(html, /\/(free-plan\?src=case-[a-z-]+#leak-check-form|contact\?src=case-[a-z-]+#contact)/, `${route} should lead to the free plan form`);
   }
 });
 
@@ -558,13 +559,12 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
 test('every main page is one tap from the key routes, and the trade guides have a hub', async () => {
   // Navigation audit, 27 Sep: guides were only linked from inside the quote form
   // and phones only saw "Free quote". Now every page carries the same map.
-  for (const route of ['/', '/contact', '/faq', '/lab', '/3d-printing', '/for', '/for/architects']) {
+  for (const route of ['/', '/contact', '/faq', '/proof', '/3d-printing', '/for', '/for/architects']) {
     const html = await readPage(route);
     // 15 Oct (Maz: footer minimal): the long footer list went; trade guides and architecture models stay one tap away via /for and /site-map.
-    for (const href of ['/prices', '/for', '/3d-printing', '/faq', '/free-plan', '/site-map']) {
-      if (['/3d-printing', '/site-map'].includes(href) || (route === '/' && ['/free-plan', '/for'].includes(href))) continue; // short footer (round 1A)
-      // The free-plan link may carry ?src=… and #leak-check-form (9 Oct: nav and footer land on the form).
-      const linked = html.includes(`href="${href}"`) || (href === '/free-plan' && html.includes('href="/free-plan?'));
+    // 21 Oct: short footer and six-link header; free preview lives on /contact.
+    for (const href of ['/prices', '/faq', '/contact']) {
+      const linked = html.includes(`href="${href}"`) || html.includes(`href="${href}?`);
       assert.ok(linked, `${route} is missing a link to ${href}`);
     }
     assert.match(html, /class="mw-menu-button"[^>]*aria-expanded="false"/, `${route} has no phone menu button`);
@@ -594,7 +594,7 @@ test('six wayfinding helps big sites use are in place', async () => {
   for (const id of ['trades', 'appointments', 'creators', 'offices']) assert.ok(audienceHub.includes(`/for/${id}`));
   // The human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
-  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/free-plan', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
+  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
   assert.match(news, /Pick your kind of business/, 'what’s new shows the latest real update');

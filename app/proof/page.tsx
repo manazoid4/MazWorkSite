@@ -3,6 +3,7 @@ import { fitDescription, OG_IMAGE } from '../seo';
 import { CONTACT_EMAIL, MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { CaseStudyGrid, ScopeSheetPreview, TestimonialList } from '../proof-parts';
+import './proof.css';
 
 /**
  * Proof hub. The rule is absolute: never invent a client, logo, quote or
@@ -19,6 +20,17 @@ export const metadata: Metadata = {
   openGraph: { title: 'Maz Works proof', description: fitDescription('Real work you can open and check today.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
+/** Own products and prototypes (was /lab). Each label says what it really is. */
+const BUILT = [
+  { name: 'RotaReason', type: 'My own product · working demo', summary: 'Ask for rota changes in plain English, check staffing rules and preview safe changes before applying them.', href: '/rotareason', label: 'Open the demo' },
+  { name: 'MAZ Core', type: 'My own tool · private console', summary: 'A console for talking to my own MAZ Core endpoint. You need your own endpoint to use it.', href: '/maz-core', label: 'Open the console' },
+  { name: 'MAZ Pocket', type: 'In progress', summary: 'A pocket device to talk to your PC and approve its actions, linked through MAZ Core.', href: '/maz-pocket-ai', label: 'Open the bridge' },
+  { name: 'Agent Nudge', type: 'Released', summary: 'Stops coding tools clashing over the same files.', href: 'https://agent-nudge-bay.vercel.app/demo/overview', label: 'Try the demo' },
+  { name: 'OpenFlowKit', type: 'Open source', summary: 'Voice-to-text in the browser, cleaned up for you.', href: 'https://openflowkit-dusky.vercel.app', label: 'Try it' },
+  { name: 'Khutba.io', type: 'Live prototype', summary: 'Live translated captions for mosque screens.', href: 'https://khutba-io.vercel.app/demo', label: 'Try the demo' },
+  { name: 'Maz Works Objects', type: 'Concept · not yet made', summary: 'Tap-to-review stands and signs, fixed price from £29.', href: '/3d-printing', label: 'See the concept' },
+];
+
 export default function ProofPage() {
   return (
     <main>
@@ -31,6 +43,21 @@ export default function ProofPage() {
 
       <section className="mw-info" aria-label="Real work">
         <CaseStudyGrid />
+      </section>
+
+      <section className="mw-info" id="built" aria-labelledby="proof-built-title">
+        <h2 id="proof-built-title">Things I’ve built</h2>
+        <p className="proof-intro">Products, prototypes and open-source tools of my own. Want something like this? <a href="/contact">Tell me what you need</a>.</p>
+        <ul className="proof-built">
+          {BUILT.map((item) => (
+            <li key={item.name}>
+              <span className="proof-tag">{item.type}</span>
+              <h3>{item.name}</h3>
+              <p>{item.summary}</p>
+              <a href={item.href}>{item.label} <span aria-hidden="true">→</span></a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mw-info" aria-labelledby="proof-quotes-title">
@@ -59,7 +86,7 @@ export default function ProofPage() {
           <p>You get a working preview and a fixed price first.</p>
         </div>
         <div className="mw-actions">
-          <a className="button button-signal" href="/free-plan#leak-check-form">{MAIN_CTA}</a>
+          <a className="button button-signal" href="/contact">{MAIN_CTA}</a>
           <a className="button" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </div>
       </section>

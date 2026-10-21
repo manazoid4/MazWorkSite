@@ -2,11 +2,18 @@ import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
 import { SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { COMPLAINT_DATA_HANDLING, COMPLAINT_PACKAGES, B2B_SYSTEMS } from '../offers';
+import { ManazirLine } from '../manazir-line';
+import { FICTION_NOTE } from '../complaints/reports';
+import { ActionTrackerSample, DashboardSample } from '../complaints/samples';
+import { DecisionTreeSample, FlowchartSample } from '../complaints/samples-workflow';
 import '../b2b.css';
+import '../complaints/samples.css';
 import './professional-teams.css';
 
 const PAGE_URL = `${SITE_URL}/professional-teams`;
 const ENQUIRY = '/contact?src=professional-teams&service=reporting#contact';
+const [health, board, flows, sprint] = COMPLAINT_PACKAGES;
 
 export const metadata: Metadata = {
   title: 'Reporting and operational tools for teams',
@@ -41,6 +48,54 @@ export default function ProfessionalTeamsPage() {
             <p>{item.text}</p>
           </article>
         ))}
+      </section>
+
+      <section className="pt-setup" id="what-i-set-up" aria-labelledby="pt-setup-title">
+        <header className="pt-section-head">
+          <p className="eyebrow">What I set up</p>
+          <h2 id="pt-setup-title">Complaints work and office systems, scoped to your team.</h2>
+          <p>Each job is a written scope and a fixed price before I start. Complaints analysis is my specialism: five years in complaints and finance, including regulated work and ombudsman cases.</p>
+        </header>
+        <ul className="pt-cards" id="complaints">
+          {[health, board, flows, sprint].map((pack) => (
+            <li key={pack.id}>
+              <h3>{pack.name}</h3>
+              <p className="pt-price">{pack.price}</p>
+              <p>{pack.purpose}</p>
+              <details>
+                <summary>What you receive, and the limits</summary>
+                <ul className="b2b-list">{pack.receives.map((item) => <li key={item}>{item}</li>)}</ul>
+                <p><strong>I need:</strong> {pack.needs.join('; ')}.</p>
+                <p><strong>Limits:</strong> {pack.limits.join('; ')}.</p>
+                <p><strong>Typical timing:</strong> {pack.turnaround} after I have the agreed inputs.</p>
+              </details>
+            </li>
+          ))}
+        </ul>
+        <h3 className="pt-sub" id="systems">Office systems</h3>
+        <ul className="pt-cards">
+          {B2B_SYSTEMS.map((item) => (
+            <li key={item.id}>
+              <p className="pt-tag">{item.tag}</p>
+              <h3>{item.name}</h3>
+              <p className="pt-price">{item.price}</p>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="pt-fine">No VAT is added. Larger or connected systems (several teams, a CRM or helpdesk) are quoted after a free scope call. Texting and app subscriptions are paid by you directly, and I tell you the figure first.</p>
+      </section>
+
+      <section className="pt-samples" id="samples" aria-labelledby="pt-samples-title">
+        <header className="pt-section-head">
+          <p className="eyebrow">Sample reports</p>
+          <h2 id="pt-samples-title">See what you would receive.</h2>
+          <p>{FICTION_NOTE}</p>
+        </header>
+        <ul className="pt-cards pt-cards-two">
+          <li><h3>Complaints Health Check</h3><p>Scores, findings and ranked actions from a review of 15 invented cases.</p><a className="button" href="/complaints/sample/health-check">View the sample Health Check</a></li>
+          <li><h3>Board report</h3><p>A fictional dataset turned into oversight, root causes and actions.</p><a className="button" href="/complaints/sample/board-report">View the sample board report</a></li>
+        </ul>
       </section>
 
       <section className="pt-demo-section" id="demonstrations" aria-labelledby="pt-demos-title">
@@ -124,21 +179,33 @@ export default function ProfessionalTeamsPage() {
         </section>
       </section>
 
+      <details className="pt-more" id="more-demos">
+        <summary>More synthetic demonstrations: complaints dashboard and staff workflow</summary>
+        <h3>Complaints dashboard</h3>
+        <DashboardSample />
+        <h3>Action tracker</h3>
+        <ActionTrackerSample />
+        <div className="b2b-two">
+          <div><h3>Process flowchart</h3><FlowchartSample /></div>
+          <div><h3>Escalation decision tree</h3><DecisionTreeSample /></div>
+        </div>
+      </details>
+
       <section className="pt-practice" aria-labelledby="pt-practice-title">
         <div><p className="eyebrow">Practical, proportionate improvements</p><h2 id="pt-practice-title">Start with the work. Use the simplest useful tool.</h2></div>
         <div>
           <p>I can improve an existing spreadsheet or report, make repeated handoffs easier to follow, or build a tailored internal tool when current software is not enough. I agree the scope and price with you before work starts.</p>
           <p>For sensitive workflows, we agree suitable access, permissions, review, escalation, data handling and retention terms before records are shared. I do not provide legal or regulatory advice.</p>
-          <p>Complaints analysis remains a specialist part of this work, from handling reviews to root-cause reporting and improvement plans.</p>
-          <p><a href="/complaints-improvement">Explore complaints improvement →</a></p>
-          <p className="pt-fine">Also: <a href="/complaints#board-reporting">synthetic board reporting</a> · <a href="/complaints#workflows">workflow and staff guide demonstration</a>.</p>
+          <ul className="b2b-list">{COMPLAINT_DATA_HANDLING.map((item) => <li key={item}>{item}</li>)}</ul>
+          <p className="pt-fine">This is a summary, not legal advice. Nothing here promises fewer complaints, savings or any other outcome.</p>
         </div>
       </section>
 
       <section className="mw-resource-hero pt-bottom-cta" aria-labelledby="teams-cta">
         <p className="eyebrow">Work directly with me</p>
         <h2 id="teams-cta">Bring me the report, deadline or process that is causing friction.</h2>
-        <p>I’m Manazir, a Computer Science graduate with five years’ experience resolving complex financial complaints and managing business accounts across the UK and Europe. I plan and build each engagement myself.</p>
+        <p>Describe the problem in a few lines. No records are needed to ask.</p>
+        <ManazirLine />
         <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>Tell me what's not working</a></p>
         <p className="pt-fine">Professional engagements are quoted to scope. We agree what data is suitable and its handling and retention terms before you share records.</p>
       </section>

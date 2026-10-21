@@ -97,10 +97,10 @@ test('only POST is accepted', async () => {
   assert.equal(res.statusCode, 405);
 });
 
-test('the /lab signup posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
-  const html = await readFile(new URL('../out/lab.html', import.meta.url), 'utf8');
+test('the footer signup (seen on /proof) posts to the API, has a hidden honeypot and says how to unsubscribe', async () => {
+  const html = await readFile(new URL('../out/proof.html', import.meta.url), 'utf8');
   const section = html.match(/<section class="mw-newsletter"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(section, '/lab should include the mailing-list signup');
+  assert.ok(section, '/proof should include the mailing-list signup');
   const form = section.match(/<form[^>]*>/)?.[0] ?? '';
   assert.match(form, /method="post"/);
   assert.match(form, /action="\/api\/subscribe"/);

@@ -12,8 +12,8 @@ async function page(route) {
 }
 
 test('professional team routes export clear, factual pages with the agreed enquiry paths', async () => {
-  const [teams, complaints] = await Promise.all([page('professional-teams'), page('complaints-improvement')]);
-  for (const [html, route, source] of [[teams, 'professional-teams', 'professional-teams'], [complaints, 'complaints-improvement', 'complaints-improvement']]) {
+  const teams = await page('professional-teams');
+  for (const [html, route, source] of [[teams, 'professional-teams', 'professional-teams']]) {
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
     assert.match(html, /id="main-content"/);
     assert.match(html, new RegExp(`rel="canonical" href="https://www\\.mazworks\\.uk/${route}"`));
@@ -28,7 +28,7 @@ test('professional team routes export clear, factual pages with the agreed enqui
   assert.match(teams, /Synthetic data/);
   assert.match(teams, /Department performance/);
   assert.match(teams, /SLA and workload oversight/);
-  assert.match(teams, /Complaints analysis remains a specialist part/);
+  assert.match(teams, /Complaints analysis is my specialism/);
   assert.match(teams, /cannot guarantee that an SLA will never be missed/);
   assert.match(teams, /\/contact\?src=professional-teams&amp;service=reporting#contact/);
   assert.match(teams, /Closed on time<\/dt><dd>94%<\/dd><span>102 of 108 completed/);
@@ -42,12 +42,8 @@ test('professional team routes export clear, factual pages with the agreed enqui
   assert.ok(workload, 'workload breakdown is present');
   assert.equal([...workload.matchAll(/<strong>(\d+)<\/strong>/g)].reduce((sum, match) => sum + Number(match[1]), 0), 36);
 
-  for (const label of ['Complaints Health Check', 'Reporting &amp; Oversight', 'Improvement &amp; Implementation']) assert.match(complaints, new RegExp(label));
-  assert.match(complaints, /Quoted to scope/);
-  assert.deepEqual([...complaints.matchAll(/<p class="b2b-price">([^<]+)<\/p>/g)].map((match) => match[1]), ['Quoted to scope', 'Quoted to scope', 'Quoted to scope']);
-  assert.match(complaints, /Fictional example for Northgate Advisory/);
-  assert.match(complaints, /Synthetic data disclaimer/);
-  assert.match(complaints, /scope and the quality, completeness and consistency of the anonymised data/i);
-  assert.match(complaints, /\/complaints\/sample\/health-check/);
-  assert.match(complaints, /\/complaints\/sample\/board-report/);
+  for (const label of ['Complaints Health Check', 'Post-Complaints Analysis &amp; Board Reporting']) assert.match(teams, new RegExp(label));
+  assert.match(teams, /Fictional example for Northgate Advisory|invented/);
+  assert.match(teams, /\/complaints\/sample\/health-check/);
+  assert.match(teams, /\/complaints\/sample\/board-report/);
 });

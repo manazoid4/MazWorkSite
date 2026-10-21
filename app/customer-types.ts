@@ -29,7 +29,7 @@ export type CustomerType = {
   id: CustomerTypeId;
   name: string;
   shortName: string;
-  /** Icon name in brand-kit/kit-icon.tsx. */
+  /** Icon name in kit-icon.tsx. */
   icon: string;
   title: string;
   lede: string;

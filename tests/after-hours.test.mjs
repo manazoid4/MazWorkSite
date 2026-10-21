@@ -67,7 +67,7 @@ test('£79/month is typed only in offers.ts', async () => {
 
 test('the offer stays discoverable without the removed homepage workflow panel', async () => {
   assert.match(await read('index'), /href="\/local-businesses"/, 'the homepage still routes local businesses to the relevant services');
-  for (const route of ['services', 'prices']) {
+  for (const route of ['for', 'prices']) {
     assert.match(await read(route), /href="\/after-hours-receptionist"/, `${route} links the receptionist page`);
   }
   assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);
@@ -115,7 +115,7 @@ test('the new pricing blocks type no price of their own (solutions data and pick
   assert.ok(start > 0 && end > start);
   const block = offers.slice(start, end).replace("price: '£0'", '');
   assert.doesNotMatch(block, /£\s?\d/, 'missed-call options read prices from the offers');
-  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx', 'app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/solutions/page.tsx']) {
+  for (const file of ['app/price-list.tsx', 'app/after-hours-receptionist/minutes-check.tsx', 'app/solutions/data.ts', 'app/solutions/solutions-picker.tsx', 'app/for/jobs-section.tsx']) {
     assert.doesNotMatch((await readFile(path.join(root, file), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, ''), /£\s?\d/, file);
   }
 });
