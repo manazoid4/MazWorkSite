@@ -34,8 +34,8 @@ test('each niche guide exports with prices, a priced second task and a tagged fr
   }
 });
 
-test('Leak Check page links every niche guide and shows real examples', async () => {
-  const html = await readFile(path.join(exportRoot, 'free-plan.html'), 'utf8').catch(() => readFile(path.join(exportRoot, 'free-plan', 'index.html'), 'utf8'));
+test('contact page links every niche guide and shows real examples', async () => {
+  const html = await readFile(path.join(exportRoot, 'contact.html'), 'utf8').catch(() => readFile(path.join(exportRoot, 'contact', 'index.html'), 'utf8'));
   assert.match(html, /Built for any business that runs on customers/);
   for (const id of NICHES) assert.match(html, new RegExp(`href="/for/${id}"`));
 });

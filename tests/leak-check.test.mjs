@@ -22,11 +22,12 @@ async function readPage(route) {
 }
 
 test('the Free Preview & Fixed Price has a dedicated shareable acquisition page', async () => {
-  const html = await readPage('/free-plan');
+  const html = await readPage('/contact');
 
   assert.match(html, /Free Preview &amp; Fixed Price/);
   assert.doesNotMatch(html, /Customer Journey Review|Booking &amp; Enquiry Check/);
-  assert.match(html, /Tap what fits, then tell me where to send your demo\. No call needed\./);
+  assert.match(html, /id="free-preview"/);
+  assert.match(html, /A free preview and fixed price/);
   assert.match(html, /within 1 working day/i);
   assert.doesNotMatch(html, /5 working days/i);
   assert.match(html, /any UK business/);
@@ -37,30 +38,25 @@ test('the Free Preview & Fixed Price has a dedicated shareable acquisition page'
   assert.match(html, /A fixed price, starting from £99/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
-  assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/free-plan"/);
+  assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/contact"/);
 });
 
-test('the free plan form puts the problem taps first, with typing and the website optional', async () => {
-  const html = await readPage('/free-plan');
+test('the one contact form keeps the free preview as a visible choice, with the business optional', async () => {
+  const html = await readPage('/contact');
   const form = /<form[^>]*id="leak-check-form"[\s\S]*?<\/form>/.exec(html)?.[0] || '';
 
   assert.ok(form, 'free check form should be present');
-  for (const name of ['name', 'email', 'problem', 'website']) {
+  for (const name of ['name', 'email', 'problem', 'business']) {
     assert.match(form, new RegExp(`name="${name}"`));
   }
-  assert.match(form, /<input[^>]*name="website"(?![^>]*required)[^>]*>/, 'website is optional');
-  // Chips need JavaScript, so the static HTML keeps the text box required for no-JS visitors;
-  // the source drops it once hydrated, when a tap is enough.
-  assert.match(form, /<textarea[^>]*name="problem"[^>]*required/, 'no-JS visitors must still describe the job');
-  const source = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
-  assert.match(source, /required=\{!hydrated\}/);
-  assert.ok(form.indexOf('mw-quick-picks') < form.indexOf('name="name"'), 'problem taps come before name and email');
-  assert.doesNotMatch(form, /name="business"|name="nextStep"/);
-  assert.match(form, />Get my free preview</);
+  assert.match(form, /<input[^>]*name="business"(?![^>]*required)[^>]*>/, 'business is optional');
+  assert.match(form, /<textarea[^>]*name="problem"[^>]*required/, 'the job description is required');
+  assert.match(form, /name="nextStep" value="A free preview and fixed price"/);
+  assert.match(form, />Send enquiry</);
 });
 
-test('the Leak Check reuses the resilient enquiry delivery path', async () => {
-  const source = await readFile(path.join(root, 'app', 'free-plan', 'leak-check-form.tsx'), 'utf8');
+test('the contact form reuses the resilient enquiry delivery path', async () => {
+  const source = await readFile(path.join(root, 'app', 'demo-request-form.tsx'), 'utf8');
 
   assert.match(source, /NATIVE_FORM_ENDPOINT/);
   assert.match(source, /sendPlanEnquiry/);

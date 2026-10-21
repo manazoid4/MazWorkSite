@@ -21,7 +21,7 @@ const P = { half: price('halfDay'), full: price('fullDay'), edits: price('editBu
 
 test('video prices are the approved ones and live only in offers.ts', async () => {
   assert.deepEqual(P, { half: 150, full: 250, edits: 200, pct: 20 });
-  for (const f of ['app/video/page.tsx', 'app/video/video-selector.tsx']) {
+  for (const f of ['app/local-businesses/page.tsx', 'app/local-businesses/video-selector.tsx']) {
     const src = await read(...f.split('/'));
     assert.doesNotMatch(src.replace(/\\u00a3|£\$\{/g, ''), /£\s?\d/, `${f} hard-codes a price`);
   }
@@ -37,7 +37,7 @@ test('bundle maths: 20% off the edits only, never the filming, no stacking', () 
 });
 
 test('the video page shows packages, savings, scope and honest placeholders', async () => {
-  const h = await html('video'); const t = text(h);
+  const h = await html('local-businesses'); const t = text(h);
   for (const s of [/£150/, /£250/, /£200/, /£160/, /£310/, /£410/, /Half-Day Content Shoot/, /Full-Day Content Shoot/, /4 Promotional Videos/, /Apply for a Portfolio Project/, /UK-wide/]) assert.match(t, s);
   assert.match(h, /href="\/contact\?service=video#contact"/);
   assert.match(h, /href="https:\/\/wa\.me\/447544965187/);
@@ -45,14 +45,14 @@ test('the video page shows packages, savings, scope and honest placeholders', as
 });
 
 test('the video page stays honest and keeps the location private', async () => {
-  const t = text(await html('video'));
+  const t = text(await html('local-businesses'));
   assert.doesNotMatch(t, /\bAI\b|unlimited footage|testimonial|Derbyshire|Nottingham|Pixel|\bhire[ds]?\b|rent(ed)? (the |our )?cameras?/i);
   assert.doesNotMatch(t, /guarantee/i);
 });
 
-test('video is wired into the nav, sitemap and enquiry form; old Content Day link redirects by page', async () => {
-  assert.match(await read('app', 'nav.ts'), /href: '\/video'/);
+test('video is folded into /local-businesses and the enquiry form; old /video and /content-day redirect there', async () => {
   assert.match(await read('app', 'enquiry.ts'), /id: 'video'[\s\S]*id: 'portfolio-project'/);
-  assert.match(await readFile(path.join(root, 'out', 'sitemap.xml'), 'utf8'), /\/video</);
-  assert.match(await html('content-day'), /href="\/video"/);
+  assert.match(await html('local-businesses'), /id="video"/);
+  const redirects = JSON.parse(await read('docs', 'plans', 'redirects-b2.json'));
+  for (const old of ['/video', '/content-day']) assert.equal(redirects.find((row) => row.source === old)?.destination, '/local-businesses#video');
 });

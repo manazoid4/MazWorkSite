@@ -4,16 +4,15 @@ import { readFile } from 'node:fs/promises';
 
 const contact = await readFile(new URL('../app/contact/page.tsx', import.meta.url), 'utf8');
 const form = await readFile(new URL('../app/demo-request-form.tsx', import.meta.url), 'utf8');
-const styles = await readFile(new URL('../app/sales.css', import.meta.url), 'utf8');
 
 test('contact puts the form directly after a short introduction and keeps call and email secondary', () => {
   assert.match(contact, /id="main-content"/);
-  assert.match(contact, /Tell me what needs to work better/);
+  assert.match(contact, /Let’s work out what would help/);
   assert.match(contact, /CHECK_REPLY_TIME/);
   assert.match(contact, /Book a 15-minute call/);
-  assert.match(contact, /Email \{CONTACT_EMAIL\}/);
+  assert.match(contact, /mailto:\$\{CONTACT_EMAIL\}/);
   assert.ok(contact.indexOf('<DemoRequestForm') > contact.indexOf('mw-contact-alternatives'));
-  assert.doesNotMatch(contact, /ALL_OFFERS|BIGGER_JOBS|free-plan\?src=contact/);
+  assert.doesNotMatch(contact, /ALL_OFFERS|BIGGER_JOBS|free-plan/);
 });
 
 test('contact keeps required answers, optional service selection and the preserved recovery path', () => {
@@ -26,7 +25,10 @@ test('contact keeps required answers, optional service selection and the preserv
   assert.match(form, /website enquiries, a clearer team dashboard, or help tracking deadlines and complaints/i);
 });
 
-test('contact styles keep the introduction compact on small screens', () => {
-  assert.match(styles, /\.mw-contact-landing \{ padding-top: clamp\(24px, 4vw, 48px\); \}/);
-  assert.match(styles, /\.mw-contact-landing \.s-check-copy h1/);
+test('contact is one form with a free-preview choice, and stacks on small screens', async () => {
+  assert.match(form, /ENQUIRY_NEXT_STEPS\[1\]/);
+  assert.match(form, /name="nextStep"/);
+  assert.match(contact, /contact formId="leak-check-form"/);
+  const css = await readFile(new URL('../app/contact/contact.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 860px\)[\s\S]*\.ct-band \{ grid-template-columns: 1fr/);
 });

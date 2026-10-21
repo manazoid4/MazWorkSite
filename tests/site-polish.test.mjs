@@ -28,13 +28,13 @@ test('the main customer journey uses one clear enquiry action', async () => {
   }
   const home = await read('index');
   assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact/);
-  const preview = await read('free-plan');
-  assert.match(preview, /Get my free preview/);
+  const preview = await read('contact');
+  assert.match(preview, /A free preview and fixed price/);
   assert.match(preview, /Free Preview &amp; Fixed Price/);
 });
 
 test('the free preview is a secondary link, never the main button', async () => {
-  for (const route of ['index', 'demos', 'linkedin', 'prices']) {
+  for (const route of ['index', 'after-hours-receptionist', 'linkedin', 'prices']) {
     const html = await read(route);
     assert.doesNotMatch(html, /button-signal[^"]*"[^>]*href="https:\/\/cal\.com/, `${route}: demo booking is a main button`);
     assert.doesNotMatch(html, /href="https:\/\/cal\.com[^"]*"[^>]*class="[^"]*button-signal/, `${route}: demo booking is a main button`);
@@ -72,7 +72,7 @@ test('page lengths: homepage under 680 words, type pages short (5 blocks), /pric
 });
 
 test('positioning: no quick-fix wording, no AI in the offer, /rotareason out of the sitemap', async () => {
-  for (const route of ['index', 'prices', 'free-plan', ...TYPES.map((t) => `for/${t}`)]) {
+  for (const route of ['index', 'prices', 'contact', ...TYPES.map((t) => `for/${t}`)]) {
     const t = text(await read(route));
     assert.doesNotMatch(t, /quick ?fix|quick win|website repair/i, route);
     assert.doesNotMatch(t, /\bAI\b/, route);

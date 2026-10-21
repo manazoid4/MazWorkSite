@@ -10,9 +10,9 @@ import { trackConversion } from '../analytics';
 import '../interactive.css';
 
 /**
- * Missed-calls calculator (CRO Move 5, 18 Oct 2026). Standalone page, and the
+ * Missed-calls calculator (CRO Move 5, 18 Oct 2026). A section of /local-businesses, and the
  * result is gated: you see your number once you leave an email and a name, the
- * same two fields as the hero, posted to the same place as /free-plan. The
+ * same two fields as the hero, posted to the same place as the /contact free-preview form. The
  * numbers are the visitor's own; nothing is saved and no industry figure is
  * assumed. Every price comes from offers.ts.
  */
@@ -129,7 +129,7 @@ export function MissedCallsCalculator() {
               <div><span>{STARTER.name}, once</span><i className="ce-bar-cost" style={{ width: `${costShare}%` }} /></div>
             </div>
             <p className="ce-pay">{days > 365 ? `${STARTER.name} would take over a year to pay for itself on these numbers.` : `${STARTER.name} (${STARTER.price}) would pay for itself in about ${days} ${days === 1 ? 'day' : 'days'}.`}</p>
-            <a className="button button-signal" href={`/free-plan?package=${encodeURIComponent(STARTER.name)}&src=missed-calls-calculator#leak-check-form`}>{MAIN_CTA}</a>
+            <a className="button button-signal" href={`/contact?intent=preview&package=${encodeURIComponent(STARTER.name)}&src=missed-calls-calculator#leak-check-form`}>{MAIN_CTA}</a>
           </>
         ) : ready ? (
           <>

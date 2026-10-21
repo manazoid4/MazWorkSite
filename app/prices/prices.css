@@ -1,0 +1,45 @@
+/* /prices hero: cobalt band with the price ladder as pop bars. Maps the light-review --pz-* palette onto the global --pop-* tokens. */
+.pz-hero {
+  margin-inline: calc((100cqw - 100%) / -2);
+  padding: clamp(40px, 6vw, 88px) max(20px, calc((100cqw - 1280px) / 2)) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: end;
+  overflow: hidden;
+  background: var(--pop-cobalt);
+  color: var(--cream);
+}
+.pz-hero-copy { padding-bottom: clamp(28px, 5vw, 72px); }
+.pz-hero .eyebrow { color: var(--cream); }
+.pz-hero h1 { max-width: 14ch; margin-top: 12px; font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
+.pz-lede { max-width: 46ch; margin-top: 22px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
+.pz-actions { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; }
+.pz-hero .button-signal { border-color: var(--signal); }
+.pz-textlink { color: var(--cream); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: .22em; }
+.pz-textlink:hover { text-decoration-color: var(--pop-yellow); }
+
+.pz-ladder { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(300px, 36vw, 440px); }
+.pz-ladder li { height: var(--h); }
+.pz-step { height: 100%; padding: 12px 10px 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; border-radius: 16px 16px 0 0; background: var(--tone); color: var(--pop-ink); text-decoration: none; transition: transform 120ms ease-out; }
+.pz-step:hover { transform: translateY(-6px); }
+.pz-yellow { --tone: var(--pop-yellow); }
+.pz-pink { --tone: var(--pop-pink); }
+.pz-orange { --tone: var(--pop-orange); }
+.pz-lilac { --tone: var(--pop-lilac); }
+.pz-step-note { font-family: var(--mono); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.pz-step-name { font-size: clamp(.85rem, 1.3vw, 1rem); font-weight: 800; line-height: 1.1; }
+.pz-step-price { display: flex; flex-direction: column; font-size: clamp(1.05rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.pz-step-price small { font-family: var(--mono); font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pz-step { animation: pz-rise 640ms cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 90ms); }
+  @keyframes pz-rise { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+@media (max-width: 899px) {
+  .pz-hero { grid-template-columns: 1fr; gap: 32px; padding-inline: 20px; }
+}
+@media (max-width: 560px) {
+  .pz-ladder { gap: 5px; }
+  .pz-step { padding: 10px 6px 12px; }
+}

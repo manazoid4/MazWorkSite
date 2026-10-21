@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function ReceptionistDemoPage() {
-  const demoHref = `/free-plan?src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`;
+  const demoHref = `/contact?intent=preview&src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}#leak-check-form`;
   return (
     <main className="vd-page">
       <SiteHeader />
