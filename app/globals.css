@@ -1,16 +1,29 @@
 :root {
-  --paper: #f6f6f3;
-  --surface: #ffffff;
-  --ink: #151615;
-  --charcoal: #20211f;
-  --muted: #5d605b;
-  --line: #20211f;
-  --soft-line: #c9cbc6;
-  --signal: #ff6b1a;
-  --signal-text: #c2410c;
+  /* Site-unity palette (Oct 2026): soft cream base, peach + pale-blue tints, plum,
+     with pop accents used on at most 2 moments per page. */
+  --cream: #fbf8f2;
+  --peach: #f5d3bf;
+  --sky-tint: #ddecf5;
+  --plum: #653e58;
+  --sun: #f4df91;
+  --pop-cobalt: #2a44f0;
+  --pop-orange: #ff6b1a;
+  --pop-yellow: #ffd43b;
+  --pop-pink: #ff9ccd;
+  --pop-lilac: #c7b8ff;
+  --pop-ink: #10133a;
+  --paper: var(--cream);
+  --surface: #fffdf9;
+  --ink: #302535;
+  --charcoal: var(--plum);
+  --muted: #625663;
+  --line: #d9cfd4;
+  --soft-line: #e8e0e3;
+  --signal: var(--pop-orange);
+  --signal-text: var(--plum);
   --ok: #0f7a4f;
   --mono: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
-  --sans: "Aptos", "Segoe UI Variable", Arial, system-ui, sans-serif;
+  --sans: Manrope, "Aptos", "Segoe UI Variable", Arial, system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
