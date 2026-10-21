@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import { MAIN_CTA } from '../../site';
 import { NICHE_GUIDES, getNicheGuide } from '../niches';
-import { NICHE_ICONS } from '../../brand-kit/kit-icon';
+import { NICHE_ICONS } from '../../kit-icon';
 import { BeforeAfter } from '../../before-after';
 import { WorkSteps } from '../../work-steps';
 import { StickyCheckCta } from '../../sticky-cta';

@@ -20,7 +20,7 @@ export type DemoItem = { name: string; bottleneck: string; built: string[]; href
 
 /** Demonstrations built by Maz Works with invented data. Shown separately from real projects. */
 export const DEMOS: DemoItem[] = [
-  { name: 'Complaints dashboard, board report and staff toolkit', bottleneck: 'Complaint records that nobody has turned into decisions for management or the board.', built: ['A tracker and dashboard', 'A board-ready slide deck and PDF', 'An action tracker, escalation tree and staff guides'], href: '/complaints', note: 'Invented data for a fictional firm. No client uses these yet.' },
+  { name: 'Complaints dashboard, board report and staff toolkit', bottleneck: 'Complaint records that nobody has turned into decisions for management or the board.', built: ['A tracker and dashboard', 'A board-ready slide deck and PDF', 'An action tracker, escalation tree and staff guides'], href: '/professional-teams#more-demos', note: 'Invented data for a fictional firm. No client uses these yet.' },
 ];
 
 function Card({ kind, name, image, bottleneck, built, impact, href, hrefLabel, limit }: { kind: Kind; name: string; image?: Project['image']; bottleneck: string; built: readonly string[]; impact: string; href: string; hrefLabel: string; limit: string }) {

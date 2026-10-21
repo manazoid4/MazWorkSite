@@ -30,7 +30,7 @@ test('/proof is live, short, shows real work and has no founding offer', async (
   assert.match(html, /JobFilter/);
   assert.match(html, /Scrap Finance Partners/);
   assert.doesNotMatch(html, /founding|founder’s discount/i);
-  assert.match(html, /href="\/free-plan#leak-check-form">Get my free preview</);
+  assert.match(html, /href="\/contact">Get my free preview</);
 });
 
 test('/proof makes no invented proof claims', async () => {

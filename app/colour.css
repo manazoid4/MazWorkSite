@@ -41,8 +41,8 @@
 .s-prices > :nth-child(3n + 1) { background: var(--sage); }
 .s-prices > :nth-child(3n + 2) { background: var(--sand); }
 .s-prices > :nth-child(3n) { background: var(--mist); }
-.s-price { border: 1px solid var(--line); box-shadow: var(--card-shadow); }
-.s-package-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(20, 22, 18, .08), 0 12px 28px rgba(20, 22, 18, .1); }
+.s-price { border: 1px solid var(--line); box-shadow: none; }
+.s-package-card:hover { transform: translateY(-2px); box-shadow: none; }
 .s-price-tag { background: var(--signal); }
 .s-price-deposit { color: var(--charcoal); }
 
@@ -58,15 +58,15 @@
 .s-trust li:nth-child(4n) strong { box-shadow: inset 0 -.4em 0 var(--wheat); }
 .s-trust strong { justify-self: start; }
 
-.site-footer, .mw-site-footer { border-top: 3px solid var(--signal); }
+.site-footer, .mw-site-footer { border-top: 0; }
 
 .s-promises li { border-left-width: 4px; }
-.s-promises li:nth-child(4n + 1) { background: var(--sage); border-left-color: var(--charcoal); }
-.s-promises li:nth-child(4n + 2) { background: var(--wheat); border-left-color: var(--charcoal); }
-.s-promises li:nth-child(4n + 3) { background: var(--clay); border-left-color: var(--charcoal); }
-.s-promises li:nth-child(4n) { background: var(--mist); border-left-color: var(--charcoal); }
+.s-promises li:nth-child(4n + 1) { background: var(--sage); border-left-color: transparent; }
+.s-promises li:nth-child(4n + 2) { background: var(--wheat); border-left-color: transparent; }
+.s-promises li:nth-child(4n + 3) { background: var(--clay); border-left-color: transparent; }
+.s-promises li:nth-child(4n) { background: var(--mist); border-left-color: transparent; }
 .s-promises span { color: var(--charcoal); }
-.s-guarantee { background: var(--sage); border: 1px solid var(--line); border-left: 4px solid var(--charcoal); box-shadow: var(--card-shadow); }
+.s-guarantee { background: var(--sage); border: 1px solid var(--line); border-left: 3px solid var(--peach); box-shadow: none; }
 .s-compare thead th:nth-child(2) { background: var(--ink); }
 .s-compare thead th:nth-child(3) { background: #4a5a4c; }
 .s-compare thead th:nth-child(4) { background: var(--slate); }
@@ -83,15 +83,15 @@
   border-bottom-color: transparent;
 }
 .mw-resource-hero { --band: var(--sand); }
-.mw-resource-cta { --band: var(--wheat); margin-top: clamp(36px, 5vw, 64px); }
+.mw-resource-cta { --band: var(--sky-tint); margin-top: clamp(36px, 5vw, 64px); }
 .mw-resource-hero .eyebrow { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
-.mw-figures img { border: 1px solid var(--line); box-shadow: var(--card-shadow); }
+.mw-figures img { border: 1px solid var(--line); box-shadow: none; }
 .mw-related a { border-left-width: 4px; }
 .mw-related a:nth-child(3n + 1) { background: var(--sage); }
 .mw-related a:nth-child(3n + 2) { background: var(--mist); }
 .mw-related a:nth-child(3n) { background: var(--clay); }
 .mw-related a span { color: var(--charcoal); }
-.mw-hub a { box-shadow: var(--card-shadow); }
+.mw-hub a { box-shadow: none; }
 .mw-hub li:nth-child(4n + 1) a { background: var(--sage); }
 .mw-hub li:nth-child(4n + 2) a { background: var(--mist); }
 .mw-hub li:nth-child(4n + 3) a { background: var(--clay); }
@@ -108,7 +108,7 @@
 .s-about .eyebrow,
 .mw-section-heading .eyebrow,
 .mw-resource-hero .eyebrow {
-  display: inline-block; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 999px;
+  display: inline-block; padding: 5px 14px; border: 1px solid var(--line); border-radius: 999px;
   background: var(--pill); color: var(--ink); font-weight: 800; letter-spacing: .06em;
   box-shadow: none;
 }

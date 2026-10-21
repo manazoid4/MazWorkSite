@@ -3,7 +3,6 @@ import { CASE_STUDY_PROJECTS } from './projects';
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
 import { SITE_URL } from './site';
-import { SERVICE_JOBS } from './services/jobs';
 
 export const dynamic = 'force-static';
 
@@ -12,39 +11,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${SITE_URL}/what-we-do`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.95 },
     { url: SITE_URL, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 1 },
-    { url: `${SITE_URL}/free-plan`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${SITE_URL}/solutions`, lastModified: new Date('2026-10-11'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/prices`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/local-businesses`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/professional-teams`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE_URL}/complaints-improvement`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/contact`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/lab`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${SITE_URL}/demos`, lastModified: updated, changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/for`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/site-map`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-10-02'), changeFrequency: 'weekly', priority: 0.4 },
     { url: `${SITE_URL}/faq`, lastModified: updated, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/proof`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE_URL}/refer`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${SITE_URL}/missed-calls-calculator`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE_URL}/b2b`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE_URL}/b2b/assessment`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/complaints`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/audit`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/terms`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/privacy`, lastModified: new Date('2026-10-02'), changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITE_URL}/services`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/after-hours-receptionist`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${SITE_URL}/managed-presence`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/video`, lastModified: new Date('2026-10-18'), changeFrequency: 'monthly', priority: 0.85 },
-    ...SERVICE_JOBS.map((job) => ({
-      url: `${SITE_URL}/services/${job.id}`,
-      lastModified: new Date('2026-10-09'),
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-    })),
     ...CUSTOMER_TYPES.map((type) => ({
       url: `${SITE_URL}/for/${type.id}`,
       lastModified: new Date('2026-10-02'),

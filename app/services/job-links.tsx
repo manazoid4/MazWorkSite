@@ -14,8 +14,8 @@ export function JobLinks({ typeId, who, inline = false }: { typeId: string; who:
     <Wrap className={inline ? 'tp-jobs' : 's-section tp-jobs'} aria-labelledby={`jobs-${typeId}-title`}>
       {inline ? <h3 id={`jobs-${typeId}-title`}>Jobs I set up for {label}</h3> : <><p className="eyebrow">From the menu</p><h2 id={`jobs-${typeId}-title`}>Jobs I set up for {label}.</h2></>}
       <ul className="tp-links">
-        {jobs.map((job) => <li key={job.id}><a href={`/services/${job.id}`}>{getMenuJob(job.id).name} <span aria-hidden="true">→</span></a></li>)}
-        <li><a href="/services">All jobs <span aria-hidden="true">→</span></a></li>
+        {jobs.map((job) => <li key={job.id}><a href={`/for#job-${job.id}`}>{getMenuJob(job.id).name} <span aria-hidden="true">→</span></a></li>)}
+        <li><a href="/for#jobs">All jobs <span aria-hidden="true">→</span></a></li>
       </ul>
     </Wrap>
   );

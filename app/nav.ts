@@ -1,6 +1,5 @@
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
-import { REFERRAL_RANGE } from './offers';
 
 /**
  * One map of the site, used by the header menu, the footer and tests, so every
@@ -10,25 +9,23 @@ import { REFERRAL_RANGE } from './offers';
  */
 export type NavLink = { href: string; label: string };
 
-/** Shown in the header on desktop. Keep to four plus the free plan button. */
+/** Shown in the header on desktop. Six links plus the "Free preview" button. */
 export const PRIMARY_NAV: NavLink[] = [
   { href: '/what-we-do', label: 'What I do' },
   { href: '/local-businesses', label: 'Local businesses' },
   { href: '/professional-teams', label: 'Professional teams' },
-  { href: '/proof', label: 'Our work' },
+  { href: '/prices', label: 'Prices' },
+  { href: '/proof', label: 'Proof' },
+  { href: '/contact', label: 'Contact' },
 ];
+
+/** The one primary header button. */
+export const NAV_CTA: NavLink = { href: '/contact', label: 'Free preview' };
 
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
-  { href: '/what-we-do', label: 'What I do' },
-  { href: '/local-businesses', label: 'Local businesses' },
-  { href: '/professional-teams', label: 'Professional teams' },
-  { href: '/complaints-improvement', label: 'Complaints improvement' },
-  { href: '/prices', label: 'Packages and prices' },
-  { href: '/proof', label: 'Our work' },
-  { href: '/demos', label: 'Bigger build demos' },
+  ...PRIMARY_NAV,
   { href: '/for', label: 'Who it’s for' },
-  { href: '/refer', label: 'Refer a business' },
   { href: '/faq', label: 'FAQ' },
   { href: '/site-map', label: 'Everything else' },
 ];
@@ -37,22 +34,15 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'What I do',
     links: [
-      { href: '/solutions', label: 'Pick your problem' },
+      { href: '/what-we-do', label: 'What I do' },
       { href: '/prices', label: 'Packages and prices' },
-      { href: '/what-we-do', label: 'What we do' },
       { href: '/local-businesses', label: 'Local businesses' },
       { href: '/professional-teams', label: 'Professional teams' },
-      { href: '/complaints-improvement', label: 'Complaints analysis and improvement' },
-      { href: '/services', label: 'Jobs I set up' },
       { href: '/after-hours-receptionist', label: 'After-hours call answering' },
-      { href: '/managed-presence', label: 'Managed presence' },
-      { href: '/b2b', label: 'For agencies and practices' },
-      { href: '/complaints', label: 'Complaints tracking' },
-      { href: '/audit', label: 'Free automation audit' },
-      { href: '/missed-calls-calculator', label: 'Missed-calls calculator' },
+      { href: '/for#problems', label: 'Pick your problem' },
+      { href: '/for#jobs', label: 'Jobs I set up' },
       { href: '/what-we-do#why', label: 'How I work' },
-      { href: '/free-plan?src=footer#leak-check-form', label: 'Get my free preview' },
-      { href: '/contact', label: 'Bigger jobs' },
+      { href: '/contact', label: 'Free preview and bigger jobs' },
     ],
   },
   {
@@ -66,24 +56,20 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
   {
     title: 'Help',
     links: [
-      { href: '/refer', label: `Refer a business (earn ${REFERRAL_RANGE})` },
+      { href: '/proof', label: 'Proof and client work' },
+      { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
-      { href: '/work/scrap-finance-partners', label: 'Client work' },
       { href: '/terms', label: 'Terms of work' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },
     ],
   },
   {
-    // Kept apart from the service on purpose (29 Sep rebuild): Objects is a
-    // concept range and the Lab holds Maz's own products, so neither competes
-    // with the one thing a small business can buy today.
-    title: 'Lab / Physical products',
+    // Objects stays a concept range, kept apart from the one thing a small business can buy today.
+    title: 'Physical products',
     links: [
-      { href: '/video', label: 'Video and filming' },
       { href: '/3d-printing', label: 'Objects (concept range)' },
       { href: '/3d-printing#architecture-property', label: 'Architecture models' },
-      { href: '/lab', label: 'Lab: my own products' },
     ],
   },
 ];

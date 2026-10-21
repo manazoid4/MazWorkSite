@@ -102,9 +102,6 @@ test('the homepage serves local and professional visitors and keeps deeper trade
   const sitemap = await fs.readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   for (const type of types.CUSTOMER_TYPES) assert.match(sitemap, new RegExp(`/for/${type.id}<`));
   assert.doesNotMatch(sitemap, /\/brand-kit</);
-  const moved = await readPage('/brand-kit');
-  assert.match(moved, /noindex/);
-  assert.match(moved, /href="\/for\/creators"/);
 });
 
 test('every explainer animation has a reduced-motion still', async () => {

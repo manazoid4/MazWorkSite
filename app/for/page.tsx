@@ -7,8 +7,10 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import { NICHE_GUIDES } from './niches';
 import { OFFERS } from '../offers';
 import { CUSTOMER_TYPES } from '../customer-types';
-import { KitIcon, NICHE_ICONS } from '../brand-kit/kit-icon';
+import { KitIcon, NICHE_ICONS } from '../kit-icon';
 import { INDUSTRY_VOICE } from './industry-voice';
+import { SolutionsPicker } from '../solutions/solutions-picker';
+import { JobsSection } from './jobs-section';
 import './trade-pages.css';
 
 export const metadata: Metadata = {
@@ -59,10 +61,20 @@ export default function ForHubPage() {
         <h2 id="for-trades-title">Go straight to your trade.</h2>
         <ul className="tp-tiles tp-tiles-4" aria-label="Trades">
           {NICHE_GUIDES.map((guide) => <Tile key={guide.id} href={`/for/${guide.id}`} icon={NICHE_ICONS[guide.id] ?? 'spark'} name={guide.shortName} line={INDUSTRY_VOICE[guide.id].hook} tag={typeOf(guide.id)} />)}
-          <li><a className="tp-tile tp-tile-else" href="/free-plan?src=for-hub&trade=other#leak-check-form"><span className="tp-card-icon" aria-hidden="true"><KitIcon name="spark" /></span><strong>Something else?</strong><span>Every kind of business is welcome. Tell me what you do.</span><em>{MAIN_CTA} <span aria-hidden="true">→</span></em></a></li>
+          <li><a className="tp-tile tp-tile-else" href="/contact?src=for-hub&trade=other#contact"><span className="tp-card-icon" aria-hidden="true"><KitIcon name="spark" /></span><strong>Something else?</strong><span>Every kind of business is welcome. Tell me what you do.</span><em>{MAIN_CTA} <span aria-hidden="true">→</span></em></a></li>
         </ul>
-        
+
       </section>
+
+      <section className="s-section" id="problems" aria-labelledby="for-problems-title">
+        <p className="eyebrow">Or by problem</p>
+        <h2 id="for-problems-title">Pick the problem. See the answer.</h2>
+        <p className="s-lede">Same four answers for every business: the problem, what you get, what it costs and what happens next. Fixed prices, no VAT added.</p>
+        <SolutionsPicker startOpen firstSelected />
+        <p className="s-actions"><a className="button button-signal" href="/contact?src=for-hub">{MAIN_CTA}</a></p>
+      </section>
+
+      <JobsSection />
 
       <SiteFooter />
     </main>

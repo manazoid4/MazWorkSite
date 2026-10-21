@@ -1,34 +1,5 @@
-import { LINKEDIN_URL, PERSON_NAME } from './site';
 import { B2B_SYSTEMS, COMPLAINT_PACKAGES, GHL_PARTNER, OFFERS, formatPrice, ghlThreeYearGbp } from './offers';
 import './b2b.css';
-
-/**
- * The founder credential, worded exactly as the rest of the site words it
- * (see ManazirLine and /proof). Do not add dates, employers or case numbers here.
- */
-export function FounderTrust() {
-  return (
-    <div className="b2b-founder">
-      <img src="/maz.webp" alt={`${PERSON_NAME}`} width={72} height={72} />
-      <p><strong>{PERSON_NAME}</strong>. Computer Science graduate (Swansea University), then five years in complaints and finance, including regulated work and ombudsman cases. I know what a complaint looks like from the other side of the desk, so the systems I build handle the awkward cases as well as the easy ones. I build every job myself.</p>
-    </div>
-  );
-}
-
-export function FounderMoat() {
-  return (
-    <section className="b2b-wrap" aria-labelledby="moat-title">
-      <h2 id="moat-title">Why an ex-finance complaints specialist builds your systems</h2>
-      <FounderTrust />
-      <ul className="b2b-grid is-three">
-        <li><strong>Careful logic</strong><span>Five years of regulated complaint work teaches you to ask “what if it goes wrong?” first. Each system is tested on the awkward cases before it goes live.</span></li>
-        <li><strong>You own it</strong><span>Accounts and data are in your name, with a written guide. No platform rent, and no lock-in if you stop working with me.</span></li>
-        <li><strong>Proper foundations</strong><span>A Computer Science degree (Swansea University) and plain, tested builds rather than a pile of fragile hacks.</span></li>
-      </ul>
-      <p className="b2b-fine"><a href={LINKEDIN_URL}>Maz Works on LinkedIn</a></p>
-    </section>
-  );
-}
 
 /** The practice lane on /prices: single tasks versus joined-up systems, and what renting a platform costs over three years. */
 export function PracticeTier() {
@@ -54,7 +25,7 @@ export function PracticeTier() {
             {COMPLAINT_PACKAGES.map((item) => <li key={item.id}>{item.name}: Quoted to scope</li>)}
             {B2B_SYSTEMS.map((item) => <li key={item.id}>{item.name}: Quoted to scope</li>)}
           </ul>
-          <p className="b2b-fine"><a href="/b2b">More on the B2B page</a></p>
+          <p className="b2b-fine"><a href="/professional-teams">More for professional teams</a></p>
         </div>
       </div>
       <h3>Own it once, or rent it</h3>

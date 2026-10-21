@@ -21,7 +21,7 @@ const words = (html) => text(mainWithoutFooter(html)).split(/\s+/).filter(Boolea
 const TYPES = ['trades', 'appointments', 'creators', 'offices'];
 
 test('the main customer journey uses one clear enquiry action', async () => {
-  for (const route of ['index', 'what-we-do', 'local-businesses', 'professional-teams', 'complaints-improvement', 'complaints', 'prices', 'contact']) {
+  for (const route of ['index', 'what-we-do', 'local-businesses', 'professional-teams', 'prices', 'contact']) {
     const html = await read(route);
     assert.match(html, /Tell me what.s not working/, `${route} must offer the shared enquiry action`);
     assert.match(html, /href="\/contact[^\"]*#contact/, `${route} must make the general enquiry form reachable`);
@@ -34,7 +34,7 @@ test('the main customer journey uses one clear enquiry action', async () => {
 });
 
 test('the free preview is a secondary link, never the main button', async () => {
-  for (const route of ['index', 'demos', 'linkedin', 'prices']) {
+  for (const route of ['index', 'prices']) {
     const html = await read(route);
     assert.doesNotMatch(html, /button-signal[^"]*"[^>]*href="https:\/\/cal\.com/, `${route}: demo booking is a main button`);
     assert.doesNotMatch(html, /href="https:\/\/cal\.com[^"]*"[^>]*class="[^"]*button-signal/, `${route}: demo booking is a main button`);

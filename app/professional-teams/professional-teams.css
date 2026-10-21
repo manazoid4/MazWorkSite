@@ -14,7 +14,7 @@
 .pt-section-head { max-width: 48rem; margin-bottom: 28px; }
 .pt-section-head h2, .pt-practice h2 { max-width: 18ch; margin: 6px 0 10px; font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -.04em; }
 .pt-section-head > p:last-child { max-width: 42rem; margin: 0; color: var(--muted); line-height: 1.55; }
-.pt-demo { margin-top: 22px; padding: clamp(16px, 3vw, 28px); border: 1px solid var(--ink); background: var(--surface); }
+.pt-demo { margin-top: 22px; padding: clamp(16px, 3vw, 28px); border: 1px solid var(--line); background: var(--surface); }
 .pt-demo-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
 .pt-demo-label { margin: 0 0 5px; }
 .pt-demo-heading h3 { margin: 0; font-size: clamp(1.2rem, 2.4vw, 1.7rem); line-height: 1.2; letter-spacing: -.025em; }
@@ -30,14 +30,14 @@
 .pt-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 14px 0 10px; color: var(--muted); font-size: .8rem; }
 .pt-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .pt-key { width: 10px; height: 10px; display: inline-block; background: var(--ink); }
-.pt-key-out { background: var(--sage); border: 1px solid var(--ink); }
+.pt-key-out { background: var(--sage); border: 1px solid var(--line); }
 .pt-weeks { display: grid; gap: 10px; }
 .pt-week { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr) 4.5rem; align-items: center; gap: 8px; font-size: .8rem; }
 .pt-bars { display: grid; gap: 3px; min-width: 0; }
 .pt-bars i { display: block; height: 9px; background: var(--ink); }
-.pt-bars .pt-bar-out { background: var(--sage); border: 1px solid var(--ink); }
+.pt-bars .pt-bar-out { background: var(--sage); border: 1px solid var(--line); }
 .pt-week-count { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
-.pt-actions { padding: 16px; background: var(--sand); }
+.pt-actions { padding: 16px; border-radius: 12px; background: var(--peach); }
 .pt-actions ul, .pt-workload ul { list-style: none; margin: 10px 0 0; padding: 0; }
 .pt-actions li { display: grid; gap: 2px; padding: 9px 0; border-top: 1px solid var(--line); }
 .pt-actions li strong { font-size: .88rem; }
@@ -58,7 +58,7 @@
 .pt-status.is-late { background: var(--clay); }
 .pt-status.is-due { background: var(--wheat); }
 .pt-status.is-unassigned { background: var(--mist); }
-.pt-workload { padding: 16px; background: var(--sand); }
+.pt-workload { padding: 16px; border-radius: 12px; background: var(--peach); }
 .pt-workload li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: .88rem; }
 .pt-workload li strong { font-variant-numeric: tabular-nums; }
 .pt-workload li.is-unowned { font-weight: 700; }
@@ -87,3 +87,29 @@
   .pt-synthetic { justify-self: start; }
   .pt-week { grid-template-columns: 3.7rem minmax(0, 1fr) 4rem; gap: 6px; font-size: .74rem; }
 }
+
+.pt-setup, .pt-samples { width: min(100% - 40px, 72rem); margin: clamp(48px, 7vw, 84px) auto 0; }
+.pt-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: 1fr; }
+.pt-cards > li { display: grid; gap: 8px; align-content: start; padding: 20px; border-radius: 12px; background: var(--peach); }
+.pt-cards > li:nth-child(2n) { background: var(--sky-tint); }
+.pt-cards h3 { margin: 0; font-size: 1.2rem; line-height: 1.25; }
+.pt-cards p { margin: 0; max-width: 65ch; }
+.pt-cards details summary { cursor: pointer; font-weight: 700; color: var(--plum); }
+.pt-cards details > * + * { margin-top: 8px; }
+.pt-price { font-weight: 800; }
+.pt-tag { color: var(--muted); font-size: .85rem; }
+.pt-sub { margin: 32px 0 14px; font-size: 1.3rem; }
+.pt-setup > .pt-fine { margin-top: 16px; }
+.pt-more { width: min(100% - 40px, 72rem); margin: 28px auto 0; padding: 18px 20px; border-radius: 12px; background: var(--sky-tint); }
+.pt-more > summary { cursor: pointer; font-weight: 700; color: var(--plum); }
+.pt-more h3 { margin: 22px 0 10px; }
+@media (min-width: 720px) {
+  .pt-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1080px) {
+  .pt-setup .pt-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pt-cards-two { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+#complaints.pt-cards { grid-template-columns: 1fr; }
+@media (min-width: 720px) { #complaints.pt-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { #complaints.pt-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
