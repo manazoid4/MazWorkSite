@@ -37,7 +37,13 @@ export function ServiceEnquiryLink({ service, children }: { service: string; chi
   }}>{children}</a>;
 }
 
-export function DemoRequestForm() {
+export function DemoRequestForm({
+  kicker,
+  problemPlaceholder,
+}: {
+  kicker?: string;
+  problemPlaceholder?: string;
+} = {}) {
   const formRef = useRef<HTMLFormElement>(null);
   const [service, setService] = useState<EnquiryServiceId>(DEFAULT_SERVICE_ID);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -143,7 +149,7 @@ export function DemoRequestForm() {
     }}>
       <input type="hidden" name="_subject" value="Maz Works — business enquiry" />
       <input type="hidden" name="_template" value="table" />
-      <p className="mw-form-kicker">Just your name, email and what you want to improve. No service choice needed.</p>
+      <p className="mw-form-kicker">{kicker ?? 'Just your name, email and what you want to improve. No service choice needed.'}</p>
       <div className="mw-form-row">
         <label>
           <span>Name</span>
@@ -164,7 +170,7 @@ export function DemoRequestForm() {
           rows={5}
           required
           disabled={submitState === 'sending'}
-          placeholder="For example: I need more website enquiries, a clearer team dashboard, or help tracking deadlines and complaints."
+          placeholder={problemPlaceholder ?? 'For example: I need more website enquiries, a clearer team dashboard, or help tracking deadlines and complaints.'}
         />
       </label>
 

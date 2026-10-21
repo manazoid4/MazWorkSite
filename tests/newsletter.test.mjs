@@ -151,7 +151,7 @@ test('the signup email to Maz names the trade the visitor picked', async () => {
   assert.match(f.calls[1].body.text, /signed up from: footer/);
 });
 
-test('every page footer offers the general enquiry, optional preview and newsletter', async () => {
+test('the homepage footer has a direct enquiry form while other footers keep the newsletter', async () => {
   const src = await readFile(new URL('../app/footer-convert.tsx', import.meta.url), 'utf8');
   assert.match(src, /ENQUIRY_CTA/);
   assert.match(src, /You don.t need to name the right service/);
@@ -159,7 +159,15 @@ test('every page footer offers the general enquiry, optional preview and newslet
   assert.match(src, /<NewsletterSignup/);
   const chrome = await readFile(new URL('../app/site-chrome.tsx', import.meta.url), 'utf8');
   assert.match(chrome, /<FooterConvert \/>/);
+  const homeSource = await readFile(new URL('../app/page.tsx', import.meta.url), 'utf8');
+  assert.match(homeSource, /HomeFooterConvert/);
   const home = await readFile(new URL('../out/index.html', import.meta.url), 'utf8');
-  assert.match(home, /href="\/contact\?src=footer-convert#contact"/);
-  assert.match(home, /id="footer-signup"/);
+  assert.match(home, /id="home-enquiry-title"/);
+  assert.match(home, /Just your name, email and what you need\./);
+  assert.match(home, /New enquiries get missed, the same task keeps being repeated/);
+  assert.match(home, /name="problem"/);
+  assert.doesNotMatch(home, /id="footer-signup"/);
+  const other = await readFile(new URL('../out/proof.html', import.meta.url), 'utf8');
+  assert.match(other, /href="\/contact\?src=footer-convert#contact"/);
+  assert.match(other, /id="footer-signup"/);
 });

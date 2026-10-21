@@ -65,8 +65,9 @@ test('£79/month is typed only in offers.ts', async () => {
   assert.match(offers, /price: '£79\/month'/);
 });
 
-test('the offer is wired in: homepage, services, prices, enquiry, footer, sitemap', async () => {
-  for (const route of ['index', 'services', 'prices']) {
+test('the offer stays discoverable without the removed homepage workflow panel', async () => {
+  assert.match(await read('index'), /href="\/local-businesses"/, 'the homepage still routes local businesses to the relevant services');
+  for (const route of ['services', 'prices']) {
     assert.match(await read(route), /href="\/after-hours-receptionist"/, `${route} links the receptionist page`);
   }
   assert.match(await read('contact'), /After-Hours Receptionist: calls answered when you can’t pick up \(£79\/month\)/);

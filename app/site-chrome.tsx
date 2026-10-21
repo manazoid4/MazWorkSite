@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { FooterConvert } from './footer-convert';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
@@ -19,10 +20,10 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ conversion }: { conversion?: ReactNode } = {}) {
   return (
     <footer className="site-footer mw-site-footer mw-footer-clean">
-      <FooterConvert />
+      {conversion ?? <FooterConvert />}
 
       {/* Minimal on purpose (Maz, 15 Oct): one hook, a short line of links. Every page link lives in the menu and on /site-map. */}
       <div className="mw-footer-brand">

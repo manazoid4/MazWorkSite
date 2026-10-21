@@ -1,30 +1,50 @@
 import type { Metadata } from 'next';
-import { ShadowCameo } from './shadow-cameo';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { ThreeBuckets } from './three-buckets';
+import { HomeFooterConvert } from './home-footer-convert';
 import { CONTACT_EMAIL, ENQUIRY_CTA } from './site';
 import { OG_IMAGE } from './seo';
 import './home-transformation.css';
-import './shadow-cameo.css';
+
 
 const PROOF = [
   {
     name: 'Scrap Finance Partners',
-    label: 'Client work · website',
-    body: 'A website designed and built for a specialist finance firm.',
+    label: 'Client website',
+    body: 'A clear digital home for a specialist finance business.',
     href: '/work/scrap-finance-partners',
-    img: '/scrap-finance-partners-mobile.webp',
-    alt: 'Scrap Finance Partners website shown on a phone',
+    img: '/scrap-finance-partners.webp',
+    alt: 'Scrap Finance Partners website, designed for a specialist finance firm',
+    tone: 'clay',
   },
   {
     name: 'JobFilter',
-    label: 'Maz Works product · software',
-    body: 'A live tool that helps small firms find and filter public contracts.',
+    label: 'Maz Works product',
+    body: 'Finding relevant public contracts for small trades firms.',
     href: '/work/jobfilter',
-    img: '/jobfilter-home-mobile.webp',
-    alt: 'JobFilter product homepage shown on a phone',
+    img: '/jobfilter-home.webp',
+    alt: 'JobFilter helps small trades firms find relevant public contracts',
+    tone: 'mist',
   },
 ];
+
+function AudienceIcon({ kind }: { kind: 'local' | 'team' }) {
+  return (
+    <svg className={`mw-door-icon is-${kind}`} viewBox="0 0 96 76" aria-hidden="true" focusable="false">
+      {kind === 'local' ? <>
+        <rect x="9" y="13" width="48" height="48" rx="3" />
+        <path d="M9 26h48M20 8v11m26-11v11M20 37h11m8 0h9M20 47h11" />
+        <circle className="mw-door-icon-badge" cx="70" cy="47" r="15" />
+        <path d="m63 47 5 5 9-10" />
+      </> : <>
+        <rect x="7" y="13" width="62" height="43" />
+        <path d="M38 56v8m-18 0h36M17 47h12V36H17zm20 0h12V28H37zm20 0h7V20h-7z" />
+        <circle className="mw-door-icon-badge" cx="77" cy="15" r="12" />
+        <path d="m72 15 4 4 7-8" />
+      </>}
+    </svg>
+  );
+}
 
 export const metadata: Metadata = {
   title: { absolute: 'Maz Works | Making businesses better, one problem at a time' },
@@ -55,41 +75,29 @@ export default function Page() {
           </div>
           <p className="mw-home-reassurance">One person to deal with. I usually reply within 1 working day. Clear scope and price before paid work. <a href="/free-plan?src=home">See how the free preview works</a>.</p>
         </div>
-        <aside className="mw-home-demo" aria-label="Example of a customer enquiry workflow">
-          <p className="mw-home-demo-label"><span>One useful job</span><span>Illustrative workflow</span></p>
-          <div className="mw-flow-card">
-            <div className="mw-flow-step"><span>01</span><strong>A customer gets in touch</strong><small>Call · message · enquiry</small></div>
-            <div className="mw-flow-connector" aria-hidden="true">↓</div>
-            <div className="mw-flow-step is-highlight"><span>02</span><strong>They get a clear next step</strong><small>A useful reply or booking route</small></div>
-            <div className="mw-flow-connector" aria-hidden="true">↓</div>
-            <div className="mw-flow-step"><span>03</span><strong>You can see what needs attention</strong><small>Owner · next step · due date</small></div>
-          </div>
-          <ShadowCameo />
-          <p className="mw-home-demo-link"><a href="/professional-teams#demonstrations">See reporting and workload examples →</a></p>
-          <p className="mw-home-demo-note">An illustrative workflow, shaped around the tools and people already in your business. <a href="/after-hours-receptionist">Need help answering calls? See the option</a>.</p>
-        </aside>
+
       </section>
 
       <ThreeBuckets />
 
       <section className="mw-home-doors" aria-labelledby="doors-title">
-        <header>
-          <p className="eyebrow">Two ways in</p>
-          <h2 id="doors-title">Start with the work you know.</h2>
-          <p>You don’t need to know which service or tool you need. Tell me what is getting in the way.</p>
-        </header>
+        <header><h2 id="doors-title">Different businesses. Real problems worth solving.</h2></header>
         <div className="mw-door-grid">
           <article className="mw-door-card mw-door-local">
-            <p className="eyebrow">For the person doing the job</p>
-            <h3>I run a local business.</h3>
-            <p>Missed calls, quiet quotes, bookings to chase or a website that no longer does its job. Start with one practical improvement.</p>
-            <a href="/local-businesses">Explore help for local businesses <span aria-hidden="true">→</span></a>
+            <AudienceIcon kind="local" />
+            <div className="mw-door-copy">
+              <h3>Local &amp; independent businesses</h3>
+              <p>You’re busy looking after customers. Your website, enquiries and bookings should make that easier.</p>
+              <a href="/local-businesses">Find help for your business <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
           <article className="mw-door-card mw-door-professional">
-            <p className="eyebrow">For teams and organisations</p>
-            <h3>I work in a professional team.</h3>
-            <p>Scattered reports, approaching deadlines or recurring complaints. Get clearer oversight and practical tools around the way your team works.</p>
-            <a href="/professional-teams">Explore work for professional teams <span aria-hidden="true">→</span></a>
+            <AudienceIcon kind="team" />
+            <div className="mw-door-copy">
+              <h3>Professional teams &amp; organisations</h3>
+              <p>Clearer reporting, visible workloads and fewer manual hand-offs, built around the tools you already use.</p>
+              <a href="/professional-teams">Explore help for your team <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
         </div>
       </section>
@@ -107,33 +115,31 @@ export default function Page() {
 
       <section className="mw-home-proof" aria-labelledby="proof-title">
         <header>
-          <p className="eyebrow">Work you can see</p>
-          <h2 id="proof-title">Real projects. Clearly labelled.</h2>
-          <p>Client work and Maz Works products are shown separately, so you can see what each example represents.</p>
+          <h2 id="proof-title">Made to be used. Have a look around.</h2>
+          <p>Client work and a product of my own. Open an example and see the thinking behind it.</p>
         </header>
         <div className="mw-home-proof-grid">
           {PROOF.map((item) => (
-            <a className="mw-home-proof-card" href={item.href} key={item.name}>
-              <img src={item.img} alt={item.alt} width={390} height={600} loading="lazy" />
+            <article className="mw-home-proof-card" key={item.name}>
+              <a className={`mw-home-proof-image is-${item.tone}`} href={item.href} aria-label={`View ${item.name}`}>
+                <img src={item.img} alt={item.alt} width={1440} height={1000} loading="lazy" />
+              </a>
               <span className="relationship">{item.label}</span>
-              <strong>{item.name}</strong>
-              <span>{item.body}</span>
-              <b aria-hidden="true">See the project →</b>
-            </a>
+              <h3><a href={item.href}>{item.name}<span aria-hidden="true"> ↗</span></a></h3>
+              <p>{item.body}</p>
+            </article>
           ))}
         </div>
-        <p className="mw-home-proof-note">Complaints work examples use synthetic data and are labelled as demonstrations. <a href="/complaints-improvement">See the sample reports →</a></p>
-        <p className="mw-home-proof-note">For professional teams: <a href="/professional-teams#demonstrations">see dashboard and workflow demonstrations →</a></p>
+        <details className="mw-home-proof-more">
+          <summary>Explore workflow demonstrations</summary>
+          <div>
+            <p>Complaints examples use synthetic data and are labelled demonstrations. <a href="/complaints-improvement">See sample reports ↗</a></p>
+            <p>For professional teams: <a href="/professional-teams#demonstrations">see dashboard and workflow demonstrations ↗</a></p>
+          </div>
+        </details>
       </section>
 
-      <section className="mw-home-close" aria-labelledby="home-close-title">
-        <p className="eyebrow">Tell me what’s getting in the way</p>
-        <h2 id="home-close-title">You don’t need the answer before you ask.</h2>
-        <p>Explain what happens today and what you’d like to happen instead. I’ll reply personally with a sensible next step.</p>
-        <a className="button button-signal" href="/contact?src=home-close#contact">{ENQUIRY_CTA}</a>
-      </section>
-
-      <SiteFooter />
+      <SiteFooter conversion={<HomeFooterConvert />} />
     </main>
   );
 }
