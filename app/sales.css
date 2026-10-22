@@ -1752,3 +1752,4 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-template-head p { margin: 0; color: var(--muted); }
 .mw-template pre { margin: 16px 0 0; padding: 16px; background: var(--sand); white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: 0.95rem; line-height: 1.55; }
 .mw-template-note { max-width: 860px; margin-top: 24px; font-size: 0.9rem; }
+.mw-template-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

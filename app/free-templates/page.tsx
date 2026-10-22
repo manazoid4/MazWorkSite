@@ -76,19 +76,19 @@ Thanks,
   },
   {
     id: 'final-demand',
-    title: 'Final demand (letter before action)',
-    when: 'The last step before court, for a business customer. If your customer is a sole trader or an individual, give them 30 days and follow the Pre-Action Protocol for Debt Claims instead.',
+    title: 'Final demand to a business (letter before action)',
+    when: 'The last step before court, only for a customer that is a company or partnership. If your customer is a sole trader or an individual, do not use this letter: follow the Pre-Action Protocol for Debt Claims (30 days, with its information sheet and reply form). If your contract sets its own late payment interest, use that instead of the 8%.',
     text: `Subject: Final demand – invoice [number]
 
 Dear [Name],
 
 Invoice [number] for £[amount], due on [due date], is still unpaid despite my reminders on [dates].
 
-Under the Late Payment of Commercial Debts (Interest) Act 1998, I am now claiming:
+Under the Late Payment of Commercial Debts (Interest) Act 1998, I am now claiming the amounts below. A separate invoice for the interest and compensation is attached.
 
 Unpaid invoice: £[amount]
 Fixed compensation: £[40 / 70 / 100]
-Interest at 8% above the Bank of England base rate, from [due date]: £[interest so far]
+Interest at 8% above the Bank of England base rate, from the day after [due date]: £[interest so far]
 Total now due: £[total]
 
 Please pay the total within 14 days of the date of this letter.
@@ -153,7 +153,7 @@ export default function FreeTemplatesPage() {
                   <h2 id={`${t.id}-title`}>{t.title}</h2>
                   <p>{t.when}</p>
                 </div>
-                <CopyButton text={t.text} />
+                <CopyButton text={t.text} label={t.title} />
               </div>
               <pre>{t.text}</pre>
             </article>
