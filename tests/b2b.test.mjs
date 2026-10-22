@@ -194,11 +194,21 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /View a scope sheet/);
 });
 
-test('the header stays focused (six links and the Free preview button) and the footer is the short list of eight links', async () => {
+test('the header stays focused (seven links and the Free preview button) and the footer is the short list of eight links', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
+  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/free-templates', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
   for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));
+});
+
+test('free templates page: free-forever line, copy buttons and the UK late payment figures', async () => {
+  const html = await page('free-templates');
+  assert.match(html, /This is free, forever\./);
+  assert.equal((html.match(/class="mw-template"/g) ?? []).length, 6);
+  assert.match(html, /Late Payment of Commercial Debts \(Interest\) Act 1998/);
+  assert.match(html, /8% above the Bank of England base rate/);
+  assert.match(html, /Pre-Action Protocol for Debt Claims/);
+  assert.match(html, /from the day after \[due date\]/);
 });
