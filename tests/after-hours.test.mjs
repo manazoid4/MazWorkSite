@@ -23,7 +23,7 @@ test('prices and receptionist cards share the configured Stripe checkout', async
   assert.ok(!link.includes('/test_'), 'checkout is not a test-mode link');
   for (const route of ['prices', 'after-hours-receptionist']) {
     const html = await read(route);
-    assert.match(text(html), /Already heard your demo\? Subscribe below\. Your first month is charged at checkout\./);
+    assert.match(text(html), /Only subscribe once you have heard your demo\. Your first month is charged at checkout\./);
     const buttons = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>Buy now<\/a>/g)];
     assert.deepEqual(buttons.map((button) => button[1]), [link], `${route} buys the configured receptionist offer`);
   }

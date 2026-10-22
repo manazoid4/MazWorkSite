@@ -23,7 +23,7 @@ const TYPES = ['trades', 'appointments', 'creators', 'offices'];
 test('the main customer journey uses one clear enquiry action', async () => {
   for (const route of ['index', 'what-we-do', 'local-businesses', 'professional-teams', 'prices', 'contact']) {
     const html = await read(route);
-    assert.match(html, /Tell me what.s not working/, `${route} must offer the shared enquiry action`);
+    assert.match(html, /Get my free preview/, `${route} must offer the shared enquiry action`);
     assert.match(html, /href="\/contact[^\"]*#contact/, `${route} must make the general enquiry form reachable`);
   }
   const home = await read('index');

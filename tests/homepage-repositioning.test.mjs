@@ -23,7 +23,7 @@ const visibleText = (source) => source
 
 test('homepage gives one clear route to the enquiry form', () => {
   const text = visibleText(main);
-  assert.match(text, /Tell me what.s not working/);
+  assert.match(text, /Get my free preview/);
   assert.match(main, /href="\/contact\?src=home#contact"/);
   assert.match(main, /id="home-enquiry-title"/);
   assert.match(main, /name="problem"/);

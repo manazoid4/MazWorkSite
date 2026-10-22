@@ -8,7 +8,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 
 export const metadata: Metadata = {
   title: 'Site map',
-  description: fitDescription('Every page on the Maz Works site in one list: packages and prices, trade guides, objects, work and help.'),
+  description: fitDescription('Every page on the Maz Works site in one list: packages and prices, trade guides, work and help.'),
   alternates: { canonical: '/site-map' },
   openGraph: { title: 'Site map — Maz Works', url: '/site-map', images: [OG_IMAGE] },
 };
