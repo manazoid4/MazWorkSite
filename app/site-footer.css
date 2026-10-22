@@ -11,8 +11,8 @@
 .mw-footer-convert .eyebrow { padding: 0; border: 0; background: transparent; color: var(--muted); font-family: var(--sans); font-size: .95rem; letter-spacing: 0; text-transform: none; }
 .mw-footer-convert .mw-footer-ask { font-family: var(--sans); font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.15; }
 .mw-footer-convert .mw-footer-line, .mw-footer-convert .mw-newsletter p, .mw-footer-convert .mw-newsletter label { font-family: var(--sans); font-size: 1rem; }
-.mw-footer-convert .button { border: 0; border-radius: 8px; box-shadow: none; font-family: var(--sans); }
+.mw-footer-convert .button { border: 0; border-radius: 999px; box-shadow: none; font-family: var(--sans); }
 .mw-footer-convert .text-link { color: var(--plum); font-family: var(--sans); font-size: .95rem; }
 .mw-footer-convert input { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-family: var(--sans); }
-.mw-footer-convert .mw-newsletter button { border: 0; border-radius: 8px; background: var(--plum); color: var(--cream); font-family: var(--sans); }
+.mw-footer-convert .mw-newsletter button { border: 0; border-radius: 999px; background: var(--plum); color: var(--cream); font-family: var(--sans); }
 .mw-site-footer.mw-footer-clean .mw-footer-links a, .mw-site-footer.mw-footer-clean > .mw-footer-bottom { font-family: var(--sans); }

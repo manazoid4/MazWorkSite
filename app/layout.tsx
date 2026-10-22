@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Fraunces, Manrope } from 'next/font/google';
 import { ConversionTracker } from './analytics';
 import { LinkedInInsight } from './linkedin-insight';
 import { Analytics } from '@vercel/analytics/next';
@@ -10,6 +11,10 @@ import './colour.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
 import { ALL_OFFERS, FREE_STEP, PRICE_RANGE } from './offers';
+
+// Agrumea-style pairing: warm serif headlines over a clean sans body.
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' });
+const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces', display: 'swap', axes: ['SOFT', 'opsz'] });
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -82,7 +87,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${manrope.variable} ${fraunces.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
