@@ -9,13 +9,14 @@ import { CUSTOMER_TYPES } from './customer-types';
  */
 export type NavLink = { href: string; label: string };
 
-/** Shown in the header on desktop. Six links plus the "Free preview" button. */
+/** Shown in the header on desktop. Seven links plus the "Free preview" button. */
 export const PRIMARY_NAV: NavLink[] = [
   { href: '/what-we-do', label: 'What I do' },
   { href: '/local-businesses', label: 'Local businesses' },
   { href: '/professional-teams', label: 'Professional teams' },
   { href: '/prices', label: 'Prices' },
   { href: '/proof', label: 'Proof' },
+  { href: '/free-templates', label: 'Free templates' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -59,6 +60,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/proof', label: 'Proof and client work' },
       { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
+      { href: '/free-templates', label: 'Free templates' },
       { href: '/terms', label: 'Terms of work' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },

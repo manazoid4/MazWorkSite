@@ -1743,3 +1743,12 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-resource-cta { background: var(--sky-tint); color: var(--ink); }
 .mw-resource-cta a.button:not(.button-signal) { background: var(--surface); color: var(--plum); }
 .s-final { background: var(--sky-tint); color: var(--ink); }
+
+/* Free templates (22 Oct 2026): copy-paste blocks. */
+.mw-templates { display: grid; gap: 24px; max-width: 860px; }
+.mw-template { border: 1px solid var(--line); background: var(--surface); padding: clamp(16px, 3vw, 24px); }
+.mw-template-head { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; }
+.mw-template-head h2 { margin: 0 0 6px; font-size: 1.25rem; }
+.mw-template-head p { margin: 0; color: var(--muted); }
+.mw-template pre { margin: 16px 0 0; padding: 16px; background: var(--sand); white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; font-size: 0.95rem; line-height: 1.55; }
+.mw-template-note { max-width: 860px; margin-top: 24px; font-size: 0.9rem; }
