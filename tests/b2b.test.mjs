@@ -210,9 +210,16 @@ test('free membership: free-forever line, six icon topics, calculator, sources o
   assert.equal((html.match(/class="mw-kit-tile"/g) ?? []).length, 6);
   for (const id of ['getting-paid', 'customers', 'tax', 'staff', 'data', 'safety']) assert.match(html, new RegExp(`id="${id}"`), id);
   assert.match(html, /class="mw-calc"/);
+  // Email list gate: one signup up front, a few items open to all, the rest say how to unlock.
+  assert.match(html, /id="join"/);
+  assert.match(html, /name="source" value="membership"/);
+  assert.match(html, /Join free\. Unlock everything\./);
+  assert.ok((html.match(/class="mw-kit-free"/g) ?? []).length >= 6, 'at least one free item per topic');
+  assert.match(html, /Free for members\. <a href="#join">/);
   assert.match(html, /Pre-Action Protocol for Debt Claims/);
   assert.match(html, /from the day after \[due date\]/);
   const { CATEGORIES } = await import('../app/free-membership/toolkit.ts');
+  for (const c of CATEGORIES) assert.ok(c.items.some((item) => item.open), `${c.id} needs a free item`);
   for (const item of CATEGORIES.flatMap((c) => c.items)) {
     if (item.kind !== 'template') assert.ok(item.sources.length > 0, `${item.title} needs a source`);
     assert.ok(item.kind === 'template' ? item.text : item.points?.length, item.title);

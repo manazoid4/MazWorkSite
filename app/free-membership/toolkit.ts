@@ -10,6 +10,8 @@ export type ToolkitItem = {
   points?: string[];
   text?: string;
   sources: string[];
+  /** Open to everyone; everything else is for members (free, email signup). */
+  open?: boolean;
 };
 
 export type ToolkitCategory = { id: string; title: string; blurb: string; icon: string; items: ToolkitItem[] };
@@ -35,6 +37,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "checklist",
         "title": "Chasing timeline: from invoice to court",
+        "open": true,
         "when": "Follow it the same way for every customer, so chasing is routine, not personal. Court steps are for England and Wales.",
         "sources": [
           "https://www.gov.uk/invoicing-and-taking-payment-from-customers/invoices-what-they-must-include",
@@ -59,6 +62,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "template",
         "title": "Friendly payment reminder",
+        "open": true,
         "when": "About 3 days after the due date. Works for any customer. Most late payers have simply forgotten.",
         "sources": [],
         "text": "Subject: Invoice [number]: friendly reminder\n\nHi [Name],\n\nJust a quick reminder that invoice [number] for £[amount] was due on [due date].\n\nI've attached a copy in case it went astray. You can pay by bank transfer:\n[Account name], sort code [00-00-00], account [00000000], reference [invoice number].\n\nIf it's already on its way, thank you, and please ignore this.\n\nThanks,\n[Your name]\n[Business name]\n[Phone number]"
@@ -134,6 +138,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "template",
         "title": "Reply to a complaint",
+        "open": true,
         "when": "Within one working day. Short, calm and specific beats long and defensive. If it is getting heated, phone instead. Never make a fix or refund depend on them not leaving a bad review.",
         "sources": [
           "https://www.gov.uk/accepting-returns-and-giving-refunds",
@@ -184,6 +189,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "facts",
         "title": "Sole trader tax calendar for the 2025 to 2026 tax year",
+        "open": true,
         "when": "Pin this up if you file self assessment as a sole trader",
         "points": [
           "The tax year ran from 6 April 2025 to 5 April 2026.",
@@ -290,6 +296,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "checklist",
         "title": "First employee checklist",
+        "open": true,
         "when": "Work through this before your first hire starts",
         "points": [
           "Check their right to work in the UK before they start. Use their share code online, or check their original documents with them present.",
@@ -376,6 +383,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "facts",
         "title": "Do you need to pay the ICO data protection fee?",
+        "open": true,
         "when": "Check before you start, then every year when it renews",
         "points": [
           "Organisations that use personal data, sole traders included, must pay a data protection fee to the ICO unless they are exempt.",
@@ -461,6 +469,7 @@ export const CATEGORIES: ToolkitCategory[] = [
       {
         "kind": "checklist",
         "title": "Health and safety legal basics for small businesses",
+        "open": true,
         "when": "When you take on your first worker, then check it once a year",
         "points": [
           "Do a risk assessment: find what could cause harm, decide how likely and how serious, then control it.",

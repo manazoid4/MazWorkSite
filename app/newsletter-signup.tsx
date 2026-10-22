@@ -17,9 +17,13 @@ type Props = {
   trade?: string;
   title?: string;
   text?: string;
+  /** Shown after a successful signup. */
+  doneText?: string;
+  /** Runs after a successful signup, with or without JavaScript. */
+  onDone?: () => void;
 };
 
-export function NewsletterSignup({ id = 'newsletter', source = 'lab', trade, title = 'Not ready yet?', text = 'Occasional updates on what I build. Unsubscribe any time.' }: Props = {}) {
+export function NewsletterSignup({ id = 'newsletter', source = 'lab', trade, title = 'Not ready yet?', text = 'Occasional updates on what I build. Unsubscribe any time.', doneText = 'You’re on the list. Thanks.', onDone }: Props = {}) {
   const [state, setState] = useState<State>('idle');
   const [message, setMessage] = useState('');
 
@@ -27,7 +31,10 @@ export function NewsletterSignup({ id = 'newsletter', source = 'lab', trade, tit
     // Two signups can share a page (footer and /lab): only the one the no-JS redirect points at shows the outcome.
     if (window.location.hash !== `#${id}`) return;
     const outcome = new URLSearchParams(window.location.search).get('subscribed');
-    if (outcome === '1') setState('done');
+    if (outcome === '1') {
+      setState('done');
+      onDone?.();
+    }
     if (outcome === '0') {
       setState('error');
       setMessage('That didn’t go through. Please try again.');
@@ -54,6 +61,7 @@ export function NewsletterSignup({ id = 'newsletter', source = 'lab', trade, tit
       const result = (await response.json().catch(() => null)) as { ok?: boolean; reason?: string } | null;
       if (result?.ok === true) {
         setState('done');
+        onDone?.();
         return;
       }
       setState('error');
@@ -71,7 +79,7 @@ export function NewsletterSignup({ id = 'newsletter', source = 'lab', trade, tit
         <p>{text}</p>
       </div>
       {state === 'done' ? (
-        <p className="mw-newsletter-done" role="status">You’re on the list. Thanks.</p>
+        <p className="mw-newsletter-done" role="status">{doneText}</p>
       ) : (
         <form className="mw-newsletter-form" method="post" action="/api/subscribe" onSubmit={onSubmit} noValidate>
           <div className="mw-newsletter-row">
