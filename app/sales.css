@@ -1766,8 +1766,8 @@ form label:has(> input[type="checkbox"]), form label:has(> input[type="radio"]) 
 .mw-kit-item[open] { grid-column: 1 / -1; }
 .mw-kit-item summary { display: grid; gap: 4px; padding: 16px 48px 16px 18px; cursor: pointer; list-style: none; position: relative; }
 .mw-kit-item summary::-webkit-details-marker { display: none; }
-.mw-kit-item summary::after { content: '+'; position: absolute; right: 18px; top: 14px; font-size: 1.5rem; line-height: 1; color: var(--plum); }
-.mw-kit-item[open] summary::after { content: '\2212'; }
+.mw-kit-item summary::after { content: '+' / ''; position: absolute; right: 18px; top: 14px; font-size: 1.5rem; line-height: 1; color: var(--plum); }
+.mw-kit-item[open] summary::after { content: '\2212' / ''; }
 .mw-kit-item summary:focus-visible { outline: 2px solid var(--plum); outline-offset: 2px; border-radius: 14px; }
 .mw-kit-kind { font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--plum); }
 .mw-kit-item-title { font-weight: 700; font-size: 1.05rem; }

@@ -5,13 +5,14 @@ import { REFERENCE_RATES, compensation, lateInterest, referenceRate } from './la
 
 const money = (n: number) => `£${n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => new Date().toLocaleDateString('en-CA'); // local YYYY-MM-DD, not UTC
 
 export function LatePaymentCalculator() {
   const [amount, setAmount] = useState('1200');
   const [due, setDue] = useState('');
   const [paid, setPaid] = useState(''); // blank = today; avoids baking the build date into the static page
   const [rate, setRate] = useState(String(REFERENCE_RATES[REFERENCE_RATES.length - 1].rate));
+  const [rateEdited, setRateEdited] = useState(false);
   const known = due ? referenceRate(due) : undefined;
 
   const value = Number(amount);
@@ -27,13 +28,13 @@ export function LatePaymentCalculator() {
           <input type="number" inputMode="decimal" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </label>
         <label>Due date
-          <input type="date" value={due} onChange={(e) => { setDue(e.target.value); const r = referenceRate(e.target.value); if (r !== undefined) setRate(String(r)); }} />
+          <input type="date" value={due} onChange={(e) => { setDue(e.target.value); const r = referenceRate(e.target.value); if (!rateEdited) setRate(r === undefined ? '' : String(r)); }} />
         </label>
         <label>Paid on (blank = today)
           <input type="date" value={paid} onChange={(e) => setPaid(e.target.value)} />
         </label>
         <label>Reference Bank Rate (%)
-          <input type="number" inputMode="decimal" min="0" step="0.01" value={rate} onChange={(e) => setRate(e.target.value)} />
+          <input type="number" inputMode="decimal" min="0" step="0.01" value={rate} onChange={(e) => { setRate(e.target.value); setRateEdited(true); }} />
         </label>
       </div>
       <output className="mw-calc-result" aria-live="polite">
@@ -45,7 +46,7 @@ export function LatePaymentCalculator() {
             <span className="mw-calc-total">You can claim: <b>{money(value + interest + fixed)}</b></span>
           </>
         ) : (
-          <span>Enter the invoice amount and the date it was due.</span>
+          <span>{!due || !(value > 0) ? 'Enter the invoice amount and the date it was due.' : days <= 0 ? 'The paid on date must be after the due date.' : 'Enter the Bank Rate.'}</span>
         )}
       </output>
       <p className="mw-calc-note">{due && known === undefined

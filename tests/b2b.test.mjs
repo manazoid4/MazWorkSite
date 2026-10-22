@@ -210,6 +210,7 @@ test('free toolkit: free-forever line, six icon topics, calculator, sources on e
   for (const id of ['getting-paid', 'customers', 'tax', 'staff', 'data', 'safety']) assert.match(html, new RegExp(`id="${id}"`), id);
   assert.match(html, /class="mw-calc"/);
   assert.match(html, /Pre-Action Protocol for Debt Claims/);
+  assert.match(html, /from the day after \[due date\]/);
   const { CATEGORIES } = await import('../app/free-toolkit/toolkit.ts');
   for (const item of CATEGORIES.flatMap((c) => c.items)) {
     if (item.kind !== 'template') assert.ok(item.sources.length > 0, `${item.title} needs a source`);
