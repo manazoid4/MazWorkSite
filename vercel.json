@@ -59,7 +59,12 @@
   "redirects": [
     {
       "source": "/free-templates",
-      "destination": "/free-toolkit",
+      "destination": "/free-membership",
+      "permanent": true
+    },
+    {
+      "source": "/free-toolkit",
+      "destination": "/free-membership",
       "permanent": true
     },
     {

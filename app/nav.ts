@@ -16,7 +16,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: '/professional-teams', label: 'Professional teams' },
   { href: '/prices', label: 'Prices' },
   { href: '/proof', label: 'Proof' },
-  { href: '/free-toolkit', label: 'Free toolkit' },
+  { href: '/free-membership', label: 'Free membership' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -60,7 +60,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/proof', label: 'Proof and client work' },
       { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
-      { href: '/free-toolkit', label: 'Free toolkit' },
+      { href: '/free-membership', label: 'Free membership' },
       { href: '/terms', label: 'Terms of work' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },

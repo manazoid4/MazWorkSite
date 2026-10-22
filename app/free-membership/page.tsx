@@ -12,13 +12,13 @@ import { CATEGORIES, CHECKED, type ToolkitItem } from './toolkit';
  * membership library, free forever. Every figure is checked against the
  * official source linked under it; content lives in toolkit.ts.
  */
-const PAGE_URL = `${SITE_URL}/free-toolkit`;
+const PAGE_URL = `${SITE_URL}/free-membership`;
 
 export const metadata: Metadata = {
-  title: 'Free small business toolkit',
-  description: fitDescription('Free UK small business toolkit: late payment calculator and letters, tax deadlines, first employee checklist, data protection and health and safety basics, customer templates. Free forever.'),
+  title: 'The free membership',
+  description: fitDescription('The free membership for UK small businesses, no subscription: late payment calculator and letters, tax deadlines, first employee checklist, data protection and health and safety basics, customer templates. Free forever.'),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Free small business toolkit', url: PAGE_URL, images: [OG_IMAGE] },
+  openGraph: { title: 'The free membership for small businesses', url: PAGE_URL, images: [OG_IMAGE] },
 };
 
 const KIND_LABEL = { checklist: 'Checklist', template: 'Template', facts: 'Key facts' } as const;
@@ -56,14 +56,14 @@ function Item({ item, id }: { item: ToolkitItem; id: string }) {
   );
 }
 
-export default function FreeToolkitPage() {
+export default function FreeMembershipPage() {
   return (
     <main>
       <SiteHeader />
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="toolkit-title">
-        <p className="eyebrow">Free toolkit</p>
-        <h1 id="toolkit-title">The free small business toolkit</h1>
+        <p className="eyebrow">No subscription</p>
+        <h1 id="toolkit-title">The free membership.</h1>
         <p>This is free, forever. I&rsquo;m committed to pushing this out for businesses.</p>
       </section>
 
