@@ -58,6 +58,11 @@
   ],
   "redirects": [
     {
+      "source": "/free-templates",
+      "destination": "/free-toolkit",
+      "permanent": true
+    },
+    {
       "source": "/start",
       "has": [
         {

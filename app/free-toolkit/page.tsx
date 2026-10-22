@@ -2,168 +2,105 @@ import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
 import { SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
+import { KitIcon } from '../kit-icon';
 import { CopyButton } from './copy-button';
+import { LatePaymentCalculator } from './late-payment-calculator';
+import { CATEGORIES, CHECKED, type ToolkitItem } from './toolkit';
 
 /**
- * Free copy-paste templates (22 Oct 2026, Maz): the useful part of a paid
- * membership library, free forever. Start small and get each one right before
- * adding more. Late-payment figures follow the Late Payment of Commercial
- * Debts (Interest) Act 1998 as set out on GOV.UK; recheck them if that changes.
+ * Free small business toolkit (22 Oct 2026, Maz): the useful parts of a paid
+ * membership library, free forever. Every figure is checked against the
+ * official source linked under it; content lives in toolkit.ts.
  */
-const PAGE_URL = `${SITE_URL}/free-templates`;
+const PAGE_URL = `${SITE_URL}/free-toolkit`;
 
 export const metadata: Metadata = {
-  title: 'Free templates',
-  description: fitDescription('Free copy-and-paste templates for UK small businesses: invoice payment terms, late payment reminders, a final demand letter, a complaint reply and a review request. Free forever.'),
+  title: 'Free small business toolkit',
+  description: fitDescription('Free UK small business toolkit: late payment calculator and letters, tax deadlines, first employee checklist, data protection and health and safety basics, customer templates. Free forever.'),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Free templates for small businesses', url: PAGE_URL, images: [OG_IMAGE] },
+  openGraph: { title: 'Free small business toolkit', url: PAGE_URL, images: [OG_IMAGE] },
 };
 
-type Template = { id: string; title: string; when: string; text: string };
+const KIND_LABEL = { checklist: 'Checklist', template: 'Template', facts: 'Key facts' } as const;
 
-const TEMPLATES: Template[] = [
-  {
-    id: 'payment-terms',
-    title: 'Payment terms for your invoices',
-    when: 'Put this at the bottom of every invoice to a business customer.',
-    text: `Payment terms: please pay within [30] days of the invoice date.
+function itemText(item: ToolkitItem) {
+  return item.kind === 'template' ? item.text ?? '' : (item.points ?? []).map((p) => `- ${p}`).join('\n');
+}
 
-Bank transfer to: [Account name]
-Sort code: [00-00-00]
-Account number: [00000000]
-Reference: [Invoice number]
+function Item({ item, id }: { item: ToolkitItem; id: string }) {
+  return (
+    <details className="mw-kit-item" id={id}>
+      <summary>
+        <span className="mw-kit-kind">{KIND_LABEL[item.kind]}</span>
+        <span className="mw-kit-item-title">{item.title}</span>
+        <span className="mw-kit-when">{item.when}</span>
+      </summary>
+      <div className="mw-kit-body">
+        {item.kind === 'template' && <pre>{item.text}</pre>}
+        {item.kind === 'checklist' && (
+          <ul className="mw-kit-checks">
+            {item.points?.map((p) => <li key={p}><label><input type="checkbox" /> <span>{p}</span></label></li>)}
+          </ul>
+        )}
+        {item.kind === 'facts' && <ul className="mw-kit-facts">{item.points?.map((p) => <li key={p}>{p}</li>)}</ul>}
+        <div className="mw-kit-foot">
+          <CopyButton text={itemText(item)} label={item.title} />
+          {item.sources.length > 0 && (
+            <span className="mw-kit-sources">Source: {item.sources.map((url, i) => (
+              <a key={url} href={url}>{new URL(url).hostname.replace('www.', '')}{item.sources.length > 1 ? ` ${i + 1}` : ''}</a>
+            ))}</span>
+          )}
+        </div>
+      </div>
+    </details>
+  );
+}
 
-If payment is late, we may claim interest and compensation under the Late Payment of Commercial Debts (Interest) Act 1998.`,
-  },
-  {
-    id: 'friendly-reminder',
-    title: 'Friendly payment reminder',
-    when: 'A few days after the due date. Most late payers just forgot.',
-    text: `Subject: Invoice [number] – friendly reminder
-
-Hi [Name],
-
-Just a quick reminder that invoice [number] for £[amount] was due on [due date].
-
-I've attached a copy in case it got lost. You can pay by bank transfer to:
-[Account name], sort code [00-00-00], account [00000000], reference [invoice number].
-
-If it's already on its way, please ignore this.
-
-Thanks,
-[Your name]
-[Business name]`,
-  },
-  {
-    id: 'second-reminder',
-    title: 'Second reminder (overdue)',
-    when: 'About 14 days late, if the first reminder got no reply or payment.',
-    text: `Subject: Invoice [number] – now [X] days overdue
-
-Hi [Name],
-
-Invoice [number] for £[amount] was due on [due date] and is now [X] days overdue.
-
-Please pay it by [date, 7 days from today].
-
-If payment is not received by then, I will add statutory interest and a fixed compensation charge, as allowed under the Late Payment of Commercial Debts (Interest) Act 1998.
-
-If there's a problem with the invoice or the work, please tell me today so we can sort it out.
-
-Thanks,
-[Your name]
-[Business name]`,
-  },
-  {
-    id: 'final-demand',
-    title: 'Final demand to a business (letter before action)',
-    when: 'The last step before court, only for a customer that is a company or partnership. If your customer is a sole trader or an individual, do not use this letter: follow the Pre-Action Protocol for Debt Claims (30 days, with its information sheet and reply form). If your contract sets its own late payment interest, use that instead of the 8%.',
-    text: `Subject: Final demand – invoice [number]
-
-Dear [Name],
-
-Invoice [number] for £[amount], due on [due date], is still unpaid despite my reminders on [dates].
-
-Under the Late Payment of Commercial Debts (Interest) Act 1998, I am now claiming the amounts below. A separate invoice for the interest and compensation is attached.
-
-Unpaid invoice: £[amount]
-Fixed compensation: £[40 / 70 / 100]
-Interest at 8% above the Bank of England base rate, from the day after [due date]: £[interest so far]
-Total now due: £[total]
-
-Please pay the total within 14 days of the date of this letter.
-
-If I do not receive payment or hear from you by [date], I will start a court claim to recover the debt without further notice. This may add court fees and costs to what you owe.
-
-Yours sincerely,
-[Your name]
-[Business name]
-[Address]`,
-  },
-  {
-    id: 'complaint-reply',
-    title: 'Reply to a complaint',
-    when: 'Send within a day. Short, calm and specific beats long and defensive.',
-    text: `Hi [Name],
-
-Thank you for telling me about [the problem in their words]. I'm sorry this happened.
-
-Here's what I'm going to do: [the fix], by [date].
-
-If that doesn't put it right, reply to this email or call me on [number] and I'll deal with it personally.
-
-Thanks for giving me the chance to fix it.
-
-[Your name]
-[Business name]`,
-  },
-  {
-    id: 'review-request',
-    title: 'Asking a happy customer for a review',
-    when: 'The same day the job is done, while they are still pleased.',
-    text: `Hi [Name],
-
-Thanks again for choosing [Business name]. I'm really glad [the job] went well.
-
-Would you mind leaving a short review? It takes about a minute and helps other people find us:
-[Review link]
-
-Thank you,
-[Your name]`,
-  },
-];
-
-export default function FreeTemplatesPage() {
+export default function FreeToolkitPage() {
   return (
     <main>
       <SiteHeader />
 
-      <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="free-templates-title">
-        <p className="eyebrow">Free templates</p>
-        <h1 id="free-templates-title">Free templates for small businesses</h1>
+      <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="toolkit-title">
+        <p className="eyebrow">Free toolkit</p>
+        <h1 id="toolkit-title">The free small business toolkit</h1>
         <p>This is free, forever. I&rsquo;m committed to pushing this out for businesses.</p>
       </section>
 
-      <section className="s-section" aria-label="Templates">
-        <div className="mw-templates">
-          {TEMPLATES.map((t) => (
-            <article className="mw-template" id={t.id} key={t.id} aria-labelledby={`${t.id}-title`}>
-              <div className="mw-template-head">
-                <div>
-                  <h2 id={`${t.id}-title`}>{t.title}</h2>
-                  <p>{t.when}</p>
-                </div>
-                <CopyButton text={t.text} label={t.title} />
-              </div>
-              <pre>{t.text}</pre>
-            </article>
-          ))}
-        </div>
-        <p className="mw-template-note">
-          Templates, not legal advice. Fill in the [brackets] before sending. Late payment rules:{' '}
-          <a href="https://www.gov.uk/late-commercial-payments-interest-debt-recovery">GOV.UK</a>.
-        </p>
-      </section>
+      <nav className="mw-kit-grid" aria-label="Toolkit topics">
+        {CATEGORIES.map((c) => (
+          <a key={c.id} href={`#${c.id}`} className="mw-kit-tile">
+            <span className="mw-kit-icon"><KitIcon name={c.icon} size={26} /></span>
+            <span className="mw-kit-tile-title">{c.title}</span>
+            <span className="mw-kit-tile-blurb">{c.blurb}</span>
+            <span className="mw-kit-tile-count">{c.items.length + (c.id === 'getting-paid' ? 1 : 0)} tools</span>
+          </a>
+        ))}
+      </nav>
+
+      {CATEGORIES.map((c) => (
+        <section key={c.id} id={c.id} className="mw-kit-section" aria-labelledby={`${c.id}-title`}>
+          <div className="mw-kit-section-head">
+            <span className="mw-kit-icon"><KitIcon name={c.icon} size={26} /></span>
+            <div>
+              <h2 id={`${c.id}-title`}>{c.title}</h2>
+              <p>{c.blurb}</p>
+            </div>
+          </div>
+          {c.id === 'getting-paid' && (
+            <div className="mw-kit-feature">
+              <h3>Late payment calculator</h3>
+              <p>What a business customer owes you in interest and compensation when they pay late.</p>
+              <LatePaymentCalculator />
+            </div>
+          )}
+          <div className="mw-kit-items">
+            {c.items.map((item, i) => <Item key={item.title} item={item} id={`${c.id}-${i + 1}`} />)}
+          </div>
+        </section>
+      ))}
+
+      <p className="mw-kit-note">Guides and templates, not legal or tax advice. Figures checked against the official sources linked on {CHECKED}. Fill in the [brackets] before sending.</p>
 
       <SiteFooter />
     </main>

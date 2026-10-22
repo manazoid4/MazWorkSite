@@ -197,18 +197,37 @@ test('proof labels demonstrations and publishes no invented results', async () =
 test('the header stays focused (seven links and the Free preview button) and the footer is the short list of eight links', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/free-templates', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
+  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/free-toolkit', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
   for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));
 });
 
-test('free templates page: free-forever line, copy buttons and the UK late payment figures', async () => {
-  const html = await page('free-templates');
+test('free toolkit: free-forever line, six icon topics, calculator, sources on every fact, old URL redirects', async () => {
+  const html = await page('free-toolkit');
   assert.match(html, /This is free, forever\./);
-  assert.equal((html.match(/class="mw-template"/g) ?? []).length, 6);
-  assert.match(html, /Late Payment of Commercial Debts \(Interest\) Act 1998/);
-  assert.match(html, /8% above the Bank of England base rate/);
+  assert.equal((html.match(/class="mw-kit-tile"/g) ?? []).length, 6);
+  for (const id of ['getting-paid', 'customers', 'tax', 'staff', 'data', 'safety']) assert.match(html, new RegExp(`id="${id}"`), id);
+  assert.match(html, /class="mw-calc"/);
   assert.match(html, /Pre-Action Protocol for Debt Claims/);
-  assert.match(html, /from the day after \[due date\]/);
+  const { CATEGORIES } = await import('../app/free-toolkit/toolkit.ts');
+  for (const item of CATEGORIES.flatMap((c) => c.items)) {
+    if (item.kind !== 'template') assert.ok(item.sources.length > 0, `${item.title} needs a source`);
+    assert.ok(item.kind === 'template' ? item.text : item.points?.length, item.title);
+    assert.doesNotMatch(JSON.stringify(item), /\u2014|\bAI\b/, item.title);
+  }
+  const vercel = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
+  assert.equal(vercel.redirects.find((r) => r.source === '/free-templates')?.destination, '/free-toolkit');
+});
+
+test('late payment maths: compensation bands, simple daily interest and the reference rate half years', async () => {
+  const { compensation, lateInterest, referenceRate } = await import('../app/free-toolkit/late-payment.ts');
+  assert.deepEqual([999.99, 1000, 9999.99, 10000].map(compensation), [40, 70, 70, 100]);
+  assert.equal(Math.round(lateInterest(1000, 3.75, 50) * 100) / 100, 16.1);
+  assert.equal(referenceRate('2025-06-30'), 4.25, 'interest starts 1 July 2025, so the 30 June 2025 rate');
+  assert.equal(referenceRate('2025-06-29'), 4.75);
+  assert.equal(referenceRate('2026-10-01'), 3.75);
+  assert.equal(referenceRate('2026-12-31'), undefined, 'starts in 2027: rate not known yet');
+  assert.equal(referenceRate('2024-06-01'), undefined);
+  assert.equal(referenceRate('not a date'), undefined);
 });
