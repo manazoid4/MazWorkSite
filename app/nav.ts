@@ -60,7 +60,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/proof', label: 'Proof and client work' },
       { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
-      { href: '/free-templates', label: 'Free templates' },
+      { href: '/free-membership', label: 'Free membership' },
       { href: '/terms', label: 'Terms of work' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },
