@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import { fitDescription, OG_IMAGE } from '../seo';
 import { SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
@@ -6,6 +7,9 @@ import { KitIcon } from '../kit-icon';
 import { CopyButton } from './copy-button';
 import { LatePaymentCalculator } from './late-payment-calculator';
 import { CATEGORIES, CHECKED, type ToolkitItem } from './toolkit';
+import { MemberBadge, MemberJoin, MemberOnly, MemberProvider } from './member';
+
+const LOCKED = CATEGORIES.flatMap((c) => c.items).filter((item) => !item.open).length;
 
 /**
  * Free small business toolkit (22 Oct 2026, Maz): the useful parts of a paid
@@ -27,15 +31,19 @@ function itemText(item: ToolkitItem) {
   return item.kind === 'template' ? item.text ?? '' : (item.points ?? []).map((p) => `- ${p}`).join('\n');
 }
 
+function Gate({ open, children }: { open?: boolean; children: ReactNode }) {
+  return open ? <>{children}</> : <MemberOnly>{children}</MemberOnly>;
+}
+
 function Item({ item, id }: { item: ToolkitItem; id: string }) {
   return (
     <details className="mw-kit-item" id={id}>
       <summary>
-        <span className="mw-kit-kind">{KIND_LABEL[item.kind]}</span>
+        <span className="mw-kit-kind">{KIND_LABEL[item.kind]}{item.open ? <span className="mw-kit-free">Free</span> : <MemberBadge />}</span>
         <span className="mw-kit-item-title">{item.title}</span>
         <span className="mw-kit-when">{item.when}</span>
       </summary>
-      <div className="mw-kit-body">
+      <Gate open={item.open}><div className="mw-kit-body">
         {item.kind === 'template' && <pre>{item.text}</pre>}
         {item.kind === 'checklist' && (
           <ul className="mw-kit-checks">
@@ -51,7 +59,7 @@ function Item({ item, id }: { item: ToolkitItem; id: string }) {
             ))}</span>
           )}
         </div>
-      </div>
+      </div></Gate>
     </details>
   );
 }
@@ -60,6 +68,7 @@ export default function FreeMembershipPage() {
   return (
     <main>
       <SiteHeader />
+      <MemberProvider>
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="toolkit-title">
         <p className="eyebrow">No subscription</p>
@@ -67,13 +76,15 @@ export default function FreeMembershipPage() {
         <p>This is free, forever. I&rsquo;m committed to pushing this out for businesses.</p>
       </section>
 
+      <MemberJoin count={LOCKED} />
+
       <nav className="mw-kit-grid" aria-label="Toolkit topics">
         {CATEGORIES.map((c) => (
           <a key={c.id} href={`#${c.id}`} className="mw-kit-tile">
             <span className="mw-kit-icon"><KitIcon name={c.icon} size={26} /></span>
             <span className="mw-kit-tile-title">{c.title}</span>
             <span className="mw-kit-tile-blurb">{c.blurb}</span>
-            <span className="mw-kit-tile-count">{c.items.length + (c.id === 'getting-paid' ? 1 : 0)} tools</span>
+            <span className="mw-kit-tile-count">{c.items.length + (c.id === 'getting-paid' ? 1 : 0)} tools · {c.items.filter((item) => item.open).length + (c.id === 'getting-paid' ? 1 : 0)} free</span>
           </a>
         ))}
       </nav>
@@ -102,6 +113,7 @@ export default function FreeMembershipPage() {
 
       <p className="mw-kit-note">Guides and templates, not legal or tax advice. Figures checked against the official sources linked on {CHECKED}. Fill in the [brackets] before sending.</p>
 
+      </MemberProvider>
       <SiteFooter />
     </main>
   );
