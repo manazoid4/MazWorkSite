@@ -26,7 +26,7 @@
 .ip-customer label { display: grid; gap: 4px; font-size: .88rem; font-weight: 700; min-width: 0; }
 .ip-customer select { width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-weight: 500; font-size: 16px; }
 .ip-controls { display: flex; flex-wrap: wrap; gap: 8px; }
-.ip-controls button { min-height: 44px; padding: 0 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-weight: 750; font-size: .95rem; cursor: pointer; }
+.ip-controls button { min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 750; font-size: .95rem; cursor: pointer; }
 .ip-controls button.ip-next { background: var(--signal); }
 .ip-controls button:disabled { opacity: .55; cursor: default; }
 .ip-owner { padding: 12px; border: 2px dashed var(--ink); display: grid; gap: 8px; min-width: 0; }
@@ -41,7 +41,7 @@
 .ip-boundary summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; color: var(--ink); }
 .ip-boundary p + p { margin-top: 6px; }
 .ip-proof noscript ol { padding-left: 1.2em; font-size: .9rem; }
-.ip-cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; border: 1px solid var(--line); background: var(--signal); color: var(--ink); font-weight: 800; text-decoration: none; }
+.ip-cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; border: 1px solid var(--line); border-radius: 999px; background: var(--signal); color: var(--ink); font-weight: 800; text-decoration: none; }
 @media (max-width: 380px) { .ip-owner dl div { grid-template-columns: 1fr; gap: 0; } }
 
 /* In your week: what customers say, and the worry. */

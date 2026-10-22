@@ -10,7 +10,7 @@
 .ah-lede { margin-top: 18px; max-width: 34em; font-size: clamp(1.05rem, 1.7vw, 1.25rem); color: var(--charcoal); }
 .ah-price { margin: 22px 0 6px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
 .ah-price strong { font-size: clamp(1.8rem, 3.4vw, 2.4rem); letter-spacing: -.03em; }
-.ah-price span { font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ah-price span { font-size: 1rem; font-weight: 700; color: var(--muted); }
 .ah-hero .mw-actions { margin-top: 18px; }
 @media (min-width: 900px) { .ah-hero { grid-template-columns: 1.15fr .85fr; } }
 
@@ -113,8 +113,8 @@
 .ah-demo { margin-top: 20px; background: var(--sky-tint); color: var(--night-text); border-radius: 18px; padding: clamp(14px, 3vw, 24px); display: grid; gap: 16px; }
 .ah-demo-picks { display: flex; flex-wrap: wrap; gap: 8px; }
 .ah-demo-name { display: grid; gap: 6px; }
-.ah-demo-name span { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink); }
-.ah-demo-name span em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: .7; }
+.ah-demo-name span { font-size: .95rem; font-weight: 700; color: var(--ink); }
+.ah-demo-name span em { font-style: normal; font-weight: 500; color: var(--muted); }
 .ah-demo-name input { min-height: 48px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: inherit; font: inherit; font-weight: 700; width: 100%; max-width: 22em; }
 .ah-demo-name input::placeholder { color: var(--night-mute); font-weight: 500; }
 .ah-demo-name input:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
