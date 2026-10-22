@@ -129,7 +129,7 @@ export const ALWAYS_INCLUDED: { title: string; body: string }[] = [
   { title: 'Short written guide', body: 'One page: what runs, when, and what to do if something changes.' },
   { title: '30 days of tweaks + 90-day fix promise', body: 'Two rounds of tweaks, and anything I built that isn’t working as agreed is fixed free for 90 days.' },
   { title: '30-day “still working?” check', body: 'I check in a month later and fix anything that drifted.' },
-  { title: 'No contracts, no monthly fee', body: 'One-off build price. Any app, text or hosting costs are agreed before work starts and paid by you straight to the provider. Care plans are optional and cancel any time.' },
+  { title: 'No long contracts', body: 'One-off builds have no monthly fee. Monthly services, like call answering and care plans, are month to month. Any app, text or hosting costs are agreed first and paid straight to the provider.' },
   { title: 'UK price match', body: 'Found the same done-for-you job cheaper from a UK business? Send me their written quote. I’ll match it, or tell you plainly what’s different.' },
 ];
 
@@ -881,7 +881,7 @@ export function workingBy(id: OfferId): string {
  */
 export const REFERRAL_TIERS: { id: string; reward: string; job: string; note: string }[] = [
   { id: 'starter', reward: '£50', job: 'A Starter or a Launch Page', note: 'One task from the automation menu, or one page that books, sells or takes enquiries.' },
-  { id: 'system', reward: '£150', job: 'A Business System, a Website or After-Hours call answering', note: 'Three jobs joined up, a five-page site, or calls answered when you can’t pick up.' },
+  { id: 'system', reward: '£150', job: 'A Business System, a Website or the After-Hours Receptionist', note: 'Three jobs joined up, a five-page site, or calls answered when you can’t pick up.' },
   { id: 'custom', reward: '£300', job: 'Custom software', note: 'A portal, an app or a tool built around how you already work.' },
 ];
 /** The reward most referrals earn: the Starter tier. Kept for copy that needs one number. */
@@ -1083,8 +1083,8 @@ export const B2B_SYSTEMS = [
     body: 'A web-form or Google enquiry gets a text or email reply in about a minute, with your Cal.com booking link, and you are told.' },
   { id: 'proposal', name: 'Proposal Chaser', price: 'Quoted to scope', tag: 'Agencies and consultancies',
     body: 'A short run of polite follow-ups on quotes you sent from Xero, PandaDoc or DocuSign, stopped the moment they reply.' },
-  { id: 'feedback', name: 'Feedback Filter', price: 'Quoted to scope', tag: 'Add-on to any system',
-    body: 'After a job, happy customers are sent to your Google review page and unhappy ones go to a private form that alerts you first.' },
+  { id: 'feedback', name: 'Review requests with a private reply option', price: 'Quoted to scope', tag: 'Add-on to any system',
+    body: 'After a job, every customer is asked for a Google review. Anyone with a problem can also reply to you privately, so you hear it first and can put it right.' },
   { id: 'digest', name: 'Monday Morning Digest', price: 'Quoted to scope', tag: 'Add-on to an agreed system',
     body: 'One email or WhatsApp message at 8am: money in, open proposals and new enquiries from the tools you already use.' },
 ] as const;

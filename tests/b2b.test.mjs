@@ -151,7 +151,7 @@ test('/professional-teams is built, in the sitemap and uses scoped pricing', asy
   const html = await page('professional-teams');
   assert.match(sitemap, /\/professional-teams</);
   assert.doesNotMatch(html.replace(/<script[\s\S]*?<\/script>/g, ''), /\bAI\b|ai assistant|ai agent/i, 'advertises AI');
-  assert.match(html, /Tell me what(?:'|&#x27;)s not working/);
+  assert.match(html, /Get my free preview/);
   assert.match(html, /Quoted to scope/);
   // The retired routes are gone from the export (they redirect in vercel.json).
   for (const route of ['b2b', 'b2b/assessment', 'complaints', 'complaints-improvement', 'audit']) await assert.rejects(page(route), /Missing static page/, route);
@@ -197,7 +197,7 @@ test('proof labels demonstrations and publishes no invented results', async () =
 test('the header stays focused (seven links and the Free preview button) and the footer is the short list of eight links', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/free-membership', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
+  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/after-hours-receptionist', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
   for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));

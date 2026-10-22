@@ -83,6 +83,8 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         note={`Free preview, no call needed. Most start with one task at ${OFFERS[0].price}.`}
       />
 
+      <section className="s-section" aria-label="After-hours call answering"><ReceptionistCard page={guide.id} /></section>
+
       <section className="s-section" id="week" aria-label="In your week"><VoiceBlock id={guide.id} level={2} /></section>
 
       <section className="s-section" id="day" aria-labelledby="niche-day-title">
@@ -105,8 +107,6 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <PriceCards items={cards} />
         <p className="s-small"><a className="s-details-link" href="/prices">See the details: every price and what’s included →</a>{parent ? <> <a className="s-details-link" href={`/for/${parent.id}`}>Every fix for {parent.shortName.toLowerCase()} →</a></> : null}</p>
       </section>
-
-      <section className="s-section" aria-label="After-hours call answering"><ReceptionistCard page={guide.id} /></section>
 
       {parent ? (
         <section className="s-section" id="cost" aria-label="What missed enquiries cost you">

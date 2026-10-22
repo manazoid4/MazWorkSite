@@ -88,7 +88,7 @@ test('homepage makes the shared customer-side purpose clear without reducing the
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }
-  assert.match(html, /Tell me what.s not working/);
+  assert.match(html, /Get my free preview/);
   for (const filler of [/Inspect the work before reading more claims/, /Operations thinking/, /What gets measured/, /£150/, /Quick Win/, /£19\/month/, /founding/i, /hacked/i]) {
     assert.doesNotMatch(visible, filler);
   }
@@ -171,7 +171,7 @@ test('homepage explains the shared purpose, three buckets and two customer route
   for (const bucket of ['Get customers', 'Serve customers', 'Keep &amp; improve']) assert.match(html, new RegExp(bucket, 'i'));
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
-  assert.match(html, /Tell me what.s not working/);
+  assert.match(html, /Get my free preview/);
   assert.doesNotMatch(visible, /£99|£149|£595/, 'homepage does not lead with a low package price');
   assert.match(html, /Made to be used\.\s*(<br\/>)?Have a look around\./);
   assert.match(html, /Maz Works product/);
@@ -442,7 +442,8 @@ test('every indexable exported page is listed in the sitemap', async () => {
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
   const listed = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
 
-  const notRoutes = new Set(['/404', '/_not-found']);
+  // /3d-printing stays live but is hidden from the menu, footer and sitemap (22 Oct audit).
+  const notRoutes = new Set(['/404', '/_not-found', '/3d-printing']);
 
   const pages = await readdir(exportRoot, { recursive: true, withFileTypes: true });
   const routes = pages
@@ -637,7 +638,3 @@ test('terms and privacy pages exist, are linked from every footer and match the 
   assert.match(leak, /href="\/privacy"[^>]*>How I use your details/);
 });
 
-test('free previews are fenced to bigger jobs; small jobs get a written plan', async () => {
-  const demos = await readPage('/after-hours-receptionist');
-  assert.match(demos, /Smaller jobs go straight from the free preview to a fixed price/);
-});

@@ -65,7 +65,7 @@
 .pt-workload > p { margin: 8px 0 0; color: var(--muted); font-size: .76rem; }
 .pt-practice { display: grid; gap: 12px; padding-top: clamp(56px, 8vw, 96px); }
 .pt-practice > div:last-child { max-width: 46rem; }
-.pt-practice p { color: var(--muted); line-height: 1.6; }
+.pt-practice p:not(.eyebrow) { color: var(--muted); line-height: 1.6; }
 .pt-practice a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
 .pt-bottom-cta { margin-top: clamp(56px, 8vw, 96px); margin-bottom: clamp(56px, 8vw, 90px); padding-inline: max(20px, calc((100% - 72rem) / 2)); }
 .pt-bottom-cta h2 { max-width: 20ch; font-size: clamp(1.8rem, 4vw, 3.25rem); line-height: 1.08; letter-spacing: -.04em; }

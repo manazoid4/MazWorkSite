@@ -16,7 +16,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: '/professional-teams', label: 'Professional teams' },
   { href: '/prices', label: 'Prices' },
   { href: '/proof', label: 'Proof' },
-  { href: '/free-membership', label: 'Free membership' },
+  { href: '/after-hours-receptionist', label: 'Call answering' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -39,7 +39,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/prices', label: 'Packages and prices' },
       { href: '/local-businesses', label: 'Local businesses' },
       { href: '/professional-teams', label: 'Professional teams' },
-      { href: '/after-hours-receptionist', label: 'After-hours call answering' },
+      { href: '/after-hours-receptionist', label: 'After-Hours Receptionist' },
       { href: '/for#problems', label: 'Pick your problem' },
       { href: '/for#jobs', label: 'Jobs I set up' },
       { href: '/what-we-do#why', label: 'How I work' },
@@ -64,14 +64,6 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/terms', label: 'Terms of work' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/site-map', label: 'Site map' },
-    ],
-  },
-  {
-    // Objects stays a concept range, kept apart from the one thing a small business can buy today.
-    title: 'Physical products',
-    links: [
-      { href: '/3d-printing', label: 'Objects (concept range)' },
-      { href: '/3d-printing#architecture-property', label: 'Architecture models' },
     ],
   },
 ];

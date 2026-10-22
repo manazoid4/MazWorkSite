@@ -30,6 +30,9 @@
 .tp-card p { color: var(--muted); font-size: .92rem; line-height: 1.45; }
 .tp-card-go { margin-top: auto; padding-top: 4px; min-height: 44px; display: inline-flex; align-items: center; font-weight: 750; font-size: .92rem; color: var(--ink); }
 .tp-cards + .s-small { margin-top: 18px; }
+/* Without this the 540px-wide video pushes phone pages sideways. */
+.tp-trade-video { margin: 0 0 24px; display: grid; gap: 8px; max-width: min(100%, 360px); }
+.tp-trade-video video { display: block; width: 100%; height: auto; }
 
 /* Link chips (jobs, replaces glued inline links) */
 .tp-jobs { margin-top: 24px; }
@@ -44,6 +47,7 @@
 /* After-hours receptionist: one dark card, like the homepage teaser */
 .tp-after { margin-top: 32px; display: grid; gap: 16px 28px; padding: 20px 22px; border: 1px solid var(--line); background: #1b1d22; color: #f3f1ec; }
 .s-section > .tp-after { margin-top: 0; }
+.tp-after .s-teaser-tag { color: #ffb36b; }
 .tp-after h2, .tp-after h3 { margin: 6px 0 8px; font-size: clamp(1.25rem, 2.4vw, 1.6rem); line-height: 1.2; max-width: none; }
 .tp-after h2 a, .tp-after h3 a { color: #f3f1ec; text-decoration: none; }
 .tp-after p { color: #d8d5cd; max-width: 52ch; }

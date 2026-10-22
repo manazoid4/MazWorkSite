@@ -122,7 +122,7 @@ test('Objects includes an honest architecture and property use case', async () =
   assert.doesNotMatch(text, /museum quality|resin quality|precision manufacturing|any scale/i);
 });
 
-test('Objects is discoverable from shared chrome, homepage and sitemap while digital services remain', async () => {
+test('Objects stays live and linked from /proof but is hidden from site chrome and the sitemap', async () => {
   const [home, objects, sitemap, readme] = await Promise.all([
     readPage('/'),
     readPage('/3d-printing'),
@@ -130,7 +130,7 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
     readFile(path.join(root, 'README.md'), 'utf8'),
   ]);
 
-  // Objects left the homepage in the 27 Sep sales overhaul; since 29 Sep it sits under "Other projects" in the menu and footer.
+  // Objects left the homepage in the 27 Sep sales overhaul and left the menu, footer and sitemap on 22 Oct.
   const lab = await readPage('/proof');
   assert.match(lab, /Maz Works Objects/);
   assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
@@ -138,7 +138,7 @@ test('Objects is discoverable from shared chrome, homepage and sitemap while dig
   assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);
   assert.match(objects, /href="\/(lab|proof)"/);
-  assert.match(sitemap, /\/3d-printing/);
+  assert.doesNotMatch(sitemap, /\/3d-printing/, 'Objects is hidden from the sitemap; the page stays live');
   assert.match(readme, /Touch One/);
   assert.match(readme, /manufacturing checks/i);
 });

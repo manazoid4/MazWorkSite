@@ -10,7 +10,7 @@ test('local business page has its agreed contact path, metadata, and canonical o
   assert.match(page, /id="main-content"/);
   assert.equal((page.match(/<h1\b/g) ?? []).length, 1);
   assert.match(page, /href="\/contact\?src=local-businesses"/);
-  assert.match(page, /Tell me what.s not working/);
+  assert.match(page, /\{MAIN_CTA\}/);
   assert.match(page, /const starter = OFFERS\[0\]/);
   assert.match(page, /const system = OFFERS\[1\]/);
   assert.match(page, /const custom = OFFERS\[2\]/);

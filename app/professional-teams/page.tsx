@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { fitDescription, OG_IMAGE } from '../seo';
-import { SITE_URL } from '../site';
+import { MAIN_CTA, SITE_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { COMPLAINT_DATA_HANDLING, COMPLAINT_PACKAGES, B2B_SYSTEMS } from '../offers';
 import { ManazirLine } from '../manazir-line';
@@ -36,7 +36,7 @@ export default function ProfessionalTeamsPage() {
         <p className="eyebrow">For managers and professional teams</p>
         <h1 id="teams-title">Better oversight. Clearer decisions. Smoother operations.</h1>
         <p>I help professional teams make better use of their information, stay on top of deadlines and improve how work gets done. From KPI dashboards and SLA tracking to reporting, complaints analysis and practical internal tools.</p>
-        <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>{MAIN_CTA}</a></p>
         <p className="pt-proofline">Founder-led work · scoped around the way your team already works</p>
       </section>
 
@@ -206,7 +206,7 @@ export default function ProfessionalTeamsPage() {
         <h2 id="teams-cta">Bring me the report, deadline or process that is causing friction.</h2>
         <p>Describe the problem in a few lines. No records are needed to ask.</p>
         <ManazirLine />
-        <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>Tell me what's not working</a></p>
+        <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>{MAIN_CTA}</a></p>
         <p className="pt-fine">Professional engagements are quoted to scope. We agree what data is suitable and its handling and retention terms before you share records.</p>
       </section>
       <SiteFooter />

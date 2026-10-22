@@ -1205,7 +1205,7 @@ main {
 .s-report li:nth-child(2) .s-level { background: #fff1c2; }
 .s-report-untested { padding: 14px 20px; font-size: .95rem; border-bottom: 1px solid var(--line); }
 .s-report footer { padding: 18px 20px; background: var(--signal); display: grid; gap: 6px; }
-.s-report footer .s-small { color: var(--charcoal); margin-top: 0; }
+.s-report footer .s-small { color: var(--ink); margin-top: 0; }
 
 .s-prices { margin-top: 24px; display: grid; gap: 14px; }
 .s-price { padding: 22px 20px; border: 1px solid var(--line); background: var(--surface); display: grid; gap: 10px; align-content: start; }
@@ -1667,7 +1667,7 @@ main {
 .s-face-cta span { font-size: .9rem; line-height: 1.4; }
 
 /* Tap targets at least 44px (audit 2 Oct, finding 4) */
-.mw-site-header .mw-menu-button, .mw-site-header .mw-nav-cta { min-height: 44px; }
+.mw-site-header .mw-menu-button, .mw-site-header .mw-nav-cta { min-height: 44px; border-radius: 999px; font-size: .95rem; }
 .mw-crumbs a { display: inline-flex; align-items: center; min-height: 44px; }
 .mw-example-fix { display: inline-flex; align-items: center; min-height: 44px; }
 input[type="range"] { min-height: 44px; }

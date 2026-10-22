@@ -1,12 +1,14 @@
-/* Calm colour layer (30 Sep): muted, warm tones instead of candy pastels.
-   Orange (--signal) stays the one loud colour, used only for actions. */
+/* Bright colour layer (Oct 2026): sunny yellow, clear sky, apricot and mint tints
+   on a cream page. Ink text stays >= 4.5:1 on every tint. Orange (--signal) is
+   kept for primary actions so they still stand out. */
 :root {
-  --sand: var(--cream);
+  --sand: #ffe7a0;
   --stone: #f3ece4;
-  --sage: var(--sky-tint);
+  --sage: #bff0d6;
   --mist: var(--sky-tint);
   --clay: var(--peach);
-  --wheat: var(--peach);
+  --wheat: #ffe08a;
+  --pink-tint: #ffd6ea;
   --slate: var(--plum);
   --card-shadow: 0 1px 2px rgba(20, 22, 18, .06), 0 6px 18px rgba(20, 22, 18, .06);
 }
@@ -39,7 +41,7 @@
 .s-hero-split h1 em, .s-hero h1 em, .mw-section-heading h1 em { font-style: normal; background: linear-gradient(transparent 60%, rgb(255 107 26 / .35) 60%); padding: 0 .06em; }
 
 .s-prices > :nth-child(3n + 1) { background: var(--sage); }
-.s-prices > :nth-child(3n + 2) { background: var(--sand); }
+.s-prices > :nth-child(3n + 2) { background: var(--pink-tint); }
 .s-prices > :nth-child(3n) { background: var(--mist); }
 .s-price { border: 1px solid var(--line); box-shadow: none; }
 .s-package-card:hover { transform: translateY(-2px); box-shadow: none; }
@@ -83,7 +85,8 @@
   border-bottom-color: transparent;
 }
 .mw-resource-hero { --band: var(--sand); }
-.mw-resource-cta { --band: var(--sky-tint); margin-top: clamp(36px, 5vw, 64px); }
+/* Neutral: the sky-blue footer band follows straight after. */
+.mw-resource-cta { --band: var(--stone); margin-top: clamp(36px, 5vw, 64px); }
 .mw-resource-hero .eyebrow { display: inline-block; padding: 4px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
 .mw-figures img { border: 1px solid var(--line); box-shadow: none; }
 .mw-related a { border-left-width: 4px; }
@@ -112,7 +115,7 @@
   background: var(--pill); color: var(--ink); font-weight: 800; letter-spacing: .06em;
   box-shadow: none;
 }
-.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: #ffe9a3; }
+.s-hero .eyebrow, .mw-resource-hero .eyebrow { --pill: var(--surface); }
 .s-section:nth-of-type(4n + 1) > .eyebrow, .mw-section:nth-of-type(4n + 1) .eyebrow { --pill: #c4ecd7; }
 .s-section:nth-of-type(4n + 2) > .eyebrow, .mw-section:nth-of-type(4n + 2) .eyebrow { --pill: #cde5fa; }
 .s-section:nth-of-type(4n + 3) > .eyebrow, .mw-section:nth-of-type(4n + 3) .eyebrow { --pill: #fad0e3; }
@@ -132,7 +135,7 @@
 .s-trades li:nth-child(6n + 3) a { background: var(--mist); }
 .s-trades li:nth-child(6n + 4) a { background: var(--wheat); }
 .s-trades li:nth-child(6n + 5) a { background: var(--sand); }
-.s-trades li:nth-child(6n) a { background: #e6f4ea; }
+.s-trades li:nth-child(6n) a { background: var(--pink-tint); }
 .s-trades a { border-color: transparent; }
 .s-trades svg { background: var(--ink); stroke: #fff; border-color: var(--ink); border-radius: 8px; }
 
