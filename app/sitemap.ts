@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/local-businesses`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/professional-teams`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/contact`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/3d-printing`, lastModified: updated, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/for`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/site-map`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-10-02'), changeFrequency: 'weekly', priority: 0.4 },

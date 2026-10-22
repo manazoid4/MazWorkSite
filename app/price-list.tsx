@@ -12,7 +12,7 @@ export function BuyNow({ name }: { name: string }) {
   const href = BUY_LINKS[name];
   if (!href) return null;
   return <>
-    {name === AFTER_HOURS.name ? <p className="s-small">Already heard your demo? Subscribe below. Your first month is charged at checkout.</p> : null}
+    {name === AFTER_HOURS.name ? <p className="s-small">Only subscribe once you have heard your demo. Your first month is charged at checkout.</p> : null}
     <a className="button button-dark s-buy-now" href={href} rel="noopener">Buy now</a>
   </>;
 }

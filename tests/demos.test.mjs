@@ -14,23 +14,14 @@ async function readPage(route) {
   throw new Error(`Missing static page for ${route}`);
 }
 
-// 30 Sep (Maz): the free preview comes after a call, arrives by a date agreed on
-// the call, and is followed by the full plan. Offer v10 (2 Oct): then 30 days of
-// tweaks and a 90-day fix promise, never "unlimited changes".
-test('the bigger-build demos section explains the call-first route and books a call', async () => {
-  const demos = await readPage('/after-hours-receptionist');
-  assert.match(demos, /id="bigger-builds"/);
-  assert.match(demos, /Book a 15-minute call/);
-  assert.match(demos, /date (we agree|you get it|agreed on the call)/i);
-  assert.match(demos, /Nothing to pay yet/);
-  assert.match(demos, /href="https:\/\/cal\.com\/mazworks\/quick-chat\?utm_source=after-hours-demos"/);
-  assert.match(demos, /30 days of tweaks/);
-  assert.doesNotMatch(demos, /unlimited/i);
+// 22 Oct audit: the bigger-build section left /after-hours-receptionist so the page sells only the receptionist.
+test('the receptionist page no longer carries the bigger-build section', async () => {
+  const page = await readPage('/after-hours-receptionist');
+  assert.doesNotMatch(page, /id="bigger-builds"|Bigger build\?/);
 });
 
 test('changes after go-live are fenced so they never become free new work', async () => {
-  // Said once, on /prices (polish, 2 Oct); /demos links there.
-  assert.match(await readPage('/after-hours-receptionist'), /href="\/prices#next"/);
+  // Said once, on /prices (polish, 2 Oct).
   const demos = await readPage('/prices');
   assert.match(demos, /Priced first, so it stays fair/);
   assert.match(demos, /A new page, task or feature: I price it first/);

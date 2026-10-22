@@ -1,5 +1,5 @@
 import { CHECK_REPLY_TIME, VAT_NOTE } from './site';
-import { OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getOffer, REFERRAL_REWARD } from './offers';
+import { AFTER_HOURS, OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getOffer, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
   answer: string;
@@ -16,7 +16,7 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'How much does it cost?',
-    answer: `Starter Automation ${OFFERS[0].price}. Business System from ${OFFERS[1].price.replace('From ', '')}. Custom Software from ${OFFERS[2].price.replace('From ', '')}. Launch Page ${getOffer('creator-launch').price}. Website from ${getOffer('website').price.replace('From ', '')}. Care plans ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. Video and filming is priced on its own page. ${VAT_NOTE}`,
+    answer: `Starter Automation ${OFFERS[0].price}. Business System from ${OFFERS[1].price.replace('From ', '')}. Custom Software from ${OFFERS[2].price.replace('From ', '')}. Launch Page ${getOffer('creator-launch').price}. Website from ${getOffer('website').price.replace('From ', '')}. Care plans ${CARE_PLANS[0].price} or ${CARE_PLANS[1].price}. ${AFTER_HOURS.name} ${AFTER_HOURS.price} (${AFTER_HOURS.setup.toLowerCase()}), month to month. Video and filming is priced on its own page. ${VAT_NOTE}`,
   },
   {
     question: `What can the ${OFFERS[0].price} Starter do?`,

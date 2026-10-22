@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { AFTER_HOURS, AUDIENCES, CREATOR_OFFERS, MANAGED_PRESENCE, OFFERS, REFERRAL_RANGE, VIDEO_EDITS, VIDEO_PRICES, VIDEO_SCOPE, VIDEO_SERVICES, VIDEO_SHOOTS, formatPrice, getOffer, videoQuote } from '../offers';
 import { fitDescription, OG_IMAGE } from '../seo';
-import { SITE_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
+import { MAIN_CTA, SITE_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
 import { VideoSelector } from './video-selector';
 import { MissedCallsCalculator } from './missed-calls-calculator';
 import './local-businesses.css';
@@ -68,7 +68,7 @@ export default function LocalBusinessesPage() {
           <p className="eyebrow">For local businesses</p>
           <h1 id="lb-title">You’re serving customers. The admin can wait.</h1>
           <p className="lb-lede">Missed calls, quiet quotes and bookings to chase can cost you the next job. I connect the tools you already use, improve your website and make the everyday work easier to manage.</p>
-          <a className="button button-signal lb-primary" href="/contact?src=local-businesses">Tell me what’s not working</a>
+          <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
           <p className="lb-note">One person to deal with. A clear scope and fixed price before any paid work.</p>
         </div>
         <aside className="lb-example" aria-label="Illustrative example of a connected customer enquiry">
@@ -217,13 +217,13 @@ export default function LocalBusinessesPage() {
           <p>You can’t answer with your hands in a boiler, mid-appointment, or up a ladder. Most of those callers ring the next name on the list. Put in your own week and see what it adds up to. Your numbers only, nothing saved, no industry figure assumed.</p>
         </div>
         <div className="lb-calc"><MissedCallsCalculator /></div>
-        <p className="lb-fine">Want it answered for you? Missed-call text-back is one task from the automation menu: a caller who can’t get you gets a text with your booking or quote link straight away. It starts at {starter.price}, and you see it working before you pay. Know someone who loses calls? <a href="/contact#refer">Refer them and earn {REFERRAL_RANGE}</a>.</p>
+        <p className="lb-fine"><a href={AFTER_HOURS.href}>Want those calls answered? The {AFTER_HOURS.name} answers in your business name, takes the details and emails you a summary: {AFTER_HOURS.price}, month to month.</a> Prefer a text back instead? Missed-call text-back is {starter.price} once, and you see it working before you pay. Know someone who loses calls? <a href="/contact#refer">Refer them and earn {REFERRAL_RANGE}</a>.</p>
       </section>
 
       <section className="lb-close" aria-labelledby="lb-close-title">
         <h2 id="lb-close-title">What’s taking too much time, or losing you work?</h2>
         <p>Tell me what happens today and what you’d like to happen instead. I’ll look at the tools you use and suggest a sensible next step.</p>
-        <a className="button button-signal lb-primary" href="/contact?src=local-businesses">Tell me what’s not working</a>
+        <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
       </section>
 
       <SiteFooter />

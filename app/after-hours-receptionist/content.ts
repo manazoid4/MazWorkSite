@@ -96,7 +96,7 @@ export const NEXT = [
   { title: 'Tell me about your business', body: 'A few taps in the form. Your website helps.' },
   { title: 'Hear your demo', body: `I reply within ${CHECK_REPLY_TIME} to check your phone setup, then set up a demo answering as your business for you to hear.` },
   { title: 'Go live', body: 'I set your rules, you switch on “divert when unanswered” on your phone once, and we test it together.' },
-  { title: 'Pay once it works', body: AFTER_HOURS.guarantee },
+  { title: 'Start paying once it works', body: 'Your first month starts once you are happy with how it answers.' },
 ];
 
 export const GUARANTEE_SHORT = STARTER_GUARANTEE.split('. ')[0];

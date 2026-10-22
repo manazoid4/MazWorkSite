@@ -18,7 +18,7 @@ test('professional team routes export clear, factual pages with the agreed enqui
     assert.match(html, /id="main-content"/);
     assert.match(html, new RegExp(`rel="canonical" href="https://www\\.mazworks\\.uk/${route}"`));
     assert.match(html, new RegExp(`/contact\\?src=${source}`));
-    assert.match(html, /Tell me what's not working/);
+    assert.match(html, /Get my free preview/);
   }
   assert.match(teams, /Better oversight\. Clearer decisions\. Smoother operations\./);
   assert.match(teams, /See what's happening/);

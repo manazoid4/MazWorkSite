@@ -5,8 +5,8 @@ export const BUILD_CREDIT = 'Built by Maz Works · mazworks.uk';
 /** Free-preview action on the specific pages and forms that deliver that offer. */
 export const VAT_NOTE = 'Not VAT-registered, so the quote is the price you pay.';
 export const MAIN_CTA = 'Get my free preview';
-/** Shared enquiry action across the main Maz Works customer journey. */
-export const ENQUIRY_CTA = "Tell me what's not working";
+/** Shared enquiry action across the main Maz Works customer journey: one label for every primary /contact button (22 Oct audit). */
+export const ENQUIRY_CTA = MAIN_CTA;
 export const PERSON_NAME = 'Manazir Hussain';
 export const CONTACT_EMAIL = 'info@mazworks.uk';
 // FormSubmit's private alias for the activated inbox. Never put a personal email address here:
