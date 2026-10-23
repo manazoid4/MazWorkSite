@@ -56,7 +56,9 @@ export const DEFAULT_NEXT_STEP = ENQUIRY_NEXT_STEPS[0];
  */
 export function readServiceFromLocation(): EnquiryServiceId | null {
   if (typeof window === 'undefined') return null;
-  const requested = new URLSearchParams(window.location.search).get('service');
+  const params = new URLSearchParams(window.location.search);
+  // The receptionist pages link here with ?package=<name> rather than ?service=.
+  const requested = params.get('service') ?? (params.get('package') === AFTER_HOURS.name ? 'after-hours' : null);
   if (!requested) return null;
   const match = ENQUIRY_SERVICES.find((service) => service.id === requested.toLowerCase());
   return match ? match.id : null;

@@ -102,7 +102,7 @@ export const CUSTOMER_TYPES: CustomerType[] = [
     calculator: { perWeek: 25, share: 10, value: 45, label: 'A typical salon: 25 bookings a week, 1 in 10 lost or no-show, £45 a visit' },
     scenes: ['booking', 'reminders', 'rebooking'],
     menu: ['online-booking', 'reminders', 'rebooking', 'waitlist', 'dm-replies', 'reviews'],
-    niches: ['salons-and-beauty', 'dog-groomers', 'clinics-and-therapists'],
+    niches: ['salons-and-beauty', 'dog-groomers', 'clinics-and-therapists', 'cafes-and-food'],
   },
   {
     id: 'creators',

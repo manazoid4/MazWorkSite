@@ -14,7 +14,7 @@ import './proof.css';
 const PAGE_URL = `${SITE_URL}/proof`;
 
 export const metadata: Metadata = {
-  title: 'Proof | Maz Works',
+  title: 'Proof',
   description: fitDescription('Real work you can open and check today. Client quotes are added here once clients say yes.'),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works proof', description: fitDescription('Real work you can open and check today.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
@@ -41,7 +41,8 @@ export default function ProofPage() {
         <p>Each item is labelled for what it is: my own product, a client build, or a demonstration with invented data.</p>
       </section>
 
-      <section className="mw-info" aria-label="Real work">
+      <section className="mw-info" aria-labelledby="proof-work-title">
+        <h2 id="proof-work-title">Case studies and demos</h2>
         <CaseStudyGrid />
       </section>
 
