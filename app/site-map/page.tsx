@@ -32,8 +32,6 @@ const EXTRA_GROUPS = [
   {
     title: 'Other projects',
     links: [
-      { href: '/maz-core', label: 'MAZ Core' },
-      { href: '/maz-pocket-ai', label: 'MAZ Pocket' },
       { href: '/complaints/sample/health-check', label: 'Sample complaints health check' },
       { href: '/complaints/sample/board-report', label: 'Sample complaints board report' },
     ],

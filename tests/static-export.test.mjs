@@ -157,9 +157,10 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(html, /paid (client|contract|engagement)|client paid|testimonial/i);
 
   const lab = await readPage('/proof');
-  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress']) {
+  for (const name of ['JobFilter', 'Scrap Finance Partners']) {
     assert.match(lab, new RegExp(name));
   }
+  for (const name of ['Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'MAZ Core']) assert.doesNotMatch(lab, new RegExp(name));
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 

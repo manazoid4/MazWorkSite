@@ -20,7 +20,7 @@
 .pz-textlink { color: var(--cream); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: .22em; }
 .pz-textlink:hover { text-decoration-color: var(--pop-yellow); }
 
-.pz-ladder { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(300px, 36vw, 440px); }
+.pz-ladder { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(300px, 36vw, 440px); }
 .pz-ladder li { height: var(--h); }
 .pz-step { height: 100%; padding: 12px 10px 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; border-radius: 16px 16px 0 0; background: var(--tone); color: var(--pop-ink); text-decoration: none; transition: transform 120ms ease-out; }
 .pz-step:hover { transform: translateY(-6px); }
