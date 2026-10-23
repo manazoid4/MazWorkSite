@@ -73,7 +73,7 @@ export default function FreeMembershipPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="toolkit-title">
         <p className="eyebrow">No subscription</p>
         <h1 id="toolkit-title">The free membership.</h1>
-        <p>This is free, forever. I&rsquo;m committed to pushing this out for businesses.</p>
+        <p>This is free, forever. Late payment letters, tax deadlines, templates and checklists for UK small businesses, all in one place.</p>
       </section>
 
       <MemberJoin count={LOCKED} />

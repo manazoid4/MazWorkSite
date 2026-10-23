@@ -78,7 +78,7 @@ export default function LocalBusinessesPage() {
             <span>They get a useful next step</span><b aria-hidden="true">↓</b>
             <span>You pick up the conversation when free</span>
           </div>
-          <p className="lb-example-foot">What can be connected depends on the tools you already use. We check that first.</p>
+          <p className="lb-example-foot">What can be connected depends on the tools you already use. I check that first.</p>
         </aside>
       </section>
 
@@ -107,7 +107,7 @@ export default function LocalBusinessesPage() {
       <section className="lb-offers" id="ways-to-start" aria-labelledby="lb-offers-title">
         <div>
           <h2 id="lb-offers-title">Start with one job. Build from there.</h2>
-          <p>We’ll work out what fits after you tell me what’s getting in the way. No package is assumed.</p>
+          <p>Tell me what’s getting in the way and I’ll suggest what fits. No package is assumed.</p>
         </div>
         <ul>
           <li><strong>{starter.name}</strong><span>{starter.price} · one task set up to run itself</span></li>

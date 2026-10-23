@@ -598,7 +598,7 @@ test('six wayfinding helps big sites use are in place', async () => {
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
-  assert.match(news, /Pick your kind of business/, 'what’s new shows the latest real update');
+  assert.match(news, /After-Hours Receptionist/, 'what’s new shows the latest real update');
   assert.ok(home.includes('href="/site-map"'));
   assert.ok(!home.includes('href="/whats-new"'), 'What’s new is for buyers only once rewritten; kept off the nav for now');
   // 4. A helpful not-found page.

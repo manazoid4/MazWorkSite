@@ -141,7 +141,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
 
       <StraightAnswers />
 
-      <p className="mw-related mw-related-quiet tp-related"><a href="/for"><strong>Other trades →</strong> <span>{(() => { const others = NICHE_GUIDES.filter((item) => item.id !== guide.id).map((item, index) => (index ? item.shortName.split(' ').map((word) => (/^[A-Z]{2,}$/.test(word) ? word : word.toLowerCase())).join(' ') : item.shortName)); return `${others.slice(0, -1).join(', ')} and ${others.at(-1)}.`; })()}</span></a></p>
+      <p className="mw-related mw-related-quiet tp-related"><a href="/for"><strong>Other businesses →</strong> <span>{(() => { const others = NICHE_GUIDES.filter((item) => item.id !== guide.id).map((item, index) => (index ? item.shortName.split(' ').map((word) => (/^[A-Z]{2,}$/.test(word) ? word : word.toLowerCase())).join(' ') : item.shortName)); return `${others.slice(0, -1).join(', ')}, and ${others.at(-1)}.`; })()}</span></a></p>
 
       <section className="mw-resource-cta" aria-labelledby="niche-cta-title">
         <div>

@@ -439,7 +439,7 @@ export const EXTRA_GROUPS: { id: string; title: string; note: string; items: Ext
     items: [
       { name: 'Booking link everywhere', price: SETUP_PRICE, what: 'Your booking or quote link added to Instagram, your Google listing and WhatsApp, with a voicemail that mentions it.' },
       { name: 'Google listing tidy', price: SETUP_PRICE, what: 'Your Google Maps listing checked and filled in properly: hours, photos, services and booking link.' },
-      { name: 'Review QR card', price: SETUP_PRICE, what: 'A printed-ready card and sign that opens your Google review page, so happy customers leave one on the spot.' },
+      { name: 'Review QR card', price: SETUP_PRICE, what: 'A print-ready card and sign that opens your Google review page, so happy customers leave one on the spot.' },
       { name: 'Quote template', price: SETUP_PRICE, what: 'A clean quote template with your terms and a pay link, ready to send from your phone.' },
       { name: 'Invoice template with pay link', price: SETUP_PRICE, what: 'An invoice template customers can pay from in one tap.' },
       { name: 'Saved replies', price: SETUP_PRICE, what: 'Your ten most-typed replies (prices, hours, directions, deposit policy) saved as one-tap replies on WhatsApp and Instagram.' },
@@ -637,7 +637,7 @@ export const USPS = [
   { title: 'See it working before you pay', body: 'No working, no invoice.' },
   { title: 'One person, start to finish', body: 'You deal with me, not a queue of account managers.' },
   { title: 'Fixed price in writing', body: 'Agreed up front. No surprise bills.' },
-  { title: 'Website, automation and video', body: 'One team for everything your customers see.' },
+  { title: 'Website, automation and video', body: 'One person for everything your customers see.' },
   { title: 'You own everything', body: 'Your accounts, your content, no lock-in.' },
   { title: 'UK-wide', body: 'Remote work, or on location for filming.' },
 ] as const;
@@ -808,7 +808,7 @@ export function runningCost(offer: Offer): string {
 }
 
 /** Running costs that are never ours, in one line. No figures: each is quoted in the scope sheet. */
-export const RUNNING_COSTS_NOTE = 'Running costs that aren’t ours: texts, booking apps, domain and hosting are paid by you directly to those companies. Each one is quoted in your scope sheet before you pay anything.';
+export const RUNNING_COSTS_NOTE = 'Running costs that aren’t mine: texts, booking apps, domain and hosting are paid by you directly to those companies. Each one is quoted in your scope sheet before you pay anything.';
 
 export const THIRD_PARTY_NOTE = 'If you need a paid app, like a texting service, you pay that company directly and I tell you the cost up front. You own everything.';
 

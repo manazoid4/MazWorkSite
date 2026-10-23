@@ -71,14 +71,14 @@ export function TypePage({ type }: { type: CustomerType }) {
         <PriceCards items={cards} />
         <p className="s-small">{STARTER_GUARANTEE} <a href="/prices#always-included">What’s always included →</a></p>
         <WorkSteps />
-        <ReceptionistCard page={type.id} level={3} />
+        {type.id !== 'creators' ? <ReceptionistCard page={type.id} level={3} /> : null}
       </section>
 
       <section className="s-section" id="how" aria-labelledby="type-how-title">
         <p className="eyebrow">See it working</p>
         <h2 id="type-how-title">What changes in your day.</h2>
         <DemoBusiness type={type.id} />
-        <div id="cost"><CalculatorReveal preset={type.calculator} trade={type.id} /></div>
+        {type.id !== 'creators' ? <div id="cost"><CalculatorReveal preset={type.calculator} trade={type.id} /></div> : null}
         {studies.map((study) => (
           <blockquote className="s-study" key={study.business}>
             <strong>{study.business}</strong> · {study.built}
@@ -92,7 +92,7 @@ export function TypePage({ type }: { type: CustomerType }) {
       <section className="mw-resource-cta" aria-labelledby="type-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="type-cta-title">Tell me the job. I’ll send a demo and a fixed price.</h2>
+          <h2 id="type-cta-title">Tell me the job. I’ll send a free preview and a fixed price.</h2>
           <p>
             <a className="s-details-link" href="/prices">See the details: every task, what’s included and what happens next →</a>
           </p>

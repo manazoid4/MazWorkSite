@@ -48,7 +48,7 @@ const TERMS: { title: string; body: string[] }[] = [
     title: 'Changes after it goes live',
     body: [
       CHANGES_WINDOW.body,
-      `Not covered: ${CHANGES_WINDOW.notCovered.map((item) => item.replace(/\.$/, '')).join('; ')}.`,
+      `Not covered: ${CHANGES_WINDOW.notCovered.map((item) => item.replace(/\.$/, '')).join('. ')}.`,
       CHANGES_WINDOW.howItWorks,
     ],
   },
@@ -110,7 +110,7 @@ export default function TermsPage() {
       <SiteHeader />
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="terms-title">
         <p className="eyebrow">Terms of work</p>
-        <h1 id="terms-title">How working together works.</h1>
+        <h1 id="terms-title">The deal, in plain English.</h1>
         <p>{`Plain English, so you know exactly what you get. Last updated ${UPDATED}. Questions: `}<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
       </section>
       <section className="mw-resource-list" aria-label="Terms">

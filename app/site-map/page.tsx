@@ -27,6 +27,11 @@ const EXTRA_GROUPS = [
       { href: '/proof', label: 'Proof and things I’ve built' },
       ...CASE_STUDY_PROJECTS.map((project) => ({ href: `/work/${project.id}`, label: project.name })),
       { href: '/rotareason', label: 'RotaReason' },
+    ],
+  },
+  {
+    title: 'Other projects',
+    links: [
       { href: '/maz-core', label: 'MAZ Core' },
       { href: '/maz-pocket-ai', label: 'MAZ Pocket' },
       { href: '/complaints/sample/health-check', label: 'Sample complaints health check' },

@@ -79,7 +79,7 @@ export function ReceptionistCard({ page, level = 2 }: { page: string; level?: 2 
       <div>
         <span className="s-teaser-tag">New · After-hours call answering</span>
         <Heading id={`after-${page}`}><a href={AFTER_HOURS.href}>{AFTER_HOURS.name} {AFTER_HOURS.price}</a></Heading>
-        <p>Busy on a job, closed for the evening, or it’s a bank holiday? Calls you can’t pick up are answered, and you get a clear message to act on.</p>
+        <p>Busy with a customer, closed for the evening, or it’s a bank holiday? Calls you can’t pick up are answered, and you get a clear message to act on.</p>
       </div>
       <div className="tp-after-links">
         <CampaignLink className="button button-signal tp-after-go" href={buildTradeEnquiryHref(page, { package: AFTER_HOURS.name })}>{MAIN_CTA}</CampaignLink>

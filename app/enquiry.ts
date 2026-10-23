@@ -32,7 +32,7 @@ export const ENQUIRY_SERVICES = [
   { id: 'objects', label: 'Tap-to-review stands and signs' },
   { id: 'brand-kit', label: `Starter for creators: keyword DM, free resource, email list (${getOffer('creator-starter').price})` },
   { id: 'video', label: `Video and filming: shoots from ${formatPrice(VIDEO_PRICES.halfDay)}, edits ${formatPrice(VIDEO_PRICES.editBundle)}` },
-  { id: 'portfolio-project', label: 'Apply for a Portfolio Project (limited places, chosen at our discretion)' },
+  { id: 'portfolio-project', label: 'Apply for a Portfolio Project (limited places, chosen at my discretion)' },
   { id: 'unsure', label: 'Not sure yet, help me work it out' },
 ] as const;
 

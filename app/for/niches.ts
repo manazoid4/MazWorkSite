@@ -50,7 +50,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     id: 'heating-and-plumbing',
     shortName: 'Heating and plumbing',
     name: 'Heating, plumbing and gas engineers',
-    title: 'Win the heating and plumbing jobs you miss while you’re on a job',
+    title: 'Win the heating and plumbing work you miss while your hands are full',
     lede: 'You can’t answer the phone with your hands in a boiler. If nobody gets back to the caller, they ring the next engineer on Google, and quotes you sent last week go quiet.',
     fixes: [
       starter('One task set up to run itself: miss a call on a job and the caller gets a text straight away with a link to book or ask for a quote.'),
@@ -134,7 +134,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     id: 'cafes-and-food',
     shortName: 'Cafés and food',
     name: 'Cafes, bakeries and food',
-    title: 'Get cafe, bakery and food customers through the door',
+    title: 'Get more people through the café door',
     lede: 'People check your hours, menu and number on their phone before they visit. Small errors quietly send them elsewhere.',
     fixes: [
       starter('One task set up to run itself: orders, bookings and messages gathered in one place with an automatic reply.'),
@@ -146,7 +146,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     id: 'clinics-and-therapists',
     shortName: 'Clinics and therapists',
     name: 'Clinics and therapists',
-    title: 'Help clinic and therapy clients book with confidence',
+    title: 'Let clients book without ringing you mid-session',
     lede: 'Patients are often nervous before they book. A dead link or a missing number at the wrong moment is enough to stop them.',
     fixes: [
       starter('One task set up to run itself: new enquiries acknowledged straight away with the next step.'),
@@ -157,7 +157,7 @@ export const NICHE_GUIDES: NicheGuide[] = [
     id: 'architects',
     shortName: 'Architects',
     name: 'Architects and architecture practices',
-    title: 'Turn portfolio interest into qualified architecture projects',
+    title: 'Turn people who like your work into real projects',
     lede: 'A strong portfolio gets attention, but the next step still matters. If a potential client has to hunt for contact details or start from a blank email, every enquiry begins with extra back-and-forth.',
     fixes: [
       starter('One task set up to run itself: a project enquiry captured in one place, acknowledged automatically and passed to you with the key details already collected.'),
