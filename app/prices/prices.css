@@ -41,6 +41,9 @@
   .pz-hero { grid-template-columns: 1fr; gap: 32px; padding-inline: 20px; }
 }
 @media (max-width: 560px) {
-  .pz-ladder { gap: 5px; }
-  .pz-step { padding: 10px 6px 12px; }
+  .pz-ladder { grid-template-columns: 1fr; height: auto; gap: 8px; }
+  .pz-ladder li { height: auto; }
+  .pz-step { height: auto; flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 12px 16px; border-radius: 14px; }
+  .pz-step-name { font-size: 1rem; }
+  .pz-step-price { flex-direction: row; align-items: baseline; gap: 6px; font-size: 1.25rem; }
 }
