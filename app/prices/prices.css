@@ -20,7 +20,7 @@
 .pz-textlink { color: var(--cream); font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: .22em; }
 .pz-textlink:hover { text-decoration-color: var(--pop-yellow); }
 
-.pz-ladder { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(300px, 36vw, 440px); }
+.pz-ladder { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; gap: 8px; height: clamp(300px, 36vw, 440px); }
 .pz-ladder li { height: var(--h); }
 .pz-step { height: 100%; padding: 12px 10px 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; border-radius: 16px 16px 0 0; background: var(--tone); color: var(--pop-ink); text-decoration: none; transition: transform 120ms ease-out; }
 .pz-step:hover { transform: translateY(-6px); }
@@ -41,6 +41,9 @@
   .pz-hero { grid-template-columns: 1fr; gap: 32px; padding-inline: 20px; }
 }
 @media (max-width: 560px) {
-  .pz-ladder { gap: 5px; }
-  .pz-step { padding: 10px 6px 12px; }
+  .pz-ladder { grid-template-columns: 1fr; height: auto; gap: 8px; }
+  .pz-ladder li { height: auto; }
+  .pz-step { height: auto; flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 12px 16px; border-radius: 14px; }
+  .pz-step-name { font-size: 1rem; }
+  .pz-step-price { flex-direction: row; align-items: baseline; gap: 6px; font-size: 1.25rem; }
 }

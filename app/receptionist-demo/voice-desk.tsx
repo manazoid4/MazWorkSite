@@ -568,8 +568,8 @@ export function VoiceDesk() {
   const main = primaryFor(phase, { canListen: canListenNow && !view.muted });
   const label = phaseLabel(phase, { muted: view.muted || !canListenNow, typing });
   const message = summary ? ownerMessage(summary, { business: config.name, time: madeAt, seconds }) : null;
-  const truth = source === 'default' ? 'Demo in your browser, not a real phone line.'
-    : `Demo in your browser, not a real phone line. Made for ${config.name}: not ${config.name}’s real line.`;
+  const truth = source === 'default' ? 'Demo in your browser, using your browser’s own voice. The real service answers your phone line with a more natural voice.'
+    : `Demo in your browser, using your browser’s own voice. Made for ${config.name}: not ${config.name}’s real line. The real service answers your phone line with a more natural voice.`;
   const planHref = `/contact?intent=preview&src=voice-demo&package=${encodeURIComponent(AFTER_HOURS.name)}${source !== 'default' ? `&business=${encodeURIComponent(config.name)}` : ''}#leak-check-form`;
   const chips = phase === 'idle' ? starter : phase === 'ended' ? [] : hints;
   const live_ = isLive(phase);
@@ -698,7 +698,7 @@ export function VoiceDesk() {
 
       <p className="vd-small">
         {WORKS_BEST} Nothing is recorded or sent to Maz Works. {caps.canListen ? 'Your browser’s own speech service turns your voice into text (in Chrome that is Google’s). ' : ''}
-        It answers only from the details it was given and takes a message for anything else. Tap or press Space to interrupt, Esc to hang up. The paid service uses a more natural voice on a real phone line.
+        It answers only from the details it was given and takes a message for anything else. Tap or press Space to interrupt, Esc to hang up.
       </p>
     </div>
   );

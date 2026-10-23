@@ -111,10 +111,10 @@ export default function ProfessionalTeamsPage() {
             <span className="pt-synthetic">Synthetic data · as at 20 Oct 2026</span>
           </div>
           <dl className="pt-metrics">
-            <div><dt>Received</dt><dd>124</dd><span>over four weeks</span></div>
-            <div><dt>Completed</dt><dd>108</dd><span>over four weeks</span></div>
-            <div><dt>Open backlog</dt><dd>36</dd><span>20 opening + 124 in − 108 out</span></div>
-            <div><dt>Closed on time</dt><dd>94%</dd><span>102 of 108 completed</span></div>
+            <div><dt>Received</dt><dd>124</dd><dd className="pt-metric-note">over four weeks</dd></div>
+            <div><dt>Completed</dt><dd>108</dd><dd className="pt-metric-note">over four weeks</dd></div>
+            <div><dt>Open backlog</dt><dd>36</dd><dd className="pt-metric-note">20 opening + 124 in − 108 out</dd></div>
+            <div><dt>Closed on time</dt><dd>94%</dd><dd className="pt-metric-note">102 of 108 completed</dd></div>
           </dl>
           <div className="pt-dashboard-lower">
             <div className="pt-trend">
@@ -155,7 +155,7 @@ export default function ProfessionalTeamsPage() {
             <p><strong>36</strong><span>open items</span></p><p><strong>3</strong><span>overdue</span></p><p><strong>7</strong><span>due within 2 days</span></p><p><strong>6</strong><span>unassigned</span></p>
           </div>
           <div className="pt-queue-grid">
-            <div className="pt-table-wrap">
+            <div className="pt-table-wrap" role="region" aria-label="Example priority queue table" tabIndex={0}>
               <table>
                 <caption>Priority queue · 6 example exceptions</caption>
                 <thead><tr><th scope="col">Work item</th><th scope="col">Owner</th><th scope="col">Due</th><th scope="col">Status</th><th scope="col">Next step</th></tr></thead>

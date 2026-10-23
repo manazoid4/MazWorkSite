@@ -16,6 +16,7 @@ const PROOF = [
     body: 'A clear digital home for a specialist finance business.',
     href: '/work/scrap-finance-partners',
     img: '/scrap-finance-partners.webp',
+    mobileImg: '/scrap-finance-partners-mobile.webp',
     alt: 'Scrap Finance Partners website, designed for a specialist finance firm',
     tone: 'peach',
   },
@@ -25,6 +26,7 @@ const PROOF = [
     body: 'Finding relevant public contracts for small trades firms.',
     href: '/work/jobfilter',
     img: '/jobfilter-home.webp',
+    mobileImg: '/jobfilter-home-mobile.webp',
     alt: 'JobFilter helps small trades firms find relevant public contracts',
     tone: 'sky',
   },
@@ -113,7 +115,10 @@ export default function Page() {
           {PROOF.map((item) => (
             <article className="mw-home-proof-card" key={item.name}>
               <a className={`mw-home-proof-image is-${item.tone}`} href={item.href} aria-label={`View ${item.name}`}>
-                <img src={item.img} alt={item.alt} width={1440} height={1000} loading="lazy" />
+                <picture>
+                  <source media="(max-width: 600px)" srcSet={item.mobileImg} />
+                  <img src={item.img} alt={item.alt} width={1440} height={1000} loading="lazy" />
+                </picture>
               </a>
               <span className="relationship">{item.label}</span>
               <h3><a href={item.href}>{item.name}<span aria-hidden="true"> ↗</span></a></h3>

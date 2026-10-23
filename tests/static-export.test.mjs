@@ -157,9 +157,10 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(html, /paid (client|contract|engagement)|client paid|testimonial/i);
 
   const lab = await readPage('/proof');
-  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress']) {
+  for (const name of ['JobFilter', 'Scrap Finance Partners']) {
     assert.match(lab, new RegExp(name));
   }
+  for (const name of ['Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'MAZ Core']) assert.doesNotMatch(lab, new RegExp(name));
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 
@@ -598,7 +599,7 @@ test('six wayfinding helps big sites use are in place', async () => {
   for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
   const news = await readPage('/whats-new');
-  assert.match(news, /Pick your kind of business/, 'what’s new shows the latest real update');
+  assert.match(news, /After-Hours Receptionist/, 'what’s new shows the latest real update');
   assert.ok(home.includes('href="/site-map"'));
   assert.ok(!home.includes('href="/whats-new"'), 'What’s new is for buyers only once rewritten; kept off the nav for now');
   // 4. A helpful not-found page.

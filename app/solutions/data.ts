@@ -69,9 +69,9 @@ export const SOLUTIONS: Solution[] = [
     keeps: [TEXTS, CARE, { label: `Want calls answered instead? ${AFTER_HOURS.name}`, value: `${AFTER_HOURS.price}, ${AFTER_HOURS.minutes} minutes. ${AFTER_HOURS.setup}.` }],
     keepsHead: 'Nothing required',
     own: OWN_STARTER,
-    also: `Or calls answered: ${AFTER_HOURS.price}, ${AFTER_HOURS.setup.toLowerCase()}`,
+    also: `Want calls answered instead? ${AFTER_HOURS.price}, ${AFTER_HOURS.setup.toLowerCase()}`,
     pkg: STARTER.name,
-    upgrade: `${STARTER_UPGRADE} The ${AFTER_HOURS.name} is a separate monthly service: ${AFTER_HOURS.terms}`,
+    upgrade: `${STARTER_UPGRADE} The ${AFTER_HOURS.name} is a separate monthly service. ${AFTER_HOURS.terms}`,
     examples: {
       trade: 'Up a ladder when the phone rings? The caller gets your quote link before they ring someone else.',
       salon: 'Mid-appointment with your hands busy? They get a text with your booking link.',

@@ -13,7 +13,7 @@ const STEPS = [
 export function WorkSteps({ level = 3 }: { level?: 2 | 3 }) {
   const Heading = level === 2 ? 'h2' : 'h3';
   return (
-    <div className="hv-steps-wrap"><Heading className={level === 2 ? 'tp-h2' : 'hv-h3'} id="steps-title">How working together goes</Heading>
+    <div className="hv-steps-wrap"><Heading className={level === 2 ? 'tp-h2' : 'hv-h3'} id="steps-title">How working together goes.</Heading>
       <ol className="hv-steps" aria-labelledby="steps-title">{STEPS.map((step, i) => <li key={step.title}><span className="hv-n" aria-hidden="true">{i + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol></div>
   );
 }

@@ -45,8 +45,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p className="case-lede">{project.caseStudy.lede}</p>
           <ProjectLinks project={project} />
           <div className="case-meta">
-            <div><h2>What I handled</h2><p>{project.caseStudy.role}</p></div>
-            <div><h2>Included</h2><ul>{project.caseStudy.scope.map((item) => <li key={item}>{item}</li>)}</ul></div>
+            <div><p className="eyebrow">What I handled</p><p>{project.caseStudy.role}</p></div>
+            <div><p className="eyebrow">Included</p><ul>{project.caseStudy.scope.map((item) => <li key={item}>{item}</li>)}</ul></div>
           </div>
         </header>
 
@@ -76,7 +76,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         <footer className="case-cta">
           <div>
             <h2>Have a similar problem?</h2>
-            <p>Tell me the job. You get a plan and a fixed price before any paid work.</p>
+            <p>Tell me the job. You get a free preview and a fixed price before any paid work.</p>
           </div>
           <div className="case-cta-actions">
             <a className="button button-signal" href={`/contact?src=case-${project.id}#contact`}>Get my free preview</a>

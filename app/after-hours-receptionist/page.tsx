@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { AFTER_HOURS, MISSED_CALL_OPTIONS } from '../offers';
 import { OG_IMAGE, fitDescription } from '../seo';
-import { MAIN_CTA, SITE_URL, VAT_NOTE } from '../site';
+import { MAIN_CTA, SITE_URL, VAT_NOTE, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { BuyNow } from '../price-list';
 import { ScrollReveal } from '../scroll-reveal';
@@ -208,6 +208,7 @@ export default function AfterHoursPage() {
         <div className="mw-actions">
           <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
           <a className="button" href="#try">Play an example call</a>
+          <a className="button" href={WHATSAPP_URL} rel="noopener">WhatsApp {WHATSAPP_DISPLAY}</a>
         </div>
       </section>
 

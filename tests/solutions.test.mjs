@@ -152,5 +152,5 @@ test('the picker never moves focus on load (the skip link must stay hidden), and
   const page = text(await read('for'));
   assert.match(page, /£99 once · nothing required monthly/);
   assert.match(page, /from £595 once · nothing required monthly/);
-  assert.match(page, /Or calls answered: £79\/month, £99 set-up, once/);
+  assert.match(page, /Want calls answered instead\? £79\/month, £99 set-up, once/);
 });

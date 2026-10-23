@@ -8,15 +8,17 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date('2026-09-21');
+  // Pages the 22 Oct redesign touched.
+  const redesigned = new Date('2026-10-22');
   return [
-    { url: `${SITE_URL}/what-we-do`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.95 },
-    { url: SITE_URL, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 1 },
+    { url: `${SITE_URL}/what-we-do`, lastModified: redesigned, changeFrequency: 'monthly', priority: 0.95 },
+    { url: SITE_URL, lastModified: redesigned, changeFrequency: 'monthly', priority: 1 },
     { url: `${SITE_URL}/about`, lastModified: new Date('2026-10-21'), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${SITE_URL}/prices`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/prices`, lastModified: redesigned, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/local-businesses`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.95 },
     { url: `${SITE_URL}/professional-teams`, lastModified: new Date('2026-10-19'), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/contact`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE_URL}/for`, lastModified: new Date('2026-10-02'), changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${SITE_URL}/for`, lastModified: redesigned, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/site-map`, lastModified: new Date('2026-09-27'), changeFrequency: 'monthly', priority: 0.3 },
     { url: `${SITE_URL}/whats-new`, lastModified: new Date('2026-10-02'), changeFrequency: 'weekly', priority: 0.4 },
     { url: `${SITE_URL}/free-membership`, lastModified: new Date('2026-10-22'), changeFrequency: 'monthly', priority: 0.7 },
@@ -27,13 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/after-hours-receptionist`, lastModified: new Date('2026-10-09'), changeFrequency: 'monthly', priority: 0.95 },
     ...CUSTOMER_TYPES.map((type) => ({
       url: `${SITE_URL}/for/${type.id}`,
-      lastModified: new Date('2026-10-02'),
+      lastModified: redesigned,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     })),
     ...NICHE_GUIDES.map((guide) => ({
       url: `${SITE_URL}/for/${guide.id}`,
-      lastModified: new Date('2026-10-02'),
+      lastModified: redesigned,
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     })),

@@ -28,7 +28,7 @@ export const DEMO_BUSINESSES: Record<CustomerTypeId, Demo> = {
   creators: {
     name: 'Peak Form Coaching',
     trade: 'a personal trainer',
-    what: 'Comment to get it: someone comments a word, gets the free preview by DM and joins the email list.',
+    what: 'Comment to get it: someone comments a word, gets your free guide by DM and joins your email list.',
     before: { title: 'Before', lines: [{ who: 'them', text: 'PLAN' }, { who: 'them', text: 'PLAN please!' }, { who: 'note', text: 'Replying by hand, hours later' }] },
     after: { title: 'After', lines: [{ who: 'them', text: 'PLAN' }, { who: 'auto', text: 'Here’s your free 4-week plan: link. Want weekly tips too?' }, { who: 'them', text: 'Yes' }, { who: 'note', text: 'Added to the email list' }] },
   },

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '../site';
 import { ALWAYS_INCLUDED, FREE_STEP, OFFERS, PAYMENT_TERMS, REFERRAL_RANGE, REFERRAL_TIERS } from '../offers';
 import { NICHE_GUIDES } from '../for/niches';
 import { NextSteps } from '../explainers';
@@ -53,7 +53,7 @@ export default function ContactPage() {
           <h1 id="contact-title">You know your business. Let’s work out what would help.</h1>
           <p>A website idea, an awkward process or a problem you haven’t quite pinned down. Start there. You don’t need to know the technical answer.</p>
           <p>I usually reply within {CHECK_REPLY_TIME}. Scope and price are agreed before work starts.</p>
-          <p className="mw-contact-alternatives"><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><span aria-hidden="true"> · </span><CallLink href={BOOKING_URL} placement="contact">Book a 15-minute call</CallLink><span aria-hidden="true"> · </span><a href="#refer">Refer a business</a></p>
+          <p className="mw-contact-alternatives"><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><span aria-hidden="true"> · </span><CallLink href={BOOKING_URL} placement="contact">Book a 15-minute call</CallLink><span aria-hidden="true"> · </span><a href={WHATSAPP_URL} rel="noopener">WhatsApp {WHATSAPP_DISPLAY}</a><span aria-hidden="true"> · </span><a href="#refer">Refer a business</a></p>
         </div>
         <div className="ct-card">
           <DemoRequestForm contact formId="leak-check-form" kicker="Just your name, email and what you need. No service choice needed." />

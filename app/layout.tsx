@@ -29,7 +29,7 @@ const structuredData = {
       sameAs: [GITHUB_URL, LINKEDIN_URL],
     },
     {
-      '@type': 'ProfilePage',
+      '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
       name: `${SITE_NAME} — ${PERSON_NAME}`,

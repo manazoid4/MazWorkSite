@@ -60,13 +60,12 @@ export const COST_MODEL = {
 
 export const STEPS = [
   { title: 'I learn your business', body: 'Your hours, services, areas, prices you’re happy to share, and the questions people always ask.' },
-  { title: 'We set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
+  { title: 'You set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
   { title: 'Calls you miss are answered', body: 'If you don’t pick up, the call goes to it. Answer as normal when you can; nothing else changes.' },
   { title: 'You get the summary', body: 'Each call arrives by email with who, what and how urgent, so you ring back with context.' },
 ];
 
 export const TRUST = [
-  { icon: 'rules', title: 'Follows your rules', body: 'It only answers from the information you approve. Anything else becomes a message.' },
   { icon: 'urgent', title: 'Urgent calls reach you', body: 'You choose the words and situations that matter, and whether it texts or rings you.' },
   { icon: 'honest', title: 'Sticks to what it knows', body: 'It answers only from the information you approve. If a question isn’t covered, it takes a message instead of guessing.' },
   { icon: 'clear', title: 'Clear with callers', body: 'It says it’s an automated receptionist for your business. Callers can leave a message for you instead.' },

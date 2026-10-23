@@ -14,7 +14,7 @@ import './proof.css';
 const PAGE_URL = `${SITE_URL}/proof`;
 
 export const metadata: Metadata = {
-  title: 'Proof | Maz Works',
+  title: 'Proof',
   description: fitDescription('Real work you can open and check today. Client quotes are added here once clients say yes.'),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works proof', description: fitDescription('Real work you can open and check today.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
@@ -23,11 +23,6 @@ export const metadata: Metadata = {
 /** Own products and prototypes (was /lab). Each label says what it really is. */
 const BUILT = [
   { name: 'RotaReason', type: 'My own product · working demo', summary: 'Ask for rota changes in plain English, check staffing rules and preview safe changes before applying them.', href: '/rotareason', label: 'Open the demo' },
-  { name: 'MAZ Core', type: 'My own tool · private console', summary: 'A console for talking to my own MAZ Core endpoint. You need your own endpoint to use it.', href: '/maz-core', label: 'Open the console' },
-  { name: 'MAZ Pocket', type: 'In progress', summary: 'A pocket device to talk to your PC and approve its actions, linked through MAZ Core.', href: '/maz-pocket-ai', label: 'Open the bridge' },
-  { name: 'Agent Nudge', type: 'Released', summary: 'Stops coding tools clashing over the same files.', href: 'https://agent-nudge-bay.vercel.app/demo/overview', label: 'Try the demo' },
-  { name: 'OpenFlowKit', type: 'Open source', summary: 'Voice-to-text in the browser, cleaned up for you.', href: 'https://openflowkit-dusky.vercel.app', label: 'Try it' },
-  { name: 'Khutba.io', type: 'Live prototype', summary: 'Live translated captions for mosque screens.', href: 'https://khutba-io.vercel.app/demo', label: 'Try the demo' },
   { name: 'Maz Works Objects', type: 'Concept · not yet made', summary: 'Tap-to-review stands and signs, fixed price from £29.', href: '/3d-printing', label: 'See the concept' },
 ];
 
@@ -41,7 +36,8 @@ export default function ProofPage() {
         <p>Each item is labelled for what it is: my own product, a client build, or a demonstration with invented data.</p>
       </section>
 
-      <section className="mw-info" aria-label="Real work">
+      <section className="mw-info" aria-labelledby="proof-work-title">
+        <h2 id="proof-work-title">Case studies and demos</h2>
         <CaseStudyGrid />
       </section>
 

@@ -49,7 +49,7 @@ export function TouchCollection() {
         ))}
       </div>
 
-      <p className="objects-name-note">Examples show our name. Yours goes in that spot.</p>
+      <p className="objects-name-note">Examples show my name. Yours goes in that spot.</p>
 
       <aside className="objects-artwork-note">
         <span>Optional +£10</span>
