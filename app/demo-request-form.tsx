@@ -94,6 +94,7 @@ export function DemoRequestForm({
     fill('name', params.get('name'));
     fill('business', params.get('business') || params.get('website'));
     if (params.get('audit')) fill('problem', readStoredAudit());
+    else if (params.get('package')) fill('problem', `I’m asking about ${params.get('package')}.`);
   }, [contact]);
 
   useEffect(() => {
@@ -291,7 +292,8 @@ export function DemoRequestForm({
               onChange={(event) => setService(event.target.value as EnquiryServiceId)}
               disabled={submitState === 'sending'}
             >
-              {ENQUIRY_SERVICES.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
+              {/* Old deep-link ids share a label with a newer one; list each label once, keeping the id in use. */}
+              {ENQUIRY_SERVICES.filter((option, i, all) => option.id === service || all.findIndex((other) => other.label === option.label) === i).map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
             </select>
           </label>
 

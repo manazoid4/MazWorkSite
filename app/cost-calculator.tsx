@@ -95,7 +95,7 @@ export function CostCalculator({ preset, trade, buildLink = true }: { preset?: C
           <p className="ce-hint">Move the sliders to see your number. The sum: per week × share lost × job value × 52 ÷ 12. Compare it with {STARTER.name} at {STARTER.price} once.</p>
         )}
       </div>
-      <p className="s-small">An estimate from what you entered, not a promise of results.{buildLink ? <> <a href="#build-my-system">Build my system →</a></> : null}</p>
+      <p className="s-small">An estimate from what you entered, not a promise of results.{buildLink ? <> <a href="#build" onClick={() => { const fold = document.getElementById('build'); if (fold instanceof HTMLDetailsElement) fold.open = true; }}>Build my system →</a></> : null}</p>
     </div>
   );
 }

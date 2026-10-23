@@ -15,7 +15,7 @@ const website = getOffer('website');
 const PAGE_URL = `${SITE_URL}/local-businesses`;
 
 export const metadata: Metadata = {
-  title: 'Systems for local businesses | Maz Works',
+  title: 'Systems for local businesses',
   description: fitDescription(`Missed calls, quiet quotes and bookings that need chasing? I connect the tools you already use. Also video and filming from ${formatPrice(VIDEO_PRICES.halfDay)} and managed website, Google and social updates ${MANAGED_PRESENCE.price.toLowerCase()}.`),
   alternates: { canonical: '/local-businesses' },
   openGraph: { title: 'Systems for local businesses | Maz Works', description: fitDescription('Missed calls, quotes, bookings, video and managed presence for local businesses.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
@@ -52,7 +52,12 @@ const videoSchema = {
       { '@type': 'Offer', name: VIDEO_EDITS.name, priceCurrency: 'GBP', price: String(VIDEO_PRICES.editBundle) },
     ],
   },
-  mainEntity: { '@type': 'FAQPage', mainEntity: VIDEO_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: VIDEO_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 
 export default function LocalBusinessesPage() {
@@ -61,6 +66,7 @@ export default function LocalBusinessesPage() {
   return (
     <main className="s-home lb-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
       <SiteHeader />
 
       <section className="lb-hero" id="main-content" tabIndex={-1} aria-labelledby="lb-title">

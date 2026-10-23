@@ -45,8 +45,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <p className="case-lede">{project.caseStudy.lede}</p>
           <ProjectLinks project={project} />
           <div className="case-meta">
-            <div><h2>What I handled</h2><p>{project.caseStudy.role}</p></div>
-            <div><h2>Included</h2><ul>{project.caseStudy.scope.map((item) => <li key={item}>{item}</li>)}</ul></div>
+            <div><p className="eyebrow">What I handled</p><p>{project.caseStudy.role}</p></div>
+            <div><p className="eyebrow">Included</p><ul>{project.caseStudy.scope.map((item) => <li key={item}>{item}</li>)}</ul></div>
           </div>
         </header>
 
