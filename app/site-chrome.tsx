@@ -3,11 +3,8 @@ import { FooterConvert } from './footer-convert';
 import { NavLinks } from './nav-links';
 import { SiteMenu } from './site-menu';
 import { CONTACT_EMAIL } from './site';
-import { NAV_CTA } from './nav';
+import { FOOTER_LINKS, NAV_CTA } from './nav';
 import './site-footer.css';
-
-// Hard-coded: nav.ts belongs to another builder.
-const FOOTER_LINKS = [['What I do', '/what-we-do'], ['Prices', '/prices'], ['Proof', '/proof'], ['About', '/about'], ['Contact', '/contact'], ['FAQ', '/faq'], ['Privacy', '/privacy'], ['Terms', '/terms']];
 
 export function SiteHeader() {
   return (
@@ -30,9 +27,9 @@ export function SiteFooter({ conversion }: { conversion?: ReactNode } = {}) {
     <footer className="site-footer mw-site-footer mw-footer-clean">
       {conversion ?? <FooterConvert />}
 
-      {/* Short on purpose (Maz, round 1A): one row of links plus the email. Every other page lives in the menu and on /site-map. */}
+      {/* One row of links plus the email (list in nav.ts). Every other page is on /site-map. */}
       <nav className="mw-footer-links" aria-label="Footer">
-        {FOOTER_LINKS.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        {FOOTER_LINKS.map(({ label, href }) => <a key={href} href={href}>{label}</a>)}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </nav>
       <p className="mw-footer-bottom">© 2026 Maz Works · Fixed quotes · Not VAT-registered</p>

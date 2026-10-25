@@ -20,15 +20,15 @@ test('professional team routes export clear, factual pages with the agreed enqui
     assert.match(html, new RegExp(`/contact\\?src=${source}`));
     assert.match(html, /Get my free preview/);
   }
-  assert.match(teams, /Better oversight\. Clearer decisions\. Smoother operations\./);
+  assert.match(teams, /See what is due, what is late and what keeps going wrong\./);
   assert.match(teams, /See what's happening/);
   assert.match(teams, /Stay on top of the work/);
-  assert.match(teams, /Find and fix the problem/);
-  assert.match(teams, /Illustrative demonstrations/);
+  assert.match(teams, /Find and fix the cause/);
+  assert.match(teams, /Concept demo · made-up data/);
   assert.match(teams, /Synthetic data/);
   assert.match(teams, /Department performance/);
-  assert.match(teams, /SLA and workload oversight/);
-  assert.match(teams, /Complaints analysis is my specialism/);
+  assert.match(teams, /Deadlines and workload/);
+  assert.match(teams, /Complaints are what I know best/);
   assert.match(teams, /cannot guarantee that an SLA will never be missed/);
   assert.match(teams, /\/contact\?src=professional-teams&amp;service=reporting#contact/);
   assert.match(teams, /Closed on time<\/dt><dd>94%<\/dd><span>102 of 108 completed/);

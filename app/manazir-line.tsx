@@ -11,8 +11,8 @@ export function ManazirLine({ block = false }: { block?: boolean }) {
       <img src="/maz.webp" alt="Manazir Hussain, who scopes and builds the work" width={112} height={112} loading="lazy" />
       <div>
         <h2 id="about-title">Hi, I’m Maz.</h2>
-        <p>I’m 26. I started my own business because I love fixing problems and helping businesses succeed. I’m there for the whole journey, not just the website.</p>
-        <p>I worked in finance handling complaints, with thousands of angry customers. I know what it’s like when something goes wrong.</p>
+        <p>I started my own business because I love fixing problems and helping businesses succeed. I’m there for the whole journey, not just the website.</p>
+        <p>I worked in finance handling complaints and escalations, with thousands of unhappy customers. I know what it’s like when something goes wrong.</p>
         <p>I’m just starting out, and I’ll always be honest about what I can and can’t do.</p>
         <a href="/about">More about me <span aria-hidden="true">→</span></a>
       </div>

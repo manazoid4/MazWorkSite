@@ -10,8 +10,8 @@ import { Cards, InfoSection } from '../infographic';
 const PAGE_URL = `${SITE_URL}/faq`;
 
 export const metadata: Metadata = {
-  title: 'FAQ',
-  description: fitDescription(`Straight answers about automation for small businesses: the free preview and fixed price, Starter Automation from ${OFFERS[0].price}, optional extras, delivery dates, payment and ownership. No VAT added.`),
+  title: 'FAQ: prices, timing and ownership',
+  description: fitDescription(`Plain answers: what the free preview is, what ${OFFERS[0].name} at ${OFFERS[0].price} does, how long it takes, how payment works and who owns what. No VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { images: [OG_IMAGE],
     title: 'Maz Works FAQ',
@@ -42,14 +42,14 @@ export default function FaqPage() {
 
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="faq-title">
         <p className="eyebrow">FAQ</p>
-        <h1 id="faq-title">Questions? Straight answers.</h1>
-        <p>Tap a question. No call needed.</p>
+        <h1 id="faq-title">Questions people ask me.</h1>
+        <p>Tap a question. If yours is not here, ask it. No call needed.</p>
         <div className="mw-actions">
           <a className="button button-signal" href="/contact#leak-check-form">Get my free preview</a>
         </div>
       </section>
 
-      <InfoSection eyebrow="Why Maz Works" title="What you can count on">
+      <InfoSection eyebrow="How I work" title="What you can count on">
         <Cards items={USPS.map(u => ({ title: u.title, body: u.body }))} />
       </InfoSection>
 
@@ -70,7 +70,7 @@ export default function FaqPage() {
       <section className="mw-resource-cta" aria-labelledby="faq-still-title">
         <div>
           <p className="eyebrow">Still unsure?</p>
-          <h2 id="faq-still-title">Ask the actual question.</h2>
+          <h2 id="faq-still-title">Not here? Ask me.</h2>
           <p>Send it by email, or use the form.</p>
         </div>
         <div className="mw-actions">

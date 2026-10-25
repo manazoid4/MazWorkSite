@@ -42,7 +42,7 @@ async function assertRoute(route, contentType) {
 try {
   await waitForServer();
   const home = await assertRoute('/', 'text/html');
-  const mazos = await assertRoute('/mazos', 'text/html');
+  const proof = await assertRoute('/proof', 'text/html');
   await assertRoute('/robots.txt', 'text/plain');
   await assertRoute('/sitemap.xml', 'application/xml');
   await assertRoute('/social-card.png', 'image/png');
@@ -53,8 +53,9 @@ try {
   if (!home.includes('JobFilter')) {
     throw new Error('Homepage smoke check did not find the featured-project copy.');
   }
-  if (!mazos.includes('This page has moved')) {
-    throw new Error('Legacy /mazos handoff smoke check failed.');
+  // /mazos and /whats-new are redirects in vercel.json (tests/redirects.test.mjs); /proof#built is where they land.
+  if (!proof.includes('id="built"')) {
+    throw new Error('Proof page smoke check did not find the #built section.');
   }
   console.log('Local static HTML and asset smoke checks passed.');
 } finally {

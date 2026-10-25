@@ -1,0 +1,47 @@
+/* /tools hub and the table-picker page. Builds on reimagine.css (rx-). Tokens only. */
+.tl-hero { padding: clamp(40px, 7vw, 88px) 0 clamp(28px, 4vw, 48px); display: grid; gap: 18px; justify-items: start; }
+.tl-hero h1 { max-width: 16ch; margin-top: 4px; font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: .98; letter-spacing: -.03em; font-variation-settings: "SOFT" 100; }
+.tl-hero-note { max-width: 56ch; color: var(--muted); }
+.tl-picker { padding-bottom: clamp(40px, 7vw, 88px); }
+.tl-notes { padding: clamp(36px, 6vw, 72px) 0; border-top: 1px solid var(--line); }
+.tl-h2 { font-size: clamp(1.7rem, 3.6vw, 2.8rem); line-height: 1.08; letter-spacing: -.025em; font-variation-settings: "SOFT" 100; }
+
+/* Label key: what each honest label means. */
+.tl-key { margin: 0; padding: clamp(20px, 3vw, 32px) 0; display: grid; gap: 18px; border-block: 1px solid var(--line); }
+.tl-key > div { display: grid; gap: 8px; justify-items: start; align-content: start; }
+.tl-key dd { max-width: 40ch; color: var(--muted); font-size: .98rem; }
+@media (min-width: 760px) { .tl-key { grid-template-columns: repeat(3, 1fr); gap: 32px; } }
+
+/* Featured demo: plan on one side, words on the other. */
+.tl-feature { display: grid; gap: clamp(24px, 4vw, 64px); align-items: center; }
+.tl-feature-copy { display: grid; gap: 16px; justify-items: start; }
+.tl-feature-copy h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.02; letter-spacing: -.03em; font-variation-settings: "SOFT" 100; }
+.tl-feature-art { padding: clamp(10px, 2vw, 18px); border: 2px solid var(--plum); border-radius: 18px; background: var(--surface); box-shadow: 8px 8px 0 color-mix(in oklch, var(--plum) 30%, transparent); }
+@media (min-width: 900px) { .tl-feature { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } .tl-feature-art { rotate: 1.2deg; } }
+
+/* The index: one ruled row per tool, not a grid of identical cards. */
+.tl-index { list-style: none; border-top: 2px solid var(--ink); }
+.tl-row { position: relative; padding: clamp(22px, 3.2vw, 36px) 0; display: grid; gap: 10px 32px; border-bottom: 1px solid var(--line); }
+.tl-row h3 { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 560; line-height: 1.05; letter-spacing: -.025em; font-variation-settings: "SOFT" 100; }
+.tl-row h3 a { text-decoration: none; }
+.tl-row h3 a::after { content: ""; position: absolute; inset: 0; }
+.tl-row p { max-width: 58ch; color: var(--muted); }
+.tl-row .rx-tag { z-index: 1; }
+.tl-row-go { display: none; font-size: 1.8rem; line-height: 1; color: var(--plum); }
+.tl-row:has(a:focus-visible) { outline: 3px solid var(--signal); outline-offset: 4px; }
+.tl-row h3 a:focus-visible { outline: none; box-shadow: none; }
+.tl-row:hover h3 a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .18em; }
+@media (min-width: 760px) {
+  .tl-row { grid-template-columns: 270px minmax(0, 1fr) 48px; align-items: start; }
+  .tl-row .rx-tag { grid-column: 1; grid-row: 1; margin-top: 8px; }
+  .tl-row > div { grid-column: 2; }
+  .tl-row-go { display: block; grid-column: 3; grid-row: 1; justify-self: end; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tl-row { transition: padding-inline 160ms ease-out, background-color 160ms ease-out; }
+  .tl-row:hover { padding-inline: 14px; background: color-mix(in oklch, var(--sun) 35%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { .tl-row { transition: none; } }
+
+.tl-close { display: grid; gap: 18px; justify-items: start; }
+.tl-close h2 { max-width: 20ch; }

@@ -11,6 +11,8 @@ const REMOVED = [
   '/free-plan', '/start', '/scope-sheet', '/refer', '/video', '/managed-presence', '/missed-calls-calculator',
   '/content-day', '/demos', '/b2b', '/b2b/assessment', '/complaints', '/complaints-improvement', '/audit',
   '/solutions', '/services', '/lab', '/linkedin', '/brag', '/brand-kit',
+  // Site reimagination (25 Oct 2026): the MAZos stub and the changelog are merged into /proof.
+  '/mazos', '/whats-new',
 ];
 const isRemoved = (path) => REMOVED.some((r) => path === r || path.startsWith(`${r}/`));
 
@@ -44,4 +46,9 @@ test('query-carrying redirects come before the generic ones', () => {
     assert.equal(redirects[i].destination, destination);
     assert.ok(i < generic(source), `${source}?${key} rule must precede the generic ${source} rule`);
   }
+});
+
+test('merged pages land on the page that now holds their content (25 Oct 2026)', () => {
+  assert.equal(bySource.get('/mazos')?.destination, '/proof#built');
+  assert.equal(bySource.get('/whats-new')?.destination, '/proof');
 });

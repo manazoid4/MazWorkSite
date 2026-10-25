@@ -133,7 +133,8 @@ test('Objects stays live and linked from /proof but is hidden from site chrome a
   // Objects left the homepage in the 27 Sep sales overhaul and left the menu, footer and sitemap on 22 Oct.
   const lab = await readPage('/proof');
   assert.match(lab, /Maz Works Objects/);
-  assert.match(lab, /Tap-to-review stands and signs, fixed price from £29/);
+  assert.match(lab, /Tap-to-review stands and signs/);
+  assert.match(lab, /Concept, not yet made/);
   assert.match(home, /Tell me the job/);
   assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);

@@ -79,7 +79,7 @@ export default function AfterHoursPage() {
             <a className="button button-signal" href={demoHref}>{MAIN_CTA}</a>
             <a className="button" href="/receptionist-demo">Talk to the receptionist</a>
           </div>
-          <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} Maz sets it up himself.`}</p>
+          <p className="mw-hero-note">{`${AFTER_HOURS.guarantee} I set it up myself.`}</p>
         </div>
         <NightCall />
       </section>
@@ -169,7 +169,7 @@ export default function AfterHoursPage() {
       <section className="ah-section ah-try" id="try" aria-labelledby="ah-try-title">
         <p className="eyebrow">Try it</p>
         <h2 id="ah-try-title">Play an example call.</h2>
-        <p className="ah-sub">Pick a caller. Watch how the call goes, then see the summary the owner gets.</p>
+        <p className="ah-sub">A made-up garage, three made-up callers. Pick one, watch the call, then see the summary the owner would get.</p>
         <CallDemo />
         <p className="ah-talk"><a className="button" href="/receptionist-demo">Talk to it out loud</a> <span>Have the call yourself, in your browser, with your microphone.</span></p>
       </section>

@@ -37,11 +37,11 @@ export function Hero() {
   return (
     <section className="pz-hero" id="main-content" tabIndex={-1} aria-labelledby="prices-title">
       <div className="pz-hero-copy">
-        <h1 id="prices-title">Prices for getting customers, serving them and improving.</h1>
-        <p className="pz-lede">One-off work and optional monthly support. {VAT_NOTE}</p>
+        <h1 id="prices-title">Plain prices, fixed before I start.</h1>
+        <p className="pz-lede">Mostly one-off work, plus a few optional monthly services. You see it working before you pay. {VAT_NOTE}</p>
         <div className="pz-actions">
           <a className="button button-signal s-button-lg" href="/contact?src=prices#contact">{ENQUIRY_CTA}</a>
-          <a className="pz-textlink" href="/what-we-do#serve-customers">See how it works <span aria-hidden="true">→</span></a>
+          <a className="pz-textlink" href="/what-we-do">See what I do <span aria-hidden="true">→</span></a>
         </div>
       </div>
       <Ladder />

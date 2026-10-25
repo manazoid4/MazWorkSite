@@ -11,8 +11,8 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
     answer: `Tell me the job you want off your plate and, usually within ${CHECK_REPLY_TIME}, I send a working preview of it with your business name on, plus a fixed price and a written scope sheet. It’s built from a template on my own test setup, so it’s not on your apps yet; that happens once you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
   },
   {
-    question: 'What do you actually build?',
-    answer: 'Automation, connected tools and custom software for small businesses: enquiries gathered and answered, quotes and invoices that follow themselves up, reminders, shared customer records, internal tools, customer portals and websites with the system built in.',
+    question: 'What do you actually do?',
+    answer: 'Four things. Websites that make it easy to enquire or book. Follow-up that happens by itself: missed-call texts, quote chasers, reminders, review requests. Booking and reporting so you can see what is due. And small custom tools for jobs normal apps cannot do. I start with the problem, not the tool.',
   },
   {
     question: 'How much does it cost?',
@@ -40,11 +40,11 @@ export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   },
   {
     question: 'What if we disagree about the work?',
-    answer: 'Before any work I send a one-page written scope: what you get, what it costs and what done looks like. You pay once you have seen it working. If something is not what we agreed, I fix it free for 90 days, and you do not pay for any part that does not work. I spent five years handling complaints and escalations in regulated finance, including ombudsman cases, so I write scopes that cannot be misread. That protects you as much as me.',
+    answer: 'Before any work I send a one-page written scope: what you get, what it costs and what done looks like. You pay once you have seen it working. If something is not what we agreed, I fix it free for 90 days, and you do not pay for any part that does not work. I spent five years handling financial complaints and escalations, so I know how a vague promise turns into a dispute. I write scopes that are hard to misread. That protects you as much as me.',
   },
   {
     question: 'Why should I trust you?',
-    answer: 'You always deal with me directly. I studied Computer Science, then spent five years in complaints and finance in regulated settings. At an internet service provider I was the main contact for escalations from business park owners and company directors on accounts worth hundreds of thousands of pounds. Everything I build lives in accounts in your name with a written guide, so it keeps working without me.',
+    answer: 'You always deal with me directly. I studied Computer Science, then spent five years handling financial complaints and customer escalations. I am new to running my own business, so you do not pay until you have seen the work running. Everything I build lives in accounts in your name with a written guide, so it keeps working without me. You can also open my own work on the My work page.',
   },
   {
     question: 'Do I own what you build?',

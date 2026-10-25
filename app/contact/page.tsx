@@ -13,18 +13,16 @@ import '../b2b.css';
 import './contact.css';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Contact Maz Works' },
-  description: fitDescription(`Tell me what is not working in your business or what you want to improve. Ask a question, or get a free working preview and fixed price from ${OFFERS[0].price}. I usually reply within ${CHECK_REPLY_TIME}.`),
+  title: { absolute: 'Contact Maz | Describe a problem, get a reply' },
+  description: fitDescription(`Tell me what is not working in your business, in your own words. I usually reply within ${CHECK_REPLY_TIME}. A free preview and fixed price if it helps. No call needed.`),
   alternates: { canonical: `${SITE_URL}/contact` },
-  openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: fitDescription('Tell me what you need help with. Fixed quote, no VAT added.'), url: `${SITE_URL}/contact`, type: 'website' },
+  openGraph: { images: [OG_IMAGE], title: 'Contact Maz Works', description: fitDescription('Tell me what is not working. I reply by email, and the price is fixed before any paid work.'), url: `${SITE_URL}/contact`, type: 'website' },
 };
 
 const RETURN = [
   'A working preview of your first job with your business name on it, to try on your phone',
-  'A fixed price and written scope sheet for setting it up on your own apps',
-  'What to automate first, and why',
-  'What I would leave alone, and why',
-  `A fixed price, starting from ${OFFERS[0].price}, with any optional extras listed separately`,
+  `A fixed price (one job starts from ${OFFERS[0].price}) and a written scope sheet, with any extras listed separately`,
+  'What I would do first, and what I would leave alone',
   'Any software or text-message costs you would pay directly',
   'A date it would be live by',
 ];
@@ -51,12 +49,12 @@ export default function ContactPage() {
         <div className="ct-copy">
           <p className="eyebrow">Contact</p>
           <h1 id="contact-title">You know your business. Let’s work out what would help.</h1>
-          <p>A website idea, an awkward process or a problem you haven’t quite pinned down. Start there. You don’t need to know the technical answer.</p>
-          <p>I usually reply within {CHECK_REPLY_TIME}. Scope and price are agreed before work starts.</p>
-          <p className="mw-contact-alternatives"><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><span aria-hidden="true"> · </span><CallLink href={BOOKING_URL} placement="contact">Book a 15-minute call</CallLink><span aria-hidden="true"> · </span><a href="#refer">Refer a business</a></p>
+          <p>Tell me what is not working, in your own words. A missed call, a messy process, or a feeling that something should be easier. You do not need the technical answer, or a plan.</p>
+          <p>I reply by email, usually within {CHECK_REPLY_TIME}. Scope and price are agreed before any paid work.</p>
+          <p className="mw-contact-alternatives"><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a><span aria-hidden="true"> · </span><CallLink href={BOOKING_URL} placement="contact">Book a 15-minute call</CallLink> (only if you would rather talk)<span aria-hidden="true"> · </span><a href="#refer">Refer a business</a></p>
         </div>
         <div className="ct-card">
-          <DemoRequestForm contact formId="leak-check-form" kicker="Just your name, email and what you need. No service choice needed." />
+          <DemoRequestForm contact formId="leak-check-form" kicker="Your name, email and a few lines about the problem. No service choice needed." />
         </div>
       </section>
 
@@ -64,7 +62,7 @@ export default function ContactPage() {
         <div className="ct-head">
           <p className="eyebrow">{FREE_STEP.name} · {FREE_STEP.price}</p>
           <h2 id="free-preview-title">What the free preview is.</h2>
-          <p>{FREE_STEP.body} Pick “A free preview and fixed price” in the form above. Free for any UK business, in any trade.</p>
+          <p>{FREE_STEP.body} Pick “A free preview and fixed price” in the form above. It is free for any UK business.</p>
         </div>
         <div className="ct-cols">
           <div className="ct-tile ct-peach">
@@ -77,7 +75,7 @@ export default function ContactPage() {
             <NextSteps />
           </div>
         </div>
-        <p className="ct-fine">Sometimes the answer is: “This isn’t worth automating yet.” If the tool you already pay for can do it, I’ll tell you.</p>
+        <p className="ct-fine">Sometimes the answer is: “This isn’t worth automating yet.” If a tool you already pay for can do it, I will say so.</p>
         <p className="ct-fine">Built for any business that runs on customers: {NICHE_GUIDES.map((guide, index) => (
           <span key={guide.id}>{index ? ' · ' : ''}<a href={`/for/${guide.id}`}>{guide.shortName}</a></span>
         ))}</p>
@@ -107,8 +105,8 @@ export default function ContactPage() {
       <section className="ct-section" id="refer" aria-labelledby="refer-title">
         <div className="ct-head">
           <p className="eyebrow">Refer a business</p>
-          <h2 id="refer-title">Know someone who keeps losing jobs? Get paid for the introduction.</h2>
-          <p>Most of my work comes from someone saying a good word. If you introduce a UK business that isn’t already talking to me, you get paid once they do: {REFERRAL_RANGE}, depending on the job they buy. No limit on how many. Paid by bank transfer within 7 days of their first invoice.</p>
+          <h2 id="refer-title">Know a business that could use this? Get paid for the introduction.</h2>
+          <p>If you introduce a UK business that isn’t already talking to me, you get paid once they do: {REFERRAL_RANGE}, depending on the job they buy. No limit on how many. Paid by bank transfer within 7 days of their first invoice.</p>
         </div>
         <ol className="ct-grid ct-steps">{REFER_STEPS.map((step, index) => <li key={step.title}><span aria-hidden="true">{index + 1}</span><strong>{step.title}</strong><span>{step.body}</span></li>)}</ol>
         <h3 className="ct-sub">What you earn</h3>

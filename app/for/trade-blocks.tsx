@@ -77,7 +77,7 @@ export function ReceptionistCard({ page, level = 2 }: { page: string; level?: 2 
   return (
     <aside className="tp-after" aria-labelledby={`after-${page}`}>
       <div>
-        <span className="s-teaser-tag">New · After-hours call answering</span>
+        <span className="s-teaser-tag">After-hours call answering</span>
         <Heading id={`after-${page}`}><a href={AFTER_HOURS.href}>{AFTER_HOURS.name} {AFTER_HOURS.price}</a></Heading>
         <p>Busy on a job, closed for the evening, or it’s a bank holiday? Calls you can’t pick up are answered, and you get a clear message to act on.</p>
       </div>

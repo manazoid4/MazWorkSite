@@ -16,16 +16,16 @@ const ENQUIRY = '/contact?src=professional-teams&service=reporting#contact';
 const [health, board, flows, sprint] = COMPLAINT_PACKAGES;
 
 export const metadata: Metadata = {
-  title: 'Reporting and operational tools for teams',
-  description: fitDescription('KPI dashboards, workload and deadline oversight, clearer reporting and practical process improvements for professional teams.'),
+  title: 'Reporting and deadline tools for teams',
+  description: fitDescription('See what is due, who owns it and what keeps going wrong. Dashboards, deadline tracking, complaints reporting and small internal tools from one person.'),
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'Reporting and operational tools for teams — Maz Works', description: fitDescription('Better oversight, clearer decisions and smoother operations for professional teams.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Reporting and deadline tools for professional teams | Maz Works', description: fitDescription('See what is due, who owns it and what keeps going wrong.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 const capabilities = [
-  { number: '01', title: "See what's happening", text: 'Dashboards, KPIs, trends and management reports that show what needs attention.' },
-  { number: '02', title: 'Stay on top of the work', text: 'Clear ownership, deadlines, handoffs and escalation visibility across a team.' },
-  { number: '03', title: 'Find and fix the problem', text: 'Review repeated issues and improve the reporting, process or tools behind them.' },
+  { number: '01', title: "See what's happening", text: 'A dashboard of what is open, what is late and which numbers are moving.' },
+  { number: '02', title: 'Stay on top of the work', text: 'Who owns each item, when it is due, and what happens when it gets stuck.' },
+  { number: '03', title: 'Find and fix the cause', text: 'Look at what keeps happening, then fix the report, the process or the tool behind it.' },
 ];
 
 export default function ProfessionalTeamsPage() {
@@ -34,10 +34,10 @@ export default function ProfessionalTeamsPage() {
       <SiteHeader />
       <section className="mw-resource-hero pt-hero" id="main-content" tabIndex={-1} aria-labelledby="teams-title">
         <p className="eyebrow">For managers and professional teams</p>
-        <h1 id="teams-title">Better oversight. Clearer decisions. Smoother operations.</h1>
-        <p>I help professional teams make better use of their information, stay on top of deadlines and improve how work gets done. From KPI dashboards and SLA tracking to reporting, complaints analysis and practical internal tools.</p>
+        <h1 id="teams-title">See what is due, what is late and what keeps going wrong.</h1>
+        <p>I help teams that handle cases, complaints or client work. I turn the spreadsheet and the pile of emails into one view you can act on: dashboards, deadline tracking, complaints reporting and small internal tools.</p>
         <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>{MAIN_CTA}</a></p>
-        <p className="pt-proofline">Founder-led work · scoped around the way your team already works</p>
+        <p className="pt-proofline">One person, start to finish · scoped around how your team already works</p>
       </section>
 
       <section className="pt-capabilities" aria-label="Three ways I help professional teams">
@@ -54,7 +54,7 @@ export default function ProfessionalTeamsPage() {
         <header className="pt-section-head">
           <p className="eyebrow">What I set up</p>
           <h2 id="pt-setup-title">Complaints work and office systems, scoped to your team.</h2>
-          <p>Each job is a written scope and a fixed price before I start. Complaints analysis is my specialism: five years in complaints and finance, including regulated work and ombudsman cases.</p>
+          <p>Each job is a written scope and a fixed price before I start. Complaints are what I know best: five years handling financial complaints and escalations.</p>
         </header>
         <ul className="pt-cards" id="complaints">
           {[health, board, flows, sprint].map((pack) => (
@@ -94,14 +94,14 @@ export default function ProfessionalTeamsPage() {
         </header>
         <ul className="pt-cards pt-cards-two">
           <li><h3>Complaints Health Check</h3><p>Scores, findings and ranked actions from a review of 15 invented cases.</p><a className="button" href="/complaints/sample/health-check">View the sample Health Check</a></li>
-          <li><h3>Board report</h3><p>A fictional dataset turned into oversight, root causes and actions.</p><a className="button" href="/complaints/sample/board-report">View the sample board report</a></li>
+          <li><h3>Board report</h3><p>A fictional dataset turned into a clear overview, root causes and actions.</p><a className="button" href="/complaints/sample/board-report">View the sample board report</a></li>
         </ul>
       </section>
 
       <section className="pt-demo-section" id="demonstrations" aria-labelledby="pt-demos-title">
         <header className="pt-section-head">
-          <p className="eyebrow">Illustrative demonstrations</p>
-          <h2 id="pt-demos-title">Useful at a glance. Clear about what to do next.</h2>
+          <p className="eyebrow">Concept demo · made-up data</p>
+          <h2 id="pt-demos-title">A dashboard that says what to do next.</h2>
           <p>Fictional department and synthetic data. These examples show the shape of the work, not client results or a live system.</p>
         </header>
 
@@ -148,7 +148,7 @@ export default function ProfessionalTeamsPage() {
 
         <section className="pt-demo pt-demo-queue" aria-labelledby="pt-queue-title">
           <div className="pt-demo-heading">
-            <div><p className="pt-demo-label">02 / SLA and workload oversight</p><h3 id="pt-queue-title">Who owns the next step?</h3></div>
+            <div><p className="pt-demo-label">02 / Deadlines and workload</p><h3 id="pt-queue-title">Who owns the next step?</h3></div>
             <span className="pt-synthetic">Synthetic data</span>
           </div>
           <div className="pt-queue-summary" aria-label="Open work summary">
@@ -192,9 +192,9 @@ export default function ProfessionalTeamsPage() {
       </details>
 
       <section className="pt-practice" aria-labelledby="pt-practice-title">
-        <div><p className="eyebrow">Practical, proportionate improvements</p><h2 id="pt-practice-title">Start with the work. Use the simplest useful tool.</h2></div>
+        <div><p className="eyebrow">Keep it simple</p><h2 id="pt-practice-title">Start with the work. Use the simplest tool that helps.</h2></div>
         <div>
-          <p>I can improve an existing spreadsheet or report, make repeated handoffs easier to follow, or build a tailored internal tool when current software is not enough. I agree the scope and price with you before work starts.</p>
+          <p>I can improve a spreadsheet or report you already have, make handoffs easier to follow, or build a small internal tool when your current software is not enough. I agree the scope and price with you before work starts.</p>
           <p>For sensitive workflows, we agree suitable access, permissions, review, escalation, data handling and retention terms before records are shared. I do not provide legal or regulatory advice.</p>
           <ul className="b2b-list">{COMPLAINT_DATA_HANDLING.map((item) => <li key={item}>{item}</li>)}</ul>
           <p className="pt-fine">This is a summary, not legal advice. Nothing here promises fewer complaints, savings or any other outcome.</p>
@@ -203,7 +203,7 @@ export default function ProfessionalTeamsPage() {
 
       <section className="mw-resource-hero pt-bottom-cta" aria-labelledby="teams-cta">
         <p className="eyebrow">Work directly with me</p>
-        <h2 id="teams-cta">Bring me the report, deadline or process that is causing friction.</h2>
+        <h2 id="teams-cta">Bring me the report, deadline or process that keeps causing trouble.</h2>
         <p>Describe the problem in a few lines. No records are needed to ask.</p>
         <ManazirLine />
         <p className="b2b-cta"><a className="button button-signal" href={ENQUIRY}>{MAIN_CTA}</a></p>
