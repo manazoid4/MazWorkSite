@@ -131,7 +131,7 @@ export default function LocalBusinessesPage() {
       <section className="lb-section" id="find-customers" aria-labelledby="lb-find-title">
         <div className="lb-section-intro">
           <h2 id="lb-find-title">Your website and Google listing.</h2>
-          <p>No one can promise a particular search position. What I can do is make the page clear and keep your details right.</p>
+          <p>No one can promise a particular search position. What I can do is make the page clear and keep your details right. See <a href="/website-design">website design for Derbyshire and Nottingham businesses</a> if you need a new site.</p>
         </div>
         <ul className="lb-find-list">
           <li><strong>{launch.name} · {launch.price}</strong><span>One page that explains what you do and makes it easy to enquire, book or buy.</span><a href="/prices#websites">See page options →</a></li>
