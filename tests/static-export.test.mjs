@@ -527,7 +527,7 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
   // or to repeat the county in the global nav, footer or founder biography.
   const serviceAreaCountyHash = '71be3b9635b8c45ea65075e9a6e76eefdaab4f1647bc2de8ff74de48697e2cff';
   for (const file of files) {
-    const relative = path.relative(exportRoot, file);
+    const relative = path.relative(exportRoot, file).split(path.sep).join('/');
     const isLocalServicePage = relative === 'website-design.html' || relative === 'website-design.txt' || relative.startsWith('website-design/');
     const text = await readFile(file, 'utf8');
     const tokens = new Set(text.toLowerCase().match(/[a-z0-9._%+-]+@[a-z0-9.-]+|[a-z]{4,12}/g) || []);

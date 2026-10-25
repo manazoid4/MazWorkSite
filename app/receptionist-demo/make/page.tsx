@@ -5,6 +5,7 @@ import '../voice-desk.css';
 
 /** Maz's tool: fill in a prospect's details, get their personal demo link. Not indexed. */
 export const metadata: Metadata = {
+  alternates: { canonical: '/receptionist-demo/make' },
   title: { absolute: 'Make a receptionist demo link | Maz Works' },
   description: 'Make a personal after-hours receptionist demo link for a business.',
   robots: { index: false, follow: false, nocache: true },

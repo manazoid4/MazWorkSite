@@ -40,6 +40,10 @@ const serviceSchema = {
 
 const questions = [
   {
+    question: 'How much does a small business website cost?',
+    answer: `A one-page Launch Page is ${launch.price} and a five-page Website is ${website.price.toLowerCase()}, both one-off with no VAT added. Domain and hosting are paid separately to the provider. The free preview and written quote show the exact figure for your job before any paid work.`,
+  },
+  {
     question: 'Do you work with businesses outside Derbyshire and Nottingham?',
     answer: 'Yes. Most website work can be done remotely, so I can help businesses elsewhere in the UK too.',
   },
@@ -104,6 +108,12 @@ export default function WebsiteDesignPage() {
         <h2 id="web-local-title">Built for local businesses, not a generic template pitch.</h2>
         <p>I work with the needs of small businesses across Derbyshire and Nottingham: trades, garages, salons, dog groomers, cafés and other independent teams. The starting point is the actual task a customer wants to complete.</p>
         <p>Browse <a href="/for">examples by industry</a>, <a href="/local-businesses">other ways to make enquiries easier</a>, or <a href="/proof">work and demos with their limitations clearly labelled</a>. I also work remotely with businesses elsewhere in the UK.</p>
+      </section>
+
+      <section className="s-section" aria-labelledby="web-more-title">
+        <h2 id="web-more-title">More than a website, when you need it.</h2>
+        <p>A website only helps if the enquiries it creates get answered. That is why I also set up the work behind it: a text sent straight back to <a href="/missed-call-text-back">missed callers</a>, <a href="/after-hours-receptionist">calls answered out of hours</a>, booking and reminder flows, and weekly reporting. Bigger needs, such as a customer portal or internal tool, are quoted as <a href="/what-we-do">custom software</a>.</p>
+        <p>New to this? Start with the <a href="/one-page-website">one-page website</a>, or see <a href="/website-cost">how website costs are worked out</a> before you decide.</p>
       </section>
 
       <section className="s-section" aria-labelledby="web-process-title">

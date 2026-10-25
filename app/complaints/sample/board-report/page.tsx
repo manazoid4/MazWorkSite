@@ -5,6 +5,7 @@ import '../../samples.css';
 
 /** Printable sample, rendered to the downloadable PDF by scripts/make-complaint-samples.mjs. Invented data. */
 export const metadata: Metadata = {
+  alternates: { canonical: '/complaints/sample/board-report' },
   title: 'Sample complaints board report',
   description: 'A fictional example of a Maz Works complaints board report, built from invented data.',
   robots: { index: false, follow: false },
