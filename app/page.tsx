@@ -44,7 +44,7 @@ export default function Page() {
       <section className="mw-home-hero" id="main-content" tabIndex={-1} aria-labelledby="home-title">
         <div className="mw-home-hero-copy">
           <p className="eyebrow">Maz Works · one person, practical fixes</p>
-          <h1 id="home-title">The problem that keeps coming back? I&nbsp;make it <mark>easier</mark>.</h1>
+          <h1 id="home-title">Less hassle. <mark>Better</mark> business.</h1>
           <p className="mw-home-lede">Missed enquiries, the same details typed twice, a list checked by hand every week. I find the pattern behind the problem, then build a practical way to make it easier.</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
