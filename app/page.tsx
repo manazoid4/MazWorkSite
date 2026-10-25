@@ -13,7 +13,7 @@ const JOBFILTER = FLAGSHIP_PROJECTS.find((project) => project.id === 'jobfilter'
 
 // The four places a recurring problem usually shows up. Links go to /what-we-do; point each at its own anchor there if wanted.
 const AREAS = [
-  { n: '01', title: 'Websites and digital experiences', body: 'A clear site that explains what you do, answers the obvious questions and makes the next step easy to take.', href: '/what-we-do' },
+  { n: '01', title: 'Websites and digital experiences', body: 'A clear site that explains what you do, answers the obvious questions and makes the next step easy to take.', href: '/website-design' },
   { n: '02', title: 'Customer enquiries and follow-up', body: 'Calls, messages and quotes get an answer, and nothing quietly slips through the gaps.', href: '/what-we-do' },
   { n: '03', title: 'Booking and operational improvements', body: 'Bookings, reminders and hand-offs that stop depending on one person remembering.', href: '/what-we-do' },
   { n: '04', title: 'Focused custom tools', body: 'When off-the-shelf software does not fit, a small tool built around one job.', href: '/what-we-do' },
@@ -26,8 +26,8 @@ const STEPS = [
   { title: 'I build it and stand behind it', body: 'I use the tools you already have where I can, show you it working, and fix problems that turn up afterwards.' },
 ];
 
-const TITLE = 'Maz Works | Fixes for problems that keep coming back';
-const DESCRIPTION = fitDescription('I find the problems that keep coming back in a business and build practical ways to make them easier: websites, enquiry and booking tools, and small custom software.');
+const TITLE = 'Websites & Business Systems in Derbyshire | Maz Works';
+const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for small businesses in Derbyshire, Nottingham and across the UK. Practical tools, fixed quotes, one person to deal with.');
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -91,7 +91,7 @@ export default function Page() {
             </li>
           ))}
         </ol>
-        <p className="mw-do-foot">Running a local or independent business? <a href="/local-businesses">See what that looks like</a>. Part of a professional team? <a href="/professional-teams">Start here</a>. Prices are on the <a href="/prices">prices page</a>.</p>
+        <p className="mw-do-foot">Need <a href="/website-design">website design in Derbyshire or Nottingham</a>? Start there. Running a local or independent business? <a href="/local-businesses">See what that looks like</a>. Part of a professional team? <a href="/professional-teams">Start here</a>. Prices are on the <a href="/prices">prices page</a>.</p>
       </section>
 
       {JOBFILTER?.image && (
