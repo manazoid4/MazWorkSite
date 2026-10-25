@@ -5,7 +5,8 @@
 .mw-home-hero h1 { max-width: 900px; margin-top: 12px; font-size: clamp(3rem, 6.4vw, 5.75rem); line-height: .99; }
 /* Pop moment 1 of 2: one highlighted word. */
 /* Hand-drawn orange swash under the word, borrowed from Agrumea Farm. */
-.mw-home-hero h1 mark { padding: 0 .04em .12em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M3 11c38-7 92-9 136-6 21 1 38 3 58 1' fill='none' stroke='%23ff6b1a' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") bottom / 100% .32em no-repeat; color: var(--ink); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.mw-home-hero h1 mark { position: relative; padding: 0 .04em .12em; background: none; color: var(--ink); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.mw-home-hero h1 mark::after { content: ""; position: absolute; inset: auto 0 0 0; height: .32em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M3 11c38-7 92-9 136-6 21 1 38 3 58 1' fill='none' stroke='%23ff6b1a' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat; pointer-events: none; }
 .mw-home-lede { max-width: 650px; margin-top: 23px; color: var(--muted); font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
 .mw-home-actions { margin-top: 29px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 26px; }
 /* Pop moment 2 of 2: the orange primary button (.button-signal). */
@@ -92,6 +93,21 @@
   .mw-home-footer-copy h2 { font-size: clamp(1.9rem, 8.2vw, 2.5rem); }
   .mw-home-footer-form .mw-demo-form { padding: 16px; }
 }
+/* Hero flash: a warm glow behind the headline, then the swash draws in once. Static unless motion is allowed. */
+.mw-home-hero { position: relative; isolation: isolate; }
+.mw-home-hero::before { content: ""; position: absolute; z-index: -1; top: 0; right: 0; width: min(62vw, 700px); aspect-ratio: 1; pointer-events: none; background: radial-gradient(closest-side, color-mix(in oklch, var(--pop-orange) 30%, transparent), transparent 72%), radial-gradient(closest-side at 72% 62%, color-mix(in oklch, var(--pop-cobalt) 22%, transparent), transparent 72%); }
+@media (prefers-reduced-motion: no-preference) {
+  .mw-home-hero-copy > * { animation: mw-up .6s cubic-bezier(.2, .7, .2, 1) both; }
+  .mw-home-hero-copy > :nth-child(1) { animation-delay: 0ms; }
+  .mw-home-hero-copy > :nth-child(2) { animation-name: mw-up-move; animation-delay: 60ms; }
+  .mw-home-hero-copy > :nth-child(3) { animation-delay: 160ms; }
+  .mw-home-hero-copy > :nth-child(4) { animation-delay: 240ms; }
+  .mw-home-hero-copy > :nth-child(5) { animation-delay: 320ms; }
+  .mw-home-hero h1 mark::after { animation: mw-draw .7s .45s cubic-bezier(.2, .7, .2, 1) both; }
+}
+@keyframes mw-up { from { opacity: 0; translate: 0 14px; } }
+@keyframes mw-up-move { from { translate: 0 14px; } } /* headline moves but never fades: keeps LCP on time */
+@keyframes mw-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
 @media (prefers-reduced-motion: reduce) {
   .mw-home * { scroll-behavior: auto; }
 }
