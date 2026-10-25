@@ -3,7 +3,6 @@ import { SiteFooter, SiteHeader } from './site-chrome';
 import { ThreeBuckets } from './three-buckets';
 import { HomeFooterConvert } from './home-footer-convert';
 import { ManazirLine } from './manazir-line';
-import { AFTER_HOURS } from './offers';
 import { ENQUIRY_CTA } from './site';
 import { OG_IMAGE } from './seo';
 import './home-transformation.css';
@@ -75,7 +74,7 @@ export default function Page() {
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
             <a className="mw-home-secondary" href="/proof">See my work <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="mw-home-reassurance">Miss calls while you work? My <a href={AFTER_HOURS.href}>{AFTER_HOURS.name}</a> answers them in your business name for {AFTER_HOURS.price}. One person to deal with, and I usually reply within 1 working day.</p>
+          <p className="mw-home-reassurance">One person to deal with, and I usually reply within 1 working day.</p>
         </div>
 
       </section>
