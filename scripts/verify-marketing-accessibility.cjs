@@ -14,7 +14,7 @@ const AXE_SOURCE = process.env.AXE_SOURCE || require.resolve('axe-core/axe.min.j
   try {
     for (const width of [390, 1440]) {
       await page.setViewportSize({ width, height: 900 });
-      for (const route of ['/', '/3d-printing', '/demos', '/work/jobfilter', '/work/scrap-finance-partners', '/faq', '/about']) {
+      for (const route of ['/', '/3d-printing', '/demos', '/faq', '/about']) {
         await page.goto(TARGET_URL + route, { waitUntil: 'networkidle' });
         await page.locator('details').evaluateAll(details => details.forEach(detail => { detail.open = true; }));
         await page.addScriptTag({ path: AXE_SOURCE });

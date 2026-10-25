@@ -18,7 +18,7 @@ test('/tools has metadata, a canonical URL and links every demo it describes', a
   assert.match(html, /<title>Tools and demos \| Maz Works<\/title>/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.mazworks\.uk\/tools"/);
   assert.match(html, /<meta name="description" content="[^"]{60,}"/);
-  for (const href of ['/tools/restaurant-tables', '/local-businesses#missed-calls-calculator', '/receptionist-demo', '/work/jobfilter', '/work/scrap-finance-partners', '/3d-printing']) {
+  for (const href of ['/tools/restaurant-tables', '/local-businesses#missed-calls-calculator', '/receptionist-demo', 'https://jobfilter.uk/find-jobs', 'https://scrap-finance-partners.vercel.app', '/3d-printing']) {
     assert.ok(html.includes(`href="${href}"`), `/tools links ${href}`);
   }
 });

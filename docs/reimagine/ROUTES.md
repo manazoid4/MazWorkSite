@@ -37,7 +37,7 @@ Phone menu (`MENU_LINKS`): the six, plus Who it's for (`/for`), FAQ and Everythi
 | `/for/{heating-and-plumbing,roofers,builders,electricians,salons-and-beauty,dog-groomers,garages,cafes-and-food,clinics-and-therapists,architects}` | same | HIDE | Ten trade pages. Reachable from `/for` and `/site-map`. Kept for long-tail search. Removed two visible "To update" placeholder boxes (dog groomers, clinics). |
 | `/free-membership` | same | HIDE | Linked from `/site-map`; `/free-templates` and `/free-toolkit` redirect here. Not edited. |
 | `/3d-printing` | same | HIDE | Strip on `/what-we-do` links to it. Stays out of the sitemap, menu and footer (decision of 22 Oct, asserted in `tests/objects.test.mjs`). Not edited. |
-| `/work/jobfilter`, `/work/scrap-finance-partners` | same | KEEP | Case-study pages, in the sitemap (0.8). Not edited. |
+| `/work/jobfilter`, `/work/scrap-finance-partners` | live sites | REMOVED | Maz, 25 Oct: the live sites are the proof. Permanent redirects in vercel.json. |
 | `/site-map` | same | KEEP | Reads `NAV_GROUPS`. Small edit to its extra groups (labels, retired link removed). |
 | `/terms`, `/privacy` | same | KEEP | Not rewritten. See "Privacy and terms check" below. |
 | `/whats-new` | `/proof` | REMOVE, 301 | A changelog of site changes from 27 Sep to 2 Oct. Nothing a buyer needs. Inbound internal links were only the site map and two QA scripts, all updated. Page and `app/updates.ts` deleted. Test in `tests/redirects.test.mjs`. |

@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { CASE_STUDY_PROJECTS } from './projects';
 import { NICHE_GUIDES } from './for/niches';
 import { CUSTOMER_TYPES } from './customer-types';
 import { SITE_URL } from './site';
@@ -9,7 +8,6 @@ export const dynamic = 'force-static';
 // Priorities are a hint only and there is no analytics data behind them (see docs/reimagine/ROUTES.md).
 // Order: the seven main pages first, then the pages kept for search and for people who arrive on them.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const updated = new Date('2026-09-21');
   const reimagined = new Date('2026-10-25');
   return [
     { url: SITE_URL, lastModified: reimagined, changeFrequency: 'monthly', priority: 1 },
@@ -40,12 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: reimagined,
       changeFrequency: 'monthly' as const,
       priority: 0.75,
-    })),
-    ...CASE_STUDY_PROJECTS.map((project) => ({
-      url: `${SITE_URL}/work/${project.id}`,
-      lastModified: updated,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
     })),
   ];
 }

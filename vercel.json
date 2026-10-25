@@ -58,6 +58,16 @@
   ],
   "redirects": [
     {
+      "source": "/work/jobfilter",
+      "destination": "https://jobfilter.uk/find-jobs",
+      "permanent": true
+    },
+    {
+      "source": "/work/scrap-finance-partners",
+      "destination": "https://scrap-finance-partners.vercel.app",
+      "permanent": true
+    },
+    {
       "source": "/free-templates",
       "destination": "/free-membership",
       "permanent": true

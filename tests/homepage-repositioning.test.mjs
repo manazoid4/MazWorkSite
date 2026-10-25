@@ -35,7 +35,7 @@ test('homepage covers the four areas, both audiences and labels its examples hon
   assert.match(main, /href="\/what-we-do"/);
   assert.match(main, /href="\/local-businesses"/);
   assert.match(main, /href="\/professional-teams"/);
-  assert.match(main, /href="\/work\/jobfilter"/);
+  assert.match(main, /href="https:\/\/jobfilter\.uk\/find-jobs"/);
   assert.doesNotMatch(main, /scrap-finance-partners/);
   const text = visibleText(main);
   assert.match(text, /Internal project/);

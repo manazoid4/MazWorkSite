@@ -7,16 +7,6 @@ export type ProjectImage = {
   width: number;
   height: number;
 };
-export type ProjectCaseStudy = {
-  lede: string;
-  role: string;
-  scope: string[];
-  /** Real, checkable outcomes only. Rendered only when filled; never invent one. */
-  results?: string[];
-  /** A real quote the client has agreed to publish. Rendered only when filled. */
-  quote?: { text: string; who: string };
-};
-
 export type Project = {
   id: string;
   name: string;
@@ -31,10 +21,7 @@ export type Project = {
   limitation: string;
   image?: ProjectImage;
   links: ProjectLink[];
-  caseStudy?: ProjectCaseStudy;
 };
-
-export type CaseStudyProject = Project & { caseStudy: ProjectCaseStudy };
 
 export const FLAGSHIP_PROJECTS: Project[] = [
   {
@@ -56,16 +43,12 @@ export const FLAGSHIP_PROJECTS: Project[] = [
       { label: 'Try a free scan', href: 'https://jobfilter.uk/find-jobs' },
       { label: 'View code', href: 'https://github.com/manazoid4/JobFilterV1' },
     ],
-    caseStudy: {
-      // TODO(Maz): results stay empty until JobFilter has real, checkable numbers. No customer counts until true.
-      lede: 'Maz Works’ own product. It helps small building firms find public contracts that fit: it checks each one against their trade, area and deadline, then sends alerts.',
-      role: 'Everything, end to end. The same full setup a client build gets.',
-      scope: ['Finding public contracts', 'Trade-fit checks', 'Alerts and reminders', 'Paid plans and checkout', 'Domain, hosting and launch'],
-    },
   },
   {
     id: 'scrap-finance-partners', name: 'Scrap Finance Partners', eyebrow: 'Flagship 02 / Client website', status: 'Client website / Live',
     relationship: 'Client work',
+    // Truth rule (context pack, 25 Sep): a delivered client build, but the client did not pay.
+    // Say "client build". Never "paid client", "paying client" or anything implying money changed hands.
     summary: 'A website for a specialist finance practice, with lead capture.',
     problem: 'The client needed a clear, credible way to explain a specialist service and to capture enquiries without extra admin.',
     insight: 'Keep it simple: clear positioning, plain pricing and one obvious way to enquire.',
@@ -80,15 +63,6 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     links: [
       { label: 'View the live site', href: 'https://scrap-finance-partners.vercel.app' },
     ],
-    // Truth rule (context pack, 25 Sep): a delivered client build, but the client did not pay.
-    // Say "client build". Never "paid client", "paying client" or anything implying money changed hands.
-    caseStudy: {
-      lede: 'A client website for a finance firm serving UK scrap and recycling businesses, with lead capture built in.',
-      role: 'Positioning, website design and build, lead capture and launch.',
-      scope: ['Positioning', 'Website design and build', 'Lead capture', 'Launch'],
-      // TODO(Maz): add results only if the client confirms them in writing, e.g. enquiries in the first month.
-      // TODO(Maz): add a quote only if the client agrees to it being published, with their name and role.
-    },
   },
 ];
 
@@ -149,11 +123,3 @@ export const FEATURED_PROJECTS: Project[] = [
     links: [{ label: 'Ask about this build', href: '/contact#contact' }],
   },
 ];
-
-export const CASE_STUDY_PROJECTS = FLAGSHIP_PROJECTS.filter(
-  (project): project is CaseStudyProject => Boolean(project.caseStudy),
-);
-
-export function getCaseStudyProject(id: string) {
-  return CASE_STUDY_PROJECTS.find((project) => project.id === id);
-}
