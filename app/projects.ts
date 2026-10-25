@@ -27,7 +27,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
   {
     id: 'jobfilter', name: 'JobFilter', eyebrow: 'Flagship 01 / Full build and setup', status: 'Live product / Built end to end',
     relationship: 'Product',
-    summary: 'A construction growth and automation product that helps small trades and maintenance firms find, qualify, track and act on relevant public-sector opportunities with less manual research.',
+    summary: 'My own product. It finds public contracts that fit a small building firm’s trade, area and deadline.',
     problem: 'Small building firms lose hours checking tender sites. Deciding what fits and tracking deadlines takes even longer.',
     insight: 'A list of tenders is not enough. Firms need weak matches removed and a clear next step.',
     built: [
@@ -38,7 +38,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     ],
     proof: 'The live product and its code are public. You can run a free scan now.',
     limitation: 'It helps firms find and chase work. It does not guarantee a contract.',
-    image: { src: '/jobfilter-scan-result.webp', mobileSrc: '/jobfilter-scan-result-mobile.webp', alt: 'JobFilter showing an honest zero-result scan after checking configured public tender sources', caption: 'Live scan result / verified matching can return zero', width: 1440, height: 900 },
+    image: { src: '/jobfilter-scan-result.webp', alt: 'JobFilter’s live scanner: enter a postcode, pick a trade and radius, then scan for public contracts', caption: 'Live site / jobfilter.uk', width: 1280, height: 800 },
     links: [
       { label: 'Try a free scan', href: 'https://jobfilter.uk/find-jobs' },
       { label: 'View code', href: 'https://github.com/manazoid4/JobFilterV1' },
@@ -49,7 +49,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     relationship: 'Client work',
     // Truth rule (context pack, 25 Sep): a delivered client build, but the client did not pay.
     // Say "client build". Never "paid client", "paying client" or anything implying money changed hands.
-    summary: 'A website for a specialist finance practice, with lead capture.',
+    summary: 'A website for a finance firm serving UK scrap and recycling businesses, with one short enquiry form.',
     problem: 'The client needed a clear, credible way to explain a specialist service and to capture enquiries without extra admin.',
     insight: 'Keep it simple: clear positioning, plain pricing and one obvious way to enquire.',
     built: [
@@ -59,7 +59,7 @@ export const FLAGSHIP_PROJECTS: Project[] = [
     ],
     proof: 'The live site is public.',
     limitation: 'This shows what was built. It makes no claims about revenue or leads.',
-    image: { src: '/scrap-finance-partners.webp', mobileSrc: '/scrap-finance-partners-mobile.webp', alt: 'Scrap Finance Partners homepage explaining its Finance Health Check for UK scrap and recycling firms', caption: 'Live client site / specialist positioning and enquiry path', width: 1440, height: 1000 },
+    image: { src: '/scrap-finance-partners.webp', alt: 'Scrap Finance Partners homepage: “Your best-selling grade might be your worst deal”, with a Request a Health Check button', caption: 'Live client site', width: 1280, height: 800 },
     links: [
       { label: 'View the live site', href: 'https://scrap-finance-partners.vercel.app' },
     ],

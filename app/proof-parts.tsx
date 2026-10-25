@@ -4,8 +4,7 @@ import './b2b.css';
 /**
  * Reusable proof components for /proof. Add a real project to projects.ts, a real
  * quote to TESTIMONIALS, and the page picks them up. Nothing here invents a
- * result: the impact line shows only confirmed `results`, otherwise it says none
- * are published yet. Every card carries one of three labels, so a prototype or a
+ * result: cards say what it is and link to it, nothing more. Every card carries one of three labels, so a prototype or a
  * concept demo can never be mistaken for client work:
  * REAL CLIENT WORK, INTERNAL PROJECT, INTERACTIVE CONCEPT DEMO.
  */
@@ -17,14 +16,14 @@ export const TESTIMONIALS: Testimonial[] = [];
 type Kind = 'own' | 'client' | 'demo';
 export const KIND_LABEL: Record<Kind, string> = { own: 'Internal project', client: 'Real client work', demo: 'Interactive concept demo' };
 
-export type DemoItem = { name: string; bottleneck: string; built: string[]; href: string; note: string };
+export type DemoItem = { name: string; href: string; note: string };
 
 /** Demonstrations built by Maz Works with invented data. Shown separately from real projects. */
 export const DEMOS: DemoItem[] = [
-  { name: 'Complaints dashboard, board report and staff toolkit', bottleneck: 'Complaint records that nobody has turned into decisions for management or the board.', built: ['A tracker and dashboard', 'A board-ready slide deck and PDF', 'An action tracker, escalation tree and staff guides'], href: '/professional-teams#more-demos', note: 'Invented data for a fictional firm. No client uses these.' },
+  { name: 'Complaints dashboard, board report and staff toolkit', href: '/professional-teams#more-demos', note: 'Turns complaint records into decisions for managers and the board. Invented data for a fictional firm; no client uses these.' },
 ];
 
-function Card({ kind, name, image, bottleneck, built, impact, href, hrefLabel, limit }: { kind: Kind; name: string; image?: Project['image']; bottleneck: string; built: readonly string[]; impact: string; href: string; hrefLabel: string; limit: string }) {
+function Card({ kind, name, image, line, href, hrefLabel }: { kind: Kind; name: string; image?: Project['image']; line: string; href: string; hrefLabel: string }) {
   return (
     <li className="pf-card">
       {image && (
@@ -36,13 +35,8 @@ function Card({ kind, name, image, bottleneck, built, impact, href, hrefLabel, l
       <div className="pf-body">
         <span className={`pf-kind is-${kind}`}>{KIND_LABEL[kind]}</span>
         <h3>{name}</h3>
-        <dl className="pf-facts">
-          <dt>The problem</dt><dd>{bottleneck}</dd>
-          <dt>What was built</dt><dd>{built.join(' ')}</dd>
-          <dt>What you can check</dt><dd>{impact}</dd>
-        </dl>
-        <p>{limit}</p>
-        <a href={href}>{hrefLabel} →</a>
+        <p>{line}</p>
+        <a href={href}>{hrefLabel} <span aria-hidden="true">↗</span></a>
       </div>
     </li>
   );
@@ -60,16 +54,13 @@ export function CaseStudyGrid({ show }: { show: Kind }) {
           kind={show}
           name={project.name}
           image={project.image}
-          bottleneck={project.problem}
-          built={project.built}
-          impact={`No results are published yet. ${project.proof}`}
+          line={project.summary}
           href={project.links[0].href}
           hrefLabel={`See ${project.name} live`}
-          limit={project.limitation}
         />
       ))}
       {demos.map((demo) => (
-        <Card key={demo.name} kind="demo" name={demo.name} bottleneck={demo.bottleneck} built={demo.built.map((item) => `${item}.`)} impact={demo.note} href={demo.href} hrefLabel="See the sample" limit="Shown so you can see how I would approach it. It is not evidence of results." />
+        <Card key={demo.name} kind="demo" name={demo.name} line={demo.note} href={demo.href} hrefLabel="See the sample" />
       ))}
     </ul>
   );
