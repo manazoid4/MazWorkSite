@@ -24,7 +24,6 @@ Maz Works is positioned around a simple idea: start with the real business probl
 
 - `/` — digital services, selected work, founding offers and live-demo enquiry
 - `/3d-printing` — Maz Works Objects, the Touch collection, interaction demonstration and product enquiry
-- `/work/jobfilter` and `/work/scrap-finance-partners` — static case studies
 - `/mazos` — no-index legacy handoff
 
 ## Homepage structure
@@ -132,12 +131,9 @@ Core rules:
 ## Routes
 
 - `/` — client-first portfolio and acquisition page
-- `/work/jobfilter` — JobFilter case study
-- `/work/scrap-finance-partners` — Scrap Finance Partners case study
 - `/mazos` — no-index legacy handoff; omitted from navigation and sitemap
 - `app/demo-request-form.tsx` — live-demo form with in-page AJAX delivery and status feedback
-- `app/projects.ts` — typed project truth and detailed case-study content
-- `app/project-elements.tsx` — shared project evidence links and optional media helper
+- `app/projects.ts` — typed project truth; project links go straight to the live sites (no case-study pages, Maz 25 Oct)
 - `app/site-chrome.tsx` — shared header/footer
 - `app/site.ts` — canonical identity and contact constants
 - `app/simplified.css` — client-first layout

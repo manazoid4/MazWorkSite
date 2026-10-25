@@ -22,7 +22,6 @@ const exportRoot = path.join(root, 'out');
 // 30 Sep 2026, approved brief v2: five focused homepage sections.
 const WORD_BUDGET = 1300;
 // Same count as the homepage: all text inside <main>, including header, footer and closed answers.
-const CASE_STUDY_WORD_BUDGET = 320;
 
 /** Shared nav chrome (phone menu panel, grouped footer) is the same on every page, so page word budgets skip it. */
 function stripNavChrome(html) {
@@ -290,7 +289,7 @@ test('contact request submits in-page instead of depending on the visitor email 
 });
 
 test('metadata and accessible navigation are present on public pages', async () => {
-  for (const route of ['/', '/about', '/work/jobfilter', '/work/scrap-finance-partners']) {
+  for (const route of ['/', '/about', '/proof', '/tools']) {
     const html = await readPage(route);
     assert.match(html, /href="#main-content">Skip to main content/);
     const target = /<([a-z]+)\b(?=[^>]*\bid="main-content")(?=[^>]*\btabindex="-1")[^>]*>/i.exec(html);
@@ -310,7 +309,7 @@ test('same-page navigation points to existing homepage sections', async () => {
 });
 
 test('internal links and assets resolve inside the static export', async () => {
-  for (const route of ['/', '/about', '/work/jobfilter', '/work/scrap-finance-partners']) {
+  for (const route of ['/', '/about', '/proof', '/tools']) {
     const html = await readPage(route);
     const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
     for (const reference of references) {
@@ -321,29 +320,16 @@ test('internal links and assets resolve inside the static export', async () => {
   }
 });
 
-test('flagship case studies remain available and use the expanded positioning', async () => {
-  const jobfilter = await readPage('/work/jobfilter');
-  assert.match(jobfilter, /JobFilter case study/);
-  assert.match(jobfilter, /help(s)? small building firms find public contracts/i);
-  assert.match(jobfilter, /Trade-fit checks/);
-  assert.match(jobfilter, /does not guarantee/i);
-
-  const scrap = await readPage('/work/scrap-finance-partners');
-  assert.match(scrap, /Scrap Finance Partners case study/);
-  assert.match(scrap, /client website/i);
-  assert.doesNotMatch(scrap, /paid (client|contract|engagement)|client paid/i);
-  assert.doesNotMatch(scrap, /outreach|client area|lead workspace|github\.com\/manazoid4\/scrap-finance-partners/i);
-
+test('case-study pages are gone; the live sites are the proof', async () => {
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
-  assert.match(sitemap, /\/work\/jobfilter/);
-  assert.match(sitemap, /\/work\/scrap-finance-partners/);
-});
-
-test('case studies stay short', async () => {
-  for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
-    const words = mainWordCount(await readPage(route));
-    assert.ok(words <= CASE_STUDY_WORD_BUDGET, `${route} has ${words} words; budget is ${CASE_STUDY_WORD_BUDGET}`);
+  const { redirects } = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
+  const live = { '/work/jobfilter': 'https://jobfilter.uk/find-jobs', '/work/scrap-finance-partners': 'https://scrap-finance-partners.vercel.app' };
+  for (const [route, url] of Object.entries(live)) {
+    await assert.rejects(readPage(route), /Missing static page/);
+    assert.equal(redirects.find((r) => r.source === route)?.destination, url);
   }
+  assert.doesNotMatch(sitemap, /\/work\//);
+  for (const route of ['/', '/proof', '/tools', '/site-map']) assert.doesNotMatch(await readPage(route), /href="\/work\//, `${route} still links a case-study page`);
 });
 
 test('legacy MazOS route is gone from the export and redirects to /proof#built', async () => {
@@ -517,16 +503,6 @@ test('the guarantee, no-VAT and referral lines appear where Maz\'s decisions req
   assert.doesNotMatch(faq, /deposit|final payment|pay the rest/i, 'no payment-split wording (Maz, 1 Oct)');
 });
 
-// 30 Sep: the free preview is real now, but only after a call (date agreed on the call).
-// Case study bodies still lead to the free plan form; the shared nav may link /demos.
-test('case studies route to a plan and fixed price, not a blanket free live demo', async () => {
-  for (const route of ['/work/jobfilter', '/work/scrap-finance-partners']) {
-    const html = (await readPage(route)).replace(/\/demos.{0,40}?Bigger build demos/g, '');
-    assert.doesNotMatch(html, /free live demo/i, `${route} still offers a free live demo`);
-    assert.match(html, /\/(free-plan\?src=case-[a-z-]+#leak-check-form|contact\?src=case-[a-z-]+#contact)/, `${route} should lead to the free plan form`);
-  }
-});
-
 // SHA-256 of personal details that must never ship (Maz's town, county and personal email).
 // Stored as hashes so this public test does not publish the details it guards against.
 const PERSONAL_DETAIL_HASHES = new Set([
@@ -592,9 +568,9 @@ test('six wayfinding helps big sites use are in place', async () => {
   assert.ok(home.includes('href="/for"'), 'the shared menu links to the audience guide hub');
   const audienceHub = await readPage('/for');
   for (const id of ['trades', 'appointments', 'creators', 'offices']) assert.ok(audienceHub.includes(`/for/${id}`));
-  // The human site map lists every trade guide and case study.
+  // The human site map lists every trade guide.
   const map = await readPage('/site-map');
-  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/tools']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
+  for (const href of ['/for/architects', '/for/garages', '/contact', '/tools']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
   // 3. The changelog page is gone (it redirects to /proof); the shared menu links the site map.
   assert.ok(home.includes('href="/site-map"'));
   assert.ok(!map.includes('href="/whats-new"') && !home.includes('href="/whats-new"'), 'no internal link to the retired changelog');

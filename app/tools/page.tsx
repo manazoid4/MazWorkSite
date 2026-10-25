@@ -31,8 +31,8 @@ const LABELS: Record<Kind, { text: string; meaning: string }> = {
 const TOOLS: { name: string; kind: Kind; href: string; blurb: string }[] = [
   { name: 'Missed-calls calculator', kind: 'concept', href: '/local-businesses#missed-calls-calculator', blurb: 'Put in your own week and see roughly what the calls you miss add up to. An estimate from your numbers, not a promise.' },
   { name: 'After-hours receptionist demo', kind: 'concept', href: '/receptionist-demo', blurb: 'Have a pretend after-hours call out loud, in your browser, and see the summary the owner would get.' },
-  { name: 'JobFilter', kind: 'internal', href: '/work/jobfilter', blurb: 'My own live product. It helps small building firms find public contracts that fit their trade, area and deadline.' },
-  { name: 'Scrap Finance Partners', kind: 'client', href: '/work/scrap-finance-partners', blurb: 'A website for a finance firm serving UK scrap and recycling businesses, with a short enquiry form built in.' },
+  { name: 'JobFilter', kind: 'internal', href: 'https://jobfilter.uk/find-jobs', blurb: 'My own live product. It helps small building firms find public contracts that fit their trade, area and deadline.' },
+  { name: 'Scrap Finance Partners', kind: 'client', href: 'https://scrap-finance-partners.vercel.app', blurb: 'A website for a finance firm serving UK scrap and recycling businesses, with a short enquiry form built in.' },
   { name: 'Maz Works Objects', kind: 'concept', href: '/3d-printing', blurb: 'A concept for tap-to-review stands and signs. Not in production yet: it shows the idea and how ordering would work.' },
 ];
 

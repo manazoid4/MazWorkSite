@@ -32,8 +32,8 @@ Maz Works is a distinctive, independent founder-led business. Customer-facing la
 
 ## Evidence on Hand
 
-- Live product: JobFilter (`/work/jobfilter`), described on the live site as a product with paid plans; no customer results are published.
-- Client build: Scrap Finance Partners (`/work/scrap-finance-partners`), with a live public site; no revenue or lead outcomes are claimed.
+- Live product: JobFilter (https://jobfilter.uk), described on the live site as a product with paid plans; no customer results are published.
+- Client build: Scrap Finance Partners (https://scrap-finance-partners.vercel.app), with a live public site; no revenue or lead outcomes are claimed.
 - Labelled practical examples include a missed-call follow-up walkthrough and fictional complaints deliverable samples. Keep examples clearly distinguished from client outcomes.
 - No verified homepage testimonial or quantified customer result was identified in the current live page; do not invent either.
 

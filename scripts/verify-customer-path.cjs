@@ -21,7 +21,7 @@ fs.mkdirSync(ARTIFACTS, {recursive:true});
  });
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});
-  for(const route of ['/','/3d-printing','/demos','/work/jobfilter','/work/scrap-finance-partners','/faq','/about']){
+  for(const route of ['/','/3d-printing','/demos','/faq','/about']){
    await page.goto(TARGET_URL+route,{waitUntil:'networkidle'});
    await page.locator('img').evaluateAll(async images => { await Promise.all(images.map(img => { img.loading='eager'; return img.decode().catch(()=>{}); })); });
    const metrics=await page.evaluate(()=>({height:document.documentElement.scrollHeight,overflow:document.documentElement.scrollWidth>innerWidth,contactY:document.querySelector('#contact,#personalise')?.getBoundingClientRect().top+scrollY,inputs:[...document.querySelectorAll('input:not([type=hidden]),textarea,select')].filter(e=>e.getBoundingClientRect().height&&e.tabIndex>=0).map(e=>({name:e.name,size:getComputedStyle(e).fontSize})),brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src)}));

@@ -62,9 +62,9 @@ export function CaseStudyGrid({ show }: { show: Kind }) {
           image={project.image}
           bottleneck={project.problem}
           built={project.built}
-          impact={project.caseStudy?.results?.length ? project.caseStudy.results.join(' ') : `No results are published yet. ${project.proof}`}
-          href={`/work/${project.id}`}
-          hrefLabel={`Open ${project.name}`}
+          impact={`No results are published yet. ${project.proof}`}
+          href={project.links[0].href}
+          hrefLabel={`See ${project.name} live`}
           limit={project.limitation}
         />
       ))}

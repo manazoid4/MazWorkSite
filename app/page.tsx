@@ -8,7 +8,7 @@ import { fitDescription, OG_IMAGE } from './seo';
 import './tools/tools.css';
 import './home-transformation.css';
 
-// The one real project on the home page. Text comes from app/projects.ts so it cannot drift from /work/jobfilter.
+// The one real project on the home page. Text comes from app/projects.ts so it cannot drift. Links go straight to the live product.
 const JOBFILTER = FLAGSHIP_PROJECTS.find((project) => project.id === 'jobfilter');
 
 // The four places a recurring problem usually shows up. Links go to /what-we-do; point each at its own anchor there if wanted.
@@ -68,7 +68,7 @@ export default function Page() {
               <span>Made easier</span>
               <p>{JOBFILTER.name} checks each public contract against the firm’s trade, area and deadline, then sends alerts.</p>
             </div>
-            <a className="rx-link" href="/work/jobfilter">How I built it <span aria-hidden="true">↗</span></a>
+            <a className="rx-link" href={JOBFILTER.links[0].href}>Try it live <span aria-hidden="true">↗</span></a>
           </aside>
         )}
       </section>
@@ -99,17 +99,17 @@ export default function Page() {
           <p className="rx-kicker">My work</p>
           <h2 id="proof-title" className="rx-title">Made to be used.<br />Have a look around.</h2>
           <div className="mw-work-grid">
-            <a className="mw-work-shot" href="/work/jobfilter" aria-label={`View ${JOBFILTER.name}`}>
+            <a className="mw-work-shot" href={JOBFILTER.links[0].href} aria-label={`View ${JOBFILTER.name}`}>
               <img src={JOBFILTER.image.src} alt={JOBFILTER.image.alt} width={JOBFILTER.image.width} height={JOBFILTER.image.height} loading="lazy" />
             </a>
             <div className="mw-work-copy">
               <span className="rx-tag" data-kind="internal">Internal project</span>
-              <h3><a href="/work/jobfilter">{JOBFILTER.name}</a></h3>
+              <h3><a href={JOBFILTER.links[0].href}>{JOBFILTER.name}</a></h3>
               <p className="mw-work-meta">Maz Works product · live</p>
               <p>Finding relevant public contracts for small trades firms.</p>
               <ul>{JOBFILTER.built.slice(0, 3).map((line) => <li key={line}>{line}</li>)}</ul>
               <p className="mw-work-limit">{JOBFILTER.limitation}</p>
-              <a className="rx-link" href="/work/jobfilter">See how it was built <span aria-hidden="true">↗</span></a>
+              <a className="rx-link" href={JOBFILTER.links[0].href}>Try a free scan <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <p className="mw-work-more">More, including client websites and prototypes, on <a href="/proof">my work page</a>. Complaints-reporting examples use synthetic data and are labelled demonstrations: <a href="/professional-teams#demonstrations">see them</a>.</p>

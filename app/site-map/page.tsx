@@ -2,7 +2,6 @@ import { fitDescription } from '../seo';
 import type { Metadata } from 'next';
 import { Breadcrumbs } from '../breadcrumbs';
 import { NAV_GROUPS } from '../nav';
-import { CASE_STUDY_PROJECTS } from '../projects';
 import { OG_IMAGE } from '../seo';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 
@@ -24,7 +23,6 @@ const EXTRA_GROUPS = [
     title: 'More of my work',
     links: [
       { href: '/proof#built', label: 'Internal projects' },
-      ...CASE_STUDY_PROJECTS.map((project) => ({ href: `/work/${project.id}`, label: project.name })),
       { href: '/rotareason', label: 'RotaReason (internal project)' },
       { href: '/maz-core', label: 'MAZ Core (private console)' },
       { href: '/maz-pocket-ai', label: 'MAZ Pocket (private bridge)' },
