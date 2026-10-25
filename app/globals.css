@@ -1740,3 +1740,5 @@ h1, h2, h3 {
     width: 100%;
   }
 }
+/* Note-to-self left where a block was removed pending new content. */
+.mw-todo { max-width: 640px; margin: 18px 0; padding: 10px 14px; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: .9rem; line-height: 1.45; }
