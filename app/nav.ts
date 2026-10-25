@@ -46,6 +46,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
       { href: '/what-we-do', label: 'What I do' },
       { href: '/prices', label: 'Prices' },
       { href: '/local-businesses', label: 'For local businesses' },
+      { href: '/website-design', label: 'Website design · Derbyshire & Nottingham' },
       { href: '/professional-teams', label: 'For professional teams' },
       { href: '/after-hours-receptionist', label: 'After-Hours Receptionist' },
       { href: '/for#problems', label: 'Pick your problem' },
