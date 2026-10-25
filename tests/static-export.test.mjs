@@ -522,11 +522,20 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
   }
   await walk(exportRoot);
   const leaks = [];
+  // The one local SEO landing page may name a county as an area served.
+  // This is NOT permission to publish a home address, town or private email,
+  // or to repeat the county in the global nav, footer or founder biography.
+  const serviceAreaCountyHash = '71be3b9635b8c45ea65075e9a6e76eefdaab4f1647bc2de8ff74de48697e2cff';
   for (const file of files) {
+    const relative = path.relative(exportRoot, file);
+    const isLocalServicePage = relative === 'website-design.html' || relative === 'website-design.txt' || relative.startsWith('website-design/');
     const text = await readFile(file, 'utf8');
     const tokens = new Set(text.toLowerCase().match(/[a-z0-9._%+-]+@[a-z0-9.-]+|[a-z]{4,12}/g) || []);
-    if ([...tokens].some((token) => PERSONAL_DETAIL_HASHES.has(createHash('sha256').update(token).digest('hex')))) {
-      leaks.push(path.relative(exportRoot, file));
+    if ([...tokens].some((token) => {
+      const hash = createHash('sha256').update(token).digest('hex');
+      return PERSONAL_DETAIL_HASHES.has(hash) && !(isLocalServicePage && hash === serviceAreaCountyHash);
+    })) {
+      leaks.push(relative);
     }
   }
   assert.deepEqual(leaks, [], `personal details found in: ${leaks.join(', ')}`);
