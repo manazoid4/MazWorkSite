@@ -170,7 +170,7 @@ export default function LocalBusinessesPage() {
         </div>
         <details className="lb-fold"><summary>Simple terms</summary><ul className="lb-ticks">{VIDEO_SCOPE.map((s) => <li key={s.title}><strong>{s.title}.</strong> {s.body}</li>)}</ul></details>
         <details className="lb-fold"><summary>Questions about filming</summary><div className="lb-faq">{VIDEO_FAQS.map((f) => <p key={f.q}><strong>{f.q}</strong><br />{f.a}</p>)}</div></details>
-        <details className="lb-fold"><summary>A Maz Works promo, made in-house</summary><video className="mw-video" controls preload="none" playsInline src="/assets/video/vertical.mp4" aria-label="Maz Works promotional video" /></details>
+        <p className="mw-todo">To update: add a short filming and content showreel here (example footage from a shoot and the finished edits).</p>
         <details className="lb-fold"><summary>Portfolio projects</summary><p>A few places each season for independent businesses. I choose at my discretion, and applying does not mean a place is certain. Tell me your business type, website, what is not working and what you want from the project.</p><p><a className="button" href="/contact?service=portfolio-project#contact">Apply for a Portfolio Project</a></p></details>
         <div className="lb-actions">
           <a className="button button-signal" href="/contact?service=video#contact">Enquire about a shoot</a>

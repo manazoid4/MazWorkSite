@@ -53,6 +53,9 @@ export async function generateMetadata({ params }: { params: Promise<{ niche: st
   };
 }
 
+/** Shared clips that do not fit these pages (salon clip on dog groomers; clinic clip shows a health form). */
+const VIDEO_TO_UPDATE: Record<string, string> = { 'dog-groomers': 'dog groomers', 'clinics-and-therapists': 'clinics and therapists (no health forms)' };
+
 export default async function NichePage({ params }: { params: Promise<{ niche: string }> }) {
   const { niche } = await params;
   const type = getCustomerType(niche);
@@ -90,7 +93,9 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
       <section className="s-section" id="day" aria-labelledby="niche-day-title">
         <p className="eyebrow">See it working</p>
         <h2 id="niche-day-title">What changes in your day.</h2>
-        {trade ? (
+        {guide.id in VIDEO_TO_UPDATE ? (
+          <p className="mw-todo">To update: add a short example video made for {VIDEO_TO_UPDATE[guide.id]}.</p>
+        ) : trade ? (
           <figure className="tp-trade-video">
             <video src={`/video/for/${trade}.mp4`} poster={`/video/for/${trade}.webp`} controls muted playsInline preload="metadata"
               aria-label="22 second example: messages answered, followed up and confirmed while the owner works. Example, not a real customer." />
