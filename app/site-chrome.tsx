@@ -10,8 +10,8 @@ export function SiteHeader() {
   return (
     <header className="site-header mw-site-header">
       <a className="brand" href="/">
-        <span className="brand-mark">MW</span>
-        <span><strong>Maz Works</strong><small>Manazir Hussain</small></span>
+        <svg className="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><polygon points="9,9 39,9 39,39 9,39" fill="#FF6A1F" /><polygon points="24,2.79 45.21,24 24,45.21 2.79,24" fill="#FF6A1F" /><circle cx="24" cy="24" r="4.8" fill="currentColor" /></svg>
+        <span><strong>MAZ WORKS</strong><small>Manazir Hussain</small></span>
       </a>
       <nav aria-label="Primary navigation">
         <NavLinks />
