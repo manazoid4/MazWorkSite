@@ -71,7 +71,7 @@ test('homepage and shared navigation make the main enquiry easy while preserving
 
   assert.match(home, /class="mw-nav-cta" href="\/contact\?src=nav#contact"[^>]*>Free preview/);
   assert.match(home, /href="\/contact\?src=home#contact">Get my free preview/);
-  assert.match(home, /href="\/after-hours-receptionist">After-Hours Receptionist<\/a> answers them in your business name for £79\/month/);
+  assert.doesNotMatch(home, /Miss calls while you work|answers them in your business name/);
   assert.doesNotMatch(home, /id="hero-quick-form"|id="leak-check-form"/);
 });
 
