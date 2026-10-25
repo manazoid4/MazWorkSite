@@ -26,8 +26,8 @@ const STEPS = [
   { title: 'I build it and stand behind it', body: 'I use the tools you already have where I can, show you it working, and fix problems that turn up afterwards.' },
 ];
 
-const TITLE = 'Websites & Business Systems in Derbyshire | Maz Works';
-const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for small businesses in Derbyshire, Nottingham and across the UK. Practical tools, fixed quotes, one person to deal with.');
+const TITLE = 'Websites, Booking & Business Systems | Maz Works';
+const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for UK small businesses. Practical tools, fixed quotes and one person to deal with.');
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -91,7 +91,7 @@ export default function Page() {
             </li>
           ))}
         </ol>
-        <p className="mw-do-foot">Need <a href="/website-design">website design in Derbyshire or Nottingham</a>? Start there. Running a local or independent business? <a href="/local-businesses">See what that looks like</a>. Part of a professional team? <a href="/professional-teams">Start here</a>. Prices are on the <a href="/prices">prices page</a>.</p>
+        <p className="mw-do-foot">Need a website? <a href="/website-design">See website design options</a>. Running a local or independent business? <a href="/local-businesses">See what that looks like</a>. Part of a professional team? <a href="/professional-teams">Start here</a>. Prices are on the <a href="/prices">prices page</a>.</p>
       </section>
 
       {JOBFILTER?.image && (
