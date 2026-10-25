@@ -45,7 +45,7 @@ export default function WhatWeDo() {
 
       <section className="s-section" id="who" aria-labelledby="who-title">
         <h2 id="who-title">Who I work with</h2>
-        <p><a href="/local-businesses">Local businesses</a> that want fewer missed calls and less chasing. For a new site, see <a href="/website-design">website design in Derbyshire and Nottingham</a>. <a href="/professional-teams">Professional teams</a> that need to see what is due and what keeps going wrong. Or <a href="/for">find your kind of business</a>.</p>
+        <p><a href="/local-businesses">Local businesses</a> that want fewer missed calls and less chasing. For a new site, see <a href="/website-design">website design options</a>. <a href="/professional-teams">Professional teams</a> that need to see what is due and what keeps going wrong. Or <a href="/for">find your kind of business</a>.</p>
       </section>
 
       <section className="s-section" id="why" aria-labelledby="how-title">
