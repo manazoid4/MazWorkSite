@@ -140,7 +140,7 @@ export default function LocalBusinessesPage() {
         </ul>
         <div className="lb-work-evidence" aria-label="Examples of real work">
           <span>See real work</span>
-          <a href="/proof">JobFilter, a live product, and Scrap Finance Partners, a client website →</a>
+          <a href="/proof">JobFilter, a live product →</a>
         </div>
       </section>
 

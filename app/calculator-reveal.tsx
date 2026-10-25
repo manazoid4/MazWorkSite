@@ -16,7 +16,7 @@ export function CalculatorReveal({ preset, trade }: { preset?: CalculatorPreset;
         {open ? 'Hide the cost estimate' : 'What are missed calls costing you? Work it out →'}
       </button>
       <div id={regionId} hidden={!open}>
-        {open ? <CostCalculator preset={preset} trade={trade} buildLink={false} /> : null}
+        {open ? <CostCalculator preset={preset} trade={trade} /> : null}
       </div>
     </div>
   );

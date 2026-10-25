@@ -10,15 +10,6 @@ import './home-transformation.css';
 
 const PROOF = [
   {
-    name: 'Scrap Finance Partners',
-    label: 'Client website',
-    body: 'A clear digital home for a specialist finance business.',
-    href: '/work/scrap-finance-partners',
-    img: '/scrap-finance-partners.webp',
-    alt: 'Scrap Finance Partners website, designed for a specialist finance firm',
-    tone: 'peach',
-  },
-  {
     name: 'JobFilter',
     label: 'Maz Works product',
     body: 'Finding relevant public contracts for small trades firms.',
