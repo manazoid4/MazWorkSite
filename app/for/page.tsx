@@ -14,10 +14,10 @@ import { JobsSection } from './jobs-section';
 import './trade-pages.css';
 
 export const metadata: Metadata = {
-  title: 'Who it’s for: pick your business',
-  description: fitDescription(`Trades, appointments, creators or offices: pick yours and see your problems, what I’d set up and the price. Named recipes from ${OFFERS[0].price}, plus guides by trade.`),
+  title: 'Who it’s for: pick your kind of business',
+  description: fitDescription(`Trades, appointments, creators or offices: pick yours and see the problems I fix, what I would set up and the price. From ${OFFERS[0].price}, plus a guide for each trade.`),
   alternates: { canonical: '/for' },
-  openGraph: { title: 'Who it’s for — Maz Works', url: '/for', images: [OG_IMAGE] },
+  openGraph: { title: 'Who it’s for | Maz Works', url: '/for', images: [OG_IMAGE] },
 };
 
 /** One tile: icon chip, name, one line, "See what I’d set up →". */

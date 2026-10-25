@@ -35,7 +35,7 @@ test('the Free Preview & Fixed Price has a dedicated shareable acquisition page'
   assert.match(html, /EXAMPLE|>Example</);
   assert.match(html, /A fictional business/);
   assert.match(html, /This isn&#x27;t worth automating yet|This isn.t worth automating yet/);
-  assert.match(html, /A fixed price, starting from £99/);
+  assert.match(html, /A fixed price \(one job starts from £99\)/);
   assert.doesNotMatch(html, /hacked/i);
   assert.match(html, /cal\.com\/mazworks\/quick-chat/);
   assert.match(html, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/contact"/);

@@ -79,8 +79,6 @@ test('positioning: no quick-fix wording, no AI in the offer, /rotareason out of 
   }
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   for (const hidden of ['rotareason', 'maz-core', 'maz-pocket-ai', 'quick-win']) assert.doesNotMatch(sitemap, new RegExp(hidden));
-  const updates = await read('whats-new');
-  assert.ok((updates.match(/class="mw-update-card/g) ?? updates.match(/<article/g) ?? []).length <= 3, 'whats-new shows at most 3 updates');
 });
 
 test('outreach templates: no prices, no names, every route links a /for page with a src tag', async () => {

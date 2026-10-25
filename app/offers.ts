@@ -637,7 +637,7 @@ export const USPS = [
   { title: 'See it working before you pay', body: 'No working, no invoice.' },
   { title: 'One person, start to finish', body: 'You deal with me, not a queue of account managers.' },
   { title: 'Fixed price in writing', body: 'Agreed up front. No surprise bills.' },
-  { title: 'Website, automation and video', body: 'One team for everything your customers see.' },
+  { title: 'Websites, follow-up and filming', body: 'One person for everything your customers see.' },
   { title: 'You own everything', body: 'Your accounts, your content, no lock-in.' },
   { title: 'UK-wide', body: 'Remote work, or on location for filming.' },
 ] as const;

@@ -26,7 +26,8 @@ async function readPage(route) {
 test('/proof is live, short, shows real work and has no founding offer', async () => {
   const html = await readPage('/proof');
 
-  assert.match(html, /Real work\. Open it and see\./);
+  assert.match(html, /What I have built\. Open it and see\./);
+  for (const label of ['Real client work', 'Internal project', 'Interactive concept demo']) assert.match(html, new RegExp(label), label);
   assert.match(html, /JobFilter/);
   assert.match(html, /Scrap Finance Partners/);
   assert.doesNotMatch(html, /founding|founder’s discount/i);
@@ -51,5 +52,5 @@ test('/proof is reachable: linked from the footer, homepage and sitemap', async 
   const home = await readPage('/');
   assert.match(home, /href="\/proof"/);
   const footerSnippet = home.slice(home.indexOf('mw-footer-links'));
-  assert.match(footerSnippet, /href="\/proof">Proof</);
+  assert.match(footerSnippet, /href="\/proof">My work</);
 });

@@ -11,14 +11,16 @@ async function page(route) {
   throw new Error(`Missing static page: ${route}`);
 }
 
-test('What I Do and prices use the three customer journey buckets', async () => {
+test('What I Do shows the four service areas and prices points back to it', async () => {
   const [what, prices] = await Promise.all([page('what-we-do'), page('prices')]);
-  for (const bucket of ['Get Customers', 'Serve Customers', 'Keep &amp; Improve']) {
-    assert.match(what, new RegExp(bucket, 'i'));
+  for (const area of ['A website that does its job', 'Enquiries answered and followed up', 'Bookings and everyday running', 'A small tool built for one job']) {
+    assert.match(what, new RegExp(area));
   }
-  assert.ok(prices.includes('href="/what-we-do"'), '/prices points at /what-we-do instead of repeating the buckets');
-  for (const id of ['get-customers', 'serve-customers', 'keep-improve']) assert.match(what, new RegExp(`id="${id}"`));
-  for (const href of ['/prices#websites', '/prices#systems', '/prices#keep-improve', '/prices#extras', '/professional-teams#demonstrations']) assert.ok(what.includes(`href="${href}"`), href);
+  assert.ok(prices.includes('href="/what-we-do"'), '/prices points at /what-we-do instead of repeating the areas');
+  for (const id of ['websites', 'enquiries', 'booking', 'custom-tools', 'side', 'why']) assert.match(what, new RegExp(`id="${id}"`));
+  for (const href of ['/prices#websites', '/after-hours-receptionist', '/professional-teams', '/local-businesses', '/3d-printing', '/tools']) assert.ok(what.includes(`href="${href}"`), href);
+  assert.match(what, /Photo to quote/);
+  assert.doesNotMatch(what, /\bAI\b/);
   for (const href of ['#websites', '#systems', '#extras', '/professional-teams#complaints']) assert.ok(prices.includes(`href="${href}"`), href);
   assert.match(prices, /id="systems"/);
   assert.match(prices, /id="websites"/);

@@ -15,10 +15,10 @@ const website = getOffer('website');
 const PAGE_URL = `${SITE_URL}/local-businesses`;
 
 export const metadata: Metadata = {
-  title: 'Systems for local businesses | Maz Works',
-  description: fitDescription(`Missed calls, quiet quotes and bookings that need chasing? I connect the tools you already use. Also video and filming from ${formatPrice(VIDEO_PRICES.halfDay)} and managed website, Google and social updates ${MANAGED_PRESENCE.price.toLowerCase()}.`),
+  title: 'Less chasing for local businesses',
+  description: fitDescription(`Missed calls, quiet quotes, bookings that need chasing? I set up the follow-up on the tools you already use. Also video and filming from ${formatPrice(VIDEO_PRICES.halfDay)}.`),
   alternates: { canonical: '/local-businesses' },
-  openGraph: { title: 'Systems for local businesses | Maz Works', description: fitDescription('Missed calls, quotes, bookings, video and managed presence for local businesses.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: { title: 'Less chasing for local businesses | Maz Works', description: fitDescription('Missed calls, quotes, bookings, video and managed presence for local businesses.'), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
 
 const industries = [
@@ -67,9 +67,9 @@ export default function LocalBusinessesPage() {
         <div className="lb-hero-copy">
           <p className="eyebrow">For local businesses</p>
           <h1 id="lb-title">You’re serving customers. The admin can wait.</h1>
-          <p className="lb-lede">Missed calls, quiet quotes and bookings to chase can cost you the next job. I connect the tools you already use, improve your website and make the everyday work easier to manage.</p>
+          <p className="lb-lede">A missed call, a quote nobody chased or a booking to confirm can cost you the next job. I set up the follow-up on the tools you already use, so it happens without you remembering.</p>
           <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
-          <p className="lb-note">One person to deal with. A clear scope and fixed price before any paid work.</p>
+          <p className="lb-note">One person to deal with. A written scope and fixed price before any paid work.</p>
         </div>
         <aside className="lb-example" aria-label="Illustrative example of a connected customer enquiry">
           <p className="lb-example-label">A simple example · illustrative</p>
@@ -94,7 +94,7 @@ export default function LocalBusinessesPage() {
       <section className="lb-section" id="serve-customers" aria-labelledby="lb-start-title">
         <div className="lb-section-intro">
           <h2 id="lb-start-title">Four jobs I set up most.</h2>
-          <p>Pick the one that costs you most. Each is a single task that runs by itself.</p>
+          <p>Pick the one that costs you most. Each one runs by itself once it is set up.</p>
         </div>
         <ul className="lb-jobs">
           <li><a href="/for#job-missed-call"><strong>Missed calls</strong><span>Give callers a clear next step while your hands are full.</span><em>See missed-call text-back →</em></a></li>
@@ -107,12 +107,12 @@ export default function LocalBusinessesPage() {
       <section className="lb-offers" id="ways-to-start" aria-labelledby="lb-offers-title">
         <div>
           <h2 id="lb-offers-title">Start with one job. Build from there.</h2>
-          <p>We’ll work out what fits after you tell me what’s getting in the way. No package is assumed.</p>
+          <p>Tell me what is getting in the way and we will work out what fits. I do not assume a package.</p>
         </div>
         <ul>
           <li><strong>{starter.name}</strong><span>{starter.price} · one task set up to run itself</span></li>
           <li><strong>{system.name}</strong><span>{system.price} · connected jobs for the wider workflow</span></li>
-          <li><strong>{custom.name}</strong><span>{custom.price} · when off-the-shelf tools don’t fit</span></li>
+          <li><strong>{custom.name}</strong><span>{custom.price} · a small tool built for one job, when off-the-shelf apps don’t fit</span></li>
           <li><strong>{launch.name}</strong><span>{launch.price} · a page for bookings, enquiries or sales</span></li>
           <li><strong>{AFTER_HOURS.name}</strong><span>{AFTER_HOURS.price} · calls answered when you can’t pick up. <a href={AFTER_HOURS.href}>How it works</a></span></li>
         </ul>
@@ -139,8 +139,8 @@ export default function LocalBusinessesPage() {
           <li><strong>Managed presence · {MANAGED_PRESENCE.price.toLowerCase()}</strong><span>I keep your website, Google listing and social posts up to date each month.</span><a href="#managed-presence">Read on below →</a></li>
         </ul>
         <div className="lb-work-evidence" aria-label="Examples of real work">
-          <span>See real work</span>
-          <a href="/proof">JobFilter, a live product →</a>
+          <span>See my work</span>
+          <a href="/proof">JobFilter, my own live product →</a>
         </div>
       </section>
 
@@ -170,7 +170,6 @@ export default function LocalBusinessesPage() {
         </div>
         <details className="lb-fold"><summary>Simple terms</summary><ul className="lb-ticks">{VIDEO_SCOPE.map((s) => <li key={s.title}><strong>{s.title}.</strong> {s.body}</li>)}</ul></details>
         <details className="lb-fold"><summary>Questions about filming</summary><div className="lb-faq">{VIDEO_FAQS.map((f) => <p key={f.q}><strong>{f.q}</strong><br />{f.a}</p>)}</div></details>
-        <p className="mw-todo">To update: add a short filming and content showreel here (example footage from a shoot and the finished edits).</p>
         <details className="lb-fold"><summary>Portfolio projects</summary><p>A few places each season for independent businesses. I choose at my discretion, and applying does not mean a place is certain. Tell me your business type, website, what is not working and what you want from the project.</p><p><a className="button" href="/contact?service=portfolio-project#contact">Apply for a Portfolio Project</a></p></details>
         <div className="lb-actions">
           <a className="button button-signal" href="/contact?service=video#contact">Enquire about a shoot</a>
@@ -222,7 +221,7 @@ export default function LocalBusinessesPage() {
 
       <section className="lb-close" aria-labelledby="lb-close-title">
         <h2 id="lb-close-title">What’s taking too much time, or losing you work?</h2>
-        <p>Tell me what happens today and what you’d like to happen instead. I’ll look at the tools you use and suggest a sensible next step.</p>
+        <p>Tell me what happens today and what you would like to happen instead. I will look at the tools you use and suggest a next step.</p>
         <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
       </section>
 

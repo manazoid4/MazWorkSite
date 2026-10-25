@@ -257,6 +257,16 @@
       "source": "/services/job-updates",
       "destination": "/for#job-job-updates",
       "permanent": true
+    },
+    {
+      "source": "/mazos",
+      "destination": "/proof#built",
+      "permanent": true
+    },
+    {
+      "source": "/whats-new",
+      "destination": "/proof",
+      "permanent": true
     }
   ]
 }

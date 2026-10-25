@@ -89,8 +89,6 @@ test('each type page is short: pains → fix, three priced recipes, a labelled d
 
 test('the homepage serves local and professional visitors and keeps deeper trade routes discoverable', async () => {
   const html = await readPage('/');
-  assert.match(html, /Local &amp; independent businesses/);
-  assert.match(html, /Professional teams &amp; organisations/);
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
   assert.match(html, /href="\/prices"/);

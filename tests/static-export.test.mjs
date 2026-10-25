@@ -75,16 +75,14 @@ async function internalTargetExists(urlPath) {
   return false;
 }
 
-test('homepage makes the shared customer-side purpose clear without reducing the work to a cheap task', async () => {
+test('homepage states the central idea plainly and does not read as small-time', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(visible, /Less hassle\. Better business\./);
-  assert.match(html, /I build websites, customer workflows and reporting tools that help businesses win work, look after customers and see what needs attention/);
-  assert.match(html, /Get Customers/);
-  assert.match(html, /Serve Customers/);
-  assert.match(html, /Keep &amp; Improve/);
-  assert.match(html, /Local &amp; independent businesses/);
-  assert.match(html, /Professional teams &amp; organisations/);
+  assert.match(visible, /The problem that keeps coming back\? I make it easier ?\./);
+  assert.match(html, /I find the pattern behind the problem, then build a practical way to make it easier/);
+  for (const area of ['Websites and digital experiences', 'Customer enquiries and follow-up', 'Booking and operational improvements', 'Focused custom tools']) assert.match(visible, new RegExp(area));
+  assert.match(html, /href="\/local-businesses"/);
+  assert.match(html, /href="\/professional-teams"/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
     assert.doesNotMatch(html, smallTime, `homepage reads as small-time: ${smallTime}`);
   }
@@ -162,19 +160,21 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
 });
 
-test('homepage explains the shared purpose, three buckets and two customer routes without leading on price', async () => {
+test('homepage explains the four areas, the two customer routes and a try-it route without leading on price', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(html, /Making businesses better, one problem at a time/);
-  assert.match(visible, /Less hassle\. Better business\./);
-  for (const bucket of ['Get customers', 'Serve customers', 'Keep &amp; improve']) assert.match(html, new RegExp(bucket, 'i'));
+  assert.match(visible, /The problem that keeps coming back\? I make it easier ?\./);
+  assert.match(html, /href="\/what-we-do"/);
+  assert.match(html, /href="\/tools"/);
+  assert.match(html, /href="\/tools\/restaurant-tables"/);
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
   assert.match(html, /Get my free preview/);
   assert.doesNotMatch(visible, /£99|£149|£595/, 'homepage does not lead with a low package price');
   assert.match(html, /Made to be used\.\s*(<br\/>)?Have a look around\./);
   assert.match(html, /Maz Works product/);
-  assert.match(html, /Client work/);
+  assert.match(html, /Internal project/);
+  assert.match(html, /Interactive concept demo/);
   const prices = await readPage('/prices');
   for (const [name, price] of [['Starter Automation', '£99'], ['Business System', 'From £595'], ['Custom Software', 'From £2,450']]) {
     assert.match(prices, new RegExp(name));
@@ -210,8 +210,8 @@ test('homepage explains the shared purpose, three buckets and two customer route
   assert.match(prices, /\/contact\?package=Starter%20Automation#leak-check-form/);
   assert.doesNotMatch(prices, /\bAI\b/);
   assert.match(prices, /\/contact\?package=Team%20training#leak-check-form/, 'every add-on can pre-fill the free plan form');
-  assert.match(prices, /<title>Maz Works prices for websites, systems and support/);
-  assert.match(prices, /Every Maz Works price in one place/);
+  assert.match(prices, /<title>Prices: websites, follow-up and custom tools \| Maz Works/);
+  assert.match(prices, /Every price in one place/);
 
   const contact = await readPage('/contact');
   assert.match(contact, /work out what would help/);
@@ -247,9 +247,9 @@ test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27
   assert.match(await readPage('/'), /within 1 working day/);
 });
 
-test('homepage shows the full customer journey without becoming a service catalogue', async () => {
+test('homepage shows the idea, four areas, work, tools, founder and process without becoming a service catalogue', async () => {
  const html = await readPage('/');
- for (const id of ['customer-buckets','doors-title','proof-title','about-title','home-enquiry-title']) assert.match(html,new RegExp(`id="${id}"`));
+ for (const id of ['what-i-do','do-title','proof-title','tools-title','about-title','how-title','home-enquiry-title']) assert.match(html,new RegExp(`id="${id}"`));
  assert.ok((stripNavChrome(html).match(/<section /g)||[]).length <= 8);
  const detail=await readPage('/what-we-do');
  for(const copy of ['How I set it up','Built on what you already use','I never need your passwords','What you own at the end','What I need from you']) assert.ok(detail.includes(copy));
@@ -290,7 +290,7 @@ test('contact request submits in-page instead of depending on the visitor email 
 });
 
 test('metadata and accessible navigation are present on public pages', async () => {
-  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
+  for (const route of ['/', '/about', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     assert.match(html, /href="#main-content">Skip to main content/);
     const target = /<([a-z]+)\b(?=[^>]*\bid="main-content")(?=[^>]*\btabindex="-1")[^>]*>/i.exec(html);
@@ -310,7 +310,7 @@ test('same-page navigation points to existing homepage sections', async () => {
 });
 
 test('internal links and assets resolve inside the static export', async () => {
-  for (const route of ['/', '/mazos', '/work/jobfilter', '/work/scrap-finance-partners']) {
+  for (const route of ['/', '/about', '/work/jobfilter', '/work/scrap-finance-partners']) {
     const html = await readPage(route);
     const references = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
     for (const reference of references) {
@@ -346,14 +346,14 @@ test('case studies stay short', async () => {
   }
 });
 
-test('legacy MazOS route stays out of homepage discovery and sitemap', async () => {
+test('legacy MazOS route is gone from the export and redirects to /proof#built', async () => {
   const home = await readPage('/');
-  const moved = await readPage('/mazos');
   const sitemap = await readFile(path.join(exportRoot, 'sitemap.xml'), 'utf8');
+  const { redirects } = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
   assert.doesNotMatch(home, /href="\/mazos"/);
   assert.doesNotMatch(sitemap, /<loc>[^<]+\/mazos(?:\/)?<\/loc>/);
-  assert.match(moved, /This page has moved/);
-  assert.match(moved, /noindex/);
+  await assert.rejects(readPage('/mazos'), /Missing static page/);
+  assert.equal(redirects.find((r) => r.source === '/mazos')?.destination, '/proof#built');
 });
 
 test('structured data reflects Maz Works founder and broad service positioning', async () => {
@@ -594,12 +594,10 @@ test('six wayfinding helps big sites use are in place', async () => {
   for (const id of ['trades', 'appointments', 'creators', 'offices']) assert.ok(audienceHub.includes(`/for/${id}`));
   // The human site map lists every trade guide and case study.
   const map = await readPage('/site-map');
-  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/whats-new']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
-  // 3. What's new stays reachable from the site map; the footer links the site map (29 Sep: off the main nav).
-  const news = await readPage('/whats-new');
-  assert.match(news, /Pick your kind of business/, 'what’s new shows the latest real update');
+  for (const href of ['/for/architects', '/for/garages', '/work/jobfilter', '/contact', '/tools']) assert.ok(map.includes(`href="${href}"`), `site map missing ${href}`);
+  // 3. The changelog page is gone (it redirects to /proof); the shared menu links the site map.
   assert.ok(home.includes('href="/site-map"'));
-  assert.ok(!home.includes('href="/whats-new"'), 'What’s new is for buyers only once rewritten; kept off the nav for now');
+  assert.ok(!map.includes('href="/whats-new"') && !home.includes('href="/whats-new"'), 'no internal link to the retired changelog');
   // 4. A helpful not-found page.
   const nf = await readFile(path.join(exportRoot, '404.html'), 'utf8');
   assert.match(nf, /That page has moved or never existed/);
@@ -611,13 +609,13 @@ test('six wayfinding helps big sites use are in place', async () => {
   assert.match(header, /href="\/prices"/);
 });
 
-test('homepage customer-journey illustrations are static, accessible and never hide content', async () => {
+test('journey illustrations stay decorative, and the home page never hides content in its static HTML', async () => {
+  const source = await readFile(path.join(root, 'app', 'three-buckets.tsx'), 'utf8');
+  assert.match(source, /className=\{`mw-journey-art is-\$\{kind\}`\}[^>]*aria-hidden="true"/);
   const html = await readPage('/');
-  assert.match(html, /class="mw-journey-art is-find"[^>]*aria-hidden="true"/);
-  assert.match(html, /class="mw-journey-art is-serve"[^>]*aria-hidden="true"/);
-  assert.match(html, /class="mw-journey-art is-improve"[^>]*aria-hidden="true"/);
   assert.doesNotMatch(html, /class="mw-home-demo"|Illustrative workflow/);
   assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');
+  assert.match(html, /class="rt-mini"[^>]*aria-hidden="true"/, 'the home mini plan is decorative');
 });
 
 

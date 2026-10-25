@@ -189,18 +189,21 @@ test('the downloadable sample PDFs exist and are real files', async () => {
 
 test('proof labels demonstrations and publishes no invented results', async () => {
   const html = await page('proof');
-  assert.match(html, /Internal demonstration, not a client/);
+  assert.match(html, /Interactive concept demo/);
+  assert.match(html, /Real client work/);
+  assert.match(html, /Internal project/);
   assert.match(html, /No client quotes yet/);
   assert.match(html, /View a scope sheet/);
 });
 
-test('the header stays focused (seven links and the Free preview button) and the footer is the short list of eight links', async () => {
+test('the header stays focused (six links and the Free preview button) and the footer is one short row', async () => {
   const html = await page('index');
   const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'));
-  for (const href of ['/what-we-do', '/local-businesses', '/professional-teams', '/prices', '/proof', '/after-hours-receptionist', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
+  for (const href of ['/what-we-do', '/proof', '/prices', '/tools', '/about', '/contact']) assert.match(header, new RegExp(`href="${href}"`), href);
+  assert.equal((header.match(/class="mw-nav-link"/g) ?? []).length, 6, 'exactly six primary links');
   assert.doesNotMatch(header, /href="\/video"/);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
-  for (const href of ['/what-we-do', '/prices', '/proof', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));
+  for (const href of ['/what-we-do', '/prices', '/proof', '/tools', '/about', '/contact', '/faq', '/privacy', '/terms']) assert.match(footer, new RegExp(`href="${href}"`));
 });
 
 test('free membership: free-forever line, six icon topics, calculator, sources on every fact, old URL redirects', async () => {

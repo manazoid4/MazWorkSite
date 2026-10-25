@@ -789,7 +789,7 @@ main {
   gap: 12px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .site-footer > .mw-footer-convert {
     grid-template-columns: 1fr;
   }

@@ -18,8 +18,8 @@ const [STARTER, SYSTEM, CUSTOM] = OFFERS;
 const lower = (price: string) => price.replace(/^From/, 'from');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Maz Works prices for websites, systems and support' },
-  description: fitDescription(`Every Maz Works price in one place: websites, customer workflows, software and monthly support. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}. Professional complaints work is quoted to scope. No VAT added.`),
+  title: { absolute: 'Prices: websites, follow-up and custom tools | Maz Works' },
+  description: fitDescription(`Every price in one place. ${STARTER.name} ${STARTER.price}, ${SYSTEM.name} ${lower(SYSTEM.price)}, ${CUSTOM.name} ${lower(CUSTOM.price)}, websites and monthly services. Fixed before I start. No VAT added.`),
   alternates: { canonical: PAGE_URL },
   openGraph: { title: 'Maz Works prices', description: fitDescription(`Automation from ${STARTER.price}. Free small set-ups with every package. UK price match. No VAT added.`), url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
 };
@@ -32,9 +32,9 @@ export default function PricesPage() {
 
       <section className="s-section" aria-labelledby="price-paths-title">
         <h2 id="price-paths-title" className="s-visually-hidden">Where to look</h2>
-        <p><a href="#websites">Websites</a> · <a href="#systems">Automation and software</a> · <a href="#monthly">Monthly support</a> · <a href="/what-we-do">What I do →</a></p>
+        <p><a href="#websites">A website</a> · <a href="#systems">Follow-up, booking and custom tools</a> · <a href="#monthly">Monthly services</a> · Not sure? <a href="/contact">Describe the problem</a>.</p>
         <p className="s-small" id="keep-improve">Dashboards, reporting and complaints improvement are quoted to scope: <a href="/professional-teams">see how that works</a>. Need care or maintenance? <a href="#extras">See options</a>.</p>
-        <details className="s-fold"><summary>How professional work is priced</summary><p>The quote sets out the data sources, deliverables and any ongoing costs before you commit. <a href="/professional-teams#complaints">Explore specialist complaints work</a>.</p></details>
+        <details className="s-fold"><summary>How work for professional teams is priced</summary><p>The quote sets out the data you will share, what I will deliver and any ongoing costs before you commit. <a href="/professional-teams#complaints">Explore specialist complaints work</a>.</p></details>
       </section>
 
       <section className="s-section" id="pricing" aria-labelledby="prices-list-title">

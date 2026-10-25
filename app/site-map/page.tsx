@@ -8,7 +8,7 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 
 export const metadata: Metadata = {
   title: 'Site map',
-  description: fitDescription('Every page on the Maz Works site in one list: packages and prices, trade guides, work and help.'),
+  description: fitDescription('Every page on the Maz Works site in one list: what I do, prices, my work, tools and demos, guides by trade, and help.'),
   alternates: { canonical: '/site-map' },
   openGraph: { title: 'Site map — Maz Works', url: '/site-map', images: [OG_IMAGE] },
 };
@@ -18,19 +18,18 @@ const EXTRA_GROUPS = [
     title: 'Get started',
     links: [
       { href: '/contact', label: 'Free preview, enquiries and bigger jobs' },
-      { href: '/whats-new', label: 'What’s new' },
     ],
   },
   {
-    title: 'Work',
+    title: 'More of my work',
     links: [
-      { href: '/proof', label: 'Proof and things I’ve built' },
+      { href: '/proof#built', label: 'Internal projects' },
       ...CASE_STUDY_PROJECTS.map((project) => ({ href: `/work/${project.id}`, label: project.name })),
-      { href: '/rotareason', label: 'RotaReason' },
-      { href: '/maz-core', label: 'MAZ Core' },
-      { href: '/maz-pocket-ai', label: 'MAZ Pocket' },
-      { href: '/complaints/sample/health-check', label: 'Sample complaints health check' },
-      { href: '/complaints/sample/board-report', label: 'Sample complaints board report' },
+      { href: '/rotareason', label: 'RotaReason (internal project)' },
+      { href: '/maz-core', label: 'MAZ Core (private console)' },
+      { href: '/maz-pocket-ai', label: 'MAZ Pocket (private bridge)' },
+      { href: '/complaints/sample/health-check', label: 'Sample complaints health check (invented data)' },
+      { href: '/complaints/sample/board-report', label: 'Sample complaints board report (invented data)' },
     ],
   },
 ];

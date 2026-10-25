@@ -1,0 +1,17 @@
+/* Drawing styles for the table plan, shared by the picker and the home-page mini plan. Tokens only. */
+.rt-floor-base { fill: var(--surface); }
+.rt-zone--window { fill: color-mix(in oklch, var(--sky-tint) 55%, var(--surface)); }
+.rt-zone--main { fill: var(--surface); }
+.rt-zone--terrace { fill: color-mix(in oklch, var(--sun) 45%, var(--surface)); }
+.rt-zone { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.rt-wall { fill: none; stroke: var(--plum); stroke-width: 3; stroke-linecap: round; }
+.rt-door { fill: none; stroke: var(--plum); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.rt-glass { fill: var(--surface); stroke: var(--plum); stroke-width: 1; }
+.rt-counter { fill: var(--plum); }
+.rt-plant { fill: var(--ok); }
+.rt-plant-core { fill: var(--cream); opacity: .55; }
+.rt-hatch-bg { fill: color-mix(in oklch, var(--ink) 8%, var(--surface)); }
+.rt-hatch-line { stroke: var(--ink); stroke-width: 1.6; opacity: .55; }
+.rt-top { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.rt-chair { fill: var(--peach); stroke: var(--ink); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.rt-mini { width: 100%; height: auto; display: block; border-radius: 10px; }
