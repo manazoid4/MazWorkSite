@@ -148,8 +148,7 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.match(html, /JobFilter/);
   assert.match(html, /Maz Works product/);
   assert.match(html, /Finding relevant public contracts for small trades firms/);
-  assert.match(html, /Scrap Finance Partners/);
-  assert.match(html, /A clear digital home for a specialist finance business/);
+  assert.doesNotMatch(html, /Scrap Finance Partners/); // kept to /proof only (Maz, 25 Oct)
   assert.match(html, /href="\/(lab|proof)/);
   for (const name of ['Agent Nudge', 'OpenFlowKit', 'Khutba', 'MAZ Pocket', 'tap-to-review']) {
     assert.doesNotMatch(html, new RegExp(name), `${name} belongs on /lab, not the homepage`);

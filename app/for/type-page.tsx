@@ -96,7 +96,7 @@ export function TypePage({ type }: { type: CustomerType }) {
           <p>
             <a className="s-details-link" href="/prices">See the details: every task, what’s included and what happens next →</a>
           </p>
-          {niches.length ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName).join(', ')} →</a></p> : null}
+          {niches.length && type.id !== 'offices' ? <p><a className="s-details-link" href={`/for/${niches[0].id}`}>Guide for {niches.map((guide) => guide.shortName).join(', ')} →</a></p> : null}
           <StraightAnswers inline />
         </div>
         <div className="mw-actions">

@@ -33,7 +33,7 @@ test('homepage serves both audiences and labels its examples honestly', () => {
   assert.match(main, /href="\/local-businesses"/);
   assert.match(main, /href="\/professional-teams"/);
   assert.match(main, /href="\/work\/jobfilter"/);
-  assert.match(main, /href="\/work\/scrap-finance-partners"/);
+  assert.doesNotMatch(main, /scrap-finance-partners/);
   assert.match(visibleText(main), /Help at every part of the customer journey/i);
   assert.doesNotMatch(main, /mw-home-demo|Illustrative workflow|A customer gets in touch/);
   assert.match(visibleText(main), /synthetic data/i);

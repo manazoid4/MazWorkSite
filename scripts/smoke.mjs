@@ -50,7 +50,7 @@ try {
   await assertRoute('/jobfilter-scan-result.webp', 'image/webp');
   await assertRoute('/jobfilter-scan-result-mobile.webp', 'image/webp');
 
-  if (!home.includes('JobFilter') || !home.includes('Scrap Finance Partners')) {
+  if (!home.includes('JobFilter')) {
     throw new Error('Homepage smoke check did not find the featured-project copy.');
   }
   if (!mazos.includes('This page has moved')) {
