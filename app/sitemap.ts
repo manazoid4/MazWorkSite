@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/about`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/local-businesses`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${SITE_URL}/website-design`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/professional-teams`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${SITE_URL}/after-hours-receptionist`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/for`, lastModified: reimagined, changeFrequency: 'monthly', priority: 0.8 },
