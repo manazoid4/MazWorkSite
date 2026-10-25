@@ -78,7 +78,7 @@ async function internalTargetExists(urlPath) {
 test('homepage states the central idea plainly and does not read as small-time', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(visible, /The problem that keeps coming back\? I make it easier ?\./);
+  assert.match(visible, /Less hassle\. Better business\./);
   assert.match(html, /I find the pattern behind the problem, then build a practical way to make it easier/);
   for (const area of ['Websites and digital experiences', 'Customer enquiries and follow-up', 'Booking and operational improvements', 'Focused custom tools']) assert.match(visible, new RegExp(area));
   assert.match(html, /href="\/local-businesses"/);
@@ -163,7 +163,7 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
 test('homepage explains the four areas, the two customer routes and a try-it route without leading on price', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(visible, /The problem that keeps coming back\? I make it easier ?\./);
+  assert.match(visible, /Less hassle\. Better business\./);
   assert.match(html, /href="\/what-we-do"/);
   assert.match(html, /href="\/tools"/);
   assert.match(html, /href="\/tools\/restaurant-tables"/);
