@@ -240,11 +240,12 @@ test('the contact form offers the free preview as a choice and never promises an
 test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27 Sep)', async () => {
   for (const route of ['/', '/contact', '/faq']) {
     const html = await readPage(route);
-    assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
+    assert.doesNotMatch(html, /reply[^.]{0,30}5 working days/i, `${route} still promises a 5-working-day reply`);
     assert.doesNotMatch(html, /2 working days/, `${route} still promises 2 working days`);
     assert.doesNotMatch(html, /preview[^.]{0,40}within 1 working day/i, `${route} promises the preview, not just a reply, within 1 working day`);
   }
   assert.match(await readPage('/'), /within 1 working day/);
+  assert.match(await readPage('/'), /No middleman, no sales team, no account managers/, 'the direct-to-builder promise leads the homepage (Maz, 26 Oct)');
 });
 
 test('homepage shows the idea, four areas, work, tools, founder and process without becoming a service catalogue', async () => {

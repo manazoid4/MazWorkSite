@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { HomeFooterConvert } from './home-footer-convert';
 import { FLAGSHIP_PROJECTS } from './projects';
-import { CHECK_REPLY_TIME, ENQUIRY_CTA } from './site';
+import { CHECK_REPLY_TIME, DIRECT_LINE, ENQUIRY_CTA } from './site';
 import { fitDescription, OG_IMAGE } from './seo';
 import './home-transformation.css';
 
@@ -24,7 +24,7 @@ const STEPS = [
 ];
 
 const TITLE = 'Websites, Booking & Business Systems | Maz Works';
-const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for UK small businesses. Practical tools, fixed quotes and one person to deal with.');
+const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for UK small businesses. Fixed quotes, and you deal directly with the person who builds it.');
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -43,11 +43,12 @@ export default function Page() {
           <p className="eyebrow">Maz Works · independent, working UK-wide</p>
           <h1 id="home-title">Less hassle. <mark>Better</mark> business.</h1>
           <p className="mw-home-lede">I build websites, enquiry and booking systems and small tools that save UK businesses time and help their customers get in touch. I find the pattern behind the problem, then build a practical way to make it easier.</p>
+          <p className="mw-home-direct">{DIRECT_LINE}</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
             <a className="mw-home-secondary" href="/tools">Try the tools and demos <span aria-hidden="true">↗</span></a>
           </div>
-          <p className="mw-home-reassurance">One person to deal with, and I usually reply within {CHECK_REPLY_TIME}.</p>
+          <p className="mw-home-reassurance">I usually reply within {CHECK_REPLY_TIME}.</p>
         </div>
 
         {JOBFILTER && (
@@ -121,6 +122,7 @@ export default function Page() {
             <h2 id="about-title" className="rx-title">Hi, I’m Maz.</h2>
             <p className="mw-founder-lead">I spent five years in finance handling complaints and escalations, with thousands of unhappy customers. I know what it’s like when something goes wrong.</p>
             <p>That job taught me to look for the cause behind a complaint, not just the complaint. It is the habit I bring to your business: find the thing that keeps happening, then make it easier.</p>
+            <p className="mw-founder-direct">No middleman. No sales team. No account managers. The person you talk to is the person who builds it.</p>
             <p>I’m a Computer Science graduate and I build every job myself. I’m just starting out, and I’ll always be honest about what I can and can’t do.</p>
             <a className="rx-link" href="/about">More about me <span aria-hidden="true">→</span></a>
           </div>

@@ -69,7 +69,7 @@ export default function WebsiteDesignPage() {
         <h1 id="web-title">Website design for UK small businesses.</h1>
         <p className="s-lede">A website should make it easy for someone to find you, understand what you offer and get in touch. I design clear, phone-friendly sites and connect the next step: an enquiry, booking or sale.</p>
         <p className="s-actions"><a className="button button-signal" href="/contact?src=website-design#contact">Get my free preview</a> <a className="text-link" href="/proof">See work and examples</a></p>
-        <p className="s-small">One person to deal with · A written scope and fixed quote before any paid work · No VAT added</p>
+        <p className="s-small"><strong>No middleman, no sales team: you deal with the person who builds it</strong> · A written scope and fixed quote before any paid work · No VAT added</p>
       </section>
 
       <section className="s-section" aria-labelledby="website-problems-title">

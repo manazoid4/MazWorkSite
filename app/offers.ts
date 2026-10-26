@@ -70,7 +70,7 @@ export const FREE_STEP = {
   name: 'Free Preview & Fixed Price',
   short: 'free preview and price',
   price: '£0',
-  body: 'Tell me what is slowing your business down. I reply within 1 working day, then show you one practical example of how I would improve it, usually within 3 working days. You get a focused preview, not a finished system, plus a fixed price, or an estimate if the job needs more detail first.',
+  body: 'Tell me what is slowing your business down. I reply within 1 working day, then show you one practical example of how I would improve it, usually within 5 working days, and often much sooner. You get a focused preview, not a finished system, plus a fixed price, or an estimate if the job needs more detail first.',
   /** What one free preview can be. Exactly one, relevant to the problem described. */
   includes: ['One example screen or page', 'One small workflow demo, such as the text a missed caller would get', 'One before-and-after of a page you already have'],
   /** Boundaries that keep the preview free and repeatable. */
@@ -550,7 +550,7 @@ export const CHANGES_WINDOW = {
  * for. Day 0 is the day the scope sheet is approved.
  */
 export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
-  { day: 'Day 0', title: 'Free preview and fixed price', body: 'You tell me the job. I reply within 1 working day, and usually within 3 working days I send one focused preview, a fixed price and a written scope sheet. Nothing to pay.' },
+  { day: 'Day 0', title: 'Free preview and fixed price', body: 'You tell me the job. I reply within 1 working day, and usually within 5 working days (often much sooner) I send one focused preview, a fixed price and a written scope sheet. Nothing to pay.' },
   { day: 'Day 1', title: 'You say yes and add me to your apps', body: 'As a user, never with passwords. I confirm the messages and timings with you.' },
   { day: 'Day 3', title: 'Set up on your apps, shown working', body: 'You see it run on your own apps and your own phone, before you pay.' },
   { day: 'Day 7', title: 'Live, then care is optional', body: 'Invoice when you’ve seen it working. Then 30 days of tweaks (two rounds) and a 90-day fix promise. Ongoing care is only if you want it.' },
@@ -562,7 +562,7 @@ export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
  * A demo for a £149 job costs more time than the job pays; small jobs get a written plan.
  */
 export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
-  { title: 'Start with the free preview', body: 'Tell me the job in a few taps. I reply within 1 working day, then send one focused preview and a fixed price, usually within 3 working days. No call needed.', note: 'Free' },
+  { title: 'Start with the free preview', body: 'Tell me the job in a few taps. I reply within 1 working day, then send one focused preview and a fixed price, usually within 5 working days and often much sooner. No call needed.', note: 'Free' },
   { title: 'Bigger build? A preview', body: 'For a Business System, Launch Page, Website or Custom Software, your scope sheet says what the bigger-build preview shows and when you get it. Smaller jobs go straight to the fixed price, which is quicker for you.', note: 'Date in your scope sheet' },
   { title: 'Your bigger-build preview arrives', body: 'A clickable preview of one screen, built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your scope sheet', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges from me beyond the quote.', note: 'Nothing to pay yet' },
@@ -639,7 +639,7 @@ export const MANAGED_PRESENCE = {
 /** What makes Maz Works different. One list, reused on the video, managed, FAQ and what-we-do pages. */
 export const USPS = [
   { title: 'See it working before you pay', body: 'No working, no invoice.' },
-  { title: 'One person, start to finish', body: 'You deal with me, not a queue of account managers.' },
+  { title: 'Deal with the builder directly', body: 'No middleman, no sales team, no account managers. The person you talk to builds it.' },
   { title: 'Fixed price in writing', body: 'Agreed up front. No surprise bills.' },
   { title: 'Websites, follow-up and filming', body: 'One person for everything your customers see.' },
   { title: 'You own everything', body: 'Your accounts, your content, no lock-in.' },
