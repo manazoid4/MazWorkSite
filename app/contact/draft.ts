@@ -100,7 +100,7 @@ export function draftFreePlan(input: DraftInput): Draft {
     '',
     `Thanks for the message. Here is your free preview and fixed price, in plain words.`,
     '',
-    `Your demo: [paste the demo link here]. It uses your business name and is built from a template on my test setup, so it is not on your apps yet.`,
+    `Your preview: [paste the preview link here]. It is one focused example of the fix, built on my own test setup, so nothing touches your apps yet.`,
     '',
     `What I'd set up first: ${recipe} (${offer.price}).`,
     `What it does: ${offer.body}`,

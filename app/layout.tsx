@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${manrope.variable} ${fraunces.variable}`}>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
         <Analytics /><ConversionTracker />

@@ -852,8 +852,6 @@ export const PACKAGE_VALUE: Partial<Record<OfferId, { parts: { label: string; pr
   };
 })();
 
-export const PRICE_RANGE = `${OFFERS[0].price}–${OFFERS[2].price.replace(/^From /, '')}+`;
-
 /**
  * Stripe-hosted checkout links. Only configured offers show "Buy now".
  * The success URL is /start?package=<name>; payment is checked in Stripe.
