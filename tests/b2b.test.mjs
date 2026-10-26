@@ -192,7 +192,8 @@ test('proof labels demonstrations and publishes no invented results', async () =
   assert.match(html, /Interactive concept demo/);
   assert.match(html, /Real client work/);
   assert.match(html, /Internal project/);
-  assert.match(html, /No client quotes yet/);
+  // No quotes yet, so the quotes section is hidden rather than shown empty (Maz, 26 Oct: tidy /proof).
+  assert.doesNotMatch(html, /What clients say/);
   assert.match(html, /View a scope sheet/);
 });
 
