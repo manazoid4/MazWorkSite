@@ -31,7 +31,7 @@ test('professional team routes export clear, factual pages with the agreed enqui
   assert.match(teams, /Complaints are what I know best/);
   assert.match(teams, /cannot guarantee that an SLA will never be missed/);
   assert.match(teams, /\/contact\?src=professional-teams&amp;service=reporting#contact/);
-  assert.match(teams, /Closed on time<\/dt><dd>94%<\/dd><span>102 of 108 completed/);
+  assert.match(teams, /Closed on time<\/dt><dd>94%<\/dd><dd class="pt-metric-note">102 of 108 completed/);
   assert.equal(Math.round(102 / 108 * 100), 94);
 
   const weeklyFlow = [...teams.matchAll(/aria-label="(\d+) received, (\d+) completed"/g)];

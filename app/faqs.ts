@@ -1,4 +1,4 @@
-import { CHECK_REPLY_TIME, VAT_NOTE } from './site';
+import { CHECK_REPLY_TIME, PREVIEW_TIME, VAT_NOTE } from './site';
 import { AFTER_HOURS, OFFERS, CARE_PLANS, CHANGES_WINDOW, DELIVERY_PROMISE, PAYMENT_TERMS, SETUP_PRICE, STARTER_GUARANTEE, getExtra, getOffer, REFERRAL_REWARD } from './offers';
 export type MazWorksFaq = {
   question: string;
@@ -8,7 +8,7 @@ export type MazWorksFaq = {
 export const MAZ_WORKS_FAQS: MazWorksFaq[] = [
   {
     question: 'What’s in the free preview?',
-    answer: `Tell me the job you want off your plate and, usually within ${CHECK_REPLY_TIME}, I send a working preview of it with your business name on, plus a fixed price and a written scope sheet. It’s built from a template on my own test setup, so it’s not on your apps yet; that happens once you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
+    answer: `One practical example of how I would fix the problem you describe: an example screen, a small workflow demo, or a before-and-after of one page. I reply within ${CHECK_REPLY_TIME} and the preview usually follows within ${PREVIEW_TIME}, with a fixed price and a written scope sheet. It’s a focused preview, not a finished system, and it’s built on my own test setup, so nothing touches your apps until you say yes. There’s no catch: no call, no automated sales emails, no obligation. If it isn’t worth automating, I say so.`,
   },
   {
     question: 'What do you actually do?',

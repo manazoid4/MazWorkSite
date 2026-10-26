@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { CHECK_REPLY_TIME, CONTACT_EMAIL, MAIN_CTA } from '../site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL, MAIN_CTA, PREVIEW_TIME } from '../site';
 import { FREE_STEP, OFFERS, formatPrice, priceAmount } from '../offers';
 import { NATIVE_FORM_ENDPOINT, buildRecoveryMailto, sendPlanEnquiry } from '../enquiry';
 import { rememberedCampaign } from '../linkedin-source';
@@ -20,7 +20,7 @@ const SHARES = [10, 20, 30, 50];
 const EMAIL_PATTERN = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 const SUBJECT = 'Maz Works — missed-calls calculator';
 const NEXT_STEP = 'Send a free preview and fixed price; not an order';
-const AUTO_REPLY = `Thanks, I've got your request. I'll email you a working preview with your business name and a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed and no obligation. Manazir, Maz Works`;
+const AUTO_REPLY = `Thanks, I've got your request. I'll reply within ${CHECK_REPLY_TIME}, then send one focused preview and a fixed price, usually within ${PREVIEW_TIME}. No call needed and no obligation. Manazir, Maz Works`;
 
 function Slider({ id, label, value, max, step, money, name, onChange }: { id: string; label: string; value: number; max: number; step: number; money?: boolean; name: string; onChange: (value: number) => void }) {
   return (

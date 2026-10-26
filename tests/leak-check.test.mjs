@@ -29,7 +29,8 @@ test('the Free Preview & Fixed Price has a dedicated shareable acquisition page'
   assert.match(html, /id="free-preview"/);
   assert.match(html, /A free preview and fixed price/);
   assert.match(html, /within 1 working day/i);
-  assert.doesNotMatch(html, /5 working days/i);
+  assert.doesNotMatch(html, /reply[^.]{0,30}5 working days/i);
+  assert.match(html, /No middleman, no sales team, no account managers/);
   assert.match(html, /any UK business/);
   assert.doesNotMatch(html, /Nottingham/);
   assert.match(html, /EXAMPLE|>Example</);

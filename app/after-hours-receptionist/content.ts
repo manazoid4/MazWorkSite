@@ -60,7 +60,7 @@ export const COST_MODEL = {
 
 export const STEPS = [
   { title: 'I learn your business', body: 'Your hours, services, areas, prices you’re happy to share, and the questions people always ask.' },
-  { title: 'We set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
+  { title: 'You set the rules', body: 'Your greeting, what it can answer, what counts as urgent and who it tells.' },
   { title: 'Calls you miss are answered', body: 'If you don’t pick up, the call goes to it. Answer as normal when you can; nothing else changes.' },
   { title: 'You get the summary', body: 'Each call arrives by email with who, what and how urgent, so you ring back with context.' },
 ];

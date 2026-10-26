@@ -1,4 +1,4 @@
-import { CHECK_REPLY_TIME } from '../app/reply-time.js';
+import { CHECK_REPLY_TIME, PREVIEW_TIME } from '../app/reply-time.js';
 import { createHash } from 'node:crypto';
 import { cleanEnquirySource, isEnquirySource } from '../app/linkedin-source.ts';
 const buckets = new Map();
@@ -94,7 +94,7 @@ export async function deliverEnquiry(body, fetchImpl = fetch) {
       subject: setup ? 'Your Maz Works setup details' : 'Your Maz Works free preview request',
       text: setup
         ? `Thanks ${body.name}, I've got your setup details.\n\nI'll check your payment and confirm the next steps by email within ${CHECK_REPLY_TIME}, before starting setup. If anything changes, reply to this email.\n\nManazir, Maz Works`
-        : `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and send you a working preview with your business name on it, plus a fixed price, usually within ${CHECK_REPLY_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
+        : `Thanks ${body.name}, I've got your request.\n\nI'll read it myself and reply within ${CHECK_REPLY_TIME}. Then I'll send one focused preview of how I'd fix it, plus a fixed price, usually within ${PREVIEW_TIME}. No call needed, no obligation.\n\nThis confirmation is the same kind of instant reply I set up for clients.\n\nIf anything changes, reply to this email.\n\nManazir, Maz Works`,
     }, 'visitor'),
   ]);
   const confirmationSent = confirmation.status === 'fulfilled' && confirmation.value === true;
@@ -140,7 +140,7 @@ export async function syncHubSpot(body, fetchImpl = fetch) {
  * replies, Maz cancels the rest in Resend (the ids are in the Resend log).
  */
 export const FOLLOW_UPS = [
-  { in: 'in 2 days', subject: 'Did you try the preview?', text: (name) => `Hi ${name},\n\nJust checking the preview reached you and worked on your phone. If anything is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
+  { in: 'in 5 days', subject: 'Did you try the preview?', text: (name) => `Hi ${name},\n\nJust checking the preview reached you and worked on your phone. If anything is unclear, reply with one line and I'll fix it.\n\nManazir, Maz Works` },
   { in: 'in 5 days', subject: 'One question', text: (name) => `Hi ${name},\n\nWhat's the one thing that would make this an easy yes? Price, timing, a worry about your apps? Tell me and I'll answer straight.\n\nManazir, Maz Works` },
   { in: 'in 9 days', subject: 'Leaving this with you', text: (name) => `Hi ${name},\n\nI'll leave it here so I'm not in your way. The preview and price stand whenever you're ready, and the written scope sheet comes before you pay anything. Reply any time.\n\nManazir, Maz Works` },
 ];

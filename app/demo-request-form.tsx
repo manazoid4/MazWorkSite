@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { CHECK_REPLY_TIME, CONTACT_EMAIL } from './site';
+import { CHECK_REPLY_TIME, CONTACT_EMAIL, PREVIEW_TIME } from './site';
 import { EnquiryRecovery } from './enquiry-recovery';
 import { trackConversion } from './analytics';
 import {
@@ -94,6 +94,7 @@ export function DemoRequestForm({
     fill('name', params.get('name'));
     fill('business', params.get('business') || params.get('website'));
     if (params.get('audit')) fill('problem', readStoredAudit());
+    else if (params.get('package')) fill('problem', `I’m asking about ${params.get('package')}.`);
   }, [contact]);
 
   useEffect(() => {
@@ -268,7 +269,7 @@ export function DemoRequestForm({
               <span>{option}</span>
             </label>
           ))}
-          {previewing ? <p className="ct-next-note">Free and no obligation. I reply myself within {CHECK_REPLY_TIME} with a working preview that has your business name on it, and a fixed price. No call needed.</p> : null}
+          {previewing ? <p className="ct-next-note">Free and no obligation. I reply myself within {CHECK_REPLY_TIME}, then send one focused preview and a fixed price, usually within {PREVIEW_TIME}. No call needed.</p> : null}
         </fieldset>
       ) : null}
 

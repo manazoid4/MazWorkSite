@@ -167,9 +167,9 @@ test('the local visitor route makes the offer and prices easy to find while trad
   assert.match(local, /Business System/);
   assert.match(local, /href="\/prices"/);
   assert.match(local, /href="\/contact\?src=local-businesses/);
-  for (const type of ['trades', 'appointments', 'creators']) {
+  for (const [type, starter] of [['trades', /£99/], ['appointments', /£99/], ['creators', /£79/]]) {
     const page = await readPage(`/for/${type}`);
     assert.match(page, /Get my free preview</, `${type}: the offer-specific preview remains available`);
-    assert.match(page, /£99/, `${type}: current Starter price remains visible`);
+    assert.match(page, starter, `${type}: current Starter price remains visible`);
   }
 });
