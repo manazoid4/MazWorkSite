@@ -22,7 +22,8 @@ test('website design service page is discoverable with honest UK-wide metadata a
   assert.match(page, /rel="canonical" href="https:\/\/www\.mazworks\.uk\/website-design"/);
   assert.match(page, /<h1[^>]*>Website design for UK small businesses\./);
   assert.match(page, /"areaServed":\{"@type":"Country","name":"United Kingdom"\}/);
-  assert.doesNotMatch(page, /Derbyshire|Nottingham|East Midlands|Heanor/i);
+  // Town and county are checked by the hashed personal-details test in static-export.test.mjs, never spelled out here.
+  assert.doesNotMatch(page, /Nottingham|East Midlands/i);
   assert.match(page, /href="\/contact\?src=website-design#contact"/);
   assert.match(page, /From £1,295/);
   assert.match(page, /no one can guarantee|Nobody can guarantee/i);
