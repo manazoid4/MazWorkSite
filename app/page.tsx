@@ -93,6 +93,14 @@ export default function Page() {
         <p className="mw-do-foot">Curious what a better booking step feels like? <a href="/tools/restaurant-tables">Try the table picker</a>. Interactive concept demo. No real reservation is made. More in <a href="/tools">tools and demos</a>.</p>
       </section>
 
+      <section className="rx-band rx-band--plum mw-member" aria-labelledby="member-title">
+        <h2 id="member-title" className="rx-title">Free membership.</h2>
+        <p className="rx-lede">Letters, deadlines, checklists.</p>
+        <div className="mw-member-actions">
+          <a className="button button-signal" href="/free-membership">Open</a>
+        </div>
+      </section>
+
       {JOBFILTER?.image && (
         <section className="rx-band rx-band--sky mw-work" aria-labelledby="proof-title">
           <p className="rx-kicker">My work</p>

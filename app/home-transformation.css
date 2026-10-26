@@ -154,3 +154,8 @@
 @media (min-width: 900px) {
   .hm-note { rotate: 1.2deg; }
 }
+
+.mw-member-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.mw-member-list li { padding: 6px 14px; border: 2px solid currentColor; font-weight: 700; }
+.mw-member-actions { margin-top: 26px; }
+.mw-member .button-signal { background: var(--cream); color: var(--plum); }
