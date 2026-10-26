@@ -19,7 +19,7 @@
   --muted: #625663;
   --line: #d9cfd4;
   --soft-line: #e8e0e3;
-  --signal: var(--pop-orange);
+  --signal: #9683ff;
   --signal-text: var(--plum);
   --ok: #0f7a4f;
   --mono: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
