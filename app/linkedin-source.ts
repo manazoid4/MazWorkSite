@@ -13,7 +13,8 @@ export function isCampaignTag(source: string | null | undefined): source is stri
 const INTERNAL_SOURCES = new Set([
   'site', 'nav', 'footer', 'contact', 'brand-kit', 'for-hub', 'prices', 'prices-hero',
   'builder', 'estimator', 'example-plan', 'scope-sheet', 'services', 'demos',
-  'after-hours', 'voice-demo', 'whats-new', 'b2b', 'b2b-assessment', 'audit', 'complaints', 'proof',
+  'after-hours', 'voice-demo',
+  ...['one-page-website', 'missed-call-text-back', 'website-cost'].flatMap(id => [id, `${id}-bottom`]), 'whats-new', 'b2b', 'b2b-assessment', 'audit', 'complaints', 'proof',
   ...['trades', 'appointments', 'creators', 'offices', 'heating-and-plumbing', 'roofers',
     'builders', 'electricians', 'salons-and-beauty', 'dog-groomers', 'garages',
     'cafes-and-food', 'clinics-and-therapists', 'architects'].map(id => `for-${id}`),
@@ -82,6 +83,8 @@ export function attributionLine(search: string, referrer: string): string {
   let host = '';
   try { host = new URL(referrer).hostname.replace(/^www\./, ''); } catch { /* no referrer */ }
   if (host === 'linkedin.com' || host === 'lnkd.in' || host.endsWith('.linkedin.com')) parts.push('referrer=linkedin');
+  // Organic search has no UTM tags, so record the engine's domain to tell Google enquiries from direct visits.
+  else if (/^(google|bing|duckduckgo|ecosia|yahoo)\.[a-z.]{2,6}$/.test(host)) parts.push('referrer=organic-search');
   return parts.join('; ');
 }
 

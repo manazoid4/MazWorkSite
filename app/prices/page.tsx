@@ -33,6 +33,7 @@ export default function PricesPage() {
       <section className="s-section" aria-labelledby="price-paths-title">
         <h2 id="price-paths-title" className="s-visually-hidden">Where to look</h2>
         <p><a href="#websites">A website</a> · <a href="#systems">Follow-up, booking and custom tools</a> · <a href="#monthly">Monthly services</a> · Not sure? <a href="/contact">Describe the problem</a>.</p>
+        <details className="s-fold"><summary>How website costs are worked out</summary><p>A one-page site and a five-page website are priced differently. <a href="/website-cost">See what moves the price</a>, or read about the <a href="/one-page-website">one-page option</a>.</p></details>
         <p className="s-small" id="keep-improve">Dashboards, reporting and complaints improvement are quoted to scope: <a href="/professional-teams">see how that works</a>. Need care or maintenance? <a href="#extras">See options</a>.</p>
         <details className="s-fold"><summary>How work for professional teams is priced</summary><p>The quote sets out the data you will share, what I will deliver and any ongoing costs before you commit. <a href="/professional-teams#complaints">Explore specialist complaints work</a>.</p></details>
       </section>

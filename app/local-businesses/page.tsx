@@ -67,7 +67,7 @@ export default function LocalBusinessesPage() {
         <div className="lb-hero-copy">
           <p className="eyebrow">For local businesses</p>
           <h1 id="lb-title">You’re serving customers. The admin can wait.</h1>
-          <p className="lb-lede">A missed call, a quote nobody chased or a booking to confirm can cost you the next job. I set up the follow-up on the tools you already use, so it happens without you remembering.</p>
+          <p className="lb-lede">A missed call, a quote nobody chased or a booking to confirm can cost you the next job. I set up the follow-up on the tools you already use, so it happens without you remembering. Start with <a href="/missed-call-text-back">missed-call text-back</a>.</p>
           <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
           <p className="lb-note">One person to deal with. A written scope and fixed price before any paid work.</p>
         </div>
