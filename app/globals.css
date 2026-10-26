@@ -51,7 +51,7 @@ section { scroll-margin-top: 80px; }
 
 .site-header { min-height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 32px; border-bottom: 1px solid var(--line); }
 .brand { display: inline-flex; align-items: center; gap: 11px; min-height: 48px; text-decoration: none; }
-.brand-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--mono); font-size: .75rem; font-weight: 900; letter-spacing: -.06em; }
+.brand-mark { width: 42px; height: 42px; flex: none; color: var(--ink); }
 .brand > span:last-child { display: grid; line-height: 1; }
 .brand strong { font-size: .96rem; letter-spacing: -.02em; }
 .brand small { margin-top: 5px; color: var(--muted); font-family: var(--mono); font-size: .72rem; }
@@ -296,7 +296,8 @@ h1, h2, h3 {
 }
 
 .brand strong {
-  font-weight: 650;
+  font-weight: 800;
+  letter-spacing: .05em;
 }
 
 .mw-site-header {
