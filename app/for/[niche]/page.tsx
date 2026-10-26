@@ -150,7 +150,7 @@ export default async function NichePage({ params }: { params: Promise<{ niche: s
         <div>
           <p className="eyebrow">Free first step</p>
           <h2 id="niche-cta-title">Not sure where to start?</h2>
-          <p>Tell me the job. I&apos;ll send a working preview and a fixed price.</p>
+          <p>Tell me the job. I&apos;ll send a focused preview and a fixed price.</p>
         </div>
         <div className="mw-actions">
           <CampaignLink className="button button-signal" href={checkHref}>{MAIN_CTA}</CampaignLink>

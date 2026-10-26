@@ -11,7 +11,7 @@ import './colour.css';
 import './reimagine.css';
 import { CONTACT_EMAIL, GITHUB_URL, LINKEDIN_URL, PERSON_NAME, SITE_NAME, SITE_URL } from './site';
 import { OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from './seo';
-import { ALL_OFFERS, FREE_STEP, PRICE_RANGE } from './offers';
+import { ALL_OFFERS, FREE_STEP } from './offers';
 
 // Agrumea-style pairing: warm serif headlines over a clean sans body.
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' });
@@ -30,14 +30,15 @@ const structuredData = {
       sameAs: [GITHUB_URL, LINKEDIN_URL],
     },
     {
-      '@type': 'ProfilePage',
+      '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
       url: `${SITE_URL}/`,
       name: `${SITE_NAME} — ${PERSON_NAME}`,
       about: { '@id': `${SITE_URL}/#person` },
     },
     {
-      '@type': ['Organization', 'ProfessionalService'],
+      // Organization, not LocalBusiness/ProfessionalService: there is no public premises, only UK-wide remote service.
+      '@type': 'Organization',
       '@id': `${SITE_URL}/#maz-works`,
       name: SITE_NAME,
       url: `${SITE_URL}/`,
@@ -47,7 +48,6 @@ const structuredData = {
       founder: { '@id': `${SITE_URL}/#person` },
       address: { '@type': 'PostalAddress', addressCountry: 'GB' },
       areaServed: { '@type': 'Country', name: 'United Kingdom' },
-      priceRange: PRICE_RANGE,
       description: 'Maz Works helps UK businesses find and serve customers through websites, Google Business Profile, booking and enquiry workflows, automation and software. It also provides complaints reporting, customer growth systems and digital rebuilds.',
       makesOffer: [
         { '@type': 'Offer', name: FREE_STEP.name, price: '0', priceCurrency: 'GBP', url: `${SITE_URL}/contact` },

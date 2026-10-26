@@ -65,12 +65,6 @@
   .mw-work-shot { rotate: -1deg; }
 }
 
-/* Tools: plum band, the made-up cafe plan on a cream card. */
-.mw-tools .tl-feature-art { box-shadow: 8px 8px 0 color-mix(in oklch, var(--cream) 22%, transparent); border-color: var(--cream); }
-.mw-tools-actions { margin-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
-.mw-btn-cream { min-height: 54px; padding-inline: 24px; border: 0; background: var(--cream); color: var(--plum); }
-.mw-btn-cream:hover { background: var(--surface); }
-
 /* Founder: peach band, photo and a short first-person note. */
 .mw-founder-grid { display: grid; gap: clamp(24px, 4vw, 64px); align-items: center; }
 .mw-founder-grid > img { width: min(100%, 240px); height: auto; aspect-ratio: 1; object-fit: cover; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; background: var(--surface); }
@@ -146,7 +140,6 @@
   .mw-area:hover { padding-inline: 14px; background: color-mix(in oklch, var(--sun) 35%, transparent); }
   .mw-area-go { transition: translate 160ms ease-out; }
   .mw-area:hover .mw-area-go { translate: 4px -4px; }
-  .mw-btn-cream { transition: background-color 120ms ease-out; }
 }
 @keyframes mw-up { from { opacity: 0; translate: 0 14px; } }
 @keyframes mw-up-move { from { translate: 0 14px; } } /* headline moves but never fades: keeps LCP on time */

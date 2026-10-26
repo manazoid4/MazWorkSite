@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from '../site-chrome';
 import { DemoRequestForm } from '../demo-request-form';
 import { CallLink } from '../analytics';
-import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, SITE_URL } from '../site';
+import { BOOKING_URL, CHECK_REPLY_TIME, CONTACT_EMAIL, PREVIEW_TIME, SITE_URL } from '../site';
 import { ALWAYS_INCLUDED, FREE_STEP, OFFERS, PAYMENT_TERMS, REFERRAL_RANGE, REFERRAL_TIERS } from '../offers';
 import { NICHE_GUIDES } from '../for/niches';
 import { NextSteps } from '../explainers';
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const RETURN = [
-  'A working preview of your first job with your business name on it, to try on your phone',
+  'One focused preview of the fix: an example screen, a small workflow demo or a before-and-after',
   `A fixed price (one job starts from ${OFFERS[0].price}) and a written scope sheet, with any extras listed separately`,
   'What I would do first, and what I would leave alone',
   'Any software or text-message costs you would pay directly',
@@ -68,10 +68,12 @@ export default function ContactPage() {
           <div className="ct-tile ct-peach">
             <h3>What you get back</h3>
             <ul className="ct-list">{RETURN.map((item) => <li key={item}>{item}</li>)}</ul>
+            <h3>What it is not</h3>
+            <ul className="ct-list">{FREE_STEP.limits.map((item) => <li key={item}>{item}</li>)}</ul>
           </div>
           <div className="ct-tile ct-sky">
             <h3>If you say yes</h3>
-            <p>Your preview and price usually arrive within {CHECK_REPLY_TIME}. Nothing happens unless you reply yes. Days are counted from the day you approve the scope sheet.</p>
+            <p>I reply within {CHECK_REPLY_TIME}; the preview and price usually follow within {PREVIEW_TIME}. Nothing happens unless you reply yes. Days are counted from the day you approve the scope sheet.</p>
             <NextSteps />
           </div>
         </div>

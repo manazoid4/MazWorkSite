@@ -92,7 +92,7 @@ export function TypePage({ type }: { type: CustomerType }) {
       <section className="mw-resource-cta" aria-labelledby="type-cta-title">
         <div>
           <p className="eyebrow">Free first step</p>
-          <h2 id="type-cta-title">Tell me the job. I’ll send a working preview and a fixed price.</h2>
+          <h2 id="type-cta-title">Tell me the job. I’ll send a focused preview and a fixed price.</h2>
           <p>
             <a className="s-details-link" href="/prices">See the details: every task, what’s included and what happens next →</a>
           </p>

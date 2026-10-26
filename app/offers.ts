@@ -70,7 +70,11 @@ export const FREE_STEP = {
   name: 'Free Preview & Fixed Price',
   short: 'free preview and price',
   price: '£0',
-  body: 'Tell me the job that eats your week or loses you customers. Usually within 1 working day you get a working preview of it with your business name on, plus a fixed price and a written scope sheet. It is built from a template on my own test setup, so it is not on your apps yet.',
+  body: 'Tell me what is slowing your business down. I reply within 1 working day, then show you one practical example of how I would improve it, usually within 3 working days. You get a focused preview, not a finished system, plus a fixed price, or an estimate if the job needs more detail first.',
+  /** What one free preview can be. Exactly one, relevant to the problem described. */
+  includes: ['One example screen or page', 'One small workflow demo, such as the text a missed caller would get', 'One before-and-after of a page you already have'],
+  /** Boundaries that keep the preview free and repeatable. */
+  limits: ['Built on my own test setup: no access to your accounts or systems', 'Nothing goes live, and nothing is connected to your tools', 'One preview per business, not rounds of revisions', 'Not every request needs one: if a quick answer helps more, you get that instead'],
 } as const;
 
 /** The four kinds of work. Every offer belongs to one, and the copy never blurs them. */
@@ -382,7 +386,7 @@ export const LANES: { id: string; title: string; offers: Offer[]; note: string }
  * always knows what the next rung costs.
  */
 export const LADDER: { step: string; what: string; price: string; href: string }[] = [
-  { step: 'Free preview', what: 'A working preview with your business name, and a fixed price.', price: FREE_STEP.price, href: '/contact' },
+  { step: 'Free preview', what: 'One focused example of the fix, and a fixed price.', price: FREE_STEP.price, href: '/contact' },
   { step: 'Starter', what: 'One task from the automation menu that runs by itself, plus 2 small set-ups free.', price: OFFERS[0].price, href: '/prices#systems' },
   { step: 'Business System', what: 'Three tasks joined up, plus a weekly report.', price: OFFERS[1].price.toLowerCase(), href: '/prices#systems' },
   { step: 'Custom', what: 'Software, a portal or an app built for you.', price: OFFERS[2].price.toLowerCase(), href: '/prices#systems' },
@@ -546,7 +550,7 @@ export const CHANGES_WINDOW = {
  * for. Day 0 is the day the scope sheet is approved.
  */
 export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
-  { day: 'Day 0', title: 'Free preview and fixed price', body: 'You tell me the job. Usually within 1 working day I send a working preview with your business name on, a fixed price and a written scope sheet. Nothing to pay.' },
+  { day: 'Day 0', title: 'Free preview and fixed price', body: 'You tell me the job. I reply within 1 working day, and usually within 3 working days I send one focused preview, a fixed price and a written scope sheet. Nothing to pay.' },
   { day: 'Day 1', title: 'You say yes and add me to your apps', body: 'As a user, never with passwords. I confirm the messages and timings with you.' },
   { day: 'Day 3', title: 'Set up on your apps, shown working', body: 'You see it run on your own apps and your own phone, before you pay.' },
   { day: 'Day 7', title: 'Live, then care is optional', body: 'Invoice when you’ve seen it working. Then 30 days of tweaks (two rounds) and a 90-day fix promise. Ongoing care is only if you want it.' },
@@ -558,7 +562,7 @@ export const NEXT_STEPS: { day: string; title: string; body: string }[] = [
  * A demo for a £149 job costs more time than the job pays; small jobs get a written plan.
  */
 export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
-  { title: 'Start with the free preview', body: 'Tell me the job in a few taps. I send a working preview with your business name and a fixed price, usually within 1 working day. No call needed.', note: 'Free' },
+  { title: 'Start with the free preview', body: 'Tell me the job in a few taps. I reply within 1 working day, then send one focused preview and a fixed price, usually within 3 working days. No call needed.', note: 'Free' },
   { title: 'Bigger build? A preview', body: 'For a Business System, Launch Page, Website or Custom Software, your scope sheet says what the bigger-build preview shows and when you get it. Smaller jobs go straight to the fixed price, which is quicker for you.', note: 'Date in your scope sheet' },
   { title: 'Your bigger-build preview arrives', body: 'A clickable preview of one screen, built around your business, sent by the date we agreed. Try it on your own phone.', note: 'Free, no obligation' },
   { title: 'Happy with it? Your scope sheet', body: 'A written plan and one fixed price. Every item listed and invoiced clearly. No extra charges from me beyond the quote.', note: 'Nothing to pay yet' },
@@ -566,7 +570,7 @@ export const DEMO_STEPS: { title: string; body: string; note: string }[] = [
 ];
 
 export const PROMISES: { title: string; body: string }[] = [
-  { title: 'Free preview first', body: 'A working preview and a fixed price, no call needed. Bigger builds also get a full-build preview. No charge.' },
+  { title: 'Free preview first', body: 'One focused preview and a fixed price, no call needed. Bigger builds get the same: one example of the key part, then a written scope. No charge.' },
   { title: 'One fixed price', body: 'A written scope sheet before any work, so you know the full cost.' },
   { title: 'No contracts', body: 'Every package is a one-off you own. Care plans are monthly, cancel any time.' },
 ];

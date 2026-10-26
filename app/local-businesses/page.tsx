@@ -52,7 +52,12 @@ const videoSchema = {
       { '@type': 'Offer', name: VIDEO_EDITS.name, priceCurrency: 'GBP', price: String(VIDEO_PRICES.editBundle) },
     ],
   },
-  mainEntity: { '@type': 'FAQPage', mainEntity: VIDEO_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: VIDEO_FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 
 export default function LocalBusinessesPage() {
@@ -61,13 +66,14 @@ export default function LocalBusinessesPage() {
   return (
     <main className="s-home lb-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema).replace(/</g, '\\u003c') }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
       <SiteHeader />
 
       <section className="lb-hero" id="main-content" tabIndex={-1} aria-labelledby="lb-title">
         <div className="lb-hero-copy">
           <p className="eyebrow">For local businesses</p>
           <h1 id="lb-title">You’re serving customers. The admin can wait.</h1>
-          <p className="lb-lede">A missed call, a quote nobody chased or a booking to confirm can cost you the next job. I set up the follow-up on the tools you already use, so it happens without you remembering.</p>
+          <p className="lb-lede">A missed call, a quote nobody chased or a booking to confirm can cost you the next job. I set up the follow-up on the tools you already use, so it happens without you remembering. Start with <a href="/missed-call-text-back">missed-call text-back</a>.</p>
           <a className="button button-signal lb-primary" href="/contact?src=local-businesses">{MAIN_CTA}</a>
           <p className="lb-note">One person to deal with. A written scope and fixed price before any paid work.</p>
         </div>
@@ -78,7 +84,7 @@ export default function LocalBusinessesPage() {
             <span>They get a useful next step</span><b aria-hidden="true">↓</b>
             <span>You pick up the conversation when free</span>
           </div>
-          <p className="lb-example-foot">What can be connected depends on the tools you already use. We check that first.</p>
+          <p className="lb-example-foot">What can be connected depends on the tools you already use. I check that first.</p>
         </aside>
       </section>
 
@@ -131,7 +137,7 @@ export default function LocalBusinessesPage() {
       <section className="lb-section" id="find-customers" aria-labelledby="lb-find-title">
         <div className="lb-section-intro">
           <h2 id="lb-find-title">Your website and Google listing.</h2>
-          <p>No one can promise a particular search position. What I can do is make the page clear and keep your details right.</p>
+          <p>No one can promise a particular search position. What I can do is make the page clear and keep your details right. See <a href="/website-design">website design options</a> if you need a new site.</p>
         </div>
         <ul className="lb-find-list">
           <li><strong>{launch.name} · {launch.price}</strong><span>One page that explains what you do and makes it easy to enquire, book or buy.</span><a href="/prices#websites">See page options →</a></li>

@@ -79,7 +79,7 @@ test('homepage states the central idea plainly and does not read as small-time',
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
   assert.match(visible, /Less hassle\. Better business\./);
   assert.match(html, /I find the pattern behind the problem, then build a practical way to make it easier/);
-  for (const area of ['Websites and digital experiences', 'Customer enquiries and follow-up', 'Booking and operational improvements', 'Focused custom tools']) assert.match(visible, new RegExp(area));
+  for (const area of ['Websites that help customers take action', 'Enquiries, bookings and follow-up', 'Small business tools and custom solutions']) assert.match(visible, new RegExp(area));
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
@@ -242,13 +242,14 @@ test('the free-check reply promise is 1 working day everywhere (Maz confirmed 27
     const html = await readPage(route);
     assert.doesNotMatch(html, /5 working days/, `${route} still promises 5 working days`);
     assert.doesNotMatch(html, /2 working days/, `${route} still promises 2 working days`);
+    assert.doesNotMatch(html, /preview[^.]{0,40}within 1 working day/i, `${route} promises the preview, not just a reply, within 1 working day`);
   }
   assert.match(await readPage('/'), /within 1 working day/);
 });
 
 test('homepage shows the idea, four areas, work, tools, founder and process without becoming a service catalogue', async () => {
  const html = await readPage('/');
- for (const id of ['what-i-do','do-title','proof-title','tools-title','about-title','how-title','home-enquiry-title']) assert.match(html,new RegExp(`id="${id}"`));
+ for (const id of ['what-i-do','do-title','proof-title','about-title','how-title','home-enquiry-title']) assert.match(html,new RegExp(`id="${id}"`));
  assert.ok((stripNavChrome(html).match(/<section /g)||[]).length <= 8);
  const detail=await readPage('/what-we-do');
  for(const copy of ['How I set it up','Built on what you already use','I never need your passwords','What you own at the end','What I need from you']) assert.ok(detail.includes(copy));
@@ -353,8 +354,9 @@ test('structured data reflects Maz Works founder and broad service positioning',
   assert.equal(person.jobTitle, 'Founder and Software Builder');
   assert.ok(person.sameAs.includes('https://github.com/manazoid4'));
   assert.ok(person.sameAs.includes('https://www.linkedin.com/company/maz-works'));
-  const business = graph.find((node) => [].concat(node['@type']).includes('ProfessionalService'));
-  assert.ok(business, 'homepage needs ProfessionalService structured data for local search');
+  const business = graph.find((node) => node['@type'] === 'Organization');
+  assert.ok(business, 'homepage needs Organization structured data');
+  assert.ok(!graph.some((node) => /LocalBusiness|ProfessionalService/.test([].concat(node['@type']).join())), 'no premises-based schema: Maz Works serves the UK remotely');
   assert.equal(business.address.addressLocality, undefined, 'never publish Maz\'s town');
   assert.equal(business.areaServed.name, 'United Kingdom');
   assert.equal(business.makesOffer[0].price, '0');
@@ -523,10 +525,11 @@ test('no public page or shipped script leaks Maz\'s personal details', async () 
   await walk(exportRoot);
   const leaks = [];
   for (const file of files) {
+    const relative = path.relative(exportRoot, file).split(path.sep).join('/');
     const text = await readFile(file, 'utf8');
     const tokens = new Set(text.toLowerCase().match(/[a-z0-9._%+-]+@[a-z0-9.-]+|[a-z]{4,12}/g) || []);
     if ([...tokens].some((token) => PERSONAL_DETAIL_HASHES.has(createHash('sha256').update(token).digest('hex')))) {
-      leaks.push(path.relative(exportRoot, file));
+      leaks.push(relative);
     }
   }
   assert.deepEqual(leaks, [], `personal details found in: ${leaks.join(', ')}`);
@@ -591,7 +594,7 @@ test('journey illustrations stay decorative, and the home page never hides conte
   const html = await readPage('/');
   assert.doesNotMatch(html, /class="mw-home-demo"|Illustrative workflow/);
   assert.doesNotMatch(html, /style="[^"]*opacity:\s*0/, 'no content may be hidden in the static HTML');
-  assert.match(html, /class="rt-mini"[^>]*aria-hidden="true"/, 'the home mini plan is decorative');
+  assert.doesNotMatch(html, /class="rt-mini"/, 'the table picker showcase left the homepage; it lives on /tools');
 });
 
 

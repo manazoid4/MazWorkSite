@@ -1,9 +1,9 @@
 import './home-visuals.css';
 import { CARE_PLAN } from './offers';
-import { CHECK_REPLY_TIME } from './site';
+import { PREVIEW_TIME } from './site';
 
 const STEPS = [
-  { title: 'Free preview', body: `A working preview with your business name, usually within ${CHECK_REPLY_TIME}.` },
+  { title: 'Free preview', body: `One focused preview of the fix, usually within ${PREVIEW_TIME}.` },
   { title: 'Fixed price', body: 'In a written scope sheet.' },
   { title: 'Built, then shown', body: 'Working before you pay.' },
   { title: 'Care is optional', body: `Only if you want it, from ${CARE_PLAN.price}.` },

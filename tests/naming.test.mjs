@@ -42,8 +42,9 @@ test('the free first step is named "free preview", not "free demo"', () => {
 });
 
 test('the free preview carries the honest one-line explanation', () => {
-  assert.match(FREE_STEP.body, /built from a template on my own test setup/i);
-  assert.match(FREE_STEP.body, /not on your apps yet/i);
+  assert.match(FREE_STEP.body, /focused preview, not a finished system/i);
+  assert.ok(FREE_STEP.limits.some((line) => /no access to your accounts/i.test(line)), 'the preview never needs client access');
+  assert.ok(FREE_STEP.limits.some((line) => /Nothing goes live/i.test(line)), 'the preview is never deployed');
 });
 
 test('the package labels are plain words, not internal speak', () => {

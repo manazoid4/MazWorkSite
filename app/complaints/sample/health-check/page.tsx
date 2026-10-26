@@ -5,6 +5,7 @@ import '../../samples.css';
 
 /** Printable sample, rendered to the downloadable PDF by scripts/make-complaint-samples.mjs. Invented data. */
 export const metadata: Metadata = {
+  alternates: { canonical: '/complaints/sample/health-check' },
   title: 'Sample Complaints Health Check report',
   description: 'A fictional example of the Maz Works Complaints Health Check report, built from invented data.',
   robots: { index: false, follow: false },
