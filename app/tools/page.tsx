@@ -84,6 +84,7 @@ export default function ToolsPage() {
           ))}
         </ul>
         <p className="rx-prose" style={{ marginTop: 24 }}>More experiments and prototypes are on <a className="rx-link" href="/proof">my work page</a>.</p>
+        <p className="rx-prose" style={{ marginTop: 14 }}><strong>Engineering research:</strong> I am investigating the missing reliability layer around AI agents: outcome receipts, cross-agent collisions and recoverable runs. <a className="rx-link" href="/research">Read the research and inspect the source</a>.</p>
       </section>
 
       <section className="rx-band rx-band--peach tl-close" aria-labelledby="tools-close-title">
