@@ -6,81 +6,51 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import './research.css';
 
 const PAGE_URL = `${SITE_URL}/research`;
-const DESCRIPTION = fitDescription('Maz Works research into a missing layer for AI agents: outcome receipts, collision prevention, recoverable sessions, capability tests and human approvals.');
+const DESCRIPTION = fitDescription('Engineering research by Manazir Hussain. Practical experiments in how AI agents coordinate, prove their work and keep people in control.');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Research: reliable AI agent infrastructure | Maz Works' },
+  title: { absolute: 'Engineering Research | Manazir Hussain | Maz Works' },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  openGraph: { title: 'The missing layer for AI agents | Maz Works', description: DESCRIPTION, url: PAGE_URL, type: 'website', images: [OG_IMAGE] },
+  openGraph: {
+    title: 'AI agents can do the work. How do we know it is done?',
+    description: DESCRIPTION,
+    url: PAGE_URL,
+    type: 'article',
+    images: [OG_IMAGE],
+  },
 };
 
-const INVESTIGATIONS = [
+const STUDIES = [
   {
     number: '01',
-    label: 'Evidence of completion',
-    title: 'Receipts, not “done” messages',
-    problem: 'An agent reports success. But did the change actually work?',
-    work: 'Agent Nudge already records versioned, ownership-checked outcome receipts separately from delivery and links to supporting evidence.',
-    next: 'Explore an open, portable receipt format other agent runtimes could emit and independently verify.',
-    status: 'Working local proof · portable format proposed',
-    link: 'https://github.com/manazoid4/agent-nudge',
-    linkText: 'Agent Nudge source',
+    name: 'Agent Nudge',
+    question: 'What happens when two agents work on the same code?',
+    approach: 'I built local checks that share relevant warnings, flag overlapping work and record task outcomes alongside their evidence.',
+    finding: 'A warning can expose a conflict before a covered action. It does not, by itself, prove that a mistake was prevented.',
+    status: 'Working local proof',
+    source: 'https://github.com/manazoid4/agent-nudge',
+    demo: 'https://agent-nudge-bay.vercel.app/demo/overview',
   },
   {
     number: '02',
-    label: 'Cooperation without collisions',
-    title: 'Shared work claims and useful warnings',
-    problem: 'Two agents change the same file or repeat a failure that another agent already diagnosed.',
-    work: 'Agent Nudge has local task/path claims, conflict warnings, scoped context sharing and suppression of irrelevant updates.',
-    next: 'Stress-test expiring claims and recovery across independently running agent tools, not just a rehearsed scenario.',
-    status: 'Local SQLite proof · recorded public demo',
-    link: 'https://agent-nudge-bay.vercel.app/demo/overview',
-    linkText: 'Try the recorded scenario',
+    name: 'mazcraft',
+    question: 'How can longer AI tasks stay organised and reviewable?',
+    approach: 'I built a way to give coding agents tracked jobs, keep work separate and bring decisions and results back for review.',
+    finding: 'Useful autonomy needs clear stopping points and handovers, not just more agents running at once.',
+    status: 'Open-source CLI; platform testing ongoing',
+    source: 'https://github.com/manazoid4/mazcraft',
+    demo: null,
   },
   {
     number: '03',
-    label: 'Continuity and recovery',
-    title: 'A session should survive its agent',
-    problem: 'A long task stalls or hits a usage limit. The next agent starts from scratch, or repeats unsafe work.',
-    work: 'mazcraft explores bounded job queues, worktrees and review. My private cross-agent memory work stores compact project state, evidence and handovers.',
-    next: 'Design a small recovery capsule: last verified state, open questions, blocked actions and the next safe step.',
-    status: 'Existing private implementations · shared format proposed',
-    link: null,
-    linkText: null,
-  },
-  {
-    number: '04',
-    label: 'Trust boundaries',
-    title: 'Test what an agent can really enforce',
-    problem: 'A provider may claim to support approvals, sandboxing or recovery while an adapter silently lacks that capability.',
-    work: 'Agent Nudge uses provider capability manifests and distinguishes unsupported, observed, advisory and enforced behaviour.',
-    next: 'Publish a reusable conformance test harness for the promises that matter before a workflow is trusted.',
-    status: 'Assurance primitives in repo · wider test harness proposed',
-    link: 'https://github.com/manazoid4/agent-nudge',
-    linkText: 'Inspect capability contracts',
-  },
-  {
-    number: '05',
-    label: 'Human decisions',
-    title: 'Approvals at the moment they matter',
-    problem: 'An agent is about to send, buy, delete or deploy, but its owner is away from the terminal.',
-    work: 'nod is an early open-source hardware project investigating a remote approval path with a local hub and a physical device.',
-    next: 'Make requests understandable, time-bound and auditable; preserve the native approval flow if the device is unavailable.',
-    status: 'Early hardware and firmware project',
-    link: 'https://github.com/manazoid4/nod',
-    linkText: 'Explore nod',
-  },
-  {
-    number: '06',
-    label: 'Process evidence',
-    title: 'Check the process, not only the final output',
-    problem: 'The end result looks plausible, but important procedural checks were skipped.',
-    work: 'FlowLens models observed steps as reviewable, versioned processes and has working Markdown/JSON exports from its fixture-based preview.',
-    next: 'Research how an agent run could attach evidence to each required step without logging private content.',
-    status: 'Interactive preview · live capture not shipped',
-    link: 'https://github.com/manazoid4/flowlens',
-    linkText: 'FlowLens source',
+    name: 'nod',
+    question: 'How can a person stay in control away from their desk?',
+    approach: 'I am exploring a small physical device for reviewing important agent requests and responding without opening a laptop.',
+    finding: 'The approval experience needs to be understandable and safe when the device is unavailable. This remains an early build.',
+    status: 'Early hardware research',
+    source: 'https://github.com/manazoid4/nod',
+    demo: null,
   },
 ] as const;
 
@@ -88,99 +58,89 @@ export default function ResearchPage() {
   return (
     <main className="ar-page">
       <SiteHeader />
-      <Breadcrumbs items={[{ label: 'Tools and demos', href: '/tools' }, { label: 'Research' }]} />
-      <header className="ar-hero" id="main-content" tabIndex={-1}>
-        <div className="ar-hero-copy">
-          <p className="ar-eyebrow">Maz Works / Engineering research</p>
-          <h1>Agents can act.<br /><em>Who checks the work?</em></h1>
-          <p className="ar-intro">I am not building another agent runner or chatbot. I am exploring the layer around agents: <strong>did the work happen, can we prove it, can the next agent pick up safely, and who approved it?</strong></p>
-          <div className="ar-actions">
-            <a className="button button-signal" href="#work">See the research</a>
-            <a className="ar-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">My GitHub <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <div className="ar-flow" aria-label="Proposed agent reliability workflow">
-          <p className="ar-flow-label">Proposed reliability layer</p>
-          <div className="ar-flow-step"><span>01</span><strong>Agent takes action</strong><small>Any compatible runtime</small></div>
-          <div className="ar-flow-step"><span>02</span><strong>Rules and approval</strong><small>What is actually enforced?</small></div>
-          <div className="ar-flow-step"><span>03</span><strong>Independent checks</strong><small>Tests, diff, artifact, outcome</small></div>
-          <div className="ar-flow-step"><span>04</span><strong>Portable receipt</strong><small>Evidence for the next person or agent</small></div>
-          <p className="ar-flow-foot">A design direction, not a claim that a unified platform is already deployed.</p>
-        </div>
-      </header>
+      <div className="ar-wrap">
+        <Breadcrumbs items={[{ label: 'Tools and demos', href: '/tools' }, { label: 'Research' }]} />
+        <article className="ar-paper">
+          <header className="ar-hero" id="main-content" tabIndex={-1}>
+            <div className="ar-paper-meta">
+              <span>Maz Works / Engineering research</span>
+              <time dateTime="2026-10-28">28 October 2026</time>
+            </div>
+            <h1>AI agents can do the work. <em>How do we know it’s done?</em></h1>
+            <p className="ar-byline">Research and engineering by <strong>Manazir Hussain</strong></p>
+            <div className="ar-abstract">
+              <p className="ar-kicker">Abstract</p>
+              <p>As AI agents take on bigger tasks, a convincing answer is no longer enough. We need to know what actually happened, what was checked and when a person needs to decide. My work explores those questions through small, testable tools rather than another AI agent.</p>
+            </div>
+            <div className="ar-actions">
+              <a className="button button-signal" href="#experiments">Explore the projects</a>
+              <a className="ar-text-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">My GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+          </header>
 
-      <section className="ar-difference" aria-labelledby="ar-difference-title">
-        <div>
-          <p className="ar-eyebrow">Where I think the gap is</p>
-          <h2 id="ar-difference-title">Don't compete with the engines. Build what they can use.</h2>
-        </div>
-        <div className="ar-difference-copy">
-          <p><a href="https://opencode.ai/" target="_blank" rel="noopener noreferrer">OpenCode</a> already handles coding agents, multiple sessions and subagents. <a href="https://github.com/odysseus-dev/odysseus" target="_blank" rel="noopener noreferrer">Odysseus</a> offers a local-first AI workspace. Rebuilding either would add little.</p>
-          <p><strong>My focus is different:</strong> an external reliability layer that can work with multiple runtimes and leave inspectable proof after a task ends.</p>
-          <p className="ar-honesty">Not a claim of first-in-the-world novelty. This is a specific direction I can test and contribute to through existing engineering work.</p>
-        </div>
-      </section>
+          <section className="ar-thesis" aria-labelledby="ar-question-title">
+            <span className="ar-number">The research question</span>
+            <h2 id="ar-question-title">What would make an agent’s work worth trusting?</h2>
+            <p>My focus is the work around the model: coordination, evidence, recovery and human decisions. These projects test different parts of that problem.</p>
+          </section>
 
-      <section className="ar-section" id="work" aria-labelledby="ar-work-title">
-        <div className="ar-section-head">
-          <p className="ar-eyebrow">Six concrete lines of research</p>
-          <h2 id="ar-work-title">Infrastructure problems worth solving.</h2>
-          <p>Each area is tied to an actual repository or private implementation. Existing work, working demos and proposed next steps are kept separate.</p>
-        </div>
-        <div className="ar-list">
-          {INVESTIGATIONS.map((item) => (
-            <article className="ar-item" key={item.number}>
-              <div className="ar-item-index"><span>{item.number}</span><small>{item.label}</small></div>
-              <div className="ar-item-body">
-                <h3>{item.title}</h3>
-                <p className="ar-problem">{item.problem}</p>
-                <p><strong>Existing work:</strong> {item.work}</p>
-                <p><strong>Research direction:</strong> {item.next}</p>
-                <p className="ar-status">{item.status}</p>
-                {item.link && <a className="ar-link" href={item.link} rel="noopener noreferrer" target="_blank">{item.linkText} <span aria-hidden="true">↗</span></a>}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+          <section className="ar-experiments" id="experiments" aria-labelledby="ar-experiments-title">
+            <div className="ar-section-heading">
+              <p className="ar-kicker">Selected experiments</p>
+              <h2 id="ar-experiments-title">Engineering, with the evidence linked.</h2>
+              <p>Three projects. Each has a question, something built and a clear limit to what it proves.</p>
+            </div>
+            <div className="ar-studies">
+              {STUDIES.map((study) => (
+                <article className="ar-study" key={study.number}>
+                  <div className="ar-study-top">
+                    <span className="ar-number">{study.number} / Research note</span>
+                    <span className="ar-status">{study.status}</span>
+                  </div>
+                  <h3>{study.name}</h3>
+                  <p className="ar-study-question">{study.question}</p>
+                  <p><strong>What I built.</strong> {study.approach}</p>
+                  <p><strong>What it shows.</strong> {study.finding}</p>
+                  <div className="ar-study-links">
+                    <a href={study.source} target="_blank" rel="noopener noreferrer">Read the source <span aria-hidden="true">↗</span></a>
+                    {study.demo && <a href={study.demo} target="_blank" rel="noopener noreferrer">See the recorded demo <span aria-hidden="true">↗</span></a>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
 
-      <section className="ar-receipt" aria-labelledby="ar-receipt-title">
-        <div>
-          <p className="ar-eyebrow">A potential public contribution</p>
-          <h2 id="ar-receipt-title">An agent work receipt.</h2>
-          <p>A proposed portable output that answers five questions: <strong>What was requested? What changed? Which checks actually ran? What approval was given? What remains unverified?</strong></p>
-          <p>Existing observability can record what tools were called. I want to explore a small format for <em>outcome evidence</em>, compatible with existing standards instead of replacing them.</p>
-          <p className="ar-quiet">Proposal only. The example opposite illustrates the contract; it is not a receipt from a real agent run.</p>
-        </div>
-        <div className="ar-receipt-card" role="img" aria-label="Illustrative work receipt showing a verified test, recorded approval, and an unverified deployment">
-          <div className="ar-receipt-bar"><span>WORK RECEIPT / EXAMPLE</span><span>v0 idea</span></div>
-          <div className="ar-receipt-line"><span>Requested</span><strong>Fix duplicate submissions</strong></div>
-          <div className="ar-receipt-line"><span>Change</span><strong>Patch + diff reference</strong></div>
-          <div className="ar-receipt-line"><span>Check</span><strong>PASS · test evidence attached</strong></div>
-          <div className="ar-receipt-line"><span>Approval</span><strong>Human decision recorded</strong></div>
-          <div className="ar-receipt-line"><span>Still unknown</span><strong>Production outcome not observed</strong></div>
-        </div>
-      </section>
+          <section className="ar-proposal" aria-labelledby="ar-proposal-title">
+            <div>
+              <p className="ar-kicker">Working hypothesis</p>
+              <h2 id="ar-proposal-title">Every agent task should leave a work receipt.</h2>
+              <p>A simple, portable record of what was requested, what changed, which checks ran and what remains unknown could make it easier for people and other agents to review the outcome.</p>
+              <p className="ar-caveat">This is a proposed direction, not a released standard or a finished cross-tool product.</p>
+            </div>
+            <div className="ar-receipt" aria-label="Four questions a proposed work receipt would answer">
+              <p className="ar-receipt-title">WORK RECEIPT / CONCEPT</p>
+              <div><span>01 / Task</span><strong>What was requested?</strong></div>
+              <div><span>02 / Change</span><strong>What actually changed?</strong></div>
+              <div><span>03 / Evidence</span><strong>What was checked?</strong></div>
+              <div><span>04 / Limits</span><strong>What is still unverified?</strong></div>
+            </div>
+          </section>
 
-      <section className="ar-standards" aria-labelledby="ar-standards-title">
-        <h2 id="ar-standards-title">Build on standards, not around them.</h2>
-        <p>OpenTelemetry already describes agent and tool traces; Agent2Agent defines tasks and artifacts. My research should complement those systems with practical checks and compact outcome evidence, rather than inventing a competing agent protocol.</p>
-        <div className="ar-standards-links">
-          <a href="https://github.com/open-telemetry/semantic-conventions-genai" target="_blank" rel="noopener noreferrer">OpenTelemetry GenAI conventions ↗</a>
-          <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noopener noreferrer">Agent2Agent protocol ↗</a>
-        </div>
-      </section>
-
-      <section className="ar-last" aria-labelledby="ar-last-title">
-        <p className="ar-eyebrow">Research, not a sales pitch</p>
-        <h2 id="ar-last-title">Interested in making agent work more trustworthy?</h2>
-        <p>Read the source, test the scenarios, or get in touch with a concrete failure case. Contributions and critical feedback are welcome.</p>
-        <div className="ar-actions">
-          <a href="https://github.com/manazoid4/agent-nudge" className="button button-signal" target="_blank" rel="noopener noreferrer">Start with Agent Nudge</a>
-          <a href="/contact" className="ar-link">Contact Maz Works <span aria-hidden="true">↗</span></a>
-        </div>
-      </section>
-      <SiteFooter />
+          <footer className="ar-paper-footer">
+            <div>
+              <p className="ar-kicker">Further reading &amp; discussion</p>
+              <h2>Open work, open questions.</h2>
+              <p>I publish code and research notes so others can inspect the work, challenge the approach and build on it. I am also exploring process evidence through <a href="https://github.com/manazoid4/flowlens" target="_blank" rel="noopener noreferrer">FlowLens</a>.</p>
+              <p className="ar-references">Related work: <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry</a> · <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noopener noreferrer">Agent2Agent</a></p>
+            </div>
+            <div className="ar-footer-actions">
+              <a className="ar-text-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">Explore the repositories ↗</a>
+              <a className="ar-text-link" href="mailto:info@mazworks.uk?subject=Engineering%20research">Discuss the research ↗</a>
+            </div>
+          </footer>
+        </article>
+      </div>
+      <SiteFooter conversion={<></>} />
     </main>
   );
 }
