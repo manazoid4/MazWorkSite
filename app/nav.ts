@@ -70,6 +70,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/proof', label: 'My work' },
       { href: '/tools', label: 'Tools and demos' },
+      { href: '/research', label: 'Agent infrastructure research' },
       { href: '/tools/restaurant-tables', label: 'Restaurant table picker (concept demo)' },
     ],
   },
