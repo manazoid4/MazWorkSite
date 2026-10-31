@@ -1,0 +1,16 @@
+.sc-stage { font-size: .85rem; font-weight: 800; color: #3b5d4b; background: #e4eee3; border: 1px solid #c8dbc9; border-radius: 4px; padding: 7px 10px; }
+.sc-table { border: 1px solid var(--ar-border); border-radius: 14px; overflow: hidden; background: #fffef9; }
+.sc-row { display: grid; grid-template-columns: 1fr 1.3fr 1.3fr 1.3fr; gap: 14px; padding: 15px 18px; border-top: 1px solid var(--ar-border); line-height: 1.5; font-size: .95rem; }
+.sc-head { border-top: 0; background: #253a47; color: #fff; font: 800 .74rem var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.sc-h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); margin: 0; }
+.sc-evidence, .sc-limits { grid-column: 2; display: grid; gap: 12px; padding-left: 20px; line-height: 1.6; max-width: 70ch; }
+.sc-evidence { grid-column: auto; }
+.sc-evidence a { font-weight: 800; white-space: nowrap; }
+.sc-stages { list-style: none; padding: 0; margin: 0; }
+.sc-stages li { display: grid; gap: 4px; padding: 14px 19px; border-top: 1px solid #e0e5e7; }
+.sc-stages li[aria-current='step'] { background: #f9eecb; }
+@media (max-width: 700px) {
+  .sc-row { grid-template-columns: 1fr; gap: 6px; }
+  .sc-head { display: none; }
+  .sc-limits { grid-column: 1; }
+}

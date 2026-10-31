@@ -24,6 +24,17 @@ export const metadata: Metadata = {
 const STUDIES = [
   {
     number: '01',
+    name: 'Scorensic',
+    question: 'Who checks the grader behind an AI benchmark?',
+    approach: 'I am building an open-source tool that feeds benchmark graders answers whose verdict is already known, repeats them, and searches what the agent can see for leaked answers.',
+    finding: 'It catches the deliberate faults in synthetic test graders. It has not yet been validated on a real benchmark.',
+    status: 'New: research and development',
+    source: 'https://github.com/manazoid4/scorensic',
+    demo: null,
+    page: '/research/scorensic',
+  },
+  {
+    number: '02',
     name: 'Agent Nudge',
     question: 'What happens when two agents work on the same code?',
     approach: 'I built local checks that share relevant warnings, flag overlapping work and record task outcomes alongside their evidence.',
@@ -33,7 +44,7 @@ const STUDIES = [
     demo: 'https://agent-nudge-bay.vercel.app/demo/overview',
   },
   {
-    number: '02',
+    number: '03',
     name: 'mazcraft',
     question: 'How can longer AI tasks stay organised and reviewable?',
     approach: 'I built a way to give coding agents tracked jobs, keep work separate and bring decisions and results back for review.',
@@ -43,7 +54,7 @@ const STUDIES = [
     demo: null,
   },
   {
-    number: '03',
+    number: '04',
     name: 'nod',
     question: 'How can a person stay in control away from their desk?',
     approach: 'I am exploring a small physical device for reviewing important agent requests and responding without opening a laptop.',
@@ -88,7 +99,7 @@ export default function ResearchPage() {
             <div className="ar-section-heading">
               <p className="ar-kicker">Selected experiments</p>
               <h2 id="ar-experiments-title">Engineering, with the evidence linked.</h2>
-              <p>Three projects. Each has a question, something built and a clear limit to what it proves.</p>
+              <p>Four projects. Each has a question, something built and a clear limit to what it proves.</p>
             </div>
             <div className="ar-studies">
               {STUDIES.map((study) => (
@@ -102,6 +113,7 @@ export default function ResearchPage() {
                   <p><strong>What I built.</strong> {study.approach}</p>
                   <p><strong>What it shows.</strong> {study.finding}</p>
                   <div className="ar-study-links">
+                    {'page' in study && <a href={study.page}>Read the project page <span aria-hidden="true">→</span></a>}
                     <a href={study.source} target="_blank" rel="noopener noreferrer">Read the source <span aria-hidden="true">↗</span></a>
                     {study.demo && <a href={study.demo} target="_blank" rel="noopener noreferrer">See the recorded demo <span aria-hidden="true">↗</span></a>}
                   </div>
