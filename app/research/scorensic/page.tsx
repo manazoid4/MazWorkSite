@@ -4,18 +4,19 @@ import { fitDescription, OG_IMAGE } from '../../seo';
 import { SITE_URL } from '../../site';
 import { SiteFooter, SiteHeader } from '../../site-chrome';
 import '../research.css';
+// Engineer-only sections sit in <details> so the page stays short for business readers (1 Nov 2026).
 import './scorensic.css';
 
 const PAGE_URL = `${SITE_URL}/research/scorensic`;
 const REPO = 'https://github.com/manazoid4/scorensic';
-const DESCRIPTION = fitDescription('Scorensic: an open-source research project checking whether AI benchmark graders mark answers correctly. Offline, no API key, early research stage.');
+const DESCRIPTION = fitDescription('Scorensic: open-source test packs that show whether AI can really do a business job, such as complaints handling, with marking that cannot be fooled.');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Scorensic: testing AI benchmark graders | Maz Works' },
+  title: { absolute: 'Scorensic: can AI do this job? | Maz Works' },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Scorensic: who checks the benchmark’s grader?',
+    title: 'Scorensic: can AI do this job?',
     description: DESCRIPTION,
     url: PAGE_URL,
     type: 'article',
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
 };
 
 // Update these lists as work is verified. Stages only advance with linked evidence.
-const UPDATED = { iso: '2026-10-31', label: '31 October 2026' };
+const UPDATED = { iso: '2026-11-01', label: '1 November 2026' };
 const STAGES = ['Research initiated', 'First reproducible tests', 'MVP working', 'External benchmark validation', 'Public beta'];
-const CURRENT_STAGE = 1;
+const CURRENT_STAGE = 2;
 
 const EVIDENCE = [
   { claim: 'A do-nothing agent scored 38% on tau-bench airline tasks.', source: 'Agentic Benchmark Checklist, 2025', href: 'https://arxiv.org/abs/2507.02825' },
@@ -44,12 +45,15 @@ const GAPS = [
 
 const EXPERIMENTS = [
   { name: 'Synthetic grader faults', status: 'Done', detail: 'Six toy graders: a clean control and five with one deliberate fault each (accepts wrong answers, rejects valid ones, inconsistent scoring, leaked answers, a do-nothing agent passes). All five faults detected; the clean control shows no findings. Synthetic only.' },
-  { name: 'Reproduce a real scorer bug', status: 'Next', detail: 'Run Scorensic against the inspect_evals scorer before and after PR #2334, and report what it catches and misses.' },
-  { name: 'Benchmark adapters', status: 'Planned', detail: 'Connect to Inspect AI scorers and Harbor verifiers, so maintainers can run the checks without rewriting their graders.' },
+  { name: 'Reproduce a real scorer bug', status: 'Done', detail: 'Against the inspect_evals scorers from PR #2334, it caught 2 of the 3 known problem types and raised no false alarms on the fixed versions.' },
+  { name: 'UK complaints pack on real models', status: 'First results', detail: '54 short tasks and 8 reply letters on two small local models. Neither worked out a single deadline correctly, and neither wrote a regulated reply that met the ombudsman rules. Invented data, small models only.' },
+  { name: 'Benchmark adapters', status: 'In progress', detail: 'Inspect AI is connected. Harbor verifiers are next.' },
 ] as const;
 
 const LIMITS = [
-  'No real benchmark has been validated yet. Every detection so far is on synthetic graders written to contain the fault.',
+  'Grader checks are validated on one real scorer bug so far, not across benchmarks.',
+  'Business results so far cover two small models on invented complaints. Larger models are untested.',
+  'Rules check what a letter says, not its tone. A person should still read it.',
   'Passing every check does not prove a grader is correct. It only means these probes passed.',
   'The leaked-answer search is a plain text match. It cannot yet see git history, encoded or paraphrased leaks.',
   'It runs grader code in a separate process with a timeout. That is not a security sandbox.',
@@ -60,21 +64,22 @@ export default function ScorensicPage() {
     <main className="ar-page">
       <SiteHeader />
       <div className="ar-wrap">
-        <Breadcrumbs items={[{ label: 'Tools and demos', href: '/tools' }, { label: 'Research', href: '/research' }, { label: 'Scorensic' }]} />
+        <Breadcrumbs items={[{ label: 'Research', href: '/research' }, { label: 'Scorensic' }]} />
         <article className="ar-paper">
           <header className="ar-hero" id="main-content" tabIndex={-1}>
             <div className="ar-paper-meta">
               <span>Maz Works / Open-source research</span>
               <time dateTime={UPDATED.iso}>Updated {UPDATED.label}</time>
             </div>
-            <h1>Scorensic. <em>Who checks the grader?</em></h1>
-            <p className="ar-byline">Making AI agent evaluations more reproducible, transparent and trustworthy.</p>
+            <h1>Scorensic. <em>Can AI do this job?</em></h1>
+            <p className="ar-byline">Open-source test packs for real business work, with marking that can’t be fooled.</p>
             <div className="ar-abstract">
               <p className="ar-kicker">Abstract</p>
-              <p>An independent open-source engineering project investigating how AI benchmarks can produce misleading results through flawed grading, inconsistent execution, leaked answers and other evaluation errors. It builds lightweight tools that detect and reproduce these failures on an ordinary laptop, with no expensive computing.</p>
+              <p>Put real tasks and right answers in a sheet. Scorensic runs them on any AI model and gives a one-page report card: right, confidently wrong, didn’t know, consistent, and whether data left the building. Before scoring, it tries to fool its own marking. The first pack covers UK complaints handling. Underneath is an engine that checks the graders behind AI benchmarks.</p>
             </div>
             <div className="ar-actions">
-              <a className="button button-signal" href={REPO} target="_blank" rel="noopener noreferrer">View the repository</a>
+              <a className="button button-signal" href="https://github.com/manazoid4/scorensic/blob/main/validation/FIRST-REAL-RUN.md" target="_blank" rel="noopener noreferrer">Read the first results</a>
+              <a className="ar-text-link" href={REPO} target="_blank" rel="noopener noreferrer">View the repository ↗</a>
               <span className="sc-stage">Status: {STAGES[CURRENT_STAGE]} (research and development)</span>
             </div>
           </header>
@@ -91,7 +96,8 @@ export default function ScorensicPage() {
             <p>Scorensic gives a grader the correct answer, harmless reformattings, empty output, refusals, known-wrong and slightly altered answers. It repeats each one in separate runs, and searches what the agent can see for the answer key. Every disagreement is reported as a specific input you can rerun, not a single score.</p>
           </section>
 
-          <section className="ar-experiments" aria-labelledby="sc-gaps">
+          <details className="rs-more"><summary>Where it fits among existing tools</summary>
+<section className="ar-experiments" aria-labelledby="sc-gaps">
             <div className="ar-section-heading">
               <p className="ar-kicker">Where it fits</p>
               <h2 id="sc-gaps">Built for the gaps other tools leave.</h2>
@@ -104,6 +110,7 @@ export default function ScorensicPage() {
               ))}
             </div>
           </section>
+</details>
 
           <section className="ar-experiments" aria-labelledby="sc-experiments">
             <div className="ar-section-heading">
@@ -120,7 +127,8 @@ export default function ScorensicPage() {
             </div>
           </section>
 
-          <section className="ar-experiments" aria-labelledby="sc-evidence">
+          <details className="rs-more"><summary>Real grader failures found by others</summary>
+<section className="ar-experiments" aria-labelledby="sc-evidence">
             <div className="ar-section-heading">
               <p className="ar-kicker">Research evidence</p>
               <h2 id="sc-evidence">Real grader failures, from primary sources.</h2>
@@ -132,6 +140,7 @@ export default function ScorensicPage() {
               ))}
             </ul>
           </section>
+</details>
 
           <section className="ar-proposal" aria-labelledby="sc-progress">
             <div>

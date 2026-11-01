@@ -14,3 +14,7 @@
   .sc-head { display: none; }
   .sc-limits { grid-column: 1; }
 }
+
+.sc-table { overflow-x: auto; max-width: 100%; }
+.rs-more .ar-experiments { margin-top: 12px; }
+@media (max-width: 640px) { .sc-evidence a { white-space: normal; } .sc-evidence, .sc-limits { grid-column: 1 / -1; min-width: 0; } }

@@ -6,63 +6,28 @@ import { SiteFooter, SiteHeader } from '../site-chrome';
 import './research.css';
 
 const PAGE_URL = `${SITE_URL}/research`;
-const DESCRIPTION = fitDescription('Engineering research by Manazir Hussain. Practical experiments in how AI agents coordinate, prove their work and keep people in control.');
+const SCORENSIC = 'https://github.com/manazoid4/scorensic';
+const RUN = 'https://github.com/manazoid4/scorensic/blob/main/validation/FIRST-REAL-RUN.md';
+const DESCRIPTION = fitDescription('Open research from Maz Works: testing whether AI can really do a business job, such as answering complaints, before anyone relies on it.');
 
 export const metadata: Metadata = {
-  title: { absolute: 'Engineering Research | Manazir Hussain | Maz Works' },
+  title: { absolute: 'Research: can AI do the job? | Maz Works' },
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  openGraph: {
-    title: 'AI agents can do the work. How do we know it is done?',
-    description: DESCRIPTION,
-    url: PAGE_URL,
-    type: 'article',
-    images: [OG_IMAGE],
-  },
+  openGraph: { title: 'Can AI do the job? Test it before you rely on it.', description: DESCRIPTION, url: PAGE_URL, type: 'article', images: [OG_IMAGE] },
 };
 
-const STUDIES = [
-  {
-    number: '01',
-    name: 'Scorensic',
-    question: 'Who checks the grader behind an AI benchmark?',
-    approach: 'I am building an open-source tool that feeds benchmark graders answers whose verdict is already known, repeats them, and searches what the agent can see for leaked answers.',
-    finding: 'It catches the deliberate faults in synthetic test graders. It has not yet been validated on a real benchmark.',
-    status: 'New: research and development',
-    source: 'https://github.com/manazoid4/scorensic',
-    demo: null,
-    page: '/research/scorensic',
-  },
-  {
-    number: '02',
-    name: 'Agent Nudge',
-    question: 'What happens when two agents work on the same code?',
-    approach: 'I built local checks that share relevant warnings, flag overlapping work and record task outcomes alongside their evidence.',
-    finding: 'A warning can expose a conflict before a covered action. It does not, by itself, prove that a mistake was prevented.',
-    status: 'Working local proof',
-    source: 'https://github.com/manazoid4/agent-nudge',
-    demo: 'https://agent-nudge-bay.vercel.app/demo/overview',
-  },
-  {
-    number: '03',
-    name: 'mazcraft',
-    question: 'How can longer AI tasks stay organised and reviewable?',
-    approach: 'I built a way to give coding agents tracked jobs, keep work separate and bring decisions and results back for review.',
-    finding: 'Useful autonomy needs clear stopping points and handovers, not just more agents running at once.',
-    status: 'Open-source CLI; platform testing ongoing',
-    source: 'https://github.com/manazoid4/mazcraft',
-    demo: null,
-  },
-  {
-    number: '04',
-    name: 'nod',
-    question: 'How can a person stay in control away from their desk?',
-    approach: 'I am exploring a small physical device for reviewing important agent requests and responding without opening a laptop.',
-    finding: 'The approval experience needs to be understandable and safe when the device is unavailable. This remains an early build.',
-    status: 'Early hardware research',
-    source: 'https://github.com/manazoid4/nod',
-    demo: null,
-  },
+// Every figure here comes from the Scorensic repository (validation/FIRST-REAL-RUN.md, 1 Nov 2026). Update only with linked evidence.
+const RESULTS = [
+  { figure: '0 of 8', text: 'deadlines worked out correctly by either model.' },
+  { figure: '0 of 2', text: 'regulated replies that met the ombudsman rules. One sounded compliant but wasn’t.' },
+  { figure: '8 of 8', text: 'letters refused by one model. It called a gym cancellation reply a possible scam.' },
+] as const;
+
+const OTHER = [
+  { name: 'Agent Nudge', what: 'Warns AI coding tools when they are about to work on the same files.', status: 'Working local proof', source: 'https://github.com/manazoid4/agent-nudge', demo: 'https://agent-nudge-bay.vercel.app/demo/overview' },
+  { name: 'mazcraft', what: 'Gives longer AI jobs clear stopping points and handovers a person can review.', status: 'Open-source tool, testing ongoing', source: 'https://github.com/manazoid4/mazcraft', demo: null },
+  { name: 'nod', what: 'A small device for approving important AI requests away from the desk.', status: 'Early hardware', source: 'https://github.com/manazoid4/nod', demo: null },
 ] as const;
 
 export default function ResearchPage() {
@@ -70,84 +35,97 @@ export default function ResearchPage() {
     <main className="ar-page">
       <SiteHeader />
       <div className="ar-wrap">
-        <Breadcrumbs items={[{ label: 'Tools and demos', href: '/tools' }, { label: 'Research' }]} />
+        <Breadcrumbs items={[{ label: 'Research' }]} />
         <article className="ar-paper">
           <header className="ar-hero" id="main-content" tabIndex={-1}>
             <div className="ar-paper-meta">
-              <span>Maz Works / Engineering research</span>
-              <time dateTime="2026-10-28">28 October 2026</time>
+              <span>Maz Works / Open research</span>
+              <time dateTime="2026-11-01">Updated 1 November 2026</time>
             </div>
-            <h1>AI agents can do the work. <em>How do we know it’s done?</em></h1>
-            <p className="ar-byline">Research and engineering by <strong>Manazir Hussain</strong></p>
+            <h1>Can AI do the job? <em>Test it before you rely on it.</em></h1>
             <div className="ar-abstract">
-              <p className="ar-kicker">Abstract</p>
-              <p>As AI agents take on bigger tasks, a convincing answer is no longer enough. We need to know what actually happened, what was checked and when a person needs to decide. My work explores those questions through small, testable tools rather than another AI agent.</p>
+              <p className="ar-kicker">In short</p>
+              <p>AI is being sold for customer work. I test whether it can actually do the job, on real tasks, and publish what I find.</p>
             </div>
             <div className="ar-actions">
-              <a className="button button-signal" href="#experiments">Explore the projects</a>
-              <a className="ar-text-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">My GitHub <span aria-hidden="true">↗</span></a>
+              <a className="button button-signal" href="#scorensic">See the first results</a>
+              <a className="ar-text-link" href="/contact?src=research#contact">Have your own tasks tested <span aria-hidden="true">→</span></a>
             </div>
           </header>
 
-          <section className="ar-thesis" aria-labelledby="ar-question-title">
-            <span className="ar-number">The research question</span>
-            <h2 id="ar-question-title">What would make an agent’s work worth trusting?</h2>
-            <p>My focus is the work around the model: coordination, evidence, recovery and human decisions. These projects test different parts of that problem.</p>
+          <section className="ar-thesis" aria-labelledby="why-title">
+            <span className="ar-number">Why it matters</span>
+            <h2 id="why-title">A confident wrong answer costs more than no answer.</h2>
+            <p>A missed deadline or a non-compliant reply can go to the ombudsman: <a href="https://www.financial-ombudsman.org.uk/businesses/resolving-complaint/case-fees" target="_blank" rel="noopener noreferrer">£680 a case</a> once a firm’s free allowance is used.</p>
           </section>
 
-          <section className="ar-experiments" id="experiments" aria-labelledby="ar-experiments-title">
+          <section className="ar-experiments" id="scorensic" aria-labelledby="sc-title">
             <div className="ar-section-heading">
-              <p className="ar-kicker">Selected experiments</p>
-              <h2 id="ar-experiments-title">Engineering, with the evidence linked.</h2>
-              <p>Four projects. Each has a question, something built and a clear limit to what it proves.</p>
+              <p className="ar-kicker">Flagship project</p>
+              <h2 id="sc-title">Scorensic: a test pack for real jobs.</h2>
+              <p>Your tasks in, a one-page report card out: right, confidently wrong, and whether your data left the building. Letters are checked against what they must and must never say. Complaints come first; customer service, invoices and bookings are next.</p>
             </div>
             <div className="ar-studies">
-              {STUDIES.map((study) => (
-                <article className="ar-study" key={study.number}>
-                  <div className="ar-study-top">
-                    <span className="ar-number">{study.number} / Research note</span>
-                    <span className="ar-status">{study.status}</span>
-                  </div>
-                  <h3>{study.name}</h3>
-                  <p className="ar-study-question">{study.question}</p>
-                  <p><strong>What I built.</strong> {study.approach}</p>
-                  <p><strong>What it shows.</strong> {study.finding}</p>
-                  <div className="ar-study-links">
-                    {'page' in study && <a href={study.page}>Read the project page <span aria-hidden="true">→</span></a>}
-                    <a href={study.source} target="_blank" rel="noopener noreferrer">Read the source <span aria-hidden="true">↗</span></a>
-                    {study.demo && <a href={study.demo} target="_blank" rel="noopener noreferrer">See the recorded demo <span aria-hidden="true">↗</span></a>}
-                  </div>
-                </article>
-              ))}
+              <article className="ar-study">
+                <div className="ar-study-top"><h3>First test: UK complaints handling</h3><span className="ar-status">Early results</span></div>
+                <p className="ar-study-question">62 tasks from invented complaints, run on two small AI models.</p>
+                <ul className="rs-results">
+                  {RESULTS.map((r) => <li key={r.figure}><strong>{r.figure}</strong> {r.text}</li>)}
+                </ul>
+                <p>Lesson: calculate dates with ordinary software, check every letter, keep a person in charge.</p>
+                <p className="ar-caveat">Larger models are not tested yet. A first result, not a verdict.</p>
+                <div className="ar-study-links">
+                  <a className="ar-text-link" href={RUN} target="_blank" rel="noopener noreferrer">Read the full results ↗</a>
+                  <a className="ar-text-link" href="/research/scorensic">Project page →</a>
+                  <a className="ar-text-link" href={SCORENSIC} target="_blank" rel="noopener noreferrer">Source code ↗</a>
+                </div>
+              </article>
             </div>
           </section>
 
-          <section className="ar-proposal" aria-labelledby="ar-proposal-title">
+          <section className="ar-proposal" aria-labelledby="use-title">
             <div>
-              <p className="ar-kicker">Working hypothesis</p>
-              <h2 id="ar-proposal-title">Every agent task should leave a work receipt.</h2>
-              <p>A simple, portable record of what was requested, what changed, which checks ran and what remains unknown could make it easier for people and other agents to review the outcome.</p>
-              <p className="ar-caveat">This is a proposed direction, not a released standard or a finished cross-tool product.</p>
+              <p className="ar-kicker">Use it or get involved</p>
+              <h2 id="use-title">Bring 10 to 20 real examples.</h2>
+              <p>I’ll show you where AI helps, where it doesn’t, and what a safe set-up looks like.</p>
             </div>
-            <div className="ar-receipt" aria-label="Four questions a proposed work receipt would answer">
-              <p className="ar-receipt-title">WORK RECEIPT / CONCEPT</p>
-              <div><span>01 / Task</span><strong>What was requested?</strong></div>
-              <div><span>02 / Change</span><strong>What actually changed?</strong></div>
-              <div><span>03 / Evidence</span><strong>What was checked?</strong></div>
-              <div><span>04 / Limits</span><strong>What is still unverified?</strong></div>
+            <div className="ar-footer-actions">
+              <a className="button button-signal" href="/contact?src=research#contact">Tell me what your team handles</a>
+              <a className="ar-text-link" href={SCORENSIC} target="_blank" rel="noopener noreferrer">Run it yourself ↗</a>
             </div>
+          </section>
+
+          <section className="ar-experiments" aria-labelledby="other-title">
+            <details className="rs-more">
+              <summary id="other-title">Other experiments: keeping AI tools organised and people in control</summary>
+              <ul className="rs-other">
+                {OTHER.map((o) => (
+                  <li key={o.name}>
+                    <div className="ar-study-top"><h3>{o.name}</h3><span className="ar-status">{o.status}</span></div>
+                    <p>{o.what}</p>
+                    <p className="ar-study-links">
+                      <a className="ar-text-link" href={o.source} target="_blank" rel="noopener noreferrer">Source ↗</a>
+                      {o.demo && <a className="ar-text-link" href={o.demo} target="_blank" rel="noopener noreferrer">Recorded demo ↗</a>}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </details>
+            <details className="rs-more">
+              <summary>For engineers: how it works</summary>
+              <p>Scorensic started as a checker for AI benchmark graders. It feeds a grader answers whose verdict is already known (blank, hedged, reformatted, near-miss), re-runs them in separate processes and searches what the agent can see for leaked answers. On a real scorer bug in inspect_evals (PR #2334) it caught 2 of 3 known problem types, with no false alarms on the fixed versions. The complaints pack checks its own marking first: it rejects all 460 deliberately wrong answers before scoring.</p>
+              <p>Working idea across these projects: every AI task should leave a short record of what was asked, what changed, what was checked and what is still unverified. A direction, not a released standard. Related work: <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry</a>, <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noopener noreferrer">Agent2Agent</a>. Repository: <a href={SCORENSIC} target="_blank" rel="noopener noreferrer">github.com/manazoid4/scorensic</a>.</p>
+            </details>
           </section>
 
           <footer className="ar-paper-footer">
             <div>
-              <p className="ar-kicker">Further reading &amp; discussion</p>
-              <h2>Open work, open questions.</h2>
-              <p>I publish code and research notes so others can inspect the work, challenge the approach and build on it. I am also exploring process evidence through <a href="https://github.com/manazoid4/flowlens" target="_blank" rel="noopener noreferrer">FlowLens</a>.</p>
-              <p className="ar-references">Related work: <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry</a> · <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noopener noreferrer">Agent2Agent</a></p>
+              <p className="ar-kicker">Open by default</p>
+              <h2>Inspect it, run it, challenge it.</h2>
             </div>
             <div className="ar-footer-actions">
-              <a className="ar-text-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">Explore the repositories ↗</a>
-              <a className="ar-text-link" href="mailto:info@mazworks.uk?subject=Engineering%20research">Discuss the research ↗</a>
+              <a className="ar-text-link" href="https://github.com/manazoid4" target="_blank" rel="noopener noreferrer">All repositories ↗</a>
+              <a className="ar-text-link" href="mailto:info@mazworks.uk?subject=Research">Discuss the research ↗</a>
             </div>
           </footer>
         </article>

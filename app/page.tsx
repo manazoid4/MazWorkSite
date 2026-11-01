@@ -9,22 +9,35 @@ import './home-transformation.css';
 // The one real project on the home page. Text comes from app/projects.ts so it cannot drift. Links go straight to the live product.
 const JOBFILTER = FLAGSHIP_PROJECTS.find((project) => project.id === 'jobfilter');
 
-// The three service areas every offer in app/offers.ts belongs to. Prices stay on /prices.
-const AREAS = [
-  { n: '01', title: 'Websites that help customers take action', body: 'Business websites and single pages that explain what you do, answer the obvious questions and make enquiring or booking easy.', href: '/website-design' },
-  { n: '02', title: 'Enquiries, bookings and follow-up', body: 'Missed callers get a text back, bookings get reminders and quotes get chased, so fewer customers slip through the gaps.', href: '/what-we-do' },
-  { n: '03', title: 'Small business tools and custom solutions', body: 'When off-the-shelf software does not fit, a focused tool built around one job that keeps coming back.', href: '/what-we-do' },
+// Two doors, one way of working. Prices stay on /prices; the "No AI in the offer" rule still holds for the small-business door.
+const DOORS = [
+  {
+    n: '01',
+    who: 'Small and local businesses',
+    title: 'Websites, bookings and follow-up',
+    body: 'A website that brings enquiries, missed callers texted back, bookings reminded, quotes chased.',
+    href: '/local-businesses',
+    more: { href: '/prices', label: 'See prices' },
+  },
+  {
+    n: '02',
+    who: 'Teams handling customers, cases and admin',
+    title: 'Clear the backlog. Hit every deadline.',
+    body: 'Complaints, customer service, finance admin and more: tracking and reporting that show what is due and what keeps going wrong. Where AI might help, I test it on your own examples first. A person stays in charge.',
+    href: '/professional-teams',
+    more: { href: '/research', label: 'How I test AI' },
+  },
 ];
 
 const STEPS = [
-  { title: 'Tell me what’s not working', body: `A few lines is plenty. No jargon, and you do not need to know the answer. I usually reply within ${CHECK_REPLY_TIME}.` },
-  { title: 'I look for the pattern', body: 'I ask what happens, how often and what it costs you in time. Sometimes the real problem is one step before the one you noticed.' },
-  { title: 'You get a preview and a fixed price', body: 'One focused example of the fix, built on my own test set-up, not your live tools. Scope and price are agreed before any work starts.' },
-  { title: 'I build it and stand behind it', body: 'I use the tools you already have where I can, show you it working, and fix problems that turn up afterwards.' },
+  { title: 'Tell me what’s not working', body: `A few lines is plenty. I usually reply within ${CHECK_REPLY_TIME}.` },
+  { title: 'I find the pattern', body: 'What happens, how often, and what it costs you. The real problem is often one step earlier.' },
+  { title: 'You see it working first', body: 'A preview on my own test set-up and a fixed price, before any work starts.' },
+  { title: 'I build it and stand behind it', body: 'Using the tools you already have where I can, and fixing problems that turn up afterwards.' },
 ];
 
-const TITLE = 'Websites, Booking & Business Systems | Maz Works';
-const DESCRIPTION = fitDescription('Websites, booking and customer follow-up for UK small businesses. Fixed quotes, and you deal directly with the person who builds it.');
+const TITLE = 'Websites, Customer Systems & Team Tools | Maz Works';
+const DESCRIPTION = fitDescription('Websites, bookings and follow-up for UK small businesses, and deadline, reporting and tested AI tools for customer and admin teams. See it working before you pay.');
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -41,8 +54,8 @@ export default function Page() {
       <section className="mw-home-hero" id="main-content" tabIndex={-1} aria-labelledby="home-title">
         <div className="mw-home-hero-copy">
           <p className="eyebrow">Maz Works · independent, working UK-wide</p>
-          <h1 id="home-title">Less hassle. <mark>Better</mark> business.</h1>
-          <p className="mw-home-lede">I build websites, enquiry and booking systems and small tools that save UK businesses time and help their customers get in touch. I find the pattern behind the problem, then build a practical way to make it easier.</p>
+          <h1 id="home-title">Find what keeps going wrong. <mark>Fix it.</mark></h1>
+          <p className="mw-home-lede">From a small firm’s bookings to a busy team’s deadlines, I find the pattern behind the problem, then build a practical way to make it easier. You see it working before you pay.</p>
           <p className="mw-home-direct">{DIRECT_LINE}</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>
@@ -75,30 +88,22 @@ export default function Page() {
         <header className="rx-split">
           <div>
             <p className="rx-kicker">What I do</p>
-            <h2 id="do-title" className="rx-title">Three ways I can help.</h2>
+            <h2 id="do-title" className="rx-title">Two kinds of business. One way of working.</h2>
           </div>
-          <p className="rx-lede">I start with what keeps going wrong, then pick the smallest thing that fixes it. Pick the one that sounds like your week.</p>
+          <p className="rx-lede">Start with what keeps going wrong, build the smallest thing that fixes it, and prove it works.</p>
         </header>
-        <ol className="mw-areas">
-          {AREAS.map((area) => (
-            <li className="mw-area" key={area.n}>
-              <span className="mw-area-n" aria-hidden="true">{area.n}</span>
-              <h3><a href={area.href}>{area.title}</a></h3>
-              <p>{area.body}</p>
-              <span className="mw-area-go" aria-hidden="true">↗</span>
+        <ol className="mw-areas mw-doors">
+          {DOORS.map((door) => (
+            <li className="mw-area" key={door.n}>
+              <span className="mw-area-n" aria-hidden="true">{door.n}</span>
+              <p className="mw-door-who">{door.who}</p>
+              <h3><a href={door.href}>{door.title}</a></h3>
+              <p>{door.body}</p>
+              <p className="mw-door-more"><a href={door.more.href}>{door.more.label} <span aria-hidden="true">→</span></a></p>
             </li>
           ))}
         </ol>
-        <p className="mw-do-foot">Need a website? <a href="/website-design">See website design options</a>. Running a local or independent business? <a href="/local-businesses">See what that looks like</a>. Part of a professional team? <a href="/professional-teams">Start here</a>. Prices are on the <a href="/prices">prices page</a>.</p>
-        <p className="mw-do-foot">Curious what a better booking step feels like? <a href="/tools/restaurant-tables">Try the table picker</a>. Interactive concept demo. No real reservation is made. More in <a href="/tools">tools and demos</a>.</p>
-      </section>
-
-      <section className="rx-band rx-band--plum mw-member" aria-labelledby="member-title">
-        <h2 id="member-title" className="rx-title">Free membership.</h2>
-        <p className="rx-lede">Letters, deadlines, checklists.</p>
-        <div className="mw-member-actions">
-          <a className="button button-signal" href="/free-membership">Open</a>
-        </div>
+        <p className="mw-do-foot">Need a website? <a href="/website-design">See website design options</a>. Want to see something first? <a href="/tools/restaurant-tables">Try the table picker</a>. Interactive concept demo. No real reservation is made. Or see <a href="/what-we-do">everything I do</a>.</p>
       </section>
 
       {JOBFILTER?.image && (
@@ -114,12 +119,18 @@ export default function Page() {
               <h3><a href={JOBFILTER.links[0].href}>{JOBFILTER.name}</a></h3>
               <p className="mw-work-meta">Maz Works product · live</p>
               <p>Finding relevant public contracts for small trades firms.</p>
-              <ul>{JOBFILTER.built.slice(0, 3).map((line) => <li key={line}>{line}</li>)}</ul>
               <p className="mw-work-limit">{JOBFILTER.limitation}</p>
               <a className="rx-link" href={JOBFILTER.links[0].href}>Try a free scan <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <p className="mw-work-more">More, including client websites and prototypes, on <a href="/proof">my work page</a>. Complaints-reporting examples use synthetic data and are labelled demonstrations: <a href="/professional-teams#demonstrations">see them</a>.</p>
+          <div className="mw-test-card">
+            <span className="rx-tag" data-kind="internal">Open research</span>
+            <h3><a href="/research">Can AI answer a complaint properly?</a></h3>
+            <p>Two small AI models wrote replies to UK financial complaints. Neither met the regulator’s rules. So I test on real examples before anything reaches a customer.</p>
+            <p className="mw-work-limit">Invented test complaints and two small models: a first test result, not a verdict on every AI model.</p>
+            <a className="rx-link" href="/research">See the test <span aria-hidden="true">→</span></a>
+          </div>
+          <p className="mw-work-more">More, including client websites, on <a href="/proof">my work page</a>. Complaints-reporting examples use synthetic data and are labelled demonstrations: <a href="/professional-teams#demonstrations">see them</a>.</p>
         </section>
       )}
 
@@ -129,9 +140,7 @@ export default function Page() {
           <div>
             <h2 id="about-title" className="rx-title">Hi, I’m Maz.</h2>
             <p className="mw-founder-lead">I spent five years in finance handling complaints and escalations, with thousands of unhappy customers. I know what it’s like when something goes wrong.</p>
-            <p>That job taught me to look for the cause behind a complaint, not just the complaint. It is the habit I bring to your business: find the thing that keeps happening, then make it easier.</p>
-            <p className="mw-founder-direct">No middleman. No sales team. No account managers. The person you talk to is the person who builds it.</p>
-            <p>I’m a Computer Science graduate and I build every job myself. I’m just starting out, and I’ll always be honest about what I can and can’t do.</p>
+            <p>It taught me to look for the cause, not just the complaint. I’m a Computer Science graduate and I build every job myself.</p>
             <a className="rx-link" href="/about">More about me <span aria-hidden="true">→</span></a>
           </div>
         </div>

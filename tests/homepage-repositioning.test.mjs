@@ -15,7 +15,7 @@ const visibleText = (source) => source
 
 test('homepage leads with the recurring-problem idea and real founder credibility', async () => {
   const text = visibleText(main);
-  assert.match(text, /Less hassle\. Better business\./);
+  assert.match(text, /Find what keeps going wrong\. Fix it\./);
   assert.match(text, /find the pattern behind the problem/);
   assert.match(text, /five years in finance handling complaints/);
   assert.match(visibleText(await readFile(path.join(root, 'out', 'about.html'), 'utf8')), /Computer Science graduate/);

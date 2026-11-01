@@ -64,3 +64,16 @@
 @media (prefers-reduced-motion: reduce) {
   .ar-page * { scroll-behavior: auto; }
 }
+
+/* 1 Nov 2026 rebuild: results list, grouped experiments, engineer detail */
+.rs-results { margin: 16px 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.rs-results li { padding: 12px 16px; border-left: 4px solid var(--plum); background: var(--surface); }
+.rs-results strong { display: block; font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.05; }
+.rs-other { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.rs-other li { padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; gap: 6px; }
+.rs-other h3 { font-size: 1.15rem; }
+.rs-more { margin-top: 24px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.rs-more summary { cursor: pointer; font-weight: 750; }
+.rs-more p { margin-top: 12px; max-width: 70ch; color: var(--muted); }
+.ar-study .ar-caveat { color: #53616c; font-size: .85rem; }
+.ar-footer-actions .ar-text-link { overflow-wrap: anywhere; }

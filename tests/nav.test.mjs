@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 
-// Reimagination (25 Oct 2026): six primary links, one button, every kept page still reachable, merged pages redirect.
+// Reimagination (25 Oct 2026), Research replaced Tools in the header (1 Nov 2026): six primary links, one button, every kept page still reachable, merged pages redirect.
 const out = path.join(process.cwd(), 'out');
 const read = (file) => readFile(path.join(out, file), 'utf8');
-const PRIMARY = [['/what-we-do', 'What I do'], ['/proof', 'My work'], ['/prices', 'Prices'], ['/tools', 'Tools and demos'], ['/about', 'About'], ['/contact', 'Contact']];
+const PRIMARY = [['/what-we-do', 'What I do'], ['/proof', 'My work'], ['/prices', 'Prices'], ['/research', 'Research'], ['/about', 'About'], ['/contact', 'Contact']];
 
 test('the header has exactly six labelled links in order, plus the Free preview button', async () => {
   const html = await read('index.html');
@@ -19,7 +19,7 @@ test('the header has exactly six labelled links in order, plus the Free preview 
 test('the phone menu and footer carry the six links, and the kept pages stay reachable from the menu', async () => {
   const html = await read('index.html');
   const menu = html.slice(html.indexOf('class="mw-menu-panel"'), html.indexOf('</ul>', html.indexOf('class="mw-menu-panel"')));
-  for (const [href] of [...PRIMARY, ['/for'], ['/faq'], ['/site-map']]) assert.ok(menu.includes(`href="${href}"`), `menu has ${href}`);
+  for (const [href] of [...PRIMARY, ['/tools'], ['/for'], ['/faq'], ['/site-map']]) assert.ok(menu.includes(`href="${href}"`), `menu has ${href}`);
   const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
   for (const [href, label] of PRIMARY) assert.ok(footer.includes(`href="${href}">${label}<`), `footer has ${label}`);
 });

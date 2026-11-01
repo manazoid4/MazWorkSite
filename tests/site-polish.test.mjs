@@ -75,7 +75,13 @@ test('positioning: no quick-fix wording, no AI in the offer, /rotareason out of 
   for (const route of ['index', 'prices', 'contact', ...TYPES.map((t) => `for/${t}`)]) {
     const t = text(await read(route));
     assert.doesNotMatch(t, /quick ?fix|quick win|website repair/i, route);
-    assert.doesNotMatch(t, /\bAI\b/, route);
+    // Never sell AI (Maz, 27 Sep). Since 1 Nov the homepage may say AI is tested before use; product-style AI copy stays banned everywhere.
+    assert.doesNotMatch(t, /AI[- ](assistant|agent|powered|receptionist|chatbot)/i, route);
+    if (route !== 'index') assert.doesNotMatch(t, /\bAI\b/, route);
+  }
+  const home = text(await read('index'));
+  for (const sentence of home.split(/(?<=[.?!])\s+/).filter((x) => /\bAI\b/.test(x))) {
+    assert.match(sentence, /test|check|rules|research|model/i, `homepage AI mention must be about testing: ${sentence}`);
   }
   const sitemap = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   for (const hidden of ['rotareason', 'maz-core', 'maz-pocket-ai', 'quick-win']) assert.doesNotMatch(sitemap, new RegExp(hidden));
