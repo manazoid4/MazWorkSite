@@ -15,7 +15,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: '/what-we-do', label: 'What I do' },
   { href: '/proof', label: 'My work' },
   { href: '/prices', label: 'Prices' },
-  { href: '/tools', label: 'Tools and demos' },
+  { href: '/research', label: 'Research' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -26,6 +26,7 @@ export const NAV_CTA: NavLink = { href: '/contact', label: 'Free preview' };
 /** Phone menu: short on purpose, one screen, no scrolling. The full map lives in the footer and /site-map. */
 export const MENU_LINKS: NavLink[] = [
   ...PRIMARY_NAV,
+  { href: '/tools', label: 'Tools and demos' },
   { href: '/for', label: 'Who it’s for' },
   { href: '/faq', label: 'FAQ' },
   { href: '/site-map', label: 'Everything else' },
@@ -34,6 +35,7 @@ export const MENU_LINKS: NavLink[] = [
 /** Footer: one row. */
 export const FOOTER_LINKS: NavLink[] = [
   ...PRIMARY_NAV,
+  { href: '/tools', label: 'Tools and demos' },
   { href: '/faq', label: 'FAQ' },
   { href: '/privacy', label: 'Privacy' },
   { href: '/terms', label: 'Terms' },
@@ -70,7 +72,8 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/proof', label: 'My work' },
       { href: '/tools', label: 'Tools and demos' },
-      { href: '/research', label: 'Agent infrastructure research' },
+      { href: '/research', label: 'Research: can AI do the job?' },
+      { href: '/research/scorensic', label: 'Scorensic test packs' },
       { href: '/tools/restaurant-tables', label: 'Restaurant table picker (concept demo)' },
     ],
   },
@@ -90,8 +93,7 @@ export const NAV_GROUPS: { title: string; links: NavLink[] }[] = [
 
 /** Homepage "On this page" jump bar, in page order. */
 export const HOME_SECTIONS: NavLink[] = [
-  { href: '#customer-buckets', label: 'What I do' },
-  { href: '#doors-title', label: 'Who I help' },
+  { href: '#what-i-do', label: 'What I do' },
   { href: '#proof-title', label: 'Work you can see' },
   { href: '#about-title', label: 'About Maz' },
 ];

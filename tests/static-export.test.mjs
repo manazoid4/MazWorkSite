@@ -77,9 +77,9 @@ async function internalTargetExists(urlPath) {
 test('homepage states the central idea plainly and does not read as small-time', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(visible, /Less hassle\. Better business\./);
+  assert.match(visible, /Find what keeps going wrong\. Fix it\./);
   assert.match(html, /I find the pattern behind the problem, then build a practical way to make it easier/);
-  for (const area of ['Websites that help customers take action', 'Enquiries, bookings and follow-up', 'Small business tools and custom solutions']) assert.match(visible, new RegExp(area));
+  for (const area of ['Websites, bookings and follow-up', 'Clear the backlog. Hit every deadline.', 'Teams handling complaints and customer cases']) assert.match(visible, new RegExp(area));
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
@@ -162,7 +162,7 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
 test('homepage explains the four areas, the two customer routes and a try-it route without leading on price', async () => {
   const html = await readPage('/');
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
-  assert.match(visible, /Less hassle\. Better business\./);
+  assert.match(visible, /Find what keeps going wrong\. Fix it\./);
   assert.match(html, /href="\/what-we-do"/);
   assert.match(html, /href="\/tools"/);
   assert.match(html, /href="\/tools\/restaurant-tables"/);
@@ -185,7 +185,7 @@ test('homepage explains the four areas, the two customer routes and a try-it rou
   assert.doesNotMatch(html, /Team training/);
   assert.match(html, /href="\/prices"/);
   assert.match(prices, /Care plan[\s\S]{0,30}£39\/month/);
-  assert.doesNotMatch(html, /\bAI\b/, 'AI is used behind the scenes, never advertised (Maz, 27 Sep)');
+  assert.doesNotMatch(html, /AI[- ](assistant|agent|powered|receptionist|chatbot)/i, 'AI is never sold as a product (Maz, 27 Sep); since 1 Nov the homepage may say it is tested first');
   // Offer v11 (2 Oct): £149, £595, £2,450 and £39/month are the live prices; £19/month, the £395 Brand Kit and unlimited changes are retired.
   for (const retired of [/£150/, /£395/, /£249/, /Quick Win/, /£19\/month/, /founding/i, /Contact Setup/, /Enquiry Check/, /Customer Journey Review/, /From £495/, /From £950/, /From £1,500/, /£1,250/, /Custom Software &amp; Websites/, /unlimited changes/i]) {
     assert.doesNotMatch(visible, retired, `retired offer still on homepage: ${retired}`);
