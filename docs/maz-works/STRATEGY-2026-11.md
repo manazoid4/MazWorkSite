@@ -13,7 +13,7 @@ Status: implemented on the homepage and /research (PR "Reposition homepage and r
 |---|---|---|
 | A. Small-business web and automation studio (status quo) | Revenue now, simple to explain | Crowded and price-driven; nothing defensible; no route to a product |
 | B. AI evaluation / dev-tools company | Credible to engineers, open-source IP | No revenue path for a solo founder; well-funded competitors (Inspect, evalmut, Braintrust and others) |
-| **C. Customer operations, checked (chosen)** | Joins the founder's complaints background, the services that already sell, and Scorensic into one story: find what goes wrong with customers, fix it, prove it works, test AI before it touches customers | Two audiences on one site; complaints teams have long sales cycles |
+| **C. Customer operations, checked (chosen)** | Joins the founder's complaints background, the services that already sell, and Scorensic into one story: find what goes wrong with customers, fix it, prove it works, test AI before it touches customers | Two audiences on one site; team sales cycles are long. Complaints is the starting niche, not the limit: customer service, finance admin, operations and professional services follow with new packs |
 
 **Why C:** It keeps the small-business revenue door open (A) and gives the research a buyer (B). The moat is the combination: regulated-complaints knowledge, plus test packs that show whether AI can do the job, plus someone who can build the fix. Generic AI consultancies sell demos. This sells evidence.
 
@@ -21,7 +21,7 @@ Status: implemented on the homepage and /research (PR "Reposition homepage and r
 A UK company that **certifies AI for customer work before it is used**. It would sell readiness audits now, using its own test packs. Later it sells the packs and report card as software that operations and compliance teams run themselves. Websites and small-business systems fund it and keep the founder close to real customer problems.
 
 ## Most promising overlooked opportunity
-**"Can AI do this job?" audits for regulated complaints teams** (financial services first; the FCA's DISP rules and the £680 ombudsman case fee make the cost of mistakes concrete). The deliverable is a fixed-scope test of the firm's own examples on the models they are considering, plus a safe set-up plan. Nobody local and affordable sells this with published, reproducible marking.
+**"Can AI do this job?" audits for customer-facing and admin teams, starting with regulated complaints teams** (financial services first; the FCA's DISP rules and the £680 ombudsman case fee make the cost of mistakes concrete). The deliverable is a fixed-scope test of the firm's own examples on the models they are considering, plus a safe set-up plan. Nobody local and affordable sells this with published, reproducible marking.
 
 ## Strongest flagship product
 **Scorensic workload packs + report card.** Today: an open-source CLI, a UK complaints pack (54 tasks, 8 letters) and self-checking marking. Path: more packs (invoices/VAT, booking requests, trade quotes), then a hosted report card with packs licensed to firms and vendors.

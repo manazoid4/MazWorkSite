@@ -63,7 +63,7 @@ export default function ResearchPage() {
             <div className="ar-section-heading">
               <p className="ar-kicker">Flagship project</p>
               <h2 id="sc-title">Scorensic: a test pack for real jobs.</h2>
-              <p>Your tasks in, a one-page report card out: right, confidently wrong, and whether your data left the building. Letters are checked against what they must and must never say.</p>
+              <p>Your tasks in, a one-page report card out: right, confidently wrong, and whether your data left the building. Letters are checked against what they must and must never say. Complaints come first; customer service, invoices and bookings are next.</p>
             </div>
             <div className="ar-studies">
               <article className="ar-study">

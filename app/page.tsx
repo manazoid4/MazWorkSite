@@ -21,9 +21,9 @@ const DOORS = [
   },
   {
     n: '02',
-    who: 'Teams handling complaints and customer cases',
+    who: 'Teams handling customers, cases and admin',
     title: 'Clear the backlog. Hit every deadline.',
-    body: 'Tracking and reporting that show what is due and what keeps going wrong. Where AI might help, I test it on your own examples first. A person stays in charge.',
+    body: 'Complaints, customer service, finance admin and more: tracking and reporting that show what is due and what keeps going wrong. Where AI might help, I test it on your own examples first. A person stays in charge.',
     href: '/professional-teams',
     more: { href: '/research', label: 'How I test AI' },
   },
@@ -36,8 +36,8 @@ const STEPS = [
   { title: 'I build it and stand behind it', body: 'Using the tools you already have where I can, and fixing problems that turn up afterwards.' },
 ];
 
-const TITLE = 'Websites, Customer Systems & Complaints Tools | Maz Works';
-const DESCRIPTION = fitDescription('Websites, bookings and follow-up for UK small businesses, and deadline, reporting and tested AI tools for complaints teams. See it working before you pay.');
+const TITLE = 'Websites, Customer Systems & Team Tools | Maz Works';
+const DESCRIPTION = fitDescription('Websites, bookings and follow-up for UK small businesses, and deadline, reporting and tested AI tools for customer and admin teams. See it working before you pay.');
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -55,7 +55,7 @@ export default function Page() {
         <div className="mw-home-hero-copy">
           <p className="eyebrow">Maz Works · independent, working UK-wide</p>
           <h1 id="home-title">Find what keeps going wrong. <mark>Fix it.</mark></h1>
-          <p className="mw-home-lede">From a small firm’s bookings to a complaints team’s deadlines, I find the pattern behind the problem, then build a practical way to make it easier. You see it working before you pay.</p>
+          <p className="mw-home-lede">From a small firm’s bookings to a busy team’s deadlines, I find the pattern behind the problem, then build a practical way to make it easier. You see it working before you pay.</p>
           <p className="mw-home-direct">{DIRECT_LINE}</p>
           <div className="mw-home-actions">
             <a className="button button-signal" href="/contact?src=home#contact">{ENQUIRY_CTA}</a>

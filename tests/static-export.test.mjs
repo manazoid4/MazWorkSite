@@ -79,7 +79,7 @@ test('homepage states the central idea plainly and does not read as small-time',
   const visible = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<option\b[^>]*>[\s\S]*?<\/option>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ');
   assert.match(visible, /Find what keeps going wrong\. Fix it\./);
   assert.match(html, /I find the pattern behind the problem, then build a practical way to make it easier/);
-  for (const area of ['Websites, bookings and follow-up', 'Clear the backlog. Hit every deadline.', 'Teams handling complaints and customer cases']) assert.match(visible, new RegExp(area));
+  for (const area of ['Websites, bookings and follow-up', 'Clear the backlog. Hit every deadline.', 'Teams handling customers, cases and admin']) assert.match(visible, new RegExp(area));
   assert.match(html, /href="\/local-businesses"/);
   assert.match(html, /href="\/professional-teams"/);
   for (const smallTime of [/website fix/i, /small fixes/i, /quick fix/i, /Enquiry Repair/, /fix what’s broken/i, /Maz Works is new/i]) {
