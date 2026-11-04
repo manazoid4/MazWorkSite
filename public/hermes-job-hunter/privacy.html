@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="How Hermes Job Hunter accesses, uses, stores and shares information through its read-only Gmail connection.">
+  <title>Privacy policy — Hermes Job Hunter</title>
+  <link rel="stylesheet" href="info.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow"><a href="index.html">Hermes Job Hunter</a></p>
+    <h1>Privacy policy</h1>
+    <p class="intro">This policy describes the personal-use Hermes Job Hunter application and its read-only Gmail connection.</p>
+    <h2>Gmail information accessed and used</h2>
+    <p>This deployment requests the <code>gmail.readonly</code> permission. It checks the mailbox address, message identifiers, history and message headers. It reads the contents of messages marked for import: a subject beginning <code>Fwd:</code>, a configured label, an approved sender or a jobs alias.</p>
+    <p>It extracts candidate job links and proposes application-status updates. Unmarked messages are ignored after their headers are checked. The connection does not send, edit or delete email. The app has no advertising or AI-model-training functionality.</p>
+    <p>An optional read-only IMAP connection is also supported. If the operator enables it, the app uses locally stored app-password credentials instead of OAuth. The current deployment uses OAuth.</p>
+    <h2>Storage and access</h2>
+    <p>Job links, processing identifiers, tracking records, approved answers and status proposals are stored in the operator’s local application database. The profile and CV are kept in private files on the operator’s Windows computer. In this deployment, Gmail OAuth tokens are stored in Windows Credential Manager. Installations without that credential-store support can use file-based token storage and need their own access controls.</p>
+    <p>The app does not automatically delete imported records or processing metadata. The operator reviews removal requests. Minimal submission safeguards are retained permanently to prevent duplicate attempts; revoking Gmail access does not clear those safeguards.</p>
+    <h2>Sharing and connected services</h2>
+    <p>Selected job-tracking records can be mirrored to the operator’s configured Notion workspace. Configured model providers can assist with application drafts using selected job information, profile facts and CV text. Gmail OAuth credentials are not included in those drafting requests. Third-party services have their own data-handling terms and settings.</p>
+    <p>Submitting an employer application shares the relevant application details with that employer or its application platform only after explicit approval. Connecting Gmail does not itself authorize any employer submission. This information page does not provide public access to application records, messages, credentials or the operator’s browser sessions.</p>
+    <p>Use and transfer of information received from Google APIs are governed by the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements. Connected services must be configured consistently with those requirements.</p>
+    <h2>Revoking access and requesting removal</h2>
+    <p>The operator can revoke Google access through <a href="https://myaccount.google.com/connections">Google Account connections</a>. Revoking access stops future Gmail API access; it does not automatically remove records already imported. Contact <a href="mailto:jobhubtbot@gmail.com">jobhubtbot@gmail.com</a> to request access or removal of retained application data.</p>
+    <footer>Effective 4 November 2026 · <a href="index.html">App information</a></footer>
+  </main>
+</body>
+</html>
