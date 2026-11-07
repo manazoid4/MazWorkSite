@@ -31,7 +31,7 @@ export default function AboutPage() {
 
       <section className="mw-about-section" aria-labelledby="background-title">
         <h2 id="background-title">Where I learned it</h2>
-        <p>I am a Computer Science graduate (Swansea University).</p>
+        <p>I studied Computer Science at Swansea University for two years.</p>
         <p>Before Maz Works I spent five years resolving complex financial complaints and handling customer escalations. The job was working out what had gone wrong, talking to people who were upset, and fixing the cause so it did not happen again.</p>
         <p>That is what I do for small businesses now, with software: dashboards and reporting, follow-up that happens on its own, and tools that take the awkward jobs off your plate.</p>
       </section>

@@ -3,7 +3,7 @@ import './manazir-line.css';
 export function ManazirLine({ block = false }: { block?: boolean }) {
   if (!block) {
     return (
-      <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>. Computer Science graduate, five years in finance complaints. I build every job myself.</span></p>
+      <p className="s-face-cta"><img src="/maz.webp" alt="" width={56} height={56} /><span><strong>Manazir Hussain</strong>. Studied Computer Science, five years in finance complaints. I build every job myself.</span></p>
     );
   }
   return (
