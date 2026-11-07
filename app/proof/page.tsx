@@ -21,7 +21,7 @@ export default function ProofPage() {
       <section className="mw-resource-hero" id="main-content" tabIndex={-1} aria-labelledby="proof-title">
         <p className="eyebrow">My work</p>
         <h1 id="proof-title">A few things worth showing.</h1>
-        <p>Working products, client work, and what I am building next. No long list of half-finished projects.</p>
+        <p>Live work you can inspect, plus one project in development.</p>
       </section>
 
       <section className="mw-info" id="client-work" aria-labelledby="proof-live-title">
