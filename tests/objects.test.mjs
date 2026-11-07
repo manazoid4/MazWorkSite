@@ -122,7 +122,7 @@ test('Objects includes an honest architecture and property use case', async () =
   assert.doesNotMatch(text, /museum quality|resin quality|precision manufacturing|any scale/i);
 });
 
-test('Objects stays live and linked from /proof but is hidden from site chrome and the sitemap', async () => {
+test('Objects old page stays reachable but is no longer promoted as a portfolio item', async () => {
   const [home, objects, sitemap, readme] = await Promise.all([
     readPage('/'),
     readPage('/3d-printing'),
@@ -131,10 +131,8 @@ test('Objects stays live and linked from /proof but is hidden from site chrome a
   ]);
 
   // Objects left the homepage in the 27 Sep sales overhaul and left the menu, footer and sitemap on 22 Oct.
-  const lab = await readPage('/proof');
-  assert.match(lab, /Maz Works Objects/);
-  assert.match(lab, /Tap-to-review stands and signs/);
-  assert.match(lab, /Concept, not yet made/);
+  const [lab, tools, what] = await Promise.all([readPage('/proof'), readPage('/tools'), readPage('/what-we-do')]);
+  for (const html of [lab, tools, what]) assert.doesNotMatch(html, /Maz Works Objects|Tap-to-review stands and signs|href="\/3d-printing"/);
   assert.match(home, /Tell me the job/);
   assert.match(home, /£99/);
   assert.match(objects, /href="\/prices"/);
