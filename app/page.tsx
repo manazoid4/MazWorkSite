@@ -139,8 +139,8 @@ export default function Page() {
           <img src="/maz.webp" alt="Manazir Hussain, who scopes and builds the work" width={240} height={240} loading="lazy" />
           <div>
             <h2 id="about-title" className="rx-title">Hi, I’m Maz.</h2>
-            <p className="mw-founder-lead">I spent five years in finance handling complaints and escalations, with thousands of unhappy customers. I know what it’s like when something goes wrong.</p>
-            <p>It taught me to look for the cause, not just the complaint. I studied Computer Science and I build every job myself.</p>
+            <p className="mw-founder-lead">I studied Computer Science at Swansea University, then worked in complaints handling and customer escalations.</p>
+            <p>That taught me to find the cause of recurring problems. Now I build practical solutions for businesses, and you work directly with me.</p>
             <a className="rx-link" href="/about">More about me <span aria-hidden="true">→</span></a>
           </div>
         </div>
