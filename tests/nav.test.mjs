@@ -27,7 +27,8 @@ test('the phone menu and footer carry the six links, and the kept pages stay rea
 test('the hidden pages are linked from /what-we-do or the site map, not the header', async () => {
   const what = await read('what-we-do.html');
   const map = await read('site-map.html');
-  for (const href of ['/local-businesses', '/professional-teams', '/for', '/3d-printing']) assert.ok(what.includes(`href="${href}"`), `what-we-do links ${href}`);
+  for (const href of ['/local-businesses', '/professional-teams', '/for']) assert.ok(what.includes(`href="${href}"`), `what-we-do links ${href}`);
+  assert.doesNotMatch(what, /href="\/3d-printing"/);
   for (const href of ['/local-businesses', '/professional-teams', '/after-hours-receptionist', '/free-membership', '/tools', '/tools/restaurant-tables']) assert.ok(map.includes(`href="${href}"`), `site map links ${href}`);
 });
 

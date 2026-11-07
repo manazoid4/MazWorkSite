@@ -17,9 +17,10 @@ test('What I Do shows the four service areas and prices points back to it', asyn
     assert.match(what, new RegExp(area));
   }
   assert.ok(prices.includes('href="/what-we-do"'), '/prices points at /what-we-do instead of repeating the areas');
-  for (const id of ['websites', 'enquiries', 'booking', 'custom-tools', 'side', 'why']) assert.match(what, new RegExp(`id="${id}"`));
-  for (const href of ['/prices#websites', '/after-hours-receptionist', '/professional-teams', '/local-businesses', '/3d-printing', '/tools']) assert.ok(what.includes(`href="${href}"`), href);
+  for (const id of ['websites', 'enquiries', 'booking', 'custom-tools', 'why']) assert.match(what, new RegExp(`id="${id}"`));
+  for (const href of ['/prices#websites', '/after-hours-receptionist', '/professional-teams', '/local-businesses', '/tools']) assert.ok(what.includes(`href="${href}"`), href);
   assert.match(what, /Photo to quote/);
+  assert.doesNotMatch(what, /A small side project: 3D printing|href="\/3d-printing"/);
   assert.doesNotMatch(what, /\bAI\b/);
   for (const href of ['#websites', '#systems', '#extras', '/professional-teams#complaints']) assert.ok(prices.includes(`href="${href}"`), href);
   assert.match(prices, /id="systems"/);

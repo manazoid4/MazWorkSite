@@ -113,7 +113,9 @@ test('the fixed terms remain on /prices and the homepage keeps its founder and p
   assert.match(html, /Hi, I’m Maz\./);
   assert.match(html, /href="\/about"/);
   assert.match(html, /src="\/maz\.webp"/, 'founder photo remains part of the personal studio identity');
-  assert.match(await readPage('/about'), /five years resolving complex financial complaints[\s\S]*dashboards and reporting/);
+  const about = await readPage('/about');
+  assert.match(about, /studied Computer Science at Swansea University, then worked in complaints handling and customer escalations/);
+  assert.doesNotMatch(about, /graduate|earned a degree|five years resolving/i);
   assert.ok(html.indexOf('Made to be used') < html.indexOf('Hi, I\u2019m Maz'), 'proof comes before the About block');
   assert.match(html, /href="\/professional-teams#demonstrations"/);
 });
@@ -153,10 +155,13 @@ test('homepage proof is limited to real, honestly labelled work', async () => {
   assert.doesNotMatch(html, /paid (client|contract|engagement)|client paid|testimonial/i);
 
   const lab = await readPage('/proof');
-  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'In progress']) {
+  for (const name of ['JobFilter', 'Scrap Finance Partners', 'Currently building: Nod']) {
     assert.match(lab, new RegExp(name));
   }
-  assert.doesNotMatch(lab, /href="https:\/\/github.com\/manazoid4\/maz-pocket"/);
+  for (const removed of ['Agent Nudge', 'OpenFlowKit', 'Khutba.io', 'MAZ Pocket', 'Maz Works Objects']) {
+    assert.doesNotMatch(lab, new RegExp(removed), removed + ' must not be showcased');
+  }
+  assert.match(lab, /github.com\/manazoid4\/nod/);
 });
 
 test('homepage explains the four areas, the two customer routes and a try-it route without leading on price', async () => {

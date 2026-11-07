@@ -24,12 +24,6 @@ const RESULTS = [
   { figure: '8 of 8', text: 'letters refused by one model. It called a gym cancellation reply a possible scam.' },
 ] as const;
 
-const OTHER = [
-  { name: 'Agent Nudge', what: 'Warns AI coding tools when they are about to work on the same files.', status: 'Working local proof', source: 'https://github.com/manazoid4/agent-nudge', demo: 'https://agent-nudge-bay.vercel.app/demo/overview' },
-  { name: 'mazcraft', what: 'Gives longer AI jobs clear stopping points and handovers a person can review.', status: 'Open-source tool, testing ongoing', source: 'https://github.com/manazoid4/mazcraft', demo: null },
-  { name: 'nod', what: 'A small device for approving important AI requests away from the desk.', status: 'Early hardware', source: 'https://github.com/manazoid4/nod', demo: null },
-] as const;
-
 export default function ResearchPage() {
   return (
     <main className="ar-page">
@@ -61,7 +55,7 @@ export default function ResearchPage() {
 
           <section className="ar-experiments" id="scorensic" aria-labelledby="sc-title">
             <div className="ar-section-heading">
-              <p className="ar-kicker">Flagship project</p>
+              <p className="ar-kicker">Published test</p>
               <h2 id="sc-title">Scorensic: a test pack for real jobs.</h2>
               <p>Your tasks in, a one-page report card out: right, confidently wrong, and whether your data left the building. Letters are checked against what they must and must never say. Complaints come first; customer service, invoices and bookings are next.</p>
             </div>
@@ -76,7 +70,7 @@ export default function ResearchPage() {
                 <p className="ar-caveat">Larger models are not tested yet. A first result, not a verdict.</p>
                 <div className="ar-study-links">
                   <a className="ar-text-link" href={RUN} target="_blank" rel="noopener noreferrer">Read the full results ↗</a>
-                  <a className="ar-text-link" href="/research/scorensic">Project page →</a>
+                  <a className="ar-text-link" href="/research/scorensic">Test details →</a>
                   <a className="ar-text-link" href={SCORENSIC} target="_blank" rel="noopener noreferrer">Source code ↗</a>
                 </div>
               </article>
@@ -95,26 +89,10 @@ export default function ResearchPage() {
             </div>
           </section>
 
-          <section className="ar-experiments" aria-labelledby="other-title">
+          <section className="ar-experiments" aria-labelledby="engineers-title">
             <details className="rs-more">
-              <summary id="other-title">Other experiments: keeping AI tools organised and people in control</summary>
-              <ul className="rs-other">
-                {OTHER.map((o) => (
-                  <li key={o.name}>
-                    <div className="ar-study-top"><h3>{o.name}</h3><span className="ar-status">{o.status}</span></div>
-                    <p>{o.what}</p>
-                    <p className="ar-study-links">
-                      <a className="ar-text-link" href={o.source} target="_blank" rel="noopener noreferrer">Source ↗</a>
-                      {o.demo && <a className="ar-text-link" href={o.demo} target="_blank" rel="noopener noreferrer">Recorded demo ↗</a>}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </details>
-            <details className="rs-more">
-              <summary>For engineers: how it works</summary>
-              <p>Scorensic started as a checker for AI benchmark graders. It feeds a grader answers whose verdict is already known (blank, hedged, reformatted, near-miss), re-runs them in separate processes and searches what the agent can see for leaked answers. On a real scorer bug in inspect_evals (PR #2334) it caught 2 of 3 known problem types, with no false alarms on the fixed versions. The complaints pack checks its own marking first: it rejects all 460 deliberately wrong answers before scoring.</p>
-              <p>Working idea across these projects: every AI task should leave a short record of what was asked, what changed, what was checked and what is still unverified. A direction, not a released standard. Related work: <a href="https://opentelemetry.io/" target="_blank" rel="noopener noreferrer">OpenTelemetry</a>, <a href="https://github.com/a2aproject/A2A" target="_blank" rel="noopener noreferrer">Agent2Agent</a>. Repository: <a href={SCORENSIC} target="_blank" rel="noopener noreferrer">github.com/manazoid4/scorensic</a>.</p>
+              <summary id="engineers-title">For engineers: how the test works</summary>
+              <p>Scorensic checks its own scoring against deliberately wrong answers before testing other systems. The source code and first recorded results are public, so anyone can inspect the method and limits.</p>
             </details>
           </section>
 

@@ -189,12 +189,14 @@ test('the downloadable sample PDFs exist and are real files', async () => {
 
 test('proof labels demonstrations and publishes no invented results', async () => {
   const html = await page('proof');
-  assert.match(html, /Interactive concept demo/);
   assert.match(html, /Real client work/);
   assert.match(html, /Internal project/);
-  // No quotes yet, so the quotes section is hidden rather than shown empty (Maz, 26 Oct: tidy /proof).
+  assert.match(html, /Currently building: Nod/);
+  assert.match(html, /early hardware build/);
+  assert.doesNotMatch(html, /OpenFlowKit|Agent Nudge|Khutba\.io|MAZ Pocket/);
+  // No quotes yet: never invent endorsements.
   assert.doesNotMatch(html, /What clients say/);
-  assert.match(html, /View a scope sheet/);
+  assert.match(html, /Clear scope, fixed price/);
 });
 
 test('the header stays focused (six links and the Free preview button) and the footer is one short row', async () => {

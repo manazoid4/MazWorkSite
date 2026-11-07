@@ -17,7 +17,8 @@ test('homepage leads with the recurring-problem idea and real founder credibilit
   const text = visibleText(main);
   assert.match(text, /Find what keeps going wrong\. Fix it\./);
   assert.match(text, /find the pattern behind the problem/);
-  assert.match(text, /five years in finance handling complaints/);
+  assert.match(text, /studied Computer Science at Swansea University, then worked in complaints handling and customer escalations/);
+  assert.doesNotMatch(text, /graduate|degree|five years in finance/i);
   assert.match(visibleText(await readFile(path.join(root, 'out', 'about.html'), 'utf8')), /studied Computer Science at Swansea University/);
   assert.doesNotMatch(text, /Miss a call and they get a text with a booking link/);
 });

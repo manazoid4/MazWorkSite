@@ -22,10 +22,7 @@ const EXTRA_GROUPS = [
   {
     title: 'More of my work',
     links: [
-      { href: '/proof#built', label: 'Internal projects' },
-      { href: '/rotareason', label: 'RotaReason (internal project)' },
-      { href: '/maz-core', label: 'MAZ Core (private console)' },
-      { href: '/maz-pocket-ai', label: 'MAZ Pocket (private bridge)' },
+      { href: '/proof#built', label: 'Nod (in development)' },
       { href: '/complaints/sample/health-check', label: 'Sample complaints health check (invented data)' },
       { href: '/complaints/sample/board-report', label: 'Sample complaints board report (invented data)' },
     ],
