@@ -18,7 +18,7 @@ test('/tools has metadata, a canonical URL and links every demo it describes', a
   assert.match(html, /<title>Tools and demos \| Maz Works<\/title>/);
   assert.match(html, /<link rel="canonical" href="https:\/\/www\.mazworks\.uk\/tools"/);
   assert.match(html, /<meta name="description" content="[^"]{60,}"/);
-  for (const href of ['/tools/restaurant-tables', '/local-businesses#missed-calls-calculator', '/receptionist-demo', 'https://jobfilter.uk/find-jobs', 'https://scrap-finance-partners.vercel.app', '/3d-printing']) {
+  for (const href of ['/tools/restaurant-tables', '/local-businesses#missed-calls-calculator', '/receptionist-demo']) {
     assert.ok(html.includes(`href="${href}"`), `/tools links ${href}`);
   }
 });
@@ -26,15 +26,15 @@ test('/tools has metadata, a canonical URL and links every demo it describes', a
 test('/tools labels every entry honestly and never presents a concept as client work', async () => {
   const html = await read('/tools');
   const text = visible(html);
-  for (const label of [/real client work/i, /internal project/i, /interactive concept demo/i]) assert.match(text, label);
-  // Each list row carries exactly one label, and the only client-work row is the real client site.
+  assert.match(text, /interactive concept demo/i);
+  // The two secondary entries are clearly labelled concept demos. Live portfolio work belongs on /proof.
   const rows = [...html.matchAll(/<li class="tl-row">([\s\S]*?)<\/li>/g)].map((m) => m[1]);
-  assert.ok(rows.length >= 5);
-  for (const row of rows) assert.equal((row.match(/class="rx-tag"/g) || []).length, 1);
-  const clientRows = rows.filter((row) => /data-kind="client"/.test(row));
-  assert.equal(clientRows.length, 1);
-  assert.match(clientRows[0], /Scrap Finance Partners/);
-  for (const row of rows.filter((r) => /Missed-calls|receptionist|Objects/.test(r))) assert.match(row, /data-kind="concept"/);
+  assert.equal(rows.length, 2);
+  for (const row of rows) {
+    assert.equal((row.match(/class="rx-tag"/g) || []).length, 1);
+    assert.match(row, /data-kind="concept"/);
+  }
+  assert.doesNotMatch(text, /OpenFlowKit|Agent Nudge|Maz Works Objects|Scrap Finance Partners|JobFilter/);
   assert.doesNotMatch(text, /testimonial|paid (client|contract)|client paid/i);
 });
 
