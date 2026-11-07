@@ -38,11 +38,6 @@ export default function WhatWeDo() {
         <p className="s-small">Photo to quote is one example of the kind of tool I mean, not a ready-made product. It starts as a conversation about your jobs.</p>
       </section>
 
-      <section className="s-section" id="side" aria-labelledby="side-title">
-        <h2 id="side-title">A small side project: 3D printing</h2>
-        <p>Separate from everything above, I am developing small 3D-printed objects, such as tap-to-review stands for a counter. It is still a concept, with its own page: <a href="/3d-printing">see the 3D printing page</a>.</p>
-      </section>
-
       <section className="s-section" id="who" aria-labelledby="who-title">
         <h2 id="who-title">Who I work with</h2>
         <p><a href="/local-businesses">Local businesses</a> that want fewer missed calls and less chasing. For a new site, see <a href="/website-design">website design options</a>. <a href="/professional-teams">Professional teams</a> that need to see what is due and what keeps going wrong. Or <a href="/for">find your kind of business</a>.</p>
