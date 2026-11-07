@@ -54,7 +54,7 @@ export default function ProfessionalTeamsPage() {
         <header className="pt-section-head">
           <p className="eyebrow">What I set up</p>
           <h2 id="pt-setup-title">Complaints work and office systems, scoped to your team.</h2>
-          <p>Each job is a written scope and a fixed price before I start. Complaints are what I know best: five years handling financial complaints and escalations.</p>
+          <p>Each job is a written scope and a fixed price before I start. Complaints are what I know best, from handling financial complaints and escalations.</p>
         </header>
         <ul className="pt-cards" id="complaints">
           {[health, board, flows, sprint].map((pack) => (
