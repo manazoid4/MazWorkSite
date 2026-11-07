@@ -5,7 +5,7 @@ import './about.css';
 
 export const metadata: Metadata = {
   title: 'About Maz',
-  description: 'I studied Computer Science, then spent years handling financial complaints and escalations. Now I fix problems that keep coming back in small businesses.',
+  description: 'I studied Computer Science at Swansea University, then worked in complaints and customer escalations. Now I build practical solutions for businesses.',
   alternates: { canonical: `${SITE_URL}/about` },
 };
 
@@ -26,14 +26,13 @@ export default function AboutPage() {
         <h2 id="story-title">What I do, and why</h2>
         <p>I like finding the thing in a business that keeps going wrong, then building a practical way to make it easier.</p>
         <p>Sometimes that is a website. More often it is what happens after someone gets in touch: the missed call, the quote nobody chased, the booking that lives in a text thread.</p>
-        <p>I am just starting out, and I would rather say so. In return you get my full attention, plain answers and a price agreed before any paid work.</p>
+        <p>You'll work directly with me, with a clear scope and an agreed price before any paid work.</p>
       </section>
 
       <section className="mw-about-section" aria-labelledby="background-title">
         <h2 id="background-title">Where I learned it</h2>
-        <p>I studied Computer Science at Swansea University for two years.</p>
-        <p>Before Maz Works I spent five years resolving complex financial complaints and handling customer escalations. The job was working out what had gone wrong, talking to people who were upset, and fixing the cause so it did not happen again.</p>
-        <p>That is what I do for small businesses now, with software: dashboards and reporting, follow-up that happens on its own, and tools that take the awkward jobs off your plate.</p>
+        <p>I studied Computer Science at Swansea University, then worked in complaints handling and customer escalations.</p>
+        <p>That taught me to understand what went wrong, find the cause and make things better. Now I use that experience to build practical tools for businesses.</p>
       </section>
 
       <section className="mw-about-section" aria-labelledby="how-title">
