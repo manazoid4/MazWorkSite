@@ -140,7 +140,7 @@ export default function Page() {
           <div>
             <h2 id="about-title" className="rx-title">Hi, I’m Maz.</h2>
             <p className="mw-founder-lead">I spent five years in finance handling complaints and escalations, with thousands of unhappy customers. I know what it’s like when something goes wrong.</p>
-            <p>It taught me to look for the cause, not just the complaint. I’m a Computer Science graduate and I build every job myself.</p>
+            <p>It taught me to look for the cause, not just the complaint. I studied Computer Science and I build every job myself.</p>
             <a className="rx-link" href="/about">More about me <span aria-hidden="true">→</span></a>
           </div>
         </div>

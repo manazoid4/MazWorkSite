@@ -56,7 +56,7 @@ The text, mark shape and border style differ, so colour is never the only cue. N
 - Four areas (`.mw-areas`): a ruled, numbered list, each row one link. Data in `app/page.tsx`.
 - Work: a real screenshot from `/public`, labelled, with the limitation stated (text from `app/projects.ts`).
 - Tools teaser and `/tools`: ruled index rows plus one featured demo. The table-picker plan art is drawn from its data (`MiniPlan`).
-- Founder note: first person, true background only (finance complaints, Computer Science graduate, builds every job). No invented numbers or qualifications.
+- Founder note: first person, true background only (finance complaints, studied Computer Science at Swansea (2 years, not a graduate), builds every job). No invented numbers or qualifications.
 - Buttons: orange primary (`.button-signal`) for the main enquiry. A cream button on the plum band, plum links with an arrow elsewhere. Forms submit in plum.
 - Buckets (`app/three-buckets.tsx`) and the short bio (`app/manazir-line.tsx`) are kept for `/what-we-do` and the trade pages. The home page no longer uses them.
 - Footer (`app/site-chrome.tsx`): one row of links, the email and one legal line. The home page adds the pale-blue contact band above it.

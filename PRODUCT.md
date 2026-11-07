@@ -20,7 +20,7 @@ An independent, founder-led problem-solving business: understand where the work 
 
 ## Capabilities and Constraints
 
-- Manazir Hussain is a Computer Science graduate with five years' experience resolving complex financial complaints and managing business accounts across the UK and Europe. He has handled difficult customer situations, identified recurring operational problems and contributed to improvements.
+- Manazir Hussain studied Computer Science at Swansea University (two years) and has five years' experience resolving complex financial complaints and managing business accounts across the UK and Europe. He has handled difficult customer situations, identified recurring operational problems and contributed to improvements.
 - Maz Works can deliver websites, automation, promotional content, business-process improvements, complaints consultancy, operational reporting and tailored solutions.
 - Do not position Maz Works as a generic digital agency, an AI automation company, a web design service or a jack-of-all-trades. AI is not the offer.
 - Prices are offer-specific. A relevant first task may start at £99; never imply every service or project costs £99. Canonical prices live in `app/offers.ts`.
